@@ -20,28 +20,37 @@
     var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://hechenyi.github.io/blog/index.html">
+  <meta name="description" content="Wireless Waveform GeneratorOFDM Waveform Configuration需要配置FFT Length，Guard band subcarrier，Cyclic prefix lengths，OFDM symbols，Transmit antennas，子载波间距等参数，另外可以配置Pilot，并可以选定Pilot在子载波中的位置已经它的输入矩阵。另外OFDM都是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MATLAB波形生成">
+<meta property="og:url" content="https://hechenyi.github.io/2025/04/21/MATLAB%E6%B3%A2%E5%BD%A2%E7%94%9F%E6%88%90/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Wireless Waveform GeneratorOFDM Waveform Configuration需要配置FFT Length，Guard band subcarrier，Cyclic prefix lengths，OFDM symbols，Transmit antennas，子载波间距等参数，另外可以配置Pilot，并可以选定Pilot在子载波中的位置已经它的输入矩阵。另外OFDM都是">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://hechenyi.github.io/images/OFDMGenerator.png">
+<meta property="og:image" content="https://hechenyi.github.io/images/5gNRUplinkGenerator.png">
+<meta property="og:image" content="https://hechenyi.github.io/images/ResourceGrid_1.png">
+<meta property="og:image" content="https://hechenyi.github.io/images/ResourceGrid_2.png">
+<meta property="article:published_time" content="2025-04-21T19:14:52.000Z">
+<meta property="article:modified_time" content="2025-04-21T20:41:49.587Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hechenyi.github.io/images/OFDMGenerator.png">
 
-<link rel="canonical" href="https://hechenyi.github.io/blog/">
+<link rel="canonical" href="https://hechenyi.github.io/2025/04/21/MATLAB%E6%B3%A2%E5%BD%A2%E7%94%9F%E6%88%90/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Hexo</title>
+  <title>MATLAB波形生成 | Hexo</title>
   
 
 
@@ -144,9 +153,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
@@ -162,10 +172,9 @@
       <meta itemprop="name" content="Hexo">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/21/MATLAB%E6%B3%A2%E5%BD%A2%E7%94%9F%E6%88%90/" class="post-title-link" itemprop="url">MATLAB波形生成</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          MATLAB波形生成
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -198,7 +207,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Wireless-Waveform-Generator"><a href="#Wireless-Waveform-Generator" class="headerlink" title="Wireless Waveform Generator"></a>Wireless Waveform Generator</h2><h3 id="OFDM-Waveform-Configuration"><a href="#OFDM-Waveform-Configuration" class="headerlink" title="OFDM Waveform Configuration"></a>OFDM Waveform Configuration</h3><p>需要配置FFT Length，Guard band subcarrier，Cyclic prefix lengths，OFDM symbols，Transmit antennas，子载波间距等参数，另外可以配置Pilot，并可以选定Pilot在子载波中的位置已经它的输入矩阵。另外OFDM都是和QAM配合使用，对于QAM的配置，可以调整它的Modulation order，Symbol mapping，bit source等参数</p>
+        <h2 id="Wireless-Waveform-Generator"><a href="#Wireless-Waveform-Generator" class="headerlink" title="Wireless Waveform Generator"></a>Wireless Waveform Generator</h2><h3 id="OFDM-Waveform-Configuration"><a href="#OFDM-Waveform-Configuration" class="headerlink" title="OFDM Waveform Configuration"></a>OFDM Waveform Configuration</h3><p>需要配置FFT Length，Guard band subcarrier，Cyclic prefix lengths，OFDM symbols，Transmit antennas，子载波间距等参数，另外可以配置Pilot，并可以选定Pilot在子载波中的位置已经它的输入矩阵。另外OFDM都是和QAM配合使用，对于QAM的配置，可以调整它的Modulation order，Symbol mapping，bit source等参数</p>
 <img src="/images/OFDMGenerator.png">
 下面是导出的matlab代码
 
@@ -207,545 +216,30 @@
 <h3 id="5gNRUplink"><a href="#5gNRUplink" class="headerlink" title="5gNRUplink"></a>5gNRUplink</h3><p>需要配置Main（SCS Carriers， Bandwdith Parts， Channel Bandwidth，SubFrames等等），PUSCH，PUCCH和SRS<br><img src="/images/5gNRUplinkGenerator.png"></p>
 <p>这里不需要像OFDM Generator一样配置FFT，因为子载波数目可以推算出来。<br>PUSCH在配置时需要注意symbol length，用来表示在一个slot占据的大小，如果symbol length是7，那么只有一个slot的一半，因此Resource Grid如下<br><img src="/images/ResourceGrid_1.png"><br>还可以改变SlotAllocation和Period，用来改变占据的slot在所有slot中的位置<br><img src="/images/ResourceGrid_2.png"><br>对于PUCCH，其可以和PUSCH在时域（也就是slot）有重合，但是不能在RB上有重合，这里也可以体现OFDM的概念，也就是说频率是复用的</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br></pre></td><td class="code"><pre><span class="line">% Generated by MATLAB(R) 24.2 (R2024b) and 5G Toolbox 24.2 (R2024b).</span><br><span class="line">% Generated on: 21-Apr-2025 22:26:35</span><br><span class="line"></span><br><span class="line">%% Generating Uplink waveform</span><br><span class="line">% Uplink configuration</span><br><span class="line">cfgUL = nrULCarrierConfig;</span><br><span class="line">cfgUL.Label = <span class="string">&#x27;Carrier1&#x27;</span>;</span><br><span class="line">cfgUL.FrequencyRange = <span class="string">&#x27;FR1&#x27;</span>;</span><br><span class="line">cfgUL.ChannelBandwidth = 60;</span><br><span class="line">cfgUL.NCellID = 1;</span><br><span class="line">cfgUL.NumSubframes = 1;</span><br><span class="line">cfgUL.InitialNSubframe = 0;</span><br><span class="line">cfgUL.WindowingPercent = 0;</span><br><span class="line">cfgUL.SampleRate = [];</span><br><span class="line">cfgUL.CarrierFrequency = 0;</span><br><span class="line"></span><br><span class="line">%% SCS specific carriers</span><br><span class="line">scscarrier = nrSCSCarrierConfig;</span><br><span class="line">scscarrier.SubcarrierSpacing = 15;</span><br><span class="line">scscarrier.NSizeGrid = 270;</span><br><span class="line">scscarrier.NStartGrid = 3;</span><br><span class="line"></span><br><span class="line">cfgUL.SCSCarriers = &#123;scscarrier&#125;;</span><br><span class="line"></span><br><span class="line">%% Bandwidth Parts</span><br><span class="line">bwp = nrWavegenBWPConfig;</span><br><span class="line">bwp.BandwidthPartID = 1;</span><br><span class="line">bwp.Label = <span class="string">&#x27;BWP1&#x27;</span>;</span><br><span class="line">bwp.SubcarrierSpacing = 15;</span><br><span class="line">bwp.CyclicPrefix = <span class="string">&#x27;normal&#x27;</span>;</span><br><span class="line">bwp.NSizeBWP = 270;</span><br><span class="line">bwp.NStartBWP = 3;</span><br><span class="line"></span><br><span class="line">cfgUL.BandwidthParts = &#123;bwp&#125;;</span><br><span class="line"></span><br><span class="line">%% Intracell Guard Bands Configuration</span><br><span class="line">gb = nrIntraCellGuardBandsConfig;</span><br><span class="line">gb.GuardBandSize = zeros(0,2);</span><br><span class="line">gb.SubcarrierSpacing = 15;</span><br><span class="line"></span><br><span class="line">cfgUL.IntraCellGuardBands = &#123;gb&#125;;</span><br><span class="line"></span><br><span class="line">%% PUSCH Instances Configuration</span><br><span class="line">pusch = nrWavegenPUSCHConfig;</span><br><span class="line">pusch.Enable = <span class="literal">true</span>;</span><br><span class="line">pusch.Label = <span class="string">&#x27;PUSCH1&#x27;</span>;</span><br><span class="line">pusch.Power = 0;</span><br><span class="line">pusch.BandwidthPartID = 1;</span><br><span class="line">pusch.Modulation = <span class="string">&#x27;64QAM&#x27;</span>;</span><br><span class="line">pusch.NumLayers = 1;</span><br><span class="line">pusch.MappingType = <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">pusch.SymbolAllocation = [0 4];</span><br><span class="line">pusch.SlotAllocation = 0:8;</span><br><span class="line">pusch.Period = 10;</span><br><span class="line">pusch.PRBSet = 0:269;</span><br><span class="line">pusch.TransformPrecoding = <span class="literal">false</span>;</span><br><span class="line">pusch.TransmissionScheme = <span class="string">&#x27;nonCodebook&#x27;</span>;</span><br><span class="line">pusch.NumAntennaPorts = 1;</span><br><span class="line">pusch.TPMI = 0;</span><br><span class="line">pusch.CodebookType = <span class="string">&#x27;codebook1_ng1n4n1&#x27;</span>;</span><br><span class="line">pusch.FrequencyHopping = <span class="string">&#x27;neither&#x27;</span>;</span><br><span class="line">pusch.SecondHopStartPRB = 1;</span><br><span class="line">pusch.Interlacing = <span class="literal">false</span>;</span><br><span class="line">pusch.RBSetIndex = 0;</span><br><span class="line">pusch.InterlaceIndex = 0;</span><br><span class="line">pusch.NID = [];</span><br><span class="line">pusch.RNTI = 1;</span><br><span class="line">pusch.NRAPID = [];</span><br><span class="line">pusch.Coding = <span class="literal">true</span>;</span><br><span class="line">pusch.TargetCodeRate = 0.513671875;</span><br><span class="line">pusch.XOverhead = 0;</span><br><span class="line">pusch.LimitedBufferRateMatching = <span class="literal">false</span>;</span><br><span class="line">pusch.MaxNumLayers = 8;</span><br><span class="line">pusch.MCSTable = <span class="string">&#x27;qam256&#x27;</span>;</span><br><span class="line">pusch.RVSequence = [0 2 3 1];</span><br><span class="line">pusch.DataSource = <span class="string">&#x27;PN9-ITU&#x27;</span>;</span><br><span class="line">pusch.EnableACK = <span class="literal">false</span>;</span><br><span class="line">pusch.NumACKBits = 10;</span><br><span class="line">pusch.BetaOffsetACK = 20;</span><br><span class="line">pusch.DataSourceACK = <span class="string">&#x27;PN9-ITU&#x27;</span>;</span><br><span class="line">pusch.EnableCSI1 = <span class="literal">false</span>;</span><br><span class="line">pusch.NumCSI1Bits = 10;</span><br><span class="line">pusch.BetaOffsetCSI1 = 6.25;</span><br><span class="line">pusch.DataSourceCSI1 = <span class="string">&#x27;PN9-ITU&#x27;</span>;</span><br><span class="line">pusch.EnableCSI2 = <span class="literal">false</span>;</span><br><span class="line">pusch.NumCSI2Bits = 10;</span><br><span class="line">pusch.BetaOffsetCSI2 = 6.25;</span><br><span class="line">pusch.DataSourceCSI2 = <span class="string">&#x27;PN9-ITU&#x27;</span>;</span><br><span class="line">pusch.EnableCGUCI = <span class="literal">false</span>;</span><br><span class="line">pusch.NumCGUCIBits = 7;</span><br><span class="line">pusch.BetaOffsetCGUCI = 20;</span><br><span class="line">pusch.DataSourceCGUCI = <span class="string">&#x27;PN9-ITU&#x27;</span>;</span><br><span class="line">pusch.EnableULSCH = <span class="literal">true</span>;</span><br><span class="line">pusch.UCIScaling = 1;</span><br><span class="line">pusch.DMRSPower = 0;</span><br><span class="line">pusch.EnablePTRS = <span class="literal">false</span>;</span><br><span class="line">pusch.PTRSPower = 0;</span><br><span class="line"></span><br><span class="line">% PUSCH DM-RS</span><br><span class="line">puschDMRS = nrPUSCHDMRSConfig;</span><br><span class="line">puschDMRS.DMRSConfigurationType = 1;</span><br><span class="line">puschDMRS.DMRSTypeAPosition = 2;</span><br><span class="line">puschDMRS.DMRSAdditionalPosition = 0;</span><br><span class="line">puschDMRS.DMRSLength = 1;</span><br><span class="line">puschDMRS.CustomSymbolSet = [];</span><br><span class="line">puschDMRS.DMRSPortSet = [];</span><br><span class="line">puschDMRS.NIDNSCID = [];</span><br><span class="line">puschDMRS.NSCID = 0;</span><br><span class="line">puschDMRS.GroupHopping = <span class="literal">false</span>;</span><br><span class="line">puschDMRS.SequenceHopping = <span class="literal">false</span>;</span><br><span class="line">puschDMRS.NRSID = [];</span><br><span class="line">puschDMRS.NumCDMGroupsWithoutData = 2;</span><br><span class="line">puschDMRS.DMRSUplinkR16 = <span class="literal">false</span>;</span><br><span class="line">puschDMRS.DMRSUplinkTransformPrecodingR16 = <span class="literal">false</span>;</span><br><span class="line">puschDMRS.DMRSEnhancedR18 = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">pusch.DMRS = puschDMRS;</span><br><span class="line"></span><br><span class="line">% PUSCH PT-RS</span><br><span class="line">puschPTRS = nrPUSCHPTRSConfig;</span><br><span class="line">puschPTRS.TimeDensity = 1;</span><br><span class="line">puschPTRS.FrequencyDensity = 2;</span><br><span class="line">puschPTRS.NumPTRSSamples = 2;</span><br><span class="line">puschPTRS.NumPTRSGroups = 2;</span><br><span class="line">puschPTRS.REOffset = <span class="string">&#x27;00&#x27;</span>;</span><br><span class="line">puschPTRS.PTRSPortSet = [];</span><br><span class="line">puschPTRS.NID = [];</span><br><span class="line"></span><br><span class="line">pusch.PTRS = puschPTRS;</span><br><span class="line"></span><br><span class="line">cfgUL.PUSCH = &#123;pusch&#125;;</span><br><span class="line"></span><br><span class="line">%% PUCCH Instances Configuration</span><br><span class="line">pucch = nrWavegenPUCCH0Config;</span><br><span class="line">pucch.Enable = <span class="literal">false</span>;</span><br><span class="line">pucch.Label = <span class="string">&#x27;PUCCH1&#x27;</span>;</span><br><span class="line">pucch.Power = 0;</span><br><span class="line">pucch.BandwidthPartID = 1;</span><br><span class="line">pucch.SymbolAllocation = [0 2];</span><br><span class="line">pucch.SlotAllocation = 0:7;</span><br><span class="line">pucch.Period = 10;</span><br><span class="line">pucch.PRBSet = 12:30;</span><br><span class="line">pucch.FrequencyHopping = <span class="string">&#x27;neither&#x27;</span>;</span><br><span class="line">pucch.SecondHopStartPRB = 1;</span><br><span class="line">pucch.Interlacing = <span class="literal">false</span>;</span><br><span class="line">pucch.RBSetIndex = 0;</span><br><span class="line">pucch.InterlaceIndex = 0;</span><br><span class="line">pucch.GroupHopping = <span class="string">&#x27;neither&#x27;</span>;</span><br><span class="line">pucch.HoppingID = [];</span><br><span class="line">pucch.InitialCyclicShift = 0;</span><br><span class="line">pucch.NumUCIBits = 1;</span><br><span class="line">pucch.DataSourceUCI = <span class="string">&#x27;PN9-ITU&#x27;</span>;</span><br><span class="line">pucch.DataSourceSR = 0;</span><br><span class="line"></span><br><span class="line">cfgUL.PUCCH = &#123;pucch&#125;;</span><br><span class="line"></span><br><span class="line">%% SRS Instances Configuration</span><br><span class="line">srs = nrWavegenSRSConfig;</span><br><span class="line">srs.Enable = <span class="literal">false</span>;</span><br><span class="line">srs.Label = <span class="string">&#x27;SRS1&#x27;</span>;</span><br><span class="line">srs.Power = 0;</span><br><span class="line">srs.BandwidthPartID = 1;</span><br><span class="line">srs.NumSRSPorts = 1;</span><br><span class="line">srs.SymbolStart = 13;</span><br><span class="line">srs.NumSRSSymbols = 1;</span><br><span class="line">srs.SlotAllocation = 0:9;</span><br><span class="line">srs.Period = 10;</span><br><span class="line">srs.FrequencyStart = 0;</span><br><span class="line">srs.NRRC = 0;</span><br><span class="line">srs.CSRS = 0;</span><br><span class="line">srs.BSRS = 0;</span><br><span class="line">srs.BHop = 0;</span><br><span class="line">srs.Repetition = 1;</span><br><span class="line">srs.KTC = 2;</span><br><span class="line">srs.KBarTC = 0;</span><br><span class="line">srs.FrequencyScalingFactor = 1;</span><br><span class="line">srs.StartRBIndex = 0;</span><br><span class="line">srs.EnableStartRBHopping = <span class="literal">false</span>;</span><br><span class="line">srs.CyclicShift = 0;</span><br><span class="line">srs.GroupSeqHopping = <span class="string">&#x27;neither&#x27;</span>;</span><br><span class="line">srs.NSRSID = 0;</span><br><span class="line">srs.SRSPositioning = <span class="literal">false</span>;</span><br><span class="line">srs.EnableEightPortTDM = <span class="literal">false</span>;</span><br><span class="line">srs.CyclicShiftHopping = <span class="literal">false</span>;</span><br><span class="line">srs.CyclicShiftHoppingID = 0;</span><br><span class="line">srs.CyclicShiftHoppingSubset = [];</span><br><span class="line">srs.HoppingFinerGranularity = <span class="literal">false</span>;</span><br><span class="line">srs.CombOffsetHopping = <span class="literal">false</span>;</span><br><span class="line">srs.CombOffsetHoppingID = 0;</span><br><span class="line">srs.CombOffsetHoppingSubset = [];</span><br><span class="line">srs.HoppingWithRepetition = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">cfgUL.SRS = &#123;srs&#125;;</span><br><span class="line"></span><br><span class="line">% Generation</span><br><span class="line">[waveform,info] = nrWaveformGenerator(cfgUL);</span><br><span class="line"></span><br><span class="line">Fs = info.ResourceGrids(1).Info.SampleRate; 								 % Specify the sample rate of the waveform <span class="keyword">in</span> Hz</span><br><span class="line"></span><br><span class="line">%% Visualize</span><br><span class="line">% Spectrum Analyzer</span><br><span class="line">spectrum = spectrumAnalyzer(<span class="string">&#x27;SampleRate&#x27;</span>, Fs);</span><br><span class="line">spectrum(waveform);</span><br><span class="line">release(spectrum);</span><br></pre></td></tr></table></figure>
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/21/C++%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/21/C++%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">C++基本概念</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-04-21 15:19:37 / Modified: 15:20:06" itemprop="dateCreated datePublished" datetime="2025-04-21T15:19:37+02:00">2025-04-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><p>指针变量本身的值是地址，X64有2的64次方个内存地址，因此指针占8个字节。<br>指针变量通常是栈上的变量。<br>指针指向的内存可以是栈上变量的地址，也可以是堆上分配的内存地址。</p>
-<h2 id="malloc-new"><a href="#malloc-new" class="headerlink" title="malloc&amp;new"></a>malloc&amp;new</h2><ul>
-<li>malloc<ul>
-<li>malloc不会调用构造析构函数</li>
-<li>malloc返回无类型的指针（因此需要转换一下，char* p &#x3D; (char*) malloc(100)）</li>
-</ul>
-</li>
-<li>new&#x2F;delete<ul>
-<li>new 返回有类型的指针</li>
-<li>new调用构造析构函数</li>
-</ul>
-</li>
-</ul>
-<h2 id="STL六大组件"><a href="#STL六大组件" class="headerlink" title="STL六大组件"></a>STL六大组件</h2><ul>
-<li>仿函数</li>
-<li>算法</li>
-<li>迭代器</li>
-<li>空间配置器</li>
-<li>容器</li>
-<li>配接器</li>
-</ul>
-<h2 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h2><ul>
-<li>创建</li>
-<li>就绪</li>
-<li>运行</li>
-<li>堵塞</li>
-<li>死亡</li>
-</ul>
-<h2 id="静态连接"><a href="#静态连接" class="headerlink" title="静态连接"></a>静态连接</h2><ul>
-<li>创建一个静态库（.a文件）</li>
-<li>编译为静态库</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ -c math_utils.cpp -o math_utils.o</span><br><span class="line">ar rcs libmathutils.a math_utils.o</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用静态库的主函数</li>
-<li>静态连接并编译生成可执行文件</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ main.cpp -L. -lmathutils -o app</span><br></pre></td></tr></table></figure>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/04/21/C++%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" rel="prev" title="C++基本概念">
+      <i class="fa fa-chevron-left"></i> C++基本概念
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/21/OFDM/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/21/OFDM/" class="post-title-link" itemprop="url">OFDM</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-04-21 14:50:57 / Modified: 15:31:57" itemprop="dateCreated datePublished" datetime="2025-04-21T14:50:57+02:00">2025-04-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="MATLAB-examole"><a href="#MATLAB-examole" class="headerlink" title="MATLAB examole"></a>MATLAB examole</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openExample(<span class="string">&#x27;comm/OFDMEndToEndExample&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="basic-description"><a href="#basic-description" class="headerlink" title="basic description"></a>basic description</h2><img src="/images/dataflow.png">  
-This example shows how to run a complete end-to-end OFDM transimission for a single-input single-output (SISO) channel. The physical-layer transmission protocol mimics typical **synchonization signals**, **reference symbols**, **control channels**, and **data channels** popular across standardized transmission schemes such as LTE, 5G NR, and WLAN.
-
-<h2 id="Channel-Parameters"><a href="#Channel-Parameters" class="headerlink" title="Channel Parameters"></a>Channel Parameters</h2><ul>
-<li>SNR<br>20dB</li>
-<li>foff</li>
-<li>doppler</li>
-<li>pathDelay</li>
-<li>pathGain</li>
-</ul>
-<h2 id="System-Parameters"><a href="#System-Parameters" class="headerlink" title="System Parameters"></a>System Parameters</h2><ul>
-<li>FFTLen<br>1024</li>
-<li>numFrames<br>100</li>
-<li>numSymbolsPerFrame<br>15</li>
-<li>CPLen<br>256</li>
-<li>txDatabits<br>[…]</li>
-<li>usedSubCarr<br>600</li>
-<li>modulationOrder<br>64&#x3D;64-QAM</li>
-<li>codeRate<br>0&#x3D;1&#x2F;2</li>
-<li>BW<br>10MHz</li>
-<li>fc(carrier frequency)<br>1.9GHz</li>
-<li>enableFading<br>True</li>
-</ul>
-<h2 id="具体过程"><a href="#具体过程" class="headerlink" title="具体过程"></a>具体过程</h2><h3 id="Populate-Parameter-Structure"><a href="#Populate-Parameter-Structure" class="headerlink" title="Populate Parameter Structure"></a>Populate Parameter Structure</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">///helperOFDMSetParameters <span class="keyword">function</span></span><br><span class="line">[sysParam, txParam] = helperOFDMSetParameters(userParam);</span><br><span class="line">///通过查表来进一步获取FFTLen, CPLen, numSubCarr, BW等数据</span><br><span class="line">[~,codeParam] = helperOFDMGetTables(userParam.BWIndex,userParam.codeRateIndex);</span><br></pre></td></tr></table></figure>
-<h3 id="Initialize-states-and-process-data-frames"><a href="#Initialize-states-and-process-data-frames" class="headerlink" title="Initialize states and process data frames"></a>Initialize states and process data frames</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">/// Initialize transmitter and receiver</span><br><span class="line">txObj = helperOFDMTxInit(sysParam);</span><br><span class="line">rxObj = helperOFDMRxInit(sysParam);</span><br><span class="line">/// 循环发送，大循环是信噪比，用来模拟不同环境，小循环是frames的数量，用来一个frame一个frame的发送</span><br><span class="line"><span class="keyword">for</span> simLoopIdx = 1:length(SNRdB)</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">for</span> frameNum = 1 : sysParam.numFrames+1</span><br><span class="line">        sysParam.frameNum = frameNum;</span><br><span class="line">        /// Generate Payload data</span><br><span class="line">        txParam.txDatabits = randi([0 1], sysParam.trBlkSize, 1);</span><br><span class="line">        /// Store data bits <span class="keyword">for</span> BER calculation</span><br><span class="line">        sysParam.txDatabits = [sysParam.txDatabits; txParam.txDataBits];</span><br><span class="line">        /// Transmit data</span><br><span class="line">        [txOut, txGrid, txDiagnostics] = helperOFDMTx(txParam, sysParam, txObj);</span><br><span class="line">        /// 经过模拟的channel进行传送</span><br><span class="line">        chanOut = helperOFDMChannel(txOut, chanParam, sysParam);</span><br><span class="line">        /// Run the receiver front-end</span><br><span class="line">        rxIn = helperOFDMRxFrontEnd(chanOut, sysParam, rxObj);</span><br><span class="line">        /// Run the receiver processing</span><br><span class="line">        [rxDataBits, isConnected, toff, rxDiagnostics] = helperOFDMRx(rxIn, sysParam, rxObj);</span><br><span class="line">        /// Collect bit and frame error statistics</span><br><span class="line">        <span class="keyword">if</span> is Connected</span><br><span class="line">            BER = errorRate(...</span><br><span class="line">                sysParam.txDataBits(end-(2*sysParam.trBlkSize)+(1:sysParam.trBlkSize)), ...</span><br><span class="line">                rxDataBits);</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/21/5gNRUplink/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/21/5gNRUplink/" class="post-title-link" itemprop="url">5gNRUplink</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-04-21 14:50:40 / Modified: 15:44:03" itemprop="dateCreated datePublished" datetime="2025-04-21T14:50:40+02:00">2025-04-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Basic-discription"><a href="#Basic-discription" class="headerlink" title="Basic discription"></a>Basic discription</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openExample(<span class="string">&#x27;5g/NRUplinkWaveformGenerationExample&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>This example shows how to configure and generate a 5G NR uplink vector waveform with physical uplink shared channel (PUSCH) and <strong>sounding reference signal</strong>(SRS).</p>
-<ul>
-<li>PUSCH and its assoicated demodulation reference signal (DM-RS) and phase-tracking reference signal (PT-RS)  </li>
-<li>SRS</li>
-</ul>
-<h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><ul>
-<li>初始化nrULCarrierConfig并配置基本参数</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">waveconfig = nrULCarrierConfig;</span><br><span class="line">waveconfig.NumSubframes = 10;</span><br><span class="line">waveconfig.FrequencyRange = <span class="string">&#x27;FR1&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>配置scs</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scscarriers = &#123;nrSCSCarrierConfig, nrSCSCarrierConfig&#125;;</span><br><span class="line">scscarriers&#123;1&#125;.SubcarrierSpacing = 15;</span><br><span class="line">scscarriers&#123;1&#125;.NSizeGrid = 216;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/21/5gNRDownlink/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/21/5gNRDownlink/" class="post-title-link" itemprop="url">5gNRDownLink</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-04-21 14:49:12 / Modified: 15:44:06" itemprop="dateCreated datePublished" datetime="2025-04-21T14:49:12+02:00">2025-04-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Basic-description"><a href="#Basic-description" class="headerlink" title="Basic description"></a>Basic description</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openExample(<span class="string">&#x27;5g/NRDownlinkWaveformGenerationExample&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>This example shows how to configure and generate a <strong>5G NR downlink</strong> vector.<br>The generated waveform contains these channels and signals</p>
-<ul>
-<li>PDSCH and its associated DM-RS and PT-RS</li>
-<li>PDCCH and its associated DM-RS</li>
-<li>PBCH and its associated DM-RS</li>
-<li>PSS and SSS</li>
-<li>CSI-RS</li>
-</ul>
-<h3 id="SCS-specific-carriers"><a href="#SCS-specific-carriers" class="headerlink" title="SCS specific carriers"></a>SCS specific carriers</h3><ul>
-<li>SubcarrierSpacing</li>
-<li>NsizeGrid</li>
-<li>StartGrid<br>NsizeGrid默认是52，说明整个带宽中有52个resource blocks，每个resource block有12个子载波</li>
-</ul>
-<h3 id="SS-burst"><a href="#SS-burst" class="headerlink" title="SS burst"></a>SS burst</h3><h4 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h4><p>SSB(SS&#x2F;PBCH Block)是一个包含PSS+SSS+PBCH的小结构，占用240个子载波（20PRBs）、4个OFDM符号<br>SS Burst是一个时间窗口（最多5ms），里面可以发多个SSB（最多64个，取决于配置）</p>
-<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><ul>
-<li>Enable</li>
-<li>Power<br>用来设置SSB的相对功率，也就是和整个波形中其他部分的功率一样，不做放大或衰减。</li>
-<li>BlockPattern<br>例如Case B（30KHz）表示subcarrier spacing</li>
-<li>TransmittedBlocks<br>说明这5ms内发射的SSB个数</li>
-<li>Period<br>发射SS Burst的周期</li>
-<li>NCRBSSB</li>
-</ul>
-<h2 id="BWPs"><a href="#BWPs" class="headerlink" title="BWPs"></a>BWPs</h2><p>A BWP is formed by a set of contiguous resources sharing a numerology on a given SCS carrier.<br>例如如果在前面已经定义好了SCS carrier，例如RB数量，间距，那么在构建BWP的时候可以用到之前构建好的SCS，因此是share numerology</p>
-<ul>
-<li>BandwidthPartID</li>
-<li>Label</li>
-<li>SubcarrierSpacing</li>
-<li>CyclicPrefix</li>
-<li>NSizeBWP<br>表示这个BWP占据多少个RB</li>
-<li>NStartBWP</li>
-</ul>
-<h2 id="PDCCH"><a href="#PDCCH" class="headerlink" title="PDCCH"></a>PDCCH</h2><p>Speicify the set of PDSCH transmission instances in the waveform by using a cell array. </p>
-<ul>
-<li><p>Enable</p>
-</li>
-<li><p>Label</p>
-</li>
-<li><p>BandwidthPartID<br>这个会和前面定义的BWP进行匹配</p>
-</li>
-<li><p>Power</p>
-</li>
-<li><p>Coding<br>Enable the DL-SCH transport channel coding</p>
-</li>
-<li><p>DataSource</p>
-</li>
-<li><p>Modulation</p>
-</li>
-<li><p>NumLayers  </p>
-<ul>
-<li>NumLayers &#x3D; 1,就相当于一个数据流（单层MIMO），也叫SISO</li>
-<li>NumLayers &#x3D; 2，基站可以同时发两条独立的数据流到UE，UE徐亚至少有四个天线来接收，这属于2x2 MIMO</li>
-<li>NumLayers &#x3D; 4，例如4x4到MIMO</li>
-</ul>
-</li>
-<li><p>VRBToPRBInterleaving</p>
-<ul>
-<li>disable interleaver</li>
-<li>enable intrleaver<br>  交错映射的作用是在频域上分散数据，提高对频率选择性衰落的抵抗力。<br>  VRB index:  0 1 2 3 4 5<br>  Mapped PRB: 0 1 4 5 2 3</li>
-</ul>
-</li>
-<li><p>DM-RS(解调参考信号)</p>
-<ul>
-<li>DMRSConfigurationType</li>
-<li>NumCDMGroupsWithoutData</li>
-<li>DMRSPortSet</li>
-<li>DMRSTypeAPosition</li>
-<li>DMRSLength</li>
-<li>DMRSAdditionalPosition（用来做scrambling，也就是说将发射给不同UE的信号区分开）</li>
-<li>DMRS.NSCID</li>
-</ul>
-</li>
-<li><p>CSI-RS</p>
-<ul>
-<li>Enable</li>
-<li>Label</li>
-<li>BandwidthPartID</li>
-<li>Power</li>
-<li>CSIRSType</li>
-<li>RowNumber</li>
-<li>CSIRSType</li>
-<li>SubcarrierLocation</li>
-<li>NumRB</li>
-<li>RBOffset</li>
-<li>SymbolLocations</li>
-<li>CSIPeriod</li>
-<li>NID</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/21/5gNRSidelink/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/21/5gNRSidelink/" class="post-title-link" itemprop="url">5gNRSidelink</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-04-21 14:33:19 / Modified: 15:34:13" itemprop="dateCreated datePublished" datetime="2025-04-21T14:33:19+02:00">2025-04-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Basic-discription"><a href="#Basic-discription" class="headerlink" title="Basic discription"></a>Basic discription</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openExample(<span class="string">&#x27;5g/NRSidelinkVectorWaveformGenerationExample&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>This example shows how to configure and generate a 5G NR sidelink baseband waveform containing a sequence of physical sidelink control channel (PSCCH) and physical sidelink shared channel (PSSCH) transmission, including sidelink control information (SCI) and SL-SCH transport channel coding.<br>NR sidelink uses the concept of resource pools to configure specific resources for transmission and reception on a sidelink carrier. Each data transmission comprises a PSCCH transmission and an associated PSSCH transmission. </p>
-<h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><ul>
-<li>set the parameters for the waveform and resource pool configuration<br>The waveform is based on the PSSCH reference measurement channels (RMCs) defined. 也就是它是根据一个参考channel进行构造的，但实际上你可以自定义参数。</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rmc = R.PSSCH.2-1.2</span><br><span class="line">bwscs = 20MHx @ 30kHz</span><br><span class="line">% Get PSCCH and PSSCH channel and sidelink pool parameters</span><br><span class="line">bw = bwscs(1); </span><br><span class="line">scs = bwscs(2);</span><br><span class="line">[waveconfig.SLTransmission,waveconfig.Pool] = NRSidelinkResourcePool.rmcTestConfiguration(rmc,bw,scs);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Waveform Generation (create a baseband IQ waveform that contains a sequence of the previously configured PSCCH and PSSCH transmissions)<ul>
-<li>Use a SL-SCH HARQ entity object to control the HARQ process and RV scheduling of the SL-SCH transport encoding, across the series of PSSCH transmissions in the waveform.</li>
-<li>Create a set of PN23 data sources to stream the SL-SCH, SCI1, and SCI2 payloads across the sequence of transmisins.</li>
-</ul>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sci1datasource = createPN23DataSource();</span><br><span class="line">sci2datasource = createPN23DataSource();</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Create a pair of PSSCH DM-RS position configurations.</li>
-<li>Create variable for the basestation waveform and related outputs</li>
-<li>配置好了之后（Slot-wise loop to build the complete waveform from the sequence of individual PSSCH and PSCCH transmission）<br>  需要注意的是每个slot里面都有PSSCH和PSCCH</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -798,6 +292,7 @@ This example shows how to run a complete end-to-end OFDM transimission for a sin
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Wireless-Waveform-Generator"><span class="nav-number">1.</span> <span class="nav-text">Wireless Waveform Generator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OFDM-Waveform-Configuration"><span class="nav-number">1.1.</span> <span class="nav-text">OFDM Waveform Configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5gNRUplink"><span class="nav-number">1.2.</span> <span class="nav-text">5gNRUplink</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
