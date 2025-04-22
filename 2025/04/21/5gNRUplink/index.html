@@ -28,7 +28,7 @@
 <meta property="og:description" content="Basic discription1openExample(&#x27;5g&#x2F;NRUplinkWaveformGenerationExample&#x27;) This example shows how to configure and generate a 5G NR uplink vector waveform with physical uplink shared channel (PUS">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-04-21T12:50:40.000Z">
-<meta property="article:modified_time" content="2025-04-21T13:44:03.692Z">
+<meta property="article:modified_time" content="2025-04-22T07:17:53.288Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -177,10 +177,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-04-21 14:50:40 / Modified: 15:44:03" itemprop="dateCreated datePublished" datetime="2025-04-21T14:50:40+02:00">2025-04-21</time>
+              <time title="Created: 2025-04-21 14:50:40" itemprop="dateCreated datePublished" datetime="2025-04-21T14:50:40+02:00">2025-04-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-04-22 09:17:53" itemprop="dateModified" datetime="2025-04-22T09:17:53+02:00">2025-04-22</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -215,7 +221,39 @@
 <ul>
 <li>配置scs</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scscarriers = &#123;nrSCSCarrierConfig, nrSCSCarrierConfig&#125;;</span><br><span class="line">scscarriers&#123;1&#125;.SubcarrierSpacing = 15;</span><br><span class="line">scscarriers&#123;1&#125;.NSizeGrid = 216;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scscarriers = &#123;nrSCSCarrierConfig, nrSCSCarrierConfig&#125;;</span><br><span class="line">scscarriers&#123;1&#125;.SubcarrierSpacing = 15;</span><br><span class="line">scscarriers&#123;1&#125;.NSizeGrid = 216;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>配置BWP</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bwp&#123;1&#125;.SubcarrierSpacing = 15;</span><br><span class="line">bwp&#123;1&#125;.CyclicPrefix = <span class="string">&#x27;Normal&#x27;</span>;</span><br><span class="line">bwp&#123;1&#125;.NSizeBWP = 25;   % Size of BWP <span class="keyword">in</span> PRBs</span><br><span class="line">bwp&#123;1&#125;.NStartBWP = 10;  % Position of BWP, relateive to point A.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>配置PUSCH</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">pusch = &#123;nrWavegenPUSCHConfig&#125;;</span><br><span class="line">pusch&#123;1&#125;.Coding = 1;    % 启用UL-SCH的信道编码(LDPC编码)</span><br><span class="line">pusch&#123;1&#125;.NID    = 1;    % Scrambling（扰码）所用的NID，确保不同用户的上行数据在解码时不会混淆</span><br><span class="line">pusch&#123;1&#125;.TransformPrecoding = <span class="literal">false</span>;    % 使用CP-OFDM（DFT只适用于某些低频场景）</span><br><span class="line">pusch&#123;1&#125;.Modulation = <span class="string">&#x27;QPSK&#x27;</span>;</span><br><span class="line">pusch&#123;1&#125;.NumLayers  = 2;</span><br><span class="line">pusch&#123;1&#125;.NumAntennaPorts    = 4;</span><br><span class="line">pusch&#123;1&#125;.DataSource = <span class="string">&#x27;PN9&#x27;</span> % Channel data <span class="built_in">source</span></span><br><span class="line">pusch&#123;1&#125;.SymbolAllocation   = [0 14];   % 说明一个slot有14个OFDM symbols</span><br><span class="line">pusch&#123;1&#125;.SlotAllocation = [0 1];        % 说明一个pusch占两个Slot</span><br><span class="line">pusch&#123;1&#125;.period         = 5;            % 说明每5个slot会重复一次PUSCH分配，第0周期：slot 0 和 slot 1，第1周期： slot 5 和 slot 6</span><br><span class="line">pusch&#123;1&#125;.PRBSet         = 0:10          % 说明占用PRB数目，从而说明带宽大小</span><br><span class="line">% DM-RS configuration</span><br><span class="line">pusch&#123;1&#125;.DMRSPower      = 0;</span><br><span class="line">pusch&#123;1&#125;.DMRS.DMRSLength    = 1;</span><br><span class="line">...</span><br><span class="line">pusch&#123;1&#125;.DMRS.NSCID         = 0;</span><br><span class="line">% PT-RS configuration</span><br><span class="line">pusch&#123;1&#125;.EnablePTRS =   0;</span><br><span class="line">pusch&#123;1&#125;.PTRSPower  =   0;</span><br><span class="line">pusch&#123;1&#125;.PTRS.TimeDensity   =   1;</span><br><span class="line">pusch&#123;1&#125;.PTRS.FrequencyDensity   =   2;</span><br><span class="line">pusch&#123;1&#125;.PTRS.NumPTRSSamples =   2;</span><br><span class="line">pusch&#123;1&#125;.PTRS.PTRSPortSet   =   0;</span><br><span class="line">pusch&#123;1&#125;.PTRS.NID   =   0;</span><br><span class="line">% UCI(Uplink Control Information)</span><br><span class="line">pusch&#123;1&#125;.EnableACK  =   <span class="literal">true</span>;   % Enable or <span class="built_in">disable</span> HARQ-ACK</span><br><span class="line">pusch&#123;1&#125;.NumACKBits =   5</span><br><span class="line">pusch&#123;1&#125;.BetaOffsetCSI1 = 2     % Power <span class="built_in">factor</span> of CSI part 1</span><br><span class="line">pusch&#123;1&#125;.DataSourceCSI1 = <span class="string">&#x27;PN9&#x27;</span> % CSI part 1 data <span class="built_in">source</span></span><br><span class="line">pusch&#123;1&#125;.DataSourceACK  = <span class="string">&#x27;PN9&#x27;</span> % HARQ-ACK data <span class="built_in">source</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>配置SRS<br>Specify SRS(sounding reference signal)</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">srs&#123;1&#125;.NumSRSPorts  =   1;  % Number of SRS ports</span><br><span class="line">srs&#123;1&#125;.NumSRSSymbols =  4;  % Number of SRS slor</span><br><span class="line">srs&#123;1&#125;.SymbolStart  =   10; % Time-domain positin of the SRS <span class="keyword">in</span> the slot</span><br><span class="line">srs&#123;1&#125;.FrequencyStart=  0;  % Frequency position of the SRS <span class="keyword">in</span> BWP <span class="keyword">in</span> RBs</span><br><span class="line">srs&#123;1&#125;.Period   =   5       % Allocation period <span class="keyword">in</span> slots</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Waveform Generation<br>Assign all the channel and signal parameters to the main carrier configuration object(nrULCarrierConfig), then generate and plot the waveform.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">waveconfig.SCSCarrier   =   scscarriers;</span><br><span class="line">waveconfig.BandwidthParts   =   bwp;</span><br><span class="line">waveconfig.PUSCH            =   pusch;</span><br><span class="line">waveconfig.SRS              =   srs;</span><br></pre></td></tr></table></figure>
+
+<h2 id="概念学习"><a href="#概念学习" class="headerlink" title="概念学习"></a>概念学习</h2><h3 id="CSI"><a href="#CSI" class="headerlink" title="CSI"></a>CSI</h3><p>CSI信道状态矩阵是由UE通过Uplink发射给Basestation，CSI包含CSI1和CSI2</p>
+<h4 id="CSI1"><a href="#CSI1" class="headerlink" title="CSI1"></a>CSI1</h4><p>主要传输的是预定义的、结构化的CSI信息，用于反馈诸如：</p>
+<ul>
+<li>PMI（Precoding Matrix Indicator）</li>
+<li>RI（Rank Indicator）</li>
+<li>LI（Layer Indicator）</li>
+<li>Wideband CQI（Channel Quality Indicator）</li>
+</ul>
+<h4 id="CSI2"><a href="#CSI2" class="headerlink" title="CSI2"></a>CSI2</h4><p>传输的是更精细或更灵活的CSI信息，比如</p>
+<ul>
+<li>Subband CQI</li>
+<li>CRIs（Codebook Reference Indices）</li>
+<li>更复杂的PMI表达</li>
+</ul>
+
     </div>
 
     
@@ -295,7 +333,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-discription"><span class="nav-number">1.</span> <span class="nav-text">Basic discription</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Steps"><span class="nav-number">2.</span> <span class="nav-text">Steps</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-discription"><span class="nav-number">1.</span> <span class="nav-text">Basic discription</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Steps"><span class="nav-number">2.</span> <span class="nav-text">Steps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.</span> <span class="nav-text">概念学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CSI"><span class="nav-number">3.1.</span> <span class="nav-text">CSI</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CSI1"><span class="nav-number">3.1.1.</span> <span class="nav-text">CSI1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSI2"><span class="nav-number">3.1.2.</span> <span class="nav-text">CSI2</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
