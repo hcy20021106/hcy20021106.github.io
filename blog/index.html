@@ -175,7 +175,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-04-22 11:45:43 / Modified: 12:32:20" itemprop="dateCreated datePublished" datetime="2025-04-22T11:45:43+02:00">2025-04-22</time>
+              <time title="Created: 2025-04-22 11:45:43 / Modified: 14:56:23" itemprop="dateCreated datePublished" datetime="2025-04-22T11:45:43+02:00">2025-04-22</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -221,9 +221,9 @@
 <li>threadCreate</li>
 <li>UE_thread_SL(里面有UE_synch和processSlotRX两个子线程，由线程池Tpool进行维护)</li>
 <li>processSlotRX</li>
-<li>phy_procedures_nrUE_SL_RX（在openair1&#x2F;SCHED_NR_UE&#x2F;phy_procedures_nr_ue.c中,<strong>调用nr_ue_slsch_rx_procedures来return ret</strong>）<ul>
+<li>phy_procedures_nrUE_SL_RX（在openair1&#x2F;SCHED_NR_UE&#x2F;phy_procedures_nr_ue.c中,调用nr_ue_slsch_rx_procedures来return ret）<ul>
 <li>nr_ue_slsch_rx_procedures(在openair1&#x2F;PHY&#x2F;NR_UE_TRANSPORT&#x2F;nl_slsch_ue.c)<ul>
-<li>nr_slsch_decoding(在nr_ue_slsch_rx_procedures中 <strong>return ret</strong>)<ul>
+<li>nr_slsch_decoding(在nr_ue_slsch_rx_procedures中，decoding的部分是sci2部分 <strong>return ret</strong>)<ul>
 <li>polar_decoder_int16(在nr_slsch_decoding函数中)</li>
 <li>LOG_E(NR_PHY, “polar_decoder_int16 failed with ret %d for slot %d\n”, decoder_state, nr_slot_rx);</li>
 <li>return ret</li>
@@ -574,7 +574,7 @@ This example shows how to run a complete end-to-end OFDM transimission for a sin
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-04-22 09:17:53" itemprop="dateModified" datetime="2025-04-22T09:17:53+02:00">2025-04-22</time>
+                <time title="Modified: 2025-04-22 12:33:00" itemprop="dateModified" datetime="2025-04-22T12:33:00+02:00">2025-04-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -843,10 +843,16 @@ This example shows how to run a complete end-to-end OFDM transimission for a sin
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-04-21 14:33:19 / Modified: 15:34:13" itemprop="dateCreated datePublished" datetime="2025-04-21T14:33:19+02:00">2025-04-21</time>
+              <time title="Created: 2025-04-21 14:33:19" itemprop="dateCreated datePublished" datetime="2025-04-21T14:33:19+02:00">2025-04-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-04-22 16:07:47" itemprop="dateModified" datetime="2025-04-22T16:07:47+02:00">2025-04-22</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -869,7 +875,7 @@ This example shows how to run a complete end-to-end OFDM transimission for a sin
 
       
       
-          <h2 id="Basic-discription"><a href="#Basic-discription" class="headerlink" title="Basic discription"></a>Basic discription</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openExample(<span class="string">&#x27;5g/NRSidelinkVectorWaveformGenerationExample&#x27;</span>)</span><br></pre></td></tr></table></figure>
+          <h2 id="Basic-discription-–-from-MATLAB"><a href="#Basic-discription-–-from-MATLAB" class="headerlink" title="Basic discription – from MATLAB"></a>Basic discription – from MATLAB</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openExample(<span class="string">&#x27;5g/NRSidelinkVectorWaveformGenerationExample&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p>This example shows how to configure and generate a 5G NR sidelink baseband waveform containing a sequence of physical sidelink control channel (PSCCH) and physical sidelink shared channel (PSSCH) transmission, including sidelink control information (SCI) and SL-SCH transport channel coding.<br>NR sidelink uses the concept of resource pools to configure specific resources for transmission and reception on a sidelink carrier. Each data transmission comprises a PSCCH transmission and an associated PSSCH transmission. </p>
 <h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><ul>
 <li>set the parameters for the waveform and resource pool configuration<br>The waveform is based on the PSSCH reference measurement channels (RMCs) defined. 也就是它是根据一个参考channel进行构造的，但实际上你可以自定义参数。</li>
@@ -888,6 +894,19 @@ This example shows how to run a complete end-to-end OFDM transimission for a sin
 </ul>
 </li>
 </ul>
+<h2 id="基于openairinterface的sidelink"><a href="#基于openairinterface的sidelink" class="headerlink" title="基于openairinterface的sidelink"></a>基于openairinterface的sidelink</h2><h3 id="S-SSB"><a href="#S-SSB" class="headerlink" title="S-SSB"></a>S-SSB</h3><img src="/images/S-SSB.png">
+一个完整的S-SSB包含S-PSS、S-SSS和PSBCH这几个部分
+- S-PSS: symbols 1, 2
+- S-SSS: symbols 3, 4
+- PSBCH: symbols 5 - 12
+S-SSB uses 11 RBs, or 132 subcarriers.
+The PSBCH provides the system wide configuration and synchronization information required to establish the connection between multiple UEs. Its payload size consists of 56 bits.
+DMRS are transmitted in every PSBCH, on every fourth subcarrier, the are used by the receiver to properly decode the PSBCH.
+
+<h4 id="procedure"><a href="#procedure" class="headerlink" title="procedure"></a>procedure</h4><p>Create SL PSS<br>  |<br>Create SL SSS<br>  |<br>Fill in DMRS<br>  |<br>Generate PSBCH Payload<br>  |<br>Generate SSB Frame<br>  |<br>Conduct Symbol Rotation<br>  |<br>Encode PSBCH<br>  |<br>Detect SSS         &#x2F;&#x2F;&#x2F;接收端<br>  ｜<br>Correlated DMRS<br>  |<br>Extract PSBCH</p>
+<h3 id="PSSCH-and-PSCCH"><a href="#PSSCH-and-PSCCH" class="headerlink" title="PSSCH and PSCCH"></a>PSSCH and PSCCH</h3><p>PSSCH contains SCI2 and DM-RS while PSCCH only contains SCI1.<br><img src="/images/PSSCH.png"></p>
+<p>The SCI2 payload is <strong>polar</strong> encoded and contains the number of data bits transmitted as well as the multiplexing scheme. So the SCI2 is used by the decoder to properly decode the PSSCH payload, which uses a Low-Density Parity Check(LDPC) encoding mechanism. Besides, the SCI2 is used for the decoding of PSSCH for the HARQ operation.</p>
+<h2 id="Procedures"><a href="#Procedures" class="headerlink" title="Procedures"></a>Procedures</h2><p>Generate SCI2           &#x2F;&#x2F;&#x2F;发射端<br> |<br>Polar Coding and Rate Matching<br> |<br>LDPC coding and Rate Matching<br> |<br>Data and Control Multiplexing<br> |<br>Scrambling<br> |<br>Constellation Modulation<br> |<br>Layer Mapping<br> |<br>Virtual resource and resource grid mapping<br> |<br>OFDM modulation<br> |<br>Tx&#x2F;Rx<br> |<br>OFDM Demodulation   &#x2F;&#x2F;&#x2F;接收端<br> |<br>Resource grid demapping<br> |<br>Channel Estimatin and Equalization<br> |<br>Layer demapping<br> |<br>Constellation demodulation<br> |<br>Descrambling<br> |<br>Data and control demultiplexing<br> |<br>LDPC decoding and polar decoding</p>
 
       
     </div>
