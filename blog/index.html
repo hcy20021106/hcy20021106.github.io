@@ -150,6 +150,158 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/22/JavaSwing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/04/22/JavaSwing/" class="post-title-link" itemprop="url">JavaSwing</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-04-22 23:20:59" itemprop="dateCreated datePublished" datetime="2025-04-22T23:20:59+02:00">2025-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-04-23 23:16:46" itemprop="dateModified" datetime="2025-04-23T23:16:46+02:00">2025-04-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>Swing is part of API for providing native look and feel GUI for Java, which has more components than AWT(Abstract Window Toolkit), and these components are more lightweight.  </p>
+<p>Documents:<br><a target="_blank" rel="noopener" href="https://docs.oracle.com/en/java/javase/20/docs/api/java.desktop/javax/swing/package-summary.html">https://docs.oracle.com/en/java/javase/20/docs/api/java.desktop/javax/swing/package-summary.html</a>  </p>
+<p>These components are as below:</p>
+<ul>
+<li>Windows and dialogs<ul>
+<li>JFrame</li>
+<li>JDialog</li>
+<li>JColorChooser</li>
+<li>JFileChooser</li>
+<li>JOptionPane</li>
+</ul>
+</li>
+<li>Menus<ul>
+<li>JMenuItem</li>
+<li>JMenu</li>
+<li>JMenuBar</li>
+<li>JCheckBoxMenuItem</li>
+<li>JRadioButtonMenuItem</li>
+<li>JPopupMenu</li>
+<li>JSeparator</li>
+</ul>
+</li>
+<li>Container<ul>
+<li>JPanel</li>
+<li>JTappedPane</li>
+<li>JSplitPane</li>
+<li>JScrollPane</li>
+<li>JToolBar</li>
+<li>JDesktopPane</li>
+<li>JInternalFrame</li>
+<li>JLayeredPane</li>
+</ul>
+</li>
+<li>Control elements<ul>
+<li>JLabel</li>
+<li>JButton</li>
+<li>JToggleButton</li>
+<li>JCheckBox</li>
+<li>JRadioButton</li>
+<li>ButtonGroup</li>
+<li>JComboBox</li>
+<li>JList</li>
+<li>JTextField</li>
+<li>JTextArea</li>
+<li>JSeperator</li>
+</ul>
+</li>
+<li>Event handling<ul>
+<li>ActionEvent</li>
+<li>AdjustmentEvent</li>
+<li>FocusEvent</li>
+<li>ItemEvent</li>
+<li>MouseEvent</li>
+<li>TextEvent</li>
+<li>WindowEvent</li>
+<li>Menuvent</li>
+<li>ListSelectionEvent</li>
+<li>TableModelEvent<br>以WindowEvent为例</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">JFrame testFrame = new JFrame(<span class="string">&quot;Listener Test&quot;</span>);</span><br><span class="line">testFrame.setSize(300,200);</span><br><span class="line">testFrame.addWindowListener(new <span class="function"><span class="title">WindowAdpater</span></span>()&#123;</span><br><span class="line">    public void windowClosing(WindowEvent e)&#123;</span><br><span class="line">        JOptionPane testOpt = new JOptionPane();</span><br><span class="line">        testOpt.showMessageDialog(new JFrame(), <span class="string">&quot;closing Window!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>这里使用了匿名函数，等同于以下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JFrame testFrame = new JFrame(<span class="string">&quot;Listener Test&quot;</span>);</span><br><span class="line">class MyWindowListener extends WindowAdpater&#123;</span><br><span class="line">    public void windowClosing(WindowEvent e)&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;窗口关闭&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">testFrame.addWindowListener(new MyWindowListener());</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Layout manager<ul>
+<li>FlowLayout</li>
+<li>GridLayout</li>
+<li>BorderLayout</li>
+<li>BoxLayout</li>
+<li>CardLayout</li>
+<li>GridBagLayout</li>
+<li>GroupLayout</li>
+<li>SpringLayout</li>
+</ul>
+</li>
+</ul>
+<h2 id="Java的抽象类和接口"><a href="#Java的抽象类和接口" class="headerlink" title="Java的抽象类和接口"></a>Java的抽象类和接口</h2><p>以抽象类WindowAdapter和接口WindowListener为例。<br>通常来说，抽象类继承了接口的方法，但是每个方法都留了个空壳实现，正因为这些空壳，继承了接口的抽象类只需要写像覆盖的那几种方法，而不是被迫写完全部。<br>例如WindowAdapter继承WindowListener</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public abstract class WindowAdapter implements WindowListener&#123;</span><br><span class="line">    public void windowOpened(WindowEvent e)&#123;&#125;</span><br><span class="line">    ...</span><br><span class="line">    public void windowDeactivated(WindowEvent e)&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用继承的方法构建MainFrame类"><a href="#使用继承的方法构建MainFrame类" class="headerlink" title="使用继承的方法构建MainFrame类"></a>使用继承的方法构建MainFrame类</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class MainFrame extends JFrame&#123;</span><br><span class="line">    public <span class="function"><span class="title">MainFrame</span></span>()&#123;</span><br><span class="line">        setTitle(<span class="string">&quot;Choose Your Favorite Items&quot;</span>);</span><br><span class="line">        setSize(400, 300);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以这么理解,以下的JFrame父类的构造函数会在子类MainFrame调用构造函数时被调用，因为如果父类构造函数如果是无参的话那么就会被隐型调用，如果是有参的话需要通过super函数来调用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class JFrame&#123;</span><br><span class="line">    public <span class="function"><span class="title">JFrame</span></span>()&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>继承了这个父类的MyFrame子类相当于在构造函数里面执行了一遍super()</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public <span class="function"><span class="title">MainFrame</span></span>()&#123;</span><br><span class="line">    super();</span><br><span class="line">    setTitle(<span class="string">&quot;Choose your favourite items&quot;</span>);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/images/你.jpg">
+你好可爱，为什么我们性格会如何相像，也许这次葡萄熟透了。
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/22/openairinterface/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -173,10 +325,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-04-22 11:45:43 / Modified: 23:20:04" itemprop="dateCreated datePublished" datetime="2025-04-22T11:45:43+02:00">2025-04-22</time>
+              <time title="Created: 2025-04-22 11:45:43" itemprop="dateCreated datePublished" datetime="2025-04-22T11:45:43+02:00">2025-04-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-04-23 12:01:30" itemprop="dateModified" datetime="2025-04-23T12:01:30+02:00">2025-04-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -363,10 +521,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-04-21 15:19:37 / Modified: 15:20:06" itemprop="dateCreated datePublished" datetime="2025-04-21T15:19:37+02:00">2025-04-21</time>
+              <time title="Created: 2025-04-21 15:19:37" itemprop="dateCreated datePublished" datetime="2025-04-21T15:19:37+02:00">2025-04-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-04-23 12:01:02" itemprop="dateModified" datetime="2025-04-23T12:01:02+02:00">2025-04-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -851,7 +1015,7 @@ This example shows how to run a complete end-to-end OFDM transimission for a sin
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-04-22 16:08:06" itemprop="dateModified" datetime="2025-04-22T16:08:06+02:00">2025-04-22</time>
+                <time title="Modified: 2025-04-23 12:22:48" itemprop="dateModified" datetime="2025-04-23T12:22:48+02:00">2025-04-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -907,6 +1071,12 @@ DMRS are transmitted in every PSBCH, on every fourth subcarrier, the are used by
 <h3 id="PSSCH-and-PSCCH"><a href="#PSSCH-and-PSCCH" class="headerlink" title="PSSCH and PSCCH"></a>PSSCH and PSCCH</h3><p>PSSCH contains SCI2 and DM-RS while PSCCH only contains SCI1.<br><img src="/images/PSSCH.png"></p>
 <p>The SCI2 payload is <strong>polar</strong> encoded and contains the number of data bits transmitted as well as the multiplexing scheme. So the SCI2 is used by the decoder to properly decode the PSSCH payload, which uses a Low-Density Parity Check(LDPC) encoding mechanism. Besides, the SCI2 is used for the decoding of PSSCH for the HARQ operation.</p>
 <h2 id="Procedures"><a href="#Procedures" class="headerlink" title="Procedures"></a>Procedures</h2><p>Generate SCI2           &#x2F;&#x2F;&#x2F;发射端<br> |<br>Polar Coding and Rate Matching<br> |<br>LDPC coding and Rate Matching<br> |<br>Data and Control Multiplexing<br> |<br>Scrambling<br> |<br>Constellation Modulation<br> |<br>Layer Mapping<br> |<br>Virtual resource and resource grid mapping<br> |<br>OFDM modulation<br> |<br>Tx&#x2F;Rx<br> |<br>OFDM Demodulation   &#x2F;&#x2F;&#x2F;接收端<br> |<br>Resource grid demapping<br> |<br>Channel Estimatin and Equalization<br> |<br>Layer demapping<br> |<br>Constellation demodulation<br> |<br>Descrambling<br> |<br>Data and control demultiplexing<br> |<br>LDPC decoding and polar decoding</p>
+<h3 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h3><h4 id="Sidelink-Sequence-Diagram"><a href="#Sidelink-Sequence-Diagram" class="headerlink" title="Sidelink Sequence Diagram"></a>Sidelink Sequence Diagram</h4><p>…<br>自己画(Synchronization ue和nearby ue之间的通信)</p>
+<h4 id="Sidelink-Block-Diagram"><a href="#Sidelink-Block-Diagram" class="headerlink" title="Sidelink Block Diagram"></a>Sidelink Block Diagram</h4><img src="/images/SidelinkBlockDiagram.png">
+
+<h4 id="Packet-Loss-Rate"><a href="#Packet-Loss-Rate" class="headerlink" title="Packet Loss Rate"></a>Packet Loss Rate</h4><p>Successfully decoded packets</p>
+<h4 id="Data-rates"><a href="#Data-rates" class="headerlink" title="Data rates"></a>Data rates</h4><h4 id="Latency-self-defined"><a href="#Latency-self-defined" class="headerlink" title="Latency(self-defined)"></a>Latency(self-defined)</h4><h4 id="Resources-blocks"><a href="#Resources-blocks" class="headerlink" title="Resources blocks"></a>Resources blocks</h4><p>具体可见paper（只需要考虑PSSCH和PSCCH）<br>因为只需要关心real data<br>Resource blocks可以推导出theoretical data rates</p>
+<h3 id="How-would-improve"><a href="#How-would-improve" class="headerlink" title="How would improve"></a>How would improve</h3><p>例如如何改良resource blocks</p>
 
       
     </div>
@@ -988,7 +1158,7 @@ DMRS are transmitted in every PSBCH, on every fourth subcarrier, the are used by
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
