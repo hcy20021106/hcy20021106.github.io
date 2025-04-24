@@ -150,6 +150,64 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/23/NRTDDPerformanceEvaluation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/04/23/NRTDDPerformanceEvaluation/" class="post-title-link" itemprop="url">NRTDDPerformanceEvaluation</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-04-23 23:47:47" itemprop="dateCreated datePublished" datetime="2025-04-23T23:47:47+02:00">2025-04-23</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/22/JavaSwing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -333,7 +391,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-04-23 12:01:30" itemprop="dateModified" datetime="2025-04-23T12:01:30+02:00">2025-04-23</time>
+                <time title="Modified: 2025-04-24 12:52:12" itemprop="dateModified" datetime="2025-04-24T12:52:12+02:00">2025-04-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -367,7 +425,16 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#define NODE_NUMBER         softmodem_params.node_number</span></span><br><span class="line"><span class="comment">#define SL_DEST_ID          softmodem_params.dest_id</span></span><br><span class="line"><span class="comment">#define NON_STOP            softmodem_params.non_stop</span></span><br><span class="line"><span class="comment">#define EMULATE_L1          softmodem_params.emulate_l1</span></span><br><span class="line"><span class="comment">#define CONTINUOUS_TX       softmodem_params.continuous_tx</span></span><br><span class="line"><span class="comment">#define SYNC_REF            softmodem_params.sync_ref</span></span><br><span class="line"><span class="comment">#define NID1                softmodem_params.nid1</span></span><br><span class="line"><span class="comment">#define NID2                softmodem_params.nid2</span></span><br><span class="line"><span class="comment">#define SL_USER_MSG         softmodem_params.sl_user_msg</span></span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h4 id="1-1-2-调用nr-uesoftmodem-c"><a href="#1-1-2-调用nr-uesoftmodem-c" class="headerlink" title="1.1.2 调用nr-uesoftmodem.c"></a>1.1.2 调用nr-uesoftmodem.c</h4><ul>
+<h4 id="1-1-2-调用nr-uesoftmodem-c"><a href="#1-1-2-调用nr-uesoftmodem-c" class="headerlink" title="1.1.2 调用nr-uesoftmodem.c"></a>1.1.2 调用nr-uesoftmodem.c</h4><h5 id="1-1-2-1-Tx-Sync-UE"><a href="#1-1-2-1-Tx-Sync-UE" class="headerlink" title="1.1.2.1 Tx(Sync UE)"></a>1.1.2.1 Tx(Sync UE)</h5><ul>
+<li>processSlotTx</li>
+<li>phy_procedures_nrUE_SL_TX(时隙控制来发射S-SSB和SCH，具体可见<strong>5gNRSidelink</strong>)<ul>
+<li>phy_ssb_slot_allocation_sl<br>  发射S-SSB</li>
+<li>nr-ue-set-slsch<br>  配置slsch</li>
+<li>nr-ue_slsch_tx_procedures<br>  发射slsch</li>
+</ul>
+</li>
+</ul>
+<h5 id="1-1-2-2-Rx-Nearby-UE"><a href="#1-1-2-2-Rx-Nearby-UE" class="headerlink" title="1.1.2.2 Rx(Nearby UE)"></a>1.1.2.2 Rx(Nearby UE)</h5><ul>
 <li>第一步，先include &lt;nr-uesoftmode.h&gt;(里面extern了nr-ue.c里的函数)</li>
 <li>第二步，get_optins</li>
 <li>init_NR_UE</li>
@@ -438,10 +505,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-04-21 21:14:52 / Modified: 23:18:46" itemprop="dateCreated datePublished" datetime="2025-04-21T21:14:52+02:00">2025-04-21</time>
+              <time title="Created: 2025-04-21 21:14:52" itemprop="dateCreated datePublished" datetime="2025-04-21T21:14:52+02:00">2025-04-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-04-23 23:48:12" itemprop="dateModified" datetime="2025-04-23T23:48:12+02:00">2025-04-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -463,10 +536,6 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-        <div class="out-img-topic">
-          <img src=/images/1.png class="img-topic">
-        </div>
       
           <h2 id="Wireless-Waveform-Generator"><a href="#Wireless-Waveform-Generator" class="headerlink" title="Wireless Waveform Generator"></a>Wireless Waveform Generator</h2><h3 id="OFDM-Waveform-Configuration"><a href="#OFDM-Waveform-Configuration" class="headerlink" title="OFDM Waveform Configuration"></a>OFDM Waveform Configuration</h3><p>需要配置FFT Length，Guard band subcarrier，Cyclic prefix lengths，OFDM symbols，Transmit antennas，子载波间距等参数，另外可以配置Pilot，并可以选定Pilot在子载波中的位置已经它的输入矩阵。另外OFDM都是和QAM配合使用，对于QAM的配置，可以调整它的Modulation order，Symbol mapping，bit source等参数</p>
 <img src="/images/OFDMGenerator.png">
@@ -1015,7 +1084,7 @@ This example shows how to run a complete end-to-end OFDM transimission for a sin
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-04-23 12:22:48" itemprop="dateModified" datetime="2025-04-23T12:22:48+02:00">2025-04-23</time>
+                <time title="Modified: 2025-04-24 12:09:23" itemprop="dateModified" datetime="2025-04-24T12:09:23+02:00">2025-04-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1039,9 +1108,9 @@ This example shows how to run a complete end-to-end OFDM transimission for a sin
 
       
       
-          <h2 id="Basic-discription-–-from-MATLAB"><a href="#Basic-discription-–-from-MATLAB" class="headerlink" title="Basic discription – from MATLAB"></a>Basic discription – from MATLAB</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openExample(<span class="string">&#x27;5g/NRSidelinkVectorWaveformGenerationExample&#x27;</span>)</span><br></pre></td></tr></table></figure>
+          <h2 id="1-Basic-discription-–-from-MATLAB"><a href="#1-Basic-discription-–-from-MATLAB" class="headerlink" title="1 Basic discription – from MATLAB"></a>1 Basic discription – from MATLAB</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openExample(<span class="string">&#x27;5g/NRSidelinkVectorWaveformGenerationExample&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p>This example shows how to configure and generate a 5G NR sidelink baseband waveform containing a sequence of physical sidelink control channel (PSCCH) and physical sidelink shared channel (PSSCH) transmission, including sidelink control information (SCI) and SL-SCH transport channel coding.<br>NR sidelink uses the concept of resource pools to configure specific resources for transmission and reception on a sidelink carrier. Each data transmission comprises a PSCCH transmission and an associated PSSCH transmission. </p>
-<h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><ul>
+<h2 id="2-Steps"><a href="#2-Steps" class="headerlink" title="2 Steps"></a>2 Steps</h2><ul>
 <li>set the parameters for the waveform and resource pool configuration<br>The waveform is based on the PSSCH reference measurement channels (RMCs) defined. 也就是它是根据一个参考channel进行构造的，但实际上你可以自定义参数。</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rmc = R.PSSCH.2-1.2</span><br><span class="line">bwscs = 20MHx @ 30kHz</span><br><span class="line">% Get PSCCH and PSSCH channel and sidelink pool parameters</span><br><span class="line">bw = bwscs(1); </span><br><span class="line">scs = bwscs(2);</span><br><span class="line">[waveconfig.SLTransmission,waveconfig.Pool] = NRSidelinkResourcePool.rmcTestConfiguration(rmc,bw,scs);</span><br></pre></td></tr></table></figure>
@@ -1058,19 +1127,20 @@ This example shows how to run a complete end-to-end OFDM transimission for a sin
 </ul>
 </li>
 </ul>
-<h2 id="基于openairinterface的sidelink"><a href="#基于openairinterface的sidelink" class="headerlink" title="基于openairinterface的sidelink"></a>基于openairinterface的sidelink</h2><h3 id="S-SSB"><a href="#S-SSB" class="headerlink" title="S-SSB"></a>S-SSB</h3><img src="/images/S-SSB.png">
+<h2 id="3-基于openairinterface的sidelink"><a href="#3-基于openairinterface的sidelink" class="headerlink" title="3 基于openairinterface的sidelink"></a>3 基于openairinterface的sidelink</h2><h3 id="3-1-S-SSB"><a href="#3-1-S-SSB" class="headerlink" title="3.1 S-SSB"></a>3.1 S-SSB</h3><img src="/images/S-SSB.png">
 一个完整的S-SSB包含S-PSS、S-SSS和PSBCH这几个部分
-- S-PSS: symbols 1, 2
-- S-SSS: symbols 3, 4
-- PSBCH: symbols 5 - 12
-S-SSB uses 11 RBs, or 132 subcarriers.
-The PSBCH provides the system wide configuration and synchronization information required to establish the connection between multiple UEs. Its payload size consists of 56 bits.
-DMRS are transmitted in every PSBCH, on every fourth subcarrier, the are used by the receiver to properly decode the PSBCH.
 
-<h4 id="procedure"><a href="#procedure" class="headerlink" title="procedure"></a>procedure</h4><p>Create SL PSS<br>  |<br>Create SL SSS<br>  |<br>Fill in DMRS<br>  |<br>Generate PSBCH Payload<br>  |<br>Generate SSB Frame<br>  |<br>Conduct Symbol Rotation<br>  |<br>Encode PSBCH<br>  |<br>Detect SSS         &#x2F;&#x2F;&#x2F;接收端<br>  ｜<br>Correlated DMRS<br>  |<br>Extract PSBCH</p>
-<h3 id="PSSCH-and-PSCCH"><a href="#PSSCH-and-PSCCH" class="headerlink" title="PSSCH and PSCCH"></a>PSSCH and PSCCH</h3><p>PSSCH contains SCI2 and DM-RS while PSCCH only contains SCI1.<br><img src="/images/PSSCH.png"></p>
+<ul>
+<li>S-PSS: symbols 1, 2</li>
+<li>S-SSS: symbols 3, 4</li>
+<li>PSBCH: symbols 5 - 12<br>S-SSB uses 11 RBs, or 132 subcarriers.<br>The PSBCH provides the system wide configuration and synchronization information required to establish the connection between multiple UEs. Its payload size consists of 56 bits.<br><strong>DMRS</strong> are transmitted in every PSBCH, on every fourth subcarrier, the are used by the receiver to properly decode the PSBCH.</li>
+</ul>
+<h4 id="3-1-1-procedure"><a href="#3-1-1-procedure" class="headerlink" title="3.1.1 procedure"></a>3.1.1 procedure</h4><p>Create SL PSS<br>  |<br>Create SL SSS<br>  |<br>Fill in DMRS<br>  |<br>Generate PSBCH Payload<br>  |<br>Generate SSB Frame<br>  |<br>Conduct Symbol Rotation<br>  |<br>Encode PSBCH<br>  |<br>Detect SSS         &#x2F;&#x2F;&#x2F;接收端<br>  ｜<br>Correlated DMRS<br>  |<br>Extract PSBCH</p>
+<h3 id="3-2-PSSCH-and-PSCCH"><a href="#3-2-PSSCH-and-PSCCH" class="headerlink" title="3.2 PSSCH and PSCCH"></a>3.2 PSSCH and PSCCH</h3><p>PSSCH contains SCI2 and DM-RS while PSCCH only contains SCI1.<br><img src="/images/PSSCH.png"></p>
 <p>The SCI2 payload is <strong>polar</strong> encoded and contains the number of data bits transmitted as well as the multiplexing scheme. So the SCI2 is used by the decoder to properly decode the PSSCH payload, which uses a Low-Density Parity Check(LDPC) encoding mechanism. Besides, the SCI2 is used for the decoding of PSSCH for the HARQ operation.</p>
-<h2 id="Procedures"><a href="#Procedures" class="headerlink" title="Procedures"></a>Procedures</h2><p>Generate SCI2           &#x2F;&#x2F;&#x2F;发射端<br> |<br>Polar Coding and Rate Matching<br> |<br>LDPC coding and Rate Matching<br> |<br>Data and Control Multiplexing<br> |<br>Scrambling<br> |<br>Constellation Modulation<br> |<br>Layer Mapping<br> |<br>Virtual resource and resource grid mapping<br> |<br>OFDM modulation<br> |<br>Tx&#x2F;Rx<br> |<br>OFDM Demodulation   &#x2F;&#x2F;&#x2F;接收端<br> |<br>Resource grid demapping<br> |<br>Channel Estimatin and Equalization<br> |<br>Layer demapping<br> |<br>Constellation demodulation<br> |<br>Descrambling<br> |<br>Data and control demultiplexing<br> |<br>LDPC decoding and polar decoding</p>
+<h4 id="3-2-1-Procedures"><a href="#3-2-1-Procedures" class="headerlink" title="3.2.1 Procedures"></a>3.2.1 Procedures</h4><p>Generate SCI2           &#x2F;&#x2F;&#x2F;发射端<br> |<br>Polar Coding and Rate Matching<br> |<br>LDPC coding and Rate Matching<br> |<br>Data and Control Multiplexing<br> |<br>Scrambling<br> |<br>Constellation Modulation<br> |<br>Layer Mapping<br> |<br>Virtual resource and resource grid mapping<br> |<br>OFDM modulation<br> |<br>Tx&#x2F;Rx<br> |<br>OFDM Demodulation   &#x2F;&#x2F;&#x2F;接收端<br> |<br>Resource grid demapping<br> |<br>Channel Estimatin and Equalization<br> |<br>Layer demapping<br> |<br>Constellation demodulation<br> |<br>Descrambling<br> |<br>Data and control demultiplexing<br> |<br>LDPC decoding and polar decoding</p>
+<h3 id="3-3-TDD"><a href="#3-3-TDD" class="headerlink" title="3.3 TDD"></a>3.3 TDD</h3><p>The flexible slot feature of 5G SL utilizes each symbol to schedule uplink, downlink, or flexible packets. According to the 3GPP standard, the S-SBB should be periodicity of 160 ms(10ms per system frame number, 0.5 ms per slot). There are other modifiable parameters like interval parameter, offset parameter, number S-SSB per period.<br><img src="/images/SSSB_TDD.png"></p>
+<p>So in this test use case, we arbitrarily chose to broadcast 2 S-SSBs per period. The first S-SSB is sent in slot 2 because we set the offset parameter to 2. The interal parameter was set to 20.<br>20+2-10ms&#x2F;0.5ms &#x3D; 2<br>so the next S-SSb will be transmitted twice in a period, and occurs in frame 1 slot 2.</p>
 <h3 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h3><h4 id="Sidelink-Sequence-Diagram"><a href="#Sidelink-Sequence-Diagram" class="headerlink" title="Sidelink Sequence Diagram"></a>Sidelink Sequence Diagram</h4><p>…<br>自己画(Synchronization ue和nearby ue之间的通信)</p>
 <h4 id="Sidelink-Block-Diagram"><a href="#Sidelink-Block-Diagram" class="headerlink" title="Sidelink Block Diagram"></a>Sidelink Block Diagram</h4><img src="/images/SidelinkBlockDiagram.png">
 
@@ -1158,7 +1228,7 @@ DMRS are transmitted in every PSBCH, on every fourth subcarrier, the are used by
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
