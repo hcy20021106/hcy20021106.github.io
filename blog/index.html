@@ -395,7 +395,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-04-24 12:56:12" itemprop="dateModified" datetime="2025-04-24T12:56:12+02:00">2025-04-24</time>
+                <time title="Modified: 2025-04-25 13:48:01" itemprop="dateModified" datetime="2025-04-25T13:48:01+02:00">2025-04-25</time>
               </span>
 
           
@@ -415,7 +415,7 @@
 <p>These components are as below:</p>
 <ul>
 <li>Windows and dialogs<ul>
-<li>JFrame</li>
+<li>JFrame<br>  <strong>JFrame</strong>是一个<strong>顶层容器</strong>，用于创建一个窗口，窗口中可以包含按钮、文本框、标签等各种组件，并且JFrame也可以布局，例如添加BorderLayout</li>
 <li>JDialog</li>
 <li>JColorChooser</li>
 <li>JFileChooser</li>
@@ -433,7 +433,7 @@
 </ul>
 </li>
 <li>Container<ul>
-<li>JPanel</li>
+<li>JPanel<br>  JPanel是面板组件，通常不单独显示，而是作为其他容器（比如JFrame）中的子容器，主要用来：组织组件（比如把按钮、文本框放在一个面板里），配合不同的布局管理器使用（FlowLayout、 BorderLayout、 GridLayout）</li>
 <li>JTappedPane</li>
 <li>JSplitPane</li>
 <li>JScrollPane</li>
@@ -447,7 +447,7 @@
 <li>JLabel</li>
 <li>JButton</li>
 <li>JToggleButton</li>
-<li>JCheckBox</li>
+<li>JCheckBox<br>  复选框组件，用来让用户在多个选项中进行单选或多选</li>
 <li>JRadioButton</li>
 <li>ButtonGroup</li>
 <li>JComboBox</li>
@@ -496,8 +496,10 @@
 <p>继承了这个父类的MyFrame子类相当于在构造函数里面执行了一遍super()</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public <span class="function"><span class="title">MainFrame</span></span>()&#123;</span><br><span class="line">    super();</span><br><span class="line">    setTitle(<span class="string">&quot;Choose your favourite items&quot;</span>);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+
 <img src="/images/你.jpg">
-你好可爱，为什么我们性格会如何相像，也许这次葡萄熟透了。
+你好可爱，为什么我们性格会如何相像
+
       
     </div>
 
@@ -547,7 +549,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-04-24 12:59:15" itemprop="dateModified" datetime="2025-04-24T12:59:15+02:00">2025-04-24</time>
+                <time title="Modified: 2025-04-25 11:28:34" itemprop="dateModified" datetime="2025-04-25T11:28:34+02:00">2025-04-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -582,11 +584,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#define NODE_NUMBER         softmodem_params.node_number</span></span><br><span class="line"><span class="comment">#define SL_DEST_ID          softmodem_params.dest_id</span></span><br><span class="line"><span class="comment">#define NON_STOP            softmodem_params.non_stop</span></span><br><span class="line"><span class="comment">#define EMULATE_L1          softmodem_params.emulate_l1</span></span><br><span class="line"><span class="comment">#define CONTINUOUS_TX       softmodem_params.continuous_tx</span></span><br><span class="line"><span class="comment">#define SYNC_REF            softmodem_params.sync_ref</span></span><br><span class="line"><span class="comment">#define NID1                softmodem_params.nid1</span></span><br><span class="line"><span class="comment">#define NID2                softmodem_params.nid2</span></span><br><span class="line"><span class="comment">#define SL_USER_MSG         softmodem_params.sl_user_msg</span></span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h4 id="调用nr-uesoftmodem-c"><a href="#调用nr-uesoftmodem-c" class="headerlink" title="调用nr-uesoftmodem.c"></a>调用nr-uesoftmodem.c</h4><h5 id="Tx-Sync-UE"><a href="#Tx-Sync-UE" class="headerlink" title="Tx(Sync UE)"></a>Tx(Sync UE)</h5><ul>
-<li>processSlotTx</li>
+<li>processSlotTx<br>如果sl_mode &#x3D;&#x3D; 2,会调用phy_procedures_nrUE_SL_TX</li>
 <li>phy_procedures_nrUE_SL_TX(时隙控制来发射S-SSB和SCH，具体可见<strong>5gNRSidelink</strong>)<ul>
-<li>phy_ssb_slot_allocation_sl<br>  发射S-SSB</li>
-<li>nr-ue-set-slsch<br>  配置slsch</li>
-<li>nr-ue_slsch_tx_procedures<br>  发射slsch</li>
+<li>phy_ssb_slot_allocation_sl（前提是sync_ref&#x3D;&#x3D;1）<br>  发射S-SSB</li>
+<li>nr-ue-set-slsch(前提是sync_ref&#x3D;&#x3D;1)<br>  配置slsch</li>
+<li>nr-ue_slsch_tx_procedures(前提是sync_ref&#x3D;&#x3D;1)<br>  uint32_t sl_bitmap_tx &#x3D; 0x00000;<br>  if(ue-&gt;sync_ref){<br>  sl_bitmap_tx &#x3D; (ue-&gt;is_synchronized_sl &#x3D;&#x3D; 0) ? 0x00001:0x00002;<br>  }<br>  发射slsch</li>
 </ul>
 </li>
 </ul>
@@ -602,7 +604,7 @@
 <li>threadCreate</li>
 <li>UE_thread_SL(里面有UE_synch和processSlotRX两个子线程，由线程池Tpool进行维护)</li>
 <li>processSlotRX</li>
-<li>phy_procedures_nrUE_SL_RX<br>openair1&#x2F;SCHED_NR_UE&#x2F;phy_procedures_nr_ue.c中,调用nr_ue_slsch_rx_procedures来return ret<ul>
+<li>phy_procedures_nrUE_SL_RX（ue-&gt;sync_ref &#x3D;&#x3D; 0）<br>uint32_t sl_bitmap_rx &#x3D; ue-&gt;sync_ref  ? 0x00001 : 0x00002;<br>if(((sl_bitmap_rx &#x3D; ue-&gt;sync_ref?) &amp; 1 ) &#x3D;&#x3D; 0 )<br>return(0);<br>openair1&#x2F;SCHED_NR_UE&#x2F;phy_procedures_nr_ue.c中,调用nr_ue_slsch_rx_procedures来return ret<ul>
 <li>nr_ue_slsch_rx_procedures(在openair1&#x2F;PHY&#x2F;NR_UE_TRANSPORT&#x2F;nl_slsch_ue.c)<ul>
 <li>nr_slsch_decoding(在nr_ue_slsch_rx_procedures中，decoding的部分是sci2部分 <strong>return ret</strong>)<ul>
 <li>polar_decoder_int16(在nr_slsch_decoding函数中)</li>

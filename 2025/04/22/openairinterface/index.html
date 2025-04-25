@@ -28,7 +28,7 @@
 <meta property="og:description" content="openairinterfaceexecutable里面有多个与build后生成的可执行文件同名的.h和.c文件，例如nr-uesoftmodem.c，相当于在执行nr-uesoftmodem后就会去这个c文件里找主函数，然后依次运行。 softmodem-common.h 第一步，先#define CMDLINE_PARAMS_DESC,用于将终端传入的参数放入一个临时变量中  12345678">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-04-22T09:45:43.000Z">
-<meta property="article:modified_time" content="2025-04-24T10:59:15.279Z">
+<meta property="article:modified_time" content="2025-04-25T09:28:34.647Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -185,7 +185,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-04-24 12:59:15" itemprop="dateModified" datetime="2025-04-24T12:59:15+02:00">2025-04-24</time>
+                <time title="Modified: 2025-04-25 11:28:34" itemprop="dateModified" datetime="2025-04-25T11:28:34+02:00">2025-04-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -219,11 +219,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#define NODE_NUMBER         softmodem_params.node_number</span></span><br><span class="line"><span class="comment">#define SL_DEST_ID          softmodem_params.dest_id</span></span><br><span class="line"><span class="comment">#define NON_STOP            softmodem_params.non_stop</span></span><br><span class="line"><span class="comment">#define EMULATE_L1          softmodem_params.emulate_l1</span></span><br><span class="line"><span class="comment">#define CONTINUOUS_TX       softmodem_params.continuous_tx</span></span><br><span class="line"><span class="comment">#define SYNC_REF            softmodem_params.sync_ref</span></span><br><span class="line"><span class="comment">#define NID1                softmodem_params.nid1</span></span><br><span class="line"><span class="comment">#define NID2                softmodem_params.nid2</span></span><br><span class="line"><span class="comment">#define SL_USER_MSG         softmodem_params.sl_user_msg</span></span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h4 id="调用nr-uesoftmodem-c"><a href="#调用nr-uesoftmodem-c" class="headerlink" title="调用nr-uesoftmodem.c"></a>调用nr-uesoftmodem.c</h4><h5 id="Tx-Sync-UE"><a href="#Tx-Sync-UE" class="headerlink" title="Tx(Sync UE)"></a>Tx(Sync UE)</h5><ul>
-<li>processSlotTx</li>
+<li>processSlotTx<br>如果sl_mode &#x3D;&#x3D; 2,会调用phy_procedures_nrUE_SL_TX</li>
 <li>phy_procedures_nrUE_SL_TX(时隙控制来发射S-SSB和SCH，具体可见<strong>5gNRSidelink</strong>)<ul>
-<li>phy_ssb_slot_allocation_sl<br>  发射S-SSB</li>
-<li>nr-ue-set-slsch<br>  配置slsch</li>
-<li>nr-ue_slsch_tx_procedures<br>  发射slsch</li>
+<li>phy_ssb_slot_allocation_sl（前提是sync_ref&#x3D;&#x3D;1）<br>  发射S-SSB</li>
+<li>nr-ue-set-slsch(前提是sync_ref&#x3D;&#x3D;1)<br>  配置slsch</li>
+<li>nr-ue_slsch_tx_procedures(前提是sync_ref&#x3D;&#x3D;1)<br>  uint32_t sl_bitmap_tx &#x3D; 0x00000;<br>  if(ue-&gt;sync_ref){<br>  sl_bitmap_tx &#x3D; (ue-&gt;is_synchronized_sl &#x3D;&#x3D; 0) ? 0x00001:0x00002;<br>  }<br>  发射slsch</li>
 </ul>
 </li>
 </ul>
@@ -239,7 +239,7 @@
 <li>threadCreate</li>
 <li>UE_thread_SL(里面有UE_synch和processSlotRX两个子线程，由线程池Tpool进行维护)</li>
 <li>processSlotRX</li>
-<li>phy_procedures_nrUE_SL_RX<br>openair1&#x2F;SCHED_NR_UE&#x2F;phy_procedures_nr_ue.c中,调用nr_ue_slsch_rx_procedures来return ret<ul>
+<li>phy_procedures_nrUE_SL_RX（ue-&gt;sync_ref &#x3D;&#x3D; 0）<br>uint32_t sl_bitmap_rx &#x3D; ue-&gt;sync_ref  ? 0x00001 : 0x00002;<br>if(((sl_bitmap_rx &#x3D; ue-&gt;sync_ref?) &amp; 1 ) &#x3D;&#x3D; 0 )<br>return(0);<br>openair1&#x2F;SCHED_NR_UE&#x2F;phy_procedures_nr_ue.c中,调用nr_ue_slsch_rx_procedures来return ret<ul>
 <li>nr_ue_slsch_rx_procedures(在openair1&#x2F;PHY&#x2F;NR_UE_TRANSPORT&#x2F;nl_slsch_ue.c)<ul>
 <li>nr_slsch_decoding(在nr_ue_slsch_rx_procedures中，decoding的部分是sci2部分 <strong>return ret</strong>)<ul>
 <li>polar_decoder_int16(在nr_slsch_decoding函数中)</li>
