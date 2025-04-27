@@ -173,10 +173,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-04-27 00:47:02 / Modified: 20:50:30" itemprop="dateCreated datePublished" datetime="2025-04-27T00:47:02+02:00">2025-04-27</time>
+              <time title="Created: 2025-04-27 00:47:02" itemprop="dateCreated datePublished" datetime="2025-04-27T00:47:02+02:00">2025-04-27</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-04-28 00:48:46" itemprop="dateModified" datetime="2025-04-28T00:48:46+02:00">2025-04-28</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -266,6 +272,16 @@
 <p>Use 3GPP TR 38.901 channel model for all links, take a free space path loss model as example</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">channelModel = <span class="string">&quot;3GPP TR 38.901&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> strcmp(channelModel,<span class="string">&quot;3GPP TR 38.901&quot;</span>)</span><br><span class="line">    % Define scenario boundaries</span><br><span class="line">    pos = reshape([gNB.Position UEs.Position],3,[]);</span><br><span class="line">    minX = min(pos(1,:));          % x-coordinate of the left edge of the scenario <span class="keyword">in</span> meters</span><br><span class="line">    minY = min(pos(2,:));          % y-coordinate of the bottom edge of the scenario <span class="keyword">in</span> meters</span><br><span class="line">    width = max(pos(1,:)) - minX;  % Width (right edge of the 2D scenario) <span class="keyword">in</span> meters, given as maxX - minX</span><br><span class="line">    height = max(pos(2,:)) - minY; % Height (top edge of the 2D scenario) <span class="keyword">in</span> meters, given as maxY - minY</span><br><span class="line"></span><br><span class="line">    % Create the channel model</span><br><span class="line">    channel = h38901Channel(Scenario=<span class="string">&quot;UMa&quot;</span>,ScenarioExtents=[minX minY width height]);</span><br><span class="line">    % Add the channel model to the simulator</span><br><span class="line">    addChannelModel(networkSimulator,@channel.channelFunction);</span><br><span class="line">    connectNodes(channel,networkSimulator);</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
 
+<p>Run the simulation for the specified numFrameSimulation frames</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">simulationTime = numFrameSimulation*1e-2;</span><br><span class="line">run(networkSimulator, simulationTime);</span><br><span class="line">% Read per-node statistics</span><br><span class="line">gNBStats = statistics(gNB, <span class="string">&quot;all&quot;</span>);</span><br><span class="line">ueStats = statistics(UEs);</span><br></pre></td></tr></table></figure>
+
+<p>Show prefomrance like throughput and spectral efficiency(UL and DL)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">displayPerformanceIndicators(metricsVisualizer);</span><br></pre></td></tr></table></figure>
+
+<p>输出的metricVisulaizer里面有MACTxBytes、MACRxBytes，可以用来计算throughput和data rate，需要注意的是MACTxBytes和MACRxBytes都有两列，分别对应的UL和DL，以MACTxBytes为例，UL一列对应的是ue端，而DL一列则对应的是gNB端，下面代码可以佐证</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">txBytes = gNBMACStats(rnti).TransmittedBytes + gNBMACStats(rnti).RetransmissionBytes;</span><br><span class="line">txRate(ueIdx, obj.DownlinkIdx) = (txBytes - obj.MACTxBytes(ueIdx, obj.DownlinkIdx))* 8 / (obj.MetricsStepDuration * 1000); % In Mbps</span><br><span class="line">bufferstatus(ueIdx, obj.DownlinkIdx) = bufferSize(rnti) ./ 1000; % In KB</span><br><span class="line">% Save the previous metrics</span><br><span class="line">obj.MACTxBytes(ueIdx, obj.DownlinkIdx) = txBytes;</span><br></pre></td></tr></table></figure>
+
+<p>有点累，总之明天见</p>
 
       
     </div>
