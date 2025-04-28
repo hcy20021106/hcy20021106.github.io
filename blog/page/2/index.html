@@ -150,6 +150,113 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/21/OFDM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/04/21/OFDM/" class="post-title-link" itemprop="url">OFDM</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-04-21 14:50:57" itemprop="dateCreated datePublished" datetime="2025-04-21T14:50:57+02:00">2025-04-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-04-26 23:35:03" itemprop="dateModified" datetime="2025-04-26T23:35:03+02:00">2025-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>在OFDM中，一个OFDM符号就是多个子载波的结合，每个子载波承载一个调制符号（如QPSK、 16QAM、 64QAM等）<br>所以一个OFDM符号在频域中会有多个调制符号，IFFT就是把这些调制符号转换成时域的连续符号，变成一个OFDM符号。<br>整体的过程是modData -&gt; 插入pilot -&gt; 插入null（清零无效子载波） -&gt; IFFT -&gt; 加CP -&gt; ofdmDataOut</p>
+<h3 id="payload处理"><a href="#payload处理" class="headerlink" title="payload处理"></a>payload处理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">dataBits = txParamConfig.txDataBits;</span><br><span class="line">% Append CRC bits to data bits</span><br><span class="line">crcData = crcGenerate(dataBits, txObj.crcDataGen);</span><br><span class="line">% Additively scramble using scramble polynomial</span><br><span class="line">scrOut = xor(crcData, txObj.pnSeq(sysParam.initState));</span><br><span class="line">% Perform convolutional coding</span><br><span class="line">dataEnc = convenc([scrOut;zeros(dataConvK-1,1)], ...</span><br><span class="line">    poly2trellis(dataConvK,dataConvCode),puncVec); % Terminated mode</span><br><span class="line">dataEnc = [dataEnc; zeros(sysParam.trBlkPadSize,1)]; % append pad to factorize payload length</span><br><span class="line">dataEnc = reshape(dataEnc,[],numDataOFDMSymbols); % form columns of symbols</span><br><span class="line">% Perform interleaving and symbol</span><br><span class="line">modData = zeros(numel(dataEnc)/(numDataOFDMSymbols*bitsPerModSym),numDataOFDMSymbols);</span><br><span class="line"><span class="keyword">for</span> i = 1:numDataOFDMSymbols</span><br><span class="line">    % Interleave each symbol</span><br><span class="line">    intrlvOut = OFDMInterleave(dataEnc(:,i),sysParam.dataIntrlvNcolumns);</span><br><span class="line">    % Modulate the symbol</span><br><span class="line">    modData(:,i) = qammod(intrlvOut, txParamConfig.modOrder, UnitAveragePower=<span class="literal">true</span>, InputType=<span class="string">&quot;bit&quot;</span>);</span><br><span class="line">end</span><br><span class="line">modDataInt = 1</span><br><span class="line">% Remove the pilot indices from modData indices</span><br><span class="line">modDataInd(pilotInd) = [];</span><br><span class="line">% Load data and pilots on the grid</span><br><span class="line">grid(pilotInd, (headerIdx+1:numSymPerFrame)) = pilot;</span><br><span class="line">grid(modDataInd, (headerIdx+1:numSymPerFrame)) = modData;</span><br></pre></td></tr></table></figure>
+<p>分析代码，可知modData的维度的宽是numel(dataEnc)&#x2F;(numDataOFDMSymbols<em>bitsPerModSym)，<br>其中numel(dataEnc)所有的bits number， numDataOFDMSymbols</em>bitsPerModSym表示每一个Frame的OFDM符号数<strong>乘上</strong>每个调制后的符号的bits数（例如4QAM有两个bits），这样既可以计算出每个OFDM符号对应的子载波数，也就是调制符号数，这是对于payload而言<br>接下来是OFDM调制</p>
+<h3 id="OFDM-Modulation"><a href="#OFDM-Modulation" class="headerlink" title="OFDM Modulation"></a>OFDM Modulation</h3><p>我们以payload为例，也就是对moddata进行调制<br>ofdmDataOut &#x3D; ofdmmod(modData, fftLen, cpLen, nullInd, sysParam.pilotIdx,pilot)<br>输入了每个OFDM符号的IFFT点数，每个OFDM符号前面加的循环前缀长度，要清零的子载波位置，导频子载波位置和导频符号。<br>在modData里根据pilotIdx，把pilot符号插到指定位置，IFFT运算则是把频域上的复数符变成时域信号。<br>输出的维度是(fftLen+cpLen) x numDataOFDMSymbols, 1<br>也就是一个列向量，表示多个OFDM符号在时域上串联在一起的结构，因为每个OFDM符号变成fftLen+cpLen个时域采样点</p>
+<h2 id="MATLAB-example"><a href="#MATLAB-example" class="headerlink" title="MATLAB example"></a>MATLAB example</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openExample(<span class="string">&#x27;comm/OFDMEndToEndExample&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="basic-description"><a href="#basic-description" class="headerlink" title="basic description"></a>basic description</h2><img src="/images/dataflow.png">  
+This example shows how to run a complete end-to-end OFDM transimission for a single-input single-output (SISO) channel. The physical-layer transmission protocol mimics typical **synchonization signals**, **reference symbols**, **control channels**, and **data channels** popular across standardized transmission schemes such as LTE, 5G NR, and WLAN.
+
+<h2 id="Channel-Parameters"><a href="#Channel-Parameters" class="headerlink" title="Channel Parameters"></a>Channel Parameters</h2><ul>
+<li>SNR<br>20dB</li>
+<li>foff</li>
+<li>doppler</li>
+<li>pathDelay</li>
+<li>pathGain</li>
+</ul>
+<h2 id="System-Parameters"><a href="#System-Parameters" class="headerlink" title="System Parameters"></a>System Parameters</h2><ul>
+<li>FFTLen<br>1024</li>
+<li>numFrames<br>100</li>
+<li>numSymbolsPerFrame<br>15</li>
+<li>CPLen<br>256</li>
+<li>txDatabits<br>[…]</li>
+<li>usedSubCarr<br>600</li>
+<li>modulationOrder<br>64&#x3D;64-QAM</li>
+<li>codeRate<br>0&#x3D;1&#x2F;2</li>
+<li>BW<br>10MHz</li>
+<li>fc(carrier frequency)<br>1.9GHz</li>
+<li>enableFading<br>True</li>
+</ul>
+<h2 id="具体过程"><a href="#具体过程" class="headerlink" title="具体过程"></a>具体过程</h2><h3 id="Populate-Parameter-Structure"><a href="#Populate-Parameter-Structure" class="headerlink" title="Populate Parameter Structure"></a>Populate Parameter Structure</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">///helperOFDMSetParameters <span class="keyword">function</span></span><br><span class="line">[sysParam, txParam] = helperOFDMSetParameters(userParam);</span><br><span class="line">///通过查表来进一步获取FFTLen, CPLen, numSubCarr, BW等数据</span><br><span class="line">[~,codeParam] = helperOFDMGetTables(userParam.BWIndex,userParam.codeRateIndex);</span><br></pre></td></tr></table></figure>
+<h3 id="Initialize-states-and-process-data-frames"><a href="#Initialize-states-and-process-data-frames" class="headerlink" title="Initialize states and process data frames"></a>Initialize states and process data frames</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">/// Initialize transmitter and receiver</span><br><span class="line">txObj = helperOFDMTxInit(sysParam);</span><br><span class="line">rxObj = helperOFDMRxInit(sysParam);</span><br><span class="line">/// 循环发送，大循环是信噪比，用来模拟不同环境，小循环是frames的数量，用来一个frame一个frame的发送</span><br><span class="line"><span class="keyword">for</span> simLoopIdx = 1:length(SNRdB)</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">for</span> frameNum = 1 : sysParam.numFrames+1</span><br><span class="line">        sysParam.frameNum = frameNum;</span><br><span class="line">        /// Generate Payload data</span><br><span class="line">        txParam.txDatabits = randi([0 1], sysParam.trBlkSize, 1);</span><br><span class="line">        /// Store data bits <span class="keyword">for</span> BER calculation</span><br><span class="line">        sysParam.txDatabits = [sysParam.txDatabits; txParam.txDataBits];</span><br><span class="line">        /// Transmit data</span><br><span class="line">        [txOut, txGrid, txDiagnostics] = helperOFDMTx(txParam, sysParam, txObj);</span><br><span class="line">        /// 经过模拟的channel进行传送</span><br><span class="line">        chanOut = helperOFDMChannel(txOut, chanParam, sysParam);</span><br><span class="line">        /// Run the receiver front-end</span><br><span class="line">        rxIn = helperOFDMRxFrontEnd(chanOut, sysParam, rxObj);</span><br><span class="line">        /// Run the receiver processing</span><br><span class="line">        [rxDataBits, isConnected, toff, rxDiagnostics] = helperOFDMRx(rxIn, sysParam, rxObj);</span><br><span class="line">        /// Collect bit and frame error statistics</span><br><span class="line">        <span class="keyword">if</span> is Connected</span><br><span class="line">            BER = errorRate(...</span><br><span class="line">                sysParam.txDataBits(end-(2*sysParam.trBlkSize)+(1:sysParam.trBlkSize)), ...</span><br><span class="line">                rxDataBits);</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/21/5gNRUplink/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -620,7 +727,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
