@@ -982,7 +982,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-04-28 15:12:29" itemprop="dateModified" datetime="2025-04-28T15:12:29+02:00">2025-04-28</time>
+                <time title="Modified: 2025-05-02 16:08:35" itemprop="dateModified" datetime="2025-05-02T16:08:35+02:00">2025-05-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1066,10 +1066,20 @@
 <li>init_nr_ue_vars（关掉MAC，无需经过gNB，因此不需要传统的MAC层处理，比如调度、DCI、HARQ，反而通常是直接使用物理层进行广播或点对对通信）</li>
 <li>init_openair0</li>
 <li>init_NR_UE_threads(nrUE)  <ul>
-<li>threadCreate</li>
-<li>UE_thread_SL(里面有UE_synch和processSlotRX两个子线程，由线程池Tpool进行维护)</li>
-<li>processSlotRX</li>
-<li>phy_procedures_nrUE_SL_RX（ue-&gt;sync_ref &#x3D;&#x3D; 0）<br>uint32_t sl_bitmap_rx &#x3D; ue-&gt;sync_ref  ? 0x00001 : 0x00002;<br>if(((sl_bitmap_rx &#x3D; ue-&gt;sync_ref?) &amp; 1 ) &#x3D;&#x3D; 0 )<br>return(0);<br>openair1&#x2F;SCHED_NR_UE&#x2F;phy_procedures_nr_ue.c中,调用nr_ue_slsch_rx_procedures来return ret<ul>
+<li><p>threadCreate</p>
+</li>
+<li><p>UE_thread_SL(里面有UE_synch和processSlotRX两个子线程，由线程池Tpool进行维护)</p>
+</li>
+<li><p>processSlotRX</p>
+</li>
+<li><p>phy_procedures_nrUE_SL_RX<br>这个函数主要判断ue是否需要执行对rx slot的处理，具体可见如下代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">这里可以防止<span class="built_in">sync</span> ue来执行这个接受函数，并且使得nearbyue只能在同步之后将is_synchronized_sl=1后才会执行.</span><br><span class="line"><span class="keyword">if</span>(ue-&gt;is_synchronized_sl == 0)</span><br><span class="line">  <span class="built_in">return</span> (0);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>（ue-&gt;sync_ref == 0）  </span><br><span class="line">uint32_t sl_bitmap_rx = ue-&gt;sync_ref  ? 0x00001 : 0x00002;</span><br><span class="line"><span class="keyword">if</span>(((sl_bitmap_rx = ue-&gt;sync_ref?) &amp; <span class="number">1</span> ) == <span class="number">0</span> )</span><br><span class="line">return(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在找到正确的frame和slot后，会执行nr_ue_slsch_rx_procedures函数，这个函数体内会具体对PSSCH进行处理，包括demapping和descrambling以及decoding(nr_slsch_decoding)，这个docoding包括对SLSCH和SCI2的解码<br>为了表示每一个收到的的frame，我们在nr_slsch_decoding函数里面LOG_I(frame,slot), beacuse each frame received will go through the process in nr_slsch_decoding, be careful that not each frame received will go through the <strong>validate_rx_str</strong> function, beacuse it should satisfy a prerequirement (destination is matched). </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/// 正常情况下的LOG_I</span><br><span class="line">[NR_PHY]In nr_ue_sl_pssch_rsrp_measurements: </span><br><span class="line">[NR_PHY]SLSCH received ok</span><br><span class="line">[PHY] Frame:..., Slot:...</span><br><span class="line">[NR_PHY] Received your text!...</span><br><span class="line">[PHY] PSSCH <span class="built_in">test</span> ...f</span><br></pre></td></tr></table></figure>
+<p>其中SLSCH received ok不一定执行(it is in nr_ue_sl_postDocode function after polar_decoded_int16 and it has a prerequisited that all segments are done), and these two funcations are all in the <strong>nr_slsch_decoding</strong> function.<br>Received your text is in the <strong>valdiate_rx_str</strong> function, and has a prerequisit that the dest is matched.</p>
+<p>openair1&#x2F;SCHED_NR_UE&#x2F;phy_procedures_nr_ue.c中,调用nr_ue_slsch_rx_procedures来return ret</p>
+<ul>
 <li>nr_ue_slsch_rx_procedures(在openair1&#x2F;PHY&#x2F;NR_UE_TRANSPORT&#x2F;nl_slsch_ue.c)<ul>
 <li>nr_slsch_decoding(在nr_ue_slsch_rx_procedures中，decoding的部分是sci2部分 <strong>return ret</strong>)<ul>
 <li>polar_decoder_int16(在nr_slsch_decoding函数中)</li>
