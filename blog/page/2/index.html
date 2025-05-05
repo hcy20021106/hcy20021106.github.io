@@ -266,7 +266,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-05-06 00:01:12" itemprop="dateModified" datetime="2025-05-06T00:01:12+02:00">2025-05-06</time>
+                <time title="Modified: 2025-05-06 00:35:17" itemprop="dateModified" datetime="2025-05-06T00:35:17+02:00">2025-05-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -328,6 +328,9 @@
 <li>静态连接并编译生成可执行文件</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ main.cpp -L. -lmathutils -o app</span><br></pre></td></tr></table></figure>
+
+<h2 id="构建结构体"><a href="#构建结构体" class="headerlink" title="构建结构体"></a>构建结构体</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">typedef struct notifiedFIFO_elt_s&#123;</span><br><span class="line">    struct notifiedFIFO_elt_s *next;</span><br><span class="line">    uint64_t key;</span><br><span class="line">    /// 构建一个空的函数指针，在使用的时候可以将其进行强制转换</span><br><span class="line">    void (*processingFunc) (void *);</span><br><span class="line">    bool malloced;</span><br><span class="line">    /// oai的系统结构体，可以用于性能测试</span><br><span class="line">    oai_cputime_t creationTime;</span><br><span class="line">    oai_cputime_t startProcessingTime;</span><br><span class="line">    oai_cputime_t endProcessingTime;</span><br><span class="line">    oai_cputime_t returnTime;</span><br><span class="line">    /// 空的指针，在使用的时候可以进行强制转换</span><br><span class="line">    void *msgData; </span><br><span class="line">&#125;   notifiedFIFO_elt_t;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>

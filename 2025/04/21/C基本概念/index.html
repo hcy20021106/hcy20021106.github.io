@@ -28,7 +28,7 @@
 <meta property="og:description" content="指针指针变量本身的值是地址，X64有2的64次方个内存地址，因此指针占8个字节。指针变量通常是栈上的变量。指针指向的内存可以是栈上变量的地址，也可以是堆上分配的内存地址。 malloc&amp;new malloc malloc不会调用构造析构函数 malloc返回无类型的指针（因此需要转换一下，char* p &#x3D; (char*) malloc(100)）   new&#x2F;dele">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-04-21T13:19:37.000Z">
-<meta property="article:modified_time" content="2025-05-05T22:01:12.434Z">
+<meta property="article:modified_time" content="2025-05-05T22:35:17.967Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -185,7 +185,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-05-06 00:01:12" itemprop="dateModified" datetime="2025-05-06T00:01:12+02:00">2025-05-06</time>
+                <time title="Modified: 2025-05-06 00:35:17" itemprop="dateModified" datetime="2025-05-06T00:35:17+02:00">2025-05-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,6 +246,9 @@
 <li>静态连接并编译生成可执行文件</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ main.cpp -L. -lmathutils -o app</span><br></pre></td></tr></table></figure>
+
+<h2 id="构建结构体"><a href="#构建结构体" class="headerlink" title="构建结构体"></a>构建结构体</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">typedef struct notifiedFIFO_elt_s&#123;</span><br><span class="line">    struct notifiedFIFO_elt_s *next;</span><br><span class="line">    uint64_t key;</span><br><span class="line">    /// 构建一个空的函数指针，在使用的时候可以将其进行强制转换</span><br><span class="line">    void (*processingFunc) (void *);</span><br><span class="line">    bool malloced;</span><br><span class="line">    /// oai的系统结构体，可以用于性能测试</span><br><span class="line">    oai_cputime_t creationTime;</span><br><span class="line">    oai_cputime_t startProcessingTime;</span><br><span class="line">    oai_cputime_t endProcessingTime;</span><br><span class="line">    oai_cputime_t returnTime;</span><br><span class="line">    /// 空的指针，在使用的时候可以进行强制转换</span><br><span class="line">    void *msgData; </span><br><span class="line">&#125;   notifiedFIFO_elt_t;</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -326,7 +329,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E9%92%88"><span class="nav-number">1.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#malloc-new"><span class="nav-number">2.</span> <span class="nav-text">malloc&amp;new</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STL%E5%85%AD%E5%A4%A7%E7%BB%84%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">STL六大组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81"><span class="nav-number">4.</span> <span class="nav-text">线程状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E8%BF%9E%E6%8E%A5"><span class="nav-number">5.</span> <span class="nav-text">静态连接</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E9%92%88"><span class="nav-number">1.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#malloc-new"><span class="nav-number">2.</span> <span class="nav-text">malloc&amp;new</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STL%E5%85%AD%E5%A4%A7%E7%BB%84%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">STL六大组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81"><span class="nav-number">4.</span> <span class="nav-text">线程状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E8%BF%9E%E6%8E%A5"><span class="nav-number">5.</span> <span class="nav-text">静态连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-number">6.</span> <span class="nav-text">构建结构体</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
