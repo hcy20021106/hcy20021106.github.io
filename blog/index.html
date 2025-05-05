@@ -173,17 +173,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-05-03 19:42:52 / Modified: 19:44:33" itemprop="dateCreated datePublished" datetime="2025-05-03T19:42:52+02:00">2025-05-03</time>
+              <time title="Created: 2025-05-03 19:42:52" itemprop="dateCreated datePublished" datetime="2025-05-03T19:42:52+02:00">2025-05-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-05-06 00:38:52" itemprop="dateModified" datetime="2025-05-06T00:38:52+02:00">2025-05-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a>
                 </span>
             </span>
 
@@ -199,7 +205,13 @@
 
       
       
-          <h2 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h2><h3 id="计算树的节点"><a href="#计算树的节点" class="headerlink" title="计算树的节点"></a>计算树的节点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">// Created by 何晨易 on 2025/5/3.</span><br><span class="line">//</span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">struct TreeNode &#123;</span><br><span class="line">  int data;</span><br><span class="line">  TreeNode *left;</span><br><span class="line">  TreeNode *right;</span><br><span class="line">//  TreeNode(): data(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="line">&#125; treeNode;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">TreeNode *<span class="function"><span class="title">createTreeNode</span></span>()&#123;</span><br><span class="line">    TreeNode *root = new TreeNode();</span><br><span class="line">    root-&gt;left = new TreeNode();</span><br><span class="line">    root-&gt;right = new TreeNode();</span><br><span class="line">    root-&gt;left-&gt;right = new TreeNode();</span><br><span class="line">    root-&gt;left-&gt;left = new TreeNode();</span><br><span class="line">    <span class="built_in">return</span> root;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">void countNodes(TreeNode* node, int&amp; internalCount, int&amp; leafCount)&#123;</span><br><span class="line">  <span class="keyword">if</span>(node == nullptr)&#123;</span><br><span class="line">    <span class="built_in">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(node-&gt;left == nullptr &amp;&amp; node-&gt;right == nullptr)&#123;</span><br><span class="line">    leafCount++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span>&#123;</span><br><span class="line">    internalCount++;</span><br><span class="line">  &#125;</span><br><span class="line">  countNodes(node-&gt;left, internalCount, leafCount);</span><br><span class="line">  countNodes(node-&gt;right, internalCount, leafCount);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">    TreeNode root_1 =&#123;1, new TreeNode(),nullptr&#125;;</span><br><span class="line">    TreeNode *root = createTreeNode();</span><br><span class="line">//      0</span><br><span class="line">//     / \</span><br><span class="line">//    0   0</span><br><span class="line">//   / \</span><br><span class="line">//  0  0</span><br><span class="line">    int internalCount = 0;</span><br><span class="line">    int   leafCount = 0;</span><br><span class="line">    countNodes(root, internalCount, leafCount);</span><br><span class="line">    cout &lt;&lt; <span class="string">internalCount &lt;&lt; endl;</span></span><br><span class="line"><span class="string">    cout &lt;&lt; leafCount &lt;&lt; endl;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+          <h2 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h2><h3 id="计算树的节点"><a href="#计算树的节点" class="headerlink" title="计算树的节点"></a>计算树的节点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">// Created by 何晨易 on 2025/5/3.</span><br><span class="line">//</span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">struct TreeNode &#123;</span><br><span class="line">  int data;</span><br><span class="line">  TreeNode *left;</span><br><span class="line">  TreeNode *right;</span><br><span class="line">  TreeNode(): data(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="line">&#125; treeNode;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">TreeNode *<span class="function"><span class="title">createTreeNode</span></span>()&#123;</span><br><span class="line">    TreeNode *root = new TreeNode();</span><br><span class="line">    root-&gt;left = new TreeNode();</span><br><span class="line">    root-&gt;right = new TreeNode();</span><br><span class="line">    root-&gt;left-&gt;right = new TreeNode();</span><br><span class="line">    root-&gt;left-&gt;left = new TreeNode();</span><br><span class="line">    <span class="built_in">return</span> root;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">void countNodes(TreeNode* node, int&amp; internalCount, int&amp; leafCount)&#123;</span><br><span class="line">  <span class="keyword">if</span>(node == nullptr)&#123;</span><br><span class="line">    <span class="built_in">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(node-&gt;left == nullptr &amp;&amp; node-&gt;right == nullptr)&#123;</span><br><span class="line">    leafCount++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span>&#123;</span><br><span class="line">    internalCount++;</span><br><span class="line">  &#125;</span><br><span class="line">  countNodes(node-&gt;left, internalCount, leafCount);</span><br><span class="line">  countNodes(node-&gt;right, internalCount, leafCount);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">    TreeNode *root = createTreeNode();</span><br><span class="line">//      0</span><br><span class="line">//     / \</span><br><span class="line">//    0   0</span><br><span class="line">//   / \</span><br><span class="line">//  0  0</span><br><span class="line">    int internalCount = 0;</span><br><span class="line">    int   leafCount = 0;</span><br><span class="line">    countNodes(root, internalCount, leafCount);</span><br><span class="line">    cout &lt;&lt; <span class="string">internalCount &lt;&lt; endl;</span></span><br><span class="line"><span class="string">    cout &lt;&lt; leafCount &lt;&lt; endl;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<p>C++在构建定义结构体的时候，可以如上述代码使用TreeNode(): data(0), left(nullptr), right(nullptr) {}方式来构造。如果不在定义结构体内使用构造函数，那么可以用{}的方式来构造  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">struct Item&#123;</span><br><span class="line">    string name;</span><br><span class="line">    int w, v, u;</span><br><span class="line">&#125;</span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line"></span><br><span class="line">    vector&lt;Item&gt; items = &#123;</span><br><span class="line">        &#123;<span class="string">&quot;Hocker&quot;</span>, 5, 5, 0&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;Handy&quot;</span>, 1, 20, 1&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h2><h3 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h3><p>可以先计算每一个物品的性价比，也就是价值&#x2F;质量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -249,7 +261,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-05-02 00:15:34" itemprop="dateModified" datetime="2025-05-02T00:15:34+02:00">2025-05-02</time>
+                <time title="Modified: 2025-05-06 00:38:56" itemprop="dateModified" datetime="2025-05-06T00:38:56+02:00">2025-05-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -422,17 +434,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-04-28 11:34:56 / Modified: 13:58:07" itemprop="dateCreated datePublished" datetime="2025-04-28T11:34:56+02:00">2025-04-28</time>
+              <time title="Created: 2025-04-28 11:34:56" itemprop="dateCreated datePublished" datetime="2025-04-28T11:34:56+02:00">2025-04-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-05-06 00:38:59" itemprop="dateModified" datetime="2025-05-06T00:38:59+02:00">2025-05-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a>
                 </span>
             </span>
 
@@ -1256,7 +1274,7 @@
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span>
       </div>
   </nav>
