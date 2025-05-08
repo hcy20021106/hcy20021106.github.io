@@ -773,7 +773,7 @@ This example shows how to run a complete end-to-end OFDM transimission for a sin
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-05-08 11:20:56" itemprop="dateModified" datetime="2025-05-08T11:20:56+02:00">2025-05-08</time>
+                <time title="Modified: 2025-05-08 16:36:28" itemprop="dateModified" datetime="2025-05-08T16:36:28+02:00">2025-05-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -840,6 +840,20 @@ This example shows how to run a complete end-to-end OFDM transimission for a sin
 </li>
 <li><p>调度协助<br>辅助scheduler判断资源使用情况，是否有未完成HARQ</p>
 </li>
+</ul>
+<h4 id="NR-UL-UE-HARQ-t"><a href="#NR-UL-UE-HARQ-t" class="headerlink" title="NR_UL_UE_HARQ_t"></a>NR_UL_UE_HARQ_t</h4><p>关键字段</p>
+<ul>
+<li>a_sci2<br>pointer to SCI2 payload from MAC interface</li>
+<li>b_sci2<br>pointer to sci2 after crc+polar encoding and rate matching stored in bytes</li>
+<li>*a<br>pointer to pdu from MAC interface(也就是payload)</li>
+<li>*b<br>pointers to the payload + CRC</li>
+</ul>
+<h4 id="NR-DL-UE-HARQ-t"><a href="#NR-DL-UE-HARQ-t" class="headerlink" title="NR_DL_UE_HARQ_t"></a>NR_DL_UE_HARQ_t</h4><p>关键字段</p>
+<ul>
+<li>*b<br>pointer to the payload</li>
+<li>B<br>the payload + crc size in bits</li>
+<li>b_sci2<br>pointer to the sci2 payload</li>
+<li>B_sci2<br>the sci2’s payload + CRC + channel coder + rate matching size in bits</li>
 </ul>
 <h3 id="TDD"><a href="#TDD" class="headerlink" title="TDD"></a>TDD</h3><p>The flexible slot feature of 5G SL utilizes each symbol to schedule uplink, downlink, or flexible packets. According to the 3GPP standard, the S-SBB should be periodicity of 160 ms(10ms per system frame number, 0.5 ms per slot). There are other modifiable parameters like interval parameter, offset parameter, number S-SSB per period.<br><img src="/images/SSSB_TDD.png"></p>
 <p>So in this test use case, we arbitrarily chose to broadcast 2 S-SSBs per period. The first S-SSB is sent in slot 2 because we set the offset parameter to 2. The interal parameter was set to 20.<br>20+2-10ms&#x2F;0.5ms &#x3D; 2<br>so the next S-SSb will be transmitted twice in a period, and occurs in frame 1 slot 2.</p>
