@@ -150,6 +150,311 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/05/09/network/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/05/09/network/" class="post-title-link" itemprop="url">network</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-05-09 15:57:49 / Modified: 15:58:37" itemprop="dateCreated datePublished" datetime="2025-05-09T15:57:49+02:00">2025-05-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h1 id="Physical-Layer"><a href="#Physical-Layer" class="headerlink" title="Physical Layer"></a>Physical Layer</h1><h2 id="Different-Representations-of-Signals"><a href="#Different-Representations-of-Signals" class="headerlink" title="Different Representations of Signals"></a>Different Representations of Signals</h2><ul>
+<li>Amplitude(Time Domain)</li>
+<li>Frequency Spectrum(Frequency Domain)</li>
+<li>Phase State Diagram(Amplitude and Phase)</li>
+</ul>
+<h2 id="Data-Transmission"><a href="#Data-Transmission" class="headerlink" title="Data Transmission"></a>Data Transmission</h2><h3 id="Format"><a href="#Format" class="headerlink" title="Format"></a>Format</h3><p>Analog Information goes through Sampling and Quantizing to convert to Bits, while Textual Information(JSON) goes through Encode to convert to Bits<br><img src="image/16.png" alt="Description of the image" height="400"></p>
+<h3 id="Line-Codes"><a href="#Line-Codes" class="headerlink" title="Line Codes"></a>Line Codes</h3><p>Line Code is baseband waveform, also called Voltage Level.</p>
+<h4 id="Forms"><a href="#Forms" class="headerlink" title="Forms"></a>Forms</h4><ul>
+<li>Binary Line Code</li>
+<li>M-ary Line Code</li>
+</ul>
+<h3 id="Passband-Transmission"><a href="#Passband-Transmission" class="headerlink" title="Passband Transmission"></a>Passband Transmission</h3><h4 id="Step"><a href="#Step" class="headerlink" title="Step"></a>Step</h4><ul>
+<li>Transform Line Code to Baseband(Complex) symbols(Methods: ASK, FSK, PSK, QAM)</li>
+<li>Shifts Center Frequency of Baseband Signal up to the Radio Carrier(加载到高频进行传输)</li>
+</ul>
+<h3 id="Channel-Capacity"><a href="#Channel-Capacity" class="headerlink" title="Channel Capacity"></a>Channel Capacity</h3><ul>
+<li>Nyquist Bound<br>由于那奎斯特理论认为最大W&#x3D;2C，然而一个采样中有log2M个bits，因此C &#x3D; 2Wlog2M</li>
+<li>Shannon Bound<br>香农理论认为C受限于信噪比，因此C &#x3D; Wlog2(1+S&#x2F;N)</li>
+</ul>
+<h1 id="Frame"><a href="#Frame" class="headerlink" title="Frame"></a>Frame</h1><h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p>A frame is the basic unit of data transmission at the <strong>Data link layer</strong>(L2) in the OSI model and is responsible for reliable data transfer between two directly connected nodes. </p>
+<h2 id="Main-Components"><a href="#Main-Components" class="headerlink" title="Main Components"></a>Main Components</h2><ul>
+<li>Frame Header: Destination MAC Address and Source MAC Address. Type&#x2F;Length Field, Control Information. Normally, the frame type is Ethernet, so we enter IPv4&#x2F;IPv6&#x2F;ARP</li>
+<li>Payload&#x2F;Data: The actual transmitted data from higher layer.</li>
+<li>FCS, Frame Check Sequence</li>
+<li>Trailer</li>
+</ul>
+<h2 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h2><ul>
+<li>Transmitter: Data link layer receive packet from network layer, and then encapsulate it with Frame Header, and transmit to physical layer.</li>
+<li>Receiver: Data link layer receives frame from physical layer, and then chect it with FCS, and decapsulates to higher layer.</li>
+</ul>
+<h2 id="MTU"><a href="#MTU" class="headerlink" title="MTU"></a>MTU</h2><p>MTU(Maximum Transmission Unit) is associated with the Data Link Layer, to defines the maximum size of data packet.<br>For example, in <strong>Ethernet</strong> the standard MTU is typically 1500 bytes, meaning that the largest IP packet(including headers) that can be transmitted without fragmentation is 1500 bytes. If a packet exceeds the MTU, it must be fragmented at the Network Layer(Layer 3) to fit into smaller frames.</p>
+<h1 id="Packet"><a href="#Packet" class="headerlink" title="Packet"></a>Packet</h1><h2 id="Definition-1"><a href="#Definition-1" class="headerlink" title="Definition"></a>Definition</h2><p>A packet is the basic unit of data transmission at the <strong>network layer</strong> in the OSI model.</p>
+<h2 id="Main-Components-1"><a href="#Main-Components-1" class="headerlink" title="Main Components"></a>Main Components</h2><ul>
+<li>Header: Source and Desination IP addresses, protocol type(<strong>IP</strong>).</li>
+<li>Payload: The actual data transported</li>
+<li>Trailer</li>
+</ul>
+<h2 id="Function-1"><a href="#Function-1" class="headerlink" title="Function"></a>Function</h2><ul>
+<li>Routing: Packets are forwarded through the network from the source to the destination using routers which can determine the best path.</li>
+<li>Fragmentation and Reassembly: Large packers might be split into smaller fragements for transmission across networks with smaller maximum transmission units(<strong>MTUs</strong>)</li>
+</ul>
+<h1 id="Segment-TCP-and-UDP"><a href="#Segment-TCP-and-UDP" class="headerlink" title="Segment(TCP and UDP)"></a>Segment(TCP and UDP)</h1><h2 id="Definition-2"><a href="#Definition-2" class="headerlink" title="Definition"></a>Definition</h2><ul>
+<li>It is basic for data transmission at the <strong>transport layer</strong> in the OSI model, to deal with the transport of data between two systems.</li>
+</ul>
+<h2 id="Main-Components-2"><a href="#Main-Components-2" class="headerlink" title="Main Components"></a>Main Components</h2><ul>
+<li>Header: Contains information like source and destination port numbers, sequence number, acknowledgment number, flags(e.g., SYN, ACK) and window size.</li>
+<li>Payload: The actual data being sent.</li>
+</ul>
+<h2 id="Function-2"><a href="#Function-2" class="headerlink" title="Function"></a>Function</h2><ul>
+<li>Data Integrity</li>
+<li>Flow Control</li>
+<li>Error Detection and Correction.</li>
+</ul>
+<h1 id="Message-or-Chunk-SCTP"><a href="#Message-or-Chunk-SCTP" class="headerlink" title="Message or Chunk(SCTP)"></a>Message or Chunk(SCTP)</h1><h2 id="Definition-3"><a href="#Definition-3" class="headerlink" title="Definition"></a>Definition</h2><p>It is basic for data transmission at SCTP, which is based on stream of data, to send data catagories like video.</p>
+<h2 id="Main-Components-3"><a href="#Main-Components-3" class="headerlink" title="Main Components"></a>Main Components</h2><ul>
+<li>Header: Contains Source Port Number, Destination Port Number, Checksum</li>
+<li>Chunk<ul>
+<li>Chunk Type</li>
+<li>Chunk Length</li>
+<li>Chunk Value</li>
+</ul>
+</li>
+</ul>
+<img src="image/18.png" alt="Description of the image" height="400">
+
+
+
+
+<h1 id="Socket-tcp-udp"><a href="#Socket-tcp-udp" class="headerlink" title="Socket(tcp udp)"></a>Socket(tcp udp)</h1><h2 id="Definition-4"><a href="#Definition-4" class="headerlink" title="Definition"></a>Definition</h2><ul>
+<li>It is an interface or ***<strong>endpoint</strong> *****that facilitates establishing and managing a TCP or UCP connection, enabling applications to send and receive data.</li>
+</ul>
+<h2 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h2><ul>
+<li>An IP address</li>
+<li>A port number</li>
+</ul>
+<h2 id="Function-3"><a href="#Function-3" class="headerlink" title="Function"></a>Function</h2><ul>
+<li>Establish, manage and terminate TCP connections.</li>
+<li>Applications use sockets to send and receive data over network.</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Notice</strong>: </p>
+<ul>
+<li><strong>TCP Socket</strong> is an interface or endpoint that facilitates establishing and managing a TCP connection, enabling applications to send and receive data.</li>
+<li><strong>TCP Segment</strong> is the actual data unit transmitted across the network, containing control information and part of the data being sent.</li>
+<li><strong>Signal Transmission</strong> OSI物理层之上的数据在encode后转换为能在物理层上以合适的信号形式进行传输。</li>
+<li><strong>Example</strong> 应用层中的HTML、JSON、XML等数据格式经过UTF-8编码后转为二进制格式，从而来到表示层。而后经过会话层进行会话管理，在这一过程中不涉及到数据流的改变。之后在传输层中被打包为segment，在网络层封装称packet，在数据链路层封装成frame，最后数据以物理信号的形式在介质中传输</li>
+</ul>
+</blockquote>
+<hr>
+<h1 id="HTTP-Message"><a href="#HTTP-Message" class="headerlink" title="HTTP Message"></a>HTTP Message</h1><p>通常在TCP三次握手完成之后，客户端会发送HTTP请求给服务器，服务器会发送响应</p>
+<h2 id="Definition-5"><a href="#Definition-5" class="headerlink" title="Definition"></a>Definition</h2><ul>
+<li>In HTTP communications, the data segments within the messages are called message. HTTP messsages come in two primary types: <strong>request messages and response messages</strong>.</li>
+</ul>
+<h2 id="Request-Message"><a href="#Request-Message" class="headerlink" title="Request Message"></a>Request Message</h2><ul>
+<li><p>Request Line</p>
+<ul>
+<li>Method(e.g., GET, POST)</li>
+<li>The request URL</li>
+</ul>
+</li>
+<li><p>Request Header</p>
+<ul>
+<li>Host</li>
+<li>User-Agent</li>
+</ul>
+</li>
+</ul>
+<h2 id="Response-Message"><a href="#Response-Message" class="headerlink" title="Response Message"></a>Response Message</h2><ul>
+<li>Status Line<ul>
+<li>Status code</li>
+<li>Status phrase</li>
+</ul>
+</li>
+<li>Response Headers<ul>
+<li>Content-Type</li>
+<li>Content-Length</li>
+<li>Server</li>
+</ul>
+</li>
+<li><strong>Response Body</strong><ul>
+<li>HTML page</li>
+<li>JSON data</li>
+<li>Image</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl  https://www.baidu.com </span><br><span class="line">curl -L -X  -b <span class="string">&#x27;foo=bar&#x27;</span> -H  <span class="string">&#x27;User-Agent: php/1.0&#x27;</span> POST https://www.baidu.com <span class="comment"># -H(User-Agent), -b(Cookie) -d(send POST with Request Header) -X(choose method)</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>Data Encapsulation Process (from higher to lower layers), Higher layer encapsulates lower layer<br><br><img src="image/5.png" alt="Description of the image" height="400"><br>Data decapsulation Process (from lower to higher layers)<br><br><img src="image/6.png" alt="Description of the image" height="400"></p>
+</blockquote>
+<hr>
+<h1 id="UDP-Tunnel"><a href="#UDP-Tunnel" class="headerlink" title="UDP Tunnel"></a>UDP Tunnel</h1><h1 id="Definition-6"><a href="#Definition-6" class="headerlink" title="Definition"></a>Definition</h1><p>udptunnel is used to encapsulate UDP packets within TCP packets and then transmit them over a TCP connection. Specifically, udptunnel encapsualtes UDP packet into a special TCP packet at the source end, and at the destination end, it decapsulates these TCP packets back into original UDP packets. This allows UDP packets to be transmitted over a TCP connection, which help bypass firewall restrictions oor address NAT travesal issues.</p>
+<h1 id="Network-Interface-Device"><a href="#Network-Interface-Device" class="headerlink" title="Network Interface&#x2F;Device"></a>Network Interface&#x2F;Device</h1><h2 id="Ethernet-Interface"><a href="#Ethernet-Interface" class="headerlink" title="Ethernet Interface"></a>Ethernet Interface</h2><ul>
+<li>Network Interface Card(NIC) for wire network</li>
+<li>Wi-Fi Interface for wireless network</li>
+<li>Fiber Optic Interface</li>
+</ul>
+<h2 id="Virtual-Interface"><a href="#Virtual-Interface" class="headerlink" title="Virtual Interface"></a>Virtual Interface</h2><ul>
+<li>Virtual Network Interface</li>
+<li>Loopback Interface</li>
+<li>VPN Interface</li>
+</ul>
+<h1 id="tun-tap"><a href="#tun-tap" class="headerlink" title="tun&#x2F;tap"></a>tun&#x2F;tap</h1><h2 id="definition"><a href="#definition" class="headerlink" title="definition"></a>definition</h2><p>tun is L3(network) device, while tap is L2(data link) device. Its function is same with hardware device. </p>
+<h2 id="Driver"><a href="#Driver" class="headerlink" title="Driver"></a>Driver</h2><ul>
+<li>字符驱动设备(模拟物理链路的数据接收与发送)</li>
+<li>网卡驱动<ul>
+<li><ol>
+<li>应用程序发起网络请求</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>进入协议栈后经过路由查询应该走虚拟网卡</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>数据进入虚拟网卡，处理后发送给应用层程序</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>数据从程序再次进入协议栈，重新路由到真实网卡</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>通过真实网卡再把数据发送出去。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="create-tun"><a href="#create-tun" class="headerlink" title="create tun"></a>create tun</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">int tun_create(char *dev, int flags)&#123;</span><br><span class="line">    struct ifreq ifr;</span><br><span class="line">    int fd, err;</span><br><span class="line">    <span class="keyword">if</span>((fd = open(&quot;/dev/net/tun&quot;, O_RDWR)) &lt; 0 )&#123;</span><br><span class="line">        <span class="built_in">return</span> fd;</span><br><span class="line">    &#125;</span><br><span class="line">    memset(&amp;ifr, 0, sizeof(ifr));</span><br><span class="line">    ifr.ifr_flags = flags;</span><br><span class="line">    <span class="keyword">if</span>(*dev)</span><br><span class="line">    strncpy(ifr.ifr_name, dev, IFNAMSIZ);</span><br><span class="line"> <span class="keyword">if</span> ((err = ioctl(fd, TUNSETIFF, (void *)&amp;ifr)) &lt; 0) &#123;</span><br><span class="line">  perror(<span class="string">&quot;ioctl(TUNSETIFF)&quot;</span>);</span><br><span class="line">  close(fd);</span><br><span class="line">  <span class="built_in">return</span> err;</span><br><span class="line"> &#125;</span><br><span class="line"> strcpy(dev, ifr.ifr_name);</span><br><span class="line"> <span class="built_in">return</span> fd; </span><br><span class="line">&#125;</span><br><span class="line">int main(int argc, char *argv[])</span><br><span class="line">&#123;</span><br><span class="line"> char buffer[BUFSIZ], veth_name[IFNAMSIZ] = <span class="string">&quot;tunveth1&quot;</span>;</span><br><span class="line"> int i, tun_fd, nread;</span><br><span class="line"> struct ethhdr *eth;</span><br><span class="line"> struct iphdr *iph;</span><br><span class="line"> struct in_addr saddr, daddr; </span><br><span class="line"> tun_fd = tun_create(veth_name, IFF_TUN | IFF_NO_PI);</span><br><span class="line"> <span class="keyword">if</span> (tun_fd &lt; 0) &#123;</span><br><span class="line">  perror(<span class="string">&quot;Creating interface&quot;</span>);</span><br><span class="line">  <span class="built_in">exit</span>(1);</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">while</span>(1) &#123;</span><br><span class="line">  memset(buffer, 0, sizeof(buffer));</span><br><span class="line">  nread = <span class="built_in">read</span>(tun_fd, buffer, sizeof(buffer));</span><br><span class="line">  <span class="keyword">if</span> (nread &lt; 0) &#123;</span><br><span class="line">   perror(<span class="string">&quot;Reading from interface&quot;</span>);</span><br><span class="line">   close(tun_fd);</span><br><span class="line">   <span class="built_in">exit</span>(1);</span><br><span class="line">  &#125;</span><br><span class="line">  iph = (struct iphdr*)buffer;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (iph-&gt;version ==4) &#123;  </span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;\nRead %d bytes from device %s\n&quot;</span>, nread, veth_name);</span><br><span class="line">   memcpy(&amp;saddr.s_addr, &amp;iph-&gt;saddr, 4);</span><br><span class="line">   memcpy(&amp;daddr.s_addr, &amp;iph-&gt;daddr, 4);</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;Source host:%s\n&quot;</span>, inet_ntoa(saddr));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;Dest host:%s\n&quot;</span>, inet_ntoa(daddr));</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="Network-Devices"><a href="#Network-Devices" class="headerlink" title="Network Devices"></a>Network Devices</h1><ul>
+<li>Router<br>It has route table, which is used to forward(转发) packet based Destination IP. It connects LAN with WAN</li>
+<li>Switch<br>It works in Data Link Layer, to forward frame based on destination MAC.</li>
+<li>Hub(Usually replaced by Switch)</li>
+<li>Gateway<br>It is a network node, which can work in different layer.</li>
+<li>Firewall</li>
+<li>Access Point</li>
+<li>Network Interface Card</li>
+<li>Load Balancer</li>
+<li>Modem<br>It is used to modulate digital signal. And demodulate analog signal.</li>
+</ul>
+<h1 id="QoS-Quality-of-Service"><a href="#QoS-Quality-of-Service" class="headerlink" title="QoS(Quality of Service)"></a>QoS(Quality of Service)</h1><h2 id="Definition-7"><a href="#Definition-7" class="headerlink" title="Definition"></a>Definition</h2><p>It is implemented to solve the problems of network congestion due to a load of active users utilizing the resources of the router. It is a technology to classify and prioritize network traffic types, such as sensitive and non-sensitive data(voice and video traffic) traffic(Web Browsing and email).</p>
+<blockquote>
+<p><strong>Notice</strong><br><br>Especially the UDP requires QoS implementation as they do not guarentee the delivery of a message.</p>
+</blockquote>
+<h2 id="Metrics-measured"><a href="#Metrics-measured" class="headerlink" title="Metrics measured"></a>Metrics measured</h2><ul>
+<li>Bandwidth</li>
+<li>Delay</li>
+<li>Loss</li>
+<li>Jitter</li>
+</ul>
+<h2 id="Mechanism"><a href="#Mechanism" class="headerlink" title="Mechanism"></a>Mechanism</h2><ul>
+<li>Classification </li>
+<li>Marking </li>
+<li>Congestion Management(prioritizes the transmission of each packet by queuing on each interface) Queuing Discipline(队列调度策略)有以下<ul>
+<li>FIFO</li>
+<li>RED</li>
+<li>HTB</li>
+<li>TBF</li>
+<li>PRIO</li>
+<li>SFQ</li>
+</ul>
+</li>
+<li>Congestion Avoidance</li>
+<li>Queuing </li>
+<li>Policing</li>
+<li>Shaping</li>
+</ul>
+<h1 id="NAT（网络地址转换）"><a href="#NAT（网络地址转换）" class="headerlink" title="NAT（网络地址转换）"></a>NAT（网络地址转换）</h1><ul>
+<li>PREROUTING<br><strong>PREROUTING</strong>用于处理入站流量（即从网络接口进入到本地系统之间的流量），它是流量到达目标主机之前应用的规则。<ul>
+<li>Function<ul>
+<li>端口转发： 将到达本地机器的特点端口的流量转发到内网中的其他机器或不同端口</li>
+<li>DNAT（目的地址转换）： 修改流量的目的地址，将其重定向到另一个主机或端口</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>POSTROUTING<br><strong>POSTROUTING</strong>链用于处理出站流量（即流量离开本地系统，准备发送到网络接口之前）。它是在流量离开目标主机之前应用的规则<ul>
+<li>Function<ul>
+<li>MASQUERADE（源地址伪装）：将出站流量的源IP地址修改为路由器的外部IP地址。主要用于处理动态IP地址的情况</li>
+<li>SNAT（源地址转换）：将出站流量的源IP地址修改为静态IP地址（如果使用静态IP）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="端口绑定"><a href="#端口绑定" class="headerlink" title="端口绑定"></a>端口绑定</h1><h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ul>
+<li>接收网络请求</li>
+<li>网络通信</li>
+<li>安全控制</li>
+<li>多进程支持</li>
+<li>资源分配与管理</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/05/03/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -261,7 +566,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-05-06 00:38:56" itemprop="dateModified" datetime="2025-05-06T00:38:56+02:00">2025-05-06</time>
+                <time title="Modified: 2025-05-09 15:58:34" itemprop="dateModified" datetime="2025-05-09T15:58:34+02:00">2025-05-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -303,7 +608,7 @@
 <p><strong>维纳-辛钦定律</strong><br>平稳随机过程$\epsilon(t)$的功率谱密度函数$P_\epsilon(w)$和自相关函数R($\tau$)为一对傅立叶变换对<br><img src="/images/功率谱密度.png"></p>
 <p><strong>平均功率计算方法</strong>:<br>S &#x3D; R(0) &#x3D; E[$\epsilon(t)^2$]<br>S &#x3D; $\frac{1}{2\pi}\int_{-\infty}^{\infty}P_\epsilon(w),dw$</p>
 <h3 id="高斯随机过程"><a href="#高斯随机过程" class="headerlink" title="高斯随机过程"></a>高斯随机过程</h3><p>若随机过程的任意<strong>n</strong>维分布都是正态分布，则称它为高斯随机过程或正态过程。其n维概率密度函数为：<br>$f_a(x_1,x_2,…;t_1,…,t_n)$<br>一维高斯过程的概率密度函数：<br>X ~ N(a,$\sigma^2$)<br>$f_1(x)$ &#x3D; $\frac{1}{\sqrt{(2\pi)}\sigma}exp[-\frac{(x-a)^2}{2\sigma^2}]$<br>高斯过程在不同时刻取值不相关，则它们也统计独立。<br>高斯过程经过线性变化（或线性系统）后仍为高斯过程。</p>
-<h4 id="正态分布函数"><a href="#正态分布函数" class="headerlink" title="正态分布函数"></a>正态分布函数</h4><p>先来看正态概率密度函数<br>X ～ N(a,$\sigma^2$),<br>$f_1(x)$ &#x3D; $\frac{1}{\sqrt{(2\pi)}\sigma}exp[-\frac{(x-a)^2}{2\sigma^2}]$<br>那么正态分布函数就是将上述函数从负无穷到x上积分<br>标准&#x2F;归一化的正态分布是另a&#x3D;0，$\sigma$&#x3D;1<br>$f_1(x)$ &#x3D; $\frac{1}{\sqrt{(2\pi)}}exp[-\frac{x^2}{2}]$  </p>
+<h4 id="正态分布函数"><a href="#正态分布函数" class="headerlink" title="正态分布函数"></a>正态分布函数</h4><p>先来看正态概率密度函数<br>X ～ N(a,$\sigma^2$),<br>$f_1(x)$ &#x3D; $\frac{1}{\sqrt{(2\pi)}\sigma}exp[-\frac{(x-a)^2}{2\sigma^2}]$<br>那么正态分布函数就是将上述函数从负无穷到x上积分<br>标准&#x2F;归一化的正态分布是另a&#x3D;0，$\sigma$&#x3D;1<br>$f_1(x)$ &#x3D; $\fra c{1}{\sqrt{(2\pi)}}exp[-\frac{x^2}{2}]$  </p>
 <h4 id="Q函数"><a href="#Q函数" class="headerlink" title="Q函数"></a>Q函数</h4><p>和正态分布的密度分布函数是互补的关系<br>也就是从x到正无穷积分（正态分布函数是从负无穷到x积分）</p>
 <h4 id="误差函数"><a href="#误差函数" class="headerlink" title="误差函数"></a>误差函数</h4><p>$\text{erf}(x) &#x3D; \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^2} , dt$<br>互补误差函数和它互补，也就是说是从x到正无穷上积分<br>误差函数、互补误差函数与正态分布函数存在一个关系<br><img src="/images/误差函数.png"></p>
 <h3 id="随机过程通过线性系统"><a href="#随机过程通过线性系统" class="headerlink" title="随机过程通过线性系统"></a>随机过程通过线性系统</h3><img src="/images/随机过程通过线性系统.png">  
@@ -323,6 +628,8 @@
 <ul>
 <li>功率谱密度<br>$P_o(w)$&#x3D;$P_i(w)$|$H(w)^2$|<br>其中|$H(w)^2$|为功率增益</li>
 </ul>
+<h2 id="窄带随机过程"><a href="#窄带随机过程" class="headerlink" title="窄带随机过程"></a>窄带随机过程</h2><p>窄带系统要求通带宽度$\Delta f \ll f_c$<br>窄带过程是指随机过程通过以$f_c$为中心频率的窄带系统的输出过程<br><img src="/images/窄带过程.png"><br>通常分析平稳高斯窄带过程$\xi(t)$<br>所以均值为0，方差为$\sigma^2$,由于可以写成同向分量$\sigma_c(t)$与正交分量$\sigma_s(t)$线性组合的关系，因此这两个分量的数学期望也均为0，并且二者都平稳（相关函数均只与时间间隔有关），并且二者的自相关函数相同，方差相同，同时也互不相关、统计独立的高斯变量。<br>简单来讲， 这两个分量为零均值、等方差、不相关、独立的平稳高斯过程。 </p>
+<h2 id="正弦波加窄带高斯过程"><a href="#正弦波加窄带高斯过程" class="headerlink" title="正弦波加窄带高斯过程"></a>正弦波加窄带高斯过程</h2><p>$r(t) &#x3D; Acos(\omega_c t + \phi) + n(t)$<br>其中n(t)是均值为0，方差为$\sigma^2$的窄带高斯噪声<br>然后通过三角函数转换可得r(t)最终也可以分解为同相分量和正交向量，也就是$z_c(t) &#x3D; Acos{\phi} + n_c(t)$和$z_s(t) &#x3D; Acos{\phi} + n_s(t)$<br><img src="随机包络随机相位.png"><br>随机包络遵循广义瑞利分布，随机相位的概率密度与信噪比环境有关。<br>对于小信噪比环境，它们分布退化为瑞利分布和均匀分布。<br>同时它们的整体，也就是正弦波+窄带高斯过程会退化为窄带高斯过程。</p>
 
       
     </div>
@@ -1042,170 +1349,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/22/openairinterface/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/22/openairinterface/" class="post-title-link" itemprop="url">openairinterface</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-04-22 11:45:43" itemprop="dateCreated datePublished" datetime="2025-04-22T11:45:43+02:00">2025-04-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-05-02 16:08:35" itemprop="dateModified" datetime="2025-05-02T16:08:35+02:00">2025-05-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="openairinterface"><a href="#openairinterface" class="headerlink" title="openairinterface"></a>openairinterface</h2><h3 id="executable"><a href="#executable" class="headerlink" title="executable"></a>executable</h3><p>里面有多个与build后生成的可执行文件同名的.h和.c文件，例如nr-uesoftmodem.c，相当于在执行nr-uesoftmodem后就会去这个c文件里找主函数，然后依次运行。</p>
-<h4 id="softmodem-common-h"><a href="#softmodem-common-h" class="headerlink" title="softmodem-common.h"></a>softmodem-common.h</h4><ul>
-<li>第一步，先#define CMDLINE_PARAMS_DESC,用于将终端传入的参数放入一个临时变量中</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#define CMDLINE_PARAMS_DESC &#123;  \</span></span><br><span class="line">    &#123;<span class="string">&quot;rf-config-file&quot;</span>,       CONFIG_HLP_RFCFGF,       0,              strptr:&amp;RF_CONFIG_FILE,             defstrval:NULL,        TYPE_STRING, 0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;split73&quot;</span>,              CONFIG_HLP_SPLIT73,      0,              strptr:&amp;SPLIT73,                    defstrval:NULL,        TYPE_STRING, 0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;thread-pool&quot;</span>,          CONFIG_HLP_TPOOL,        0,              strptr:&amp;TP_CONFIG,                  defstrval:<span class="string">&quot;-1,-1,-1,-1,-1,-1,-1,-1&quot;</span>, TYPE_STRING, 0&#125;,       \</span><br><span class="line">    &#123;<span class="string">&quot;phy-test&quot;</span>,             CONFIG_HLP_PHYTST,       PARAMFLAG_BOOL, iptr:&amp;PHY_TEST,                     defintval:0,           TYPE_INT,    0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;sl-phy-test&quot;</span>,          CONFIG_HLP_SL_PHYTST,    PARAMFLAG_BOOL, iptr:&amp; </span><br><span class="line">    ....</span><br><span class="line">    TUNE_OFFSET,                defintval:0,           TYPE_DOUBLE, 0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;wait-for-sync&quot;</span>,        NULL,                    PARAMFLAG_BOOL, iptr:&amp;WAIT_FOR_SYNC,                defintval:0,           TYPE_INT,    0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;single-thread-enable&quot;</span>, CONFIG_HLP_NOSNGLT,      PARAMFLAG_BOOL, iptr:&amp;SINGLE_THREAD_FLAG,           defintval:0,           TYPE_INT,    0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;C&quot;</span> ,                   CONFIG_HLP_DLF,          0,              u64ptr:&amp;(downlink_frequency[0][0]), defuintval:3600000000, TYPE_UINT64, 0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;CO&quot;</span> ,                  CONFIG_HLP_ULF,          0,              iptr:&amp;(uplink_frequency_offset[0][0]), defintval:0,        TYPE_INT,    0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;a&quot;</span> ,                   CONFIG_HLP_CHOFF,        0,              iptr:&amp;CHAIN_OFFSET,                 defintval:0,           TYPE_INT,    0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;d&quot;</span> ,                   CONFIG_HLP_SOFTS,        PARAMFLAG_BOOL, uptr:(uint32_t *)&amp;do_forms,         defintval:0,           TYPE_INT8,   0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;q&quot;</span> ,                   CONFIG_HLP_STMON,        PARAMFLAG_BOOL, iptr:&amp;opp_enabled,                  defintval:0,           TYPE_INT,    0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;numerology&quot;</span> ,          CONFIG_HLP_NUMEROLOGY,   PARAMFLAG_BOOL, iptr:&amp;NUMEROLOGY,                   defintval:1,           TYPE_INT,    0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;band&quot;</span> ,                CONFIG_HLP_BAND,         0,              iptr:&amp;BAND,                         defintval:78,          TYPE_INT,    0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;emulate-rf&quot;</span> ,          CONFIG_HLP_EMULATE_RF,   PARAMFLAG_BOOL, iptr:&amp;EMULATE_RF,                   defintval:0,           TYPE_INT,    0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;parallel-config&quot;</span>,      CONFIG_HLP_PARALLEL_CMD, 0,              strptr:&amp;parallel_config,            defstrval:NULL,        TYPE_STRING, 0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;worker-config&quot;</span>,        CONFIG_HLP_WORKER_CMD,   0,              strptr:&amp;worker_config,              defstrval:NULL,        TYPE_STRING, 0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;noS1&quot;</span>,                 CONFIG_HLP_NOS1,         PARAMFLAG_BOOL, uptr:&amp;noS1,                         defintval:0,           TYPE_INT,    0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;rfsim&quot;</span>,                CONFIG_HLP_RFSIM,        PARAMFLAG_BOOL, uptr:&amp;rfsim,                        defintval:0,           TYPE_INT,    0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;nokrnmod&quot;</span>,             CONFIG_HLP_NOKRNMOD,     PARAMFLAG_BOOL, uptr:&amp;nokrnmod,                     defintval:0,           TYPE_INT,    0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;nbiot-disable&quot;</span>,        CONFIG_HLP_DISABLNBIOT,  PARAMFLAG_BOOL, uptr:&amp;nonbiot,                      defuintval:0,          TYPE_INT,    0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;chest-freq&quot;</span>,           CONFIG_HLP_CHESTFREQ,    0,              iptr:&amp;SYNC_REF,                     defintval:0,           TYPE_INT,    0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;nid1&quot;</span>,                 CONFIG_HLP_NID1,         0,              iptr:&amp;NID1,                         defintval:10,          TYPE_INT,    0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;nid2&quot;</span>,                 CONFIG_HLP_NID2,         0,              iptr:&amp;NID2,                         defintval:1,           TYPE_INT,    0&#125;,                     \</span><br><span class="line">    &#123;<span class="string">&quot;message&quot;</span>,              CONFIG_HLP_MSG,          0,              strptr:&amp;SL_USER_MSG,                defstrval:NULL,        TYPE_STRING, 0&#125;,                     \</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>第二步，将临时变量放入结构体变量中，用于后续调用</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#define NODE_NUMBER         softmodem_params.node_number</span></span><br><span class="line"><span class="comment">#define SL_DEST_ID          softmodem_params.dest_id</span></span><br><span class="line"><span class="comment">#define NON_STOP            softmodem_params.non_stop</span></span><br><span class="line"><span class="comment">#define EMULATE_L1          softmodem_params.emulate_l1</span></span><br><span class="line"><span class="comment">#define CONTINUOUS_TX       softmodem_params.continuous_tx</span></span><br><span class="line"><span class="comment">#define SYNC_REF            softmodem_params.sync_ref</span></span><br><span class="line"><span class="comment">#define NID1                softmodem_params.nid1</span></span><br><span class="line"><span class="comment">#define NID2                softmodem_params.nid2</span></span><br><span class="line"><span class="comment">#define SL_USER_MSG         softmodem_params.sl_user_msg</span></span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="调用nr-uesoftmodem-c"><a href="#调用nr-uesoftmodem-c" class="headerlink" title="调用nr-uesoftmodem.c"></a>调用nr-uesoftmodem.c</h4><h5 id="调用UE-thread-SL"><a href="#调用UE-thread-SL" class="headerlink" title="调用UE_thread_SL"></a>调用UE_thread_SL</h5><ul>
-<li><p>Initialization</p>
-<ul>
-<li>初始化UE</li>
-<li>收发缓冲区指针</li>
-<li>射频设备设置</li>
-<li>FIFO初始化<br>  初始化一个命名为nf的<strong>notifiedFIFO</strong>,这是一个线程安全的FIFO（先进先出）队列，用于管理从工作线程（线程池Tpool中）返回的结果。工作线程在完成时隙处理任务后会通知这个FIFI<br>  初始化一个命名为freeBlocks的notifiedFIFO，这个队列将持有预先分配好的数据结构<strong>nr_rxtx_thread_data_t</strong>,准备用于处理即将到来的时隙。使用预先分配块可以避免在主循环中频繁进行内存分配和释放</li>
-<li>初始化变量，包括sync_running_sl等标识位</li>
-</ul>
-</li>
-<li><p>预分配处理块（pre-allocate processing blocks）<br>这里使用了FIFO任务队列，具体来说构建了TPool线程池，然后还构建了一个FIFO任务队列，队列中每个成员是一个任务结构体，里面包含一个任务函数 + msgdata</p>
-<ul>
-<li>notifiedFIFO<br>  这个队列是用来管理任务队列</li>
-</ul>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">typedef struct notifiedFIFO&#123;</span><br><span class="line">    /// 队列的尾部（用于入列）</span><br><span class="line">    notifiedFIFO_elt_t *inF;</span><br><span class="line">    /// 队列的头部（用于出列）</span><br><span class="line">    notifiedFIFO_elt_t *outF;</span><br><span class="line"></span><br><span class="line">&#125; notifiedFIFO_t;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>newNotifiedFIFO_elt, notifiedFIFO_elt结构体是notifiedFIFO队列的成员，也就是每一个任务元素，里面包含任务函数还有数据。为了队列中的一个元素分配内存，并为其提供一些额外的功能（比如存储msgData，并确保数据对齐以便SIMD处理）</li>
-</ul>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">typedef struct notifiedFIFO_elt_s&#123;</span><br><span class="line"></span><br><span class="line">    struct notifiedFIFO_elt_s *next;</span><br><span class="line">    void (*processingFunc) (void *);</span><br><span class="line">    void *msgData;</span><br><span class="line">    ...</span><br><span class="line">&#125; notifiedFIFO_elt_t;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>pushNotifiedFIFO_nothreadSafe<br>  这段代码实现的是一个非线程安全的队列操作，具体是将一个新的元素（notifiedFIFO_elt_t *msg）推入队列(notifiedFIFO_t *nf)的末尾，它的功能是将<strong>msg</strong>添加到一个名为<strong>notifiedFIFO_t</strong>的队列中， 并维护队列的入口和出口指针</li>
-</ul>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pushNotifiedFIFO_nothreadSafe(notifiedFIFO_t *nf, notifiedFIFO_elt_t *msg)&#123;</span><br><span class="line">    msg-&gt;next = NULL;</span><br><span class="line">    <span class="keyword">if</span>(nf-&gt;outF == NULL)</span><br><span class="line">    nf-&gt;outF = msg;</span><br><span class="line">    <span class="keyword">if</span>(nf-&gt;inF != NULL)</span><br><span class="line">    nf-&gt;inF-&gt;next = msg;</span><br><span class="line">    </span><br><span class="line">    nf-&gt;inF = msg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>pushTpool<br>  这个函数的目的是将任务添加到线程池中，并根据线程池的状态决定任务的处理方式。具体来说，它有两种处理方式：1. 线程池已激活时，任务会被放入队列，等待工作线程从队列中取出并执行。2. 线程池未激活时，任务会在当前线程中理解执行。</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">static inline void pushTpool(tpool_t *t, notifiedFIFO_elt_t *msg)&#123;</span><br><span class="line">  <span class="keyword">if</span> (t-&gt;measurePerf) msg-&gt;creationTime=rdtsc_oai();</span><br><span class="line">    <span class="keyword">if</span> ( t-&gt;activated)</span><br><span class="line">        pushNotifiedFIFO(&amp;t-&gt;incomingFifo, msg);</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (t-&gt;measurePerf)</span><br><span class="line">         msg-&gt;startProcessingTime=rdtsc_oai();</span><br><span class="line"></span><br><span class="line">            msg-&gt;processingFunc(NotifiedFifoData(msg));</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (t-&gt;measurePerf)</span><br><span class="line">        msg-&gt;endProcessingTime=rdtsc_oai();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (msg-&gt;reponseFifo)</span><br><span class="line">            pushNotifiedFIFO(msg-&gt;reponseFifo, msg);</span><br><span class="line">        &#125;         </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>pullTpool<br>  这个函数是将线程池响应队列中拉取任务.</li>
-</ul>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  static inline notifiedFIFO_elt_t *pullTpool(notifiedFIFO_t *responseFifo, tpool_t *t) &#123;</span><br><span class="line">notifiedFIFO_elt_t *msg= pullNotifiedFIFO(responseFifo);</span><br><span class="line"><span class="keyword">if</span> (msg == NULL)</span><br><span class="line">  <span class="built_in">return</span> NULL;</span><br><span class="line">AssertFatal(t-&gt;traceFd, <span class="string">&quot;Thread pool used while not initialized&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (t-&gt;measurePerf)</span><br><span class="line">  msg-&gt;returnTime=rdtsc_oai();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (t-&gt;traceFd &gt; 0)</span><br><span class="line">  <span class="keyword">if</span>(write(t-&gt;traceFd, msg, sizeof(*msg)));</span><br><span class="line"></span><br><span class="line"><span class="built_in">return</span> msg;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h5 id="Tx-Sync-UE"><a href="#Tx-Sync-UE" class="headerlink" title="Tx(Sync UE)"></a>Tx(Sync UE)</h5><ul>
-<li>processSlotTx<br>如果sl_mode &#x3D;&#x3D; 2,会调用phy_procedures_nrUE_SL_TX</li>
-<li>phy_procedures_nrUE_SL_TX(时隙控制来发射S-SSB和SCH，具体可见<strong>5gNRSidelink</strong>)<ul>
-<li>phy_ssb_slot_allocation_sl（前提是sync_ref&#x3D;&#x3D;1）<br>  发射S-SSB</li>
-<li>nr-ue-set-slsch(前提是sync_ref&#x3D;&#x3D;1)<br>  配置slsch</li>
-<li>nr-ue_slsch_tx_procedures(前提是sync_ref&#x3D;&#x3D;1)<br>  uint32_t sl_bitmap_tx &#x3D; 0x00000;<br>  if(ue-&gt;sync_ref){<br>  sl_bitmap_tx &#x3D; (ue-&gt;is_synchronized_sl &#x3D;&#x3D; 0) ? 0x00001:0x00002;<br>  }<br>  发射slsch</li>
-</ul>
-</li>
-</ul>
-<h5 id="Rx-Nearby-UE"><a href="#Rx-Nearby-UE" class="headerlink" title="Rx(Nearby UE)"></a>Rx(Nearby UE)</h5><ul>
-<li>第一步，先include &lt;nr-uesoftmode.h&gt;(里面extern了nr-ue.c里的函数)</li>
-<li>第二步，get_optins</li>
-<li>init_NR_UE</li>
-<li>set_options(包括max_ldpc_iterations, tx_total_gain_dB等等)</li>
-<li>nr_phy_config_request_sl(传参来配置PHY层的UE)<br>配置nrUE_config（用于存储通过 FAPI 接口传递给 PHY 层的配置信息（如频率、带宽、SSB 配置等）。）和ue，例如配置nrUE_config-&gt;ssb,<br>  nrUE_config-&gt;carrier_config.sl_frequency<br>  UE-&gt;sync_ref,<br>  UE-&gt;configured<br>  UE-&gt;synchronized</li>
-<li>init_nr_ue_vars（关掉MAC，无需经过gNB，因此不需要传统的MAC层处理，比如调度、DCI、HARQ，反而通常是直接使用物理层进行广播或点对对通信）</li>
-<li>init_openair0</li>
-<li>init_NR_UE_threads(nrUE)  <ul>
-<li><p>threadCreate</p>
-</li>
-<li><p>UE_thread_SL(里面有UE_synch和processSlotRX两个子线程，由线程池Tpool进行维护)</p>
-</li>
-<li><p>processSlotRX</p>
-</li>
-<li><p>phy_procedures_nrUE_SL_RX<br>这个函数主要判断ue是否需要执行对rx slot的处理，具体可见如下代码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">这里可以防止<span class="built_in">sync</span> ue来执行这个接受函数，并且使得nearbyue只能在同步之后将is_synchronized_sl=1后才会执行.</span><br><span class="line"><span class="keyword">if</span>(ue-&gt;is_synchronized_sl == 0)</span><br><span class="line">  <span class="built_in">return</span> (0);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>（ue-&gt;sync_ref == 0）  </span><br><span class="line">uint32_t sl_bitmap_rx = ue-&gt;sync_ref  ? 0x00001 : 0x00002;</span><br><span class="line"><span class="keyword">if</span>(((sl_bitmap_rx = ue-&gt;sync_ref?) &amp; <span class="number">1</span> ) == <span class="number">0</span> )</span><br><span class="line">return(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
-
-<p>在找到正确的frame和slot后，会执行nr_ue_slsch_rx_procedures函数，这个函数体内会具体对PSSCH进行处理，包括demapping和descrambling以及decoding(nr_slsch_decoding)，这个docoding包括对SLSCH和SCI2的解码<br>为了表示每一个收到的的frame，我们在nr_slsch_decoding函数里面LOG_I(frame,slot), beacuse each frame received will go through the process in nr_slsch_decoding, be careful that not each frame received will go through the <strong>validate_rx_str</strong> function, beacuse it should satisfy a prerequirement (destination is matched). </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/// 正常情况下的LOG_I</span><br><span class="line">[NR_PHY]In nr_ue_sl_pssch_rsrp_measurements: </span><br><span class="line">[NR_PHY]SLSCH received ok</span><br><span class="line">[PHY] Frame:..., Slot:...</span><br><span class="line">[NR_PHY] Received your text!...</span><br><span class="line">[PHY] PSSCH <span class="built_in">test</span> ...f</span><br></pre></td></tr></table></figure>
-<p>其中SLSCH received ok不一定执行(it is in nr_ue_sl_postDocode function after polar_decoded_int16 and it has a prerequisited that all segments are done), and these two funcations are all in the <strong>nr_slsch_decoding</strong> function.<br>Received your text is in the <strong>valdiate_rx_str</strong> function, and has a prerequisit that the dest is matched.</p>
-<p>openair1&#x2F;SCHED_NR_UE&#x2F;phy_procedures_nr_ue.c中,调用nr_ue_slsch_rx_procedures来return ret</p>
-<ul>
-<li>nr_ue_slsch_rx_procedures(在openair1&#x2F;PHY&#x2F;NR_UE_TRANSPORT&#x2F;nl_slsch_ue.c)<ul>
-<li>nr_slsch_decoding(在nr_ue_slsch_rx_procedures中，decoding的部分是sci2部分 <strong>return ret</strong>)<ul>
-<li>polar_decoder_int16(在nr_slsch_decoding函数中)</li>
-<li>LOG_E(NR_PHY, “polar_decoder_int16 failed with ret %d for slot %d\n”, decoder_state, nr_slot_rx);</li>
-<li>return ret</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>validate_rx_payload(log(“PSSCH test”))</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="ci-script部分"><a href="#ci-script部分" class="headerlink" title="ci-script部分"></a>ci-script部分</h2><h3 id="sl-check-log-py"><a href="#sl-check-log-py" class="headerlink" title="sl_check_log.py"></a>sl_check_log.py</h3><p>根据nearby.log中”PSSCH test”字段进行检查，将”PSSCH test OK with 1 &#x2F; 2 &#x3D; 0.50”中的1放入nb_decoded,将2放入total_rx, 由于是for循环一直检查nearby.log，而且每个循环内会直接把int型数据覆盖给nb_decoded,”nb_decoded &#x3D; int(field[-5])”,因此会把log里的最后一条数据传给nb_decoded。同时nb_decoded_list也是只最后一条数据的list，例如nb_decoded_list&#x3D;[1]，同理total_rx_list&#x3D;[103]</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1275,7 +1418,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
