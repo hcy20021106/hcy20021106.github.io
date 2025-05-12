@@ -173,8 +173,18 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2025-05-12 21:31:45" itemprop="dateCreated datePublished" datetime="2025-05-12T21:31:45+02:00">2025-05-12</time>
+              <time title="Created: 2025-05-12 21:31:45 / Modified: 23:14:41" itemprop="dateCreated datePublished" datetime="2025-05-12T21:31:45+02:00">2025-05-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                </span>
             </span>
 
           
@@ -189,7 +199,19 @@
 
       
       
-          
+          <h2 id="Basic-concept"><a href="#Basic-concept" class="headerlink" title="Basic concept"></a>Basic concept</h2><h2 id="FFT是在时间复杂度为-mathcal-O-n-log-n-完成的离散傅立叶变换（Discrete-Fourier-transform，-DFT）算法，主要应用是加速多项式乘法计算。"><a href="#FFT是在时间复杂度为-mathcal-O-n-log-n-完成的离散傅立叶变换（Discrete-Fourier-transform，-DFT）算法，主要应用是加速多项式乘法计算。" class="headerlink" title="FFT是在时间复杂度为$\mathcal{O}(n \log n)$完成的离散傅立叶变换（Discrete Fourier transform， DFT）算法，主要应用是加速多项式乘法计算。"></a>FFT是在时间复杂度为$\mathcal{O}(n \log n)$完成的离散傅立叶变换（Discrete Fourier transform， DFT）算法，主要应用是加速多项式乘法计算。</h2><blockquote>
+<p><strong>Notice</strong><br><br>DFT用于有限长的离散信号（通常为有限长度N）<br><br>DTFT用于无限长的离散信号（理论上）<br><br>DFT用于<strong>实际信号</strong>处理，如<strong>FFT</strong>算法<br></p>
+</blockquote>
+<hr>
+<h2 id="FFT的实际应用"><a href="#FFT的实际应用" class="headerlink" title="FFT的实际应用"></a>FFT的实际应用</h2><p>在实际信号收发中，信号在经过调制后输出的复数对是频域信号，这是因为它们表示的是各个子载波上的频域符号，还没有经过IFFT转换为时域波形。通过IFFT后这些复数对才会映射到各个子载波上。例如有四个QPSK符号，对它们进行IFFT：<br>x[n] &#x3D; $\frac{1}{4}\sum_{k&#x3D;0}^{3}e^{j\frac{2{\pi}nk}{4}}$</p>
+<h2 id="FFT原理"><a href="#FFT原理" class="headerlink" title="FFT原理"></a>FFT原理</h2><h3 id="多项式"><a href="#多项式" class="headerlink" title="多项式"></a>多项式</h3><p>A(x) &#x3D; $\sum_{i&#x3D;0}^{n-1}{a_i}x^i$ 与 B(x) &#x3D; $\sum_{i&#x3D;0}^{n-1}{b_i}x^i$相乘的结果为<br>C(x) &#x3D; $\sum_{k&#x3D;0}^{2n-2}(\sum_{k&#x3D;i+j}a_ib_j)x^k$<br>那么这四个点就用来表示这一个OFDM符号对应的四个采样点它们的时域波形。时域信号有以下几个特性：</p>
+<ul>
+<li>是4个子载波复数调制符号在频域上的逆变换（IFFT）</li>
+<li>保证正交性</li>
+<li>可以加循环前缀后发射</li>
+<li>接收端做FFT可以完美还原出X[k]</li>
+</ul>
+
       
     </div>
 
@@ -1211,8 +1233,6 @@
   </span>
   <span class="author" itemprop="copyrightHolder">John Doe</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
 
         
 
