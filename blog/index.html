@@ -524,7 +524,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-05-06 00:38:59" itemprop="dateModified" datetime="2025-05-06T00:38:59+02:00">2025-05-06</time>
+                <time title="Modified: 2025-05-27 00:21:25" itemprop="dateModified" datetime="2025-05-27T00:21:25+02:00">2025-05-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -555,6 +555,51 @@
 <li>任务队列支持FIFO机制</li>
 <li>线程池的销毁与资源回收</li>
 </ul>
+<h2 id="Producer-Consumer-Model"><a href="#Producer-Consumer-Model" class="headerlink" title="Producer-Consumer Model"></a>Producer-Consumer Model</h2><p>以下元素和结构几乎出现在所有经典线程池实现中:</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>功能说明</th>
+<th>是否为标准做法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>线程数组</strong></td>
+<td>预先创建固定数量的线程，用于处理任务</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><strong>任务队列</strong></td>
+<td>存放尚未处理的任务，按顺序排队</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><strong>互斥锁（mutex）</strong></td>
+<td>用于保护任务队列的访问，防止多个线程竞争资源</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><strong>条件变量（cond）</strong></td>
+<td>当任务队列为空时阻塞线程，有新任务时唤醒工作线程</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><strong>无限循环的 <code>worker_thread</code></strong></td>
+<td>每个线程不断尝试从任务队列中取任务并执行</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><strong>stop 标志</strong></td>
+<td>控制线程池的销毁流程，优雅地通知线程退出</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><strong>任务结构包含 function + arg</strong></td>
+<td>支持传入任意函数和参数，使线程池任务更通用</td>
+<td>✅ 是</td>
+</tr>
+</tbody></table>
 <h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><p>这涉及同步的概念，需要满足同步与互斥，因此需要使用互斥锁（pthread_mutex_t）来保证任务队列操作的线程安全，以及需要条件变量（pthread_cond_t）用于通知线程处理任务<br>下面代码展示了 初始化线程池 -&gt; 添加任务到线程池 -&gt; 把任务从线程池中取出来，执行task里的function，并以此构建工作线程。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include&lt;stdlib.h&gt;</span></span><br><span class="line"><span class="comment">#include&lt;pthread.h&gt;</span></span><br><span class="line"><span class="comment">#include&lt;unistd.h&gt;</span></span><br><span class="line">typedef struct task&#123;</span><br><span class="line">    void (*<span class="keyword">function</span>) (void *);</span><br><span class="line">    void *arg;</span><br><span class="line">    struct task *next;</span><br><span class="line">&#125; task_t;</span><br><span class="line">typedef struct&#123;</span><br><span class="line">    /// 互斥锁</span><br><span class="line">    pthread_mutex_t lock;</span><br><span class="line">    /// 条件变量</span><br><span class="line">    pthread_cond_t cond;</span><br><span class="line">    /// 线程数组</span><br><span class="line">    pthread_t *threads;</span><br><span class="line">    /// 任务队列</span><br><span class="line">    task_t *task_queue;</span><br><span class="line">    int thread_count;</span><br><span class="line">    int stop;</span><br><span class="line">&#125; thread_pool_t;</span><br><span class="line"></span><br><span class="line">// 线程池实例</span><br><span class="line">thread_pool_t pool;</span><br><span class="line"></span><br><span class="line">// 线程执行的任务函数,这里具体来说是从pool里的任务队列中把任务一个一个的取出来，然后再执行任务里的<span class="keyword">function</span>，把然后放到当前work_thread执行。</span><br><span class="line">void *worker_thread(void *arg)&#123;</span><br><span class="line">    <span class="keyword">while</span>(1)&#123;</span><br><span class="line">        pthread_mutex_lock(&amp;pool.lock);</span><br><span class="line">        // 等待任务</span><br><span class="line">        <span class="keyword">while</span>(pool.task_queue == NULL &amp;&amp; !pool.stop)&#123;</span><br><span class="line">            pthread_cond_wait(&amp;pool.cond, &amp;pool.lock);</span><br><span class="line">        &#125;</span><br><span class="line">        // 检查是否需要终止线程</span><br><span class="line">        <span class="keyword">if</span>(pool.stop)&#123;</span><br><span class="line">            pthread_mutex_unlock(&amp;pool.lock);</span><br><span class="line">            pthread_exit(NULL);</span><br><span class="line">        &#125;</span><br><span class="line">        // 取出任务</span><br><span class="line">        task_t *task = pool.task_queue;</span><br><span class="line">        <span class="keyword">if</span>(task)&#123;</span><br><span class="line">            pool.task_queue = task-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        pthread_mutex_unlock(&amp;pool.lock);</span><br><span class="line">        <span class="keyword">if</span>(task)&#123;</span><br><span class="line">            task-&gt;<span class="keyword">function</span>(task-&gt;arg);</span><br><span class="line">            free(task);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">void thread_pool_init(int thread_count)&#123;</span><br><span class="line">    pool.thread_count = thread_count;</span><br><span class="line">    pool.stop = 0;</span><br><span class="line">    pool.task_queue = NULL;</span><br><span class="line">    pthread_mutex_init(&amp;pool.lock, NULL);</span><br><span class="line">    pthread_cond_init(&amp;pool.cond, NULL);</span><br><span class="line">    pool.threads = (pthread_t *) malloc(sizeof(pthread_t)*thread_count );</span><br><span class="line">    // 创建工作线程</span><br><span class="line">    <span class="keyword">for</span>(int i = 0; i &lt; thread_count; i++)&#123;</span><br><span class="line">        pthread_create(&amp;pool.threads[i], NULL, worker_thread, NULL);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 添加任务到线程池</span><br><span class="line">void thread_pool_add_task(void (*<span class="keyword">function</span>)(void *), void *arg)&#123;</span><br><span class="line">    task_t *new_task = (task_t *) malloc(sizeof(task_t));</span><br><span class="line">    new_task-&gt;<span class="keyword">function</span> = <span class="keyword">function</span>;</span><br><span class="line">    new_task-&gt;arg = arg;</span><br><span class="line">    new_task-&gt;next = NULL;</span><br><span class="line">    pthread_mutex_lock(&amp;pool.lock);</span><br><span class="line">    //添加到任务队列尾部</span><br><span class="line">    <span class="keyword">if</span>(pool.task_queue == NULL)&#123;</span><br><span class="line">        pool.task_queue = new_task;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        task_t *temp = pool.task_queue;</span><br><span class="line">        <span class="keyword">while</span>(temp-&gt;next)&#123;</span><br><span class="line">            temp = temp-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        temp-&gt;next = new_task;</span><br><span class="line">    &#125;</span><br><span class="line">    pthread_cond_signal(&amp;pool.cond);</span><br><span class="line">    pthread_mutex_unlock(&amp;pool.lock);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">// 关闭线程池</span><br><span class="line">void <span class="function"><span class="title">thread_pool_destroy</span></span>()&#123;</span><br><span class="line">    pthread_mutex_lock(&amp;pool.lock);</span><br><span class="line">    pool.stop = 1;</span><br><span class="line">    pthread_cond_broadcast(&amp;pool.cond);</span><br><span class="line">    pthread_mutex_unlock(&amp;pool.lock);</span><br><span class="line">    // 等待所有线程结束</span><br><span class="line">    <span class="keyword">for</span>(int i = 0; i &lt; pool.thread_count; i++)&#123;</span><br><span class="line">        pthread_join(pool.threads[i], NULL);</span><br><span class="line">    &#125;</span><br><span class="line">    free(pool.threads);</span><br><span class="line">    task_t *task;</span><br><span class="line">    <span class="keyword">while</span>(pool.task_queue)&#123;</span><br><span class="line">        task = pool.task_queue;</span><br><span class="line">        pool.task_queue = task-&gt;next;</span><br><span class="line">        free(task);</span><br><span class="line">    &#125;</span><br><span class="line">    pthread_mutex_destroy(&amp;pool.lock);</span><br><span class="line">    pthread_cond_destroy(&amp;pool.cond);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 测试任务</span><br><span class="line">void test_task(void *arg)&#123;</span><br><span class="line">    int num = *(int *) arg;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;线程 %ld 正在执行任务 %d\n&quot;</span>, pthread_self(),num);</span><br><span class="line">    <span class="built_in">sleep</span>(1);</span><br><span class="line">&#125;</span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">    //  创建四个线程</span><br><span class="line">    thread_pool_init(4);</span><br><span class="line">    <span class="keyword">for</span>(int i = 0; i &lt; 10; i++)&#123;</span><br><span class="line">        int *task_num = malloc(sizeof(int));</span><br><span class="line">        *task_num = i;</span><br><span class="line">        thread_pool_add_task(test_task, task_num);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">sleep</span>(5);</span><br><span class="line">    thread_pool_destroy;</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
@@ -757,7 +802,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-05-19 00:14:50" itemprop="dateModified" datetime="2025-05-19T00:14:50+02:00">2025-05-19</time>
+                <time title="Modified: 2025-05-27 00:28:44" itemprop="dateModified" datetime="2025-05-27T00:28:44+02:00">2025-05-27</time>
               </span>
 
           
@@ -803,6 +848,9 @@
 <p>只有知道了书的结尾，才会明白书的开头。可正在阅读开头之时又怎知故事结尾</p>
 <p>枯木会逢春</p>
 <p>但是太阳，它每时每刻都是夕阳也都是旭日。当它熄灭着走下山去收尽苍凉残照之际，正是它在另一面燃烧着爬上山巅布满烈烈朝晖之时。</p>
+<p>我们并不是生活在土地上，事实上我们生活在时间里。田野、街道、河流、房屋是我们置身度外时间之中的伙伴。时间将我们推移向前或向后，并改变这我们的模样</p>
+<p>节省每一个铜板为着战争和革命事业，为着我们的经济建设，是我们的会计制度的原则。</p>
+<p>尊重，是一种被教育出来的浪漫，穿上它是荣耀，铺下来是敬重，大学是文明的灯塔，也是人性的熔炉。在毕业典礼的人潮中回望，才会明白这方天地最珍贵的从不是文凭，而是他慷慨赠予每个闯入者的礼物。<br>永远对未知保持最谦卑的热望，这不仅是人类文明的保险柜，放着千年智慧的结晶，更是未来的孵化器，脚踏先辈脊梁，触碰更耀眼的光芒。</p>
 
       
     </div>
