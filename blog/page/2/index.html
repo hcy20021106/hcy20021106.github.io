@@ -570,7 +570,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-05-27 23:27:31" itemprop="dateModified" datetime="2025-05-27T23:27:31+02:00">2025-05-27</time>
+                <time title="Modified: 2025-05-28 00:50:06" itemprop="dateModified" datetime="2025-05-28T00:50:06+02:00">2025-05-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -598,7 +598,7 @@
 <p>其中子载波分配是指OFDM将整个频谱分成若干个正交的子载波，每个调制符号会被映射到一个子载波上。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X(t) = \sum_&#123;n=0&#125;^&#123;N-1&#125;s_n \cdot e^&#123;j2\pi f_n t&#125;</span><br></pre></td></tr></table></figure>
 <p>入上述表达式实现了每个符号乘以一个复指数信号（频率为该子载波的频率）进行映射。也就是说，每个符号都会与一个正弦或余弦波相乘，并根据子载波的频率进行偏移。</p>
-<p>IFFT: 对调制后的符号进行 逆离散傅里叶变换（IFFT），将频域信号转换为时域信号。IFFT 是将各个子载波的信号合成在一起的步骤，在这个步骤之后，信号由频域转为时域。</p>
+<p>IFFT: 对调制后的符号进行 逆离散傅里叶变换（IFFT），将频域信号转换为时域信号。IFFT 是将各个子载波的信号合成在一起的步骤，在这个步骤之后，信号由频域转为时域。<br>在matlab仿真中，data为原始复数对，X_freq为频域信号，zeros(FFT_size,1),装有data，这样就实现了将原始数据加载到子载波上，然后X_time &#x3D; ifft(ifftshift(X_freq), N)</p>
 <h2 id="OFDM-子载波时域与频域特性说明"><a href="#OFDM-子载波时域与频域特性说明" class="headerlink" title="OFDM 子载波时域与频域特性说明"></a>OFDM 子载波时域与频域特性说明</h2><h3 id="OFDM-子载波的频域表示"><a href="#OFDM-子载波的频域表示" class="headerlink" title="OFDM 子载波的频域表示"></a>OFDM 子载波的频域表示</h3><p>在 OFDM 系统中，信号在频域由多个子载波组成，每个子载波对应一个特定的频率分量。假设有 (N) 个子载波，总频域信号为：</p>
 <p>$$<br>X[k], \quad k &#x3D; 0, 1, \ldots, N-1<br>$$</p>
 <p>其中，$X[k]$ 是第 $k$ 个子载波的复数调制符号（例如 QAM 符号）。</p>
@@ -622,6 +622,16 @@
 <li><p>反过来，频域中某个频率点实际代表一个<strong>带频移的 sinc 函数</strong>在时域的表现。</p>
 </li>
 </ul>
+<hr>
+<h3 id="对-frac-1-N-e-j-2-pi-frac-k-0-N-n-进行求DTFT"><a href="#对-frac-1-N-e-j-2-pi-frac-k-0-N-n-进行求DTFT" class="headerlink" title="对$\frac{1}{N} e^{j 2\pi \frac{k_0}{N} n}$进行求DTFT"></a>对$\frac{1}{N} e^{j 2\pi \frac{k_0}{N} n}$进行求DTFT</h3><p>对该信号进行离散时间傅里叶变换（DTFT）：</p>
+<p>$$<br>X(e^{j\Omega}) &#x3D; \sum_{n&#x3D;-\infty}^{\infty} x[n] \cdot e^{-j\Omega n}<br>$$</p>
+<p>代入 (x[n])：</p>
+<p>$$<br>X(e^{j\Omega}) &#x3D; \frac{1}{N} \sum_{n&#x3D;-\infty}^{\infty} e^{-j n \left( \Omega - \frac{2\pi k_0}{N} \right)}<br>$$</p>
+<p>角频率 $\Omega$ 和实际频率 $f$ 之间的关系为：</p>
+<p>$$<br>\Omega &#x3D; 2\pi \frac{f}{f_s} \quad \Rightarrow \quad f &#x3D; \frac{\Omega}{2\pi} f_s<br>$$</p>
+<p>所以主冲击的位置频率为：<br>$$<br>\Delta f &#x3D; \Delta \Omega \cdot \frac{f_s}{2\pi}<br>$$</p>
+<p>所以频移为<br>$$<br>f_{k_0} &#x3D; \frac{2\pi \cdot \frac{k_0}{N} f_s}{2\pi} &#x3D; \frac{k_0}{N} f_s<br>$$</p>
+<p>这正是我们设定的第 $k_0$个子载波的频移！<br>因此相邻子载波间距等于 $\frac{1}{N}  f_s$</p>
 <hr>
 <h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><table>
 <thead>
