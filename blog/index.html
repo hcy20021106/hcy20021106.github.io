@@ -150,6 +150,160 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/07/numpy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/07/numpy/" class="post-title-link" itemprop="url">numpy</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-06-07 21:53:37 / Modified: 22:04:55" itemprop="dateCreated datePublished" datetime="2025-06-07T21:53:37+02:00">2025-06-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <p>将某一数据类型(bytes, array)直接转换成NumPy数组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.frombuffer()</span><br></pre></td></tr></table></figure>
+<p>将输入的arr数组转为指定形状的arr，可以指定长宽，若某个为-1，则会自动计算其长或宽的大小</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.reshape(arr,(height,depth))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/07/%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/07/%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/" class="post-title-link" itemprop="url">信源编码</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-06-07 21:37:43 / Modified: 22:06:27" itemprop="dateCreated datePublished" datetime="2025-06-07T21:37:43+02:00">2025-06-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>信源编码主要用于提高数据传输的可靠性，纠正通信过程中可能发生的错误。常用的信源编码包括：</p>
+<ul>
+<li><strong>Reed-Solomon（RS）编码</strong>：一种块编码，擅长纠正突发错误。</li>
+<li><strong>卷积编码</strong>：一种常见的前向纠错码，适用于连续数据流。</li>
+<li><strong>交织（Interleaving）</strong>：重排数据顺序，扩散突发错误，提高纠错效果。</li>
+</ul>
+<p>整体收发流程为:</p>
+<ol>
+<li>发射端<br>视频源-》RS编码-》卷积交织-》数据流标记-》</li>
+<li>接收端<br>解调后的基带数字信号-》维特比解码-》解交织-》RS解码</li>
+</ol>
+<h2 id="Reed-Solomon-RS-编码"><a href="#Reed-Solomon-RS-编码" class="headerlink" title="Reed-Solomon (RS) 编码"></a>Reed-Solomon (RS) 编码</h2><h3 id="RS编码基本概念"><a href="#RS编码基本概念" class="headerlink" title="RS编码基本概念"></a>RS编码基本概念</h3><ul>
+<li>RS编码在数据块后添加冗余校验码，能纠正一定数量的错误字节。</li>
+<li>典型参数：RS(n, k)，n为编码后数据长度，k为原始数据长度。</li>
+<li>纠错能力为 <code>t = (n - k) / 2</code>。</li>
+</ul>
+<h3 id="Python实现（基于reedsolo库）"><a href="#Python实现（基于reedsolo库）" class="headerlink" title="Python实现（基于reedsolo库）"></a>Python实现（基于reedsolo库）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> reedsolo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化RS编码器，n=255, k=223是常见参数</span></span><br><span class="line">rs = reedsolo.RSCodec(<span class="number">32</span>)</span><br><span class="line"></span><br><span class="line">data = <span class="string">b&#x27;Hello, this is a test message for RS encoding.&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 编码</span></span><br><span class="line">encoded = rs.encode(data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解码（自动纠错）</span></span><br><span class="line">decoded = rs.decode(encoded)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Original:&quot;</span>, data)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Encoded:&quot;</span>, encoded)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Decoded:&quot;</span>, decoded)</span><br></pre></td></tr></table></figure>
+
+<h2 id="卷积交织-Convolutional-Interleaving"><a href="#卷积交织-Convolutional-Interleaving" class="headerlink" title="卷积交织(Convolutional Interleaving)"></a>卷积交织(Convolutional Interleaving)</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li>把相邻字节分散到不连续的位置</li>
+<li>把突发错误转换为随机错误，提高纠错性能</li>
+</ul>
+<h3 id="使用python实现"><a href="#使用python实现" class="headerlink" title="使用python实现"></a>使用python实现</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def convolutional_interleave(data, depth=4):</span><br><span class="line">    length = len(data)</span><br><span class="line">    pad_len = (depth - (length % depth)) % depth</span><br><span class="line">    data_padded = data + bytes([0]*pad_len)</span><br><span class="line">    matrix = np.reshape(np.frombuffer(data_padded, dtype=np.uint8), (-1, depth))</span><br><span class="line">    interleaved = matrix.T.flatten()</span><br><span class="line">    <span class="built_in">return</span> bytes(interleaved)</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+<h3 id="使用python实现反交织（交织恢复）"><a href="#使用python实现反交织（交织恢复）" class="headerlink" title="使用python实现反交织（交织恢复）"></a>使用python实现反交织（交织恢复）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def convolutional_deinterleave(data, depth=4):</span><br><span class="line">    length = len(data)</span><br><span class="line">    matrix = np.reshape(np.frombuffer(data, dtype=np.uint8), (depth, -1))</span><br><span class="line">    deinterleaved = matrix.T.flatten()</span><br><span class="line">    <span class="built_in">return</span> bytes(deinterleaved)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/04/%E6%95%B0%E5%AD%97%E8%B0%83%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -950,273 +1104,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/27/FDD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/27/FDD/" class="post-title-link" itemprop="url">FDD</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-04-27 00:47:02" itemprop="dateCreated datePublished" datetime="2025-04-27T00:47:02+02:00">2025-04-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-04-28 00:48:46" itemprop="dateModified" datetime="2025-04-28T00:48:46+02:00">2025-04-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>在FDD系统中，信道被分为上行链路（UL，uplink）和下行链路（DL，downlink），它们分别使用不同的频段进行通信。因此在FDD通信是同时进行上行和下行的。<br>在FDD系统和TDD系统中有多种调度算法：</p>
-<ul>
-<li>RR（Round Robin） 这种调度算法主要关注公平性，即尽可能平等地分配资源给所有用户</li>
-<li>PF（比例公平调度，Proportional Fair），这种算法试图在公平性和吞吐量之间找到一个折衷，它在考虑公平性的同时，优先选择信道质量好的用户。相比RR，它能在吞吐量和公平性之间达到较好的平衡。</li>
-<li>Best CQI（最佳信道质量指示符调度） 这种调度算法优先选择信道质量好的用户，这能显著提高下行和上行的吞吐量，因为它充分利用了信道质量信息，但是牺牲了公平性。</li>
-</ul>
-<p>在NR FDD测试中需要构建RLC层，因为:</p>
-<ul>
-<li>需要模拟真实数据流的传输过程</li>
-<li>RLC层决定了数据如何从上到下分发、管理和重传</li>
-<li>真实的链路有丢包、重传、顺序乱序等问题要处理</li>
-</ul>
-<h3 id="RLC"><a href="#RLC" class="headerlink" title="RLC"></a>RLC</h3><p>RLC全称是Radio Link Control，用于无线链路控制，主要是保证数据传输的可靠性，其融合了OSI七层协议的数据链路层和传输层的功能和机制，包括滑动窗口、ARQ等等 </p>
-<h4 id="SDU和PDU"><a href="#SDU和PDU" class="headerlink" title="SDU和PDU"></a>SDU和PDU</h4><p>在协议体系里，下层协议是为上层协议提供服务(service)的，因此凡是上层发过来的或者发往上层的数据都叫SDU(Service Data Unit)。而上层协议(Protocol)实体对数据进行处理后，通过下层协议提供的服务继续往后面发送，因此凡是发给下层或从下层收到的数据叫做PDU(Protocol Data Unit)<br>例如Network Layer的SDU可以理解为Packet，MAC的PDU可以理解为Frame</p>
-<h4 id="三种传输模型"><a href="#三种传输模型" class="headerlink" title="三种传输模型"></a>三种传输模型</h4><ul>
-<li>TM - Transparent Mode<br>发射端不对RLC SDU做分段操作，也不添加RLC Header，只是缓存数据，接收端同理，收到数据后直接发给上层。</li>
-<li>UM - Unacknowledged Mode<br>无响应模式，类似UDP，发射端可以对数据进行分段处理，但不需要接收端反馈接收状态</li>
-<li>AM - Acknowledged Mode<br>响应模式，接收端通过RLC status report反馈包接收状态，发射端根据status report决定是否重传数据</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openExample(<span class="string">&#x27;5g/NRFDDSchedulingPerformanceEvaluationExample&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>这个例子展示了RR scheduler. The scheduler allocates resources based on pending retransmissions, buffer status, and channel quality for the UE nodes.<br><img src="/images/FDDScheduler.png"></p>
-<h2 id="分析代码"><a href="#分析代码" class="headerlink" title="分析代码"></a>分析代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">networkSimulator = wirelessNetworkSimulator.init; ///Create a wireless network simulator</span><br></pre></td></tr></table></figure>
-<p>gNB &#x3D; nrGNB(Position &#x3D; [0 0 30], DuplexMode &#x3D; “FDD”, CarrierFrequency &#x3D; 2.6e9, ChannelBandwidth &#x3D; 30e6, SubcarrierSpacing &#x3D; 15e3, ReceiveGain &#x3D; 11);</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configureScheduler(gNB,Scheduler=<span class="string">&quot;RoundRobin&quot;</span>,ResourceAllocationType=0);</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uePositions = [100 0 3; 250 0 3; 700 0 3; 750 0 3];</span><br><span class="line">ueNames = <span class="string">&quot;UE-&quot;</span> + (1:size(uePositions,1));</span><br><span class="line">UEs = nrUE(Name=ueNames,Position=uePositions,ReceiveGain=11);</span><br></pre></td></tr></table></figure>
-<p>Set ue positions</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/// Set the AppConfig parameter.</span><br><span class="line">load(<span class="string">&quot;NRFDDAppConfig.mat&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p>输出的AppConfig结构体，里面都是有关应用层流量配置和RLC配置（RNTI， LogicalChannelID）</p>
-<ul>
-<li>DataRate</li>
-<li>PacketSize</li>
-<li>HostDevice</li>
-<li>RNTI(Radio network temporary identifier of a UE node.)</li>
-<li>LogicalChannelID</li>
-<li>BearerType</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">load(<span class="string">&quot;NRFDDRLCChannelConfig.mat&quot;</span>);</span><br></pre></td></tr></table></figure>
-<p>这是用于配置RLC,以下参数是有关RLC配置<br>注意RNTI用于唯一标识UE，它是临时的标识符，用于上下文中的调度和通信。<br>LogicalChannelID用于标识UE上的具体逻辑信道，它区分不同类型的数据流或信号。<br>RNTI和LogicalChannelID的结合可以唯一标识某个UE上的特定数据流，确保数据的正常调度和传输。</p>
-<ul>
-<li>RNTI</li>
-<li>LogicalChannelID</li>
-<li>LogicalChannelGroup</li>
-<li>RLCEntityType</li>
-<li>Priority</li>
-<li>SNFieldLength</li>
-<li>BufferSize</li>
-<li>PollPDU</li>
-<li>PollByte</li>
-<li>PollRetransmitTimer</li>
-<li>MaxRetxThreshold</li>
-<li>ReassemblyTimer</li>
-<li>StatusProhibitTimer</li>
-<li>PrioritizedBitRate</li>
-<li>BucketSizeDuration<br>具体可参考matlab 5g tool中的nrRLCBearerConfig结构体</li>
-</ul>
-<p>在配置每个ue的RLC后，使用connectionUE函数将ue和gnb进行连接</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">connectUE(gNB,UEs&#123;ueIdx&#125;, BSRPeriodicity=5, RLCBearerConfig=rlcBearers&#123;ueIdx&#125;);</span><br></pre></td></tr></table></figure>
-<p>之后set the periodic DL and UL application traffic pattern for UEs.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">app = networkTrafficOnOff(PacketSize=2000, GeneratePacket=<span class="literal">true</span>,OnTime=numFrameSimulation/100,OffTime=0,DataRate=AppConfig.DataRate(appIdx));</span><br><span class="line"><span class="keyword">if</span> AppConfig.HostDevice(appIdx) == 0</span><br><span class="line">% Add traffic pattern that generates traffic on downlink</span><br><span class="line">addTrafficSource(gNB, app, DestionationNode=UEs(AppConfig.RNTI(appIdx)), LogicalChannelID=AppConfig.LogicalChannelID(appIdx))</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">% Add traffic pattern that generates traffic on uplink</span><br><span class="line">addTrafficSource(UEs(AppConfig.RNTI(appIdx)),app,LogicalChannelID=AppConfig.LogicalChannelID(appIdx))</span><br></pre></td></tr></table></figure>
-
-<p>Add the gNB and UE nodes to the network simulator</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">addNodes(networkSimulator,gNB)</span><br><span class="line">addNodes(networkSimulator,UEs)</span><br></pre></td></tr></table></figure>
-
-<p>Use 3GPP TR 38.901 channel model for all links, take a free space path loss model as example</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">channelModel = <span class="string">&quot;3GPP TR 38.901&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> strcmp(channelModel,<span class="string">&quot;3GPP TR 38.901&quot;</span>)</span><br><span class="line">    % Define scenario boundaries</span><br><span class="line">    pos = reshape([gNB.Position UEs.Position],3,[]);</span><br><span class="line">    minX = min(pos(1,:));          % x-coordinate of the left edge of the scenario <span class="keyword">in</span> meters</span><br><span class="line">    minY = min(pos(2,:));          % y-coordinate of the bottom edge of the scenario <span class="keyword">in</span> meters</span><br><span class="line">    width = max(pos(1,:)) - minX;  % Width (right edge of the 2D scenario) <span class="keyword">in</span> meters, given as maxX - minX</span><br><span class="line">    height = max(pos(2,:)) - minY; % Height (top edge of the 2D scenario) <span class="keyword">in</span> meters, given as maxY - minY</span><br><span class="line"></span><br><span class="line">    % Create the channel model</span><br><span class="line">    channel = h38901Channel(Scenario=<span class="string">&quot;UMa&quot;</span>,ScenarioExtents=[minX minY width height]);</span><br><span class="line">    % Add the channel model to the simulator</span><br><span class="line">    addChannelModel(networkSimulator,@channel.channelFunction);</span><br><span class="line">    connectNodes(channel,networkSimulator);</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-
-<p>Run the simulation for the specified numFrameSimulation frames</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">simulationTime = numFrameSimulation*1e-2;</span><br><span class="line">run(networkSimulator, simulationTime);</span><br><span class="line">% Read per-node statistics</span><br><span class="line">gNBStats = statistics(gNB, <span class="string">&quot;all&quot;</span>);</span><br><span class="line">ueStats = statistics(UEs);</span><br></pre></td></tr></table></figure>
-
-<p>Show prefomrance like throughput and spectral efficiency(UL and DL)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">displayPerformanceIndicators(metricsVisualizer);</span><br></pre></td></tr></table></figure>
-
-<p>输出的metricVisulaizer里面有MACTxBytes、MACRxBytes，可以用来计算throughput和data rate，需要注意的是MACTxBytes和MACRxBytes都有两列，分别对应的UL和DL，以MACTxBytes为例，UL一列对应的是ue端，而DL一列则对应的是gNB端，下面代码可以佐证</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">txBytes = gNBMACStats(rnti).TransmittedBytes + gNBMACStats(rnti).RetransmissionBytes;</span><br><span class="line">txRate(ueIdx, obj.DownlinkIdx) = (txBytes - obj.MACTxBytes(ueIdx, obj.DownlinkIdx))* 8 / (obj.MetricsStepDuration * 1000); % In Mbps</span><br><span class="line">bufferstatus(ueIdx, obj.DownlinkIdx) = bufferSize(rnti) ./ 1000; % In KB</span><br><span class="line">% Save the previous metrics</span><br><span class="line">obj.MACTxBytes(ueIdx, obj.DownlinkIdx) = txBytes;</span><br></pre></td></tr></table></figure>
-
-<p>有点累，总之明天见</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/24/%E9%9A%8F%E7%AC%94/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/24/%E9%9A%8F%E7%AC%94/" class="post-title-link" itemprop="url">随笔</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-04-24 22:32:31" itemprop="dateCreated datePublished" datetime="2025-04-24T22:32:31+02:00">2025-04-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-06 23:16:46" itemprop="dateModified" datetime="2025-06-06T23:16:46+02:00">2025-06-06</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <p>It did not take evil to produce evil.</p>
-<p>你要是没有碰到那个坏事，你就学不到对付那个坏事的本事，所以艰难困苦能使我们的事业成功</p>
-<p>在危险环境中表示绝望的人，在黑暗中看不见光明的人，只是懦夫与机会主义者  </p>
-<p>有利的条件和主动的恢复，产生于再坚持一下的努力之中  </p>
-<p>泱泱华夏，一撇一捺皆是脊梁<br>神州大地，一丝一念皆是未来<br>浩浩九州，一文一墨均是骄阳</p>
-<p>在坚冰还盖着北海的时候，我看到了怒放的梅花  </p>
-<p>政治越改进，抗战越能坚持；抗战越坚持，政治就越能改进。抗战的经验已经证明，十个月的中国人民的进步抵得上过去多少年的进步。</p>
-<p>A person with a similar soul is like gift.</p>
-<p>读万卷书行万里路，胸中脱去尘埃。 </p>
-<p>有一个喜欢的人真的太重要了，在你打算稀里糊涂过这普普通通一生的时候，会因为对方而再想要努力一下，在那么多疲惫不堪甚至抬不起头的日子里，会因为对方而觉得人生还有盼头。因为有念想，才有动力，对生活才会释放更多热情。总之岁月漫长，然而值得等待。  – 村上春树</p>
-<p>爱情不是整天无所事事的黏在一起</p>
-<p>人民民主专政的基础是工人阶级、农民阶级和城市小资产阶级的联盟，而主要是工人和农民的联盟，因为这两个阶级占了中国人口的百分之八十到九十。推翻帝国主义和国民党反动派，主要是这个两个阶级的力量。由新民主主义到社会主义，主要依靠这两个阶级的联盟。孙中山的“唤起民众”“扶助农工”的意思是说小资产阶级和民族资产阶级。</p>
-<p>我们必须克服苦难，我们必须学会自己不懂的东西。我们必须向一切内行的人们（不管什么人）学经济工作。拜他们做老师，恭恭敬敬地学，老老实实地学。不懂就是不懂，不要装懂。</p>
-<p>life always finds its own way out.</p>
-<p>好像那时我们都在，当时的事都记了起来，时间真的像是长了脚的妖怪，跑的飞快。<br>往事只是冰冷冷的过往，只是因为人的到来而变的温暖。</p>
-<p>我和你投缘，你和我同频，我们俩就这样在一起吧</p>
-<p>始于颜值，敬于才华，合于性格，久于善良，终于人品<br>和漂亮的人在一起，会越来越美，和阳光的人在一起，心里就会很阳光，和快乐的人在一起，嘴角就常带微笑，和聪明的人在一起，做事就变机敏，和大方的人在一起，出事就不小气，和睿智的人在一起，遇事就不迷茫。<br>而你，漂亮阳光快乐聪明大方睿智，夫欲何求。</p>
-<p>一个人真正值得炫耀的东西，是善良，是教养，是包容。是见过世面的涵养，向阳而生，努力向上，做一个温暖的人。 </p>
-<p>本质是在失去后显现</p>
-<p>享受阳光，保证休息，坚持锻炼，健康饮食，强大自信，真心的朋友</p>
-<p>坚持原则的你，被说固执；推陈出新的你，被指激进。<br>改变世界的人，不需要掌声铺路；那些撼动时代的理想，往往先把自己活成火炬。<br>花不语，<br>跪着把理想捂热的人，站着看的世界更辽阔</p>
-<p>If your feelings are still what they were last April, tell me so at once, my affections and wishes have not changed.</p>
-<p>Dear Cecilia, the story can resume.  </p>
-<p>Do not go gentle into that good night. Old age should burn and rave at close of day. Rage, rage against the dying light.</p>
-<p>So do you want to take a leap of faith, or become an old man, filled with regret waiting to die alone?</p>
-<p>分享欲是靠回应来延续的，热情也是</p>
-<p>社会形态的转变需要时间，而在一个历史角度上很短篇幅的转变时间，落在一代人身上就是他们的一身</p>
-<p>但我所说的中国革命高潮快要到来，决不是如有些人所谓“有到来之可能”那样完全没有行动意义的、可望而不可即的一种空的东西。它是站在海岸遥望海中已经看得见桅杆尖头了的一只航船，它是立于高山之巅远看东方已见光芒四射喷薄欲出的一轮朝日，它是躁动于母腹中的快要成熟了的一个婴儿。</p>
-<p>天在将黑未黑时最美，爱在将爱未爱时最迷人</p>
-<p>只有知道了书的结尾，才会明白书的开头。可正在阅读开头之时又怎知故事结尾</p>
-<p>枯木会逢春</p>
-<p>但是太阳，它每时每刻都是夕阳也都是旭日。当它熄灭着走下山去收尽苍凉残照之际，正是它在另一面燃烧着爬上山巅布满烈烈朝晖之时。</p>
-<p>时间可以吞噬一切，但它丝毫不能减少的是你伟大的思想，你的幽默，你的善良，还有你的勇气。</p>
-<p>我们并不是生活在土地上，事实上我们生活在时间里。田野、街道、河流、房屋是我们置身度外时间之中的伙伴。时间将我们推移向前或向后，并改变这我们的模样</p>
-<p>节省每一个铜板为着战争和革命事业，为着我们的经济建设，是我们的会计制度的原则。</p>
-<p>尊重，是一种被教育出来的浪漫，穿上它是荣耀，铺下来是敬重，大学是文明的灯塔，也是人性的熔炉。在毕业典礼的人潮中回望，才会明白这方天地最珍贵的从不是文凭，而是他慷慨赠予每个闯入者的礼物。<br>永远对未知保持最谦卑的热望，这不仅是人类文明的保险柜，放着千年智慧的结晶，更是未来的孵化器，脚踏先辈脊梁，触碰更耀眼的光芒。</p>
-<p>春华秋实，生命的意义就在于它的无意义，花海盛开的璀璨，燕子归来的安心，有闪光就会有坠落的必经之路，吟唱声声，像是一句句呼唤，呼唤遗落在远方的人的心。情绪的荒岛一定会生出灿烂的玫瑰，在温润有力又极具故事感的声音里，感受到了坚定存在的信念，在浩瀚星辰里看到平凡生活里的闪光。</p>
-<p>如果你站在童年的位置，展望未来，你会说前途无量，但是你如果站在终点看生命的轨迹，你就只能看到一条命运之路。你不知道命运是什么，才知道什么是命运，所以很多人口中说的，看不到孩子的未来，其实是看到了未来，人生唯一的确定性，就是不确定。所以大胆的让孩子去做他想做的任何事情，任何美好的事情，活在当下，抓住一切的美好。</p>
-<p>我站在今天设想过去又幻想未来，过去和未来在今天随意交叉，因而过去和未来都刮着现在的风。</p>
-<p>时间是个怪物，最令人不解的迷，同时时间又是长了脚的妖怪，跑的飞快。</p>
-<p>莫逆之交</p>
-<p>我在感情上的愚钝就像是门窗紧闭的屋子，虽然爱情的脚步在屋前走过去又走过来，我也听到了，可是我觉得那是路过的脚步，那是走向别人的脚步。直到有一天，这个脚步停留在这里，然后门铃响了。</p>
-<p>任何影响，只会让一个人变得越来越像他自己，而不会像别人，这就是阅读和学习爱给我们最好的一个体会。</p>
-<p>环境不能影响一个人，而是揭示一个人</p>
-<p>But poetry, beauty, romance, love … these are what we stay alive for.</p>
-<p>生活的意义在于独立自我，教育的本质在于独立思考。从老师的角度来说先传道后有授业解惑，而从学生的角度出发行有余力则以学文，教育往往不必将学习直至首位，精神的建立，思想的塑造，才是真正的重要。</p>
-<p>被动和逃避总是很容易让人错失那些美好，而只有懂得了真正的勇敢和真正的释怀，生者才可以更好地生，死亡才能不成为伤疤，而成为释怀的记忆。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1282,7 +1173,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
