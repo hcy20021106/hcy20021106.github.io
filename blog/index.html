@@ -150,6 +150,104 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/11/MyBatis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/11/MyBatis/" class="post-title-link" itemprop="url">MyBatis</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-06-11 16:51:28" itemprop="dateCreated datePublished" datetime="2025-06-11T16:51:28+02:00">2025-06-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-06-12 01:07:10" itemprop="dateModified" datetime="2025-06-12T01:07:10+02:00">2025-06-12</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>Maven项目的配置文件包括<strong>pom.xml</strong>和<strong>mybatis-config.xml</strong></p>
+<h3 id="mybatis-config-xml组成部分"><a href="#mybatis-config-xml组成部分" class="headerlink" title="mybatis-config.xml组成部分"></a>mybatis-config.xml组成部分</h3><ul>
+<li>properties<br>读取数据库连接参数（外部配置）</li>
+<li>typeAliases<br>简化JavaBean类型写法</li>
+<li>environments</li>
+<li><strong>mappers</strong><br>扫描Mapper接口所在包，自动注册为映射器</li>
+</ul>
+<h3 id="pom-xml组成部分"><a href="#pom-xml组成部分" class="headerlink" title="pom.xml组成部分"></a>pom.xml组成部分</h3><ul>
+<li>project标签</li>
+<li>公司，项目名，项目版本标签</li>
+<li>properties标签<br>  定义项目中的一些变量，方便统一管理<ul>
+<li>Java版本</li>
+<li>编码</li>
+<li>JavaFX版本</li>
+</ul>
+</li>
+<li>dependencies<br>  定义项目依赖的第三方库<ul>
+<li>MyBatis（Java ORM框架）</li>
+<li>MySQL JDBC驱动（mysql-connector-j）</li>
+<li>JUnit和Mockito（测试框架）</li>
+<li>JavaFX相关库</li>
+</ul>
+</li>
+</ul>
+<h2 id="映射器接口Mapper"><a href="#映射器接口Mapper" class="headerlink" title="映射器接口Mapper"></a>映射器接口Mapper</h2><h3 id="PreparationStep（实体类）"><a href="#PreparationStep（实体类）" class="headerlink" title="PreparationStep（实体类）"></a>PreparationStep（实体类）</h3><p>表示数据库中<strong>preparationstep</strong>表中的一条记录<br>用于封装数据表中的一行数据<br>同时可以作为PreparationStepMapper接口中方法的传递参数</p>
+<h3 id="PreparationStepMapper"><a href="#PreparationStepMapper" class="headerlink" title="PreparationStepMapper"></a>PreparationStepMapper</h3><p>用于定义数据库操作的方法，MyBatis会将其自动生成实现类<br>@Param(“xxx”)给参数命名，供XML中引用</p>
+<p>mapper接口的实例化</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">recipeIngredientMapper = sqlSession.getMapper(RecipeIngredientMapper.class);</span><br></pre></td></tr></table></figure>
+<p>目的是让MyBatis自动生成RecipeIngredientMapper接口的实现类，并返回其实例，然后可以调用这个类里通过调用其方法，并通过xml来进行sql映射。</p>
+<h3 id="PreparationStepMapper-xml（映射SQL文件）"><a href="#PreparationStepMapper-xml（映射SQL文件）" class="headerlink" title="PreparationStepMapper.xml（映射SQL文件）"></a>PreparationStepMapper.xml（映射SQL文件）</h3><p>负责将Mapper接口中定义的方法与具体SQL语句绑定</p>
+<h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><h3 id="View类"><a href="#View类" class="headerlink" title="View类"></a>View类</h3><h3 id="Model类"><a href="#Model类" class="headerlink" title="Model类"></a>Model类</h3><h3 id="Controller类"><a href="#Controller类" class="headerlink" title="Controller类"></a>Controller类</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public class RecipeDisplayController implements EventHandler&lt;ActionEvent&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>其中EventHandler为接口，里面有handle方法，需要在RecipeDisplayControlle类里写这个方法，从而实现鼠标点击响应的功能</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/10/%E6%95%B0%E5%AD%97%E5%9F%BA%E5%B8%A6%E4%BF%A1%E5%8F%B7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -990,75 +1088,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/29/LMMSE-base-channel-estimation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/29/LMMSE-base-channel-estimation/" class="post-title-link" itemprop="url">LMMSE base channel estimation</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-04-29 00:45:01 / Modified: 00:55:51" itemprop="dateCreated datePublished" datetime="2025-04-29T00:45:01+02:00">2025-04-29</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>先了解MMSE，MMSE（Minimum Mean Square Error），也就是最小均方误差，是一种常用的统计估计方法，它的目标就是最小化估计值与实际值之间的均方误差（MSE）。在通信系统中，MMSE被广泛用于信道估计，因为它能够在噪声和干扰的影响下，给出一个最优估计。<br>另外，在信道估计中，交叉相关矩阵通常用于计算数据子载波和导频子载波之间的相关性，这对于估计信道的状态至关重要。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1128,7 +1157,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
