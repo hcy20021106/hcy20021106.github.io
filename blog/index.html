@@ -150,6 +150,149 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/12/MVC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/12/MVC/" class="post-title-link" itemprop="url">MVC</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-06-12 15:42:50 / Modified: 15:51:23" itemprop="dateCreated datePublished" datetime="2025-06-12T15:42:50+02:00">2025-06-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <hr>
+<h2 id="🧠-MVC-Architecture"><a href="#🧠-MVC-Architecture" class="headerlink" title="🧠 MVC Architecture"></a>🧠 MVC Architecture</h2><h3 id="🟢-Model-PizzaModel-java"><a href="#🟢-Model-PizzaModel-java" class="headerlink" title="🟢 Model (PizzaModel.java)"></a>🟢 Model (<code>PizzaModel.java</code>)</h3><ul>
+<li>Manages pizza size and toppings</li>
+<li>Maintains pricing data for sizes and toppings</li>
+<li>Calculates total price dynamically</li>
+</ul>
+<h4 id="Size-Prices"><a href="#Size-Prices" class="headerlink" title="Size Prices"></a>Size Prices</h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Base Price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Small</td>
+<td>€4.00</td>
+</tr>
+<tr>
+<td>Medium</td>
+<td>€5.50</td>
+</tr>
+<tr>
+<td>Large</td>
+<td>€7.00</td>
+</tr>
+</tbody></table>
+<h4 id="Topping-Price-based-on-selected-size"><a href="#Topping-Price-based-on-selected-size" class="headerlink" title="Topping Price (based on selected size)"></a>Topping Price (based on selected size)</h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Topping Price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Small</td>
+<td>€0.75</td>
+</tr>
+<tr>
+<td>Medium</td>
+<td>€1.00</td>
+</tr>
+<tr>
+<td>Large</td>
+<td>€1.45</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="🟡-View-PizzaView-java"><a href="#🟡-View-PizzaView-java" class="headerlink" title="🟡 View (PizzaView.java)"></a>🟡 View (<code>PizzaView.java</code>)</h3><ul>
+<li>Built with Java Swing</li>
+<li>Contains:<ul>
+<li>Size selection (radio buttons)</li>
+<li>Toppings selection (radio buttons)</li>
+<li>Total price display (<code>JTextField</code>)</li>
+<li>Pizza image (<code>Pizza.jpeg</code>)</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Layout uses <code>BorderLayout</code> with components divided into size panel, topping panel, total price panel, and center image.</p>
+</blockquote>
+<hr>
+<h3 id="🔵-Controller-PizzaController-java"><a href="#🔵-Controller-PizzaController-java" class="headerlink" title="🔵 Controller (PizzaController.java)"></a>🔵 Controller (<code>PizzaController.java</code>)</h3><p>绑定View与Model</p>
+<ul>
+<li>Binds user interaction to logic</li>
+<li>Registers <code>ActionListener</code> to size and topping buttons<br>使用SizeRadioButtonListener类实现了ActionListener接口，用来监听用户点击按钮的行为。<br>然后给button通过addActionListener这个类从而实现监听功能</li>
+<li>On user interaction:<ul>
+<li>Updates model with size&#x2F;toppings</li>
+<li>Recalculates and updates price in the view</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="💡-How-It-Works"><a href="#💡-How-It-Works" class="headerlink" title="💡 How It Works"></a>💡 How It Works</h2><ol>
+<li>User selects a pizza size.</li>
+<li>Topping prices are adjusted based on size.</li>
+<li>User selects&#x2F;deselects toppings.</li>
+<li>Total price updates live on the GUI.</li>
+</ol>
+<hr>
+<h2 id="🖼️-GUI-Screenshot-Placeholder"><a href="#🖼️-GUI-Screenshot-Placeholder" class="headerlink" title="🖼️ GUI Screenshot Placeholder"></a>🖼️ GUI Screenshot Placeholder</h2><blockquote>
+<p>Make sure to include <code>Pizza.jpeg</code> in the <code>pizzacalculationtool</code> package folder.</p>
+</blockquote>
+<pre><code class="language-java">new ImageIcon(getClass().getResource(&quot;Pizza.jpeg&quot;))
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/11/MyBatis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -181,7 +324,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-12 01:07:10" itemprop="dateModified" datetime="2025-06-12T01:07:10+02:00">2025-06-12</time>
+                <time title="Modified: 2025-06-12 15:24:36" itemprop="dateModified" datetime="2025-06-12T15:24:36+02:00">2025-06-12</time>
               </span>
 
           
@@ -196,7 +339,7 @@
 
       
       
-          <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>Maven项目的配置文件包括<strong>pom.xml</strong>和<strong>mybatis-config.xml</strong></p>
+          <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>Maven项目的配置文件包括<strong>pom.xml</strong>和<strong>mybatis-config.xml</strong>（核心配置文件）</p>
 <h3 id="mybatis-config-xml组成部分"><a href="#mybatis-config-xml组成部分" class="headerlink" title="mybatis-config.xml组成部分"></a>mybatis-config.xml组成部分</h3><ul>
 <li>properties<br>读取数据库连接参数（外部配置）</li>
 <li>typeAliases<br>简化JavaBean类型写法</li>
@@ -220,15 +363,38 @@
 </ul>
 </li>
 </ul>
-<h2 id="映射器接口Mapper"><a href="#映射器接口Mapper" class="headerlink" title="映射器接口Mapper"></a>映射器接口Mapper</h2><h3 id="PreparationStep（实体类）"><a href="#PreparationStep（实体类）" class="headerlink" title="PreparationStep（实体类）"></a>PreparationStep（实体类）</h3><p>表示数据库中<strong>preparationstep</strong>表中的一条记录<br>用于封装数据表中的一行数据<br>同时可以作为PreparationStepMapper接口中方法的传递参数</p>
+<h2 id="映射器接口Mapper"><a href="#映射器接口Mapper" class="headerlink" title="映射器接口Mapper"></a>映射器接口Mapper</h2><p>DAO层（Data Access Object），也就是数据访问对象，和Mapper接口一致。</p>
+<h3 id="PreparationStep（实体类）"><a href="#PreparationStep（实体类）" class="headerlink" title="PreparationStep（实体类）"></a>PreparationStep（实体类）</h3><p>表示数据库中<strong>preparationstep</strong>表中的一条记录<br>用于封装数据表中的一行数据<br>同时可以作为PreparationStepMapper接口中方法的传递参数</p>
 <h3 id="PreparationStepMapper"><a href="#PreparationStepMapper" class="headerlink" title="PreparationStepMapper"></a>PreparationStepMapper</h3><p>用于定义数据库操作的方法，MyBatis会将其自动生成实现类<br>@Param(“xxx”)给参数命名，供XML中引用</p>
 <p>mapper接口的实例化</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">recipeIngredientMapper = sqlSession.getMapper(RecipeIngredientMapper.class);</span><br></pre></td></tr></table></figure>
 <p>目的是让MyBatis自动生成RecipeIngredientMapper接口的实现类，并返回其实例，然后可以调用这个类里通过调用其方法，并通过xml来进行sql映射。</p>
 <h3 id="PreparationStepMapper-xml（映射SQL文件）"><a href="#PreparationStepMapper-xml（映射SQL文件）" class="headerlink" title="PreparationStepMapper.xml（映射SQL文件）"></a>PreparationStepMapper.xml（映射SQL文件）</h3><p>负责将Mapper接口中定义的方法与具体SQL语句绑定</p>
-<h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><h3 id="View类"><a href="#View类" class="headerlink" title="View类"></a>View类</h3><h3 id="Model类"><a href="#Model类" class="headerlink" title="Model类"></a>Model类</h3><h3 id="Controller类"><a href="#Controller类" class="headerlink" title="Controller类"></a>Controller类</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public class RecipeDisplayController implements EventHandler&lt;ActionEvent&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><h3 id="View类"><a href="#View类" class="headerlink" title="View类"></a>View类</h3><ul>
+<li>MainPageView</li>
+<li>RecipeCreateView</li>
+<li>RecipeDisplayView</li>
+<li>RecipeSelectView</li>
+<li>SignView</li>
+</ul>
+<p>使用javafx来设计GUI</p>
+<h3 id="Model类"><a href="#Model类" class="headerlink" title="Model类"></a>Model类</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);  </span><br><span class="line">sqlSession = sqlSessionFactory.openSession();</span><br><span class="line">recipeIngredientMapper = sqlSession.getMapper(RecipeIngredientMapper.class);</span><br></pre></td></tr></table></figure>
+<p>先构建sqlSession，用于和sql会话交互，然后再分别getMapper获取每个Mapper</p>
+<h3 id="Controller类"><a href="#Controller类" class="headerlink" title="Controller类"></a>Controller类</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public class RecipeDisplayController implements EventHandler&lt;ActionEvent&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 
 <p>其中EventHandler为接口，里面有handle方法，需要在RecipeDisplayControlle类里写这个方法，从而实现鼠标点击响应的功能</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">this.model = new Model();</span><br><span class="line">selectedRecipe = model.getRecipeByID(selectedRecipeNumber);</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>调用model里定义的方法</p>
+<h2 id="EC-BVA"><a href="#EC-BVA" class="headerlink" title="EC&#x2F;BVA"></a>EC&#x2F;BVA</h2><h3 id="EC"><a href="#EC" class="headerlink" title="EC"></a>EC</h3><p>有效等价类&#x2F;无效等价类<br>以username为例<br>username:<br>Value: String<br>ECs:<br>Valid:<br>EC V1 &#x3D; {userName | userName is a unique string, not purely numeric, and less<br>than 18 digits}<br>Invalid:<br>EC V2 &#x3D; {userName | userName duplicates an exsiting userName in the<br>database e.g. userName &#x3D; “HeChenyi”}<br>EC V3 &#x3D; {userName | userName is a purely numeric string}<br>EC V4 &#x3D; {userName | userName is more than 18 digits}<br>EC V5 &#x3D; {userName | userName is more than 18 digits}<br>EC V6 &#x3D; {userName | userName &#x3D; null}</p>
+<h3 id="Junit测试"><a href="#Junit测试" class="headerlink" title="Junit测试"></a>Junit测试</h3><p>也就是单元测试（Unit Test）类，用的是Junit5（org.junit.jupiter）编写的。<br>以下为Model.sign()方法设计的功能性单元测试，并且按照EC方法设计的测试用例，其包含以下方法名:</p>
+<ul>
+<li>testSignUserAlreadyExists</li>
+<li>testSignUserNameIsPureInteger</li>
+<li>testSignPasswordIsPureInteger</li>
+<li>testSignSuccess</li>
+</ul>
+<h3 id="BVA测试"><a href="#BVA测试" class="headerlink" title="BVA测试"></a>BVA测试</h3><p>可以测试密码最小长度，密码最大长度</p>
 
       
     </div>
@@ -574,10 +740,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-06-04 21:19:42 / Modified: 21:34:24" itemprop="dateCreated datePublished" datetime="2025-06-04T21:19:42+02:00">2025-06-04</time>
+              <time title="Created: 2025-06-04 21:19:42" itemprop="dateCreated datePublished" datetime="2025-06-04T21:19:42+02:00">2025-06-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-06-12 20:52:31" itemprop="dateModified" datetime="2025-06-12T20:52:31+02:00">2025-06-12</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -600,56 +772,70 @@
 
       
       
-          <h1 id="模拟调制学习记录-📡"><a href="#模拟调制学习记录-📡" class="headerlink" title="模拟调制学习记录 📡"></a>模拟调制学习记录 📡</h1><p>记录我对模拟调制技术的学习笔记，分为 AM、DSB、SSB 和 VSB 四种常见调制方式。</p>
-<h2 id="📘-AM（Amplitude-Modulation）调幅"><a href="#📘-AM（Amplitude-Modulation）调幅" class="headerlink" title="📘 AM（Amplitude Modulation）调幅"></a>📘 AM（Amplitude Modulation）调幅</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+          <h2 id="AM（Amplitude-Modulation）调幅"><a href="#AM（Amplitude-Modulation）调幅" class="headerlink" title="AM（Amplitude Modulation）调幅"></a>AM（Amplitude Modulation）调幅</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
 <li>通过改变载波信号的<strong>幅度</strong>来携带信息信号。</li>
 <li>调制信号形式：</li>
 </ul>
 <p>$$<br>s(t) &#x3D; [A_0 + m(t)] \cos(2\pi f_c t)<br>$$</p>
-<p>其中$A_0\cos(2\pi f_c t)$为载波，$m(t)$为调制信号</p>
-<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<p>其中$A_0\cos(2\pi f_c t)$为载波，$m(t)$为调制信号，$s(t)$为已调信号</p>
+<ul>
 <li>简单易实现。</li>
 <li>带宽为 (2B)，其中 (B) 为信号带宽。</li>
 <li>存在包络检波方式，易于接收。</li>
 <li>效率低，载波本身不包含信息但占用功率。</li>
 </ul>
 <hr>
-<h2 id="📘-DSB（Double-Side-Band）双边带调制"><a href="#📘-DSB（Double-Side-Band）双边带调制" class="headerlink" title="📘 DSB（Double Side Band）双边带调制"></a>📘 DSB（Double Side Band）双边带调制</h2><h3 id="基本概念-1"><a href="#基本概念-1" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<h3 id="DSB（Double-Side-Band）双边带调制"><a href="#DSB（Double-Side-Band）双边带调制" class="headerlink" title="DSB（Double Side Band）双边带调制"></a>DSB（Double Side Band）双边带调制</h3><ul>
 <li>又称 DSB-SC（Suppressed Carrier）。</li>
 <li>将基带信号与载波相乘，抑制直流项。</li>
-<li>形式：<br>$$<br>[<br>s(t) &#x3D; m(t) \cos(2\pi f_c t)<br>]<br>$$</li>
+<li>形式：</li>
 </ul>
-<h3 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h3><ul>
+<p>$s(t) &#x3D; m(t) \cos(2\pi f_c t)$</p>
+<p>特点:</p>
+<ul>
 <li>没有载波，传输效率高于 AM。</li>
 <li>但接收时需要载波同步，复杂度增加。</li>
 <li>频谱包含上下两个边带，带宽为 (2B)。</li>
 </ul>
 <hr>
-<h2 id="📘-SSB（Single-Side-Band）单边带调制"><a href="#📘-SSB（Single-Side-Band）单边带调制" class="headerlink" title="📘 SSB（Single Side Band）单边带调制"></a>📘 SSB（Single Side Band）单边带调制</h2><h3 id="基本概念-2"><a href="#基本概念-2" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<h3 id="SSB（Single-Side-Band）单边带调制"><a href="#SSB（Single-Side-Band）单边带调制" class="headerlink" title="SSB（Single Side Band）单边带调制"></a>SSB（Single Side Band）单边带调制</h3><p>基本概念</p>
+<ul>
 <li>在 DSB 的基础上，仅保留一个边带（上边带或下边带）。</li>
 <li>去除冗余频谱部分，提高频谱效率。</li>
 </ul>
-<h3 id="生成方法"><a href="#生成方法" class="headerlink" title="生成方法"></a>生成方法</h3><ul>
+<p>生成方法:</p>
+<ul>
 <li>滤波法：滤除一个边带。</li>
 <li>平衡调制 + 相移法（Hilbert 变换）：生成正交信号组合消除一个边带。</li>
 </ul>
-<h3 id="特点-2"><a href="#特点-2" class="headerlink" title="特点"></a>特点</h3><ul>
+<p>特点:</p>
+<ul>
 <li>带宽减半，仅为 (B)。</li>
 <li>频谱效率高，适合长距离传输（如语音通信）。</li>
 <li>实现复杂，载波恢复要求高。</li>
 </ul>
 <hr>
-<h2 id="📘-VSB（Vestigial-Side-Band）残留边带调制"><a href="#📘-VSB（Vestigial-Side-Band）残留边带调制" class="headerlink" title="📘 VSB（Vestigial Side Band）残留边带调制"></a>📘 VSB（Vestigial Side Band）残留边带调制</h2><h3 id="基本概念-3"><a href="#基本概念-3" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<h3 id="VSB（Vestigial-Side-Band）残留边带调制"><a href="#VSB（Vestigial-Side-Band）残留边带调制" class="headerlink" title="VSB（Vestigial Side Band）残留边带调制"></a>VSB（Vestigial Side Band）残留边带调制</h3><ul>
 <li>在 SSB 基础上，保留一个完整边带 + 另一个边带的一小部分（残留边带）。</li>
 <li>实际用于电视视频信号等高带宽场景。</li>
 </ul>
-<h3 id="特点-3"><a href="#特点-3" class="headerlink" title="特点"></a>特点</h3><ul>
+<p>特点:</p>
+<ul>
 <li>兼顾频谱利用与实现难度。</li>
 <li>能较好保留低频成分，解决 SSB 滤波困难问题。</li>
 <li>广泛用于模拟电视广播（如 NTSC、PAL）。</li>
 </ul>
 <hr>
-<p>📚 <strong>小结</strong></p>
+<h2 id="FM-PM（角度调制）"><a href="#FM-PM（角度调制）" class="headerlink" title="FM&#x2F;PM（角度调制）"></a>FM&#x2F;PM（角度调制）</h2><p>$S_m(t) &#x3D; Acos[w_ct+\phi(t)]$<br>其中：<br>顺时位移&#x3D;$w_ct+\phi(t)$<br>瞬时角频率&#x3D;$w_c+\frac{d\phi(t)}{dt}$<br>PM调相是让其中的$\phi(t)$与调制信号成正比，也就是$\phi(t)&#x3D;k_pm(t)$<br>FM调频是让其中的$\frac{d\phi(t)}{dt}$与调制信号成正比，也就是$\frac{d\phi(t)}{dt}&#x3D;k_fm(t)$<br>实际应用中通常使用FM调频  </p>
+<h3 id="FM"><a href="#FM" class="headerlink" title="FM"></a>FM</h3><p>令$m(t)&#x3D;A_mcos(w_mt)$<br>这个调制信号也是单因信号<br>根据$\frac{d\phi(t)}{dt}&#x3D;k_fm(t)$可知<br>$\phi(t) &#x3D; K_fA_m\int cos(w_m\tau)d\tau$ &#x3D; $\frac{K_fA_m}{w_m}sin(w_mt)$<br>其中$m_f$为调频指数</p>
+<h3 id="NBFM"><a href="#NBFM" class="headerlink" title="NBFM"></a>NBFM</h3><p>FM信号的最大瞬时相位偏移满足远小于pi&#x2F;6(0.5)<br>通过化简可得<br>$S_{NBFM}(t) &#x3D; Acos(w_ct)-[AK_f\int m(\tau)d\tau]sin(w_ct)$  </p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>对于直流分量为0的信号，也就是其傅立叶变换后的w&#x3D;0处为0的信号，有<br>$\mathcal{F}\left(\int m(t),dt \right) &#x3D; \frac{M(\omega)}{j\omega}$</p>
+</blockquote>
+<p>hint：<br>不定积分可以写成原信号和单位阶跃函数卷积的形式，然后单位阶跃信号的傅立叶变换为 $\frac{1}{jw} + \pi\delta(w)$<br>由于原信号的傅立叶变换后的w&#x3D;0处为0，因此与冲击信号乘积的部分可除去。</p>
+<hr>
+<p><strong>小结</strong></p>
 <table>
 <thead>
 <tr>
@@ -690,7 +876,6 @@
 </tr>
 </tbody></table>
 <hr>
-<p>✍️ 更新时间：2025-06-04</p>
 
       
     </div>
@@ -948,146 +1133,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/05/01/%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/05/01/%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">随机过程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-05-01 00:51:52" itemprop="dateCreated datePublished" datetime="2025-05-01T00:51:52+02:00">2025-05-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-11 15:59:18" itemprop="dateModified" datetime="2025-06-11T15:59:18+02:00">2025-06-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="Basic-concept"><a href="#Basic-concept" class="headerlink" title="Basic concept"></a>Basic concept</h2><p>随机过程是随机试验的衍生，具体来说它是Xi(t)的集合，其中Xi是n个变量，理论上n是无强大，Xi的分布函数和t有关，也就是说它的统计学特性受时间影响。</p>
-<h3 id="样本函数与概率密度函数（PDF）"><a href="#样本函数与概率密度函数（PDF）" class="headerlink" title="样本函数与概率密度函数（PDF）"></a>样本函数与概率密度函数（PDF）</h3><p>样本函数：随机过程X(t)的一次实现或某个样本路径，记为x(t)，也就是样本函数<br>概率密度函数：在某个时刻t，随机变量X(t)的概率分布密度函数，记为$f(x)$<br>可以这么理解：<br>样本函数：一个人的身高随年龄的变化曲线<br>概率密度：某个年龄段所有人身高的统计分布</p>
-<h3 id="随机过程的均值和自相关函数计算"><a href="#随机过程的均值和自相关函数计算" class="headerlink" title="随机过程的均值和自相关函数计算"></a>随机过程的均值和自相关函数计算</h3><p>$\epsilon(t) &#x3D; Acos(w_ct + \phi)$<br>其中$\phi$在0到2pi上均匀分布<br>$E[\epsilon(t)]&#x3D;\int_{0}^{2\pi}Acos(w_ct+\phi)\frac{1}{2\pi}d_\phi$<br>然后对cos函数进行拆解，把$cos\phi$的部分拆解出来，然后求积分</p>
-<h3 id="一维分布函数"><a href="#一维分布函数" class="headerlink" title="一维分布函数"></a>一维分布函数</h3><p>也就是说只考虑某个固定的时间t，随机变量X(t)的分布函数一般与t有关：<br>Fx(x,t) &#x3D; P{X(t)&lt;&#x3D;x}<br>当t取遍T中的所有元素时，我们可以得到一系列的分布函数，将这些分布函数的全体所构成的集合称为一维分布函数族，记为<br>{Fx(x;t)}<br>这个也就是一维分布函数族,它用来刻画随机过程在各个单独时刻的统计特性。</p>
-<h3 id="一维随机过程的n维分布函数族"><a href="#一维随机过程的n维分布函数族" class="headerlink" title="一维随机过程的n维分布函数族"></a>一维随机过程的n维分布函数族</h3><p>一维分布函数族刻画了随机过程在各个时刻的统计特征，为了描述随机过程在<strong>不同时刻状态之间的统计联系</strong>，一般可对任意<br> 个不同的时刻，也就是可以用二维分布函数来表示，如下分布函数所示：   </p>
-<img src="/images/一维随机过程.png"> 
-
-<p>这个分布函数是关于t1 t2 x1 x2四个变量的函数。<br>例如当t1&#x3D;1，x1&#x3D;1；t2&#x3D;1，x2&#x3D;1的时候P( x(t&#x3D;1)&lt;1 , x(t&#x3D;2)&lt;1 ) 的取值，<br>对比前面的1维分布函数，后者例如t1&#x3D;1，x1&#x3D;1时候，P（ x（t&#x3D;1）&lt;1）的取值<br><strong>n维</strong>分布函数：为了描述随机过程在不同时刻状态之间的关系，对任意n个不同时刻t1，t2，…,tn引入n维随机变量<br>（X（t1）， X（t2）， X（t3），…, X（tn））的分布函数</p>
-<h3 id="平稳随机过程"><a href="#平稳随机过程" class="headerlink" title="平稳随机过程"></a>平稳随机过程</h3><p>平稳随机过程的统计特性不随时间的推移而变化，其一维分布与时间t无关，二维分布只与时间间隔$\tau$有关，如下</p>
-<ul>
-<li>一维分布与时间$\tau$无关<br>f(x,t) &#x3D; f(x)</li>
-<li>二维分布只与时间间隔$\tau$有关<br>f(x1,x2;t1,t2) &#x3D; f(x1,x2;τ)</li>
-</ul>
-<h4 id="平稳随机过程的数字特征"><a href="#平稳随机过程的数字特征" class="headerlink" title="平稳随机过程的数字特征"></a>平稳随机过程的数字特征</h4><ul>
-<li>自相关只与时间间隔$\tau$有关，而与时间起点无关<br>R(0) &#x3D; E[ $\epsilon^2(t)$ ] &#x3D; S<br>同时平均功率E根据定义如下式所示：<br>S &#x3D; $\int_{-\infty}^{\infty}P_n(f)d_f$  &#x3D;  $\frac{1}{2\pi}\int_{-\infty}^{\infty}P_n(w)d_w$</li>
-</ul>
-<p>物理意义： 随机过程的平均功率    </p>
-<ul>
-<li><p>均值<br>均值与t无关，样本函数围绕一水平线起伏  </p>
-</li>
-<li><p>方差<br>方差与t无关，为常数</p>
-</li>
-</ul>
-<p>R($\infty$) &#x3D; E[$\epsilon$(t)]²<br>因为时间间隔无限大时，$\epsilon(t)$ 与 $\epsilon(t+\tau)$趋于独立</p>
-<p>物理意义： 随机过程的直流功率</p>
-<h4 id="平稳随机过程的功率谱密度"><a href="#平稳随机过程的功率谱密度" class="headerlink" title="平稳随机过程的功率谱密度"></a>平稳随机过程的功率谱密度</h4><p>假定f(t)为随机过程$\epsilon(t)$的任意实现，对其进行T长度的截断，并在对其进行傅立叶变换。<br>$\lim_{T \to \infty} \frac{|F_T(w)|^2}{T}$</p>
-<p><strong>维纳-辛钦定律</strong><br>平稳随机过程$\epsilon(t)$的功率谱密度函数$P_\epsilon(w)$和自相关函数R($\tau$)为一对傅立叶变换对<br><img src="/images/功率谱密度.png"></p>
-<p><strong>平均功率计算方法</strong>:<br>S &#x3D; R(0) &#x3D; E[$\epsilon(t)^2$]<br>S &#x3D; $\frac{1}{2\pi}\int_{-\infty}^{\infty}P_\epsilon(w),dw$</p>
-<h3 id="高斯随机过程"><a href="#高斯随机过程" class="headerlink" title="高斯随机过程"></a>高斯随机过程</h3><p>若随机过程的任意<strong>n</strong>维分布都是正态分布，则称它为高斯随机过程或正态过程。其n维概率密度函数为：<br>$f_a(x_1,x_2,…;t_1,…,t_n)$<br>一维高斯过程的概率密度函数：<br>X ~ N(a,$\sigma^2$)<br>$f_1(x)$ &#x3D; $\frac{1}{\sqrt{(2\pi)}\sigma}exp[-\frac{(x-a)^2}{2\sigma^2}]$<br>高斯过程在不同时刻取值不相关，则它们也统计独立。<br>高斯过程经过线性变化（或线性系统）后仍为高斯过程。</p>
-<h4 id="正态分布函数"><a href="#正态分布函数" class="headerlink" title="正态分布函数"></a>正态分布函数</h4><p>先来看正态概率密度函数<br>X ～ N(a,$\sigma^2$),<br>$f_1(x)$ &#x3D; $\frac{1}{\sqrt{(2\pi)}\sigma}exp[-\frac{(x-a)^2}{2\sigma^2}]$<br>那么正态分布函数就是将上述函数从负无穷到x上积分<br>标准&#x2F;归一化的正态分布是另a&#x3D;0，$\sigma$&#x3D;1<br>$f_1(x) &#x3D; \frac{1}{\sqrt{(2\pi)}}exp[-\frac{x^2}{2}]$  </p>
-<h4 id="Q函数"><a href="#Q函数" class="headerlink" title="Q函数"></a>Q函数</h4><p>和正态分布的密度分布函数是互补的关系<br>也就是从x到正无穷积分（正态分布函数是从负无穷到x积分）</p>
-<h4 id="误差函数"><a href="#误差函数" class="headerlink" title="误差函数"></a>误差函数</h4><p>$\text{erf}(x) &#x3D; \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^2} , dt$<br>互补误差函数和它互补，也就是说是从x到正无穷上积分<br>误差函数、互补误差函数与正态分布函数存在一个关系<br><img src="/images/误差函数.png"></p>
-<h3 id="随机过程通过线性系统"><a href="#随机过程通过线性系统" class="headerlink" title="随机过程通过线性系统"></a>随机过程通过线性系统</h3><img src="/images/随机过程通过线性系统.png">  
-
-<p>有以下几个特性  </p>
-<ul>
-<li><p>数学期望<br>E[$\epsilon_o(t)$] &#x3D; aH(0)</p>
-</li>
-<li><p>自相关函数<br>输入平稳随机过程，则输出过程自相关函数只与时间间隔有关</p>
-</li>
-</ul>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>平稳随机过程通过线性系统，输出也是平稳随机过程</p>
-</blockquote>
-<hr>
-<ul>
-<li>功率谱密度<br>$P_o(w)$&#x3D;$P_i(w)$|$H(w)^2$|<br>其中|$H(w)^2$|为功率增益</li>
-</ul>
-<h3 id="窄带随机过程"><a href="#窄带随机过程" class="headerlink" title="窄带随机过程"></a>窄带随机过程</h3><p>窄带系统要求通带宽度$\Delta f \ll f_c$<br>窄带过程是指随机过程通过以$f_c$为中心频率的窄带系统的输出过程<br>$$<br>\xi(t) &#x3D; A(t) \cos\big(2\pi f_c t + \phi(t)\big)<br>$$</p>
-<ul>
-<li>( \xi(t) )：窄带随机过程  </li>
-<li>( A(t) )：随机包络（幅度调制过程）  </li>
-<li>( f_c )：载波频率（中心频率）  </li>
-<li>( \phi(t) )：随机相位</li>
-</ul>
-<img src="/images/窄带过程.png">  
-通常分析平稳高斯窄带过程$\xi(t)$  
-所以均值为0，方差为$\sigma^2$,由于可以写成同向分量$\sigma_c(t)$与正交分量$\sigma_s(t)$线性组合的关系，因此这两个分量的数学期望也均为0，并且二者都平稳（相关函数均只与时间间隔有关），并且二者的自相关函数相同，方差相同，同时也互不相关、统计独立的高斯变量。
-简单来讲， 这两个分量为零均值、等方差、不相关、独立的平稳高斯过程。 
-
-<h3 id="正弦波加窄带高斯过程"><a href="#正弦波加窄带高斯过程" class="headerlink" title="正弦波加窄带高斯过程"></a>正弦波加窄带高斯过程</h3><p>$r(t) &#x3D; Acos(\omega_c t + \phi) + n(t)$<br>其中n(t)是均值为0，方差为$\sigma^2$的窄带高斯噪声<br>然后通过三角函数转换可得r(t)最终也可以分解为同相分量和正交向量，也就是$z_c(t) &#x3D; Acos{\phi} + n_c(t)$和$z_s(t) &#x3D; Acos{\phi} + n_s(t)$<br><img src="随机包络随机相位.png"><br>随机包络遵循广义瑞利分布，随机相位的概率密度与信噪比环境有关。<br>对于小信噪比环境，它们分布退化为瑞利分布和均匀分布。<br>同时它们的整体，也就是正弦波+窄带高斯过程会退化为窄带高斯过程。</p>
-<h3 id="白噪声"><a href="#白噪声" class="headerlink" title="白噪声"></a>白噪声</h3><p>功率谱密度均匀分布在整个频率范围内的随机过程称为白噪声<br>由自相关和功率谱密度的傅立叶变换关系可知，白噪声的自相关函数是在$\tau$&#x3D;0上面有个冲激信号的函数</p>
-<h3 id="高斯白噪声"><a href="#高斯白噪声" class="headerlink" title="高斯白噪声"></a>高斯白噪声</h3><p>服从高斯分布的白噪声，在任意两个不同时刻上随机变量互不相关，且统计独立。</p>
-<h3 id="低通白噪声"><a href="#低通白噪声" class="headerlink" title="低通白噪声"></a>低通白噪声</h3><p>功率谱是门函数，对应的自相关函数是sinc函数</p>
-<h3 id="带通白噪声"><a href="#带通白噪声" class="headerlink" title="带通白噪声"></a>带通白噪声</h3><p>功率是门函数与两个冲激函数的卷积，对应的傅立叶变换是sinc函数与cos函数的乘积</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1157,7 +1202,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
