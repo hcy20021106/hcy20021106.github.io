@@ -181,7 +181,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-12 20:21:36" itemprop="dateModified" datetime="2025-06-12T20:21:36+02:00">2025-06-12</time>
+                <time title="Modified: 2025-06-14 16:18:03" itemprop="dateModified" datetime="2025-06-14T16:18:03+02:00">2025-06-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -206,7 +206,7 @@
       
       
           <h2 id="Basic-concept"><a href="#Basic-concept" class="headerlink" title="Basic concept"></a>Basic concept</h2><p>随机过程是随机试验的衍生，具体来说它是Xi(t)的集合，其中Xi是n个变量，理论上n是无强大，Xi的分布函数和t有关，也就是说它的统计学特性受时间影响。</p>
-<h3 id="样本函数与概率密度函数（PDF）"><a href="#样本函数与概率密度函数（PDF）" class="headerlink" title="样本函数与概率密度函数（PDF）"></a>样本函数与概率密度函数（PDF）</h3><p>样本函数：随机过程X(t)的一次实现或某个样本路径，记为x(t)，也就是样本函数<br>概率密度函数：在某个时刻t，随机变量X(t)的概率分布密度函数，记为$f(x)$<br>可以这么理解：<br>样本函数：一个人的身高随年龄的变化曲线<br>概率密度：某个年龄段所有人身高的统计分布</p>
+<h3 id="样本函数与概率密度函数（PDF）"><a href="#样本函数与概率密度函数（PDF）" class="headerlink" title="样本函数与概率密度函数（PDF）"></a>样本函数与概率密度函数（PDF）</h3><p>样本函数：随机过程X(t)的一次实现或某个样本路径，记为x(t)，也就是样本函数<br>概率密度函数：在某个时刻t，随机变量X(t)的概率分布密度函数，记为$f(x)$<br>可以这么理解：<br>样本函数：一个人的身高随年龄的变化曲线<br>概率密度：某个年龄段所有人身高的统计分布  </p>
 <h3 id="随机过程的均值和自相关函数计算"><a href="#随机过程的均值和自相关函数计算" class="headerlink" title="随机过程的均值和自相关函数计算"></a>随机过程的均值和自相关函数计算</h3><p>$\epsilon(t) &#x3D; Acos(w_ct + \phi)$<br>其中$\phi$在0到2pi上均匀分布<br>$E[\epsilon(t)]&#x3D;\int_{0}^{2\pi}Acos(w_ct+\phi)\frac{1}{2\pi}d_\phi$<br>然后对cos函数进行拆解，把$cos\phi$的部分拆解出来，然后求积分</p>
 <h3 id="一维分布函数"><a href="#一维分布函数" class="headerlink" title="一维分布函数"></a>一维分布函数</h3><p>也就是说只考虑某个固定的时间t，随机变量X(t)的分布函数一般与t有关：<br>Fx(x,t) &#x3D; P{X(t)&lt;&#x3D;x}<br>当t取遍T中的所有元素时，我们可以得到一系列的分布函数，将这些分布函数的全体所构成的集合称为一维分布函数族，记为<br>{Fx(x;t)}<br>这个也就是一维分布函数族,它用来刻画随机过程在各个单独时刻的统计特性。</p>
 <h3 id="一维随机过程的n维分布函数族"><a href="#一维随机过程的n维分布函数族" class="headerlink" title="一维随机过程的n维分布函数族"></a>一维随机过程的n维分布函数族</h3><p>一维分布函数族刻画了随机过程在各个时刻的统计特征，为了描述随机过程在<strong>不同时刻状态之间的统计联系</strong>，一般可对任意<br> 个不同的时刻，也就是可以用二维分布函数来表示，如下分布函数所示：   </p>
@@ -219,7 +219,7 @@
 <li>二维分布只与时间间隔$\tau$有关<br>f(x1,x2;t1,t2) &#x3D; f(x1,x2;τ)</li>
 </ul>
 <h4 id="平稳随机过程的数字特征"><a href="#平稳随机过程的数字特征" class="headerlink" title="平稳随机过程的数字特征"></a>平稳随机过程的数字特征</h4><ul>
-<li>自相关只与时间间隔$\tau$有关，而与时间起点无关<br>R(0) &#x3D; E[ $\epsilon^2(t)$ ] &#x3D; S<br>同时平均功率E根据定义如下式所示：<br>S &#x3D; $\int_{-\infty}^{\infty}P_n(f)d_f$  &#x3D;  $\frac{1}{2\pi}\int_{-\infty}^{\infty}P_n(w)d_w$</li>
+<li>自相关只与时间间隔$\tau$有关，而与时间起点无关<br>R(0) &#x3D; E[ $\epsilon^2(t)$ ] &#x3D; S<br>同时平均功率E根据定义如下式所示：<br>S &#x3D; $\int_{-\infty}^{\infty}P_n(f)d_f$  &#x3D;  $\frac{1}{2\pi}\int_{-\infty}^{\infty}P_n(w)d_w$<br>因此平均功率S有以上两种求法</li>
 </ul>
 <p>物理意义： 随机过程的平均功率    </p>
 <ul>
@@ -233,6 +233,12 @@
 <h4 id="平稳随机过程的功率谱密度"><a href="#平稳随机过程的功率谱密度" class="headerlink" title="平稳随机过程的功率谱密度"></a>平稳随机过程的功率谱密度</h4><p>假定f(t)为随机过程$\epsilon(t)$的任意实现，对其进行T长度的截断，并在对其进行傅立叶变换。<br>$\lim_{T \to \infty} \frac{|F_T(w)|^2}{T}$</p>
 <p><strong>维纳-辛钦定律</strong><br>平稳随机过程$\epsilon(t)$的功率谱密度函数$P_\epsilon(w)$和自相关函数R($\tau$)为一对傅立叶变换对<br><img src="/images/功率谱密度.png"></p>
 <p><strong>平均功率计算方法</strong>:<br>S &#x3D; R(0) &#x3D; E[$\epsilon(t)^2$]<br>S &#x3D; $\frac{1}{2\pi}\int_{-\infty}^{\infty}P_\epsilon(w),dw$</p>
+<h4 id="平稳随机过程的各态历经性"><a href="#平稳随机过程的各态历经性" class="headerlink" title="平稳随机过程的各态历经性"></a>平稳随机过程的各态历经性</h4><p>时间均值公式：<br>$\overline{x} &#x3D; \lim_{T \to \infty} \frac{1}{2T} \int_{-T}^{T} x(t) , dt$<br>若平稳随机过程的时间均值$\overline{x}$ &#x3D; E(x)，那么其具有各态历经性  </p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>在求随机过程的功率时，使用其平方的数学期望来进行计算，而非其时间均值，除非是在满足各态历经性的前提下</p>
+</blockquote>
+<hr>
 <h3 id="高斯随机过程"><a href="#高斯随机过程" class="headerlink" title="高斯随机过程"></a>高斯随机过程</h3><p>若随机过程的任意<strong>n</strong>维分布都是正态分布，则称它为高斯随机过程或正态过程。其n维概率密度函数为：<br>$f_a(x_1,x_2,…;t_1,…,t_n)$<br>一维高斯过程的概率密度函数：<br>X ~ N(a,$\sigma^2$)<br>$f_1(x)$ &#x3D; $\frac{1}{\sqrt{(2\pi)}\sigma}exp[-\frac{(x-a)^2}{2\sigma^2}]$<br>高斯过程在不同时刻取值不相关，则它们也统计独立。<br>高斯过程经过线性变化（或线性系统）后仍为高斯过程。</p>
 <h4 id="正态分布函数"><a href="#正态分布函数" class="headerlink" title="正态分布函数"></a>正态分布函数</h4><p>先来看正态概率密度函数<br>X ～ N(a,$\sigma^2$),<br>$f_1(x)$ &#x3D; $\frac{1}{\sqrt{(2\pi)}\sigma}exp[-\frac{(x-a)^2}{2\sigma^2}]$<br>那么正态分布函数就是将上述函数从负无穷到x上积分<br>标准&#x2F;归一化的正态分布是另a&#x3D;0，$\sigma$&#x3D;1<br>$f_1(x) &#x3D; \frac{1}{\sqrt{(2\pi)}}exp[-\frac{x^2}{2}]$  </p>
 <h4 id="Q函数"><a href="#Q函数" class="headerlink" title="Q函数"></a>Q函数</h4><p>和正态分布的密度分布函数是互补的关系<br>也就是从x到正无穷积分（正态分布函数是从负无穷到x积分）</p>
@@ -668,7 +674,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-12 15:55:03" itemprop="dateModified" datetime="2025-06-12T15:55:03+02:00">2025-06-12</time>
+                <time title="Modified: 2025-06-14 16:53:24" itemprop="dateModified" datetime="2025-06-14T16:53:24+02:00">2025-06-14</time>
               </span>
 
           
@@ -736,6 +742,7 @@
 <p>生命就像是一个疗伤的过程，我们受伤，痊愈，再受伤。每一次的痊愈好像都是为了迎接下一次的受伤。或许总要彻彻底底的绝望一次，才能重新再活一次。</p>
 <p>大江歌罢掉头东，邃密群科济世穷。<br>面壁十年图破壁，难酬蹈海亦英雄。</p>
 <p>无由见颜色，还自托微波</p>
+<p>无论海角与天涯，大抵心安即是家</p>
 
       
     </div>

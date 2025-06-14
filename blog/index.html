@@ -674,7 +674,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-06 23:17:17" itemprop="dateModified" datetime="2025-06-06T23:17:17+02:00">2025-06-06</time>
+                <time title="Modified: 2025-06-14 15:30:04" itemprop="dateModified" datetime="2025-06-14T15:30:04+02:00">2025-06-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -698,7 +698,9 @@
 
       
       
-          
+          <h2 id="二进制调制"><a href="#二进制调制" class="headerlink" title="二进制调制"></a>二进制调制</h2><h2 id="多进制调制"><a href="#多进制调制" class="headerlink" title="多进制调制"></a>多进制调制</h2><h3 id="正交调制"><a href="#正交调制" class="headerlink" title="正交调制"></a>正交调制</h3><p>已调信号表示为正交调制信号的组合<br>$u(t)&#x3D;A(t)cos[w_ct+\phi(t)] &#x3D; I(t)cosw_ct+Q(t)sinw_ct$  </p>
+<p>其中$I(t)&#x3D;A(t)cos\phi(t)$为同相分量<br>$Q(t)&#x3D;A(t)sin\phi(t)$为正交分量<br>易见I(t)和Q(t)都是成形滤波，因此在生成I(t)和Q(t)我们先引入In和Qn，可以在信号矢量图&#x2F;星座图上面显示In，Qn<br>$u_n(t-nT_B) &#x3D; A_ng(t-nT_B)cos[w_ct+\phi_n] &#x3D; I_ng(t-nT_B)cosw_ct-Q_ng(t-nT_B)sinw_ct$<br>注意u(t)和$u_n(t)$的区别在于是否对单个码元进行分析，$I_n$和$I_t$的区别也是如此。<br>其中对$I_ng(t-nT_B)$和$Q_ng(t-nT_B)$求累加可以分别表示I(t)和Q(t)，因此In和Qn可以表征It和Qt</p>
+
       
     </div>
 
@@ -748,7 +750,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-12 20:52:31" itemprop="dateModified" datetime="2025-06-12T20:52:31+02:00">2025-06-12</time>
+                <time title="Modified: 2025-06-14 16:51:33" itemprop="dateModified" datetime="2025-06-14T16:51:33+02:00">2025-06-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -833,7 +835,14 @@
 <blockquote>
 <p><strong>Notice</strong><br><br>对于直流分量为0的信号，也就是其傅立叶变换后的w&#x3D;0处为0的信号，有<br>$\mathcal{F}\left(\int m(t),dt \right) &#x3D; \frac{M(\omega)}{j\omega}$</p>
 </blockquote>
+<hr>
 <p>hint：<br>不定积分可以写成原信号和单位阶跃函数卷积的形式，然后单位阶跃信号的傅立叶变换为 $\frac{1}{jw} + \pi\delta(w)$<br>由于原信号的傅立叶变换后的w&#x3D;0处为0，因此与冲击信号乘积的部分可除去。</p>
+<h2 id="模拟调制系统的抗噪声性能"><a href="#模拟调制系统的抗噪声性能" class="headerlink" title="模拟调制系统的抗噪声性能"></a>模拟调制系统的抗噪声性能</h2><p>研究抗噪声性能也就是在研究SNR，为了研究模拟调制对系统的抗噪声能力，我们重点关注已调信号$s_m(t)$与n(t)在经过带通滤波器（输入端的接收滤波器）后生成的$s_m(t)$与$n_i(t)$的$\frac{S_0}{N_0}$与经过解调器后形成的$\frac{S_i}{N_i}$之间的比值。<br>结论：<br>以DSB为例，最后的信噪比经过相干解调后会改善一倍，也就是$G_{DSB} &#x3D; \frac{S_0&#x2F;N_0}{S_i&#x2F;N_i}&#x3D;2$</p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>实质上已调信号$s_m(t)$会经过发送滤波器和信道，但我们在这里将其忽略，因此只需考虑$s_m(t)$<br>另外，我们假设$s_m(t)$经过带通滤波器后的保持不变，仍为$s_m(t)$<br>而对于噪声n(t) (我们通常假设其为高斯白噪声)，在经过带通滤波器的传信滤噪后，会生成窄带噪声，因此我们用窄带噪声的特性来分析</p>
+</blockquote>
+<hr>
 <hr>
 <p><strong>小结</strong></p>
 <table>

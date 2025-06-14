@@ -28,7 +28,7 @@
 <meta property="og:description" content="AM（Amplitude Modulation）调幅基本概念 通过改变载波信号的幅度来携带信息信号。 调制信号形式：  $$s(t) &#x3D; [A_0 + m(t)] \cos(2\pi f_c t)$$ 其中$A_0\cos(2\pi f_c t)$为载波，$m(t)$为调制信号，$s(t)$为已调信号  简单易实现。 带宽为 (2B)，其中 (B) 为信号带宽。 存在包络检波方式，易于接">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T19:19:42.000Z">
-<meta property="article:modified_time" content="2025-06-12T18:52:31.756Z">
+<meta property="article:modified_time" content="2025-06-14T14:51:33.854Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -185,7 +185,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-12 20:52:31" itemprop="dateModified" datetime="2025-06-12T20:52:31+02:00">2025-06-12</time>
+                <time title="Modified: 2025-06-14 16:51:33" itemprop="dateModified" datetime="2025-06-14T16:51:33+02:00">2025-06-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,7 +269,14 @@
 <blockquote>
 <p><strong>Notice</strong><br><br>对于直流分量为0的信号，也就是其傅立叶变换后的w&#x3D;0处为0的信号，有<br>$\mathcal{F}\left(\int m(t),dt \right) &#x3D; \frac{M(\omega)}{j\omega}$</p>
 </blockquote>
+<hr>
 <p>hint：<br>不定积分可以写成原信号和单位阶跃函数卷积的形式，然后单位阶跃信号的傅立叶变换为 $\frac{1}{jw} + \pi\delta(w)$<br>由于原信号的傅立叶变换后的w&#x3D;0处为0，因此与冲击信号乘积的部分可除去。</p>
+<h2 id="模拟调制系统的抗噪声性能"><a href="#模拟调制系统的抗噪声性能" class="headerlink" title="模拟调制系统的抗噪声性能"></a>模拟调制系统的抗噪声性能</h2><p>研究抗噪声性能也就是在研究SNR，为了研究模拟调制对系统的抗噪声能力，我们重点关注已调信号$s_m(t)$与n(t)在经过带通滤波器（输入端的接收滤波器）后生成的$s_m(t)$与$n_i(t)$的$\frac{S_0}{N_0}$与经过解调器后形成的$\frac{S_i}{N_i}$之间的比值。<br>结论：<br>以DSB为例，最后的信噪比经过相干解调后会改善一倍，也就是$G_{DSB} &#x3D; \frac{S_0&#x2F;N_0}{S_i&#x2F;N_i}&#x3D;2$</p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>实质上已调信号$s_m(t)$会经过发送滤波器和信道，但我们在这里将其忽略，因此只需考虑$s_m(t)$<br>另外，我们假设$s_m(t)$经过带通滤波器后的保持不变，仍为$s_m(t)$<br>而对于噪声n(t) (我们通常假设其为高斯白噪声)，在经过带通滤波器的传信滤噪后，会生成窄带噪声，因此我们用窄带噪声的特性来分析</p>
+</blockquote>
+<hr>
 <hr>
 <p><strong>小结</strong></p>
 <table>
@@ -392,7 +399,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AM%EF%BC%88Amplitude-Modulation%EF%BC%89%E8%B0%83%E5%B9%85"><span class="nav-number">1.</span> <span class="nav-text">AM（Amplitude Modulation）调幅</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DSB%EF%BC%88Double-Side-Band%EF%BC%89%E5%8F%8C%E8%BE%B9%E5%B8%A6%E8%B0%83%E5%88%B6"><span class="nav-number">1.2.</span> <span class="nav-text">DSB（Double Side Band）双边带调制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSB%EF%BC%88Single-Side-Band%EF%BC%89%E5%8D%95%E8%BE%B9%E5%B8%A6%E8%B0%83%E5%88%B6"><span class="nav-number">1.3.</span> <span class="nav-text">SSB（Single Side Band）单边带调制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VSB%EF%BC%88Vestigial-Side-Band%EF%BC%89%E6%AE%8B%E7%95%99%E8%BE%B9%E5%B8%A6%E8%B0%83%E5%88%B6"><span class="nav-number">1.4.</span> <span class="nav-text">VSB（Vestigial Side Band）残留边带调制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FM-PM%EF%BC%88%E8%A7%92%E5%BA%A6%E8%B0%83%E5%88%B6%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">FM&#x2F;PM（角度调制）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FM"><span class="nav-number">2.1.</span> <span class="nav-text">FM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NBFM"><span class="nav-number">2.2.</span> <span class="nav-text">NBFM</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AM%EF%BC%88Amplitude-Modulation%EF%BC%89%E8%B0%83%E5%B9%85"><span class="nav-number">1.</span> <span class="nav-text">AM（Amplitude Modulation）调幅</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DSB%EF%BC%88Double-Side-Band%EF%BC%89%E5%8F%8C%E8%BE%B9%E5%B8%A6%E8%B0%83%E5%88%B6"><span class="nav-number">1.2.</span> <span class="nav-text">DSB（Double Side Band）双边带调制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSB%EF%BC%88Single-Side-Band%EF%BC%89%E5%8D%95%E8%BE%B9%E5%B8%A6%E8%B0%83%E5%88%B6"><span class="nav-number">1.3.</span> <span class="nav-text">SSB（Single Side Band）单边带调制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VSB%EF%BC%88Vestigial-Side-Band%EF%BC%89%E6%AE%8B%E7%95%99%E8%BE%B9%E5%B8%A6%E8%B0%83%E5%88%B6"><span class="nav-number">1.4.</span> <span class="nav-text">VSB（Vestigial Side Band）残留边带调制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FM-PM%EF%BC%88%E8%A7%92%E5%BA%A6%E8%B0%83%E5%88%B6%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">FM&#x2F;PM（角度调制）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FM"><span class="nav-number">2.1.</span> <span class="nav-text">FM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NBFM"><span class="nav-number">2.2.</span> <span class="nav-text">NBFM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E8%B0%83%E5%88%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%8A%97%E5%99%AA%E5%A3%B0%E6%80%A7%E8%83%BD"><span class="nav-number">3.</span> <span class="nav-text">模拟调制系统的抗噪声性能</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
