@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="vector基本用法12345678910111213std::vector&lt;int&gt; v1;                  &#x2F;&#x2F; 空 vectorstd::vector&lt;int&gt; v2(5);               &#x2F;&#x2F; 5 个默认值元素（0）std::vector&lt;int&gt; v3(5, 42);           &#x2F;&#x2F; 5 个元素，值为 42st">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++">
+<meta property="og:url" content="https://hechenyi.github.io/2025/06/15/C++/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="vector基本用法12345678910111213std::vector&lt;int&gt; v1;                  &#x2F;&#x2F; 空 vectorstd::vector&lt;int&gt; v2(5);               &#x2F;&#x2F; 5 个默认值元素（0）std::vector&lt;int&gt; v3(5, 42);           &#x2F;&#x2F; 5 个元素，值为 42st">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-15T11:13:04.000Z">
+<meta property="article:modified_time" content="2025-06-15T11:31:08.890Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hechenyi.github.io/2025/06/15/C++/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>C++ | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/15/C++/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-06-15 13:13:04 / Modified: 13:31:08" itemprop="dateCreated datePublished" datetime="2025-06-15T13:13:04+02:00">2025-06-15</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="vector基本用法"><a href="#vector基本用法" class="headerlink" title="vector基本用法"></a>vector基本用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;int&gt; v1;                  // 空 vector</span><br><span class="line">std::vector&lt;int&gt; v2(5);               // 5 个默认值元素（0）</span><br><span class="line">std::vector&lt;int&gt; v3(5, 42);           // 5 个元素，值为 42</span><br><span class="line">std::vector&lt;int&gt; v4 = &#123;1, 2, 3&#125;;      // 使用列表初始化</span><br><span class="line">v.push_back(x);     // 添加元素</span><br><span class="line">v.pop_back();       // 删除最后一个元素</span><br><span class="line">v.size();           // 返回元素个数</span><br><span class="line">v.empty();          // 是否为空</span><br><span class="line">v.clear();          // 清空所有元素</span><br><span class="line">v.front();          // 返回第一个元素</span><br><span class="line">v.back();           // 返回最后一个元素</span><br><span class="line">v[i];               // 访问第 i 个元素</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="vector遍历方式"><a href="#vector遍历方式" class="headerlink" title="vector遍历方式"></a>vector遍历方式</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;int&gt; v = &#123;1, 2, 3&#125;;</span><br><span class="line"></span><br><span class="line">// 方法 1：范围 <span class="keyword">for</span> 循环</span><br><span class="line"><span class="keyword">for</span> (int x : v) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">x &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 方法 2：索引访问</span></span><br><span class="line"><span class="string">for (int i = 0; i &lt; v.size(); ++i) &#123;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; v[i] &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 方法 3：普通迭代器</span></span><br><span class="line"><span class="string">for (auto it = v.begin(); it != v.end(); ++it) &#123;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; *it &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 方法 4：反向迭代器</span></span><br><span class="line"><span class="string">for (auto rit = v.rbegin(); rit != v.rend(); ++rit) &#123;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; *rit &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="迭代器基本用法"><a href="#迭代器基本用法" class="headerlink" title="迭代器基本用法"></a>迭代器基本用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">begin()	指向第一个元素的迭代器</span><br><span class="line">end()	指向最后一个元素之后的位置</span><br><span class="line">rbegin()	反向迭代器，指向最后一个元素</span><br><span class="line">rend()	反向迭代器，指向第一个元素之前</span><br><span class="line">cbegin()	常量迭代器，不能修改元素</span><br><span class="line">cend()	常量迭代器，指向末尾</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用迭代器拷贝容器"><a href="#使用迭代器拷贝容器" class="headerlink" title="使用迭代器拷贝容器"></a>使用迭代器拷贝容器</h2><p>std::vector<T> subvec(start_iter, end_iter);</p>
+<p>需注意这是左闭右开</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;vector&gt;</span></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    std::vector&lt;int&gt; original = &#123;1, 2, 3, 4, 5&#125;;</span><br><span class="line"></span><br><span class="line">    // 拷贝整个 original 到 copy（完整复制）</span><br><span class="line">    std::vector&lt;int&gt; copy(original.begin(), original.end());</span><br><span class="line"></span><br><span class="line">    // 拷贝 original 的前 3 个元素 [0,3) -&gt; 元素 1, 2, 3</span><br><span class="line">    std::vector&lt;int&gt; firstHalf(original.begin(), original.begin() + 3);</span><br><span class="line"></span><br><span class="line">    // 拷贝 original 的后两个元素 [3,5) -&gt; 元素 4, 5</span><br><span class="line">    std::vector&lt;int&gt; lastPart(original.begin() + 3, original.end());</span><br><span class="line"></span><br><span class="line">    // 输出结果</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;copy: &quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (int num : copy) std::cout &lt;&lt; <span class="string">num &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; &quot;\nfirstHalf: &quot;;</span></span><br><span class="line"><span class="string">    for (int num</span> : firstHalf) std::cout &lt;&lt; <span class="string">num &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; &quot;\nlastPart: &quot;;</span></span><br><span class="line"><span class="string">    for (int num</span> : lastPart) std::cout &lt;&lt; <span class="string">num &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; std::endl;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>输出结构：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">copy: 1 2 3 4 5</span><br><span class="line">firstHalf: 1 2 3</span><br><span class="line">lastPart: 4 5</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/06/12/MVC/" rel="prev" title="MVC">
+      <i class="fa fa-chevron-left"></i> MVC
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vector%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">vector基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vector%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">vector遍历方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">迭代器基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%8B%B7%E8%B4%9D%E5%AE%B9%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">使用迭代器拷贝容器</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

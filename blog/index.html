@@ -150,7 +150,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/15/C/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/15/C++/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -164,7 +164,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/06/15/C/" class="post-title-link" itemprop="url">C++</a>
+            <a href="/2025/06/15/C++/" class="post-title-link" itemprop="url">C++</a>
         </h2>
 
         <div class="post-meta">
@@ -173,8 +173,9 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2025-06-15 13:13:04" itemprop="dateCreated datePublished" datetime="2025-06-15T13:13:04+02:00">2025-06-15</time>
+              <time title="Created: 2025-06-15 13:13:04 / Modified: 13:31:08" itemprop="dateCreated datePublished" datetime="2025-06-15T13:13:04+02:00">2025-06-15</time>
             </span>
 
           
@@ -189,7 +190,19 @@
 
       
       
-          
+          <h2 id="vector基本用法"><a href="#vector基本用法" class="headerlink" title="vector基本用法"></a>vector基本用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;int&gt; v1;                  // 空 vector</span><br><span class="line">std::vector&lt;int&gt; v2(5);               // 5 个默认值元素（0）</span><br><span class="line">std::vector&lt;int&gt; v3(5, 42);           // 5 个元素，值为 42</span><br><span class="line">std::vector&lt;int&gt; v4 = &#123;1, 2, 3&#125;;      // 使用列表初始化</span><br><span class="line">v.push_back(x);     // 添加元素</span><br><span class="line">v.pop_back();       // 删除最后一个元素</span><br><span class="line">v.size();           // 返回元素个数</span><br><span class="line">v.empty();          // 是否为空</span><br><span class="line">v.clear();          // 清空所有元素</span><br><span class="line">v.front();          // 返回第一个元素</span><br><span class="line">v.back();           // 返回最后一个元素</span><br><span class="line">v[i];               // 访问第 i 个元素</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="vector遍历方式"><a href="#vector遍历方式" class="headerlink" title="vector遍历方式"></a>vector遍历方式</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;int&gt; v = &#123;1, 2, 3&#125;;</span><br><span class="line"></span><br><span class="line">// 方法 1：范围 <span class="keyword">for</span> 循环</span><br><span class="line"><span class="keyword">for</span> (int x : v) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">x &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 方法 2：索引访问</span></span><br><span class="line"><span class="string">for (int i = 0; i &lt; v.size(); ++i) &#123;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; v[i] &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 方法 3：普通迭代器</span></span><br><span class="line"><span class="string">for (auto it = v.begin(); it != v.end(); ++it) &#123;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; *it &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 方法 4：反向迭代器</span></span><br><span class="line"><span class="string">for (auto rit = v.rbegin(); rit != v.rend(); ++rit) &#123;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; *rit &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="迭代器基本用法"><a href="#迭代器基本用法" class="headerlink" title="迭代器基本用法"></a>迭代器基本用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">begin()	指向第一个元素的迭代器</span><br><span class="line">end()	指向最后一个元素之后的位置</span><br><span class="line">rbegin()	反向迭代器，指向最后一个元素</span><br><span class="line">rend()	反向迭代器，指向第一个元素之前</span><br><span class="line">cbegin()	常量迭代器，不能修改元素</span><br><span class="line">cend()	常量迭代器，指向末尾</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用迭代器拷贝容器"><a href="#使用迭代器拷贝容器" class="headerlink" title="使用迭代器拷贝容器"></a>使用迭代器拷贝容器</h2><p>std::vector<T> subvec(start_iter, end_iter);</p>
+<p>需注意这是左闭右开</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;vector&gt;</span></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    std::vector&lt;int&gt; original = &#123;1, 2, 3, 4, 5&#125;;</span><br><span class="line"></span><br><span class="line">    // 拷贝整个 original 到 copy（完整复制）</span><br><span class="line">    std::vector&lt;int&gt; copy(original.begin(), original.end());</span><br><span class="line"></span><br><span class="line">    // 拷贝 original 的前 3 个元素 [0,3) -&gt; 元素 1, 2, 3</span><br><span class="line">    std::vector&lt;int&gt; firstHalf(original.begin(), original.begin() + 3);</span><br><span class="line"></span><br><span class="line">    // 拷贝 original 的后两个元素 [3,5) -&gt; 元素 4, 5</span><br><span class="line">    std::vector&lt;int&gt; lastPart(original.begin() + 3, original.end());</span><br><span class="line"></span><br><span class="line">    // 输出结果</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;copy: &quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (int num : copy) std::cout &lt;&lt; <span class="string">num &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; &quot;\nfirstHalf: &quot;;</span></span><br><span class="line"><span class="string">    for (int num</span> : firstHalf) std::cout &lt;&lt; <span class="string">num &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; &quot;\nlastPart: &quot;;</span></span><br><span class="line"><span class="string">    for (int num</span> : lastPart) std::cout &lt;&lt; <span class="string">num &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; std::endl;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>输出结构：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">copy: 1 2 3 4 5</span><br><span class="line">firstHalf: 1 2 3</span><br><span class="line">lastPart: 4 5</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
       
     </div>
 
