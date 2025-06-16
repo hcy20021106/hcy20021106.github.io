@@ -828,7 +828,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-15 19:05:58" itemprop="dateModified" datetime="2025-06-15T19:05:58+02:00">2025-06-15</time>
+                <time title="Modified: 2025-06-16 17:33:51" itemprop="dateModified" datetime="2025-06-16T17:33:51+02:00">2025-06-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -865,6 +865,12 @@
 <li>效率低，载波本身不包含信息但占用功率。</li>
 </ul>
 <p>包络检波器包括全波整流器和低通滤波器两部分组成，其中全波整流器用于将负半轴的波形翻到正半轴</p>
+<h4 id="功率计算"><a href="#功率计算" class="headerlink" title="功率计算"></a>功率计算</h4><p>$S_{AM}(t) &#x3D; [A_0 + m(t)]cosw_ct &#x3D; A_0cosw_ct + m(t)cosw_ct$<br>其中$A_0cosw_ct$和$m(t)cosw_ct$分别是载波相和边带相，其功率分别是$\frac{A_0^2}{2}$和$\frac{\overline{m(t)}^2}{2}$</p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>$\overline{m(t)}^2$表示m(t)的均方值<br>对随机过程或者给定信号都能求均方值，并且其都用来求平均功率</p>
+</blockquote>
+<hr>
 <h3 id="DSB（Double-Side-Band）双边带调制"><a href="#DSB（Double-Side-Band）双边带调制" class="headerlink" title="DSB（Double Side Band）双边带调制"></a>DSB（Double Side Band）双边带调制</h3><p>由于包络与m(t)不成正比，不能使用包络检波法，此时解调需要使用相干解调法</p>
 <ul>
 <li>又称 DSB-SC（Suppressed Carrier）。</li>
@@ -928,7 +934,48 @@
 <p><strong>Notice</strong><br><br>实质上已调信号$s_m(t)$会经过发送滤波器和信道，但我们在这里将其忽略，因此只需考虑$s_m(t)$<br>另外，我们假设$s_m(t)$经过带通滤波器后的保持不变，仍为$s_m(t)$<br>而对于噪声n(t) (我们通常假设其为高斯白噪声)，在经过带通滤波器的传信滤噪后，会生成窄带噪声，因此我们用窄带噪声的特性来分析</p>
 </blockquote>
 <hr>
-<h3 id="包络检测法"><a href="#包络检测法" class="headerlink" title="包络检测法"></a>包络检测法</h3><h4 id="AM系统"><a href="#AM系统" class="headerlink" title="AM系统"></a>AM系统</h4><p>非线性解调，不能分别处理信号和噪声<br>输入信号$S_{AM}(t) &#x3D; [A_0 + m(t)]cosw_ct$<br>输入噪声$n_i(t) &#x3D; n_c(t)cosw_ct - n_s(t)sinw_ct$<br>将二者信号相加并通过包络检测可得到<br>所含包络$E(t) &#x3D; \sqrt{ \left[ A_0 + m(t) + n_c(t) \right]^2 + n_s^2(t) }$<br>后面需要分析大信噪比和小信噪比两种情况</p>
+<table>
+<thead>
+<tr>
+<th>调制方式</th>
+<th>解调前信噪比 $\frac{S_0}{N_0}$</th>
+<th>解调后信噪比 $\frac{S_i}{N_i}$</th>
+<th>抗噪声能力 $G &#x3D; \frac{S_i&#x2F;N_i}{S_0&#x2F;N_0}$</th>
+<th>特点说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AM（含载波）</td>
+<td>$\frac{\frac{A_0^2}{2}+\frac{\overline{m^2(t)}}{2}}{n_0B(N_i)}$</td>
+<td>$\frac{1}{4}\overline{m^2(t)}&#x2F; \frac{1}{4}N_i(N_0)$</td>
+<td>$\frac{2\overline{m^2(t)}}{A_0^2+\overline{m^2(t)}}$</td>
+<td>信噪比依赖调幅指数，抗噪性能最弱</td>
+</tr>
+<tr>
+<td>DSB（无载波）</td>
+<td>$\frac{1}{2} \overline{m^2(t)} &#x2F; n_0B(N_i)$</td>
+<td>$\frac{1}{4}\overline{m^2(t)} &#x2F; \frac{1}{4}N_i(N_0)$</td>
+<td><strong>2</strong></td>
+<td>相干解调提升一倍信噪比</td>
+</tr>
+<tr>
+<td>SSB</td>
+<td>$\frac{1}{4}\overline{m^2(t)} &#x2F; n_0B(N_i)$</td>
+<td>$\frac{1}{16}overline{m^2(t)} &#x2F; \frac{1}{4}N_i(N_0)$</td>
+<td><strong>1</strong></td>
+<td>最佳带宽效率，抗噪不变</td>
+</tr>
+</tbody></table>
+<h3 id="包络检测法"><a href="#包络检测法" class="headerlink" title="包络检测法"></a>包络检测法</h3><h4 id="AM系统"><a href="#AM系统" class="headerlink" title="AM系统"></a>AM系统</h4><p>非线性解调，不能分别处理信号和噪声<br>输入信号$S_{AM}(t) &#x3D; [A_0 + m(t)]cosw_ct$<br>由于输入会经过带通滤波器，因此输入噪声会成为窄带高斯白噪声，根据窄带高斯白噪声的性质可将其分为正交部分和同相部分两部分，如下输入噪声所示：<br>输入噪声$n_i(t) &#x3D; n_c(t)cosw_ct - n_s(t)sinw_ct$</p>
+<p>将二者信号相加并通过包络检测可得到<br>所含包络$E(t) &#x3D; \sqrt{ \left[ A_0 + m(t) + n_c(t) \right]^2 + n_s^2(t) }$<br>后面需要分析大信噪比和小信噪比两种情况 </p>
+<h5 id="大信噪比"><a href="#大信噪比" class="headerlink" title="大信噪比"></a>大信噪比</h5><p>信号包络远超过噪声包络<br>也就是$A_0+m(t)&gt;&gt;\sqrt{n_c(t)^2 + n_s(t)^2}$<br>因此$E(t) \approx \sqrt{[A_0+m(t)]^2 + 2[A_0 + m(t)]n_c(t)} \approx A_0 + m(t) + n_c(t) $  </p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>$(1+x)^{1&#x2F;2} \approx 1 + \frac{x}{2}$</p>
+</blockquote>
+<hr>
+<p>因此输出信号中信号(m(t))的平均功率为$\overline{m(t)^2}$, 噪声的平均功率为$\overline{n_c(t)^2}$<br>其中$n_c(t)$为窄带高斯噪声，功率为其均方值，也就是$E[n_c(t)^2]$,根据窄带信号的统计特性可知，其本身的数学期望和方差都和其正交部分和同相部分相等，因此均方值也相同<br>因此此时输出信噪比$S_0&#x2F;N_0$与相干检波时一样，又因为输入信噪比也一样（易知），因此抗噪声性一样（大信噪比情况下）  </p>
+<h4 id="小信噪比"><a href="#小信噪比" class="headerlink" title="小信噪比"></a>小信噪比</h4><p>也就是信号包络远小于噪声包络<br>通过分析合成的信号的包络E(t)，可知信号会被检测器扰乱为噪声。因此此时输出信噪比急剧恶化<br>这也就是门限效应，是由于包络检测器的非线性解调作用而产生的。（相干解调是线性解调，不存在门限效应）<br>在大信噪比环境下抗噪声能力与相干解调在任意信噪比时几乎相同，而在小信噪比时会很弱，因此会有一个拐点，也就是会出现门限效应。</p>
 <p><strong>小结</strong></p>
 <table>
 <thead>
