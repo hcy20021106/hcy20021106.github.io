@@ -150,6 +150,160 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/22/JavaSwing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/04/22/JavaSwing/" class="post-title-link" itemprop="url">JavaSwing</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-04-22 23:20:59" itemprop="dateCreated datePublished" datetime="2025-04-22T23:20:59+02:00">2025-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-04-25 13:48:01" itemprop="dateModified" datetime="2025-04-25T13:48:01+02:00">2025-04-25</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>Swing is part of API for providing native look and feel GUI for Java, which has more components than AWT(Abstract Window Toolkit), and these components are more lightweight.  </p>
+<p>Documents:<br><a target="_blank" rel="noopener" href="https://docs.oracle.com/en/java/javase/20/docs/api/java.desktop/javax/swing/package-summary.html">https://docs.oracle.com/en/java/javase/20/docs/api/java.desktop/javax/swing/package-summary.html</a>  </p>
+<p>These components are as below:</p>
+<ul>
+<li>Windows and dialogs<ul>
+<li>JFrame<br>  <strong>JFrame</strong>是一个<strong>顶层容器</strong>，用于创建一个窗口，窗口中可以包含按钮、文本框、标签等各种组件，并且JFrame也可以布局，例如添加BorderLayout</li>
+<li>JDialog</li>
+<li>JColorChooser</li>
+<li>JFileChooser</li>
+<li>JOptionPane</li>
+</ul>
+</li>
+<li>Menus<ul>
+<li>JMenuItem</li>
+<li>JMenu</li>
+<li>JMenuBar</li>
+<li>JCheckBoxMenuItem</li>
+<li>JRadioButtonMenuItem</li>
+<li>JPopupMenu</li>
+<li>JSeparator</li>
+</ul>
+</li>
+<li>Container<ul>
+<li>JPanel<br>  JPanel是面板组件，通常不单独显示，而是作为其他容器（比如JFrame）中的子容器，主要用来：组织组件（比如把按钮、文本框放在一个面板里），配合不同的布局管理器使用（FlowLayout、 BorderLayout、 GridLayout）</li>
+<li>JTappedPane</li>
+<li>JSplitPane</li>
+<li>JScrollPane</li>
+<li>JToolBar</li>
+<li>JDesktopPane</li>
+<li>JInternalFrame</li>
+<li>JLayeredPane</li>
+</ul>
+</li>
+<li>Control elements<ul>
+<li>JLabel</li>
+<li>JButton</li>
+<li>JToggleButton</li>
+<li>JCheckBox<br>  复选框组件，用来让用户在多个选项中进行单选或多选</li>
+<li>JRadioButton</li>
+<li>ButtonGroup</li>
+<li>JComboBox</li>
+<li>JList</li>
+<li>JTextField</li>
+<li>JTextArea</li>
+<li>JSeperator</li>
+</ul>
+</li>
+<li>Event handling<ul>
+<li>ActionEvent</li>
+<li>AdjustmentEvent</li>
+<li>FocusEvent</li>
+<li>ItemEvent</li>
+<li>MouseEvent</li>
+<li>TextEvent</li>
+<li>WindowEvent</li>
+<li>Menuvent</li>
+<li>ListSelectionEvent</li>
+<li>TableModelEvent<br>以WindowEvent为例</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">JFrame testFrame = new JFrame(<span class="string">&quot;Listener Test&quot;</span>);</span><br><span class="line">testFrame.setSize(300,200);</span><br><span class="line">testFrame.addWindowListener(new <span class="function"><span class="title">WindowAdpater</span></span>()&#123;</span><br><span class="line">    public void windowClosing(WindowEvent e)&#123;</span><br><span class="line">        JOptionPane testOpt = new JOptionPane();</span><br><span class="line">        testOpt.showMessageDialog(new JFrame(), <span class="string">&quot;closing Window!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>这里使用了匿名函数，等同于以下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JFrame testFrame = new JFrame(<span class="string">&quot;Listener Test&quot;</span>);</span><br><span class="line">class MyWindowListener extends WindowAdpater&#123;</span><br><span class="line">    public void windowClosing(WindowEvent e)&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;窗口关闭&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">testFrame.addWindowListener(new MyWindowListener());</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Layout manager<ul>
+<li>FlowLayout</li>
+<li>GridLayout</li>
+<li>BorderLayout</li>
+<li>BoxLayout</li>
+<li>CardLayout</li>
+<li>GridBagLayout</li>
+<li>GroupLayout</li>
+<li>SpringLayout</li>
+</ul>
+</li>
+</ul>
+<h2 id="Java的抽象类和接口"><a href="#Java的抽象类和接口" class="headerlink" title="Java的抽象类和接口"></a>Java的抽象类和接口</h2><p>以抽象类WindowAdapter和接口WindowListener为例。<br>通常来说，抽象类继承了接口的方法，但是每个方法都留了个空壳实现，正因为这些空壳，继承了接口的抽象类只需要写像覆盖的那几种方法，而不是被迫写完全部。<br>例如WindowAdapter继承WindowListener</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public abstract class WindowAdapter implements WindowListener&#123;</span><br><span class="line">    public void windowOpened(WindowEvent e)&#123;&#125;</span><br><span class="line">    ...</span><br><span class="line">    public void windowDeactivated(WindowEvent e)&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用继承的方法构建MainFrame类"><a href="#使用继承的方法构建MainFrame类" class="headerlink" title="使用继承的方法构建MainFrame类"></a>使用继承的方法构建MainFrame类</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class MainFrame extends JFrame&#123;</span><br><span class="line">    public <span class="function"><span class="title">MainFrame</span></span>()&#123;</span><br><span class="line">        setTitle(<span class="string">&quot;Choose Your Favorite Items&quot;</span>);</span><br><span class="line">        setSize(400, 300);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以这么理解,以下的JFrame父类的构造函数会在子类MainFrame调用构造函数时被调用，因为如果父类构造函数如果是无参的话那么就会被隐型调用，如果是有参的话需要通过super函数来调用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class JFrame&#123;</span><br><span class="line">    public <span class="function"><span class="title">JFrame</span></span>()&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>继承了这个父类的MyFrame子类相当于在构造函数里面执行了一遍super()</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public <span class="function"><span class="title">MainFrame</span></span>()&#123;</span><br><span class="line">    super();</span><br><span class="line">    setTitle(<span class="string">&quot;Choose your favourite items&quot;</span>);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<img src="/images/你.jpg">
+你好可爱，为什么我们性格会如何相像
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/22/openairinterface/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1284,12 +1438,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span>
       </div>
   </nav>

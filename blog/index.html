@@ -150,6 +150,64 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/17/PyTorch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/17/PyTorch/" class="post-title-link" itemprop="url">PyTorch</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-06-17 14:57:35" itemprop="dateCreated datePublished" datetime="2025-06-17T14:57:35+02:00">2025-06-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/16/MachineLearning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -176,6 +234,22 @@
 
               <time title="Created: 2025-06-16 23:42:25" itemprop="dateCreated datePublished" datetime="2025-06-16T23:42:25+02:00">2025-06-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-06-17 14:48:22" itemprop="dateModified" datetime="2025-06-17T14:48:22+02:00">2025-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                </span>
+            </span>
 
           
 
@@ -189,7 +263,35 @@
 
       
       
-          
+          <h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>Look for a function for e.g., image recognition, speech recognition.  </p>
+<ul>
+<li>Regression<br>The function outputs a scalar</li>
+<li>Classification<br>Given options (classes), the function outputs the correct one.</li>
+<li>Structured Learning</li>
+</ul>
+<h3 id="Linear-Model"><a href="#Linear-Model" class="headerlink" title="Linear Model"></a>Linear Model</h3><h4 id="Define-function-with-unknown-parameters"><a href="#Define-function-with-unknown-parameters" class="headerlink" title="Define function with unknown parameters"></a>Define function with unknown parameters</h4><p>Model: $y &#x3D; b + w_1$ based on domain knowledge<br>w (weight) and b (bias) are unknown parameters (learn from data)<br>如果是一组包含有多个feature（例如同时考虑前七天的数据来进行预测）<br>那么$y &#x3D; b + \sum_j w_jx_j$</p>
+<h4 id="Define-Loss-from-Training-Data"><a href="#Define-Loss-from-Training-Data" class="headerlink" title="Define Loss from Training Data"></a>Define Loss from Training Data</h4><p>Loss is a function of the unknown parameters: L(b,w)<br>e.g., L(0.5k, 1) corresponding to $y &#x3D; 0.5k + 1x_1$<br>我们定义一个loss function为:<br>$e_n &#x3D; |y_n - \hat{y_n}|$  </p>
+<p>Loss: $L(b, w) &#x3D; \frac{1}{N} \sum_{n&#x3D;1}^{N} \left| y_n - \hat{y}_n \right|$</p>
+<p>其中y为预测值，$\hat{y}$为真实值,这里我们定义的Loss是mean absolute error （MAE），如果是mean square error（MSE），则是差值的的平方。</p>
+<h4 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h4><p>我们通过最小化损失函数 <em>L(b, w)</em> 来学习未知参数 b 和 w。优化目标为：</p>
+<p>$b^<em>, w^</em> &#x3D; \arg\min_{b, w} L(b, w)$</p>
+<p>我们可以使用梯度下降法进行优化，参数更新如下：</p>
+<p>$w \leftarrow w - \eta \frac{\partial L}{\partial w}, \quad<br>b \leftarrow b - \eta \frac{\partial L}{\partial b}$</p>
+<p>其中 $\eta$ 为学习率。对于 MAE 损失，由于其不可导点较多，可以使用次梯度法；对于 MSE 损失，则可以直接使用标准梯度下降算法。</p>
+<h3 id="Sophisticated-Models"><a href="#Sophisticated-Models" class="headerlink" title="Sophisticated Models"></a>Sophisticated Models</h3><p>Beacuse linear models have severe limitation (model bias), so we include more sophisticated models.</p>
+<h4 id="Sigmoid-function"><a href="#Sigmoid-function" class="headerlink" title="Sigmoid function"></a>Sigmoid function</h4><p>$y &#x3D; b + wx_1 &#x3D;&gt; y &#x3D; b + \sum_i c_i \cdot \sigma(b_i + w_ix_1)$<br>注：不同的w，b，c可以让sigmoid曲线可以拟合不同的曲线<br>注意这里是多个sigmoid的和，因为实际情况可能是由多个sigmoid拟合而成。<br>相对应的，对于$y &#x3D; b + \sum_j w_jx_j$, 则有$y &#x3D; b + \sum_i c_i \cdot \sigma(b_i + \sum_j w_{ij} x_j)$  </p>
+<p>示例：i &#x3D; 1,2,3; j &#x3D; 1,2,3 时的显式形式<br>$$<br>r_1 &#x3D; b_1 + w_{11}x_1 + w_{12}x_2 + w_{13}x_3<br>$$</p>
+<p>$$<br>r_2 &#x3D; b_2 + w_{21}x_1 + w_{22}x_2 + w_{23}x_3<br>$$</p>
+<p>$$<br>r_3 &#x3D; b_3 + w_{31}x_1 + w_{32}x_2 + w_{33}x_3<br>$$</p>
+<p>向量化（矩阵）形式<br>$$<br>\mathbf{r} &#x3D; W \mathbf{x} + \mathbf{b}<br>$$</p>
+<p>然后对生成的r做sigmoid函数，矩阵表达形式如下</p>
+<p>$$<br>\mathbf{a} &#x3D; \sigma(\mathbf{r})<br>$$</p>
+<p>最后的输出y矩阵表达形式如下：<br>$$<br>y &#x3D; b + \mathbf{c}^T \mathbf{a}<br>$$</p>
+<p>Optimization部分，先将所有unknown parameters放到$\mathbf{\theta}$向量中<br>$$<br>\mathbf{\theta} &#x3D; \left[ b,\ c_1,\ \dots,\ c_i,\ b_1,\ \dots,\ b_i,\ w_{11},\ \dots,\ w_{ij} \right]<br>$$</p>
+<p>定义Loss function $L(\theta)$,最后想要取得的 $\mathbf{\theta^{*}} &#x3D; \arg\min_{\theta} L$  </p>
+<p>因此我们同样的使用梯度下降更新去得到最后的$\mathbf{\theta^{*}}$<br>$$<br>\theta \leftarrow \theta - \eta \cdot \nabla_\theta L(\theta)<br>$$  </p>
+<p><strong>Batch Size</strong>, <strong>Epoch</strong>, <strong>N</strong><br>1,000 examples (N &#x3D; 1,000), Batch size is 100, so 100 update in 1 epoch (10 Batch).</p>
+
       
     </div>
 
@@ -1089,88 +1191,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/04/%E4%BF%A1%E9%81%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/04/%E4%BF%A1%E9%81%93/" class="post-title-link" itemprop="url">信道</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-06-04 16:48:13 / Modified: 16:58:48" itemprop="dateCreated datePublished" datetime="2025-06-04T16:48:13+02:00">2025-06-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="定义与分类"><a href="#定义与分类" class="headerlink" title="定义与分类"></a>定义与分类</h2><ul>
-<li>狭义信道<ul>
-<li>有线信道<br>  同轴电缆，光纤</li>
-<li>无线信道<br>  微波视距传播，卫星中继，移动通信信道</li>
-</ul>
-</li>
-<li>广义信道<ul>
-<li>调制信道<br>  调制器输出-&gt;解调器输入</li>
-<li>编码信道<br>  编码器输出-&gt;译码器输入</li>
-</ul>
-</li>
-</ul>
-<h3 id="调制信道"><a href="#调制信道" class="headerlink" title="调制信道"></a>调制信道</h3><p>有一对一&#x2F;一对多的输入输出端，满足线性叠加原理，对信号有时变和时不变的两种延迟和损耗，其数学模型是叠加有噪声的线性时变&#x2F;时不变滤波器</p>
-<h4 id="恒参信道"><a href="#恒参信道" class="headerlink" title="恒参信道"></a>恒参信道</h4><p>对应的信道特性为线性时不变滤波器</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1240,12 +1260,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span>
       </div>
   </nav>
