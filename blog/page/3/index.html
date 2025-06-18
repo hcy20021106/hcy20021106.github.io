@@ -728,7 +728,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-05-29 22:55:41" itemprop="dateModified" datetime="2025-05-29T22:55:41+02:00">2025-05-29</time>
+                <time title="Modified: 2025-06-18 20:59:27" itemprop="dateModified" datetime="2025-06-18T20:59:27+02:00">2025-06-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -754,8 +754,10 @@
       
           <h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>在OFDM中，一个OFDM符号就是多个子载波的结合，每个子载波承载一个调制符号（如QPSK、 16QAM、 64QAM等）<br>所以一个OFDM符号在频域中会有多个调制符号，IFFT就是把这些调制符号转换成时域的连续符号，变成一个OFDM符号。<br>整体的过程是modData -&gt; 插入pilot -&gt; 插入null（清零无效子载波）-&gt; 子载波分配与映射 -&gt; IFFT -&gt; 加CP -&gt; ofdmDataOut</p>
 <p>其中子载波分配是指OFDM将整个频谱分成若干个正交的子载波，每个调制符号会被映射到一个子载波上。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X(t) = \sum_&#123;n=0&#125;^&#123;N-1&#125;s_n \cdot e^&#123;j2\pi f_n t&#125;</span><br></pre></td></tr></table></figure>
-<p>入上述表达式实现了每个符号乘以一个复指数信号（频率为该子载波的频率）进行映射。也就是说，每个符号都会与一个正弦或余弦波相乘，并根据子载波的频率进行偏移。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s(t_m) = \sum_&#123;n=0&#125;^&#123;N-1&#125;[I_ncosw_nt_m - Q_n sinw_nt_m] = Re \sum_&#123;n=0&#125;^&#123;N-1&#125;[(I_n + jQ_n)e^&#123;jw_nt_m&#125;]</span><br></pre></td></tr></table></figure>
+<p>其中$\sum_{n&#x3D;0}^{N-1}[(I_n + jQ_n)e^{jw_nt_m}]$是IDFT的形式，再结合IFFT因此可将上式子转变为：  </p>
+<p>$Re[IFFT(I_n + jQ_n)]$  </p>
+<p>因此可将$Z_n &#x3D; I_n + jQ_n$理解为OFDM信号在DFT的频谱上的离散点。从上述表达式实现了每个符号乘以一个复指数信号（频率为该子载波的频率）进行映射。也就是说，每个符号都会与一个正弦或余弦波相乘，并根据子载波的频率进行偏移。</p>
 <p>IFFT: 对调制后的符号进行 逆离散傅里叶变换（IFFT），将频域信号转换为时域信号。IFFT 是将各个子载波的信号合成在一起的步骤，在这个步骤之后，信号由频域转为时域。<br>在matlab仿真中，data为原始复数对，X_freq为频域信号，zeros(FFT_size,1),装有data，这样就实现了将原始数据加载到子载波上，然后X_time &#x3D; ifft(ifftshift(X_freq), N)</p>
 <h2 id="OFDM-子载波时域与频域特性说明"><a href="#OFDM-子载波时域与频域特性说明" class="headerlink" title="OFDM 子载波时域与频域特性说明"></a>OFDM 子载波时域与频域特性说明</h2><h3 id="OFDM-子载波的频域表示"><a href="#OFDM-子载波的频域表示" class="headerlink" title="OFDM 子载波的频域表示"></a>OFDM 子载波的频域表示</h3><p>在 OFDM 系统中，信号在频域由多个子载波组成，每个子载波对应一个特定的频率分量。假设有 (N) 个子载波，总频域信号为：</p>
 <p>$$<br>X[k], \quad k &#x3D; 0, 1, \ldots, N-1<br>$$</p>
