@@ -173,10 +173,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-06-04 16:48:13 / Modified: 16:58:48" itemprop="dateCreated datePublished" datetime="2025-06-04T16:48:13+02:00">2025-06-04</time>
+              <time title="Created: 2025-06-04 16:48:13" itemprop="dateCreated datePublished" datetime="2025-06-04T16:48:13+02:00">2025-06-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-06-25 22:31:11" itemprop="dateModified" datetime="2025-06-25T22:31:11+02:00">2025-06-25</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -212,7 +218,12 @@
 </li>
 </ul>
 <h3 id="调制信道"><a href="#调制信道" class="headerlink" title="调制信道"></a>调制信道</h3><p>有一对一&#x2F;一对多的输入输出端，满足线性叠加原理，对信号有时变和时不变的两种延迟和损耗，其数学模型是叠加有噪声的线性时变&#x2F;时不变滤波器</p>
-<h4 id="恒参信道"><a href="#恒参信道" class="headerlink" title="恒参信道"></a>恒参信道</h4><p>对应的信道特性为线性时不变滤波器</p>
+<h4 id="恒参信道"><a href="#恒参信道" class="headerlink" title="恒参信道"></a>恒参信道</h4><h2 id="对应的信道特性为线性时不变滤波器。理想恒参信道的特征：-s-0-t-Ks-i-t-t-d-H-w-Ke-jwt-d-因此这个恒参信道的幅频特性和相频特性分别为-H-K-相频特性-phi-w-wt-d-，-群时延特性-tau-w-frac-d-phi-w-dw-t-d"><a href="#对应的信道特性为线性时不变滤波器。理想恒参信道的特征：-s-0-t-Ks-i-t-t-d-H-w-Ke-jwt-d-因此这个恒参信道的幅频特性和相频特性分别为-H-K-相频特性-phi-w-wt-d-，-群时延特性-tau-w-frac-d-phi-w-dw-t-d" class="headerlink" title="对应的信道特性为线性时不变滤波器。理想恒参信道的特征：$s_0(t) &#x3D; Ks_i(t - t_d)$$H(w) &#x3D; Ke^{-jwt_d}$因此这个恒参信道的幅频特性和相频特性分别为 $|H| &#x3D; K$ 相频特性$\phi(w) &#x3D; -wt_d$， 群时延特性$\tau(w) &#x3D; -\frac{d\phi(w)}{dw} &#x3D; t_d$,  "></a>对应的信道特性为线性时不变滤波器。<br>理想恒参信道的特征：<br>$s_0(t) &#x3D; Ks_i(t - t_d)$<br>$H(w) &#x3D; Ke^{-jwt_d}$<br>因此这个恒参信道的幅频特性和相频特性分别为 $|H| &#x3D; K$ 相频特性$\phi(w) &#x3D; -wt_d$， 群时延特性$\tau(w) &#x3D; -\frac{d\phi(w)}{dw} &#x3D; t_d$,  </h2><blockquote>
+<p><strong>Notice</strong><br><br>如果输入的频谱有两个分量，系统的 幅频响应 和 相频响应 会分别对这两个频率分量产生不同的幅度缩放和相位偏移。<br>假如输入信号为两个频域分量的叠加：<br>$x(t) &#x3D; A_1 \cos(\omega_1 t) + A_2 \cos(\omega_2 t)$<br>对应的频域表示为两根谱线：<br>$X(j\omega) &#x3D; \frac{A_1}{2} \left[ \delta(\omega - \omega_1) + \delta(\omega + \omega_1) \right] + \frac{A_2}{2} \left[ \delta(\omega - \omega_2) + \delta(\omega + \omega_2) \right]$<br>系统频率响应表示为：<br>$H(j\omega) &#x3D; |H(j\omega)| e^{j \phi(\omega)}$<br>系统输出频域为输入频谱与频率响应的乘积<br>$Y(j\omega) &#x3D; H(j\omega) \cdot X(j\omega)$<br>分别作用于两个频率分量：<br>$<br>\begin{cases}<br>\text{频率 } \omega_1 \text{ 分量的幅度变为 } A_1 |H(j\omega_1)|, \quad \text{相位增加 } \phi(\omega_1) \<br>\text{频率 } \omega_2 \text{ 分量的幅度变为 } A_2 |H(j\omega_2)|, \quad \text{相位增加 } \phi(\omega_2)<br>\end{cases}<br>$<br>因此，输出信号为：<br>$y(t) &#x3D; A_1 |H(j\omega_1)| \cos\left(\omega_1 t + \phi(\omega_1)\right) + A_2 |H(j\omega_2)| \cos\left(\omega_2 t + \phi(\omega_2)\right)$</p>
+</blockquote>
+<hr>
+<p>由此分析可得对信号不同频率分量放大或衰减倍数相同，由于群时延特性为常数因此信号不同频率分量到底，输出端的时间先后一致<br>然后，现实中的信道会出现幅频失真、相频失真和群时延失真的情况。也就是说对信号不同频率分量放大或者衰减倍数不同。或者信号不同频率分量到达输出端的时间先后不一。但是这些失真不产生新的频率分量，因此均为线性失真。</p>
+<h4 id="随参信道"><a href="#随参信道" class="headerlink" title="随参信道"></a>随参信道</h4><p>原因：<br>由于多径效应产生的时延差。<br>特性：<br>存在时变的衰减和时延<br>存在多径传播现象<br>$r(t) &#x3D; \sum_{i &#x3D; 1}{n}a_i(t)cosw_c[t-\tau_i(t)] &#x3D; X(t)cosw_ct - Y(t)sinw_ct$<br>其中$a_i(t)$为时变衰落，$\tau_i(t)$为时变时延，X(t)为窄带信号的同相分量，Y(t)为正交分量，其均方和的开方为随机包络，arctan为随机相位。<br>多路传播的影响：<strong>瑞利衰落</strong></p>
 
       
     </div>
@@ -570,10 +581,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-04-29 00:45:01 / Modified: 00:55:51" itemprop="dateCreated datePublished" datetime="2025-04-29T00:45:01+02:00">2025-04-29</time>
+              <time title="Created: 2025-04-29 00:45:01" itemprop="dateCreated datePublished" datetime="2025-04-29T00:45:01+02:00">2025-04-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-06-25 21:42:09" itemprop="dateModified" datetime="2025-06-25T21:42:09+02:00">2025-06-25</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -597,7 +614,7 @@
       
       
           <h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>先了解MMSE，MMSE（Minimum Mean Square Error），也就是最小均方误差，是一种常用的统计估计方法，它的目标就是最小化估计值与实际值之间的均方误差（MSE）。在通信系统中，MMSE被广泛用于信道估计，因为它能够在噪声和干扰的影响下，给出一个最优估计。<br>另外，在信道估计中，交叉相关矩阵通常用于计算数据子载波和导频子载波之间的相关性，这对于估计信道的状态至关重要。</p>
-
+<h2 id="数学公式推导"><a href="#数学公式推导" class="headerlink" title="数学公式推导"></a>数学公式推导</h2>
       
     </div>
 
@@ -925,7 +942,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-18 15:49:34" itemprop="dateModified" datetime="2025-06-18T15:49:34+02:00">2025-06-18</time>
+                <time title="Modified: 2025-06-25 22:22:17" itemprop="dateModified" datetime="2025-06-25T22:22:17+02:00">2025-06-25</time>
               </span>
 
           
@@ -1003,6 +1020,10 @@
 <p>那个为中华之崛起而读书，全民讨论中国往何处去的历史是<strong>真实存在</strong>的，甚至很难相信，在那苦难的年代，认真竟是被大家所推崇的，理性的争论竟然是可以实现的。在这样的国土上，真的有这样一群人，一种生活方式，他们能为了国家付出，为了理想奋斗，而不仅仅只是关注自己基金的涨跌，脸上痘痘的多少，又或者新发的朋友圈有多少人点赞。总之，理想可以以真实的形式存在。</p>
 <p>醒时同交欢，醉后各分离</p>
 <p>理性认识依赖于感性认识，理性的东西所以靠得住，正是由于它来源于感性，否则理性的东西就成了无源之水，无木之本，而只是主观自生的靠不住的东西了。此外，认识有待于深化，也就是说认识不能只停顿在低级的感性阶段，否则就成了“经验论”的错误，因而不能通观客观过程的全体，也称为庸俗的事务主义家。理性认识之后需行动起来，在懂得了客观世界的规律性后需要去解释世界，也就是拿了这种对于客观规律性的认识去能动地改造世界，也可称之为改造世界的实践过程。总的来说，通过实践而发现真理，又通过实践而证实真理和发展真理。从感性认识而能动地发展到理性认识，又从理性认识而能动地指导革命实践，改造主观世界和客观世界。这就是辩证唯物论的知行统一观。</p>
+<p>密切联系人民群众，洞悉社会弊病的人，然后将基于此形成的理性认识，并投入改造世界的实践过程的人，可称为先生。而大多是的人只了解少数精英阶层，而忽视底层的大多数。</p>
+<p>中国人的性格和中国文明的三大特征，正是深沉，博大和淳朴，此外还有灵敏<br>—— 辜鸿铭《中国人的精神》</p>
+<p>真正的平等，意味着一视同仁，门户开放，有教无类，或像伟大的拿破仑所表述的人尽其才，而不是将笨蛋与非笨蛋的头脑弄平，使国家中最好之人与最差之人一样差的绝对平等；真正的自由，并不意味着可以随心所欲，而是可以自由地做正确的事情，即中国经书中所谓率性之谓道。真正的民主，是指敞开的大门，没有出身、地位和种族之别，而不是指没有君、王权，更不是指庶民议政。大多数永远是不好的，他们不具备参政议政的能力。近代西方由大多数人来参与和支配政治的观念为群氓崇拜，它是非理性民主政治的来源，是欧美近来所有社会、政治和世界无政府状态的根源，也是导致欧洲大战的非直接原因。</p>
+<p>不觉碧山暮，秋云暗几重</p>
 
       
     </div>

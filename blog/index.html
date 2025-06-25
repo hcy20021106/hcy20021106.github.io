@@ -988,7 +988,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-16 17:33:51" itemprop="dateModified" datetime="2025-06-16T17:33:51+02:00">2025-06-16</time>
+                <time title="Modified: 2025-06-24 16:14:20" itemprop="dateModified" datetime="2025-06-24T16:14:20+02:00">2025-06-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1134,7 +1134,7 @@
 <p><strong>Notice</strong><br><br>$(1+x)^{1&#x2F;2} \approx 1 + \frac{x}{2}$</p>
 </blockquote>
 <hr>
-<p>因此输出信号中信号(m(t))的平均功率为$\overline{m(t)^2}$, 噪声的平均功率为$\overline{n_c(t)^2}$<br>其中$n_c(t)$为窄带高斯噪声，功率为其均方值，也就是$E[n_c(t)^2]$,根据窄带信号的统计特性可知，其本身的数学期望和方差都和其正交部分和同相部分相等，因此均方值也相同<br>因此此时输出信噪比$S_0&#x2F;N_0$与相干检波时一样，又因为输入信噪比也一样（易知），因此抗噪声性一样（大信噪比情况下）  </p>
+<p>因此输出信号中信号(m(t))的平均功率为$\overline{m(t)^2}$, 噪声的平均功率为$\overline{n_c(t)^2}$<br>其中$n_c(t)$为窄带高斯噪声，功率为其均方值，也就是$E[n_c(t)^2]$,根据窄带信号的统计特性可知，其本身的数学期望和方差都和其正交部分和同相部分相等（E&#x3D;0，D&#x3D;$\sigma^2$），因此均方值也相同<br>因此此时输出信噪比$S_0&#x2F;N_0$与相干检波时一样，又因为输入信噪比也一样（易知），因此抗噪声性一样（大信噪比情况下）  </p>
 <h4 id="小信噪比"><a href="#小信噪比" class="headerlink" title="小信噪比"></a>小信噪比</h4><p>也就是信号包络远小于噪声包络<br>通过分析合成的信号的包络E(t)，可知信号会被检测器扰乱为噪声。因此此时输出信噪比急剧恶化<br>这也就是门限效应，是由于包络检测器的非线性解调作用而产生的。（相干解调是线性解调，不存在门限效应）<br>在大信噪比环境下抗噪声能力与相干解调在任意信噪比时几乎相同，而在小信噪比时会很弱，因此会有一个拐点，也就是会出现门限效应。</p>
 <p><strong>小结</strong></p>
 <table>
