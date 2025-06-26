@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://hechenyi.github.io/images/dataflow.png">
 <meta property="article:published_time" content="2025-04-21T12:50:57.000Z">
-<meta property="article:modified_time" content="2025-06-18T18:59:27.610Z">
+<meta property="article:modified_time" content="2025-06-26T15:18:18.463Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://hechenyi.github.io/images/dataflow.png">
@@ -187,7 +187,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-18 20:59:27" itemprop="dateModified" datetime="2025-06-18T20:59:27+02:00">2025-06-18</time>
+                <time title="Modified: 2025-06-26 17:18:18" itemprop="dateModified" datetime="2025-06-26T17:18:18+02:00">2025-06-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -304,7 +304,7 @@
 <h3 id="采样频率"><a href="#采样频率" class="headerlink" title="采样频率"></a>采样频率</h3><p>采样率 &#x3D; 子载波数量 x 子载波间隔<br>这是5G NR的特性<br>数学证明:<br>$f_{sampling} &#x3D; \frac{n_{subcarrier} * n_{OFDMSymbolsPerSlot}}{T_{slot}} &#x3D; \frac{n_{subcarrier}}{T_{TimePerSymbol}} &#x3D; n_{subcarrier} * \Delta f$  </p>
 <hr>
 <blockquote>
-<p><strong>Notice</strong><br><br>需要注意的是这里的子载波数量包含使用和未使用的子载波，也就是等于FFT size，所以不完全等于带宽（带宽只由使用的子载波数量决定， CP只占据时间资源而不占据频域资源）, FFT size （N）本质上是对长度为N的时域信号进行变换，默认把这段信号看成是周期性重复的。一个OFDM符号的采样点数目通常等于FFT size。如果采样点数目要大于FFT size，那么可以逐块做FFT，如果采样点数目要小，那么做FFT时一般会补零（zero-padding）。</p>
+<p><strong>Notice</strong><br><br>需要注意的是这里的子载波数量包含使用和未使用的子载波，也就是等于FFT size (针对一个OFDM符号而言，也就是对x[n]的一个OFDM符号采样后的离散信号进行ifft变换)，所以不完全等于带宽（带宽只由使用的子载波数量决定， CP只占据时间资源而不占据频域资源）, FFT size （N）本质上是对长度为N的时域信号进行变换，默认把这段信号看成是周期性重复的。一个OFDM符号的采样点数目通常等于FFT size。如果采样点数目要大于FFT size，那么可以逐块做FFT，如果采样点数目要小，那么做FFT时一般会补零（zero-padding）。</p>
 </blockquote>
 <hr>
 <h2 id="MATLAB-example"><a href="#MATLAB-example" class="headerlink" title="MATLAB example"></a>MATLAB example</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openExample(<span class="string">&#x27;comm/OFDMEndToEndExample&#x27;</span>)</span><br></pre></td></tr></table></figure>

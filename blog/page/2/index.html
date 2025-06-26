@@ -419,7 +419,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-25 22:31:11" itemprop="dateModified" datetime="2025-06-25T22:31:11+02:00">2025-06-25</time>
+                <time title="Modified: 2025-06-26 15:14:04" itemprop="dateModified" datetime="2025-06-26T15:14:04+02:00">2025-06-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -456,12 +456,14 @@
 </li>
 </ul>
 <h3 id="调制信道"><a href="#调制信道" class="headerlink" title="调制信道"></a>调制信道</h3><p>有一对一&#x2F;一对多的输入输出端，满足线性叠加原理，对信号有时变和时不变的两种延迟和损耗，其数学模型是叠加有噪声的线性时变&#x2F;时不变滤波器</p>
-<h4 id="恒参信道"><a href="#恒参信道" class="headerlink" title="恒参信道"></a>恒参信道</h4><h2 id="对应的信道特性为线性时不变滤波器。理想恒参信道的特征：-s-0-t-Ks-i-t-t-d-H-w-Ke-jwt-d-因此这个恒参信道的幅频特性和相频特性分别为-H-K-相频特性-phi-w-wt-d-，-群时延特性-tau-w-frac-d-phi-w-dw-t-d"><a href="#对应的信道特性为线性时不变滤波器。理想恒参信道的特征：-s-0-t-Ks-i-t-t-d-H-w-Ke-jwt-d-因此这个恒参信道的幅频特性和相频特性分别为-H-K-相频特性-phi-w-wt-d-，-群时延特性-tau-w-frac-d-phi-w-dw-t-d" class="headerlink" title="对应的信道特性为线性时不变滤波器。理想恒参信道的特征：$s_0(t) &#x3D; Ks_i(t - t_d)$$H(w) &#x3D; Ke^{-jwt_d}$因此这个恒参信道的幅频特性和相频特性分别为 $|H| &#x3D; K$ 相频特性$\phi(w) &#x3D; -wt_d$， 群时延特性$\tau(w) &#x3D; -\frac{d\phi(w)}{dw} &#x3D; t_d$,  "></a>对应的信道特性为线性时不变滤波器。<br>理想恒参信道的特征：<br>$s_0(t) &#x3D; Ks_i(t - t_d)$<br>$H(w) &#x3D; Ke^{-jwt_d}$<br>因此这个恒参信道的幅频特性和相频特性分别为 $|H| &#x3D; K$ 相频特性$\phi(w) &#x3D; -wt_d$， 群时延特性$\tau(w) &#x3D; -\frac{d\phi(w)}{dw} &#x3D; t_d$,  </h2><blockquote>
+<h4 id="恒参信道"><a href="#恒参信道" class="headerlink" title="恒参信道"></a>恒参信道</h4><p>对应的信道特性为线性时不变滤波器。<br>理想恒参信道的特征：<br>$s_0(t) &#x3D; Ks_i(t - t_d)$<br>$H(w) &#x3D; Ke^{-jwt_d}$<br>因此这个恒参信道的幅频特性和相频特性分别为 $|H| &#x3D; K$ 相频特性$\phi(w) &#x3D; -wt_d$， 群时延特性$\tau(w) &#x3D; -\frac{d\phi(w)}{dw} &#x3D; t_d$,  </p>
+<hr>
+<blockquote>
 <p><strong>Notice</strong><br><br>如果输入的频谱有两个分量，系统的 幅频响应 和 相频响应 会分别对这两个频率分量产生不同的幅度缩放和相位偏移。<br>假如输入信号为两个频域分量的叠加：<br>$x(t) &#x3D; A_1 \cos(\omega_1 t) + A_2 \cos(\omega_2 t)$<br>对应的频域表示为两根谱线：<br>$X(j\omega) &#x3D; \frac{A_1}{2} \left[ \delta(\omega - \omega_1) + \delta(\omega + \omega_1) \right] + \frac{A_2}{2} \left[ \delta(\omega - \omega_2) + \delta(\omega + \omega_2) \right]$<br>系统频率响应表示为：<br>$H(j\omega) &#x3D; |H(j\omega)| e^{j \phi(\omega)}$<br>系统输出频域为输入频谱与频率响应的乘积<br>$Y(j\omega) &#x3D; H(j\omega) \cdot X(j\omega)$<br>分别作用于两个频率分量：<br>$<br>\begin{cases}<br>\text{频率 } \omega_1 \text{ 分量的幅度变为 } A_1 |H(j\omega_1)|, \quad \text{相位增加 } \phi(\omega_1) \<br>\text{频率 } \omega_2 \text{ 分量的幅度变为 } A_2 |H(j\omega_2)|, \quad \text{相位增加 } \phi(\omega_2)<br>\end{cases}<br>$<br>因此，输出信号为：<br>$y(t) &#x3D; A_1 |H(j\omega_1)| \cos\left(\omega_1 t + \phi(\omega_1)\right) + A_2 |H(j\omega_2)| \cos\left(\omega_2 t + \phi(\omega_2)\right)$</p>
 </blockquote>
 <hr>
 <p>由此分析可得对信号不同频率分量放大或衰减倍数相同，由于群时延特性为常数因此信号不同频率分量到底，输出端的时间先后一致<br>然后，现实中的信道会出现幅频失真、相频失真和群时延失真的情况。也就是说对信号不同频率分量放大或者衰减倍数不同。或者信号不同频率分量到达输出端的时间先后不一。但是这些失真不产生新的频率分量，因此均为线性失真。</p>
-<h4 id="随参信道"><a href="#随参信道" class="headerlink" title="随参信道"></a>随参信道</h4><p>原因：<br>由于多径效应产生的时延差。<br>特性：<br>存在时变的衰减和时延<br>存在多径传播现象<br>$r(t) &#x3D; \sum_{i &#x3D; 1}{n}a_i(t)cosw_c[t-\tau_i(t)] &#x3D; X(t)cosw_ct - Y(t)sinw_ct$<br>其中$a_i(t)$为时变衰落，$\tau_i(t)$为时变时延，X(t)为窄带信号的同相分量，Y(t)为正交分量，其均方和的开方为随机包络，arctan为随机相位。<br>多路传播的影响：<strong>瑞利衰落</strong></p>
+<h4 id="随参信道"><a href="#随参信道" class="headerlink" title="随参信道"></a>随参信道</h4><p>原因：<br>由于多径效应产生的时延差。<br>特性：<br>存在时变的衰减和时延<br>存在多径传播现象<br>$r(t) &#x3D; \sum_{i &#x3D; 1}{n}a_i(t)cosw_c[t-\tau_i(t)] &#x3D; X(t)cosw_ct - Y(t)sinw_ct$<br>其中$a_i(t)$为 <strong>时变衰落</strong> ，$\tau_i(t)$为<strong>时变时延</strong>，X(t)为窄带信号的同相分量，Y(t)为正交分量，其均方和的开方为随机包络，arctan为随机相位。<br>多路传播的影响：<strong>瑞利衰落</strong></p>
 
       
     </div>
@@ -827,7 +829,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-26 00:39:29" itemprop="dateModified" datetime="2025-06-26T00:39:29+02:00">2025-06-26</time>
+                <time title="Modified: 2025-06-26 17:24:56" itemprop="dateModified" datetime="2025-06-26T17:24:56+02:00">2025-06-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -872,14 +874,19 @@
 <p>Where:</p>
 <p>$$<br>R_{hd,hp}: \text{ Cross-correlation matrix between data and pilot subcarriers} \<br>R_{hp,hp}: \text{ Autocorrelation matrix of pilot subcarriers} \<br>\hat{H}_{\text{pilot}}: \text{ LS-estimated channel at pilot positions} \<br>\sigma^2: \text{ Noise variance} \<br>X: \text{ Diagonal matrix of known pilot symbols}<br>$$</p>
 <hr>
-<h3 id="3-Channel-Frequency-Response-DFT"><a href="#3-Channel-Frequency-Response-DFT" class="headerlink" title="3. Channel Frequency Response (DFT)"></a>3. Channel Frequency Response (DFT)</h3><p>The time-domain convolution is:</p>
+<h3 id="3-Channel-Frequency-Response-DFT"><a href="#3-Channel-Frequency-Response-DFT" class="headerlink" title="3. Channel Frequency Response (DFT)"></a>3. Channel Frequency Response (DFT)</h3><p>The time-domain convolution is，这也是一个离散时间的线性卷积公式，它描述了<strong>多径信道</strong>(多径效应)对时域基带信号的影响，其中每一个h[l]表示不同时间延迟下的路径增益:</p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>引入OFDM可以抗多径，因为在循环前缀CP足够长的条件下，把时域的多径线性卷积变换为<strong>循环卷积</strong>,也就是Y[k] &#x3D; H[k]X[k] + W[k]<br></p>
+</blockquote>
+<hr>
 <p>$$<br>y[n] &#x3D; \sum_{m&#x3D;0}^{L-1} h[m] \cdot x[n - m]<br>$$</p>
 <p>The corresponding channel frequency response is obtained via DFT:</p>
 <p>$$<br>H[k] &#x3D; \sum_{l&#x3D;0}^{L-1} h[l] \cdot e^{-j \frac{2\pi k l}{N}}<br>$$</p>
 <p>Where:</p>
 <p>$$<br>h[l]: \text{ Channel tap in time domain} \<br>N: \text{ FFT length (number of subcarriers)} \<br>k: \text{ Subcarrier index}<br>$$</p>
 <hr>
-<h3 id="4-Calculation-of-R-hp-hp"><a href="#4-Calculation-of-R-hp-hp" class="headerlink" title="4. Calculation of ( R_{hp,hp} )"></a>4. Calculation of ( R_{hp,hp} )</h3><p>To calculate the autocorrelation matrix between pilot subcarriers ( R_{hp,hp} ), we start from the frequency-domain channel representation. The channel frequency response at subcarrier ( n ) is given by the discrete Fourier transform (DFT) of the time-domain channel taps:</p>
+<h3 id="4-Calculation-of-R-hp-hp"><a href="#4-Calculation-of-R-hp-hp" class="headerlink" title="4. Calculation of $R_{hp,hp}$"></a>4. Calculation of $R_{hp,hp}$</h3><p>在统计通信理论中，如果H[i]是频率索引为i的频域信道系数（例如OFDM中第i个子载波的信道响应）<br>$R_H(i,j)&#x3D;E[H[i]H[j]]$<br>To calculate the autocorrelation matrix between pilot subcarriers $R_{hp,hp}$, we start from the frequency-domain channel representation. The channel frequency response at subcarrier ( n ) is given by the discrete Fourier transform (DFT) of the time-domain channel taps:</p>
 <p>$$<br>H[n] &#x3D; \sum_{l&#x3D;0}^{L-1} h[l] e^{-j \frac{2\pi}{N} n l}<br>$$</p>
 <p>where:</p>
 <ul>
@@ -890,12 +897,13 @@
 </ul>
 <p>The autocorrelation between frequency responses at pilot subcarrier indices ( n_i ) and ( n_j ) is:</p>
 <p>$$<br>\begin{aligned}<br>R_{hp,hp}(i,j) &amp;&#x3D; E \left[ H[n_i] H^<em>[n_j] \right] \<br>&amp;&#x3D; E \left[ \left( \sum_{l&#x3D;0}^{L-1} h[l] e^{-j \frac{2\pi}{N} n_i l} \right) \left( \sum_{m&#x3D;0}^{L-1} h[m] e^{-j \frac{2\pi}{N} n_j m} \right)^</em> \right] \<br>&amp;&#x3D; \sum_{l&#x3D;0}^{L-1} \sum_{m&#x3D;0}^{L-1} e^{-j \frac{2\pi}{N} n_i l} e^{j \frac{2\pi}{N} n_j m} E \left[ h[l] h^*[m] \right]<br>\end{aligned}<br>$$</p>
-<p>Assuming that the channel taps are uncorrelated with power delay profile ( \sigma_l^2 &#x3D; E[|h[l]|^2] ), we have:</p>
+<p>Assuming that the channel taps are uncorrelated with power delay profile $\sigma_l^2 &#x3D; E[|h[l]|^2]$, we have:</p>
 <p>$$<br>E \left[ h[l] h^*[m] \right] &#x3D;<br>\begin{cases}<br>\sigma_l^2, &amp; l &#x3D; m \<br>0, &amp; l \neq m<br>\end{cases}<br>$$</p>
 <p>Thus, the autocorrelation matrix element simplifies to:</p>
 <p>$$<br>R_{hp,hp}(i,j) &#x3D; \sum_{l&#x3D;0}^{L-1} \sigma_l^2 e^{-j \frac{2\pi}{N} (n_i - n_j) l}<br>$$</p>
 <p>This formula describes the correlation between frequency-domain channel coefficients at pilot positions ( n_i ) and ( n_j ), derived from the time-domain power delay profile.</p>
 <hr>
+<h3 id="5-Calculation-of-R-hd-hp"><a href="#5-Calculation-of-R-hd-hp" class="headerlink" title="5. Calculation of $R_{hd,hp}$"></a>5. Calculation of $R_{hd,hp}$</h3><p>计算过程和计算导频之间的互相关函数一样，只是需要注意data部分的索引。</p>
 <h2 id="📁-File-Structure"><a href="#📁-File-Structure" class="headerlink" title="📁 File Structure"></a>📁 File Structure</h2><ul>
 <li><code>ofdm_lmmse_sim.m</code> – Main simulation script  </li>
 <li><code>Gen_autocorr.m</code> – Generates channel autocorrelation values  </li>
@@ -939,12 +947,18 @@
 </tr>
 </tbody></table>
 <hr>
-<h2 id="🚀-How-to-Run"><a href="#🚀-How-to-Run" class="headerlink" title="🚀 How to Run"></a>🚀 How to Run</h2><ol>
-<li>Open the folder in MATLAB.  </li>
-<li>Ensure both <code>.m</code> files are in the same directory.  </li>
-<li>Run the simulation:</li>
-</ol>
-<pre><code class="language-matlab">&gt;&gt; ofdm_lmmse_sim
+<h2 id="CSI-Acquisition-and-Precoding-Impact-on-BER"><a href="#CSI-Acquisition-and-Precoding-Impact-on-BER" class="headerlink" title="CSI Acquisition and Precoding Impact on BER"></a>CSI Acquisition and Precoding Impact on BER</h2><p>In MIMO-OFDM systems, accurate Channel State Information (CSI) is essential for leveraging spatial multiplexing gains and optimizing transmission through precoding:</p>
+<ul>
+<li><strong>Channel Sounding:</strong> Known pilot or preamble sequences are transmitted to probe the channel. The receiver estimates the CSI (\hat{H}) using LMMSE or similar methods.  </li>
+<li><strong>CSI Feedback &amp; Precoding:</strong> The estimated CSI is fed back to the transmitter, which computes a precoding matrix ( \mathbf{V} ) (e.g., based on SVD or LMMSE estimation) to pre-multiply data symbols. This precoding enhances signal quality and mitigates interference.  </li>
+<li><strong>Data Transmission &amp; BER:</strong> The precoded data is transmitted through the MIMO channel. The receiver decodes the signals based on the estimated CSI. The accuracy of CSI directly affects Bit Error Rate (BER) performance — better CSI leads to lower BER.</li>
+</ul>
+<p>Example MATLAB snippet for per-subcarrier precoding:</p>
+<pre><code class="language-matlab">for carrIdx = 1:prm.numCarriers
+    Q = squeeze(v(carrIdx,:,:));
+    normQ = Q * sqrt(numTx)/norm(Q,&#39;fro&#39;);
+    preData(carrIdx,symIdx,:) = squeeze(gridData(carrIdx,symIdx,:)).&#39; * normQ;
+end
 </code></pre>
 
       

@@ -28,7 +28,7 @@
 <meta property="og:description" content="定义与分类 狭义信道 有线信道  同轴电缆，光纤 无线信道  微波视距传播，卫星中继，移动通信信道   广义信道 调制信道  调制器输出-&gt;解调器输入 编码信道  编码器输出-&gt;译码器输入    调制信道有一对一&#x2F;一对多的输入输出端，满足线性叠加原理，对信号有时变和时不变的两种延迟和损耗，其数学模型是叠加有噪声的线性时变&#x2F;时不变滤波器 恒参信道对应的信道特性为线性时">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T14:48:13.000Z">
-<meta property="article:modified_time" content="2025-06-25T20:31:11.650Z">
+<meta property="article:modified_time" content="2025-06-26T13:14:04.693Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -185,7 +185,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-25 22:31:11" itemprop="dateModified" datetime="2025-06-25T22:31:11+02:00">2025-06-25</time>
+                <time title="Modified: 2025-06-26 15:14:04" itemprop="dateModified" datetime="2025-06-26T15:14:04+02:00">2025-06-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -221,12 +221,14 @@
 </li>
 </ul>
 <h3 id="调制信道"><a href="#调制信道" class="headerlink" title="调制信道"></a>调制信道</h3><p>有一对一&#x2F;一对多的输入输出端，满足线性叠加原理，对信号有时变和时不变的两种延迟和损耗，其数学模型是叠加有噪声的线性时变&#x2F;时不变滤波器</p>
-<h4 id="恒参信道"><a href="#恒参信道" class="headerlink" title="恒参信道"></a>恒参信道</h4><h2 id="对应的信道特性为线性时不变滤波器。理想恒参信道的特征：-s-0-t-Ks-i-t-t-d-H-w-Ke-jwt-d-因此这个恒参信道的幅频特性和相频特性分别为-H-K-相频特性-phi-w-wt-d-，-群时延特性-tau-w-frac-d-phi-w-dw-t-d"><a href="#对应的信道特性为线性时不变滤波器。理想恒参信道的特征：-s-0-t-Ks-i-t-t-d-H-w-Ke-jwt-d-因此这个恒参信道的幅频特性和相频特性分别为-H-K-相频特性-phi-w-wt-d-，-群时延特性-tau-w-frac-d-phi-w-dw-t-d" class="headerlink" title="对应的信道特性为线性时不变滤波器。理想恒参信道的特征：$s_0(t) &#x3D; Ks_i(t - t_d)$$H(w) &#x3D; Ke^{-jwt_d}$因此这个恒参信道的幅频特性和相频特性分别为 $|H| &#x3D; K$ 相频特性$\phi(w) &#x3D; -wt_d$， 群时延特性$\tau(w) &#x3D; -\frac{d\phi(w)}{dw} &#x3D; t_d$,  "></a>对应的信道特性为线性时不变滤波器。<br>理想恒参信道的特征：<br>$s_0(t) &#x3D; Ks_i(t - t_d)$<br>$H(w) &#x3D; Ke^{-jwt_d}$<br>因此这个恒参信道的幅频特性和相频特性分别为 $|H| &#x3D; K$ 相频特性$\phi(w) &#x3D; -wt_d$， 群时延特性$\tau(w) &#x3D; -\frac{d\phi(w)}{dw} &#x3D; t_d$,  </h2><blockquote>
+<h4 id="恒参信道"><a href="#恒参信道" class="headerlink" title="恒参信道"></a>恒参信道</h4><p>对应的信道特性为线性时不变滤波器。<br>理想恒参信道的特征：<br>$s_0(t) &#x3D; Ks_i(t - t_d)$<br>$H(w) &#x3D; Ke^{-jwt_d}$<br>因此这个恒参信道的幅频特性和相频特性分别为 $|H| &#x3D; K$ 相频特性$\phi(w) &#x3D; -wt_d$， 群时延特性$\tau(w) &#x3D; -\frac{d\phi(w)}{dw} &#x3D; t_d$,  </p>
+<hr>
+<blockquote>
 <p><strong>Notice</strong><br><br>如果输入的频谱有两个分量，系统的 幅频响应 和 相频响应 会分别对这两个频率分量产生不同的幅度缩放和相位偏移。<br>假如输入信号为两个频域分量的叠加：<br>$x(t) &#x3D; A_1 \cos(\omega_1 t) + A_2 \cos(\omega_2 t)$<br>对应的频域表示为两根谱线：<br>$X(j\omega) &#x3D; \frac{A_1}{2} \left[ \delta(\omega - \omega_1) + \delta(\omega + \omega_1) \right] + \frac{A_2}{2} \left[ \delta(\omega - \omega_2) + \delta(\omega + \omega_2) \right]$<br>系统频率响应表示为：<br>$H(j\omega) &#x3D; |H(j\omega)| e^{j \phi(\omega)}$<br>系统输出频域为输入频谱与频率响应的乘积<br>$Y(j\omega) &#x3D; H(j\omega) \cdot X(j\omega)$<br>分别作用于两个频率分量：<br>$<br>\begin{cases}<br>\text{频率 } \omega_1 \text{ 分量的幅度变为 } A_1 |H(j\omega_1)|, \quad \text{相位增加 } \phi(\omega_1) \<br>\text{频率 } \omega_2 \text{ 分量的幅度变为 } A_2 |H(j\omega_2)|, \quad \text{相位增加 } \phi(\omega_2)<br>\end{cases}<br>$<br>因此，输出信号为：<br>$y(t) &#x3D; A_1 |H(j\omega_1)| \cos\left(\omega_1 t + \phi(\omega_1)\right) + A_2 |H(j\omega_2)| \cos\left(\omega_2 t + \phi(\omega_2)\right)$</p>
 </blockquote>
 <hr>
 <p>由此分析可得对信号不同频率分量放大或衰减倍数相同，由于群时延特性为常数因此信号不同频率分量到底，输出端的时间先后一致<br>然后，现实中的信道会出现幅频失真、相频失真和群时延失真的情况。也就是说对信号不同频率分量放大或者衰减倍数不同。或者信号不同频率分量到达输出端的时间先后不一。但是这些失真不产生新的频率分量，因此均为线性失真。</p>
-<h4 id="随参信道"><a href="#随参信道" class="headerlink" title="随参信道"></a>随参信道</h4><p>原因：<br>由于多径效应产生的时延差。<br>特性：<br>存在时变的衰减和时延<br>存在多径传播现象<br>$r(t) &#x3D; \sum_{i &#x3D; 1}{n}a_i(t)cosw_c[t-\tau_i(t)] &#x3D; X(t)cosw_ct - Y(t)sinw_ct$<br>其中$a_i(t)$为时变衰落，$\tau_i(t)$为时变时延，X(t)为窄带信号的同相分量，Y(t)为正交分量，其均方和的开方为随机包络，arctan为随机相位。<br>多路传播的影响：<strong>瑞利衰落</strong></p>
+<h4 id="随参信道"><a href="#随参信道" class="headerlink" title="随参信道"></a>随参信道</h4><p>原因：<br>由于多径效应产生的时延差。<br>特性：<br>存在时变的衰减和时延<br>存在多径传播现象<br>$r(t) &#x3D; \sum_{i &#x3D; 1}{n}a_i(t)cosw_c[t-\tau_i(t)] &#x3D; X(t)cosw_ct - Y(t)sinw_ct$<br>其中$a_i(t)$为 <strong>时变衰落</strong> ，$\tau_i(t)$为<strong>时变时延</strong>，X(t)为窄带信号的同相分量，Y(t)为正交分量，其均方和的开方为随机包络，arctan为随机相位。<br>多路传播的影响：<strong>瑞利衰落</strong></p>
 
     </div>
 
@@ -307,7 +309,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%88%86%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">定义与分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E5%88%B6%E4%BF%A1%E9%81%93"><span class="nav-number">1.1.</span> <span class="nav-text">调制信道</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%81%92%E5%8F%82%E4%BF%A1%E9%81%93"><span class="nav-number">1.1.1.</span> <span class="nav-text">恒参信道</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E5%BA%94%E7%9A%84%E4%BF%A1%E9%81%93%E7%89%B9%E6%80%A7%E4%B8%BA%E7%BA%BF%E6%80%A7%E6%97%B6%E4%B8%8D%E5%8F%98%E6%BB%A4%E6%B3%A2%E5%99%A8%E3%80%82%E7%90%86%E6%83%B3%E6%81%92%E5%8F%82%E4%BF%A1%E9%81%93%E7%9A%84%E7%89%B9%E5%BE%81%EF%BC%9A-s-0-t-Ks-i-t-t-d-H-w-Ke-jwt-d-%E5%9B%A0%E6%AD%A4%E8%BF%99%E4%B8%AA%E6%81%92%E5%8F%82%E4%BF%A1%E9%81%93%E7%9A%84%E5%B9%85%E9%A2%91%E7%89%B9%E6%80%A7%E5%92%8C%E7%9B%B8%E9%A2%91%E7%89%B9%E6%80%A7%E5%88%86%E5%88%AB%E4%B8%BA-H-K-%E7%9B%B8%E9%A2%91%E7%89%B9%E6%80%A7-phi-w-wt-d-%EF%BC%8C-%E7%BE%A4%E6%97%B6%E5%BB%B6%E7%89%B9%E6%80%A7-tau-w-frac-d-phi-w-dw-t-d"><span class="nav-number">2.</span> <span class="nav-text">对应的信道特性为线性时不变滤波器。理想恒参信道的特征：$s_0(t) &#x3D; Ks_i(t - t_d)$$H(w) &#x3D; Ke^{-jwt_d}$因此这个恒参信道的幅频特性和相频特性分别为 $|H| &#x3D; K$ 相频特性$\phi(w) &#x3D; -wt_d$， 群时延特性$\tau(w) &#x3D; -\frac{d\phi(w)}{dw} &#x3D; t_d$,  </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9A%8F%E5%8F%82%E4%BF%A1%E9%81%93"><span class="nav-number">2.0.1.</span> <span class="nav-text">随参信道</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%88%86%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">定义与分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E5%88%B6%E4%BF%A1%E9%81%93"><span class="nav-number">1.1.</span> <span class="nav-text">调制信道</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%81%92%E5%8F%82%E4%BF%A1%E9%81%93"><span class="nav-number">1.1.1.</span> <span class="nav-text">恒参信道</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9A%8F%E5%8F%82%E4%BF%A1%E9%81%93"><span class="nav-number">1.1.2.</span> <span class="nav-text">随参信道</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

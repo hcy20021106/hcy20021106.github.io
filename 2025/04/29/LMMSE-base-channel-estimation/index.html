@@ -28,7 +28,7 @@
 <meta property="og:description" content="Basic Concept先了解MMSE，MMSE（Minimum Mean Square Error），也就是最小均方误差，是一种常用的统计估计方法，它的目标就是最小化估计值与实际值之间的均方误差（MSE）。在通信系统中，MMSE被广泛用于信道估计，因为它能够在噪声和干扰的影响下，给出一个最优估计。另外，在信道估计中，交叉相关矩阵通常用于计算数据子载波和导频子载波之间的相关性，这对于估计信道的状">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-04-28T22:45:01.000Z">
-<meta property="article:modified_time" content="2025-06-25T22:39:29.953Z">
+<meta property="article:modified_time" content="2025-06-26T15:24:56.729Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -185,7 +185,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-26 00:39:29" itemprop="dateModified" datetime="2025-06-26T00:39:29+02:00">2025-06-26</time>
+                <time title="Modified: 2025-06-26 17:24:56" itemprop="dateModified" datetime="2025-06-26T17:24:56+02:00">2025-06-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -229,14 +229,19 @@
 <p>Where:</p>
 <p>$$<br>R_{hd,hp}: \text{ Cross-correlation matrix between data and pilot subcarriers} \<br>R_{hp,hp}: \text{ Autocorrelation matrix of pilot subcarriers} \<br>\hat{H}_{\text{pilot}}: \text{ LS-estimated channel at pilot positions} \<br>\sigma^2: \text{ Noise variance} \<br>X: \text{ Diagonal matrix of known pilot symbols}<br>$$</p>
 <hr>
-<h3 id="3-Channel-Frequency-Response-DFT"><a href="#3-Channel-Frequency-Response-DFT" class="headerlink" title="3. Channel Frequency Response (DFT)"></a>3. Channel Frequency Response (DFT)</h3><p>The time-domain convolution is:</p>
+<h3 id="3-Channel-Frequency-Response-DFT"><a href="#3-Channel-Frequency-Response-DFT" class="headerlink" title="3. Channel Frequency Response (DFT)"></a>3. Channel Frequency Response (DFT)</h3><p>The time-domain convolution is，这也是一个离散时间的线性卷积公式，它描述了<strong>多径信道</strong>(多径效应)对时域基带信号的影响，其中每一个h[l]表示不同时间延迟下的路径增益:</p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>引入OFDM可以抗多径，因为在循环前缀CP足够长的条件下，把时域的多径线性卷积变换为<strong>循环卷积</strong>,也就是Y[k] &#x3D; H[k]X[k] + W[k]<br></p>
+</blockquote>
+<hr>
 <p>$$<br>y[n] &#x3D; \sum_{m&#x3D;0}^{L-1} h[m] \cdot x[n - m]<br>$$</p>
 <p>The corresponding channel frequency response is obtained via DFT:</p>
 <p>$$<br>H[k] &#x3D; \sum_{l&#x3D;0}^{L-1} h[l] \cdot e^{-j \frac{2\pi k l}{N}}<br>$$</p>
 <p>Where:</p>
 <p>$$<br>h[l]: \text{ Channel tap in time domain} \<br>N: \text{ FFT length (number of subcarriers)} \<br>k: \text{ Subcarrier index}<br>$$</p>
 <hr>
-<h3 id="4-Calculation-of-R-hp-hp"><a href="#4-Calculation-of-R-hp-hp" class="headerlink" title="4. Calculation of ( R_{hp,hp} )"></a>4. Calculation of ( R_{hp,hp} )</h3><p>To calculate the autocorrelation matrix between pilot subcarriers ( R_{hp,hp} ), we start from the frequency-domain channel representation. The channel frequency response at subcarrier ( n ) is given by the discrete Fourier transform (DFT) of the time-domain channel taps:</p>
+<h3 id="4-Calculation-of-R-hp-hp"><a href="#4-Calculation-of-R-hp-hp" class="headerlink" title="4. Calculation of $R_{hp,hp}$"></a>4. Calculation of $R_{hp,hp}$</h3><p>在统计通信理论中，如果H[i]是频率索引为i的频域信道系数（例如OFDM中第i个子载波的信道响应）<br>$R_H(i,j)&#x3D;E[H[i]H[j]]$<br>To calculate the autocorrelation matrix between pilot subcarriers $R_{hp,hp}$, we start from the frequency-domain channel representation. The channel frequency response at subcarrier ( n ) is given by the discrete Fourier transform (DFT) of the time-domain channel taps:</p>
 <p>$$<br>H[n] &#x3D; \sum_{l&#x3D;0}^{L-1} h[l] e^{-j \frac{2\pi}{N} n l}<br>$$</p>
 <p>where:</p>
 <ul>
@@ -247,12 +252,13 @@
 </ul>
 <p>The autocorrelation between frequency responses at pilot subcarrier indices ( n_i ) and ( n_j ) is:</p>
 <p>$$<br>\begin{aligned}<br>R_{hp,hp}(i,j) &amp;&#x3D; E \left[ H[n_i] H^<em>[n_j] \right] \<br>&amp;&#x3D; E \left[ \left( \sum_{l&#x3D;0}^{L-1} h[l] e^{-j \frac{2\pi}{N} n_i l} \right) \left( \sum_{m&#x3D;0}^{L-1} h[m] e^{-j \frac{2\pi}{N} n_j m} \right)^</em> \right] \<br>&amp;&#x3D; \sum_{l&#x3D;0}^{L-1} \sum_{m&#x3D;0}^{L-1} e^{-j \frac{2\pi}{N} n_i l} e^{j \frac{2\pi}{N} n_j m} E \left[ h[l] h^*[m] \right]<br>\end{aligned}<br>$$</p>
-<p>Assuming that the channel taps are uncorrelated with power delay profile ( \sigma_l^2 &#x3D; E[|h[l]|^2] ), we have:</p>
+<p>Assuming that the channel taps are uncorrelated with power delay profile $\sigma_l^2 &#x3D; E[|h[l]|^2]$, we have:</p>
 <p>$$<br>E \left[ h[l] h^*[m] \right] &#x3D;<br>\begin{cases}<br>\sigma_l^2, &amp; l &#x3D; m \<br>0, &amp; l \neq m<br>\end{cases}<br>$$</p>
 <p>Thus, the autocorrelation matrix element simplifies to:</p>
 <p>$$<br>R_{hp,hp}(i,j) &#x3D; \sum_{l&#x3D;0}^{L-1} \sigma_l^2 e^{-j \frac{2\pi}{N} (n_i - n_j) l}<br>$$</p>
 <p>This formula describes the correlation between frequency-domain channel coefficients at pilot positions ( n_i ) and ( n_j ), derived from the time-domain power delay profile.</p>
 <hr>
+<h3 id="5-Calculation-of-R-hd-hp"><a href="#5-Calculation-of-R-hd-hp" class="headerlink" title="5. Calculation of $R_{hd,hp}$"></a>5. Calculation of $R_{hd,hp}$</h3><p>计算过程和计算导频之间的互相关函数一样，只是需要注意data部分的索引。</p>
 <h2 id="📁-File-Structure"><a href="#📁-File-Structure" class="headerlink" title="📁 File Structure"></a>📁 File Structure</h2><ul>
 <li><code>ofdm_lmmse_sim.m</code> – Main simulation script  </li>
 <li><code>Gen_autocorr.m</code> – Generates channel autocorrelation values  </li>
@@ -296,12 +302,18 @@
 </tr>
 </tbody></table>
 <hr>
-<h2 id="🚀-How-to-Run"><a href="#🚀-How-to-Run" class="headerlink" title="🚀 How to Run"></a>🚀 How to Run</h2><ol>
-<li>Open the folder in MATLAB.  </li>
-<li>Ensure both <code>.m</code> files are in the same directory.  </li>
-<li>Run the simulation:</li>
-</ol>
-<pre><code class="language-matlab">&gt;&gt; ofdm_lmmse_sim
+<h2 id="CSI-Acquisition-and-Precoding-Impact-on-BER"><a href="#CSI-Acquisition-and-Precoding-Impact-on-BER" class="headerlink" title="CSI Acquisition and Precoding Impact on BER"></a>CSI Acquisition and Precoding Impact on BER</h2><p>In MIMO-OFDM systems, accurate Channel State Information (CSI) is essential for leveraging spatial multiplexing gains and optimizing transmission through precoding:</p>
+<ul>
+<li><strong>Channel Sounding:</strong> Known pilot or preamble sequences are transmitted to probe the channel. The receiver estimates the CSI (\hat{H}) using LMMSE or similar methods.  </li>
+<li><strong>CSI Feedback &amp; Precoding:</strong> The estimated CSI is fed back to the transmitter, which computes a precoding matrix ( \mathbf{V} ) (e.g., based on SVD or LMMSE estimation) to pre-multiply data symbols. This precoding enhances signal quality and mitigates interference.  </li>
+<li><strong>Data Transmission &amp; BER:</strong> The precoded data is transmitted through the MIMO channel. The receiver decodes the signals based on the estimated CSI. The accuracy of CSI directly affects Bit Error Rate (BER) performance — better CSI leads to lower BER.</li>
+</ul>
+<p>Example MATLAB snippet for per-subcarrier precoding:</p>
+<pre><code class="language-matlab">for carrIdx = 1:prm.numCarriers
+    Q = squeeze(v(carrIdx,:,:));
+    normQ = Q * sqrt(numTx)/norm(Q,&#39;fro&#39;);
+    preData(carrIdx,symIdx,:) = squeeze(gridData(carrIdx,symIdx,:)).&#39; * normQ;
+end
 </code></pre>
 
     </div>
@@ -383,7 +395,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-Concept"><span class="nav-number">1.</span> <span class="nav-text">Basic Concept</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC"><span class="nav-number">2.</span> <span class="nav-text">数学公式推导</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OFDM-System-Simulation-with-LMMSE-Channel-Estimation"><span class="nav-number"></span> <span class="nav-text">OFDM System Simulation with LMMSE Channel Estimation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%8C-Features"><span class="nav-number">1.</span> <span class="nav-text">📌 Features</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%A0-Theoretical-Background"><span class="nav-number">2.</span> <span class="nav-text">🧠 Theoretical Background</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-OFDM-Signal-Model"><span class="nav-number">2.1.</span> <span class="nav-text">1. OFDM Signal Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-LMMSE-Channel-Estimation"><span class="nav-number">2.2.</span> <span class="nav-text">2. LMMSE Channel Estimation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Channel-Frequency-Response-DFT"><span class="nav-number">2.3.</span> <span class="nav-text">3. Channel Frequency Response (DFT)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Calculation-of-R-hp-hp"><span class="nav-number">2.4.</span> <span class="nav-text">4. Calculation of ( R_{hp,hp} )</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%81-File-Structure"><span class="nav-number">3.</span> <span class="nav-text">📁 File Structure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%99%EF%B8%8F-Key-Parameters"><span class="nav-number">4.</span> <span class="nav-text">⚙️ Key Parameters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%9A%80-How-to-Run"><span class="nav-number">5.</span> <span class="nav-text">🚀 How to Run</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-Concept"><span class="nav-number">1.</span> <span class="nav-text">Basic Concept</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC"><span class="nav-number">2.</span> <span class="nav-text">数学公式推导</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OFDM-System-Simulation-with-LMMSE-Channel-Estimation"><span class="nav-number"></span> <span class="nav-text">OFDM System Simulation with LMMSE Channel Estimation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%8C-Features"><span class="nav-number">1.</span> <span class="nav-text">📌 Features</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%A0-Theoretical-Background"><span class="nav-number">2.</span> <span class="nav-text">🧠 Theoretical Background</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-OFDM-Signal-Model"><span class="nav-number">2.1.</span> <span class="nav-text">1. OFDM Signal Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-LMMSE-Channel-Estimation"><span class="nav-number">2.2.</span> <span class="nav-text">2. LMMSE Channel Estimation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Channel-Frequency-Response-DFT"><span class="nav-number">2.3.</span> <span class="nav-text">3. Channel Frequency Response (DFT)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Calculation-of-R-hp-hp"><span class="nav-number">2.4.</span> <span class="nav-text">4. Calculation of $R_{hp,hp}$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Calculation-of-R-hd-hp"><span class="nav-number">2.5.</span> <span class="nav-text">5. Calculation of $R_{hd,hp}$</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%81-File-Structure"><span class="nav-number">3.</span> <span class="nav-text">📁 File Structure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%99%EF%B8%8F-Key-Parameters"><span class="nav-number">4.</span> <span class="nav-text">⚙️ Key Parameters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSI-Acquisition-and-Precoding-Impact-on-BER"><span class="nav-number">5.</span> <span class="nav-text">CSI Acquisition and Precoding Impact on BER</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
