@@ -1288,7 +1288,7 @@ end
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-25 23:27:04" itemprop="dateModified" datetime="2025-06-25T23:27:04+02:00">2025-06-25</time>
+                <time title="Modified: 2025-06-30 17:54:23" itemprop="dateModified" datetime="2025-06-30T17:54:23+02:00">2025-06-30</time>
               </span>
 
           
@@ -1371,6 +1371,10 @@ end
 <p>真正的平等，意味着一视同仁，门户开放，有教无类，或像伟大的拿破仑所表述的人尽其才，而不是将笨蛋与非笨蛋的头脑弄平，使国家中最好之人与最差之人一样差的绝对平等；真正的自由，并不意味着可以随心所欲，而是可以自由地做正确的事情，即中国经书中所谓率性之谓道。真正的民主，是指敞开的大门，没有出身、地位和种族之别，而不是指没有君、王权，更不是指庶民议政。大多数永远是不好的，他们不具备参政议政的能力。近代西方由大多数人来参与和支配政治的观念为群氓崇拜，它是非理性民主政治的来源，是欧美近来所有社会、政治和世界无政府状态的根源，也是导致欧洲大战的非直接原因。</p>
 <p>不觉碧山暮，秋云暗几重</p>
 <p>你终会明白前途比爱情重要，你还会明白爱情比前途更难得，但最后你会明白，对的人，会站在你的前途里。</p>
+<p>不必听自暴自弃者流的话，只是向上走。不必等待炬火，此后如竟没有炬火，我便是唯一的光</p>
+<p>犹记碧桃影里，誓三生。</p>
+<p>千年史册耻无名，一片丹心报天子。</p>
+<p>楚虽三户能亡秦，岂有堂堂中国空无人！</p>
 
       
     </div>
@@ -1421,7 +1425,7 @@ end
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-04-29 01:06:20" itemprop="dateModified" datetime="2025-04-29T01:06:20+02:00">2025-04-29</time>
+                <time title="Modified: 2025-06-30 15:26:12" itemprop="dateModified" datetime="2025-06-30T15:26:12+02:00">2025-06-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1448,6 +1452,8 @@ end
           <h2 id="向量处理"><a href="#向量处理" class="headerlink" title="向量处理"></a>向量处理</h2><p>a &#x3D; [1:3:100]<br>其中a是初始值，b是步长，c是终点值<br>返回结果是[1,4,7,…,100]<br>b(a) &#x3D; []<br>把向量b中的a对应索引给删掉</p>
 <h2 id="列向量和横向量"><a href="#列向量和横向量" class="headerlink" title="列向量和横向量"></a>列向量和横向量</h2><p>列向量使用;<br>a &#x3D; [1;2;3]<br>b &#x3D; [4;5;6]<br>c &#x3D; [a;b]<br>其中c将两个列向量进行拼接<br>横向量使用逗号，其他同理<br>如果想使用a&#x3D;(1:100)类似语法构建列向量，可以先构建横向量，例如a&#x3D;(1:100),然后再使用(:)进行转换a&#x3D;a(:)</p>
 <h2 id="table"><a href="#table" class="headerlink" title="table"></a>table</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">% 构建table</span><br><span class="line">RNTI = [1;2;3];</span><br><span class="line">LogicalChannelID = [3;4;5];</span><br><span class="line">RLCEntityType = [<span class="string">&quot;AM&quot;</span>; <span class="string">&quot;AM&quot;</span>; <span class="string">&quot;UM&quot;</span>];</span><br><span class="line">RLCChannelConfig = table(</span><br><span class="line">    RNTI, LogicalChannelID,LogicalChannelGroup,RLCEntityType,...</span><br><span class="line"></span><br><span class="line">);</span><br><span class="line">% 查询表的行数</span><br><span class="line">nRows = size(RLCChannelConfig, 1);</span><br><span class="line">% 查询表的列数</span><br><span class="line">nCols = size(RLCChannelConfig, 2);</span><br><span class="line">% 把table保存成.mat文件</span><br><span class="line">save(<span class="string">&#x27;RLCChannelConfig.mat&#x27;</span>, <span class="string">&#x27;RLCChannelConfig&#x27;</span>)</span><br><span class="line">% 取出table中的某个字段中的某一行的数据</span><br><span class="line">data = RLCChannelConfig.RNTI(1);</span><br><span class="line">% 把table转成struct</span><br><span class="line">myStruct = table2struct(RLCChannelConfig)</span><br><span class="line">myStruct_1 = table2struct(RLCChannelConfig(1,2:end));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="对角矩阵操作"><a href="#对角矩阵操作" class="headerlink" title="对角矩阵操作"></a>对角矩阵操作</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">% 创建对角矩阵</span><br><span class="line">A = diag([1 2 3]);   % 生成对角线为 [1 2 3] 的矩阵</span><br><span class="line"></span><br><span class="line">% 提取矩阵的对角线</span><br><span class="line">d = diag(A);         % 返回 A 的主对角线</span><br><span class="line"></span><br><span class="line">% 生成偏移对角矩阵</span><br><span class="line">B = diag([4 5 6], 1);  % 将 [4 5 6] 放在主对角线上方一条对角线上</span><br><span class="line">X = diag((<span class="number">1</span>+<span class="number">1</span>i)*ones(<span class="number">1</span>,Pilot_num));   % all pilots are 1+1i.</span><br><span class="line">    </span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h2 id="Cell"><a href="#Cell" class="headerlink" title="Cell"></a>Cell</h2><p>Cell是一种可以容纳任意类型数据的容器，可以保存不同类型、不同大小的数据在一个数组中&#x2F;</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">% 创建空cell</span><br><span class="line">x = &#123;&#125;;</span><br><span class="line">x&#123;1&#125; = 1;</span><br><span class="line">x&#123;2&#125; = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line">x&#123;3&#125; = [1 2 3];</span><br><span class="line"></span><br></pre></td></tr></table></figure>

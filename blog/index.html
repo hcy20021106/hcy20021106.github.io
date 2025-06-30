@@ -321,6 +321,13 @@ D_inv = diag(1 ./ diag(D));
 
               <time title="Created: 2025-06-17 14:57:35" itemprop="dateCreated datePublished" datetime="2025-06-17T14:57:35+02:00">2025-06-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-06-30 15:36:25" itemprop="dateModified" datetime="2025-06-30T15:36:25+02:00">2025-06-30</time>
+              </span>
 
           
 
@@ -334,7 +341,135 @@ D_inv = diag(1 ./ diag(D));
 
       
       
-          
+          <h1 id="PyTorch-Quick-Start-Guide-🚀"><a href="#PyTorch-Quick-Start-Guide-🚀" class="headerlink" title="PyTorch Quick Start Guide 🚀"></a>PyTorch Quick Start Guide 🚀</h1><h2 id="📚-基本概念"><a href="#📚-基本概念" class="headerlink" title="📚 基本概念"></a>📚 基本概念</h2><h3 id="📐-常见数据的-Tensor-维度"><a href="#📐-常见数据的-Tensor-维度" class="headerlink" title="📐 常见数据的 Tensor 维度"></a>📐 常见数据的 Tensor 维度</h3><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>维度说明</th>
+<th>示例 Shape</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Scalar（标量）</td>
+<td>0-D Tensor</td>
+<td><code>torch.tensor(3.14)</code></td>
+</tr>
+<tr>
+<td>Vector（向量）</td>
+<td>1-D Tensor</td>
+<td><code>(N,)</code> → <code>[1, 2, 3]</code></td>
+</tr>
+<tr>
+<td>Audio（音频）</td>
+<td>1-D 或 2-D（多通道）</td>
+<td><code>(samples,)</code> or <code>(channels, samples)</code></td>
+</tr>
+<tr>
+<td>Grayscale Image</td>
+<td>2-D 或 3-D（加 batch）</td>
+<td><code>(H, W)</code> or <code>(N, 1, H, W)</code></td>
+</tr>
+<tr>
+<td>RGB Image</td>
+<td>3-D（C,H,W）或 4-D（N,C,H,W）</td>
+<td><code>(3, H, W)</code> or <code>(N, 3, H, W)</code></td>
+</tr>
+<tr>
+<td>Video</td>
+<td>4-D（T,C,H,W）或 5-D（N,T,C,H,W）</td>
+<td><code>(frames, 3, H, W)</code></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>✅ <strong>常用格式缩写</strong>  </p>
+<ul>
+<li><code>N</code>: Batch size  </li>
+<li><code>C</code>: Channels  </li>
+<li><code>H</code>: Height  </li>
+<li><code>W</code>: Width  </li>
+<li><code>T</code>: Time steps &#x2F; frames</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="常用函数小结"><a href="#常用函数小结" class="headerlink" title="常用函数小结"></a>常用函数小结</h2><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>unsqueeze(dim)</td>
+<td>插入新维度</td>
+</tr>
+<tr>
+<td>squeeze(dim)</td>
+<td>去除大小为1的维度</td>
+</tr>
+<tr>
+<td>transpose(a,b)</td>
+<td>交换两个维度</td>
+</tr>
+<tr>
+<td>.view()</td>
+<td>改变形状</td>
+</tr>
+<tr>
+<td>.reshape()</td>
+<td>改变形状</td>
+</tr>
+</tbody></table>
+<h2 id="⚙️-常用操作示例"><a href="#⚙️-常用操作示例" class="headerlink" title="⚙️ 常用操作示例"></a>⚙️ 常用操作示例</h2><pre><code class="language-python">import torch
+
+# 创建一个随机的 RGB 图片 Tensor: (C,H,W)
+x = torch.randn(3, 224, 224)
+y = torch.zeros([2,3])
+# 输出size, e.g., torch.Size([2,3])
+x.shape
+# cat: concatenate multiple tensors
+x = torch.zeros([2,1,3])
+y = torch.zeros([2,3,3])
+z = torch.zeros([2,2,3])
+w = torch.cat([x,y,z], dim = 1)
+# torch.Size([2,6,3])
+w.shape
+
+# 查看形状
+print(x.shape)  # torch.Size([3, 224, 224])
+
+# 交换维度: transpose
+x_transposed = x.transpose(1, 2)  # (C, W, H)
+
+# 重新排列所有维度: permute
+x_permuted = x.permute(1, 2, 0)   # (H, W, C)
+
+# 展平为一维
+x_flatten = x.view(-1)
+
+# 添加 batch 维度
+x_batched = x.unsqueeze(0)  # (1, C, H, W)
+
+# 去除维度为 1 的维度
+x_squeezed = x_batched.squeeze(0)  # (C, H, W)
+
+# 数据类型转换
+x_double = x.double()
+x_int = x.int()
+
+# 基本运算
+y = torch.randn_like(x)
+z = x + y  # element-wise 加法
+
+# 移动到 GPU
+x_cuda = x.to(&#39;cuda&#39;)
+
+# 自动求导示例
+w = torch.randn(5, requires_grad=True)
+loss = (w ** 2).sum()
+loss.backward()
+print(w.grad)
+</code></pre>
+
       
     </div>
 
@@ -384,7 +519,7 @@ D_inv = diag(1 ./ diag(D));
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-17 14:48:22" itemprop="dateModified" datetime="2025-06-17T14:48:22+02:00">2025-06-17</time>
+                <time title="Modified: 2025-06-30 17:48:51" itemprop="dateModified" datetime="2025-06-30T17:48:51+02:00">2025-06-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -436,7 +571,102 @@ D_inv = diag(1 ./ diag(D));
 <p>定义Loss function $L(\theta)$,最后想要取得的 $\mathbf{\theta^{*}} &#x3D; \arg\min_{\theta} L$  </p>
 <p>因此我们同样的使用梯度下降更新去得到最后的$\mathbf{\theta^{*}}$<br>$$<br>\theta \leftarrow \theta - \eta \cdot \nabla_\theta L(\theta)<br>$$  </p>
 <p><strong>Batch Size</strong>, <strong>Epoch</strong>, <strong>N</strong><br>1,000 examples (N &#x3D; 1,000), Batch size is 100, so 100 update in 1 epoch (10 Batch).</p>
-
+<h3 id="PyTorch-CNN-二分类示例"><a href="#PyTorch-CNN-二分类示例" class="headerlink" title="PyTorch CNN 二分类示例"></a>PyTorch CNN 二分类示例</h3><h4 id="预处理transform"><a href="#预处理transform" class="headerlink" title="预处理transform"></a>预处理transform</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">transform = transforms.Compose([</span><br><span class="line">    transforms.Resize((<span class="number">256</span>, <span class="number">256</span>)),</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<h4 id="自定义Dataset"><a href="#自定义Dataset" class="headerlink" title="自定义Dataset"></a>自定义Dataset</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class MyData(Dataset):</span><br><span class="line">    def __init__(self, root_dir, classes, transform=None):</span><br><span class="line">        self.root_dir = root_dir</span><br><span class="line">        self.classes = classes</span><br><span class="line">        self.transform = transform</span><br><span class="line"></span><br><span class="line">        self.img_paths = []</span><br><span class="line">        self.labels = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> idx, cls <span class="keyword">in</span> enumerate(classes):</span><br><span class="line">            cls_path = os.path.join(root_dir, cls)</span><br><span class="line">            <span class="keyword">for</span> img_name <span class="keyword">in</span> os.listdir(cls_path):</span><br><span class="line">                self.img_paths.append(os.path.join(cls_path, img_name))</span><br><span class="line">                self.labels.append(idx)</span><br><span class="line"></span><br><span class="line">    def __getitem__(self, idx):</span><br><span class="line">        img_path = self.img_paths[idx]</span><br><span class="line">        img = Image.open(img_path).convert(<span class="string">&#x27;RGB&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> self.transform:</span><br><span class="line">            img = self.transform(img)</span><br><span class="line">        label = self.labels[idx]</span><br><span class="line">        <span class="built_in">return</span> img, label</span><br><span class="line"></span><br><span class="line">    def __len__(self):</span><br><span class="line">        <span class="built_in">return</span> len(self.img_paths)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="简单CNN模型"><a href="#简单CNN模型" class="headerlink" title="简单CNN模型"></a>简单CNN模型</h4><h5 id="输入数据格式"><a href="#输入数据格式" class="headerlink" title="输入数据格式"></a>输入数据格式</h5><ul>
+<li>输入图像为彩色图像（RGB），尺寸统一为 256×256 像素。</li>
+<li>输入张量形状为 <code>[batch_size, 3, 256, 256]</code>，其中 <code>3</code> 是通道数（RGB），<code>batch_size</code> 是批量大小。</li>
+</ul>
+<h5 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h5><h5 id="卷积层和池化层流程"><a href="#卷积层和池化层流程" class="headerlink" title="卷积层和池化层流程"></a>卷积层和池化层流程</h5><ul>
+<li><p><strong>第一层卷积</strong>: <code>nn.Conv2d(3, 16, kernel_size=3, padding=1)</code></p>
+<ul>
+<li>输入通道数：3</li>
+<li>输出通道数：16</li>
+<li>卷积核大小：3×3</li>
+<li>填充大小：1，步长默认1</li>
+<li>输出尺寸计算公式：<br>[<br>\text{Output Size} &#x3D; \left\lfloor \frac{\text{Input Size} + 2 \times \text{padding} - \text{kernel size}}{\text{stride}} \right\rfloor + 1<br>]<br>代入参数：<br>[<br>\frac{256 + 2 \times 1 - 3}{1} + 1 &#x3D; 256<br>]</li>
+<li>输出张量形状：<code>[batch_size, 16, 256, 256]</code></li>
+</ul>
+</li>
+<li><p><strong>ReLU激活</strong></p>
+</li>
+<li><p><strong>第一次池化</strong>: <code>nn.MaxPool2d(2)</code></p>
+<ul>
+<li>池化窗口大小：2×2，步长2</li>
+<li>尺寸减半，输出形状为：<code>[batch_size, 16, 128, 128]</code></li>
+</ul>
+</li>
+<li><p><strong>第二层卷积</strong>: <code>nn.Conv2d(16, 32, kernel_size=3, padding=1)</code></p>
+<ul>
+<li>输入通道数：16</li>
+<li>输出通道数：32</li>
+<li>卷积核大小：3×3，填充1，步长1</li>
+<li>输出尺寸同理计算为：<code>128</code></li>
+<li>输出张量形状：<code>[batch_size, 32, 128, 128]</code></li>
+</ul>
+</li>
+<li><p><strong>ReLU激活</strong></p>
+</li>
+<li><p><strong>第二次池化</strong>: <code>nn.MaxPool2d(2)</code></p>
+<ul>
+<li>尺寸减半，输出形状为：<code>[batch_size, 32, 64, 64]</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="全连接层流程"><a href="#全连接层流程" class="headerlink" title="全连接层流程"></a>全连接层流程</h5><ul>
+<li><p><strong>展平层</strong>: 将卷积层输出展平成一维向量<br>输入维度为：<br>[<br>32 \times 64 \times 64 &#x3D; 131072<br>]</p>
+</li>
+<li><p><strong>全连接层1</strong>: <code>nn.Linear(131072, 64)</code>  </p>
+</li>
+<li><p><strong>ReLU激活</strong></p>
+</li>
+<li><p><strong>全连接层2</strong>: <code>nn.Linear(64, 1)</code></p>
+</li>
+<li><p><strong>Sigmoid激活</strong>: 输出概率值，范围在[0,1]之间</p>
+</li>
+<li><p><strong>输出</strong>: 使用 <code>.squeeze(1)</code> 将输出维度从 <code>[batch_size, 1]</code> 转换为 <code>[batch_size]</code>，便于计算损失函数。</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class SimpleCNN(nn.Module):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super().__init__()</span><br><span class="line">        self.conv = nn.Sequential(</span><br><span class="line">            nn.Conv2d(3,16,3,padding = 1);</span><br><span class="line">            nn.ReLU(),</span><br><span class="line">            nn.MaxPool2d(2),</span><br><span class="line">            nn.Conv2d(16,32,3,padding = 1);</span><br><span class="line">            nn.ReLU(),</span><br><span class="line">            nn.MaxPool2d(2),</span><br><span class="line">        )</span><br><span class="line">        self.fc = nn.Sequential(</span><br><span class="line">            nn.Flatten(),</span><br><span class="line">            nn.Linear(32 * 64 * 64, 64),  <span class="comment"># 256-&gt;128-&gt;64，宽高减半两次</span></span><br><span class="line">            nn.ReLU(),</span><br><span class="line">            nn.Linear(64, 1),</span><br><span class="line">            nn.Sigmoid(),</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        def forward(self, x):</span><br><span class="line">            x = self.conv(x)</span><br><span class="line">            x = self.fc(x)</span><br><span class="line">            <span class="built_in">return</span> x.squeeze(1)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="准备数据和模型"><a href="#准备数据和模型" class="headerlink" title="准备数据和模型"></a>准备数据和模型</h4><h5 id="train-validate-test数据集的区别"><a href="#train-validate-test数据集的区别" class="headerlink" title="train,validate,test数据集的区别"></a>train,validate,test数据集的区别</h5><table>
+<thead>
+<tr>
+<th>集合</th>
+<th>作用</th>
+<th>使用阶段</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>训练集 (Train)</td>
+<td>用于模型训练，更新模型参数</td>
+<td>训练阶段</td>
+<td>占比最大，数据多样性丰富</td>
+</tr>
+<tr>
+<td>验证集 (Validation)</td>
+<td>用于调参和模型选择，监控过拟合情况</td>
+<td>训练过程中的评估阶段</td>
+<td>不参与训练，用于调节超参数和模型结构</td>
+</tr>
+<tr>
+<td>测试集 (Test)</td>
+<td>用于评估最终模型性能</td>
+<td>训练完成后的性能评估</td>
+<td>完全独立，不参与训练和调参</td>
+</tr>
+</tbody></table>
+<h5 id="train-validate-test数据集的划分"><a href="#train-validate-test数据集的划分" class="headerlink" title="train,validate,test数据集的划分"></a>train,validate,test数据集的划分</h5><ul>
+<li><p>创建完整数据集<br>dataset &#x3D; MyData(root_dir, classes, transform&#x3D;transform)</p>
+</li>
+<li><p>按比例划分训练、验证、测试集 70%, 15%, 15%<br>total_size &#x3D; len(dataset)<br>train_size &#x3D; int(0.7 * total_size)<br>val_size &#x3D; int(0.15 * total_size)<br>test_size &#x3D; total_size - train_size - val_size</p>
+</li>
+</ul>
+<p>train_dataset, val_dataset, test_dataset &#x3D; random_split(dataset, [train_size, val_size, test_size])</p>
+<ul>
+<li>创建DataLoader<br>train_loader &#x3D; DataLoader(train_dataset, batch_size&#x3D;64, shuffle&#x3D;True)<br>val_loader &#x3D; DataLoader(val_dataset, batch_size&#x3D;64, shuffle&#x3D;False)<br>test_loader &#x3D; DataLoader(test_dataset, batch_size&#x3D;64, shuffle&#x3D;False)</li>
+</ul>
+<h4 id="训练循环"><a href="#训练循环" class="headerlink" title="训练循环"></a>训练循环</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">n_epochs = 10</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(n_epochs):</span><br><span class="line">    model.train()</span><br><span class="line">    running_loss = 0.0</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> dataloader:</span><br><span class="line">        x, y = x.to(device), y.float().to(device)</span><br><span class="line">        </span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        pred = model(x)</span><br><span class="line">        loss = criterion(pred, y)</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line"></span><br><span class="line">        running_loss += loss.item() * x.size(0)</span><br><span class="line"></span><br><span class="line">    epoch_loss = running_loss / len(dataset)</span><br><span class="line">    <span class="built_in">print</span>(f<span class="string">&quot;Epoch &#123;epoch+1&#125;/&#123;n_epochs&#125; - Loss: &#123;epoch_loss:.4f&#125;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;训练完成！&quot;</span>)</span><br></pre></td></tr></table></figure>
       
     </div>
 
