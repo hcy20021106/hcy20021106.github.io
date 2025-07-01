@@ -150,6 +150,89 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/04/%E6%95%B0%E5%AD%97%E8%B0%83%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/04/%E6%95%B0%E5%AD%97%E8%B0%83%E5%88%B6/" class="post-title-link" itemprop="url">数字调制</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-06-04 23:18:05" itemprop="dateCreated datePublished" datetime="2025-06-04T23:18:05+02:00">2025-06-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-06-15 16:49:42" itemprop="dateModified" datetime="2025-06-15T16:49:42+02:00">2025-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="二进制调制"><a href="#二进制调制" class="headerlink" title="二进制调制"></a>二进制调制</h2><h3 id="解调"><a href="#解调" class="headerlink" title="解调"></a>解调</h3><p>2ASK可以用包络检测法，而2PSK不行，只能用相干解调法</p>
+<h2 id="多进制调制"><a href="#多进制调制" class="headerlink" title="多进制调制"></a>多进制调制</h2><h3 id="正交调制"><a href="#正交调制" class="headerlink" title="正交调制"></a>正交调制</h3><p>已调信号表示为正交调制信号的组合<br>$u(t)&#x3D;A(t)cos[w_ct+\phi(t)] &#x3D; I(t)cosw_ct-Q(t)sinw_ct$  </p>
+<p>其中$I(t)&#x3D;A(t)cos\phi(t)$为同相分量<br>$Q(t)&#x3D;A(t)sin\phi(t)$为正交分量<br>易见I(t)和Q(t)都是成形滤波，因此在生成I(t)和Q(t)我们先引入In和Qn，可以在信号矢量图&#x2F;星座图上面显示In，Qn<br>$u_n(t-nT_B) &#x3D; A_ng(t-nT_B)cos[w_ct+\phi_n] &#x3D; I_ng(t-nT_B)cosw_ct-Q_ng(t-nT_B)sinw_ct$<br>注意u(t)和$u_n(t)$的区别在于是否对单个码元进行分析，$I_n$和$I_t$的区别也是如此。<br>其中对$I_ng(t-nT_B)$和$Q_ng(t-nT_B)$求累加可以分别表示I(t)和Q(t)，因此In和Qn可以表征It和Qt</p>
+<h3 id="正交调制的相干解调法"><a href="#正交调制的相干解调法" class="headerlink" title="正交调制的相干解调法"></a>正交调制的相干解调法</h3><p>由于$u(t) &#x3D; I(t)cosw_ct-Q(t)sinw_ct$  </p>
+<ul>
+<li>获取In<br>与本地载波$cosw_ct$相乘后经过低通滤波器后生成$\frac{1}{2}I(t)$,然后经过抽样判决后生成In</li>
+<li>获取Qn<br>与本地载波$-sinw_ct$相乘同理获取Qn</li>
+</ul>
+<p>然后In与Qn经过并&#x2F;串变换后得到输出01序列</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/04/%E6%A8%A1%E6%8B%9F%E8%B0%83%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -419,7 +502,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-01 13:15:10" itemprop="dateModified" datetime="2025-07-01T13:15:10+02:00">2025-07-01</time>
+                <time title="Modified: 2025-07-02 01:26:24" itemprop="dateModified" datetime="2025-07-02T01:26:24+02:00">2025-07-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -463,7 +546,15 @@
 </blockquote>
 <hr>
 <p>由此分析可得对信号不同频率分量放大或衰减倍数相同，由于群时延特性为常数因此信号不同频率分量到底，输出端的时间先后一致<br>然后，现实中的信道会出现幅频失真、相频失真和群时延失真的情况。也就是说对信号不同频率分量放大或者衰减倍数不同。或者信号不同频率分量到达输出端的时间先后不一。但是这些失真不产生新的频率分量，因此均为线性失真。</p>
-<h4 id="随参信道"><a href="#随参信道" class="headerlink" title="随参信道"></a>随参信道</h4><p>原因：<br>由于多径效应产生的时延差。<br>特性：<br>存在时变的衰减和时延<br>存在多径传播现象<br>$r(t) &#x3D; \sum_{i &#x3D; 1}{n}a_i(t)cosw_c[t-\tau_i(t)] &#x3D; X(t)cosw_ct - Y(t)sinw_ct$<br>其中$a_i(t)$为 <strong>时变衰落</strong> ，$\tau_i(t)$为<strong>时变时延</strong>，X(t)为窄带信号的同相分量，Y(t)为正交分量，其均方和的开方为随机包络，arctan为随机相位。<br>多路传播的影响：<strong>瑞利衰落</strong>.<br>$r(t) &#x3D; \sum_{i&#x3D;1}^{n} a_i(t) \left( \cos \phi_i(t) \cos w_c t - \sin \phi_i(t) \sin w_c t \right)$<br>进一步写成随机包络+随机相位的形式：<br>$r(t) &#x3D; X_t \cos w_c t - Y_t \sin w_c t$<br>其中X(t)和Y(t)分别为同相分量和正交分量,进一步写成随机包络+随机相位的形式<br>$r_(t) &#x3D; V(t)cos[w_ct+\phi(t)]$.<br>其中V(t)为X(t)和Y(t)的平方和的开方，服从瑞利分布，$\phi(t)$为$arctan\frac{Y(t)}{X(t)}$,服从均匀分布</p>
+<h4 id="随参信道"><a href="#随参信道" class="headerlink" title="随参信道"></a>随参信道</h4><p>原因：<br>由于多径效应产生的时延差。<br>特性：<br>存在时变的衰减和时延<br>存在多径传播现象<br>$r(t) &#x3D; \sum_{i &#x3D; 1}^{n}a_i(t)cosw_c[t-\tau_i(t)] &#x3D; X(t)cosw_ct - Y(t)sinw_ct$<br>其中$a_i(t)$为 <strong>时变衰落</strong> ，$\tau_i(t)$为<strong>时变时延</strong>，X(t)为窄带信号的同相分量，Y(t)为正交分量，其均方和的开方为随机包络，arctan为随机相位。<br>多路传播的影响：<strong>瑞利衰落</strong>.<br>$r(t) &#x3D; \sum_{i&#x3D;1}^{n} a_i(t) \left( \cos \phi_i(t) \cos w_c t - \sin \phi_i(t) \sin w_c t \right)$<br>进一步写成随机包络+随机相位的形式：<br>$r(t) &#x3D; X_t \cos w_c t - Y_t \sin w_c t$<br>其中X(t)和Y(t)分别为同相分量和正交分量,进一步写成随机包络+随机相位的形式<br>$r(t) &#x3D; V(t)cos[w_ct+\phi(t)]$.<br>其中V(t)为X(t)和Y(t)的平方和的开方，服从瑞利分布，$\phi(t)$为$arctan\frac{Y(t)}{X(t)}$,服从均匀分布</p>
+<h4 id="OFDM信号经过随参信道的Python示例代码"><a href="#OFDM信号经过随参信道的Python示例代码" class="headerlink" title="OFDM信号经过随参信道的Python示例代码"></a>OFDM信号经过随参信道的Python示例代码</h4><p>下面示例代码展示如何生成多径瑞利信道的频率响应，及经过该信道的接收pilot信号：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="number">1000</span>;           <span class="comment">% 数据组数</span></span><br><span class="line">L = <span class="number">6</span>;              <span class="comment">% 多径数</span></span><br><span class="line">Nfft = <span class="number">2048</span>;        <span class="comment">% FFT点数</span></span><br><span class="line">pilotLen = <span class="number">128</span>;     <span class="comment">% pilot信号长度</span></span><br><span class="line">snr_dB = <span class="number">20</span>;        <span class="comment">% 信噪比</span></span><br><span class="line"></span><br><span class="line">Hs = <span class="built_in">zeros</span>(N, Nfft);           <span class="comment">% 频率响应矩阵</span></span><br><span class="line">rxSignals = <span class="built_in">zeros</span>(N, pilotLen); <span class="comment">% 接收pilot信号矩阵</span></span><br><span class="line"></span><br><span class="line">f = (<span class="number">0</span>:Nfft<span class="number">-1</span>)/Nfft;          <span class="comment">% 归一化频率</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> idx = <span class="number">1</span>:N</span><br><span class="line">    pathDelay = <span class="built_in">sort</span>(<span class="built_in">rand</span>(<span class="number">1</span>,L) * <span class="number">3e-7</span>);        <span class="comment">% 随机路径时延（秒）</span></span><br><span class="line">    pathPower = <span class="built_in">ones</span>(<span class="number">1</span>,L)/L;                    <span class="comment">% 均匀功率分布</span></span><br><span class="line">    a = <span class="built_in">sqrt</span>(pathPower/<span class="number">2</span>).*(<span class="built_in">randn</span>(<span class="number">1</span>,L)+<span class="number">1</span><span class="built_in">j</span>*<span class="built_in">randn</span>(<span class="number">1</span>,L)); <span class="comment">% 复数瑞利衰落增益</span></span><br><span class="line">    </span><br><span class="line">    H = <span class="built_in">zeros</span>(<span class="number">1</span>, Nfft);</span><br><span class="line">    <span class="keyword">for</span> k = <span class="number">1</span>:Nfft</span><br><span class="line">        H(k) = sum(a .* <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">j</span>*<span class="number">2</span>*<span class="built_in">pi</span>*f(k)*pathDelay)); <span class="comment">% 频率响应叠加</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    Hs(idx,:) = H;</span><br><span class="line">    </span><br><span class="line">    symbols = <span class="built_in">exp</span>(<span class="number">1</span><span class="built_in">j</span>*<span class="built_in">pi</span>/<span class="number">2</span>*randi([<span class="number">0</span> <span class="number">3</span>],<span class="number">1</span>,pilotLen));   <span class="comment">% 随机QPSK pilot信号</span></span><br><span class="line">    </span><br><span class="line">    h_time = <span class="built_in">zeros</span>(<span class="number">1</span>, pilotLen);</span><br><span class="line">    tapIndex = <span class="built_in">round</span>(pathDelay / (<span class="number">3e-7</span>/pilotLen)) + <span class="number">1</span>; <span class="comment">% 时延映射采样点</span></span><br><span class="line">    tapIndex(tapIndex &gt; pilotLen) = pilotLen;         <span class="comment">% 防止超出边界</span></span><br><span class="line">    <span class="keyword">for</span> l = <span class="number">1</span>:L</span><br><span class="line">        h_time(tapIndex(l)) = a(l);                     <span class="comment">% 构造时域冲激响应</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    rxSignal = conv(symbols, h_time, <span class="string">&#x27;same&#x27;</span>);          <span class="comment">% 时域卷积模拟信道传输</span></span><br><span class="line">    signalPower = <span class="built_in">mean</span>(<span class="built_in">abs</span>(rxSignal).^<span class="number">2</span>);</span><br><span class="line">    noisePower = signalPower / (<span class="number">10</span>^(snr_dB/<span class="number">10</span>));</span><br><span class="line">    noise = <span class="built_in">sqrt</span>(noisePower/<span class="number">2</span>)*(<span class="built_in">randn</span>(<span class="built_in">size</span>(rxSignal))+<span class="number">1</span><span class="built_in">j</span>*<span class="built_in">randn</span>(<span class="built_in">size</span>(rxSignal)));</span><br><span class="line">    </span><br><span class="line">    rxSignals(idx,:) = rxSignal + noise;               <span class="comment">% 添加AWGN噪声</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>在实际仿真中，信道时域冲激响应 h_time 的长度（即维度）不必与pilot信号长度相同，<br><br>它只需包含有效的多径分量（即最大时延对应的采样点数），通常远小于 pilotLen，<br><br>这样可以减少计算开销，提高仿真效率。<br><br>只需保证信道时域响应长度足够覆盖所有路径时延即可。<br><br>而且不会影响结果（使用循环卷积）<br></p>
+</blockquote>
+<hr>
 
       
     </div>
@@ -1288,7 +1379,7 @@ end
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-01 11:01:46" itemprop="dateModified" datetime="2025-07-01T11:01:46+02:00">2025-07-01</time>
+                <time title="Modified: 2025-07-02 01:27:40" itemprop="dateModified" datetime="2025-07-02T01:27:40+02:00">2025-07-02</time>
               </span>
 
           
@@ -1376,91 +1467,7 @@ end
 <p>千年史册耻无名，一片丹心报天子。</p>
 <p>楚虽三户能亡秦，岂有堂堂中国空无人！</p>
 <p>“我也明知白驹过隙，逝者如斯，未来可能讲更有意思的话，著更其完美的文，做更其壮丽的事业，但今天只是今天，未来也只是今天的未来。”</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/24/MATLAB%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/24/MATLAB%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">MATLAB基础语法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-04-24 14:50:46" itemprop="dateCreated datePublished" datetime="2025-04-24T14:50:46+02:00">2025-04-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-30 15:26:12" itemprop="dateModified" datetime="2025-06-30T15:26:12+02:00">2025-06-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MATLAB/" itemprop="url" rel="index"><span itemprop="name">MATLAB</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="向量处理"><a href="#向量处理" class="headerlink" title="向量处理"></a>向量处理</h2><p>a &#x3D; [1:3:100]<br>其中a是初始值，b是步长，c是终点值<br>返回结果是[1,4,7,…,100]<br>b(a) &#x3D; []<br>把向量b中的a对应索引给删掉</p>
-<h2 id="列向量和横向量"><a href="#列向量和横向量" class="headerlink" title="列向量和横向量"></a>列向量和横向量</h2><p>列向量使用;<br>a &#x3D; [1;2;3]<br>b &#x3D; [4;5;6]<br>c &#x3D; [a;b]<br>其中c将两个列向量进行拼接<br>横向量使用逗号，其他同理<br>如果想使用a&#x3D;(1:100)类似语法构建列向量，可以先构建横向量，例如a&#x3D;(1:100),然后再使用(:)进行转换a&#x3D;a(:)</p>
-<h2 id="table"><a href="#table" class="headerlink" title="table"></a>table</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">% 构建table</span><br><span class="line">RNTI = [1;2;3];</span><br><span class="line">LogicalChannelID = [3;4;5];</span><br><span class="line">RLCEntityType = [<span class="string">&quot;AM&quot;</span>; <span class="string">&quot;AM&quot;</span>; <span class="string">&quot;UM&quot;</span>];</span><br><span class="line">RLCChannelConfig = table(</span><br><span class="line">    RNTI, LogicalChannelID,LogicalChannelGroup,RLCEntityType,...</span><br><span class="line"></span><br><span class="line">);</span><br><span class="line">% 查询表的行数</span><br><span class="line">nRows = size(RLCChannelConfig, 1);</span><br><span class="line">% 查询表的列数</span><br><span class="line">nCols = size(RLCChannelConfig, 2);</span><br><span class="line">% 把table保存成.mat文件</span><br><span class="line">save(<span class="string">&#x27;RLCChannelConfig.mat&#x27;</span>, <span class="string">&#x27;RLCChannelConfig&#x27;</span>)</span><br><span class="line">% 取出table中的某个字段中的某一行的数据</span><br><span class="line">data = RLCChannelConfig.RNTI(1);</span><br><span class="line">% 把table转成struct</span><br><span class="line">myStruct = table2struct(RLCChannelConfig)</span><br><span class="line">myStruct_1 = table2struct(RLCChannelConfig(1,2:end));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="对角矩阵操作"><a href="#对角矩阵操作" class="headerlink" title="对角矩阵操作"></a>对角矩阵操作</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">% 创建对角矩阵</span><br><span class="line">A = diag([1 2 3]);   % 生成对角线为 [1 2 3] 的矩阵</span><br><span class="line"></span><br><span class="line">% 提取矩阵的对角线</span><br><span class="line">d = diag(A);         % 返回 A 的主对角线</span><br><span class="line"></span><br><span class="line">% 生成偏移对角矩阵</span><br><span class="line">B = diag([4 5 6], 1);  % 将 [4 5 6] 放在主对角线上方一条对角线上</span><br><span class="line">X = diag((<span class="number">1</span>+<span class="number">1</span>i)*ones(<span class="number">1</span>,Pilot_num));   % all pilots are 1+1i.</span><br><span class="line">    </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="Cell"><a href="#Cell" class="headerlink" title="Cell"></a>Cell</h2><p>Cell是一种可以容纳任意类型数据的容器，可以保存不同类型、不同大小的数据在一个数组中&#x2F;</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">% 创建空cell</span><br><span class="line">x = &#123;&#125;;</span><br><span class="line">x&#123;1&#125; = 1;</span><br><span class="line">x&#123;2&#125; = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line">x&#123;3&#125; = [1 2 3];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="class"><a href="#class" class="headerlink" title="class"></a>class</h2><p>假设有一个nrUE类<br>构建nrUEs数组很简单</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UEs = nrUE(Name=ueNames,Position=uePositions, Receive=11);</span><br></pre></td></tr></table></figure>
-<p>只需要在传参时将数组传进去即可，这样输出自动成为数组</p>
+<p>一点浩然气，千里快哉风。</p>
 
       
     </div>
@@ -1545,7 +1552,7 @@ end
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
