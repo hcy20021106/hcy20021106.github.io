@@ -519,7 +519,7 @@ print(w.grad)
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-30 17:48:51" itemprop="dateModified" datetime="2025-06-30T17:48:51+02:00">2025-06-30</time>
+                <time title="Modified: 2025-07-01 11:44:53" itemprop="dateModified" datetime="2025-07-01T11:44:53+02:00">2025-07-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -550,7 +550,7 @@ print(w.grad)
 <li>Structured Learning</li>
 </ul>
 <h3 id="Linear-Model"><a href="#Linear-Model" class="headerlink" title="Linear Model"></a>Linear Model</h3><h4 id="Define-function-with-unknown-parameters"><a href="#Define-function-with-unknown-parameters" class="headerlink" title="Define function with unknown parameters"></a>Define function with unknown parameters</h4><p>Model: $y &#x3D; b + w_1$ based on domain knowledge<br>w (weight) and b (bias) are unknown parameters (learn from data)<br>如果是一组包含有多个feature（例如同时考虑前七天的数据来进行预测）<br>那么$y &#x3D; b + \sum_j w_jx_j$</p>
-<h4 id="Define-Loss-from-Training-Data"><a href="#Define-Loss-from-Training-Data" class="headerlink" title="Define Loss from Training Data"></a>Define Loss from Training Data</h4><p>Loss is a function of the unknown parameters: L(b,w)<br>e.g., L(0.5k, 1) corresponding to $y &#x3D; 0.5k + 1x_1$<br>我们定义一个loss function为:<br>$e_n &#x3D; |y_n - \hat{y_n}|$  </p>
+<h4 id="Define-Loss-from-Training-Data"><a href="#Define-Loss-from-Training-Data" class="headerlink" title="Define Loss from Training Data"></a>Define Loss from Training Data</h4><p>Loss is a function of the unknown parameters: L(b,w)<br>e.g., L(0.5k, 1) corresponding to $\hat{y} &#x3D; 0.5k + 1x_1$.<br>$\hat{y}$ is predicted value, y is ground truth (target)<br>我们定义一个loss function为:<br>$e_n &#x3D; |y_n - \hat{y_n}|$  </p>
 <p>Loss: $L(b, w) &#x3D; \frac{1}{N} \sum_{n&#x3D;1}^{N} \left| y_n - \hat{y}_n \right|$</p>
 <p>其中y为预测值，$\hat{y}$为真实值,这里我们定义的Loss是mean absolute error （MAE），如果是mean square error（MSE），则是差值的的平方。</p>
 <h4 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h4><p>我们通过最小化损失函数 <em>L(b, w)</em> 来学习未知参数 b 和 w。优化目标为：</p>
@@ -667,6 +667,39 @@ print(w.grad)
 <li>创建DataLoader<br>train_loader &#x3D; DataLoader(train_dataset, batch_size&#x3D;64, shuffle&#x3D;True)<br>val_loader &#x3D; DataLoader(val_dataset, batch_size&#x3D;64, shuffle&#x3D;False)<br>test_loader &#x3D; DataLoader(test_dataset, batch_size&#x3D;64, shuffle&#x3D;False)</li>
 </ul>
 <h4 id="训练循环"><a href="#训练循环" class="headerlink" title="训练循环"></a>训练循环</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">n_epochs = 10</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(n_epochs):</span><br><span class="line">    model.train()</span><br><span class="line">    running_loss = 0.0</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> dataloader:</span><br><span class="line">        x, y = x.to(device), y.float().to(device)</span><br><span class="line">        </span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        pred = model(x)</span><br><span class="line">        loss = criterion(pred, y)</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line"></span><br><span class="line">        running_loss += loss.item() * x.size(0)</span><br><span class="line"></span><br><span class="line">    epoch_loss = running_loss / len(dataset)</span><br><span class="line">    <span class="built_in">print</span>(f<span class="string">&quot;Epoch &#123;epoch+1&#125;/&#123;n_epochs&#125; - Loss: &#123;epoch_loss:.4f&#125;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;训练完成！&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h3><p>在分类中，需要讲线性输出映射到概率</p>
+<h4 id="Sigmoid（二分类）"><a href="#Sigmoid（二分类）" class="headerlink" title="Sigmoid（二分类）"></a>Sigmoid（二分类）</h4><p>模型：<br>$p &#x3D; \sigma(z) &#x3D; \frac{1}{1 + e^{-z}},\quad z &#x3D; b + \sum_j w_j x_j$.<br>预测类别：<br>$\hat{y} &#x3D;\begin{cases} 1 &amp; \text{if } p &gt; 0.5 \ 0 &amp; \text{otherwise} \end{cases}$.<br>Binary Cross-Entropy Loss (BCL):<br>$L(b, w) &#x3D; -\frac{1}{N} \sum_{n&#x3D;1}^{N} [, y_n \log p_n + (1 - y_n) \log (1 - p_n)$</p>
+<h4 id="Softmax（多分类）"><a href="#Softmax（多分类）" class="headerlink" title="Softmax（多分类）"></a>Softmax（多分类）</h4><p>对于$K$个类别<br>$p_k &#x3D; \frac{e^{z_k}}{\sum_{j&#x3D;1}^{K} e^{z_j}},\quad z_k &#x3D; b_k + \sum_j w_{kj} x_j \quad k&#x3D;1 \dots,K$.<br>Multiclass Cross-Entropy Loss:<br>$L(b, w) &#x3D; -\frac{1}{N} \sum_{n&#x3D;1}^{N} \sum_{k&#x3D;1}^{K} y_{nk} \log p_{nk}$。<br>其中：<br>$y_{nk} &#x3D; 1$ if sample $n$ is of class $k$, otherwise $0$.<br>因此这里用了one-hot编码，因为只考虑了只有真实类别对应的$y_{nk} &#x3D; 1$,其余为0，$p_{nk}$是Softmax后预测属于类别k的概率</p>
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Output Function</th>
+<th>Activation</th>
+<th>Loss Function</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Regression</td>
+<td>$y$</td>
+<td>Linear</td>
+<td>MAE &#x2F; MSE</td>
+</tr>
+<tr>
+<td>Binary Classification</td>
+<td>$p$</td>
+<td>Sigmoid</td>
+<td>Binary Cross-Entropy (BCE)</td>
+</tr>
+<tr>
+<td>Multiclass Classification</td>
+<td>$p_k$</td>
+<td>Softmax</td>
+<td>Multiclass Cross-Entropy</td>
+</tr>
+</tbody></table>
+
       
     </div>
 

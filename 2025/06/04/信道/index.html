@@ -28,7 +28,7 @@
 <meta property="og:description" content="定义与分类 狭义信道 有线信道  同轴电缆，光纤 无线信道  微波视距传播，卫星中继，移动通信信道   广义信道 调制信道  调制器输出-&gt;解调器输入 编码信道  编码器输出-&gt;译码器输入    调制信道有一对一&#x2F;一对多的输入输出端，满足线性叠加原理，对信号有时变和时不变的两种延迟和损耗，其数学模型是叠加有噪声的线性时变&#x2F;时不变滤波器 恒参信道对应的信道特性为线性时">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-04T14:48:13.000Z">
-<meta property="article:modified_time" content="2025-06-26T13:14:04.693Z">
+<meta property="article:modified_time" content="2025-07-01T11:15:10.600Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -185,7 +185,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-26 15:14:04" itemprop="dateModified" datetime="2025-06-26T15:14:04+02:00">2025-06-26</time>
+                <time title="Modified: 2025-07-01 13:15:10" itemprop="dateModified" datetime="2025-07-01T13:15:10+02:00">2025-07-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -228,7 +228,7 @@
 </blockquote>
 <hr>
 <p>由此分析可得对信号不同频率分量放大或衰减倍数相同，由于群时延特性为常数因此信号不同频率分量到底，输出端的时间先后一致<br>然后，现实中的信道会出现幅频失真、相频失真和群时延失真的情况。也就是说对信号不同频率分量放大或者衰减倍数不同。或者信号不同频率分量到达输出端的时间先后不一。但是这些失真不产生新的频率分量，因此均为线性失真。</p>
-<h4 id="随参信道"><a href="#随参信道" class="headerlink" title="随参信道"></a>随参信道</h4><p>原因：<br>由于多径效应产生的时延差。<br>特性：<br>存在时变的衰减和时延<br>存在多径传播现象<br>$r(t) &#x3D; \sum_{i &#x3D; 1}{n}a_i(t)cosw_c[t-\tau_i(t)] &#x3D; X(t)cosw_ct - Y(t)sinw_ct$<br>其中$a_i(t)$为 <strong>时变衰落</strong> ，$\tau_i(t)$为<strong>时变时延</strong>，X(t)为窄带信号的同相分量，Y(t)为正交分量，其均方和的开方为随机包络，arctan为随机相位。<br>多路传播的影响：<strong>瑞利衰落</strong></p>
+<h4 id="随参信道"><a href="#随参信道" class="headerlink" title="随参信道"></a>随参信道</h4><p>原因：<br>由于多径效应产生的时延差。<br>特性：<br>存在时变的衰减和时延<br>存在多径传播现象<br>$r(t) &#x3D; \sum_{i &#x3D; 1}{n}a_i(t)cosw_c[t-\tau_i(t)] &#x3D; X(t)cosw_ct - Y(t)sinw_ct$<br>其中$a_i(t)$为 <strong>时变衰落</strong> ，$\tau_i(t)$为<strong>时变时延</strong>，X(t)为窄带信号的同相分量，Y(t)为正交分量，其均方和的开方为随机包络，arctan为随机相位。<br>多路传播的影响：<strong>瑞利衰落</strong>.<br>$r(t) &#x3D; \sum_{i&#x3D;1}^{n} a_i(t) \left( \cos \phi_i(t) \cos w_c t - \sin \phi_i(t) \sin w_c t \right)$<br>进一步写成随机包络+随机相位的形式：<br>$r(t) &#x3D; X_t \cos w_c t - Y_t \sin w_c t$<br>其中X(t)和Y(t)分别为同相分量和正交分量,进一步写成随机包络+随机相位的形式<br>$r_(t) &#x3D; V(t)cos[w_ct+\phi(t)]$.<br>其中V(t)为X(t)和Y(t)的平方和的开方，服从瑞利分布，$\phi(t)$为$arctan\frac{Y(t)}{X(t)}$,服从均匀分布</p>
 
     </div>
 
