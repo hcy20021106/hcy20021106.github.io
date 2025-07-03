@@ -772,7 +772,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-05-06 01:01:24" itemprop="dateModified" datetime="2025-05-06T01:01:24+02:00">2025-05-06</time>
+                <time title="Modified: 2025-07-03 02:02:50" itemprop="dateModified" datetime="2025-07-03T02:02:50+02:00">2025-07-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -840,6 +840,74 @@
 <h3 id="强行转换并使用msgData指针"><a href="#强行转换并使用msgData指针" class="headerlink" title="强行转换并使用msgData指针"></a>强行转换并使用msgData指针</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">notifiedFIFO_elt_t *Msg = newNotifiedFIFO_elt(sizeof(syncData_t), 0, &amp;nf, UE_synch);</span><br><span class="line">syncData_t *syncMsg = (syncData_t *) NotifiedFifoData(Msg));</span><br><span class="line">syncMsg-&gt;UE = UE;</span><br><span class="line">memset(&amp;syncMsg-&gt;proc, 0, sizeof(syncMsg-&gt;proc));</span><br><span class="line">pushTpool(&amp;(get_nrUE_params()-&gt;Tpool), Msg);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>pushTpool</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">static inline void pushTpool(tpool_t *t, notifiedFIFO_elt_t *msg) &#123;</span><br><span class="line">  <span class="keyword">if</span> (t-&gt;measurePerf) msg-&gt;creationTime=rdtsc_oai();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( t-&gt;activated)</span><br><span class="line">    pushNotifiedFIFO(&amp;t-&gt;incomingFifo, msg);</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (t-&gt;measurePerf)</span><br><span class="line">      msg-&gt;startProcessingTime=rdtsc_oai();</span><br><span class="line"></span><br><span class="line">    msg-&gt;processingFunc(NotifiedFifoData(msg));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (t-&gt;measurePerf)</span><br><span class="line">      msg-&gt;endProcessingTime=rdtsc_oai();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (msg-&gt;reponseFifo)</span><br><span class="line">      pushNotifiedFIFO(msg-&gt;reponseFifo, msg);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="📘-C-指针和字符串字面量示例"><a href="#📘-C-指针和字符串字面量示例" class="headerlink" title="📘 C 指针和字符串字面量示例"></a>📘 C 指针和字符串字面量示例</h2><h3 id="📌-1-基础示例：指针初始化"><a href="#📌-1-基础示例：指针初始化" class="headerlink" title="📌 1. 基础示例：指针初始化"></a>📌 1. 基础示例：指针初始化</h3><p>✅ 正确用法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> *a = &amp;x;  <span class="comment">// a 指向 x 的地址</span></span><br><span class="line">    *a = <span class="number">2</span>;       <span class="comment">// 修改 x 的值</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;x = %d\n&quot;</span>, x);  <span class="comment">// 输出：2</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>🚫 错误用法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> *a = <span class="number">1</span>;   <span class="comment">// 错误！a 指向地址 0x1，几乎肯定无效</span></span><br><span class="line">    *a = <span class="number">2</span>;       <span class="comment">// 未定义行为，可能段错误</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="📌-2-字符串字面量是只读的"><a href="#📌-2-字符串字面量是只读的" class="headerlink" title="📌 2. 字符串字面量是只读的"></a>📌 2. 字符串字面量是只读的</h3><p>✅ 正确示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> *a = <span class="string">&quot;a&quot;</span>;  <span class="comment">// a 指向字符串字面量 &quot;a&quot;</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, a);  <span class="comment">// 输出：a</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 🚫 不要尝试修改只读字符串：</span></span><br><span class="line">    <span class="comment">// a[0] = &#x27;b&#x27;; // 可能段错误</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="📌-3-可修改字符串：使用数组"><a href="#📌-3-可修改字符串：使用数组" class="headerlink" title="📌 3. 可修改字符串：使用数组"></a>📌 3. 可修改字符串：使用数组</h3><p>✅ 正确示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> a[] = <span class="string">&quot;a&quot;</span>; <span class="comment">// 创建一个可修改的数组</span></span><br><span class="line">    a[<span class="number">0</span>] = <span class="string">&#x27;b&#x27;</span>;     <span class="comment">// 修改成功</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, a);  <span class="comment">// 输出：b</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="📌-4-内存示意"><a href="#📌-4-内存示意" class="headerlink" title="📌 4. 内存示意"></a>📌 4. 内存示意</h3><table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>a</code></td>
+<td>指针变量，保存一个地址</td>
+</tr>
+<tr>
+<td><code>*a</code></td>
+<td>访问指针指向地址中的值</td>
+</tr>
+<tr>
+<td><code>&amp;x</code></td>
+<td>取变量 x 的地址</td>
+</tr>
+<tr>
+<td><code>&quot;abc&quot;</code></td>
+<td>字符串字面量（只读）</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="📌-5-char-a-vs-char-a"><a href="#📌-5-char-a-vs-char-a" class="headerlink" title="📌 5. char *a vs char a[]"></a>📌 5. <code>char *a</code> vs <code>char a[]</code></h3><table>
+<thead>
+<tr>
+<th>声明</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>char *a = &quot;abc&quot;;</code></td>
+<td>a 是指针，指向只读字符串字面量</td>
+</tr>
+<tr>
+<td><code>char a[] = &quot;abc&quot;;</code></td>
+<td>a 是数组，内容拷贝到栈上，可修改</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="✅-总结"><a href="#✅-总结" class="headerlink" title="✅ 总结"></a>✅ 总结</h3><ol>
+<li><strong>指针变量保存的是地址，解引用（<code>*a</code>）访问该地址中的值。</strong></li>
+<li><strong>字符串字面量通常是只读内存，想要可修改字符串就要用数组拷贝出来。</strong></li>
+<li><strong>对无效地址解引用会导致未定义行为（段错误、程序崩溃）。</strong></li>
+</ol>
+<hr>
+<h3 id="✨-完整示例：可复制运行"><a href="#✨-完整示例：可复制运行" class="headerlink" title="✨ 完整示例：可复制运行"></a>✨ 完整示例：可复制运行</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 指针操作</span></span><br><span class="line">    <span class="type">int</span> x = <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span> *p = &amp;x;</span><br><span class="line">    *p = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;x = %d\n&quot;</span>, x);  <span class="comment">// 输出：20</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 字符串字面量（只读）</span></span><br><span class="line">    <span class="type">char</span> *s1 = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, s1);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 可修改字符串（数组）</span></span><br><span class="line">    <span class="type">char</span> s2[] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    s2[<span class="number">0</span>] = <span class="string">&#x27;H&#x27;</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, s2);  <span class="comment">// 输出：Hello</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+
       
     </div>
 
