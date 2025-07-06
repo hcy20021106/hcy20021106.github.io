@@ -704,7 +704,7 @@ print(w.grad)
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-01 11:44:53" itemprop="dateModified" datetime="2025-07-01T11:44:53+02:00">2025-07-01</time>
+                <time title="Modified: 2025-07-04 17:59:27" itemprop="dateModified" datetime="2025-07-04T17:59:27+02:00">2025-07-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -734,7 +734,7 @@ print(w.grad)
 <li>Classification<br>Given options (classes), the function outputs the correct one.</li>
 <li>Structured Learning</li>
 </ul>
-<h3 id="Linear-Model"><a href="#Linear-Model" class="headerlink" title="Linear Model"></a>Linear Model</h3><h4 id="Define-function-with-unknown-parameters"><a href="#Define-function-with-unknown-parameters" class="headerlink" title="Define function with unknown parameters"></a>Define function with unknown parameters</h4><p>Model: $y &#x3D; b + w_1$ based on domain knowledge<br>w (weight) and b (bias) are unknown parameters (learn from data)<br>如果是一组包含有多个feature（例如同时考虑前七天的数据来进行预测）<br>那么$y &#x3D; b + \sum_j w_jx_j$</p>
+<h3 id="Linear-Model"><a href="#Linear-Model" class="headerlink" title="Linear Model"></a>Linear Model</h3><h4 id="Define-function-with-unknown-parameters"><a href="#Define-function-with-unknown-parameters" class="headerlink" title="Define function with unknown parameters"></a>Define function with unknown parameters</h4><p>Model: $y &#x3D; b + w_1x_1$ based on domain knowledge<br>w (weight) and b (bias) are unknown parameters (learn from data)<br>如果是一组包含有多个feature（例如同时考虑前七天的数据来进行预测）<br>那么$y &#x3D; b + \sum_j w_jx_j$</p>
 <h4 id="Define-Loss-from-Training-Data"><a href="#Define-Loss-from-Training-Data" class="headerlink" title="Define Loss from Training Data"></a>Define Loss from Training Data</h4><p>Loss is a function of the unknown parameters: L(b,w)<br>e.g., L(0.5k, 1) corresponding to $\hat{y} &#x3D; 0.5k + 1x_1$.<br>$\hat{y}$ is predicted value, y is ground truth (target)<br>我们定义一个loss function为:<br>$e_n &#x3D; |y_n - \hat{y_n}|$  </p>
 <p>Loss: $L(b, w) &#x3D; \frac{1}{N} \sum_{n&#x3D;1}^{N} \left| y_n - \hat{y}_n \right|$</p>
 <p>其中y为预测值，$\hat{y}$为真实值,这里我们定义的Loss是mean absolute error （MAE），如果是mean square error（MSE），则是差值的的平方。</p>
@@ -744,7 +744,7 @@ print(w.grad)
 <p>$w \leftarrow w - \eta \frac{\partial L}{\partial w}, \quad<br>b \leftarrow b - \eta \frac{\partial L}{\partial b}$</p>
 <p>其中 $\eta$ 为学习率。对于 MAE 损失，由于其不可导点较多，可以使用次梯度法；对于 MSE 损失，则可以直接使用标准梯度下降算法。</p>
 <h3 id="Sophisticated-Models"><a href="#Sophisticated-Models" class="headerlink" title="Sophisticated Models"></a>Sophisticated Models</h3><p>Beacuse linear models have severe limitation (model bias), so we include more sophisticated models.</p>
-<h4 id="Sigmoid-function"><a href="#Sigmoid-function" class="headerlink" title="Sigmoid function"></a>Sigmoid function</h4><p>$y &#x3D; b + wx_1 &#x3D;&gt; y &#x3D; b + \sum_i c_i \cdot \sigma(b_i + w_ix_1)$<br>注：不同的w，b，c可以让sigmoid曲线可以拟合不同的曲线<br>注意这里是多个sigmoid的和，因为实际情况可能是由多个sigmoid拟合而成。<br>相对应的，对于$y &#x3D; b + \sum_j w_jx_j$, 则有$y &#x3D; b + \sum_i c_i \cdot \sigma(b_i + \sum_j w_{ij} x_j)$  </p>
+<h4 id="Sigmoid-function（logistic-regression）"><a href="#Sigmoid-function（logistic-regression）" class="headerlink" title="Sigmoid function（logistic regression）"></a>Sigmoid function（logistic regression）</h4><p>$y &#x3D; b + wx_1 &#x3D;&gt; y &#x3D; b + \sum_i c_i \cdot \sigma(b_i + w_ix_1)$<br>注：不同的w，b，c可以让sigmoid曲线可以拟合不同的曲线<br>注意这里是多个sigmoid的和，因为实际情况可能是由多个sigmoid拟合而成。<br>相对应的，对于$y &#x3D; b + \sum_j w_jx_j$, 则有$y &#x3D; b + \sum_i c_i \cdot \sigma(b_i + \sum_j w_{ij} x_j)$  </p>
 <p>示例：i &#x3D; 1,2,3; j &#x3D; 1,2,3 时的显式形式<br>$$<br>r_1 &#x3D; b_1 + w_{11}x_1 + w_{12}x_2 + w_{13}x_3<br>$$</p>
 <p>$$<br>r_2 &#x3D; b_2 + w_{21}x_1 + w_{22}x_2 + w_{23}x_3<br>$$</p>
 <p>$$<br>r_3 &#x3D; b_3 + w_{31}x_1 + w_{32}x_2 + w_{33}x_3<br>$$</p>
@@ -756,6 +756,29 @@ print(w.grad)
 <p>定义Loss function $L(\theta)$,最后想要取得的 $\mathbf{\theta^{*}} &#x3D; \arg\min_{\theta} L$  </p>
 <p>因此我们同样的使用梯度下降更新去得到最后的$\mathbf{\theta^{*}}$<br>$$<br>\theta \leftarrow \theta - \eta \cdot \nabla_\theta L(\theta)<br>$$  </p>
 <p><strong>Batch Size</strong>, <strong>Epoch</strong>, <strong>N</strong><br>1,000 examples (N &#x3D; 1,000), Batch size is 100, so 100 update in 1 epoch (10 Batch).</p>
+<h3 id="Use-Quadratic-and-Higher-Order-Terms"><a href="#Use-Quadratic-and-Higher-Order-Terms" class="headerlink" title="Use Quadratic and Higher-Order Terms"></a>Use Quadratic and Higher-Order Terms</h3><p>To increase model expressiveness, you can replace the linear input with polynomial terms.</p>
+<p>For example, a quadratic input:<br>$$<br>y &#x3D; b + w_1 \cdot x_1 + w_2 \cdot x_1^2 + w_3 \cdot x_1^3 + … + w_n \cdot x_1^n<br>$$</p>
+<h4 id="Overfitting-Risk"><a href="#Overfitting-Risk" class="headerlink" title="Overfitting Risk"></a>Overfitting Risk</h4><ul>
+<li>Adding higher-degree polynomials increases the parameter space.</li>
+<li>The model can fit training data too well, including noise.</li>
+<li>This leads to poor generalization on unseen data.</li>
+</ul>
+<h4 id="Rugularization-to-Prevent-Overfitting"><a href="#Rugularization-to-Prevent-Overfitting" class="headerlink" title="Rugularization to Prevent Overfitting"></a>Rugularization to Prevent Overfitting</h4><p>Add a penalty term to the loss function:</p>
+<p>为了防止过拟合，通常在损失函数中加入正则化项，对权重进行惩罚。<br>常见的有 <strong>L2 正则化（权重衰减）</strong>：</p>
+<p>$\text{Loss} &#x3D; \text{MSE} + \lambda \sum_{i} w_i^2$</p>
+<ul>
+<li>其中，(\lambda) 是正则化系数（也叫 <strong>weight decay</strong>）。</li>
+<li>通过限制权重 (w_i) 的大小，减少模型对高阶项的过度依赖，从而降低过拟合风险。</li>
+</ul>
+<h4 id="训练时如何加上正则化相"><a href="#训练时如何加上正则化相" class="headerlink" title="训练时如何加上正则化相"></a>训练时如何加上正则化相</h4><p>训练模型时，需要在参数更新步骤中加上正则化项。<br>以 <strong>L2 正则化</strong> 为例，每次参数更新公式：</p>
+<p>$w :&#x3D; w - \eta (\nabla L + \lambda w)$</p>
+<ul>
+<li>$\eta$：学习率（learning rate）</li>
+<li>$\nabla L$：损失函数对参数的梯度</li>
+<li>$\lambda w$：正则化项对参数的梯度（L2 正则化）</li>
+</ul>
+<p>✅ 直观理解</p>
+<p>每次更新时，把权重往 0 再拉一点，<br>防止它们变得太大，避免模型拟合噪声，提升泛化能力。</p>
 <h3 id="PyTorch-CNN-二分类示例"><a href="#PyTorch-CNN-二分类示例" class="headerlink" title="PyTorch CNN 二分类示例"></a>PyTorch CNN 二分类示例</h3><h4 id="预处理transform"><a href="#预处理transform" class="headerlink" title="预处理transform"></a>预处理transform</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">transform = transforms.Compose([</span><br><span class="line">    transforms.Resize((<span class="number">256</span>, <span class="number">256</span>)),</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
 <h4 id="自定义Dataset"><a href="#自定义Dataset" class="headerlink" title="自定义Dataset"></a>自定义Dataset</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class MyData(Dataset):</span><br><span class="line">    def __init__(self, root_dir, classes, transform=None):</span><br><span class="line">        self.root_dir = root_dir</span><br><span class="line">        self.classes = classes</span><br><span class="line">        self.transform = transform</span><br><span class="line"></span><br><span class="line">        self.img_paths = []</span><br><span class="line">        self.labels = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> idx, cls <span class="keyword">in</span> enumerate(classes):</span><br><span class="line">            cls_path = os.path.join(root_dir, cls)</span><br><span class="line">            <span class="keyword">for</span> img_name <span class="keyword">in</span> os.listdir(cls_path):</span><br><span class="line">                self.img_paths.append(os.path.join(cls_path, img_name))</span><br><span class="line">                self.labels.append(idx)</span><br><span class="line"></span><br><span class="line">    def __getitem__(self, idx):</span><br><span class="line">        img_path = self.img_paths[idx]</span><br><span class="line">        img = Image.open(img_path).convert(<span class="string">&#x27;RGB&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> self.transform:</span><br><span class="line">            img = self.transform(img)</span><br><span class="line">        label = self.labels[idx]</span><br><span class="line">        <span class="built_in">return</span> img, label</span><br><span class="line"></span><br><span class="line">    def __len__(self):</span><br><span class="line">        <span class="built_in">return</span> len(self.img_paths)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h4 id="简单CNN模型"><a href="#简单CNN模型" class="headerlink" title="简单CNN模型"></a>简单CNN模型</h4><h5 id="输入数据格式"><a href="#输入数据格式" class="headerlink" title="输入数据格式"></a>输入数据格式</h5><ul>
