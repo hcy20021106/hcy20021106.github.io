@@ -150,6 +150,127 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/07/%E5%85%B6%E4%BB%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/07/07/%E5%85%B6%E4%BB%96/" class="post-title-link" itemprop="url">其他</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-07-07 17:20:33 / Modified: 17:53:27" itemprop="dateCreated datePublished" datetime="2025-07-07T17:20:33+02:00">2025-07-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="周期冲激序列的傅立叶变换"><a href="#周期冲激序列的傅立叶变换" class="headerlink" title="周期冲激序列的傅立叶变换"></a>周期冲激序列的傅立叶变换</h2><p>求冲激串 $ \sum_{k&#x3D;-\infty}^{\infty}\delta(t-kT) $ 的傅立叶变换。</p>
+<hr>
+<h3 id="🚩-思路一：傅立叶级数展开"><a href="#🚩-思路一：傅立叶级数展开" class="headerlink" title="🚩 思路一：傅立叶级数展开"></a>🚩 思路一：傅立叶级数展开</h3><ul>
+<li>时间域是周期信号，周期 $T$，所以可以写成傅立叶级数：</li>
+</ul>
+<p>$$<br>x(t) &#x3D; \sum_{n&#x3D;-\infty}^{\infty} c_n e^{j n \Omega_s t}, \quad \Omega_s &#x3D; \frac{2\pi}{T}.<br>$$</p>
+<ul>
+<li>求傅立叶系数，对于冲激串：</li>
+</ul>
+<p>$$<br>c_n &#x3D; \frac{1}{T} \int_{-T&#x2F;2}^{T&#x2F;2} \sum_{k&#x3D;-\infty}^{\infty} \delta(t - kT) e^{-j n \Omega_s t} dt.<br>$$</p>
+<p>只会取到 $k &#x3D; 0$：</p>
+<p>$$<br>c_n &#x3D; \frac{1}{T}.<br>$$</p>
+<ul>
+<li>所以：</li>
+</ul>
+<p>$$<br>x(t) &#x3D; \frac{1}{T} \sum_{n&#x3D;-\infty}^{\infty} e^{j n \Omega_s t}.<br>$$</p>
+<ul>
+<li>利用傅立叶变换性质，复指数 $e^{j n \Omega_s t}$ 的傅立叶变换：</li>
+</ul>
+<p>$$<br>\mathcal{F}[e^{j n \Omega_s t}] &#x3D; 2\pi \delta(\omega - n\Omega_s).<br>$$</p>
+<ul>
+<li>所以：</li>
+</ul>
+<p>$$<br>X(j\omega) &#x3D; \frac{1}{T} \sum_{n&#x3D;-\infty}^{\infty} 2\pi \delta(\omega - n\Omega_s)<br>&#x3D; \frac{2\pi}{T} \sum_{n&#x3D;-\infty}^{\infty} \delta(\omega - n\Omega_s).<br>$$</p>
+<hr>
+<h3 id="🚩-思路二：直接利用时移性质"><a href="#🚩-思路二：直接利用时移性质" class="headerlink" title="🚩 思路二：直接利用时移性质"></a>🚩 思路二：直接利用时移性质</h3><hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>时移性质是指信号在时域中的时间延迟会导致其傅立叶变换在相位上发生线性变化。<br><br>f(t)沿时间右轴t0得到f(t-t0),则傅立叶变换F(w)将在所有频率点上乘上一个相位因子$e^{-jwt_0}$<br></p>
+</blockquote>
+<hr>
+<ul>
+<li>单个冲激的傅立叶变换：</li>
+</ul>
+<p>$$<br>\mathcal{F}[\delta(t)] &#x3D; 1, \quad \mathcal{F}[\delta(t - kT)] &#x3D; e^{-j \omega kT}.<br>$$</p>
+<ul>
+<li>求和：</li>
+</ul>
+<p>$$<br>X(j\omega) &#x3D; \sum_{k&#x3D;-\infty}^{\infty} e^{-j \omega kT}<br>&#x3D; \sum_{k&#x3D;-\infty}^{\infty} e^{-j k \omega T}.<br>$$</p>
+<ul>
+<li>这本质上是一个无限等比数列在单位圆上的和，用冲激串采样定理：</li>
+</ul>
+<p>$$<br>\sum_{k&#x3D;-\infty}^{\infty} e^{-j k \omega T}<br>&#x3D; 2\pi \sum_{n&#x3D;-\infty}^{\infty} \delta(\omega - n\Omega_s) \cdot \frac{1}{T}.<br>$$</p>
+<ul>
+<li>所以同样得到：</li>
+</ul>
+<p>$$<br>X(j\omega) &#x3D; \frac{2\pi}{T} \sum_{n&#x3D;-\infty}^{\infty} \delta(\omega - n\Omega_s).<br>$$</p>
+<hr>
+<h2 id="✅-总结"><a href="#✅-总结" class="headerlink" title="✅ 总结"></a>✅ 总结</h2><ul>
+<li><p>时间域：周期冲激串，周期 $T$</p>
+</li>
+<li><p>频域：等间隔频域冲激串，间隔 $\Omega_s &#x3D; \frac{2\pi}{T}$，幅度系数 $\frac{2\pi}{T}$</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/02/%E5%BE%AA%E7%8E%AF%E5%8D%B7%E7%A7%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -704,7 +825,7 @@ print(w.grad)
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-04 17:59:27" itemprop="dateModified" datetime="2025-07-04T17:59:27+02:00">2025-07-04</time>
+                <time title="Modified: 2025-07-07 21:06:03" itemprop="dateModified" datetime="2025-07-07T21:06:03+02:00">2025-07-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -737,7 +858,7 @@ print(w.grad)
 <h3 id="Linear-Model"><a href="#Linear-Model" class="headerlink" title="Linear Model"></a>Linear Model</h3><h4 id="Define-function-with-unknown-parameters"><a href="#Define-function-with-unknown-parameters" class="headerlink" title="Define function with unknown parameters"></a>Define function with unknown parameters</h4><p>Model: $y &#x3D; b + w_1x_1$ based on domain knowledge<br>w (weight) and b (bias) are unknown parameters (learn from data)<br>如果是一组包含有多个feature（例如同时考虑前七天的数据来进行预测）<br>那么$y &#x3D; b + \sum_j w_jx_j$</p>
 <h4 id="Define-Loss-from-Training-Data"><a href="#Define-Loss-from-Training-Data" class="headerlink" title="Define Loss from Training Data"></a>Define Loss from Training Data</h4><p>Loss is a function of the unknown parameters: L(b,w)<br>e.g., L(0.5k, 1) corresponding to $\hat{y} &#x3D; 0.5k + 1x_1$.<br>$\hat{y}$ is predicted value, y is ground truth (target)<br>我们定义一个loss function为:<br>$e_n &#x3D; |y_n - \hat{y_n}|$  </p>
 <p>Loss: $L(b, w) &#x3D; \frac{1}{N} \sum_{n&#x3D;1}^{N} \left| y_n - \hat{y}_n \right|$</p>
-<p>其中y为预测值，$\hat{y}$为真实值,这里我们定义的Loss是mean absolute error （MAE），如果是mean square error（MSE），则是差值的的平方。</p>
+<p>其中y为真实值，$\hat{y}$为预测值,这里我们定义的Loss是mean absolute error （MAE），如果是mean square error（MSE），则是差值的的平方。</p>
 <h4 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h4><p>我们通过最小化损失函数 <em>L(b, w)</em> 来学习未知参数 b 和 w。优化目标为：</p>
 <p>$b^<em>, w^</em> &#x3D; \arg\min_{b, w} L(b, w)$</p>
 <p>我们可以使用梯度下降法进行优化，参数更新如下：</p>
@@ -907,6 +1028,34 @@ print(w.grad)
 <td>Multiclass Cross-Entropy</td>
 </tr>
 </tbody></table>
+<h3 id="Support-Vector-Machine"><a href="#Support-Vector-Machine" class="headerlink" title="Support Vector Machine"></a>Support Vector Machine</h3><p><strong>Support Vector Machine(SVM)</strong> 是一种常见的监督学习方法，常用于二分类任务，核心思想是通过寻找一个最优的分割超平面，使得不同类别之间的间隔（margin）最大化。</p>
+<h4 id="Linear-Model-1"><a href="#Linear-Model-1" class="headerlink" title="Linear Model"></a>Linear Model</h4><p>对于线性可分数据，SVM定义一个线性决策函数：<br>$$<br>f(x) &#x3D; w^T x + b<br>$$</p>
+<p>其中：</p>
+<ul>
+<li>$w$ 是权重向量，</li>
+<li>$b$ 是偏置项。</li>
+</ul>
+<p>分类规则：</p>
+<p>$$<br>\hat{y} &#x3D; \text{sign}(f(x)) &#x3D;<br>\begin{cases}<br>+1 &amp; \text{if } f(x) \ge 0 \\<br>-1 &amp; \text{if } f(x) &lt; 0<br>\end{cases}<br>$$</p>
+<h4 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h4><p>SVM 常用 <strong>合页损失（Hinge Loss）</strong>：</p>
+<p>$$<br>L_n &#x3D; \max(0,, 1 - y_n f(x_n))<br>$$</p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>如果$y_nf(x_n)&gt;0$则说明分类正确<br><br>但是,$y_nf(x_n)&gt;&#x3D;1$才完美，因为SVM不仅要求分类正确，还要最大化间隔，也就是安全间隔，所以在合页损失中有1<br></p>
+</blockquote>
+<hr>
+<p>整体目标函数：</p>
+<h2 id="L-w-b-frac-1-2-w-2-C-sum-n-1-N-max-0-1-y-n-w-T-x-n-b"><a href="#L-w-b-frac-1-2-w-2-C-sum-n-1-N-max-0-1-y-n-w-T-x-n-b" class="headerlink" title="$$L(w,b) &#x3D; \frac{1}{2} |w|^2 + C \sum_{n&#x3D;1}^N \max(0,, 1 - y_n (w^T x_n + b)).$$"></a>$$<br>L(w,b) &#x3D; \frac{1}{2} |w|^2 + C \sum_{n&#x3D;1}^N \max(0,, 1 - y_n (w^T x_n + b)).<br>$$</h2><blockquote>
+<p><strong>Notice</strong><br><br>$\frac{1}{2}|w|^2$是正则化项，用于控制模型的复杂度，防止过拟合，权重不要太大。<br><br>$C \sum_{n&#x3D;1}^N \max(0,, 1 - y_n (w^T x_n + b))$是所有样本的合页损失的加权和。<br></p>
+</blockquote>
+<hr>
+<h3 id="Optimization-Gradient-Descent"><a href="#Optimization-Gradient-Descent" class="headerlink" title="Optimization (Gradient Descent)"></a>Optimization (Gradient Descent)</h3><p>合页损失可以用梯度下降或随机梯度下降（SGD）优化：</p>
+<p>$$<br>w \leftarrow w - \eta (w - C \sum_{n \in M} y_n x_n),<br>\quad<br>M &#x3D; { n ,|, 1 - y_n f(x_n) &gt; 0 }<br>$$</p>
+<p>其中：</p>
+<ul>
+<li>$\eta$ 是学习率，</li>
+<li>$M$ 是当前违反 margin 条件的样本集合。</li>
+</ul>
 
       
     </div>
@@ -1292,7 +1441,7 @@ print(w.grad)
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-11 15:34:40" itemprop="dateModified" datetime="2025-06-11T15:34:40+02:00">2025-06-11</time>
+                <time title="Modified: 2025-07-07 18:31:43" itemprop="dateModified" datetime="2025-07-07T18:31:43+02:00">2025-07-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1316,7 +1465,7 @@ print(w.grad)
 
       
       
-          <h2 id="基带信号波形"><a href="#基带信号波形" class="headerlink" title="基带信号波形"></a>基带信号波形</h2><h3 id="单极性不归零信号（单极性NRZ）"><a href="#单极性不归零信号（单极性NRZ）" class="headerlink" title="单极性不归零信号（单极性NRZ）"></a>单极性不归零信号（单极性NRZ）</h3><h3 id="双极性不归零信号（双极性NRZ）"><a href="#双极性不归零信号（双极性NRZ）" class="headerlink" title="双极性不归零信号（双极性NRZ）"></a>双极性不归零信号（双极性NRZ）</h3><h3 id="单极性归零信号（单极性RZ）"><a href="#单极性归零信号（单极性RZ）" class="headerlink" title="单极性归零信号（单极性RZ）"></a>单极性归零信号（单极性RZ）</h3><h3 id="双极性归零信号（双极性RZ）"><a href="#双极性归零信号（双极性RZ）" class="headerlink" title="双极性归零信号（双极性RZ）"></a>双极性归零信号（双极性RZ）</h3><h2 id="功率谱密度"><a href="#功率谱密度" class="headerlink" title="功率谱密度"></a>功率谱密度</h2><h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="基带传输的常用码型"><a href="#基带传输的常用码型" class="headerlink" title="基带传输的常用码型"></a>基带传输的常用码型</h2><h2 id="码间干扰ISI"><a href="#码间干扰ISI" class="headerlink" title="码间干扰ISI"></a>码间干扰ISI</h2><h2 id="抗噪声性能（分析无码间干扰条件）"><a href="#抗噪声性能（分析无码间干扰条件）" class="headerlink" title="抗噪声性能（分析无码间干扰条件）"></a>抗噪声性能（分析无码间干扰条件）</h2><p>由于无ISI，并且根据抽样判决$x(kT_B+t_0) &#x3D; a_kh(t_0)+n_R(kT_B+t_0)$<br>其中$a_k$为数字基带信号，如1和-1。<br>若不考虑t0，并且输入是双极性信号，那么</p>
+          <h2 id="基带信号波形"><a href="#基带信号波形" class="headerlink" title="基带信号波形"></a>基带信号波形</h2><h3 id="单极性不归零信号（单极性NRZ）"><a href="#单极性不归零信号（单极性NRZ）" class="headerlink" title="单极性不归零信号（单极性NRZ）"></a>单极性不归零信号（单极性NRZ）</h3><h3 id="双极性不归零信号（双极性NRZ）"><a href="#双极性不归零信号（双极性NRZ）" class="headerlink" title="双极性不归零信号（双极性NRZ）"></a>双极性不归零信号（双极性NRZ）</h3><h3 id="单极性归零信号（单极性RZ）"><a href="#单极性归零信号（单极性RZ）" class="headerlink" title="单极性归零信号（单极性RZ）"></a>单极性归零信号（单极性RZ）</h3><h3 id="双极性归零信号（双极性RZ）"><a href="#双极性归零信号（双极性RZ）" class="headerlink" title="双极性归零信号（双极性RZ）"></a>双极性归零信号（双极性RZ）</h3><h2 id="功率谱密度"><a href="#功率谱密度" class="headerlink" title="功率谱密度"></a>功率谱密度</h2><h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="基带传输的常用码型"><a href="#基带传输的常用码型" class="headerlink" title="基带传输的常用码型"></a>基带传输的常用码型</h2><h2 id="码间干扰ISI"><a href="#码间干扰ISI" class="headerlink" title="码间干扰ISI"></a>码间干扰ISI</h2><h2 id="抗噪声性能（分析无码间干扰条件）"><a href="#抗噪声性能（分析无码间干扰条件）" class="headerlink" title="抗噪声性能（分析无码间干扰条件）"></a>抗噪声性能（分析无码间干扰条件）</h2><p>由于无ISI，并且根据抽样判决$x(kT_B+t_0) &#x3D; a_kh(t_0)+n_R(kT_B+t_0)$<br>其中$a_k$为数字基带信号，如1和-1。<br>若考虑ISI，那么$x(kT_B+t_0) &#x3D; a_kh(t_0)+ \sum_{n !&#x3D; k}a_nh[(k-n)T_B + t_0] + n_R(kT_B+t_0)$</p>
 <h2 id="均衡技术"><a href="#均衡技术" class="headerlink" title="均衡技术"></a>均衡技术</h2><h2 id="部分响应技术"><a href="#部分响应技术" class="headerlink" title="部分响应技术"></a>部分响应技术</h2>
       
     </div>
@@ -1395,101 +1544,10 @@ print(w.grad)
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/07/%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/07/%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/" class="post-title-link" itemprop="url">信源编码</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-06-07 21:37:43 / Modified: 22:06:27" itemprop="dateCreated datePublished" datetime="2025-06-07T21:37:43+02:00">2025-06-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>信源编码主要用于提高数据传输的可靠性，纠正通信过程中可能发生的错误。常用的信源编码包括：</p>
-<ul>
-<li><strong>Reed-Solomon（RS）编码</strong>：一种块编码，擅长纠正突发错误。</li>
-<li><strong>卷积编码</strong>：一种常见的前向纠错码，适用于连续数据流。</li>
-<li><strong>交织（Interleaving）</strong>：重排数据顺序，扩散突发错误，提高纠错效果。</li>
-</ul>
-<p>整体收发流程为:</p>
-<ol>
-<li>发射端<br>视频源-》RS编码-》卷积交织-》数据流标记-》</li>
-<li>接收端<br>解调后的基带数字信号-》维特比解码-》解交织-》RS解码</li>
-</ol>
-<h2 id="Reed-Solomon-RS-编码"><a href="#Reed-Solomon-RS-编码" class="headerlink" title="Reed-Solomon (RS) 编码"></a>Reed-Solomon (RS) 编码</h2><h3 id="RS编码基本概念"><a href="#RS编码基本概念" class="headerlink" title="RS编码基本概念"></a>RS编码基本概念</h3><ul>
-<li>RS编码在数据块后添加冗余校验码，能纠正一定数量的错误字节。</li>
-<li>典型参数：RS(n, k)，n为编码后数据长度，k为原始数据长度。</li>
-<li>纠错能力为 <code>t = (n - k) / 2</code>。</li>
-</ul>
-<h3 id="Python实现（基于reedsolo库）"><a href="#Python实现（基于reedsolo库）" class="headerlink" title="Python实现（基于reedsolo库）"></a>Python实现（基于reedsolo库）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> reedsolo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化RS编码器，n=255, k=223是常见参数</span></span><br><span class="line">rs = reedsolo.RSCodec(<span class="number">32</span>)</span><br><span class="line"></span><br><span class="line">data = <span class="string">b&#x27;Hello, this is a test message for RS encoding.&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 编码</span></span><br><span class="line">encoded = rs.encode(data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解码（自动纠错）</span></span><br><span class="line">decoded = rs.decode(encoded)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Original:&quot;</span>, data)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Encoded:&quot;</span>, encoded)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Decoded:&quot;</span>, decoded)</span><br></pre></td></tr></table></figure>
-
-<h2 id="卷积交织-Convolutional-Interleaving"><a href="#卷积交织-Convolutional-Interleaving" class="headerlink" title="卷积交织(Convolutional Interleaving)"></a>卷积交织(Convolutional Interleaving)</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
-<li>把相邻字节分散到不连续的位置</li>
-<li>把突发错误转换为随机错误，提高纠错性能</li>
-</ul>
-<h3 id="使用python实现"><a href="#使用python实现" class="headerlink" title="使用python实现"></a>使用python实现</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def convolutional_interleave(data, depth=4):</span><br><span class="line">    length = len(data)</span><br><span class="line">    pad_len = (depth - (length % depth)) % depth</span><br><span class="line">    data_padded = data + bytes([0]*pad_len)</span><br><span class="line">    matrix = np.reshape(np.frombuffer(data_padded, dtype=np.uint8), (-1, depth))</span><br><span class="line">    interleaved = matrix.T.flatten()</span><br><span class="line">    <span class="built_in">return</span> bytes(interleaved)</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-<h3 id="使用python实现反交织（交织恢复）"><a href="#使用python实现反交织（交织恢复）" class="headerlink" title="使用python实现反交织（交织恢复）"></a>使用python实现反交织（交织恢复）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def convolutional_deinterleave(data, depth=4):</span><br><span class="line">    length = len(data)</span><br><span class="line">    matrix = np.reshape(np.frombuffer(data, dtype=np.uint8), (depth, -1))</span><br><span class="line">    deinterleaved = matrix.T.flatten()</span><br><span class="line">    <span class="built_in">return</span> bytes(deinterleaved)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/">4</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1555,7 +1613,7 @@ print(w.grad)
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

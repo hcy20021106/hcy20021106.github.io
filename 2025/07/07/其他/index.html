@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Basic description1openExample(&#x27;5g&#x2F;NRDownlinkWaveformGenerationExample&#x27;) This example shows how to configure and generate a 5G NR downlink vector.The generated waveform contains these channel">
+  <meta name="description" content="周期冲激序列的傅立叶变换求冲激串 $ \sum_{k&#x3D;-\infty}^{\infty}\delta(t-kT) $ 的傅立叶变换。  🚩 思路一：傅立叶级数展开 时间域是周期信号，周期 $T$，所以可以写成傅立叶级数：  $$x(t) &#x3D; \sum_{n&#x3D;-\infty}^{\infty} c_n e^{j n \Omega_s t}, \quad \Omega_">
 <meta property="og:type" content="article">
-<meta property="og:title" content="5gNRDownLink">
-<meta property="og:url" content="https://hechenyi.github.io/2025/04/21/5gNRDownlink/index.html">
+<meta property="og:title" content="其他">
+<meta property="og:url" content="https://hechenyi.github.io/2025/07/07/%E5%85%B6%E4%BB%96/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Basic description1openExample(&#x27;5g&#x2F;NRDownlinkWaveformGenerationExample&#x27;) This example shows how to configure and generate a 5G NR downlink vector.The generated waveform contains these channel">
+<meta property="og:description" content="周期冲激序列的傅立叶变换求冲激串 $ \sum_{k&#x3D;-\infty}^{\infty}\delta(t-kT) $ 的傅立叶变换。  🚩 思路一：傅立叶级数展开 时间域是周期信号，周期 $T$，所以可以写成傅立叶级数：  $$x(t) &#x3D; \sum_{n&#x3D;-\infty}^{\infty} c_n e^{j n \Omega_s t}, \quad \Omega_">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-04-21T12:49:12.000Z">
-<meta property="article:modified_time" content="2025-04-27T18:50:33.645Z">
+<meta property="article:published_time" content="2025-07-07T15:20:33.000Z">
+<meta property="article:modified_time" content="2025-07-07T15:53:27.085Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hechenyi.github.io/2025/04/21/5gNRDownlink/">
+<link rel="canonical" href="https://hechenyi.github.io/2025/07/07/%E5%85%B6%E4%BB%96/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>5gNRDownLink | Hexo</title>
+  <title>其他 | Hexo</title>
   
 
 
@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/21/5gNRDownlink/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/07/%E5%85%B6%E4%BB%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -168,7 +168,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          5gNRDownLink
+          其他
         </h1>
 
         <div class="post-meta">
@@ -177,23 +177,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2025-04-21 14:49:12" itemprop="dateCreated datePublished" datetime="2025-04-21T14:49:12+02:00">2025-04-21</time>
+              <time title="Created: 2025-07-07 17:20:33 / Modified: 17:53:27" itemprop="dateCreated datePublished" datetime="2025-07-07T17:20:33+02:00">2025-07-07</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-04-27 20:50:33" itemprop="dateModified" datetime="2025-04-27T20:50:33+02:00">2025-04-27</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
                 </span>
             </span>
 
@@ -208,94 +202,57 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Basic-description"><a href="#Basic-description" class="headerlink" title="Basic description"></a>Basic description</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openExample(<span class="string">&#x27;5g/NRDownlinkWaveformGenerationExample&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>This example shows how to configure and generate a <strong>5G NR downlink</strong> vector.<br>The generated waveform contains these channels and signals</p>
+        <h2 id="周期冲激序列的傅立叶变换"><a href="#周期冲激序列的傅立叶变换" class="headerlink" title="周期冲激序列的傅立叶变换"></a>周期冲激序列的傅立叶变换</h2><p>求冲激串 $ \sum_{k&#x3D;-\infty}^{\infty}\delta(t-kT) $ 的傅立叶变换。</p>
+<hr>
+<h3 id="🚩-思路一：傅立叶级数展开"><a href="#🚩-思路一：傅立叶级数展开" class="headerlink" title="🚩 思路一：傅立叶级数展开"></a>🚩 思路一：傅立叶级数展开</h3><ul>
+<li>时间域是周期信号，周期 $T$，所以可以写成傅立叶级数：</li>
+</ul>
+<p>$$<br>x(t) &#x3D; \sum_{n&#x3D;-\infty}^{\infty} c_n e^{j n \Omega_s t}, \quad \Omega_s &#x3D; \frac{2\pi}{T}.<br>$$</p>
 <ul>
-<li>PDSCH and its associated DM-RS and PT-RS</li>
-<li>PDCCH and its associated DM-RS</li>
-<li>PBCH and its associated DM-RS</li>
-<li>PSS and SSS</li>
-<li>CSI-RS</li>
+<li>求傅立叶系数，对于冲激串：</li>
 </ul>
-<h3 id="SCS-specific-carriers"><a href="#SCS-specific-carriers" class="headerlink" title="SCS specific carriers"></a>SCS specific carriers</h3><ul>
-<li>SubcarrierSpacing</li>
-<li>NsizeGrid</li>
-<li>StartGrid<br>NsizeGrid默认是52，说明整个带宽中有52个resource blocks，每个resource block有12个子载波</li>
-</ul>
-<h3 id="SS-burst"><a href="#SS-burst" class="headerlink" title="SS burst"></a>SS burst</h3><h4 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h4><p>SSB(SS&#x2F;PBCH Block)是一个包含PSS+SSS+PBCH的小结构，占用240个子载波（20PRBs）、4个OFDM符号<br>SS Burst是一个时间窗口（最多5ms），里面可以发多个SSB（最多64个，取决于配置）</p>
-<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><ul>
-<li>Enable</li>
-<li>Power<br>用来设置SSB的相对功率，也就是和整个波形中其他部分的功率一样，不做放大或衰减。</li>
-<li>BlockPattern<br>例如Case B（30KHz）表示subcarrier spacing</li>
-<li>TransmittedBlocks<br>说明这5ms内发射的SSB个数</li>
-<li>Period<br>发射SS Burst的周期</li>
-<li>NCRBSSB</li>
-</ul>
-<h2 id="BWPs"><a href="#BWPs" class="headerlink" title="BWPs"></a>BWPs</h2><p>A BWP is formed by a set of contiguous resources sharing a numerology on a given SCS carrier.<br>例如如果在前面已经定义好了SCS carrier，例如RB数量，间距，那么在构建BWP的时候可以用到之前构建好的SCS，因此是share numerology</p>
+<p>$$<br>c_n &#x3D; \frac{1}{T} \int_{-T&#x2F;2}^{T&#x2F;2} \sum_{k&#x3D;-\infty}^{\infty} \delta(t - kT) e^{-j n \Omega_s t} dt.<br>$$</p>
+<p>只会取到 $k &#x3D; 0$：</p>
+<p>$$<br>c_n &#x3D; \frac{1}{T}.<br>$$</p>
 <ul>
-<li>BandwidthPartID</li>
-<li>Label</li>
-<li>SubcarrierSpacing</li>
-<li>CyclicPrefix</li>
-<li>NSizeBWP<br>表示这个BWP占据多少个RB</li>
-<li>NStartBWP</li>
+<li>所以：</li>
 </ul>
-<h2 id="PDCCH"><a href="#PDCCH" class="headerlink" title="PDCCH"></a>PDCCH</h2><p>Speicify the set of PDSCH transmission instances in the waveform by using a cell array. </p>
+<p>$$<br>x(t) &#x3D; \frac{1}{T} \sum_{n&#x3D;-\infty}^{\infty} e^{j n \Omega_s t}.<br>$$</p>
 <ul>
-<li><p>Enable</p>
-</li>
-<li><p>Label</p>
-</li>
-<li><p>BandwidthPartID<br>这个会和前面定义的BWP进行匹配</p>
-</li>
-<li><p>Power</p>
-</li>
-<li><p>Coding<br>Enable the DL-SCH transport channel coding</p>
-</li>
-<li><p>DataSource</p>
-</li>
-<li><p>Modulation</p>
-</li>
-<li><p>NumLayers  </p>
-<ul>
-<li>NumLayers &#x3D; 1,就相当于一个数据流（单层MIMO），也叫SISO</li>
-<li>NumLayers &#x3D; 2，基站可以同时发两条独立的数据流到UE，UE徐亚至少有四个天线来接收，这属于2x2 MIMO</li>
-<li>NumLayers &#x3D; 4，例如4x4到MIMO</li>
+<li>利用傅立叶变换性质，复指数 $e^{j n \Omega_s t}$ 的傅立叶变换：</li>
 </ul>
-</li>
-<li><p>VRBToPRBInterleaving</p>
+<p>$$<br>\mathcal{F}[e^{j n \Omega_s t}] &#x3D; 2\pi \delta(\omega - n\Omega_s).<br>$$</p>
 <ul>
-<li>disable interleaver</li>
-<li>enable intrleaver<br>  交错映射的作用是在频域上分散数据，提高对频率选择性衰落的抵抗力。<br>  VRB index:  0 1 2 3 4 5<br>  Mapped PRB: 0 1 4 5 2 3</li>
+<li>所以：</li>
 </ul>
-</li>
-<li><p>DM-RS(解调参考信号)</p>
+<p>$$<br>X(j\omega) &#x3D; \frac{1}{T} \sum_{n&#x3D;-\infty}^{\infty} 2\pi \delta(\omega - n\Omega_s)<br>&#x3D; \frac{2\pi}{T} \sum_{n&#x3D;-\infty}^{\infty} \delta(\omega - n\Omega_s).<br>$$</p>
+<hr>
+<h3 id="🚩-思路二：直接利用时移性质"><a href="#🚩-思路二：直接利用时移性质" class="headerlink" title="🚩 思路二：直接利用时移性质"></a>🚩 思路二：直接利用时移性质</h3><hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>时移性质是指信号在时域中的时间延迟会导致其傅立叶变换在相位上发生线性变化。<br><br>f(t)沿时间右轴t0得到f(t-t0),则傅立叶变换F(w)将在所有频率点上乘上一个相位因子$e^{-jwt_0}$<br></p>
+</blockquote>
+<hr>
 <ul>
-<li>DMRSConfigurationType</li>
-<li>NumCDMGroupsWithoutData</li>
-<li>DMRSPortSet</li>
-<li>DMRSTypeAPosition</li>
-<li>DMRSLength</li>
-<li>DMRSAdditionalPosition（用来做scrambling，也就是说将发射给不同UE的信号区分开）</li>
-<li>DMRS.NSCID</li>
+<li>单个冲激的傅立叶变换：</li>
 </ul>
-</li>
-<li><p>CSI-RS</p>
+<p>$$<br>\mathcal{F}[\delta(t)] &#x3D; 1, \quad \mathcal{F}[\delta(t - kT)] &#x3D; e^{-j \omega kT}.<br>$$</p>
 <ul>
-<li>Enable</li>
-<li>Label</li>
-<li>BandwidthPartID</li>
-<li>Power</li>
-<li>CSIRSType</li>
-<li>RowNumber</li>
-<li>CSIRSType</li>
-<li>SubcarrierLocation</li>
-<li>NumRB</li>
-<li>RBOffset</li>
-<li>SymbolLocations</li>
-<li>CSIPeriod</li>
-<li>NID</li>
+<li>求和：</li>
 </ul>
+<p>$$<br>X(j\omega) &#x3D; \sum_{k&#x3D;-\infty}^{\infty} e^{-j \omega kT}<br>&#x3D; \sum_{k&#x3D;-\infty}^{\infty} e^{-j k \omega T}.<br>$$</p>
+<ul>
+<li>这本质上是一个无限等比数列在单位圆上的和，用冲激串采样定理：</li>
+</ul>
+<p>$$<br>\sum_{k&#x3D;-\infty}^{\infty} e^{-j k \omega T}<br>&#x3D; 2\pi \sum_{n&#x3D;-\infty}^{\infty} \delta(\omega - n\Omega_s) \cdot \frac{1}{T}.<br>$$</p>
+<ul>
+<li>所以同样得到：</li>
+</ul>
+<p>$$<br>X(j\omega) &#x3D; \frac{2\pi}{T} \sum_{n&#x3D;-\infty}^{\infty} \delta(\omega - n\Omega_s).<br>$$</p>
+<hr>
+<h2 id="✅-总结"><a href="#✅-总结" class="headerlink" title="✅ 总结"></a>✅ 总结</h2><ul>
+<li><p>时间域：周期冲激串，周期 $T$</p>
+</li>
+<li><p>频域：等间隔频域冲激串，间隔 $\Omega_s &#x3D; \frac{2\pi}{T}$，幅度系数 $\frac{2\pi}{T}$</p>
 </li>
 </ul>
 
@@ -313,13 +270,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/04/21/5gNRSidelink/" rel="prev" title="5gNRSidelink">
-      <i class="fa fa-chevron-left"></i> 5gNRSidelink
+    <a href="/2025/07/02/%E5%BE%AA%E7%8E%AF%E5%8D%B7%E7%A7%AF/" rel="prev" title="循环卷积">
+      <i class="fa fa-chevron-left"></i> 循环卷积
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/04/21/5gNRUplink/" rel="next" title="5gNRUplink">
-      5gNRUplink <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -378,7 +332,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-description"><span class="nav-number">1.</span> <span class="nav-text">Basic description</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SCS-specific-carriers"><span class="nav-number">1.1.</span> <span class="nav-text">SCS specific carriers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SS-burst"><span class="nav-number">1.2.</span> <span class="nav-text">SS burst</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E"><span class="nav-number">1.2.1.</span> <span class="nav-text">补充说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BWPs"><span class="nav-number">2.</span> <span class="nav-text">BWPs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PDCCH"><span class="nav-number">3.</span> <span class="nav-text">PDCCH</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%A8%E6%9C%9F%E5%86%B2%E6%BF%80%E5%BA%8F%E5%88%97%E7%9A%84%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2"><span class="nav-number">1.</span> <span class="nav-text">周期冲激序列的傅立叶变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9A%A9-%E6%80%9D%E8%B7%AF%E4%B8%80%EF%BC%9A%E5%82%85%E7%AB%8B%E5%8F%B6%E7%BA%A7%E6%95%B0%E5%B1%95%E5%BC%80"><span class="nav-number">1.1.</span> <span class="nav-text">🚩 思路一：傅立叶级数展开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9A%A9-%E6%80%9D%E8%B7%AF%E4%BA%8C%EF%BC%9A%E7%9B%B4%E6%8E%A5%E5%88%A9%E7%94%A8%E6%97%B6%E7%A7%BB%E6%80%A7%E8%B4%A8"><span class="nav-number">1.2.</span> <span class="nav-text">🚩 思路二：直接利用时移性质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9C%85-%E6%80%BB%E7%BB%93"><span class="nav-number">2.</span> <span class="nav-text">✅ 总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
