@@ -825,7 +825,7 @@ print(w.grad)
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-14 00:51:33" itemprop="dateModified" datetime="2025-07-14T00:51:33+08:00">2025-07-14</time>
+                <time title="Modified: 2025-07-16 19:55:37" itemprop="dateModified" datetime="2025-07-16T19:55:37+08:00">2025-07-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1000,7 +1000,7 @@ print(w.grad)
 <h3 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h3><p>在分类中，需要讲线性输出映射到概率</p>
 <h4 id="Sigmoid（二分类）"><a href="#Sigmoid（二分类）" class="headerlink" title="Sigmoid（二分类）"></a>Sigmoid（二分类）</h4><p>模型：<br>$p &#x3D; \sigma(z) &#x3D; \frac{1}{1 + e^{-z}},\quad z &#x3D; b + \sum_j w_j x_j$.<br>预测类别：<br>$\hat{y} &#x3D;\begin{cases} 1 &amp; \text{if } p &gt; 0.5 \ 0 &amp; \text{otherwise} \end{cases}$.<br>Binary Cross-Entropy Loss (BCL):<br>$L(b, w) &#x3D; -\frac{1}{N} \sum_{n&#x3D;1}^{N} [, y_n \log p_n + (1 - y_n) \log (1 - p_n)$</p>
 <h4 id="Softmax（多分类）"><a href="#Softmax（多分类）" class="headerlink" title="Softmax（多分类）"></a>Softmax（多分类）</h4><p>对于$K$个类别<br>$p_k &#x3D; \frac{e^{z_k}}{\sum_{j&#x3D;1}^{K} e^{z_j}},\quad z_k &#x3D; b_k + \sum_j w_{kj} x_j \quad k&#x3D;1 \dots,K$.<br>Multiclass Cross-Entropy Loss:<br>$L(b, w) &#x3D; -\frac{1}{N} \sum_{n&#x3D;1}^{N} \sum_{k&#x3D;1}^{K} y_{nk} \log p_{nk}$。<br>其中：<br>$y_{nk} &#x3D; 1$ if sample $n$ is of class $k$, otherwise $0$.<br>因此这里用了one-hot编码，因为只考虑了只有真实类别对应的$y_{nk} &#x3D; 1$,其余为0，$p_{nk}$是Softmax后预测属于类别k的概率</p>
-<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><table>
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><h4 id="Linear-Regression-vs-Sigmoid-Regression"><a href="#Linear-Regression-vs-Sigmoid-Regression" class="headerlink" title="Linear Regression vs Sigmoid Regression"></a>Linear Regression vs Sigmoid Regression</h4><table>
 <thead>
 <tr>
 <th>Task</th>
@@ -1026,6 +1026,55 @@ print(w.grad)
 <td>$p_k$</td>
 <td>Softmax</td>
 <td>Multiclass Cross-Entropy</td>
+</tr>
+</tbody></table>
+<h4 id="MSE-vs-Binary-Cross-Entropy"><a href="#MSE-vs-Binary-Cross-Entropy" class="headerlink" title="MSE vs Binary Cross-Entropy"></a>MSE vs Binary Cross-Entropy</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>Linear Regression</th>
+<th>Logistic Regression</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>🎯 任务</td>
+<td>预测连续值（回归）</td>
+<td>预测二分类（分类）</td>
+</tr>
+<tr>
+<td>📈 模型</td>
+<td>$y_hat &#x3D; b + Σ w_j * x_j$</td>
+<td>$p &#x3D; σ(z) &#x3D; 1&#x2F;(1+exp(-z)), z &#x3D; b + Σ w_j * x_j$</td>
+</tr>
+<tr>
+<td>📊 输出</td>
+<td>实数 (-∞, +∞)</td>
+<td>概率 [0, 1]</td>
+</tr>
+<tr>
+<td>📚 分布</td>
+<td>假设输出服从高斯分布</td>
+<td>假设输出服从伯努利分布</td>
+</tr>
+<tr>
+<td>🔗 损失</td>
+<td>均方误差 (MSE: Mean Squared Error)</td>
+<td>二元交叉熵 (BCE: Binary Cross-Entropy)</td>
+</tr>
+<tr>
+<td>⚡ 目标</td>
+<td>最大化高斯似然</td>
+<td>最大化伯努利似然</td>
+</tr>
+<tr>
+<td>⚙️ 梯度</td>
+<td>梯度线性，更新相对平滑</td>
+<td>梯度在非饱和区间较大，下降快，但接近 0&#x2F;1 时可能饱和</td>
+</tr>
+<tr>
+<td>总体来说，Cross-Entropy效果更好一点</td>
+<td></td>
+<td></td>
 </tr>
 </tbody></table>
 <h3 id="Support-Vector-Machine"><a href="#Support-Vector-Machine" class="headerlink" title="Support Vector Machine"></a>Support Vector Machine</h3><p><strong>Support Vector Machine(SVM)</strong> 是一种常见的监督学习方法，常用于二分类任务，核心思想是通过寻找一个最优的分割超平面，使得不同类别之间的间隔（margin）最大化。</p>
