@@ -456,7 +456,7 @@ print(f&quot;Difference (CP removed vs. circular): &#123;error:.3e&#125;&quot;)
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/26/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/25/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -470,7 +470,7 @@ print(f&quot;Difference (CP removed vs. circular): &#123;error:.3e&#125;&quot;)
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/06/26/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="post-title-link" itemprop="url">线性代数</a>
+            <a href="/2025/06/25/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="post-title-link" itemprop="url">线性代数</a>
         </h2>
 
         <div class="post-meta">
@@ -479,10 +479,16 @@ print(f&quot;Difference (CP removed vs. circular): &#123;error:.3e&#125;&quot;)
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-06-26 04:52:26 / Modified: 05:57:02" itemprop="dateCreated datePublished" datetime="2025-06-26T04:52:26+08:00">2025-06-26</time>
+              <time title="Created: 2025-06-25 22:52:26" itemprop="dateCreated datePublished" datetime="2025-06-25T22:52:26+08:00">2025-06-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-07-18 00:15:27" itemprop="dateModified" datetime="2025-07-18T00:15:27+08:00">2025-07-18</time>
+              </span>
 
           
 
@@ -572,15 +578,33 @@ print(f&quot;Difference (CP removed vs. circular): &#123;error:.3e&#125;&quot;)
 </li>
 </ul>
 <hr>
-<h2 id="4-MATLAB-示例代码片段"><a href="#4-MATLAB-示例代码片段" class="headerlink" title="4. MATLAB 示例代码片段"></a>4. MATLAB 示例代码片段</h2><pre><code class="language-matlab">% 1. 解 AX = B 的最小二乘解
-X = A \ B;
+<h2 id="4-MATLAB-示例代码片段"><a href="#4-MATLAB-示例代码片段" class="headerlink" title="4. MATLAB 示例代码片段"></a>4. MATLAB 示例代码片段</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 1. 解 AX = B 的最小二乘解</span></span><br><span class="line">X = A \ B;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 2. 解 XA = B 的最小二乘解</span></span><br><span class="line">X = B / A;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 3. 对角矩阵求逆</span></span><br><span class="line">D = <span class="built_in">diag</span>([d1, d2, d3]);</span><br><span class="line">D_inv = <span class="built_in">diag</span>(<span class="number">1</span> ./ <span class="built_in">diag</span>(D));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-% 2. 解 XA = B 的最小二乘解
-X = B / A;
-
-% 3. 对角矩阵求逆
-D = diag([d1, d2, d3]);
-D_inv = diag(1 ./ diag(D));
+<h1 id="矩阵特征值的推导过程"><a href="#矩阵特征值的推导过程" class="headerlink" title="矩阵特征值的推导过程"></a>矩阵特征值的推导过程</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>设 A 是一个 n×n 的方阵，如果存在非零向量 v 和标量 λ，使得：</p>
+<pre><code>A v = λ v
+</code></pre>
+<p>则 λ 称为矩阵 A 的一个特征值，v 称为对应的特征向量。</p>
+<h2 id="推导过程"><a href="#推导过程" class="headerlink" title="推导过程"></a>推导过程</h2><p>从特征值定义出发：</p>
+<pre><code>A v = λ v
+</code></pre>
+<p>可以写成：</p>
+<pre><code>A v = λ I v
+</code></pre>
+<p>将等式两边移项，得到：</p>
+<pre><code>A v - λ I v = 0
+</code></pre>
+<p>提取 v：</p>
+<pre><code>(A - λ I) v = 0
+</code></pre>
+<p>这是一个齐次线性方程组。</p>
+<h2 id="非零解条件"><a href="#非零解条件" class="headerlink" title="非零解条件"></a>非零解条件</h2><p>为了使该方程有非零解 v ≠ 0，矩阵 (A - λ I) 必须是奇异矩阵，即其行列式为零：</p>
+<pre><code>det(A - λ I) = 0
+</code></pre>
+<p>这称为特征方程，解这个方程可以得到矩阵 A 的所有特征值 λ。</p>
+<hr>
+<p>总结：</p>
+<pre><code>A v = λ v  ⇒  (A - λ I) v = 0  
+有非零解 ⇔ det(A - λ I) = 0
 </code></pre>
 
       
@@ -825,7 +849,7 @@ print(w.grad)
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-16 19:55:37" itemprop="dateModified" datetime="2025-07-16T19:55:37+08:00">2025-07-16</time>
+                <time title="Modified: 2025-07-18 00:49:57" itemprop="dateModified" datetime="2025-07-18T00:49:57+08:00">2025-07-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1160,6 +1184,97 @@ print(w.grad)
 <p><strong>Notice</strong><br><br>在 高斯朴素贝叶斯（Gaussian Naive Bayes） 中，每个类别（target）都会单独拟合一个高斯分布，而且是针对每个特征分别计算。<br><br>在同一个类别（target）下，多个特征是条件独立的（<strong>朴素贝叶斯的前提</strong>,便于求得<strong>联合概率</strong>）<br></p>
 </blockquote>
 <hr>
+<h3 id="Discriminative-Model-vs-Generative-Model"><a href="#Discriminative-Model-vs-Generative-Model" class="headerlink" title="Discriminative Model vs Generative Model"></a>Discriminative Model vs Generative Model</h3><h4 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h4><table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Discriminative Model (判别式模型)</strong></th>
+<th><strong>Generative Model (生成式模型)</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>核心思想</strong></td>
+<td>直接学习 <strong>后验分布</strong> $p(y|x)$</td>
+<td>先学习 <strong>联合分布</strong> $p(x,y)$，或条件分布 $p(x|y)$ 和先验 $p(y)$</td>
+</tr>
+<tr>
+<td><strong>关键任务</strong></td>
+<td>找到最好的决策边界，分清类别</td>
+<td>理解数据是如何生成的，可用于生成新样本</td>
+</tr>
+<tr>
+<td><strong>举个例子</strong></td>
+<td>Logistic Regression, SVM, Neural Network</td>
+<td>Naive Bayes, GMM, HMM, GAN, VAE</td>
+</tr>
+</tbody></table>
+<h4 id="公式对比"><a href="#公式对比" class="headerlink" title="公式对比"></a>公式对比</h4><table>
+<thead>
+<tr>
+<th></th>
+<th><strong>判别式</strong></th>
+<th><strong>生成式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>核心建模</strong></td>
+<td>$p(y|x)$</td>
+<td>$p(x,y) &#x3D; p(x|y) p(y)$</td>
+</tr>
+<tr>
+<td><strong>目标</strong></td>
+<td>最大化条件似然：$\max_\theta p(y|x)$</td>
+<td>最大化联合似然：$\max_\theta p(x,y)$</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h4><table>
+<thead>
+<tr>
+<th></th>
+<th><strong>判别式</strong></th>
+<th><strong>生成式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>优点</strong></td>
+<td>- 不需要建模输入分布，简单高效  <br> - 一般分类准确率更高</td>
+<td>- 可生成新数据  <br> - 可处理缺失值  <br> - 对小样本问题有优势</td>
+</tr>
+<tr>
+<td><strong>缺点</strong></td>
+<td>- 无法生成数据  <br> - 对缺失值敏感</td>
+<td>- 对输入分布需要假设  <br> - 特征条件独立假设可能太强</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="常见示例"><a href="#常见示例" class="headerlink" title="常见示例"></a>常见示例</h4><table>
+<thead>
+<tr>
+<th></th>
+<th><strong>判别式</strong></th>
+<th><strong>生成式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>线性模型</strong></td>
+<td>Logistic Regression</td>
+<td>Naive Bayes (Gaussian&#x2F;Multinomial)</td>
+</tr>
+<tr>
+<td><strong>非线性</strong></td>
+<td>Neural Network, SVM</td>
+<td>GMM, HMM, GAN, VAE</td>
+</tr>
+</tbody></table>
+<h3 id="Optimization-1"><a href="#Optimization-1" class="headerlink" title="Optimization"></a>Optimization</h3><h4 id="使用Hessian分析Saddle-Point和Local-Minimal"><a href="#使用Hessian分析Saddle-Point和Local-Minimal" class="headerlink" title="使用Hessian分析Saddle Point和Local Minimal"></a>使用Hessian分析Saddle Point和Local Minimal</h4><p>At critical point: $L(\theta) &#x3D; L(\theta_0) + \frac{1}{2}(\theta - \theta_0)^TH(\theta - \theta_0)$.<br>我们把u(an eigen vector of H)当作$\theta - \theta_0$,$\lambda$为eigen value. </p>
+<p>那么$u^T H u &#x3D; u^T(\lambda u) &#x3D; \lambda|u|^2 $.<br>因此$\lambda$正负会直接L的increase or decrease<br>根据这个公式可知解决saddle point问题步骤如下：  </p>
+<ul>
+<li>找到H</li>
+<li>找到H的某个负特征值</li>
+<li>对应的特征向量u就是想找的下降方向</li>
+<li>$\theta &#x3D; \theta_0 + u$</li>
+</ul>
 
       
     </div>

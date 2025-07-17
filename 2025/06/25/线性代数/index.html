@@ -23,16 +23,16 @@
   <meta name="description" content="线性方程组与矩阵运算总结本笔记总结了关于线性方程组求解及矩阵运算的几个关键知识点，涵盖：  MATLAB 中 \ 与 &#x2F; 操作符的含义 对角矩阵的求逆方法 噪声环境下线性模型的最小二乘估计   1. 线性方程组求解：$AX &#x3D; B$我们常见的线性模型为： $$AX &#x3D; B$$ 目标是求出未知矩阵或向量 $X$。  1.1 MATLAB 中的 \ 与 &#x2F; 含义   表达式 数学意">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线性代数">
-<meta property="og:url" content="https://hechenyi.github.io/2025/06/26/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/index.html">
+<meta property="og:url" content="https://hechenyi.github.io/2025/06/25/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="线性方程组与矩阵运算总结本笔记总结了关于线性方程组求解及矩阵运算的几个关键知识点，涵盖：  MATLAB 中 \ 与 &#x2F; 操作符的含义 对角矩阵的求逆方法 噪声环境下线性模型的最小二乘估计   1. 线性方程组求解：$AX &#x3D; B$我们常见的线性模型为： $$AX &#x3D; B$$ 目标是求出未知矩阵或向量 $X$。  1.1 MATLAB 中的 \ 与 &#x2F; 含义   表达式 数学意">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-06-25T20:52:26.000Z">
-<meta property="article:modified_time" content="2025-06-25T21:57:02.451Z">
+<meta property="article:published_time" content="2025-06-25T14:52:26.000Z">
+<meta property="article:modified_time" content="2025-07-17T16:15:27.638Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hechenyi.github.io/2025/06/26/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
+<link rel="canonical" href="https://hechenyi.github.io/2025/06/25/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
 
 
 <script id="page-configurations">
@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/26/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/25/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -177,10 +177,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-06-26 04:52:26 / Modified: 05:57:02" itemprop="dateCreated datePublished" datetime="2025-06-26T04:52:26+08:00">2025-06-26</time>
+              <time title="Created: 2025-06-25 22:52:26" itemprop="dateCreated datePublished" datetime="2025-06-25T22:52:26+08:00">2025-06-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-07-18 00:15:27" itemprop="dateModified" datetime="2025-07-18T00:15:27+08:00">2025-07-18</time>
+              </span>
 
           
 
@@ -269,15 +275,33 @@
 </li>
 </ul>
 <hr>
-<h2 id="4-MATLAB-示例代码片段"><a href="#4-MATLAB-示例代码片段" class="headerlink" title="4. MATLAB 示例代码片段"></a>4. MATLAB 示例代码片段</h2><pre><code class="language-matlab">% 1. 解 AX = B 的最小二乘解
-X = A \ B;
+<h2 id="4-MATLAB-示例代码片段"><a href="#4-MATLAB-示例代码片段" class="headerlink" title="4. MATLAB 示例代码片段"></a>4. MATLAB 示例代码片段</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 1. 解 AX = B 的最小二乘解</span></span><br><span class="line">X = A \ B;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 2. 解 XA = B 的最小二乘解</span></span><br><span class="line">X = B / A;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 3. 对角矩阵求逆</span></span><br><span class="line">D = <span class="built_in">diag</span>([d1, d2, d3]);</span><br><span class="line">D_inv = <span class="built_in">diag</span>(<span class="number">1</span> ./ <span class="built_in">diag</span>(D));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-% 2. 解 XA = B 的最小二乘解
-X = B / A;
-
-% 3. 对角矩阵求逆
-D = diag([d1, d2, d3]);
-D_inv = diag(1 ./ diag(D));
+<h1 id="矩阵特征值的推导过程"><a href="#矩阵特征值的推导过程" class="headerlink" title="矩阵特征值的推导过程"></a>矩阵特征值的推导过程</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>设 A 是一个 n×n 的方阵，如果存在非零向量 v 和标量 λ，使得：</p>
+<pre><code>A v = λ v
+</code></pre>
+<p>则 λ 称为矩阵 A 的一个特征值，v 称为对应的特征向量。</p>
+<h2 id="推导过程"><a href="#推导过程" class="headerlink" title="推导过程"></a>推导过程</h2><p>从特征值定义出发：</p>
+<pre><code>A v = λ v
+</code></pre>
+<p>可以写成：</p>
+<pre><code>A v = λ I v
+</code></pre>
+<p>将等式两边移项，得到：</p>
+<pre><code>A v - λ I v = 0
+</code></pre>
+<p>提取 v：</p>
+<pre><code>(A - λ I) v = 0
+</code></pre>
+<p>这是一个齐次线性方程组。</p>
+<h2 id="非零解条件"><a href="#非零解条件" class="headerlink" title="非零解条件"></a>非零解条件</h2><p>为了使该方程有非零解 v ≠ 0，矩阵 (A - λ I) 必须是奇异矩阵，即其行列式为零：</p>
+<pre><code>det(A - λ I) = 0
+</code></pre>
+<p>这称为特征方程，解这个方程可以得到矩阵 A 的所有特征值 λ。</p>
+<hr>
+<p>总结：</p>
+<pre><code>A v = λ v  ⇒  (A - λ I) v = 0  
+有非零解 ⇔ det(A - λ I) = 0
 </code></pre>
 
     </div>
@@ -359,7 +383,7 @@ D_inv = diag(1 ./ diag(D));
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">线性方程组与矩阵运算总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E6%B1%82%E8%A7%A3%EF%BC%9A-AX-B"><span class="nav-number">1.1.</span> <span class="nav-text">1. 线性方程组求解：$AX &#x3D; B$</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-MATLAB-%E4%B8%AD%E7%9A%84-%E4%B8%8E-%E5%90%AB%E4%B9%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 MATLAB 中的 \ 与 &#x2F; 含义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">情况说明：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AF%B9%E8%A7%92%E7%9F%A9%E9%98%B5%E7%9A%84%E6%B1%82%E9%80%86"><span class="nav-number">1.2.</span> <span class="nav-text">2. 对角矩阵的求逆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%8F%AF%E9%80%86%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 可逆条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E9%80%86%E7%9F%A9%E9%98%B5%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 逆矩阵表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">3. 线性模型与最小二乘法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%97%A0%E5%99%AA%E5%A3%B0%E6%97%B6%EF%BC%88%E7%90%86%E6%83%B3%E6%83%85%E5%86%B5%EF%BC%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 无噪声时（理想情况）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%90%AB%E5%99%AA%E5%A3%B0%E6%97%B6%EF%BC%88%E5%AE%9E%E9%99%85%E6%83%85%E5%86%B5%EF%BC%89"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 含噪声时（实际情况）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-MATLAB-%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5"><span class="nav-number">1.4.</span> <span class="nav-text">4. MATLAB 示例代码片段</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">线性方程组与矩阵运算总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E6%B1%82%E8%A7%A3%EF%BC%9A-AX-B"><span class="nav-number">1.1.</span> <span class="nav-text">1. 线性方程组求解：$AX &#x3D; B$</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-MATLAB-%E4%B8%AD%E7%9A%84-%E4%B8%8E-%E5%90%AB%E4%B9%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 MATLAB 中的 \ 与 &#x2F; 含义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">情况说明：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AF%B9%E8%A7%92%E7%9F%A9%E9%98%B5%E7%9A%84%E6%B1%82%E9%80%86"><span class="nav-number">1.2.</span> <span class="nav-text">2. 对角矩阵的求逆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%8F%AF%E9%80%86%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 可逆条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E9%80%86%E7%9F%A9%E9%98%B5%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 逆矩阵表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">3. 线性模型与最小二乘法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%97%A0%E5%99%AA%E5%A3%B0%E6%97%B6%EF%BC%88%E7%90%86%E6%83%B3%E6%83%85%E5%86%B5%EF%BC%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 无噪声时（理想情况）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%90%AB%E5%99%AA%E5%A3%B0%E6%97%B6%EF%BC%88%E5%AE%9E%E9%99%85%E6%83%85%E5%86%B5%EF%BC%89"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 含噪声时（实际情况）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-MATLAB-%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5"><span class="nav-number">1.4.</span> <span class="nav-text">4. MATLAB 示例代码片段</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E7%89%B9%E5%BE%81%E5%80%BC%E7%9A%84%E6%8E%A8%E5%AF%BC%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">矩阵特征值的推导过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E5%AF%BC%E8%BF%87%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">推导过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E9%9B%B6%E8%A7%A3%E6%9D%A1%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">非零解条件</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
