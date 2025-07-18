@@ -849,7 +849,7 @@ print(w.grad)
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-18 00:49:57" itemprop="dateModified" datetime="2025-07-18T00:49:57+08:00">2025-07-18</time>
+                <time title="Modified: 2025-07-19 01:23:29" itemprop="dateModified" datetime="2025-07-19T01:23:29+08:00">2025-07-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1275,6 +1275,60 @@ print(w.grad)
 <li>对应的特征向量u就是想找的下降方向</li>
 <li>$\theta &#x3D; \theta_0 + u$</li>
 </ul>
+<h3 id="Batch-和-Momentum简要说明"><a href="#Batch-和-Momentum简要说明" class="headerlink" title="Batch 和 Momentum简要说明"></a>Batch 和 Momentum简要说明</h3><h4 id="Batch（小批量）"><a href="#Batch（小批量）" class="headerlink" title="Batch（小批量）"></a>Batch（小批量）</h4><p>在训练神经网络时，我们通常不会每次使用整个训练集来更新参数，而是将数据划分为多个“小批量”，每个 batch 包含若干样本。</p>
+<p>例如：</p>
+<ul>
+<li>数据总量为 10,000，batch size &#x3D; 32</li>
+<li>则每个 epoch 有约 312 次更新</li>
+</ul>
+<h5 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h5><ul>
+<li>提高训练效率（相比使用整个数据集）</li>
+<li>提供更稳定的梯度估计（相比单个样本）</li>
+<li>有利于 GPU 并行计算</li>
+</ul>
+<h5 id="直觉："><a href="#直觉：" class="headerlink" title="直觉："></a>直觉：</h5><ul>
+<li>小 batch：训练快但不稳定，梯度噪声大</li>
+<li>大 batch：训练稳定但计算开销大，收敛可能慢</li>
+</ul>
+<h4 id="Momentum（动量）"><a href="#Momentum（动量）" class="headerlink" title="Momentum（动量）"></a>Momentum（动量）</h4><p>Momentum 是优化器的一种加速技巧，通过引入“动量”，在梯度方向上积累速度。</p>
+<p>常规梯度下降公式：</p>
+<pre><code>$θ_&#123;t+1&#125; = θ_t - η ∇L(θ_t)$
+</code></pre>
+<p>加入动量后的更新规则：</p>
+<pre><code>$v_&#123;t+1&#125; = γ v_t - η ∇L(θ_t)$
+$θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
+</code></pre>
+<p>其中：</p>
+<ul>
+<li>η 是学习率</li>
+<li>γ 是动量系数（如 0.9）</li>
+<li>v 是“速度向量”，表示历史梯度累积效果</li>
+</ul>
+<h5 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h5><ul>
+<li>加快收敛速度</li>
+<li>减少梯度震荡</li>
+<li>更容易跳出局部最小值</li>
+</ul>
+<h5 id="直觉：-1"><a href="#直觉：-1" class="headerlink" title="直觉："></a>直觉：</h5><p>像滚动的小球有惯性，动量让优化器在梯度一致的方向上加速前进，在梯度变化剧烈的方向上稳定下来。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>定义</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Batch</td>
+<td>一次更新中使用的样本子集</td>
+<td>提高效率、平滑梯度估计</td>
+</tr>
+<tr>
+<td>Momentum</td>
+<td>使用历史梯度加速更新</td>
+<td>加速收敛、减少震荡、跳出局部最小值</td>
+</tr>
+</tbody></table>
 
       
     </div>
