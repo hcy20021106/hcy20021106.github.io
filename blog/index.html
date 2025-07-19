@@ -173,10 +173,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-07-07 23:20:33 / Modified: 23:53:27" itemprop="dateCreated datePublished" datetime="2025-07-07T23:20:33+08:00">2025-07-07</time>
+              <time title="Created: 2025-07-07 17:20:33" itemprop="dateCreated datePublished" datetime="2025-07-07T17:20:33+08:00">2025-07-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-07-19 14:44:22" itemprop="dateModified" datetime="2025-07-19T14:44:22+08:00">2025-07-19</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -252,6 +258,114 @@
 <li><p>频域：等间隔频域冲激串，间隔 $\Omega_s &#x3D; \frac{2\pi}{T}$，幅度系数 $\frac{2\pi}{T}$</p>
 </li>
 </ul>
+<h2 id="拉丁字母"><a href="#拉丁字母" class="headerlink" title="拉丁字母"></a>拉丁字母</h2><table>
+<thead>
+<tr>
+<th>LaTeX代码</th>
+<th>渲染效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\alpha$</td>
+<td>α</td>
+</tr>
+<tr>
+<td>$\beta$</td>
+<td>β</td>
+</tr>
+<tr>
+<td>$\gamma$</td>
+<td>γ</td>
+</tr>
+<tr>
+<td>$\delta$</td>
+<td>δ</td>
+</tr>
+<tr>
+<td>$\epsilon$</td>
+<td>ε</td>
+</tr>
+<tr>
+<td>$\zeta$</td>
+<td>ζ</td>
+</tr>
+<tr>
+<td>$\eta$</td>
+<td>η</td>
+</tr>
+<tr>
+<td>$\theta$</td>
+<td>θ</td>
+</tr>
+<tr>
+<td>$\iota$</td>
+<td>ι</td>
+</tr>
+<tr>
+<td>$\kappa$</td>
+<td>κ</td>
+</tr>
+<tr>
+<td>$\lambda$</td>
+<td>λ</td>
+</tr>
+<tr>
+<td>$\mu$</td>
+<td>μ</td>
+</tr>
+<tr>
+<td>$\nu$</td>
+<td>ν</td>
+</tr>
+<tr>
+<td>$\xi$</td>
+<td>ξ</td>
+</tr>
+<tr>
+<td>$\pi$</td>
+<td>π</td>
+</tr>
+<tr>
+<td>$\rho$</td>
+<td>ρ</td>
+</tr>
+<tr>
+<td>$\sigma$</td>
+<td>σ</td>
+</tr>
+<tr>
+<td>$\varsigma$</td>
+<td>ς</td>
+</tr>
+<tr>
+<td>$\tau$</td>
+<td>τ</td>
+</tr>
+<tr>
+<td>$\upsilon$</td>
+<td>υ</td>
+</tr>
+<tr>
+<td>$\phi$</td>
+<td>φ</td>
+</tr>
+<tr>
+<td>$\varphi$</td>
+<td>ϕ</td>
+</tr>
+<tr>
+<td>$\chi$</td>
+<td>χ</td>
+</tr>
+<tr>
+<td>$\psi$</td>
+<td>ψ</td>
+</tr>
+<tr>
+<td>$\omega$</td>
+<td>ω</td>
+</tr>
+</tbody></table>
 
       
     </div>
@@ -849,7 +963,7 @@ print(w.grad)
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-19 01:23:29" itemprop="dateModified" datetime="2025-07-19T01:23:29+08:00">2025-07-19</time>
+                <time title="Modified: 2025-07-19 14:52:29" itemprop="dateModified" datetime="2025-07-19T14:52:29+08:00">2025-07-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -889,7 +1003,13 @@ print(w.grad)
 <p>$w \leftarrow w - \eta \frac{\partial L}{\partial w}, \quad<br>b \leftarrow b - \eta \frac{\partial L}{\partial b}$</p>
 <p>其中 $\eta$ 为学习率。对于 MAE 损失，由于其不可导点较多，可以使用次梯度法；对于 MSE 损失，则可以直接使用标准梯度下降算法。</p>
 <h3 id="Sophisticated-Models"><a href="#Sophisticated-Models" class="headerlink" title="Sophisticated Models"></a>Sophisticated Models</h3><p>Beacuse linear models have severe limitation (model bias), so we include more sophisticated models.</p>
-<h4 id="Sigmoid-function（logistic-regression）"><a href="#Sigmoid-function（logistic-regression）" class="headerlink" title="Sigmoid function（logistic regression）"></a>Sigmoid function（logistic regression）</h4><p>$y &#x3D; b + wx_1 &#x3D;&gt; y &#x3D; b + \sum_i c_i \cdot \sigma(b_i + w_ix_1)$<br>注：不同的w，b，c可以让sigmoid曲线可以拟合不同的曲线<br>注意这里是多个sigmoid的和，因为实际情况可能是由多个sigmoid拟合而成。<br>相对应的，对于$y &#x3D; b + \sum_j w_jx_j$, 则有$y &#x3D; b + \sum_i c_i \cdot \sigma(b_i + \sum_j w_{ij} x_j)$  </p>
+<h4 id="Sigmoid-function（logistic-regression）"><a href="#Sigmoid-function（logistic-regression）" class="headerlink" title="Sigmoid function（logistic regression）"></a>Sigmoid function（logistic regression）</h4><p>$y &#x3D; b + wx_1 &#x3D;&gt; y &#x3D; b + \sum_i c_i \cdot \sigma(b_i + w_ix_1)$<br>注：不同的w，b，c可以让sigmoid曲线可以拟合不同的曲线。</p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>输入层: $x_j (j &#x3D; 1…d)$<br><br>   ↓ <br><br>隐藏层: $h_i &#x3D; \sigma(b_i + \sum w_ij x_j) (i &#x3D; 1…N)$<br><br>   ↓ <br><br>输出层: $y &#x3D; b + \sum c_i h_i$ (标量输出)<br></p>
+</blockquote>
+<hr>
+<p>因此这里设计到deep learning中的<strong>hiden node</strong>的概念(hiden node的数量可以理解为用来拟合的ReLU曲线数量)，隐藏点越多，能够拟合出来的function越准确。<br>注意这里是多个sigmoid的和，因为实际情况可能是由多个sigmoid拟合而成。<br>相对应的，对于$y &#x3D; b + \sum_j w_jx_j$, 则有$y &#x3D; b + \sum_i c_i \cdot \sigma(b_i + \sum_j w_{ij} x_j)$  </p>
 <p>示例：i &#x3D; 1,2,3; j &#x3D; 1,2,3 时的显式形式<br>$$<br>r_1 &#x3D; b_1 + w_{11}x_1 + w_{12}x_2 + w_{13}x_3<br>$$</p>
 <p>$$<br>r_2 &#x3D; b_2 + w_{21}x_1 + w_{22}x_2 + w_{23}x_3<br>$$</p>
 <p>$$<br>r_3 &#x3D; b_3 + w_{31}x_1 + w_{32}x_2 + w_{33}x_3<br>$$</p>
@@ -1275,22 +1395,70 @@ print(w.grad)
 <li>对应的特征向量u就是想找的下降方向</li>
 <li>$\theta &#x3D; \theta_0 + u$</li>
 </ul>
-<h3 id="Batch-和-Momentum简要说明"><a href="#Batch-和-Momentum简要说明" class="headerlink" title="Batch 和 Momentum简要说明"></a>Batch 和 Momentum简要说明</h3><h4 id="Batch（小批量）"><a href="#Batch（小批量）" class="headerlink" title="Batch（小批量）"></a>Batch（小批量）</h4><p>在训练神经网络时，我们通常不会每次使用整个训练集来更新参数，而是将数据划分为多个“小批量”，每个 batch 包含若干样本。</p>
+<h4 id="Adaptive-Learning-Rate"><a href="#Adaptive-Learning-Rate" class="headerlink" title="Adaptive Learning Rate"></a>Adaptive Learning Rate</h4><h5 id="Root-Mean-Square"><a href="#Root-Mean-Square" class="headerlink" title="Root Mean Square"></a>Root Mean Square</h5><p><strong>定义：</strong><br>Root Mean Square（RMS）是指一组数平方后求平均再开方，反映平均“能量”大小。</p>
+<p>公式如下：</p>
+<p>$\sigma_i^t &#x3D; \sqrt{\frac{1}{t+1}\sum_{i&#x3D;0}^t (g_i^t)^2}$.  </p>
+<p>$\theta_i^{t+1} &#x3D; \theta_i^t - \frac{\eta}{\sigma_i^t}g_i^t$</p>
+<p>在优化中，用于衡量梯度大小，作为学习率调整的依据。</p>
+<h5 id="RMSProp-Root-Mean-Square-Propagation"><a href="#RMSProp-Root-Mean-Square-Propagation" class="headerlink" title="RMSProp (Root Mean Square Propagation)"></a>RMSProp (Root Mean Square Propagation)</h5><ul>
+<li>梯度平方滑动平均：</li>
+</ul>
+<p>$\sigma_i^t &#x3D; \sqrt{\alpha (\sigma_i^{t-1})^2 + (1-\alpha)(g_i^t)^2}$</p>
+<ul>
+<li>参数更新：</li>
+</ul>
+<p>$θ_i^{t+1} &#x3D; θ_i^t - \frac{\eta}{\sigma_i^t}g_i^t$</p>
+<p>其中：</p>
+<ul>
+<li>ρ 是衰减率（常用 0.9）</li>
+<li>η 是基础学习率</li>
+<li>ε 是防止除以 0 的小常数（如 1e-8）</li>
+</ul>
+<h5 id="直觉理解："><a href="#直觉理解：" class="headerlink" title="直觉理解："></a>直觉理解：</h5><ul>
+<li>梯度大的参数方向：步长缩小，避免震荡</li>
+<li>梯度小的参数方向：步长放大，避免停滞</li>
+<li>RMSProp 根据每个参数的历史梯度自动调整学习率，实现更稳定的收敛过程</li>
+</ul>
+<h4 id="总结对比"><a href="#总结对比" class="headerlink" title="总结对比"></a>总结对比</h4><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>含义 &#x2F; 作用</th>
+<th>与 RMSProp 的关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Adaptive Learning Rate</td>
+<td>每个参数独立学习率，动态调整</td>
+<td>RMSProp 是其代表性实现方法</td>
+</tr>
+<tr>
+<td>Root Mean Square</td>
+<td>用于估计梯度平均能量，控制步长</td>
+<td>被 RMSProp 用于缩放学习率</td>
+</tr>
+<tr>
+<td>RMSProp</td>
+<td>自适应优化算法，防止学习率过早衰减</td>
+<td>实现了 adaptive learning rate</td>
+</tr>
+</tbody></table>
+<h5 id="Learning-Rate-Scheduling"><a href="#Learning-Rate-Scheduling" class="headerlink" title="Learning Rate Scheduling"></a>Learning Rate Scheduling</h5><h4 id="Batch-和-Momentum简要说明"><a href="#Batch-和-Momentum简要说明" class="headerlink" title="Batch 和 Momentum简要说明"></a>Batch 和 Momentum简要说明</h4><h5 id="Batch（小批量）"><a href="#Batch（小批量）" class="headerlink" title="Batch（小批量）"></a>Batch（小批量）</h5><p>在训练神经网络时，我们通常不会每次使用整个训练集来更新参数，而是将数据划分为多个“小批量”，每个 batch 包含若干样本。</p>
 <p>例如：</p>
 <ul>
 <li>数据总量为 10,000，batch size &#x3D; 32</li>
 <li>则每个 epoch 有约 312 次更新</li>
 </ul>
-<h5 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h5><ul>
+<h6 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h6><ul>
 <li>提高训练效率（相比使用整个数据集）</li>
 <li>提供更稳定的梯度估计（相比单个样本）</li>
 <li>有利于 GPU 并行计算</li>
 </ul>
-<h5 id="直觉："><a href="#直觉：" class="headerlink" title="直觉："></a>直觉：</h5><ul>
+<h6 id="直觉："><a href="#直觉：" class="headerlink" title="直觉："></a>直觉：</h6><ul>
 <li>小 batch：训练快但不稳定，梯度噪声大</li>
 <li>大 batch：训练稳定但计算开销大，收敛可能慢</li>
 </ul>
-<h4 id="Momentum（动量）"><a href="#Momentum（动量）" class="headerlink" title="Momentum（动量）"></a>Momentum（动量）</h4><p>Momentum 是优化器的一种加速技巧，通过引入“动量”，在梯度方向上积累速度。</p>
+<h5 id="Momentum（动量）"><a href="#Momentum（动量）" class="headerlink" title="Momentum（动量）"></a>Momentum（动量）</h5><p>Momentum 是优化器的一种加速技巧，通过引入“动量”，在梯度方向上积累速度。</p>
 <p>常规梯度下降公式：</p>
 <pre><code>$θ_&#123;t+1&#125; = θ_t - η ∇L(θ_t)$
 </code></pre>
@@ -1304,13 +1472,13 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
 <li>γ 是动量系数（如 0.9）</li>
 <li>v 是“速度向量”，表示历史梯度累积效果</li>
 </ul>
-<h5 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h5><ul>
+<h6 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h6><ul>
 <li>加快收敛速度</li>
 <li>减少梯度震荡</li>
 <li>更容易跳出局部最小值</li>
 </ul>
-<h5 id="直觉：-1"><a href="#直觉：-1" class="headerlink" title="直觉："></a>直觉：</h5><p>像滚动的小球有惯性，动量让优化器在梯度一致的方向上加速前进，在梯度变化剧烈的方向上稳定下来。</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><table>
+<h6 id="直觉：-1"><a href="#直觉：-1" class="headerlink" title="直觉："></a>直觉：</h6><p>像滚动的小球有惯性，动量让优化器在梯度一致的方向上加速前进，在梯度变化剧烈的方向上稳定下来。</p>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><table>
 <thead>
 <tr>
 <th>概念</th>
