@@ -181,7 +181,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-19 01:06:07" itemprop="dateModified" datetime="2025-07-19T01:06:07+08:00">2025-07-19</time>
+                <time title="Modified: 2025-07-19 23:19:39" itemprop="dateModified" datetime="2025-07-19T23:19:39+08:00">2025-07-19</time>
               </span>
 
           
@@ -284,6 +284,7 @@
 <p>一个人能力有大小，但只要有这点精神（毫无自私自利之心的精神），就是一个高尚的人，一个纯粹的人，一个有道德的人，一个脱离了低级趣味的人，一个有益于人民的人。</p>
 <p>做官之道，其实就三句话：和光同尘，雨露均沾，花花轿子众人抬。一人吃独食，是吃不长久的。</p>
 <p>就算失败，我也想知道，自己倒在距离终点多远的地方。</p>
+<p>给历史以一定的科学的地位，是尊重历史的辩证法的发展，而不是颂古非今，不是赞扬任何封建的毒素。对于人民群众和青年学生，主要地不是要引导他们向后看，而是要引导他们向前看。</p>
 
       
     </div>
@@ -888,191 +889,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/21/C%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/21/C%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">C基本概念</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-04-21 21:19:37" itemprop="dateCreated datePublished" datetime="2025-04-21T21:19:37+08:00">2025-04-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-03 08:02:50" itemprop="dateModified" datetime="2025-07-03T08:02:50+08:00">2025-07-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><p>指针变量本身的值是地址，X64有2的64次方个内存地址，因此指针占8个字节。<br>指针变量通常是栈上的变量。<br>指针指向的内存可以是栈上变量的地址，也可以是堆上分配的内存地址。</p>
-<h2 id="malloc-new"><a href="#malloc-new" class="headerlink" title="malloc&amp;new"></a>malloc&amp;new</h2><ul>
-<li>malloc<ul>
-<li>malloc不会调用构造析构函数</li>
-<li>malloc返回无类型的指针（因此需要转换一下，char* p &#x3D; (char*) malloc(100)）</li>
-</ul>
-</li>
-<li>new&#x2F;delete<ul>
-<li>new 返回有类型的指针</li>
-<li>new调用构造析构函数</li>
-</ul>
-</li>
-</ul>
-<h2 id="STL六大组件"><a href="#STL六大组件" class="headerlink" title="STL六大组件"></a>STL六大组件</h2><ul>
-<li>仿函数</li>
-<li>算法</li>
-<li>迭代器</li>
-<li>空间配置器</li>
-<li>容器</li>
-<li>配接器</li>
-</ul>
-<h2 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h2><ul>
-<li>创建</li>
-<li>就绪</li>
-<li>运行</li>
-<li>堵塞</li>
-<li>死亡</li>
-</ul>
-<h2 id="静态连接"><a href="#静态连接" class="headerlink" title="静态连接"></a>静态连接</h2><ul>
-<li>创建一个静态库（.a文件）</li>
-<li>编译为静态库</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ -c math_utils.cpp -o math_utils.o</span><br><span class="line">ar rcs libmathutils.a math_utils.o</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用静态库的主函数</li>
-<li>静态连接并编译生成可执行文件</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ main.cpp -L. -lmathutils -o app</span><br></pre></td></tr></table></figure>
-
-<h2 id="构建结构体"><a href="#构建结构体" class="headerlink" title="构建结构体"></a>构建结构体</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">typedef struct notifiedFIFO_elt_s&#123;</span><br><span class="line">    struct notifiedFIFO_elt_s *next;</span><br><span class="line">    uint64_t key;</span><br><span class="line">    /// 构建一个空的函数指针，在使用的时候可以将其进行强制转换</span><br><span class="line">    void (*processingFunc) (void *);</span><br><span class="line">    bool malloced;</span><br><span class="line">    /// oai的系统结构体，可以用于性能测试</span><br><span class="line">    oai_cputime_t creationTime;</span><br><span class="line">    oai_cputime_t startProcessingTime;</span><br><span class="line">    oai_cputime_t endProcessingTime;</span><br><span class="line">    oai_cputime_t returnTime;</span><br><span class="line">    /// 空的指针，在使用的时候可以进行强制转换</span><br><span class="line">    void *msgData; </span><br><span class="line">&#125;   notifiedFIFO_elt_t;</span><br></pre></td></tr></table></figure>
-
-<h3 id="强行转换并使用msgData指针"><a href="#强行转换并使用msgData指针" class="headerlink" title="强行转换并使用msgData指针"></a>强行转换并使用msgData指针</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">notifiedFIFO_elt_t *Msg = newNotifiedFIFO_elt(sizeof(syncData_t), 0, &amp;nf, UE_synch);</span><br><span class="line">syncData_t *syncMsg = (syncData_t *) NotifiedFifoData(Msg));</span><br><span class="line">syncMsg-&gt;UE = UE;</span><br><span class="line">memset(&amp;syncMsg-&gt;proc, 0, sizeof(syncMsg-&gt;proc));</span><br><span class="line">pushTpool(&amp;(get_nrUE_params()-&gt;Tpool), Msg);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>pushTpool</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">static inline void pushTpool(tpool_t *t, notifiedFIFO_elt_t *msg) &#123;</span><br><span class="line">  <span class="keyword">if</span> (t-&gt;measurePerf) msg-&gt;creationTime=rdtsc_oai();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( t-&gt;activated)</span><br><span class="line">    pushNotifiedFIFO(&amp;t-&gt;incomingFifo, msg);</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (t-&gt;measurePerf)</span><br><span class="line">      msg-&gt;startProcessingTime=rdtsc_oai();</span><br><span class="line"></span><br><span class="line">    msg-&gt;processingFunc(NotifiedFifoData(msg));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (t-&gt;measurePerf)</span><br><span class="line">      msg-&gt;endProcessingTime=rdtsc_oai();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (msg-&gt;reponseFifo)</span><br><span class="line">      pushNotifiedFIFO(msg-&gt;reponseFifo, msg);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="📘-C-指针和字符串字面量示例"><a href="#📘-C-指针和字符串字面量示例" class="headerlink" title="📘 C 指针和字符串字面量示例"></a>📘 C 指针和字符串字面量示例</h2><h3 id="📌-1-基础示例：指针初始化"><a href="#📌-1-基础示例：指针初始化" class="headerlink" title="📌 1. 基础示例：指针初始化"></a>📌 1. 基础示例：指针初始化</h3><p>✅ 正确用法：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> *a = &amp;x;  <span class="comment">// a 指向 x 的地址</span></span><br><span class="line">    *a = <span class="number">2</span>;       <span class="comment">// 修改 x 的值</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;x = %d\n&quot;</span>, x);  <span class="comment">// 输出：2</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>🚫 错误用法：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> *a = <span class="number">1</span>;   <span class="comment">// 错误！a 指向地址 0x1，几乎肯定无效</span></span><br><span class="line">    *a = <span class="number">2</span>;       <span class="comment">// 未定义行为，可能段错误</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="📌-2-字符串字面量是只读的"><a href="#📌-2-字符串字面量是只读的" class="headerlink" title="📌 2. 字符串字面量是只读的"></a>📌 2. 字符串字面量是只读的</h3><p>✅ 正确示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> *a = <span class="string">&quot;a&quot;</span>;  <span class="comment">// a 指向字符串字面量 &quot;a&quot;</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, a);  <span class="comment">// 输出：a</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 🚫 不要尝试修改只读字符串：</span></span><br><span class="line">    <span class="comment">// a[0] = &#x27;b&#x27;; // 可能段错误</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="📌-3-可修改字符串：使用数组"><a href="#📌-3-可修改字符串：使用数组" class="headerlink" title="📌 3. 可修改字符串：使用数组"></a>📌 3. 可修改字符串：使用数组</h3><p>✅ 正确示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> a[] = <span class="string">&quot;a&quot;</span>; <span class="comment">// 创建一个可修改的数组</span></span><br><span class="line">    a[<span class="number">0</span>] = <span class="string">&#x27;b&#x27;</span>;     <span class="comment">// 修改成功</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, a);  <span class="comment">// 输出：b</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="📌-4-内存示意"><a href="#📌-4-内存示意" class="headerlink" title="📌 4. 内存示意"></a>📌 4. 内存示意</h3><table>
-<thead>
-<tr>
-<th>表达式</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>a</code></td>
-<td>指针变量，保存一个地址</td>
-</tr>
-<tr>
-<td><code>*a</code></td>
-<td>访问指针指向地址中的值</td>
-</tr>
-<tr>
-<td><code>&amp;x</code></td>
-<td>取变量 x 的地址</td>
-</tr>
-<tr>
-<td><code>&quot;abc&quot;</code></td>
-<td>字符串字面量（只读）</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="📌-5-char-a-vs-char-a"><a href="#📌-5-char-a-vs-char-a" class="headerlink" title="📌 5. char *a vs char a[]"></a>📌 5. <code>char *a</code> vs <code>char a[]</code></h3><table>
-<thead>
-<tr>
-<th>声明</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>char *a = &quot;abc&quot;;</code></td>
-<td>a 是指针，指向只读字符串字面量</td>
-</tr>
-<tr>
-<td><code>char a[] = &quot;abc&quot;;</code></td>
-<td>a 是数组，内容拷贝到栈上，可修改</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="✅-总结"><a href="#✅-总结" class="headerlink" title="✅ 总结"></a>✅ 总结</h3><ol>
-<li><strong>指针变量保存的是地址，解引用（<code>*a</code>）访问该地址中的值。</strong></li>
-<li><strong>字符串字面量通常是只读内存，想要可修改字符串就要用数组拷贝出来。</strong></li>
-<li><strong>对无效地址解引用会导致未定义行为（段错误、程序崩溃）。</strong></li>
-</ol>
-<hr>
-<h3 id="✨-完整示例：可复制运行"><a href="#✨-完整示例：可复制运行" class="headerlink" title="✨ 完整示例：可复制运行"></a>✨ 完整示例：可复制运行</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 指针操作</span></span><br><span class="line">    <span class="type">int</span> x = <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span> *p = &amp;x;</span><br><span class="line">    *p = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;x = %d\n&quot;</span>, x);  <span class="comment">// 输出：20</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 字符串字面量（只读）</span></span><br><span class="line">    <span class="type">char</span> *s1 = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, s1);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 可修改字符串（数组）</span></span><br><span class="line">    <span class="type">char</span> s2[] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    s2[<span class="number">0</span>] = <span class="string">&#x27;H&#x27;</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, s2);  <span class="comment">// 输出：Hello</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/21/OFDM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1536,6 +1352,201 @@
 <li>NID</li>
 </ul>
 </li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/21/5gNRSidelink/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/04/21/5gNRSidelink/" class="post-title-link" itemprop="url">5gNRSidelink</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-04-21 20:33:19" itemprop="dateCreated datePublished" datetime="2025-04-21T20:33:19+08:00">2025-04-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-05-19 06:33:54" itemprop="dateModified" datetime="2025-05-19T06:33:54+08:00">2025-05-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="Basic-discription-–-from-MATLAB"><a href="#Basic-discription-–-from-MATLAB" class="headerlink" title="Basic discription – from MATLAB"></a>Basic discription – from MATLAB</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openExample(<span class="string">&#x27;5g/NRSidelinkVectorWaveformGenerationExample&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>This example shows how to configure and generate a 5G NR sidelink baseband waveform containing a sequence of physical sidelink control channel (PSCCH) and physical sidelink shared channel (PSSCH) transmission, including sidelink control information (SCI) and SL-SCH transport channel coding.<br>NR sidelink uses the concept of resource pools to configure specific resources for transmission and reception on a sidelink carrier. Each data transmission comprises a PSCCH transmission and an associated PSSCH transmission. </p>
+<h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><ul>
+<li>set the parameters for the waveform and resource pool configuration<br>The waveform is based on the PSSCH reference measurement channels (RMCs) defined. 也就是它是根据一个参考channel进行构造的，但实际上你可以自定义参数。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rmc = R.PSSCH.2-1.2</span><br><span class="line">bwscs = 20MHx @ 30kHz</span><br><span class="line">% Get PSCCH and PSSCH channel and sidelink pool parameters</span><br><span class="line">bw = bwscs(1); </span><br><span class="line">scs = bwscs(2);</span><br><span class="line">[waveconfig.SLTransmission,waveconfig.Pool] = NRSidelinkResourcePool.rmcTestConfiguration(rmc,bw,scs);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Waveform Generation (create a baseband IQ waveform that contains a sequence of the previously configured PSCCH and PSSCH transmissions)<ul>
+<li>Use a SL-SCH HARQ entity object to control the HARQ process and RV scheduling of the SL-SCH transport encoding, across the series of PSSCH transmissions in the waveform.</li>
+<li>Create a set of PN23 data sources to stream the SL-SCH, SCI1, and SCI2 payloads across the sequence of transmisins.</li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sci1datasource = createPN23DataSource();</span><br><span class="line">sci2datasource = createPN23DataSource();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Create a pair of PSSCH DM-RS position configurations.</li>
+<li>Create variable for the basestation waveform and related outputs</li>
+<li>配置好了之后（Slot-wise loop to build the complete waveform from the sequence of individual PSSCH and PSCCH transmission）<br>  需要注意的是每个slot里面都有PSSCH和PSCCH</li>
+</ul>
+</li>
+</ul>
+<h2 id="基于openairinterface的sidelink"><a href="#基于openairinterface的sidelink" class="headerlink" title="基于openairinterface的sidelink"></a>基于openairinterface的sidelink</h2><h3 id="S-SSB"><a href="#S-SSB" class="headerlink" title="S-SSB"></a>S-SSB</h3><img src="/images/S-SSB.png">
+一个完整的S-SSB包含S-PSS、S-SSS和PSBCH这几个部分
+
+<ul>
+<li>S-PSS: symbols 1, 2</li>
+<li>S-SSS: symbols 3, 4</li>
+<li>PSBCH: symbols 5 - 12<br>S-SSB uses 11 RBs, or 132 subcarriers.<br>The PSBCH provides the system wide configuration and synchronization information required to establish the connection between multiple UEs. Its payload size consists of 56 bits.<br><strong>DMRS</strong> are transmitted in every PSBCH, on every fourth subcarrier, the are used by the receiver to properly decode the PSBCH.</li>
+</ul>
+<h4 id="procedure"><a href="#procedure" class="headerlink" title="procedure"></a>procedure</h4><p>Create SL PSS<br>  |<br>Create SL SSS<br>  |<br>Fill in DMRS<br>  |<br>Generate PSBCH Payload<br>  |<br>Generate SSB Frame<br>  |<br>Conduct Symbol Rotation<br>  |<br>Encode PSBCH<br>  |<br>Detect SSS         &#x2F;&#x2F;&#x2F;接收端<br>  ｜<br>Correlated DMRS<br>  |<br>Extract PSBCH</p>
+<h3 id="S-SSB-SPSS-and-SSSS-and-PSBCH"><a href="#S-SSB-SPSS-and-SSSS-and-PSBCH" class="headerlink" title="S-SSB (SPSS and SSSS) and PSBCH"></a>S-SSB (SPSS and SSSS) and PSBCH</h3><p><strong>nr_sl_initial_sync</strong>函数处理Sidelink S-SSB&#x2F;PSBCH block<br>In 5G sidelink, the first SSB symbol is the PSBCH, so the first thing is to adjust the SSB offset accordingly. The next symbols are PSS and SSS. So we need then to adjust the SSB offset accodingly (subtracting first PSS prefix). </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">uint32_t psbch_plus_prefix_size = fp-&gt;ofdm_symbol_size + fp-&gt;nb_prefix_samples;</span><br><span class="line">uint32_t num_pss_prefix_samples_size = (ue-&gt;common_vars.N2_id + 1) * fp-&gt;nb_prefix_samples;</span><br><span class="line">/// get and extract the corresponding SSB</span><br><span class="line"><span class="keyword">for</span> (int j = 0; j &lt; fp-&gt;slots_per_frame - 1; j++) &#123;</span><br><span class="line">  <span class="keyword">for</span> (int i = 0; i &lt; N_SYMB_SLOT_SL; i++)</span><br><span class="line">nr_slot_fep_init_sync(ue, proc, i ,j ,is * fp-&gt;samples_per_frame + ue-&gt;ssb_offset);</span><br><span class="line">&#125;</span><br><span class="line">/// nr_slot_fep_init_sync 用来接收数据并做dft处理</span><br><span class="line"></span><br><span class="line">int nr_slot_fep_init_sync(PHY_VARS_NR_UE *ue,</span><br><span class="line">                          UE_nr_rxtx_proc_t *proc,</span><br><span class="line">                          unsigned char symbol,</span><br><span class="line">                          unsigned char Ns,</span><br><span class="line">                          int sample_offset)</span><br><span class="line">&#123; ///计算偏移值从而定位到对应的slot以及对应的symbol</span><br><span class="line">  unsigned int slot_offset = frame_parms-&gt;get_samples_slot_timestamp(Ns,frame_parms,0);</span><br><span class="line">  unsigned int rx_offset   = sample_offset + slot_offset;</span><br><span class="line">  unsigned int abs_symbol  = Ns * frame_parms-&gt;symbols_per_slot + symbol;</span><br><span class="line">  <span class="keyword">for</span> (int idx_symb = Ns*frame_parms-&gt;symbols_per_slot; idx_symb &lt;= abs_symbol; idx_symb++)</span><br><span class="line">    rx_offset += (abs_symbol%(0x7&lt;&lt;<span class="string">frame_parms-&gt;numerology_index)) ? nb_prefix_samples : nb_prefix_samples0;</span></span><br><span class="line"><span class="string">  rx_offset += frame_parms</span>-&gt;ofdm_symbol_size * symbol;</span><br><span class="line">  /// dft (<span class="keyword">time</span> domain symbols -&gt; frequency domain symbols)</span><br><span class="line">   dft(dftsize,</span><br><span class="line">        rxdata_ptr,</span><br><span class="line">        (int16_t *)&amp;common_vars-&gt;common_vars_rx_data_per_thread[proc-&gt;thread_id].rxdataF[aa][frame_parms-&gt;ofdm_symbol_size*symbol],</span><br><span class="line">        1);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">/// 之后对dft后的频域信号进行frequency offset的计算 （根据SSS来计算）</span><br><span class="line">/// DFT -&gt; rxdataF</span><br><span class="line"><span class="keyword">for</span> (Nid1 = 0; Nid1 &lt; N_ID_1_NUMBER; Nid1++) &#123;</span><br><span class="line">  <span class="keyword">for</span> (uint8_t phase = 0; phase &lt; PHASE_HYPOTHESIS_NUMBER; phase++) &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; LENGTH_SSS_NR; i++) &#123;</span><br><span class="line">      metric_re += d[i] * (((phase_re_nr[phase] * sss0[<span class="number">2</span> *i ]) &gt;&gt; SCALING_METRIC_SSS_NR) - ((phase_im_nr[phase] * sss0[<span class="number">2</span> * i + <span class="number">1</span>]) &gt;&gt; SCALING_METRIC_SSS_NR))</span><br><span class="line">                 + d[i] * (((phase_re_nr[phase] * sss1[<span class="number">2</span> *i ]) &gt;&gt; SCALING_METRIC_SSS_NR) - ((phase_im_nr[phase] * sss1[<span class="number">2</span> * i + <span class="number">1</span>]) &gt;&gt; SCALING_METRIC_SSS_NR));</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">int re = 0, im = 0;</span><br><span class="line"><span class="keyword">for</span>(int i = 0; i &lt; LENGTH_SSS_NR; i++) &#123;</span><br><span class="line">  re += d[i] * sss0[2 * i];</span><br><span class="line">  im += d[i] * sss0[2 * i + 1];</span><br><span class="line">  re += d[i] * sss1[2 * i];</span><br><span class="line">  im += d[i] * sss1[2 * i + 1];</span><br><span class="line">&#125;</span><br><span class="line">double ffo_sss = atan2(im, re) / M_PI / 4.3;</span><br><span class="line">*freq_offset_sss = (int)(ffo_sss * frame_parms-&gt;subcarrier_spacing);</span><br><span class="line"></span><br><span class="line">/// compensation</span><br><span class="line"><span class="keyword">for</span> (int n = start; n &lt; end; n++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (int ar = 0; ar &lt; fp-&gt;nb_antennas_rx; ar++) &#123;</span><br><span class="line">              double re = ((double)(((short *)ue-&gt;common_vars.rxdata[ar]))[2 * n]);</span><br><span class="line">              double im = ((double)(((short *)ue-&gt;common_vars.rxdata[ar]))[2 * n + 1]);</span><br><span class="line">              ((short *)ue-&gt;common_vars.rxdata[ar])[<span class="number">2</span> * n] = (short)(round(re * cos(n * off_angle) - im * sin(n * off_angle)));</span><br><span class="line">              ((short *)ue-&gt;common_vars.rxdata[ar])[<span class="number">2</span> * n + <span class="number">1</span>] = (short)(round(re * sin(n * off_angle) + im *cos(n * off_angle)));</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">/// 处理psbch</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="PSSCH-and-PSCCH"><a href="#PSSCH-and-PSCCH" class="headerlink" title="PSSCH and PSCCH"></a>PSSCH and PSCCH</h3><p>PSSCH contains SCI2 and DM-RS while PSCCH only contains SCI1.<br><img src="/images/PSSCH.png"></p>
+<p>The SCI2 payload is <strong>polar</strong> encoded and contains the number of data bits transmitted as well as the multiplexing scheme. So the SCI2 is used by the decoder to properly decode the PSSCH payload, which uses a Low-Density Parity Check(LDPC) encoding mechanism. Besides, the SCI2 is used for the decoding of PSSCH for the HARQ operation.</p>
+<h4 id="Procedures"><a href="#Procedures" class="headerlink" title="Procedures"></a>Procedures</h4><p>Generate SCI2           &#x2F;&#x2F;&#x2F;发射端<br> |<br>Polar Coding and Rate Matching<br> |<br>LDPC coding and Rate Matching<br> |<br>Data and Control Multiplexing<br> |<br>Scrambling<br> |<br>Constellation Modulation<br> |<br>Layer Mapping<br> |<br>Virtual resource and resource grid mapping<br> |<br>OFDM modulation<br> |<br>Tx&#x2F;Rx<br> |<br>OFDM Demodulation   &#x2F;&#x2F;&#x2F;接收端<br> |<br>Resource grid demapping<br> |<br>Channel Estimatin and Equalization<br> |<br>Layer demapping<br> |<br>Constellation demodulation<br> |<br>Descrambling<br> |<br>Data and control demultiplexing<br> |<br>LDPC decoding and polar decoding</p>
+<h3 id="HARQ"><a href="#HARQ" class="headerlink" title="HARQ"></a>HARQ</h3><p>HARQ (Hybrid ARQ (Automatic Repeat Request)). It is a feedback transmission and reception 5G uses. It has such functionalities as blow:</p>
+<ul>
+<li><p>重传控制<br>用于管理是否需要重传(通过round， ndi， tx_status等字段)</p>
+</li>
+<li><p>数据存储<br>存储当前HARQ过程的数据，比如<strong>a_sci2</strong>, <strong>b_sci2</strong><br>其中a_sci2用于pointer to sci2 after crc + polar encoding and rate matching stored in bytes.<br>其中b_sci2用于pointer to output of data-control multiplexer in bits.<br>其他<strong>A_sci2</strong>和<strong>B_sci2</strong>用于表示数据大小in bits<br>B_sci2：用来表示数据的大小，使用 uint32_t 类型来存储大小（单位：比特），它是一个静态的数字，而不是实际的数据内容。<br>b_sci2：指向实际数据的指针，用来表示数据的内存地址，实际的数据内容存储在该地址指向的内存区域。使用指针是因为数据的长度不固定或可能变化，因此需要动态地分配和管理内存。</p>
+</li>
+<li><p>编码缓存<br>存储LDPC&#x2F;Polar编码输出及中间步骤</p>
+</li>
+<li><p>slot定位<br>指明此HARQ对应的slot and frame(frame, slot) </p>
+</li>
+<li><p>调度协助<br>辅助scheduler判断资源使用情况，是否有未完成HARQ</p>
+</li>
+</ul>
+<h4 id="NR-UL-UE-HARQ-t"><a href="#NR-UL-UE-HARQ-t" class="headerlink" title="NR_UL_UE_HARQ_t"></a>NR_UL_UE_HARQ_t</h4><p>关键字段</p>
+<ul>
+<li>a_sci2<br>pointer to SCI2 payload from MAC interface</li>
+<li>b_sci2<br>pointer to sci2 after crc+polar encoding and rate matching stored in bytes</li>
+<li>*a<br>pointer to pdu from MAC interface(也就是payload)</li>
+<li>*b<br>pointers to the payload + CRC</li>
+</ul>
+<h4 id="NR-DL-UE-HARQ-t"><a href="#NR-DL-UE-HARQ-t" class="headerlink" title="NR_DL_UE_HARQ_t"></a>NR_DL_UE_HARQ_t</h4><p>关键字段</p>
+<ul>
+<li>*b<br>pointer to the payload</li>
+<li>B<br>the payload + crc size in bits</li>
+<li>b_sci2<br>pointer to the sci2 payload</li>
+<li>B_sci2<br>the sci2’s payload + CRC + channel coder + rate matching size in bits</li>
+</ul>
+<h3 id="TDD"><a href="#TDD" class="headerlink" title="TDD"></a>TDD</h3><p>The flexible slot feature of 5G SL utilizes each symbol to schedule uplink, downlink, or flexible packets. According to the 3GPP standard, the S-SBB should be periodicity of 160 ms(10ms per system frame number, 0.5 ms per slot). There are other modifiable parameters like interval parameter, offset parameter, number S-SSB per period.<br><img src="/images/SSSB_TDD.png"></p>
+<p>So in this test use case, we arbitrarily chose to broadcast 2 S-SSBs per period. The first S-SSB is sent in slot 2 because we set the offset parameter to 2. The interal parameter was set to 20.<br>20+2-10ms&#x2F;0.5ms &#x3D; 2<br>so the next S-SSb will be transmitted twice in a period, and occurs in frame 1 slot 2.</p>
+<h4 id="S-SSB后SCH-PSSCH-PSCCH-之间的时隔划分"><a href="#S-SSB后SCH-PSSCH-PSCCH-之间的时隔划分" class="headerlink" title="S-SSB后SCH(PSSCH &amp; PSCCH)之间的时隔划分"></a>S-SSB后SCH(PSSCH &amp; PSCCH)之间的时隔划分</h4><p>在SL Mode 2中，时隔划分是由UE自身配置的S-SSB周期&#x2F;偏移&#x2F;间隔决定（例如在某个slot发射S-SSB在另外的slot内发射SCH），这是由UE本地RRC Layer来配置的。在本次实验中，查看代码可知S-SSB是每个160ms发射一次S-SSB，代码可见&#x2F;openair1&#x2F;SCHED_NR_UE&#x2F;phy_procedures_nr_ur.c<br>先从RRC层获取S-SSB的各种参数配置，例如一个周期(160ms)内有多少个S-SSB，第一个S-SSB的偏移量还有两个S-SSB之间的间隔</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">bool phy_ssb_slot_allocation_sl(PHY_VARS_NR_UE *ue, int frame, int slot)</span><br><span class="line">&#123;</span><br><span class="line">  NR_DL_FRAME_PARMS *fp = &amp;ue-&gt;frame_parms;</span><br><span class="line">  static int sl_numssb_withinperiod_r16, sl_timeoffsetssb_r16, sl_timeoffsetssb_r16_copy;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (sl_numssb_withinperiod_r16 == 0) &#123;</span><br><span class="line">    sl_numssb_withinperiod_r16 = ue-&gt;slss-&gt;sl_numssb_withinperiod_r16;</span><br><span class="line">    sl_timeoffsetssb_r16 = ue-&gt;slss-&gt;sl_timeoffsetssb_r16;</span><br><span class="line">    sl_timeoffsetssb_r16_copy = sl_timeoffsetssb_r16;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ((frame * fp-&gt;slots_per_frame + slot) % (<span class="number">16</span> * fp-&gt;slots_per_frame) == <span class="number">0</span>) &#123;</span><br><span class="line">    ue-&gt;slss-&gt;sl_numssb_withinperiod_r16 = ue-&gt;slss-&gt;sl_numssb_withinperiod_r16_copy;</span><br><span class="line">    sl_timeoffsetssb_r16 = frame * fp-&gt;slots_per_frame + sl_timeoffsetssb_r16_copy;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  if (ue-&gt;slss-&gt;sl_numssb_withinperiod_r16 &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    if (frame * fp-&gt;slots_per_frame + slot == sl_timeoffsetssb_r16) &#123;</span><br><span class="line">      sl_timeoffsetssb_r16 = sl_timeoffsetssb_r16 + ue-&gt;slss-&gt;sl_timeinterval_r16;</span><br><span class="line">      ue-&gt;slss-&gt;sl_numssb_withinperiod_r16 = ue-&gt;slss-&gt;sl_numssb_withinperiod_r16 - <span class="number">1</span>;</span><br><span class="line">      LOG_I(PHY,&quot;*** SL-SSB slot allocation  %d.%d ***\n&quot;, frame, slot); </span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      return false;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    return false;</span><br><span class="line">  &#125;</span><br><span class="line">  return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于syncref ue，以0-15 frames 为例，frame 0 ， frame 1中的slot 1会发射SSB，然后在其他的frame中的slot1或者slot0会发射PSSCH，代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">uint32_t sl_bitmap_tx = 0x00000;</span><br><span class="line"><span class="keyword">if</span>(ue-&gt;sync_ref) &#123;</span><br><span class="line">  sl_bitmap_tx = (ue-&gt;is_synchronized_sl == 0) ? 0x00001 : 0x00002;  // SyncRef UE tx slot 0, Relay UE B tx slot 1.</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> ((sl_bitmap_tx &gt;&gt; slot_tx) &amp; <span class="number">1</span>) &#123;</span><br><span class="line">  for (uint8_t harq_pid = <span class="number">0</span>; harq_pid &lt; <span class="number">1</span>; harq_pid++) &#123;</span><br><span class="line">    nr_ue_set_slsch(&amp;ue-&gt;frame_parms, harq_pid, ue-&gt;slsch[proc-&gt;thread_id][gNB_id], frame_tx, slot_tx);</span><br><span class="line">    if (ue-&gt;slsch[proc-&gt;thread_id][gNB_id]-&gt;harq_processes[harq_pid]-&gt;status == ACTIVE) &#123;</span><br><span class="line">      nr_ue_slsch_tx_procedures(ue, harq_pid, frame_tx, slot_tx);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于nearby ue，也是从每个frame中的特定slot去获取pssch</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">int phy_procedures_nrUE_SL_RX(PHY_VARS_NR_UE *ue,</span><br><span class="line">                           UE_nr_rxtx_proc_t *proc,</span><br><span class="line">                           uint8_t synchRefUE_id,</span><br><span class="line">                           notifiedFIFO_t *txFifo) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (ue-&gt;is_synchronized_sl == 0)</span><br><span class="line">    <span class="built_in">return</span> (0);</span><br><span class="line"></span><br><span class="line">  // TODO: Need to add rx SSB slot 2 (to Relay UE) and rx SSB slot 4 (Nearby UE) <span class="keyword">for</span> resync</span><br><span class="line">  uint32_t sl_bitmap_rx = ue-&gt;sync_ref ? 0x00001 : 0x00002; // Relay UE B rx slot 0, Nearby UE rx slot 1.</span><br><span class="line">  <span class="keyword">if</span> (((sl_bitmap_rx &gt;&gt; proc-&gt;nr_slot_rx) &amp; <span class="number">1</span>) == <span class="number">0</span>) </span><br><span class="line">    return (<span class="number">0</span>);</span><br><span class="line">  int frame_rx = proc-&gt;frame_rx;</span><br><span class="line">  int slot_rx = proc-&gt;nr_slot_rx;</span><br><span class="line">  uint32_t ret = nr_ue_slsch_rx_procedures(ue, harq_pid, frame_rx, slot_rx, rxdataF, B_mul, Nidx, proc);</span><br><span class="line"></span><br><span class="line">  bool payload_type_string = true;</span><br><span class="line">  bool polar_decoded = (ret &lt; LDPC_MAX_LIMIT) ? true : false;</span><br><span class="line">  uint16_t dest = (*harq-&gt;b_sci2 &gt;&gt; <span class="number">32</span>) &amp; <span class="number">0</span>xFFFF;</span><br><span class="line">  bool dest_matched = (dest == node_id);</span><br><span class="line">  if (polar_decoded)</span><br><span class="line">    LOG_D(PHY, &quot;dest %u vs %u node_id for hex %lx\n&quot;, dest, node_id, *harq-&gt;b_sci2);</span><br><span class="line">  if ((ret != -<span class="number">1</span>) &amp;&amp; dest_matched) &#123;</span><br><span class="line">    if (payload_type_string)</span><br><span class="line">        validate_rx_payload_str(harq, slot_rx, polar_decoded);</span><br><span class="line">        else</span><br><span class="line">        validate_rx_payload(harq, frame_rx, slot_rx, polar_decoded);</span><br><span class="line">              &#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>sl-numSSB-WithinPeriod-r16, sl-timeInterval-r16, sl-SSB-PeriodicityAndOffset-r16这些和S-SSB的时序相关的配置根据<strong>3GPP</strong>规范明确出现在<strong>RRC</strong>层定义的Sidelink配置结构中。</p>
+</blockquote>
+<hr>
+<h3 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h3><h4 id="Sidelink-Sequence-Diagram"><a href="#Sidelink-Sequence-Diagram" class="headerlink" title="Sidelink Sequence Diagram"></a>Sidelink Sequence Diagram</h4><p>…<br>自己画(Synchronization ue和nearby ue之间的通信)</p>
+<h4 id="Sidelink-Block-Diagram"><a href="#Sidelink-Block-Diagram" class="headerlink" title="Sidelink Block Diagram"></a>Sidelink Block Diagram</h4><img src="/images/SidelinkBlockDiagram.png">
+
+<h4 id="RSRP-Reference-signal-received-power"><a href="#RSRP-Reference-signal-received-power" class="headerlink" title="RSRP (Reference signal received power)"></a>RSRP (Reference signal received power)</h4><p>分别计算了SSB-RSRP和PSSCH-RSRP<br>以下是PSSCH-RSRP的计算公式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">\mathrm&#123;RSRP&#125;_&#123;\mathrm&#123;dBm&#125;&#125;</span><br><span class="line">= 10 \log_&#123;10&#125;\Bigl(P_&#123;\mathrm&#123;lin&#125;&#125;\Bigr)</span><br><span class="line">  + 30</span><br><span class="line">  - 10 \log_&#123;10&#125;\bigl(2^&#123;30&#125;\bigr)</span><br><span class="line">  - \bigl(G_&#123;\mathrm&#123;rx&#125;&#125; - G_&#123;\mathrm&#123;off&#125;&#125;\bigr)</span><br><span class="line">  - \mathrm&#123;dB\_fixed&#125;(N_&#123;\mathrm&#123;fft&#125;&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>其中$P_{lin}$是对所有测量到的资源元素（RE）功率取平均后的线性功率，其中$10\log_{10}(2^{30})$是因为系统用30位定点数表示FFT输出，数值实际上被乘了$2^{30}$,因此需要减去这个缩放因子。除此之外还需要减去补偿放大器带来的功率增益。同时还要减去不同FFT大小（即OFDM子载波总数）下的单位子载波的功率密度变化。</p>
+<p>从哪些信号计算rsrp？：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (int k = 0; k &lt; nb_rb * NR_NB_SC_PER_RB; k += 4) &#123;</span><br><span class="line">  <span class="comment">#ifdef DEBUG_MEAS_UE</span></span><br><span class="line">  LOG_I(N_pssch %d %d\n<span class="string">&quot;, __FUNCTION__, rxF_pssch[k * 2], rxF_pssch[k * 2 + 1]);</span></span><br><span class="line"><span class="string">  #endif</span></span><br><span class="line"><span class="string">  rsrp += (((int32_t)rxF_pssch[k * 2] * rxF_pssch[k * 2]) + ((int32_t)rxF_pssch[k * 2 + 1] * rxF_pssch[k * 2 + 1]));</span></span><br><span class="line"><span class="string">  nb_re++;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>每4个子载波取一次DMRS信号来进行测量received power，对每一个抽样点先取实数平方加虚部平方，得到这个RE到线性功率，累加到rsrp。</p>
+<h4 id="Sync-time"><a href="#Sync-time" class="headerlink" title="Sync time"></a>Sync time</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#796821.854505 [NR_PHY] SyncRef UE found with Nid1 10 and Nid2 1 SS-RSRP -100 dBm/RE</span></span><br><span class="line">  <span class="keyword">if</span> not line.startswith(<span class="string">&#x27;[&#x27;</span>) and <span class="string">&#x27;SyncRef UE found&#x27;</span> <span class="keyword">in</span> line and <span class="string">&#x27;Nid1&#x27;</span> <span class="keyword">in</span> line and <span class="string">&#x27;Nid2&#x27;</span> <span class="keyword">in</span> line:</span><br><span class="line">      num_split = 13 <span class="keyword">if</span> <span class="string">&#x27;RSRP&#x27;</span> <span class="keyword">in</span> line <span class="keyword">else</span> 10</span><br><span class="line">      fields = line.split(maxsplit=num_split)</span><br><span class="line">      est_nid1 = int(fields[7])</span><br><span class="line">      est_nid2 = int(fields[10])</span><br><span class="line">      <span class="keyword">if</span> <span class="string">&#x27;RSRP&#x27;</span> <span class="keyword">in</span> line:</span><br><span class="line">            ssb_rsrp = int(fields[12])</span><br><span class="line">      found.add(<span class="string">&#x27;syncref&#x27;</span>)</span><br><span class="line">      time_end_s = <span class="built_in">float</span>(fields[0])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>同步时间平均是7-8秒，对应的SSB数目是除0.16秒再乘2<br>因为周期是160ms，并且一个周期内有2个SSB</p>
+<h4 id="Packet-Loss-Rate"><a href="#Packet-Loss-Rate" class="headerlink" title="Packet Loss Rate"></a>Packet Loss Rate</h4><p>Successfully decoded packets</p>
+<h4 id="Data-rates"><a href="#Data-rates" class="headerlink" title="Data rates"></a>Data rates</h4><ul>
+<li>所有数据</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">uint32_t B_mul = get_B_multiplexed_value(&amp;ue-&gt;frame_parms, slsch-&gt;harq_processes[0]);</span><br><span class="line">uint32_t get_B_multiplexed_value(NR_DL_FRAME_PARMS* fp, NR_DL_UE_HARQ_t *harq) &#123;</span><br><span class="line"></span><br><span class="line">  uint8_t Nl                = harq-&gt;Nl;</span><br><span class="line">  unsigned int G_slsch_bits = harq-&gt;G;</span><br><span class="line">  uint32_t B_mul = G_slsch_bits + harq-&gt;B_sci2 * Nl;</span><br><span class="line">  <span class="built_in">return</span> B_mul;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中harq-&gt;nl是Number of MIMO layers (streams), harq-&gt;G是Number of soft channel bits，<br>最终<strong>B_mul</strong>是整个Sidelink PDU中所有实际通过空口传输的比特数(数据+控制)，可以用来估算实际的PHY吞吐量。</p>
+<p>其中harq-G具体计算如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">uint32_t nr_get_G_sl(uint16_t nb_rb, uint16_t nb_re_sci1, uint16_t nb_re_sci2, uint16_t nb_symb_sch, uint8_t nb_re_dmrs, uint16_t length_dmrs, uint8_t Qm, uint8_t Nl) &#123;</span><br><span class="line">    uint32_t G;</span><br><span class="line">    G = (((NR_NB_SC_PER_RB * nb_symb_sch)-(nb_re_dmrs * length_dmrs)) * nb_rb - nb_re_sci1 - nb_re_sci2) * Qm * Nl;</span><br><span class="line">    <span class="built_in">return</span>(G);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中NR_NB_SC_PER_RB是每个资源块包含的子载波数，一个RB包含12个子载波<br>nb_symb_sch 是该slot内的符号数量。其中<strong>nb_rb</strong>是资源块数量，在oai中通常标准化为50的倍数，例如我们在脚本中把rbsl设为了52，但在oai中会变为50。其中<strong>Qm</strong>表示每个RE的的调制比特数，例如QPSK &#x3D; 2，16QAM &#x3D; 4<br>最终nr_get_G_sl的返回值是12480，说明整个pssch的bits是12480，这表示一个slot中传输的数据总比特数，包括： PSSCH数据部分 + SCI2控制信息部分的比特总数。harq-&gt;G是11904bits，这表示整个PSSCH传输中当前slot可承载的数据比特数（理论最大），也就是不包含SCI2控制信息<br>吞吐量 &#x3D; 12480&#x2F;0.0005 &#x3D; 24960000 bits&#x2F;s &#x3D; 24.96 Mbps &#x3D; 3.12 MB&#x2F;s<br>而这时理论上一个slot上的吞吐量，如果放到整一个frame中，那么吞吐量 &#x3D; 24960000 bits&#x2F;s &#x2F; 20 &#x3D; <strong>1248000</strong> bits&#x2F;s<br>（因为一个frame只有一个slot用于pssch传输）<br>在实际测试中，data rate大约为<strong>1188000</strong> bis&#x2F;s,略小于理论速率，因此合理。（可能是由于丢包导致的）<br>overview of parameters:</p>
+<ul>
+<li>MCS<br>0, so it is QPSK</li>
+<li>RB<br>52个RB然后被oai归一化为50，每个RB中有12个子载波  </li>
+<li>SCS<br>子载波间隔为30kHz，这样算下来带宽为18MHx（50x12x30），但是还有一些guard band（保护带），因此实际带宽会更大，大约为标准化带宽20MHz</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">void nr_ue_set_slsch_rx(PHY_VARS_NR_UE *ue, unsigned char harq_pid)</span><br><span class="line">&#123;</span><br><span class="line">  int nb_rb = get_PRB(ue-&gt;frame_parms.N_RB_SL);</span><br><span class="line">  uint16_t nb_symb_sch = 12;</span><br><span class="line">  uint16_t nb_symb_cch = 3; // Assumption there are three SLCCH symbols</span><br><span class="line">  uint8_t dmrsConfigType = 0;</span><br><span class="line">  uint8_t Nl = 1; // number of layer</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Latency-self-defined"><a href="#Latency-self-defined" class="headerlink" title="Latency(self-defined)"></a>Latency(self-defined)</h4><p>histogram latency<br>对于发射端<br>在nr_ue_slsch_tx_procedures函数中某一位置加上时间戳，例如在modulation + layer mapping + resource mapping之后，但是在nr_ue_pssch_common_procedures()函数之前，因为nr_ue_pssch_common_procedures()涉及具体的把信号加到RF端。<br>对于接收端<br>在nr_ue_slsch_rx_procedures函数内，在nr_slsch_decoding之后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">uint32_t ret = nr_slsch_decoding(rxUE, proc, ulsch_llr[0],</span><br><span class="line">                          &amp;rxUE-&gt;frame_parms, slsch_ue_rx,</span><br><span class="line">                          slsch_ue_rx-&gt;harq_processes[0], frame,</span><br><span class="line">                          nb_symb_sch, slot, harq_pid);</span><br><span class="line">///////////////////////////////////////////////////////</span><br><span class="line">LOG_I(NR_PHY,<span class="string">&quot;Frame: %d, Slot: %d&quot;</span>, frame, slot);</span><br><span class="line"><span class="built_in">return</span> ret;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Resources-blocks"><a href="#Resources-blocks" class="headerlink" title="Resources blocks"></a>Resources blocks</h4><p>具体可见paper（只需要考虑PSSCH和PSCCH）<br>因为只需要关心real data<br>Resource blocks可以推导出theoretical data rates</p>
+<h3 id="How-would-improve"><a href="#How-would-improve" class="headerlink" title="How would improve"></a>How would improve</h3><p>例如如何改良resource blocks</p>
+<h4 id="改动地方"><a href="#改动地方" class="headerlink" title="改动地方"></a>改动地方</h4><ul>
+<li>ue-&gt;sync_ref &#x3D; 0</li>
+<li>polar_decoder_int16 failed</li>
+<li>validate_rx_str<br>问题：<br>sync过几秒就不再接收了</li>
 </ul>
 
       
