@@ -150,6 +150,107 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/21/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/07/21/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">数字信号处理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-07-21 15:13:01 / Modified: 16:01:38" itemprop="dateCreated datePublished" datetime="2025-07-21T15:13:01+08:00">2025-07-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h1 id="数字信号处理-—-DFT和DTFT简介"><a href="#数字信号处理-—-DFT和DTFT简介" class="headerlink" title="数字信号处理 — DFT和DTFT简介"></a>数字信号处理 — DFT和DTFT简介</h1><h2 id="离散时间傅里叶变换（DTFT）"><a href="#离散时间傅里叶变换（DTFT）" class="headerlink" title="离散时间傅里叶变换（DTFT）"></a>离散时间傅里叶变换（DTFT）</h2><p>DTFT（Discrete-Time Fourier Transform）是离散时间信号的傅里叶变换，定义为将离散时间信号映射到连续的频率域。<br>它的数学表达式为：</p>
+<p>$$<br>X(\omega) &#x3D; \sum_{n&#x3D;-\infty}^{\infty} x[n] e^{-j \omega n}<br>$$</p>
+<ul>
+<li>其中，$x[n]$ 是离散时间信号，  </li>
+<li>$\omega$ 是连续频率变量，取值范围为 $-\pi \leq \omega \leq \pi$。  </li>
+<li>DTFT结果是频率的连续函数。</li>
+</ul>
+<p>DTFT适合分析无限长或有限长信号的频率特性。</p>
+<hr>
+<h2 id="连续时间信号采样与离散时间傅里叶变换-DTFT-推导"><a href="#连续时间信号采样与离散时间傅里叶变换-DTFT-推导" class="headerlink" title="连续时间信号采样与离散时间傅里叶变换 (DTFT) 推导"></a>连续时间信号采样与离散时间傅里叶变换 (DTFT) 推导</h2><p>设连续时间信号的傅里叶变换为：</p>
+<p>$$<br>X_s(j\omega) &#x3D; \int_{-\infty}^{\infty} x_s(t) \cdot e^{-j \omega t} , dt<br>$$</p>
+<p>其中，采样后的信号 $x_s(t)$ 可以表示为：</p>
+<p>$$<br>x_s(t) &#x3D; \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot \delta(t - k T_s)<br>$$</p>
+<p>代入傅里叶变换：</p>
+<p>$$<br>\begin{aligned}<br>X_s(j\omega) &amp;&#x3D; \int_{-\infty}^{\infty} \left( \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot \delta(t - k T_s) \right) e^{-j \omega t} , dt \<br>&amp;&#x3D; \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot e^{-j \omega k T_s} \int_{-\infty}^{\infty} \delta(t - k T_s) , dt \quad \text{(利用线性性质和 $x(t)\delta(t - t_0) &#x3D; x(t_0) \delta(t - t_0)$)} \<br>&amp;&#x3D; \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot e^{-j \omega k T_s}<br>\end{aligned}<br>$$</p>
+<p>令</p>
+<ul>
+<li>$\Omega &#x3D; \omega T_s$ （连续时间角频率转换为数字频率），  </li>
+<li>$x[k] &#x3D; x(k T_s)$ （离散时间信号样本），</li>
+</ul>
+<p>则上述式子可写为：</p>
+<p>$$<br>X(e^{j \Omega}) &#x3D; \sum_{k&#x3D;-\infty}^{\infty} x[k] \cdot e^{-j \Omega k}<br>$$</p>
+<p>这就是离散时间傅里叶变换（DTFT）的定义。</p>
+<hr>
+<p><strong>总结：</strong></p>
+<ul>
+<li>通过采样，将连续时间信号转换为离散时间信号；  </li>
+<li>连续时间傅里叶变换 $X_s(j\omega)$ 可表达为离散时间傅里叶变换 $X(e^{j \Omega})$ 的形式，连接了连续与离散频域。</li>
+</ul>
+<h2 id="离散傅里叶变换（DFT）"><a href="#离散傅里叶变换（DFT）" class="headerlink" title="离散傅里叶变换（DFT）"></a>离散傅里叶变换（DFT）</h2><p>DFT（Discrete Fourier Transform）是DTFT的离散版本，适用于有限长度的序列。<br>它将一个长度为$N$的序列转换为长度为$N$的频域序列，计算公式为：</p>
+<p>$$<br>X[k] &#x3D; \sum_{n&#x3D;0}^{N-1} x[n] e^{-j \frac{2\pi}{N} k n}, \quad k&#x3D;0,1,\ldots,N-1<br>$$</p>
+<ul>
+<li>$x[n]$ 是长度为$N$的离散信号，  </li>
+<li>$X[k]$ 是离散的频率样本点，  </li>
+<li>DFT的频率点是均匀分布在 $[0, 2\pi)$ 上。</li>
+</ul>
+<p>DFT广泛应用于数字信号处理中的频谱分析和滤波。</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><strong>DTFT</strong>：频率连续，信号长度可以无限，理论分析工具。  </li>
+<li><strong>DFT</strong>：频率离散，信号长度有限，数值计算工具，常用快速算法FFT实现。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/07/%E5%85%B6%E4%BB%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -963,7 +1064,7 @@ print(w.grad)
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-19 22:51:53" itemprop="dateModified" datetime="2025-07-19T22:51:53+08:00">2025-07-19</time>
+                <time title="Modified: 2025-07-21 14:57:46" itemprop="dateModified" datetime="2025-07-21T14:57:46+08:00">2025-07-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1535,6 +1636,72 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
 <li>$d_v$ 是 Value 向量的维度</li>
 <li>注意力机制允许模型动态地聚焦于输入序列中最相关的部分</li>
 </ul>
+<h3 id="RNN-Recurrent-Neural-Network"><a href="#RNN-Recurrent-Neural-Network" class="headerlink" title="RNN (Recurrent Neural Network)"></a>RNN (Recurrent Neural Network)</h3><h4 id="Long-Short-Term-Memory-LTSM-Cell-Explanation"><a href="#Long-Short-Term-Memory-LTSM-Cell-Explanation" class="headerlink" title="Long Short-Term Memory (LTSM) Cell Explanation"></a>Long Short-Term Memory (LTSM) Cell Explanation</h4><p>This project contains visual illustrations and numerical examples of how an LSTM (Long Short-Term Memory) cell works internally. The LSTM is a type of recurrent neural network (RNN) that is capable of learning long-term dependencies and solving the vanishing gradient problem.</p>
+<h4 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h4><p>LSTMs introduce <strong>memory cells</strong> and <strong>gating mechanisms</strong> to control the flow of information. The key gates in an LSTM cell are:</p>
+<ul>
+<li><p><strong>遗忘门（Forget Gate）</strong><br>控制保留多少过去的记忆。<br>计算方式：$f(z_f)$，使用 sigmoid 激活函数，输出范围在 $[0, 1]$，模拟“开”与“关”。</p>
+</li>
+<li><p><strong>输入门（Input Gate）</strong><br>决定当前输入中保留哪些信息。<br>表达式为：$f(z_i)$ 和 $g(z)$。</p>
+</li>
+<li><p><strong>记忆单元状态（Cell State）</strong><br>状态更新公式：<br>$$<br>C_{\text{new}} &#x3D; f(z_f) \cdot C_{\text{old}} + f(z_i) \cdot g(z)<br>$$</p>
+</li>
+<li><p><strong>输出门（Output Gate）</strong><br>决定当前时刻的隐藏状态输出 $a$：<br>$$<br>a &#x3D; f(z_o) \cdot h(C)<br>$$</p>
+</li>
+</ul>
+<p>激活函数说明：</p>
+<ul>
+<li>$f(\cdot)$ 表示 sigmoid（$\sigma$ 函数），控制门的开关；</li>
+<li>$g(\cdot)$ 表示 tanh，处理输入的候选记忆；</li>
+<li>$h(\cdot)$ 通常也是 tanh，用于输出处理。</li>
+</ul>
+<hr>
+<h4 id="LSTM-数值计算示例"><a href="#LSTM-数值计算示例" class="headerlink" title="LSTM 数值计算示例"></a>LSTM 数值计算示例</h4><img src="/images/LSTM_Formulation.png">
+
+<p>该图展示了一个完整的 <strong>LSTM 单元的前向传播数值过程</strong>，主要特征包括：</p>
+<ul>
+<li>输入特征向量 $x_1$, $x_2$, $x_3$ 及偏置项；</li>
+<li>不同门控的权重矩阵、偏置与线性组合；</li>
+<li>显式显示了输入门、遗忘门、输出门的计算过程；</li>
+<li>Cell 的状态值如何随着时间变化更新；</li>
+<li>最终输出 $y$ 序列中在特定时间步激活（例如输出为 7）。</li>
+</ul>
+<p>通过可视化的矩阵计算，可以看到 LSTM 如何“记住”或“忘记”输入中的关键信息。</p>
+<h5 id="关键计算公式"><a href="#关键计算公式" class="headerlink" title="关键计算公式"></a>关键计算公式</h5><p>$$<br>\begin{aligned}<br>f_t &amp;&#x3D; \sigma(W_f \cdot [h_{t-1}, x_t] + b_f) \\<br>i_t &amp;&#x3D; \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) \\<br>g_t &amp;&#x3D; \tanh(W_g \cdot [h_{t-1}, x_t] + b_g) \\<br>C_t &amp;&#x3D; f_t \cdot C_{t-1} + i_t \cdot g_t \\<br>o_t &amp;&#x3D; \sigma(W_o \cdot [h_{t-1}, x_t] + b_o) \\<br>h_t &amp;&#x3D; o_t \cdot \tanh(C_t)<br>\end{aligned}<br>$$</p>
+<h4 id="LSTM的模块说明以及应用场景"><a href="#LSTM的模块说明以及应用场景" class="headerlink" title="LSTM的模块说明以及应用场景"></a>LSTM的模块说明以及应用场景</h4><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>遗忘门</td>
+<td>学习去“忘记”无关记忆</td>
+</tr>
+<tr>
+<td>输入门</td>
+<td>学习将当前输入写入记忆</td>
+</tr>
+<tr>
+<td>候选记忆块</td>
+<td>生成当前输入的表示</td>
+</tr>
+<tr>
+<td>Cell 状态</td>
+<td>长期记忆存储通道</td>
+</tr>
+<tr>
+<td>输出门</td>
+<td>控制当前输出暴露多少内部记忆</td>
+</tr>
+</tbody></table>
+<p>LSTM 网络适用于处理<strong>时间相关性较强</strong>的任务，例如：</p>
+<ul>
+<li>🧠 自然语言处理（NLP）：文本分类、情感分析、语言建模</li>
+<li>📈 时间序列预测：股价、传感器数据、气象数据</li>
+<li>🗣 语音识别、语音生成</li>
+<li>🔄 序列到序列（Seq2Seq）：机器翻译、摘要生成等</li>
+</ul>
 
       
     </div>
@@ -1960,69 +2127,6 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/08/numpy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/08/numpy/" class="post-title-link" itemprop="url">numpy</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-06-08 03:53:37 / Modified: 04:04:55" itemprop="dateCreated datePublished" datetime="2025-06-08T03:53:37+08:00">2025-06-08</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <p>将某一数据类型(bytes, array)直接转换成NumPy数组</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.frombuffer()</span><br></pre></td></tr></table></figure>
-<p>将输入的arr数组转为指定形状的arr，可以指定长宽，若某个为-1，则会自动计算其长或宽的大小</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.reshape(arr,(height,depth))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2092,7 +2196,7 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
