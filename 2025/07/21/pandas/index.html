@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="将某一数据类型(bytes, array)直接转换成NumPy数组 1np.frombuffer() 将输入的arr数组转为指定形状的arr，可以指定长宽，若某个为-1，则会自动计算其长或宽的大小 1np.reshape(arr,(height,depth))">
+  <meta name="description" content="pandas 基础语法速查以下内容基于对 pandas 基础用法的常见问题整理，方便快速入门和复习。  1. 查看数据 df.head()返回数据框前 5 行（默认），可以用 df.head(n) 查看前 n 行。用于快速预览数据。  df.iloc[:, :-1].values用 .iloc 按位置索引，:,:-1 表示所有行，除最后一列以外的所有列。.values 返回对应的 NumPy 数组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="numpy">
-<meta property="og:url" content="https://hechenyi.github.io/2025/06/08/numpy/index.html">
+<meta property="og:title" content="pandas">
+<meta property="og:url" content="https://hechenyi.github.io/2025/07/21/pandas/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="将某一数据类型(bytes, array)直接转换成NumPy数组 1np.frombuffer() 将输入的arr数组转为指定形状的arr，可以指定长宽，若某个为-1，则会自动计算其长或宽的大小 1np.reshape(arr,(height,depth))">
+<meta property="og:description" content="pandas 基础语法速查以下内容基于对 pandas 基础用法的常见问题整理，方便快速入门和复习。  1. 查看数据 df.head()返回数据框前 5 行（默认），可以用 df.head(n) 查看前 n 行。用于快速预览数据。  df.iloc[:, :-1].values用 .iloc 按位置索引，:,:-1 表示所有行，除最后一列以外的所有列。.values 返回对应的 NumPy 数组">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-06-07T19:53:37.000Z">
-<meta property="article:modified_time" content="2025-06-07T20:04:55.697Z">
+<meta property="article:published_time" content="2025-07-21T12:17:58.000Z">
+<meta property="article:modified_time" content="2025-07-21T14:26:15.832Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hechenyi.github.io/2025/06/08/numpy/">
+<link rel="canonical" href="https://hechenyi.github.io/2025/07/21/pandas/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>numpy | Hexo</title>
+  <title>pandas | Hexo</title>
   
 
 
@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/08/numpy/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/21/pandas/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -168,7 +168,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          numpy
+          pandas
         </h1>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-06-08 03:53:37 / Modified: 04:04:55" itemprop="dateCreated datePublished" datetime="2025-06-08T03:53:37+08:00">2025-06-08</time>
+              <time title="Created: 2025-07-21 20:17:58 / Modified: 22:26:15" itemprop="dateCreated datePublished" datetime="2025-07-21T20:17:58+08:00">2025-07-21</time>
             </span>
 
           
@@ -193,11 +193,41 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>将某一数据类型(bytes, array)直接转换成NumPy数组</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.frombuffer()</span><br></pre></td></tr></table></figure>
-<p>将输入的arr数组转为指定形状的arr，可以指定长宽，若某个为-1，则会自动计算其长或宽的大小</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.reshape(arr,(height,depth))</span><br></pre></td></tr></table></figure>
-
+        <h1 id="pandas-基础语法速查"><a href="#pandas-基础语法速查" class="headerlink" title="pandas 基础语法速查"></a>pandas 基础语法速查</h1><p>以下内容基于对 pandas 基础用法的常见问题整理，方便快速入门和复习。</p>
+<hr>
+<h2 id="1-查看数据"><a href="#1-查看数据" class="headerlink" title="1. 查看数据"></a>1. 查看数据</h2><ul>
+<li><p><code>df.head()</code><br>返回数据框前 5 行（默认），可以用 <code>df.head(n)</code> 查看前 n 行。<br>用于快速预览数据。</p>
+</li>
+<li><p><code>df.iloc[:, :-1].values</code><br>用 <code>.iloc</code> 按位置索引，<code>:,:-1</code> 表示所有行，除最后一列以外的所有列。<br><code>.values</code> 返回对应的 NumPy 数组。</p>
+</li>
+<li><p><code>df.values</code><br>将整个 DataFrame 转换为 NumPy 数组，包含所有数据（数值和非数值都可能存在）。</p>
+</li>
+</ul>
+<hr>
+<h2 id="2-处理缺失值"><a href="#2-处理缺失值" class="headerlink" title="2. 处理缺失值"></a>2. 处理缺失值</h2><ul>
+<li><code>df.fillna(0, inplace=True)</code><br>将所有缺失值（NaN）替换为 0，<code>inplace=True</code> 代表直接修改原 DataFrame。</li>
+</ul>
+<hr>
+<h2 id="3-唯一值和类别编码"><a href="#3-唯一值和类别编码" class="headerlink" title="3. 唯一值和类别编码"></a>3. 唯一值和类别编码</h2><ul>
+<li><p><code>df.Summary.unique()</code><br>返回列 <code>Summary</code> 中所有唯一的值（去重后的列表）。</p>
+</li>
+<li><p><code>df.LoudCover.unique()</code><br>类似，返回 <code>LoudCover</code> 列所有唯一值。</p>
+</li>
+<li><p>Label Encoding  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line">  labelencoder = LabelEncoder()</span><br><span class="line">  df[<span class="string">&#x27;Summary&#x27;</span>] = labelencoder.fit_transform(df[<span class="string">&#x27;Summary&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">## 4. 相关性分析</span></span><br><span class="line">- df.corr()</span><br><span class="line">计算数值列之间的相关系数矩阵（默认是 Pearson 相关系数）。</span><br><span class="line"></span><br><span class="line">注意：执行 df.corr() 前，确保 DataFrame 中只包含数值列，否则可能报错。</span><br><span class="line">- 热力图可视化</span><br><span class="line">```bash</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sn</span><br><span class="line">sn.heatmap(df.select_dtypes(include=[<span class="string">&#x27;number&#x27;</span>]).corr())</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="5-数据拼接与转换"><a href="#5-数据拼接与转换" class="headerlink" title="5. 数据拼接与转换"></a>5. 数据拼接与转换</h2><ul>
+<li>pd.concat(cols, axis &#x3D; 1)<br>将列表 cols 中的多个 DataFrame 按列合并成一个大 DataFrame。</li>
+<li>.shift(n)<br>对时间序列数据进行平移（滞后或提前）。<br>例如：df.shift(1) 会将所有数据下移一行，原第一行变为 NaN。</li>
+</ul>
+<h2 id="6-Numpy与Pandas转换"><a href="#6-Numpy与Pandas转换" class="headerlink" title="6. Numpy与Pandas转换"></a>6. Numpy与Pandas转换</h2><ul>
+<li>DataFrame转为NumPy数组</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = df.values</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>只保留数值列转为数组</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = df.select_dtypes(include=[<span class="string">&#x27;number&#x27;</span>]).values</span><br><span class="line"></span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -212,13 +242,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/06/08/%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/" rel="prev" title="信源编码">
-      <i class="fa fa-chevron-left"></i> 信源编码
+    <a href="/2025/07/21/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" rel="prev" title="数字信号处理">
+      <i class="fa fa-chevron-left"></i> 数字信号处理
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/06/11/%E6%95%B0%E5%AD%97%E5%9F%BA%E5%B8%A6%E4%BF%A1%E5%8F%B7/" rel="next" title="数字基带信号">
-      数字基带信号 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -277,6 +304,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pandas-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E9%80%9F%E6%9F%A5"><span class="nav-number">1.</span> <span class="nav-text">pandas 基础语法速查</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.</span> <span class="nav-text">1. 查看数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%A4%84%E7%90%86%E7%BC%BA%E5%A4%B1%E5%80%BC"><span class="nav-number">1.2.</span> <span class="nav-text">2. 处理缺失值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%94%AF%E4%B8%80%E5%80%BC%E5%92%8C%E7%B1%BB%E5%88%AB%E7%BC%96%E7%A0%81"><span class="nav-number">1.3.</span> <span class="nav-text">3. 唯一值和类别编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%95%B0%E6%8D%AE%E6%8B%BC%E6%8E%A5%E4%B8%8E%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.4.</span> <span class="nav-text">5. 数据拼接与转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Numpy%E4%B8%8EPandas%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.5.</span> <span class="nav-text">6. Numpy与Pandas转换</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
