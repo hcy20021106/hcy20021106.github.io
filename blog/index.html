@@ -1157,7 +1157,7 @@ print(w.grad)
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-25 14:21:09" itemprop="dateModified" datetime="2025-07-25T14:21:09+08:00">2025-07-25</time>
+                <time title="Modified: 2025-07-26 22:07:12" itemprop="dateModified" datetime="2025-07-26T22:07:12+08:00">2025-07-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1729,7 +1729,20 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
 <li>$d_v$ 是 Value 向量的维度</li>
 <li>注意力机制允许模型动态地聚焦于输入序列中最相关的部分</li>
 </ul>
-<h3 id="RNN-Recurrent-Neural-Network"><a href="#RNN-Recurrent-Neural-Network" class="headerlink" title="RNN (Recurrent Neural Network)"></a>RNN (Recurrent Neural Network)</h3><h4 id="Long-Short-Term-Memory-LSTM-Cell-Explanation"><a href="#Long-Short-Term-Memory-LSTM-Cell-Explanation" class="headerlink" title="Long Short-Term Memory (LSTM) Cell Explanation"></a>Long Short-Term Memory (LSTM) Cell Explanation</h4><p>一个LSTM cell可以理解为一个cnn中的neuron<br>This project contains visual illustrations and numerical examples of how an LSTM (Long Short-Term Memory) cell works internally. The LSTM is a type of recurrent neural network (RNN) that is capable of learning long-term dependencies and solving the vanishing gradient problem.</p>
+<h4 id="Local-Attention"><a href="#Local-Attention" class="headerlink" title="Local Attention"></a>Local Attention</h4><p>In <strong>local attention</strong>, each position only attends to a limited number of nearby positions (i.e., a fixed-size window). It mimics sliding-window machanims.<br><strong>Example (window size &#x3D; 2):</strong><br>$$<br>a_i attends to {a_{i-2}, a_{i-1}, a_i, a_{i+1}, a_{i+2}}<br>$$</p>
+<h5 id="Pros"><a href="#Pros" class="headerlink" title="Pros:"></a>Pros:</h5><ul>
+<li>Reduces computation to 0(nw), where w is the window size</li>
+<li>Works well in spatial&#x2F;temporal data (e.g., images, audio)</li>
+</ul>
+<h4 id="Global-Attention"><a href="#Global-Attention" class="headerlink" title="Global Attention"></a>Global Attention</h4><p>In <strong>global attention</strong>, each query attends to <strong>all positions</strong> in the sequence.</p>
+<h5 id="Pros-1"><a href="#Pros-1" class="headerlink" title="Pros:"></a>Pros:</h5><ul>
+<li>Captures long-range dependencies</li>
+<li>Powerful and general-purpose</li>
+</ul>
+<h5 id="Cons"><a href="#Cons" class="headerlink" title="Cons:"></a>Cons:</h5><ul>
+<li>High computational cost</li>
+</ul>
+<h4 id="Clustering-based-Attention"><a href="#Clustering-based-Attention" class="headerlink" title="Clustering-based Attention"></a>Clustering-based Attention</h4><h3 id="RNN-Recurrent-Neural-Network"><a href="#RNN-Recurrent-Neural-Network" class="headerlink" title="RNN (Recurrent Neural Network)"></a>RNN (Recurrent Neural Network)</h3><h4 id="Long-Short-Term-Memory-LSTM-Cell-Explanation"><a href="#Long-Short-Term-Memory-LSTM-Cell-Explanation" class="headerlink" title="Long Short-Term Memory (LSTM) Cell Explanation"></a>Long Short-Term Memory (LSTM) Cell Explanation</h4><p>一个LSTM cell可以理解为一个cnn中的neuron<br>This project contains visual illustrations and numerical examples of how an LSTM (Long Short-Term Memory) cell works internally. The LSTM is a type of recurrent neural network (RNN) that is capable of learning long-term dependencies and solving the vanishing gradient problem.</p>
 <h4 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h4><p>LSTMs introduce <strong>memory cells</strong> and <strong>gating mechanisms</strong> to control the flow of information. The key gates in an LSTM cell are:</p>
 <ul>
 <li><p><strong>遗忘门（Forget Gate）</strong><br>控制保留多少过去的记忆。<br>计算方式：$f(z_f)$，使用 sigmoid 激活函数，输出范围在 $[0, 1]$，模拟“开”与“关”。</p>
@@ -2016,7 +2029,7 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
 <h6 id="Multi-head-Self-Attention"><a href="#Multi-head-Self-Attention" class="headerlink" title="Multi-head Self-Attention"></a>Multi-head Self-Attention</h6><p>首先计算Query, Key, Value:<br>$$<br>Q &#x3D; H^{(l-1)} W^Q,\quad K &#x3D; H^{(l-1)} W^K,\quad V &#x3D; H^{(l-1)} W^V<br>$$</p>
 <p>其中：</p>
 <ul>
-<li>$W^Q, W^K, W^V \in \mathbb{R}^{d_{\text{model}} \times d_k}$  </li>
+<li>$W^Q, W^K, W^V \in \mathbb{R}^{d_{\text{model}} \times d_k}$<br>$d_model$通常等于输入或输出的特征维度 </li>
 <li>通常 $d_k &#x3D; \frac{d_{\text{model}}}{h}$，$h$ 为注意力头数</li>
 </ul>
 <p>单个注意力头的输出：</p>
@@ -2025,7 +2038,7 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
 <p>$$<br>\text{MultiHead}(H) &#x3D; \text{Concat}(\text{head}_1, …, \text{head}_h) W^O<br>$$</p>
 <p>加残差连接与 LayerNorm：</p>
 <p>$$<br>\tilde{H}^{(l)} &#x3D; \text{LayerNorm}\left( H^{(l-1)} + \text{MultiHead}(H^{(l-1)}) \right)<br>$$</p>
-<h6 id="前馈网络-Feed-Forward-Network"><a href="#前馈网络-Feed-Forward-Network" class="headerlink" title="前馈网络(Feed Forward Network)"></a>前馈网络(Feed Forward Network)</h6><p>位置前馈网络(Position-wise FFN)作用于每个位置的向量：<br>$$<br>\text{FFN}(x) &#x3D; \max(0, x W_1 + b_1) W_2 + b_2<br>$$<br>其中：</p>
+<h6 id="前馈网络-Feed-Forward-Network-（MLP）"><a href="#前馈网络-Feed-Forward-Network-（MLP）" class="headerlink" title="前馈网络(Feed Forward Network)（MLP）"></a>前馈网络(Feed Forward Network)（MLP）</h6><p>位置前馈网络(Position-wise FFN)作用于每个位置的向量：<br>$$<br>\text{FFN}(x) &#x3D; \max(0, x W_1 + b_1) W_2 + b_2<br>$$<br>其中：</p>
 <ul>
 <li>$W_1 \in \mathbb{R}^{d_{\text{model}} \times d_{\text{ff}}}$</li>
 <li>$W_2 \in \mathbb{R}^{d_{\text{ff}} \times d_{\text{model}}}$</li>
@@ -2079,6 +2092,63 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
 <li>编码器输出需携带更多信息</li>
 <li>速度快，但精度通常低于 AT</li>
 </ul>
+<h3 id="Vision-Transformer-ViT"><a href="#Vision-Transformer-ViT" class="headerlink" title="Vision Transformer (ViT)"></a>Vision Transformer (ViT)</h3><p>ViT和一般的Transformer不同，不需要decoder，只需要encoder。<br>ViT将输入图片分为多个patch(16x16),再将每个patch投影为固定长度的向量送入Transformer，后续encoder的操作和原始Transformer中完全相同。<br>对于图片分类，因此在输入序列中加入一个<strong>特殊的</strong>token，该token对应的输出即为最后的类别预测。</p>
+<ul>
+<li>patch embedding:<br>例如输入图片大小为224x224，将图片分为固定大小的patch，patch大小为16x16，则每张图像会生成224x224&#x2F;16x16&#x3D;196个patch，也就是说sequence length &#x3D; 196，每个patch维度16x16x3 &#x3D; 768。因此输入通过线性投射层之后的维度依然为196x768，即一共有196个token，每个token的维度是768。这里还需要加上一个特殊字符cls，因此最终的维度是197x768。因此，通过patch embedding可以将vision问题转为一个seq2seq问题</li>
+<li>positional encoding<br>和basic transformer一样,可以理解为为一张表，表一共有N行，N的大小和输入序列长度相同，每一行代表一个向量，向量的维度和输入序列embedding的维度相同（768）</li>
+<li>Layer Normalization&#x2F;multi-head attention&#x2F;Layer Normalization<br>LN输出维度依然是197x768。多头自注意力时，先将输入映射到q，k，v，如果只有一个头，qkv的维度都是197x768，如果有12个头（768&#x2F;12&#x3D;64），则qkv的维度是197x64，一共有12组qkv，最后再将12组qkv的输出拼接起来，输出维度是197x768，然后在过一层LN，维度依然是197x768</li>
+<li>MLP（Feed Forward Network FFN）<br>将维度放大再缩小回去，197x768放大为197x3072，再缩小变为197x768</li>
+</ul>
+<p>一个block之后维度依然和输入相同，都是197x768，因此可以堆叠多个block。最后会将特殊字符cls对应的输出<br>作为encoder的最终输出 ，代表最终的image presentation（另一种做法是不加cls字符，对所有的tokens的输出做一个平均）</p>
+<h3 id="Generative-Adversarial-Networks-GAN"><a href="#Generative-Adversarial-Networks-GAN" class="headerlink" title="Generative Adversarial Networks (GAN)"></a>Generative Adversarial Networks (GAN)</h3><p>Generative Adversarial Networks (GANs) are a class of deep learning models in which <strong>two networks compete</strong>: a <strong>generator</strong> tries to produce realistic data, and a <strong>discriminator</strong> tries to distinguish between real and fake data. This adversarial setup drives both networks to improve.</p>
+<h4 id="Key-Components"><a href="#Key-Components" class="headerlink" title="Key Components"></a>Key Components</h4><h5 id="1-Generator-G"><a href="#1-Generator-G" class="headerlink" title="1. Generator (G)"></a>1. Generator (G)</h5><ul>
+<li><strong>Input</strong>: random noise vector <code>z</code> (e.g., 100-dimensional Gaussian)</li>
+<li><strong>Output</strong>: fake data (e.g., an image)</li>
+<li><strong>Goal</strong>: generate samples that look like real data and <strong>fool the discriminator</strong></li>
+</ul>
+<h5 id="2-Discriminator-D"><a href="#2-Discriminator-D" class="headerlink" title="2. Discriminator (D)"></a>2. Discriminator (D)</h5><ul>
+<li><strong>Input</strong>: real or generated data</li>
+<li><strong>Output</strong>: a probability (0 &#x3D; fake, 1 &#x3D; real)</li>
+<li><strong>Goal</strong>: correctly distinguish real data from generated (fake) data</li>
+</ul>
+<h4 id="Overall-Objective"><a href="#Overall-Objective" class="headerlink" title="Overall Objective"></a>Overall Objective</h4><p>The two networks play a <strong>minimax game</strong><br>$$<br>\min_G \max_D V(D, G) &#x3D; \mathbb{E}<em>{x \sim p</em>{\text{data}}}[\log D(x)] + \mathbb{E}_{z \sim p_z}[\log(1 - D(G(z)))]<br>$$</p>
+<ul>
+<li>Discriminator <code>D</code> tries to <strong>maximize</strong> the ability to classify real vs fake.</li>
+<li>Generator <code>G</code> tries to <strong>minimize</strong> the ability of <code>D</code> to detect its fakes.</li>
+</ul>
+<h4 id="Train"><a href="#Train" class="headerlink" title="Train"></a>Train</h4><h5 id="Step-1-Fix-Generator-Train-Discriminator"><a href="#Step-1-Fix-Generator-Train-Discriminator" class="headerlink" title="Step 1: Fix Generator, Train Discriminator"></a>Step 1: Fix Generator, Train Discriminator</h5><p><strong>Goal</strong>: Teach <code>D</code> to distinguish real and fake data</p>
+<ol>
+<li>Sample a batch of real data <code>x_real</code> from the dataset.</li>
+<li>Sample random noise <code>z</code>, and generate fake data <code>x_fake = G(z)</code>.</li>
+<li>Compute discriminator outputs:<ul>
+<li><code>D(x_real)</code> → should be close to 1</li>
+<li><code>D(G(z))</code> → should be close to 0</li>
+</ul>
+</li>
+<li>Compute discriminator loss:</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">L_D = -[ \log D(x_&#123;\text&#123;real&#125;&#125;) + \log(1 - D(G(z))) ]</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>Update only <strong>D’s parameters</strong> (freeze G).</li>
+</ol>
+<hr>
+<h6 id="Step-2-Fix-Discriminator-Train-Generator"><a href="#Step-2-Fix-Discriminator-Train-Generator" class="headerlink" title="Step 2: Fix Discriminator, Train Generator"></a>Step 2: Fix Discriminator, Train Generator</h6><p><strong>Goal</strong>: Improve <code>G</code> so that <code>D</code> can’t tell its output is fake</p>
+<ol>
+<li>Sample new random noise <code>z</code></li>
+<li>Generate fake data <code>x_fake = G(z)</code></li>
+<li>Compute discriminator prediction <code>D(G(z))</code></li>
+<li>Generator loss (trying to <strong>maximize</strong> D’s confidence that fakes are real):</li>
+</ol>
+<p>$$<br>L_G &#x3D; -\log D(G(z))<br>$$</p>
+<ol start="5">
+<li>Update only <strong>G’s parameters</strong> (freeze D)</li>
+</ol>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>可以把Generator和Discriminator合成一个large network来看待<br><br>例如Genrator有5层神经网络，Discriminator有5层神经网络，那么我们一共要训练的就是10层神经网络<br></p>
+</blockquote>
+<hr>
 
       
     </div>
@@ -2121,10 +2191,16 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-06-15 19:13:04 / Modified: 19:31:08" itemprop="dateCreated datePublished" datetime="2025-06-15T19:13:04+08:00">2025-06-15</time>
+              <time title="Created: 2025-06-15 13:13:04" itemprop="dateCreated datePublished" datetime="2025-06-15T13:13:04+08:00">2025-06-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-07-25 21:53:22" itemprop="dateModified" datetime="2025-07-25T21:53:22+08:00">2025-07-25</time>
+              </span>
 
           
 
@@ -2138,7 +2214,42 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
 
       
       
-          <h2 id="vector基本用法"><a href="#vector基本用法" class="headerlink" title="vector基本用法"></a>vector基本用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;int&gt; v1;                  // 空 vector</span><br><span class="line">std::vector&lt;int&gt; v2(5);               // 5 个默认值元素（0）</span><br><span class="line">std::vector&lt;int&gt; v3(5, 42);           // 5 个元素，值为 42</span><br><span class="line">std::vector&lt;int&gt; v4 = &#123;1, 2, 3&#125;;      // 使用列表初始化</span><br><span class="line">v.push_back(x);     // 添加元素</span><br><span class="line">v.pop_back();       // 删除最后一个元素</span><br><span class="line">v.size();           // 返回元素个数</span><br><span class="line">v.empty();          // 是否为空</span><br><span class="line">v.clear();          // 清空所有元素</span><br><span class="line">v.front();          // 返回第一个元素</span><br><span class="line">v.back();           // 返回最后一个元素</span><br><span class="line">v[i];               // 访问第 i 个元素</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          <h1 id="C-STL容器"><a href="#C-STL容器" class="headerlink" title="C++ STL容器"></a>C++ STL容器</h1><h2 id="unordered-set与unordered-map"><a href="#unordered-set与unordered-map" class="headerlink" title="unordered_set与unordered_map"></a>unordered_set与unordered_map</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th><code>std::unordered_set</code></th>
+<th><code>std::unordered_map</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>存储内容</strong></td>
+<td>只存储 <strong>键</strong>（key）</td>
+<td>存储 <strong>键值对</strong>（key-value）</td>
+</tr>
+<tr>
+<td><strong>访问方式</strong></td>
+<td>只能通过键判断元素是否存在</td>
+<td>通过键访问对应的值，例如：<code>map[key]</code></td>
+</tr>
+<tr>
+<td><strong>典型用途</strong></td>
+<td>用于判断元素是否存在、集合操作</td>
+<td>用于映射关系，如字符串到整数的字典映射</td>
+</tr>
+<tr>
+<td><strong>示例声明</strong></td>
+<td><code>std::unordered_set&lt;int&gt; s;</code></td>
+<td><code>std::unordered_map&lt;std::string, int&gt; m;</code></td>
+</tr>
+<tr>
+<td><strong>内部实现</strong></td>
+<td>哈希表（只哈希 key）</td>
+<td>哈希表（key 哈希 + value 存储）</td>
+</tr>
+</tbody></table>
+<p>unordered_set常用来代替vector来判断元素是否存在，因为它的find操作的时间复杂度是O(1)</p>
+<h2 id="vector基本用法"><a href="#vector基本用法" class="headerlink" title="vector基本用法"></a>vector基本用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;int&gt; v1;                  // 空 vector</span><br><span class="line">std::vector&lt;int&gt; v2(5);               // 5 个默认值元素（0）</span><br><span class="line">std::vector&lt;int&gt; v3(5, 42);           // 5 个元素，值为 42</span><br><span class="line">std::vector&lt;int&gt; v4 = &#123;1, 2, 3&#125;;      // 使用列表初始化</span><br><span class="line">v.push_back(x);     // 添加元素</span><br><span class="line">v.pop_back();       // 删除最后一个元素</span><br><span class="line">v.size();           // 返回元素个数</span><br><span class="line">v.empty();          // 是否为空</span><br><span class="line">v.clear();          // 清空所有元素</span><br><span class="line">v.front();          // 返回第一个元素</span><br><span class="line">v.back();           // 返回最后一个元素</span><br><span class="line">v[i];               // 访问第 i 个元素</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h2 id="vector遍历方式"><a href="#vector遍历方式" class="headerlink" title="vector遍历方式"></a>vector遍历方式</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;int&gt; v = &#123;1, 2, 3&#125;;</span><br><span class="line"></span><br><span class="line">// 方法 1：范围 <span class="keyword">for</span> 循环</span><br><span class="line"><span class="keyword">for</span> (int x : v) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">x &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 方法 2：索引访问</span></span><br><span class="line"><span class="string">for (int i = 0; i &lt; v.size(); ++i) &#123;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; v[i] &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 方法 3：普通迭代器</span></span><br><span class="line"><span class="string">for (auto it = v.begin(); it != v.end(); ++it) &#123;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; *it &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 方法 4：反向迭代器</span></span><br><span class="line"><span class="string">for (auto rit = v.rbegin(); rit != v.rend(); ++rit) &#123;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; *rit &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="迭代器基本用法"><a href="#迭代器基本用法" class="headerlink" title="迭代器基本用法"></a>迭代器基本用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">begin()	指向第一个元素的迭代器</span><br><span class="line">end()	指向最后一个元素之后的位置</span><br><span class="line">rbegin()	反向迭代器，指向最后一个元素</span><br><span class="line">rend()	反向迭代器，指向第一个元素之前</span><br><span class="line">cbegin()	常量迭代器，不能修改元素</span><br><span class="line">cend()	常量迭代器，指向末尾</span><br></pre></td></tr></table></figure>
@@ -2150,6 +2261,68 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
 <p>输出结构：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">copy: 1 2 3 4 5</span><br><span class="line">firstHalf: 1 2 3</span><br><span class="line">lastPart: 4 5</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+
+<h2 id="引用"><a href="#引用" class="headerlink" title="&amp;引用"></a>&amp;引用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">string res;</span><br><span class="line"><span class="keyword">for</span> (const string &amp;row : rows)</span><br><span class="line">    res += row;</span><br><span class="line"><span class="built_in">return</span> res;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>拷贝？</th>
+<th>推荐？</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>const string &amp;row</code></td>
+<td>❌ 否</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><code>const string row</code></td>
+<td>✅ 是</td>
+<td>⚠️ 否</td>
+</tr>
+</tbody></table>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>凡是遍历容器但不需要修改元素时，都用 const T&amp;，可以大大减少不必要的拷贝。<br></p>
+</blockquote>
+<hr>
+<h2 id="C-Lambda-表达式（匿名函数）使用"><a href="#C-Lambda-表达式（匿名函数）使用" class="headerlink" title="C++ Lambda 表达式（匿名函数）使用"></a>C++ Lambda 表达式（匿名函数）使用</h2><p>Lambda表达式是C++11引入的一种简洁方式，用于定义匿名函数。适用于临时定义函数逻辑，可以在函数内定义</p>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><ul>
+<li><strong>capture</strong> 捕捉外部变量</li>
+<li><strong>parameter_list</strong> 参数列表</li>
+<li><strong>return_type</strong>(可选) 返回类型</li>
+<li><strong>function_body</strong> 函数体</li>
+</ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 最基本的Lambda</span><br><span class="line">auto add = [](int a, int b)&#123;</span><br><span class="line">    <span class="built_in">return</span> a + b;</span><br><span class="line">&#125;;</span><br><span class="line">int result = add(3,4);</span><br><span class="line">// 捕捉外部变量</span><br><span class="line">int x = 10;</span><br><span class="line">auto printX = [=]()&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">x &lt;&lt; std::endl;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">// 捕捉外部变量(按引用)</span></span><br><span class="line"><span class="string">int y = 5;</span></span><br><span class="line"><span class="string">auto increaseY = [&amp;]()&#123;</span></span><br><span class="line"><span class="string">    y += 1;</span></span><br><span class="line"><span class="string">&#125;;</span></span><br><span class="line"><span class="string">increaseY();</span></span><br></pre></td></tr></table></figure>
+<h2 id="捕捉列表说明"><a href="#捕捉列表说明" class="headerlink" title="捕捉列表说明"></a>捕捉列表说明</h2><table>
+<thead>
+<tr>
+<th>写法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>[=]</code></td>
+<td>按值捕获所有外部变量（不可修改）</td>
+</tr>
+<tr>
+<td><code>[&amp;]</code></td>
+<td>按引用捕获所有外部变量（可修改）</td>
+</tr>
+<tr>
+<td><code>[=, &amp;x]</code></td>
+<td>除 <code>x</code> 外按值捕获，<code>x</code> 按引用捕获</td>
+</tr>
+<tr>
+<td><code>[x, &amp;y]</code></td>
+<td><code>x</code> 按值捕获，<code>y</code> 按引用捕获</td>
+</tr>
+<tr>
+<td><code>[this]</code></td>
+<td>捕获当前类对象指针</td>
+</tr>
+</tbody></table>
 
       
     </div>
