@@ -1157,7 +1157,7 @@ print(w.grad)
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-26 22:07:12" itemprop="dateModified" datetime="2025-07-26T22:07:12+08:00">2025-07-26</time>
+                <time title="Modified: 2025-07-28 00:22:54" itemprop="dateModified" datetime="2025-07-28T00:22:54+08:00">2025-07-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -2128,10 +2128,19 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
 <li>Compute discriminator loss:</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">L_D = -[ \log D(x_&#123;\text&#123;real&#125;&#125;) + \log(1 - D(G(z))) ]</span><br></pre></td></tr></table></figure>
-
+<p>用GAN原始论文中判别器的目标函数表达的是同一个意思，只是换了视角：<br>$$<br>\mathbb{E}<em>{x \sim P</em>{\text{data}}}[\log D(x)] + \mathbb{E}_{x’ \sim P_g}[\log(1 - D(x’))]<br>$$</p>
+<ul>
+<li>D(x) is the discriminator’s estimated probability that x is real</li>
+<li>G(z) maps a noise vector z to a generated sample x’ &#x3D; G(z)</li>
+<li>$P_{data}$是real image集，也是随机变量，$P_g$是经过generator后产生的数据集。</li>
+</ul>
 <ol start="5">
 <li>Update only <strong>D’s parameters</strong> (freeze G).</li>
 </ol>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>Assuming an optimal discriminator $D^<em>(x) &#x3D; \frac{P_{\text{data}}(x)}{P_{\text{data}}(x) + P_g(x)}$, plugging this into the value function yields:<br><br>$V(D^</em>, G) &#x3D; -\log(4) + 2 \cdot D_{JS}(P_{\text{data}} | P_g)$<br><br>This means <strong>minimizing $V(D^*, G)$ is equivalent to minimizing JS divergence</strong>. Hence, improving the generator means reducing<br> divergence between the two distributions.<br></p>
+</blockquote>
 <hr>
 <h6 id="Step-2-Fix-Discriminator-Train-Generator"><a href="#Step-2-Fix-Discriminator-Train-Generator" class="headerlink" title="Step 2: Fix Discriminator, Train Generator"></a>Step 2: Fix Discriminator, Train Generator</h6><p><strong>Goal</strong>: Improve <code>G</code> so that <code>D</code> can’t tell its output is fake</p>
 <ol>
