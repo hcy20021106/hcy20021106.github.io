@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="MIMO-OFDM 波束成形系统理论介绍1. 引言现代无线通信系统（如 5G NR、LTE、WLAN）普遍采用 MIMO-OFDM 技术，因其对频率选择性衰落信道的鲁棒性及高数据速率的支持。随着应用需求的增加，系统配置日益复杂，天线阵列规模和子载波数量大幅提升，多天线、多流传输成为主流。 2. 天线阵列与波束成形通过多个天线元素组成的阵列，系统可实现空间复用和波束成形。波束成形（Beamformi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIMOBeamforming">
+<meta property="og:url" content="https://hechenyi.github.io/2025/08/01/MIMOBeamforming/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="MIMO-OFDM 波束成形系统理论介绍1. 引言现代无线通信系统（如 5G NR、LTE、WLAN）普遍采用 MIMO-OFDM 技术，因其对频率选择性衰落信道的鲁棒性及高数据速率的支持。随着应用需求的增加，系统配置日益复杂，天线阵列规模和子载波数量大幅提升，多天线、多流传输成为主流。 2. 天线阵列与波束成形通过多个天线元素组成的阵列，系统可实现空间复用和波束成形。波束成形（Beamformi">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-31T16:58:24.000Z">
+<meta property="article:modified_time" content="2025-07-31T17:21:46.518Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hechenyi.github.io/2025/08/01/MIMOBeamforming/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>MIMOBeamforming | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/01/MIMOBeamforming/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MIMOBeamforming
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-01 00:58:24 / Modified: 01:21:46" itemprop="dateCreated datePublished" datetime="2025-08-01T00:58:24+08:00">2025-08-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="MIMO-OFDM-波束成形系统理论介绍"><a href="#MIMO-OFDM-波束成形系统理论介绍" class="headerlink" title="MIMO-OFDM 波束成形系统理论介绍"></a>MIMO-OFDM 波束成形系统理论介绍</h1><h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><p>现代无线通信系统（如 5G NR、LTE、WLAN）普遍采用 <strong>MIMO-OFDM</strong> 技术，因其对频率选择性衰落信道的鲁棒性及高数据速率的支持。随着应用需求的增加，系统配置日益复杂，天线阵列规模和子载波数量大幅提升，多天线、多流传输成为主流。</p>
+<h2 id="2-天线阵列与波束成形"><a href="#2-天线阵列与波束成形" class="headerlink" title="2. 天线阵列与波束成形"></a>2. 天线阵列与波束成形</h2><p>通过多个天线元素组成的阵列，系统可实现<strong>空间复用</strong>和<strong>波束成形</strong>。波束成形（Beamforming）是利用空间信号处理技术调整发射信号的相位和幅度，使信号在目标方向上增强，同时抑制干扰，提高信噪比（SNR）和系统性能（如降低误码率 BER）。<br>在多天线系统中，除了数字基带层面的预编码外，通常还会应用 射频波束成形矩阵 (Frf)，这是在模拟射频前端对信号进行加权处理，实现对天线阵列的物理波束成形。</p>
+<p>射频波束成形通过对数字基带信号乘以 Frf 矩阵，将信号映射到各个天线单元。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">% RF beamforming: Apply Frf to the digital signal            </span><br><span class="line">% Each antenna element is connected to each data stream</span><br><span class="line">txSig = txSigSTS*mFrf;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-波束成形的关键流程"><a href="#3-波束成形的关键流程" class="headerlink" title="3. 波束成形的关键流程"></a>3. 波束成形的关键流程</h2><h3 id="接收端-Channel-Sounding"><a href="#接收端-Channel-Sounding" class="headerlink" title="接收端(Channel Sounding)"></a>接收端(Channel Sounding)</h3><p>Preamble Tx -&gt; MIMO Channel -&gt; OFDM Rx -&gt; MIMO Channel Estimate -&gt; SVD -&gt; nfrf</p>
+<h3 id="发射端-Precoding-from-channel-sounding"><a href="#发射端-Precoding-from-channel-sounding" class="headerlink" title="发射端 (Precoding from channel sounding)"></a>发射端 (Precoding from channel sounding)</h3><p>系统建模时，将天线阵列位置、天线方向图和空间信道特性纳入设计，采用如下流程：</p>
+<p>数据编码 → 预编码（基于信道测量）→ OFDM调制 → 发射波束成形 → MIMO信道 → 接收波束成形 → OFDM解调 → 数据恢复</p>
+<h3 id="具体步骤说明："><a href="#具体步骤说明：" class="headerlink" title="具体步骤说明："></a>具体步骤说明：</h3><ol>
+<li><p><strong>编码与调制</strong><br>发送数据先经过信源编码和信道编码提升可靠性，再映射成数字调制符号。</p>
+</li>
+<li><p><strong>信道测量与预编码</strong><br>通过信道探测（Channel Sounding）获取信道状态信息（CSI），基于 CSI 设计预编码矩阵，实现多流的空间分离和干扰抑制。</p>
+</li>
+<li><p><strong>OFDM 调制</strong><br>将频域符号映射到多个正交子载波，经过 IFFT 生成时域 OFDM 符号，并添加循环前缀以抵抗符号间干扰。</p>
+</li>
+<li><p><strong>发射波束成形</strong><br>通过射频预编码矩阵对数字基带信号进行加权组合，形成定向的传输波束，提高发射信号的方向增益。</p>
+</li>
+<li><p><strong>MIMO 空间信道</strong><br>模拟多径衰落、散射及路径损耗，采用 WINNER II 等复杂空间信道模型，真实反映无线环境。</p>
+</li>
+<li><p><strong>接收波束成形</strong><br>接收端根据信道特性调整接收波束，最大化信号质量。</p>
+</li>
+<li><p><strong>OFDM 解调与数据恢复</strong><br>移除循环前缀，FFT 变换回频域，进行符号检测和译码，恢复原始数据。</p>
+</li>
+</ol>
+<h2 id="4-系统优势"><a href="#4-系统优势" class="headerlink" title="4. 系统优势"></a>4. 系统优势</h2><ul>
+<li><strong>抗频率选择性衰落</strong>：OFDM 将宽带信道分解为多个平坦子信道。</li>
+<li><strong>空间复用</strong>：多天线支持多数据流并行传输，提升频谱效率。</li>
+<li><strong>波束成形提升 SNR</strong>：信号能量聚焦于接收端，提高可靠性。</li>
+<li><strong>灵活信道模型</strong>：支持多种空间信道模型，便于性能评估和系统设计。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/07/21/pandas/" rel="prev" title="pandas">
+      <i class="fa fa-chevron-left"></i> pandas
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MIMO-OFDM-%E6%B3%A2%E6%9D%9F%E6%88%90%E5%BD%A2%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">MIMO-OFDM 波束成形系统理论介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%BC%95%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">1. 引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%A4%A9%E7%BA%BF%E9%98%B5%E5%88%97%E4%B8%8E%E6%B3%A2%E6%9D%9F%E6%88%90%E5%BD%A2"><span class="nav-number">1.2.</span> <span class="nav-text">2. 天线阵列与波束成形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%B3%A2%E6%9D%9F%E6%88%90%E5%BD%A2%E7%9A%84%E5%85%B3%E9%94%AE%E6%B5%81%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">3. 波束成形的关键流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E7%AB%AF-Channel-Sounding"><span class="nav-number">1.3.1.</span> <span class="nav-text">接收端(Channel Sounding)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E5%B0%84%E7%AB%AF-Precoding-from-channel-sounding"><span class="nav-number">1.3.2.</span> <span class="nav-text">发射端 (Precoding from channel sounding)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="nav-number">1.3.3.</span> <span class="nav-text">具体步骤说明：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8A%BF"><span class="nav-number">1.4.</span> <span class="nav-text">4. 系统优势</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
