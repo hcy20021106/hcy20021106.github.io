@@ -174,14 +174,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2025-04-29 06:45:01" itemprop="dateCreated datePublished" datetime="2025-04-29T06:45:01+08:00">2025-04-29</time>
+              <time title="Created: 2025-04-29 00:45:01" itemprop="dateCreated datePublished" datetime="2025-04-29T00:45:01+08:00">2025-04-29</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-26 23:24:56" itemprop="dateModified" datetime="2025-06-26T23:24:56+08:00">2025-06-26</time>
+                <time title="Modified: 2025-08-01 15:58:28" itemprop="dateModified" datetime="2025-08-01T15:58:28+08:00">2025-08-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -306,12 +306,244 @@
 <li><strong>Data Transmission &amp; BER:</strong> The precoded data is transmitted through the MIMO channel. The receiver decodes the signals based on the estimated CSI. The accuracy of CSI directly affects Bit Error Rate (BER) performance — better CSI leads to lower BER.</li>
 </ul>
 <p>Example MATLAB snippet for per-subcarrier precoding:</p>
-<pre><code class="language-matlab">for carrIdx = 1:prm.numCarriers
-    Q = squeeze(v(carrIdx,:,:));
-    normQ = Q * sqrt(numTx)/norm(Q,&#39;fro&#39;);
-    preData(carrIdx,symIdx,:) = squeeze(gridData(carrIdx,symIdx,:)).&#39; * normQ;
-end
-</code></pre>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> carrIdx = <span class="number">1</span>:prm.numCarriers</span><br><span class="line">    Q = <span class="built_in">squeeze</span>(v(carrIdx,:,:));</span><br><span class="line">    normQ = Q * <span class="built_in">sqrt</span>(numTx)/norm(Q,<span class="string">&#x27;fro&#x27;</span>);</span><br><span class="line">    preData(carrIdx,symIdx,:) = <span class="built_in">squeeze</span>(gridData(carrIdx,symIdx,:)).&#x27; * normQ;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Deep-Learning-for-CSI-Prediction"><a href="#Deep-Learning-for-CSI-Prediction" class="headerlink" title="Deep Learning for CSI Prediction"></a>Deep Learning for CSI Prediction</h3><h4 id="Objective"><a href="#Objective" class="headerlink" title="Objective"></a>Objective</h4><p>Use a neural network to predict CSI vectors from the received LTF sequences instead of using LMMSE.</p>
+<h4 id="Model-Architecture-Keras"><a href="#Model-Architecture-Keras" class="headerlink" title="Model Architecture (Keras)"></a>Model Architecture (Keras)</h4><ul>
+<li>Fully Connected Neural Network (FC或MLP)</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> args.model == <span class="string">&#x27;FC&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;now the model is Full Dense Model&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> args.datasource == <span class="string">&#x27;matlab_maMimo&#x27;</span>:</span><br><span class="line">        <span class="keyword">if</span> args.decimate_max:</span><br><span class="line">            decimate = Flatten()(MaxPooling1D()(next_layer_in))</span><br><span class="line">            next_layer_in = Concatenate(axis=1)([decimate, seq_p])</span><br><span class="line">        <span class="keyword">elif</span> args.decimate_avg:</span><br><span class="line">            decimate = Flatten()(AveragePooling1D()(next_layer_in))</span><br><span class="line">            next_layer_in = Concatenate(axis=1)([decimate, seq_p])</span><br><span class="line">        <span class="comment"># TODO aggiungere decimazione pura (senza max o avg pooling, solo scarto)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            flatten = Flatten()(next_layer_in)</span><br><span class="line">            next_layer_in = Concatenate(axis=1)([flatten, seq_p])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i, n <span class="keyword">in</span> enumerate(nn):</span><br><span class="line">        layers[<span class="string">&#x27;dense&#x27;</span>].append(</span><br><span class="line">            Dense(nn[i], activation=<span class="string">&#x27;relu&#x27;</span>, kernel_initializer=<span class="string">&#x27;glorot_uniform&#x27;</span>, name=<span class="string">&#x27;fc_dense&#x27;</span>+str(i))(next_layer_in)</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">if</span> args.useBN:</span><br><span class="line">            layers[<span class="string">&#x27;batchnorm&#x27;</span>].append(</span><br><span class="line">                BatchNormalization()(layers[<span class="string">&#x27;dense&#x27;</span>][-1])</span><br><span class="line">            )</span><br><span class="line">            next_layer_in = layers[<span class="string">&#x27;batchnorm&#x27;</span>][-1]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            next_layer_in = layers[<span class="string">&#x27;dense&#x27;</span>][-1]</span><br><span class="line">        <span class="keyword">if</span> (i &lt; (numDense - 1)) and (args.dropout != 0.0):  <span class="comment"># if not the last layer, add dropout</span></span><br><span class="line">            layers[<span class="string">&#x27;dropout&#x27;</span>].append(</span><br><span class="line">                Dropout(args.dropout, name=<span class="string">&#x27;drop&#x27;</span>+str(i))(next_layer_in)</span><br><span class="line">            )</span><br><span class="line">            next_layer_in = layers[<span class="string">&#x27;dropout&#x27;</span>][-1]</span><br><span class="line">    encoder = Dense(simParams[<span class="string">&#x27;nSubCarr&#x27;</span>], activation=<span class="string">&#x27;linear&#x27;</span>, kernel_initializer=<span class="string">&#x27;glorot_uniform&#x27;</span>, name=<span class="string">&#x27;fc_regressor&#x27;</span>)(next_layer_in)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> args.datasource == <span class="string">&#x27;matlab_maMimo&#x27;</span>:</span><br><span class="line">        CSI_predictor = Model([seq_in,seq_p], encoder)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        CSI_predictor = Model(seq_in, encoder)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>其中隐藏层nn数列为[1024,1024],因此最后的模型summary为：</p>
+<table>
+<thead>
+<tr>
+<th>Layer Name</th>
+<th>Type</th>
+<th>Output Shape</th>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>seq_in</code></td>
+<td>Input</td>
+<td><code>(None, T, F)</code></td>
+<td>0</td>
+<td>CSI time-series input</td>
+</tr>
+<tr>
+<td><code>seq_p</code></td>
+<td>Input</td>
+<td><code>(None, P)</code></td>
+<td>0</td>
+<td>Position input</td>
+</tr>
+<tr>
+<td><code>flatten</code></td>
+<td>Flatten</td>
+<td><code>(None, T×F)</code></td>
+<td>0</td>
+<td>Flattens CSI sequence</td>
+</tr>
+<tr>
+<td><code>concatenate</code></td>
+<td>Concatenate</td>
+<td><code>(None, T×F + P)</code></td>
+<td>0</td>
+<td>Merges CSI and position inputs</td>
+</tr>
+<tr>
+<td><code>fc_dense0</code></td>
+<td>Dense</td>
+<td><code>(None, 1024)</code></td>
+<td><code>(T×F + P + 1) × 1024</code></td>
+<td>Fully connected layer with ReLU</td>
+</tr>
+<tr>
+<td><code>batch_norm_0</code></td>
+<td>BatchNorm</td>
+<td><code>(None, 1024)</code></td>
+<td>4096</td>
+<td>Batch normalization</td>
+</tr>
+<tr>
+<td><code>drop0</code></td>
+<td>Dropout</td>
+<td><code>(None, 1024)</code></td>
+<td>0</td>
+<td>Dropout layer (optional)</td>
+</tr>
+<tr>
+<td><code>fc_dense1</code></td>
+<td>Dense</td>
+<td><code>(None, 1024)</code></td>
+<td><code>1024 × 1024 + 1024 = 1,049,600</code></td>
+<td>Hidden dense layer</td>
+</tr>
+<tr>
+<td><code>batch_norm_1</code></td>
+<td>BatchNorm</td>
+<td><code>(None, 1024)</code></td>
+<td>4096</td>
+<td>Batch normalization</td>
+</tr>
+<tr>
+<td><code>fc_regressor</code></td>
+<td>Dense</td>
+<td><code>(None, nSubCarr)</code></td>
+<td><code>1024 × nSubCarr + nSubCarr</code></td>
+<td>Output prediction (e.g., CSI subcarriers)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>CNN</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">elif</span> args.model ==<span class="string">&#x27;CONV1D&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;now the model is Convolution 1D Model&quot;</span>)</span><br><span class="line"></span><br><span class="line">    conv1 = BatchNormalization()(Conv1D(128, 7, padding=<span class="string">&#x27;same&#x27;</span>, name=<span class="string">&#x27;cnn1d_1&#x27;</span>, activation=<span class="string">&#x27;relu&#x27;</span>)(next_layer_in))</span><br><span class="line">    maxpool1 = AveragePooling1D()(conv1)</span><br><span class="line">    <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">    conv2 = BatchNormalization()(Conv1D(64, 7, padding=&#x27;same&#x27;, name=&#x27;cnn1d_2&#x27;, activation=&#x27;relu&#x27;)(maxpool1))</span></span><br><span class="line"><span class="string">    maxpool2 = AveragePooling1D()(conv2)</span></span><br><span class="line"><span class="string">   </span></span><br><span class="line"><span class="string">    conv3 = BatchNormalization()(Conv1D(64, 5, padding=&#x27;same&#x27;, name=&#x27;cnn1d_3&#x27;, activation=&#x27;relu&#x27;)(maxpool2))</span></span><br><span class="line"><span class="string">    maxpool3 = MaxPooling1D()(conv3)</span></span><br><span class="line"><span class="string">    &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">    flatten = Flatten()(maxpool1)</span><br><span class="line">    <span class="comment"># TODO INSERT CONVOLUTIONAL AUTOENCODER HERE</span></span><br><span class="line"></span><br><span class="line">    next_layer_in = Concatenate(axis=1)([flatten, seq_p])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i, n <span class="keyword">in</span> enumerate(nn):</span><br><span class="line">        layers[<span class="string">&#x27;dense&#x27;</span>].append(</span><br><span class="line">            Dense(nn[i], activation=<span class="string">&#x27;relu&#x27;</span>, kernel_initializer=<span class="string">&#x27;glorot_uniform&#x27;</span>, name=<span class="string">&#x27;fc_dense&#x27;</span>+str(i))(next_layer_in)</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">if</span> args.useBN:</span><br><span class="line">            layers[<span class="string">&#x27;batchnorm&#x27;</span>].append(</span><br><span class="line">                BatchNormalization()(layers[<span class="string">&#x27;dense&#x27;</span>][-1])</span><br><span class="line">            )</span><br><span class="line">            next_layer_in = layers[<span class="string">&#x27;batchnorm&#x27;</span>][-1]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            next_layer_in = layers[<span class="string">&#x27;dense&#x27;</span>][-1]</span><br><span class="line">        <span class="keyword">if</span> i &lt; (numDense - 1):  <span class="comment"># if not the last layer, add dropout</span></span><br><span class="line">            layers[<span class="string">&#x27;dropout&#x27;</span>].append(</span><br><span class="line">                Dropout(args.dropout, name=<span class="string">&#x27;drop&#x27;</span>+str(i))(next_layer_in)</span><br><span class="line">            )</span><br><span class="line">            next_layer_in = layers[<span class="string">&#x27;dropout&#x27;</span>][-1]</span><br><span class="line">    encoder = Dense(n_out, activation=<span class="string">&#x27;linear&#x27;</span>, kernel_initializer=<span class="string">&#x27;glorot_uniform&#x27;</span>, name=<span class="string">&#x27;fc_regressor&#x27;</span>)(next_layer_in)</span><br><span class="line"></span><br><span class="line">    CSI_predictor = Model([seq_in,seq_p], encoder)</span><br></pre></td></tr></table></figure>
+<p>模型的summary如下：</p>
+<table>
+<thead>
+<tr>
+<th>Layer Name</th>
+<th>Layer Type</th>
+<th>Output Shape</th>
+<th>Number of Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>seq_in</td>
+<td>InputLayer</td>
+<td>(None, T, F)</td>
+<td>0</td>
+<td>Input CSI sequence</td>
+</tr>
+<tr>
+<td>cnn1d_1</td>
+<td>Conv1D</td>
+<td>(None, T, 128)</td>
+<td>(F * 7 * 128) + 128</td>
+<td>1D convolution, kernel size 7, 128 filters</td>
+</tr>
+<tr>
+<td>batch_normalization</td>
+<td>BatchNormalization</td>
+<td>(None, T, 128)</td>
+<td>512</td>
+<td>Normalization after conv1d</td>
+</tr>
+<tr>
+<td>average_pooling1d</td>
+<td>AveragePooling1D</td>
+<td>(None, T&#x2F;&#x2F;2, 128)</td>
+<td>0</td>
+<td>Downsampling by average pooling</td>
+</tr>
+<tr>
+<td>flatten</td>
+<td>Flatten</td>
+<td>(None, (T&#x2F;&#x2F;2) * 128)</td>
+<td>0</td>
+<td>Flatten pooled feature maps</td>
+</tr>
+<tr>
+<td>seq_p</td>
+<td>InputLayer</td>
+<td>(None, P)</td>
+<td>0</td>
+<td>Additional parameter input (e.g., position)</td>
+</tr>
+<tr>
+<td>concatenate</td>
+<td>Concatenate</td>
+<td>(None, (T&#x2F;&#x2F;2)*128 + P)</td>
+<td>0</td>
+<td>Concatenate flattened features and params</td>
+</tr>
+<tr>
+<td>fc_dense0</td>
+<td>Dense</td>
+<td>(None, 1024)</td>
+<td>((T&#x2F;&#x2F;2)*128 + P + 1) * 1024</td>
+<td>Fully connected layer with 1024 units</td>
+</tr>
+<tr>
+<td>batch_normalization_1</td>
+<td>BatchNormalization</td>
+<td>(None, 1024)</td>
+<td>4096</td>
+<td>Normalization after fc_dense0</td>
+</tr>
+<tr>
+<td>drop0</td>
+<td>Dropout</td>
+<td>(None, 1024)</td>
+<td>0</td>
+<td>Dropout for regularization</td>
+</tr>
+<tr>
+<td>fc_dense1</td>
+<td>Dense</td>
+<td>(None, 1024)</td>
+<td>1,049,600 (1024*1024 + 1024)</td>
+<td>Fully connected layer with 1024 units</td>
+</tr>
+<tr>
+<td>batch_normalization_2</td>
+<td>BatchNormalization</td>
+<td>(None, 1024)</td>
+<td>4096</td>
+<td>Normalization after fc_dense1</td>
+</tr>
+<tr>
+<td>drop1</td>
+<td>Dropout</td>
+<td>(None, 1024)</td>
+<td>0</td>
+<td>Dropout for regularization</td>
+</tr>
+<tr>
+<td>fc_re</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>需要注意这里的T就是inPreamble，因此在取卷积后output shape为(T,128)，其中128为通道数<br></p>
+</blockquote>
+<hr>
+<p>Output:</p>
+<ul>
+<li>Predicted CSI of shape $n_{Rx} \times n_{Tx} \times n_{SubCarriers}$</li>
+</ul>
+<h4 id="Loss"><a href="#Loss" class="headerlink" title="Loss"></a>Loss</h4><p>The model minimizes <strong>MSE</strong> between predicted CSI and ground truth:</p>
+<p>$$<br>\text{MSE} &#x3D; \frac{1}{N} \sum_{i&#x3D;1}^{N} \left| H_i - \hat{H}_i \right|^2<br>$$</p>
+<p>Also supports NMSE:</p>
+<p>$$<br>\text{NMSE} &#x3D; \frac{| H - \hat{H} |^2}{| H |^2}<br>$$</p>
+<h4 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">earlystop = EarlyStopping(patience=10, restore_best_weights=True)</span><br><span class="line">reduce_lr = ReduceLROnPlateau(<span class="built_in">factor</span>=0.1, patience=20)</span><br><span class="line">callbacks = [earlystop, reduce_lr]</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> args.method == <span class="string">&#x27;default_SNR&#x27;</span>:</span><br><span class="line">    applyGaussNoise = changeNoisePower(avg_sigPow, ...)</span><br><span class="line">    callbacks.append(applyGaussNoise)</span><br><span class="line"></span><br><span class="line">CSI_predictor.fit(</span><br><span class="line">    x=train_generator,</span><br><span class="line">    validation_data=valid_generator,</span><br><span class="line">    epochs=args.epochs,</span><br><span class="line">    callbacks=callbacks</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Evaluation-Metrics"><a href="#Evaluation-Metrics" class="headerlink" title="Evaluation Metrics"></a>Evaluation Metrics</h4><table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MSE</td>
+<td>$\frac{1}{N} \sum \left</td>
+</tr>
+<tr>
+<td>NMSE</td>
+<td>$\frac{\left| H - \hat{H} \right|^2}{\left| H \right|^2}$</td>
+</tr>
+<tr>
+<td>(Optional) Correlation</td>
+<td>$\frac{H \cdot \hat{H}^*}{|H| |\hat{H}|}$</td>
+</tr>
+</tbody></table>
 
       
     </div>
