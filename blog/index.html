@@ -2497,7 +2497,7 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-25 21:53:22" itemprop="dateModified" datetime="2025-07-25T21:53:22+08:00">2025-07-25</time>
+                <time title="Modified: 2025-08-02 22:08:54" itemprop="dateModified" datetime="2025-08-02T22:08:54+08:00">2025-08-02</time>
               </span>
 
           
@@ -2586,14 +2586,14 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
 </blockquote>
 <hr>
 <h2 id="C-Lambda-表达式（匿名函数）使用"><a href="#C-Lambda-表达式（匿名函数）使用" class="headerlink" title="C++ Lambda 表达式（匿名函数）使用"></a>C++ Lambda 表达式（匿名函数）使用</h2><p>Lambda表达式是C++11引入的一种简洁方式，用于定义匿名函数。适用于临时定义函数逻辑，可以在函数内定义</p>
-<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><ul>
+<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><ul>
 <li><strong>capture</strong> 捕捉外部变量</li>
 <li><strong>parameter_list</strong> 参数列表</li>
 <li><strong>return_type</strong>(可选) 返回类型</li>
 <li><strong>function_body</strong> 函数体</li>
 </ul>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 最基本的Lambda</span><br><span class="line">auto add = [](int a, int b)&#123;</span><br><span class="line">    <span class="built_in">return</span> a + b;</span><br><span class="line">&#125;;</span><br><span class="line">int result = add(3,4);</span><br><span class="line">// 捕捉外部变量</span><br><span class="line">int x = 10;</span><br><span class="line">auto printX = [=]()&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">x &lt;&lt; std::endl;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">// 捕捉外部变量(按引用)</span></span><br><span class="line"><span class="string">int y = 5;</span></span><br><span class="line"><span class="string">auto increaseY = [&amp;]()&#123;</span></span><br><span class="line"><span class="string">    y += 1;</span></span><br><span class="line"><span class="string">&#125;;</span></span><br><span class="line"><span class="string">increaseY();</span></span><br></pre></td></tr></table></figure>
-<h2 id="捕捉列表说明"><a href="#捕捉列表说明" class="headerlink" title="捕捉列表说明"></a>捕捉列表说明</h2><table>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 最基本的Lambda</span><br><span class="line">auto add = [](int a, int b)&#123;</span><br><span class="line">    <span class="built_in">return</span> a + b;</span><br><span class="line">&#125;;</span><br><span class="line">int result = add(3,4);</span><br><span class="line">// 捕捉外部变量</span><br><span class="line">int x = 10;</span><br><span class="line">auto printX = [=]()&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">x &lt;&lt; std::endl;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">// 捕捉外部变量(按引用)</span></span><br><span class="line"><span class="string">int y = 5;</span></span><br><span class="line"><span class="string">auto increaseY = [&amp;]()&#123;</span></span><br><span class="line"><span class="string">    y += 1;</span></span><br><span class="line"><span class="string">&#125;;</span></span><br><span class="line"><span class="string">increaseY();</span></span><br></pre></td></tr></table></figure>
+<h3 id="捕捉列表说明"><a href="#捕捉列表说明" class="headerlink" title="捕捉列表说明"></a>捕捉列表说明</h3><table>
 <thead>
 <tr>
 <th>写法</th>
@@ -2621,6 +2621,9 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
 <td>捕获当前类对象指针</td>
 </tr>
 </tbody></table>
+<h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><h3 id="string-substr"><a href="#string-substr" class="headerlink" title="string.substr"></a>string.substr</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string x=<span class="string">&quot;abc&quot;</span>;</span><br><span class="line">string y = x.substr(0,1);</span><br></pre></td></tr></table></figure>
+<h2 id="拷贝"><a href="#拷贝" class="headerlink" title="拷贝"></a>拷贝</h2><h3 id="值拷贝"><a href="#值拷贝" class="headerlink" title="值拷贝"></a>值拷贝</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">void rotate(vector&lt;vector&lt;int&gt;&gt;&amp; matrix)&#123;</span><br><span class="line">    auto matrix_new = matrix;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>C++ 这里的 &#x3D; 拷贝是值拷贝，会得到一个新的数组</p>
 
       
     </div>
