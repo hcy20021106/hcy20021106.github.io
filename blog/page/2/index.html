@@ -150,6 +150,149 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/12/MVC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/12/MVC/" class="post-title-link" itemprop="url">MVC</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-06-12 21:42:50 / Modified: 21:51:23" itemprop="dateCreated datePublished" datetime="2025-06-12T21:42:50+08:00">2025-06-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <hr>
+<h2 id="🧠-MVC-Architecture"><a href="#🧠-MVC-Architecture" class="headerlink" title="🧠 MVC Architecture"></a>🧠 MVC Architecture</h2><h3 id="🟢-Model-PizzaModel-java"><a href="#🟢-Model-PizzaModel-java" class="headerlink" title="🟢 Model (PizzaModel.java)"></a>🟢 Model (<code>PizzaModel.java</code>)</h3><ul>
+<li>Manages pizza size and toppings</li>
+<li>Maintains pricing data for sizes and toppings</li>
+<li>Calculates total price dynamically</li>
+</ul>
+<h4 id="Size-Prices"><a href="#Size-Prices" class="headerlink" title="Size Prices"></a>Size Prices</h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Base Price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Small</td>
+<td>€4.00</td>
+</tr>
+<tr>
+<td>Medium</td>
+<td>€5.50</td>
+</tr>
+<tr>
+<td>Large</td>
+<td>€7.00</td>
+</tr>
+</tbody></table>
+<h4 id="Topping-Price-based-on-selected-size"><a href="#Topping-Price-based-on-selected-size" class="headerlink" title="Topping Price (based on selected size)"></a>Topping Price (based on selected size)</h4><table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Topping Price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Small</td>
+<td>€0.75</td>
+</tr>
+<tr>
+<td>Medium</td>
+<td>€1.00</td>
+</tr>
+<tr>
+<td>Large</td>
+<td>€1.45</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="🟡-View-PizzaView-java"><a href="#🟡-View-PizzaView-java" class="headerlink" title="🟡 View (PizzaView.java)"></a>🟡 View (<code>PizzaView.java</code>)</h3><ul>
+<li>Built with Java Swing</li>
+<li>Contains:<ul>
+<li>Size selection (radio buttons)</li>
+<li>Toppings selection (radio buttons)</li>
+<li>Total price display (<code>JTextField</code>)</li>
+<li>Pizza image (<code>Pizza.jpeg</code>)</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Layout uses <code>BorderLayout</code> with components divided into size panel, topping panel, total price panel, and center image.</p>
+</blockquote>
+<hr>
+<h3 id="🔵-Controller-PizzaController-java"><a href="#🔵-Controller-PizzaController-java" class="headerlink" title="🔵 Controller (PizzaController.java)"></a>🔵 Controller (<code>PizzaController.java</code>)</h3><p>绑定View与Model</p>
+<ul>
+<li>Binds user interaction to logic</li>
+<li>Registers <code>ActionListener</code> to size and topping buttons<br>使用SizeRadioButtonListener类实现了ActionListener接口，用来监听用户点击按钮的行为。<br>然后给button通过addActionListener这个类从而实现监听功能</li>
+<li>On user interaction:<ul>
+<li>Updates model with size&#x2F;toppings</li>
+<li>Recalculates and updates price in the view</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="💡-How-It-Works"><a href="#💡-How-It-Works" class="headerlink" title="💡 How It Works"></a>💡 How It Works</h2><ol>
+<li>User selects a pizza size.</li>
+<li>Topping prices are adjusted based on size.</li>
+<li>User selects&#x2F;deselects toppings.</li>
+<li>Total price updates live on the GUI.</li>
+</ol>
+<hr>
+<h2 id="🖼️-GUI-Screenshot-Placeholder"><a href="#🖼️-GUI-Screenshot-Placeholder" class="headerlink" title="🖼️ GUI Screenshot Placeholder"></a>🖼️ GUI Screenshot Placeholder</h2><blockquote>
+<p>Make sure to include <code>Pizza.jpeg</code> in the <code>pizzacalculationtool</code> package folder.</p>
+</blockquote>
+<pre><code class="language-java">new ImageIcon(getClass().getResource(&quot;Pizza.jpeg&quot;))
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/11/MyBatis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1088,154 +1231,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/05/01/%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/05/01/%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">随机过程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-05-01 00:51:52" itemprop="dateCreated datePublished" datetime="2025-05-01T00:51:52+08:00">2025-05-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-19 14:23:59" itemprop="dateModified" datetime="2025-07-19T14:23:59+08:00">2025-07-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="Basic-concept"><a href="#Basic-concept" class="headerlink" title="Basic concept"></a>Basic concept</h2><p>随机过程是随机试验的衍生，具体来说它是Xi(t)的集合，其中Xi是n个变量，理论上n是无强大，Xi的分布函数和t有关，也就是说它的统计学特性受时间影响。</p>
-<h3 id="样本函数与概率密度函数（PDF）"><a href="#样本函数与概率密度函数（PDF）" class="headerlink" title="样本函数与概率密度函数（PDF）"></a>样本函数与概率密度函数（PDF）</h3><p>样本函数：随机过程X(t)的一次实现或某个样本路径，记为x(t)，也就是样本函数<br>概率密度函数：在某个时刻t，随机变量X(t)的概率分布密度函数，记为$f(x)$<br>可以这么理解：<br>样本函数：一个人的身高随年龄的变化曲线<br>概率密度：某个年龄段所有人身高的统计分布  </p>
-<h3 id="随机过程的均值和自相关函数计算"><a href="#随机过程的均值和自相关函数计算" class="headerlink" title="随机过程的均值和自相关函数计算"></a>随机过程的均值和自相关函数计算</h3><p>$\epsilon(t) &#x3D; Acos(w_ct + \phi)$<br>其中$\phi$在0到2pi上均匀分布<br>$E[\epsilon(t)]&#x3D;\int_{0}^{2\pi}Acos(w_ct+\phi)\frac{1}{2\pi}d_\phi$<br>然后对cos函数进行拆解，把$cos\phi$的部分拆解出来，然后求积分</p>
-<h3 id="一维分布函数"><a href="#一维分布函数" class="headerlink" title="一维分布函数"></a>一维分布函数</h3><p>也就是说只考虑某个固定的时间t，随机变量X(t)的分布函数一般与t有关：<br>Fx(x,t) &#x3D; P{X(t)&lt;&#x3D;x}<br>当t取遍T中的所有元素时，我们可以得到一系列的分布函数，将这些分布函数的全体所构成的集合称为一维分布函数族，记为<br>{Fx(x;t)}<br>这个也就是一维分布函数族,它用来刻画随机过程在各个单独时刻的统计特性。</p>
-<h3 id="一维随机过程的n维分布函数族"><a href="#一维随机过程的n维分布函数族" class="headerlink" title="一维随机过程的n维分布函数族"></a>一维随机过程的n维分布函数族</h3><p>一维分布函数族刻画了随机过程在各个时刻的统计特征，为了描述随机过程在<strong>不同时刻状态之间的统计联系</strong>，一般可对任意<br> 个不同的时刻，也就是可以用二维分布函数来表示，如下分布函数所示：   </p>
-<img src="/images/一维随机过程.png"> 
-
-<p>这个分布函数是关于t1 t2 x1 x2四个变量的函数。<br>例如当t1&#x3D;1，x1&#x3D;1；t2&#x3D;1，x2&#x3D;1的时候P( x(t&#x3D;1)&lt;1 , x(t&#x3D;2)&lt;1 ) 的取值，<br>对比前面的1维分布函数，后者例如t1&#x3D;1，x1&#x3D;1时候，P（ x（t&#x3D;1）&lt;1）的取值<br><strong>n维</strong>分布函数：为了描述随机过程在不同时刻状态之间的关系，对任意n个不同时刻t1，t2，…,tn引入n维随机变量<br>（X（t1）， X（t2）， X（t3），…, X（tn））的分布函数</p>
-<h3 id="平稳随机过程"><a href="#平稳随机过程" class="headerlink" title="平稳随机过程"></a>平稳随机过程</h3><p>平稳随机过程的统计特性不随时间的推移而变化，其一维分布与时间t无关，二维分布只与时间间隔$\tau$有关，如下</p>
-<ul>
-<li>一维分布与时间$\tau$无关<br>f(x,t) &#x3D; f(x)</li>
-<li>二维分布只与时间间隔$\tau$有关<br>f(x1,x2;t1,t2) &#x3D; f(x1,x2;τ)</li>
-</ul>
-<h4 id="平稳随机过程的数字特征"><a href="#平稳随机过程的数字特征" class="headerlink" title="平稳随机过程的数字特征"></a>平稳随机过程的数字特征</h4><ul>
-<li>自相关只与时间间隔$\tau$有关，而与时间起点无关<br>R(0) &#x3D; E[ $\epsilon^2(t)$ ] &#x3D; S （也称为均方值）<br>同时平均功率E根据定义如下式所示：<br>S &#x3D; $\int_{-\infty}^{\infty}P_n(f)d_f$  &#x3D;  $\frac{1}{2\pi}\int_{-\infty}^{\infty}P_n(w)d_w$<br>因此平均功率S有以上两种求法</li>
-</ul>
-<p>物理意义： 随机过程的平均功率    </p>
-<ul>
-<li><p>均值<br>均值与t无关，样本函数围绕一水平线起伏<br>也就是$E[\epsilon(t)] &#x3D; \mu$.<br>因此$P &#x3D; \lim_{T \to \infty} \frac{1}{2T}\int_{-T}^{T}E[\epsilon(t)^2]dt &#x3D; E[\epsilon(t)^2]$</p>
-</li>
-<li><p>方差。</p>
-</li>
-</ul>
-<p>方差与t无关，为常数</p>
-<p>R($\infty$) &#x3D; E[$\epsilon$(t)]²<br>因为时间间隔无限大时，$\epsilon(t)$ 与 $\epsilon(t+\tau)$趋于独立</p>
-<p>物理意义： 随机过程的直流功率</p>
-<h4 id="平稳随机过程的功率谱密度"><a href="#平稳随机过程的功率谱密度" class="headerlink" title="平稳随机过程的功率谱密度"></a>平稳随机过程的功率谱密度</h4><p>假定f(t)为随机过程$\epsilon(t)$的任意实现，对其进行T长度的截断，并在对其进行傅立叶变换。<br>$\lim_{T \to \infty} \frac{|F_T(w)|^2}{T}$</p>
-<p><strong>维纳-辛钦定律</strong><br>平稳随机过程$\epsilon(t)$的功率谱密度函数$P_\epsilon(w)$和自相关函数R($\tau$)为一对傅立叶变换对<br><img src="/images/功率谱密度.png"></p>
-<p><strong>平均功率计算方法</strong>:<br>S &#x3D; R(0) &#x3D; E[$\epsilon(t)^2$]<br>S &#x3D; $\frac{1}{2\pi}\int_{-\infty}^{\infty}P_\epsilon(w),dw$</p>
-<h4 id="平稳随机过程的各态历经性"><a href="#平稳随机过程的各态历经性" class="headerlink" title="平稳随机过程的各态历经性"></a>平稳随机过程的各态历经性</h4><p>时间均值公式：<br>$\overline{x} &#x3D; \lim_{T \to \infty} \frac{1}{2T} \int_{-T}^{T} x(t) , dt$<br>若平稳随机过程的时间均值$\overline{x}$ &#x3D; E(x)，那么其具有各态历经性  </p>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>在求随机过程的功率时，使用其平方的数学期望来进行计算，而非其时间均值，除非是在满足各态历经性的前提下</p>
-</blockquote>
-<hr>
-<h3 id="高斯随机过程"><a href="#高斯随机过程" class="headerlink" title="高斯随机过程"></a>高斯随机过程</h3><p>若随机过程的任意<strong>n</strong>维分布都是正态分布，则称它为高斯随机过程或正态过程。其n维概率密度函数为：<br>$f_a(x_1,x_2,…;t_1,…,t_n)$<br>一维高斯过程的概率密度函数：<br>X ~ N(a,$\sigma^2$)<br>$f_1(x)$ &#x3D; $\frac{1}{\sqrt{(2\pi)}\sigma}exp[-\frac{(x-a)^2}{2\sigma^2}]$<br>高斯过程在不同时刻取值不相关，则它们也统计独立。<br>高斯过程经过线性变化（或线性系统）后仍为高斯过程。</p>
-<h4 id="正态分布函数"><a href="#正态分布函数" class="headerlink" title="正态分布函数"></a>正态分布函数</h4><p>先来看正态概率密度函数<br>X ～ N(a,$\sigma^2$),<br>$f_1(x)$ &#x3D; $\frac{1}{\sqrt{(2\pi)}\sigma}exp[-\frac{(x-a)^2}{2\sigma^2}]$<br>那么正态分布函数就是将上述函数从负无穷到x上积分<br>标准&#x2F;归一化的正态分布是另a&#x3D;0，$\sigma$&#x3D;1<br>$f_1(x) &#x3D; \frac{1}{\sqrt{(2\pi)}}exp[-\frac{x^2}{2}]$  </p>
-<h4 id="Q函数"><a href="#Q函数" class="headerlink" title="Q函数"></a>Q函数</h4><p>和正态分布的密度分布函数是互补的关系<br>也就是从x到正无穷积分（正态分布函数是从负无穷到x积分）</p>
-<h4 id="误差函数"><a href="#误差函数" class="headerlink" title="误差函数"></a>误差函数</h4><p>$\text{erf}(x) &#x3D; \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^2} , dt$<br>互补误差函数和它互补，也就是说是从x到正无穷上积分<br>误差函数、互补误差函数与正态分布函数存在一个关系<br><img src="/images/误差函数.png"></p>
-<h3 id="随机过程通过线性系统"><a href="#随机过程通过线性系统" class="headerlink" title="随机过程通过线性系统"></a>随机过程通过线性系统</h3><img src="/images/随机过程通过线性系统.png">  
-
-<p>有以下几个特性  </p>
-<ul>
-<li><p>数学期望<br>E[$\epsilon_o(t)$] &#x3D; aH(0)</p>
-</li>
-<li><p>自相关函数<br>输入平稳随机过程，则输出过程自相关函数只与时间间隔有关</p>
-</li>
-</ul>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>平稳随机过程通过线性系统，输出也是平稳随机过程</p>
-</blockquote>
-<hr>
-<ul>
-<li>功率谱密度<br>$P_o(w)$&#x3D;$P_i(w)$|$H(w)^2$|<br>其中|$H(w)^2$|为功率增益</li>
-</ul>
-<h3 id="窄带随机过程"><a href="#窄带随机过程" class="headerlink" title="窄带随机过程"></a>窄带随机过程</h3><p>窄带系统要求通带宽度$\Delta f \ll f_c$<br>窄带过程是指随机过程通过以$f_c$为中心频率的窄带系统的输出过程<br>$$<br>\xi(t) &#x3D; A(t) \cos\big(2\pi f_c t + \phi(t)\big)<br>$$</p>
-<ul>
-<li>$\xi(t)$：窄带随机过程的样本函数</li>
-<li>A(t)：随机包络（幅度调制过程）  </li>
-<li>$f_c$：载波频率（中心频率）  </li>
-<li>$\phi(t)$：随机相位</li>
-</ul>
-<p>可以将其写成同相分量加上正交分量的形式<br>$\xi(t) &#x3D; \xi_c(t)cosw_ct - \xi_s(t)sinw_ct$<br>其中同相分量$\xi_c(t)$和正交分量$\xi_s(t)$以及$\xi(t)$的统计特性都一样，也就是数学期望和方差都一样，因此其均方值也一样，也就是平均功率都一样</p>
-<img src="/images/窄带过程.png">  
-通常分析平稳高斯窄带过程$\xi(t)$  
-所以均值为0，方差为$\sigma^2$,由于可以写成同向分量$\sigma_c(t)$与正交分量$\sigma_s(t)$线性组合的关系，因此这两个分量的数学期望也均为0，并且二者都平稳（相关函数均只与时间间隔有关），并且二者的自相关函数相同，方差相同，同时也互不相关、统计独立的高斯变量。
-简单来讲， 这两个分量为零均值、等方差、不相关、独立的平稳高斯过程。 
-
-<h3 id="正弦波加窄带高斯过程"><a href="#正弦波加窄带高斯过程" class="headerlink" title="正弦波加窄带高斯过程"></a>正弦波加窄带高斯过程</h3><p>$r(t) &#x3D; Acos(\omega_c t + \phi) + n(t)$<br>其中n(t)是均值为0，方差为$\sigma^2$的窄带高斯噪声<br>然后通过三角函数转换可得r(t)最终也可以分解为同相分量和正交向量，也就是$z_c(t) &#x3D; Acos{\phi} + n_c(t)$和$z_s(t) &#x3D; Acos{\phi} + n_s(t)$<br><img src="随机包络随机相位.png"><br>随机包络遵循广义瑞利分布，随机相位的概率密度与信噪比环境有关。<br>对于小信噪比环境，它们分布退化为瑞利分布和均匀分布。<br>同时它们的整体，也就是正弦波+窄带高斯过程会退化为窄带高斯过程。</p>
-<h3 id="白噪声"><a href="#白噪声" class="headerlink" title="白噪声"></a>白噪声</h3><p>功率谱密度均匀分布在整个频率范围内的随机过程称为白噪声<br>由自相关和功率谱密度的傅立叶变换关系可知，白噪声的自相关函数是在$\tau$&#x3D;0上面有个冲激信号的函数</p>
-<h3 id="高斯白噪声"><a href="#高斯白噪声" class="headerlink" title="高斯白噪声"></a>高斯白噪声</h3><p>服从高斯分布的白噪声，在任意两个不同时刻上随机变量互不相关，且统计独立。</p>
-<h3 id="低通白噪声"><a href="#低通白噪声" class="headerlink" title="低通白噪声"></a>低通白噪声</h3><p>功率谱是门函数，对应的自相关函数是sinc函数</p>
-<h3 id="带通白噪声"><a href="#带通白噪声" class="headerlink" title="带通白噪声"></a>带通白噪声</h3><p>功率是门函数与两个冲激函数的卷积，对应的傅立叶变换是sinc函数与cos函数的乘积</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1305,12 +1300,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">categories</span>
       </div>
   </nav>
