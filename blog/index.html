@@ -1390,7 +1390,7 @@ print(w.grad)
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-03 22:05:17" itemprop="dateModified" datetime="2025-08-03T22:05:17+08:00">2025-08-03</time>
+                <time title="Modified: 2025-08-03 22:17:30" itemprop="dateModified" datetime="2025-08-03T22:17:30+08:00">2025-08-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1424,7 +1424,7 @@ print(w.grad)
 <h4 id="Define-Loss-from-Training-Data"><a href="#Define-Loss-from-Training-Data" class="headerlink" title="Define Loss from Training Data"></a>Define Loss from Training Data</h4><p>Loss is a function of the unknown parameters: L(b,w)<br>e.g., L(0.5k, 1) corresponding to $\hat{y} &#x3D; 0.5k + 1x_1$.<br>$\hat{y}$ is predicted value, y is ground truth (target)<br>我们定义一个loss function为:<br>$e_n &#x3D; |y_n - \hat{y_n}|$  </p>
 <p>Loss: $L(b, w) &#x3D; \frac{1}{N} \sum_{n&#x3D;1}^{N} \left| y_n - \hat{y}_n \right|$</p>
 <h2 id="其中y为真实值，-hat-y-为预测值-这里我们定义的Loss是mean-absolute-error-（MAE），如果是mean-square-error（MSE），则是差值的的平方。"><a href="#其中y为真实值，-hat-y-为预测值-这里我们定义的Loss是mean-absolute-error-（MAE），如果是mean-square-error（MSE），则是差值的的平方。" class="headerlink" title="其中y为真实值，$\hat{y}$为预测值,这里我们定义的Loss是mean absolute error （MAE），如果是mean square error（MSE），则是差值的的平方。"></a>其中y为真实值，$\hat{y}$为预测值,这里我们定义的Loss是mean absolute error （MAE），如果是mean square error（MSE），则是差值的的平方。</h2><blockquote>
-<p><strong>Notice</strong><br><br>f<br></p>
+<p><strong>Notice</strong><br><br>除了常见的 MAE（平均绝对误差）和 MSE（均方误差）之外，NMSE（归一化均方误差）也是一种常用的评价指标。NMSE<br><br>是将均方误差归一化到真实信号的能量上，计算公式为：<br><br>$\text{NMSE} &#x3D; \frac{\sum ( \hat{y}_i - y_i )^2}{\sum y_i^2}$<br><br>它衡量的是预测误差相对于真实信号强度的比例，适合用于信号处理、通信等领域，可以更公平地反映预测性能，特别是在信号幅度变化较大时。<br></p>
 </blockquote>
 <hr>
 <h4 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h4><p>我们通过最小化损失函数 <em>L(b, w)</em> 来学习未知参数 b 和 w。优化目标为：</p>
