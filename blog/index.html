@@ -2497,7 +2497,7 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-02 22:08:54" itemprop="dateModified" datetime="2025-08-02T22:08:54+08:00">2025-08-02</time>
+                <time title="Modified: 2025-08-03 10:28:53" itemprop="dateModified" datetime="2025-08-03T10:28:53+08:00">2025-08-03</time>
               </span>
 
           
@@ -2624,6 +2624,8 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
 <h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><h3 id="string-substr"><a href="#string-substr" class="headerlink" title="string.substr"></a>string.substr</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string x=<span class="string">&quot;abc&quot;</span>;</span><br><span class="line">string y = x.substr(0,1);</span><br></pre></td></tr></table></figure>
 <h2 id="拷贝"><a href="#拷贝" class="headerlink" title="拷贝"></a>拷贝</h2><h3 id="值拷贝"><a href="#值拷贝" class="headerlink" title="值拷贝"></a>值拷贝</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">void rotate(vector&lt;vector&lt;int&gt;&gt;&amp; matrix)&#123;</span><br><span class="line">    auto matrix_new = matrix;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>C++ 这里的 &#x3D; 拷贝是值拷贝，会得到一个新的数组</p>
+<h3 id="指针赋值"><a href="#指针赋值" class="headerlink" title="指针赋值"></a>指针赋值</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ListNode* smallHead = small;</span><br></pre></td></tr></table></figure>
+<p><strong>smallHead</strong>是另一个指针，它指向与small相同的节点（即两者指向的是同一个内存地址）<br>类似浅拷贝操作，都只是简单的指针赋值</p>
 
       
     </div>
