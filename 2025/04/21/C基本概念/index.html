@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="指针指针变量本身的值是地址，X64有2的64次方个内存地址，因此指针占8个字节。指针变量通常是栈上的变量。指针指向的内存可以是栈上变量的地址，也可以是堆上分配的内存地址。 malloc&amp;new malloc malloc不会调用构造析构函数 malloc返回无类型的指针（因此需要转换一下，char* p &#x3D; (char*) malloc(100)）   new&#x2F;dele">
+  <meta name="description" content="指针指针变量本身的值是地址，X64有2的64次方个内存地址，因此指针占8个字节。指针变量通常是栈上的变量。指针指向的内存可以是栈上变量的地址，也可以是堆上分配的内存地址。 malloc&amp;new malloc （C） malloc不会调用构造析构函数 malloc返回无类型的指针（因此需要转换一下，char* p &#x3D; (char*) malloc(100)）   new&#x2F;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C基本概念">
 <meta property="og:url" content="https://hechenyi.github.io/2025/04/21/C%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="指针指针变量本身的值是地址，X64有2的64次方个内存地址，因此指针占8个字节。指针变量通常是栈上的变量。指针指向的内存可以是栈上变量的地址，也可以是堆上分配的内存地址。 malloc&amp;new malloc malloc不会调用构造析构函数 malloc返回无类型的指针（因此需要转换一下，char* p &#x3D; (char*) malloc(100)）   new&#x2F;dele">
+<meta property="og:description" content="指针指针变量本身的值是地址，X64有2的64次方个内存地址，因此指针占8个字节。指针变量通常是栈上的变量。指针指向的内存可以是栈上变量的地址，也可以是堆上分配的内存地址。 malloc&amp;new malloc （C） malloc不会调用构造析构函数 malloc返回无类型的指针（因此需要转换一下，char* p &#x3D; (char*) malloc(100)）   new&#x2F;">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-04-21T07:19:37.000Z">
-<meta property="article:modified_time" content="2025-07-19T13:07:27.866Z">
+<meta property="article:modified_time" content="2025-08-04T04:55:41.931Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -185,7 +185,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-19 21:07:27" itemprop="dateModified" datetime="2025-07-19T21:07:27+08:00">2025-07-19</time>
+                <time title="Modified: 2025-08-04 12:55:41" itemprop="dateModified" datetime="2025-08-04T12:55:41+08:00">2025-08-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -210,17 +210,20 @@
       
         <h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><p>指针变量本身的值是地址，X64有2的64次方个内存地址，因此指针占8个字节。<br>指针变量通常是栈上的变量。<br>指针指向的内存可以是栈上变量的地址，也可以是堆上分配的内存地址。</p>
 <h2 id="malloc-new"><a href="#malloc-new" class="headerlink" title="malloc&amp;new"></a>malloc&amp;new</h2><ul>
-<li>malloc<ul>
+<li>malloc （C）<ul>
 <li>malloc不会调用构造析构函数</li>
 <li>malloc返回无类型的指针（因此需要转换一下，char* p &#x3D; (char*) malloc(100)）</li>
 </ul>
 </li>
-<li>new&#x2F;delete<ul>
+<li>new&#x2F;delete （C++）<ul>
 <li>new 返回有类型的指针</li>
 <li>new调用构造析构函数</li>
 </ul>
 </li>
 </ul>
+<p>二者都是在堆上动态性地存储变量。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;stdlib.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;string.h&gt;</span></span><br><span class="line"></span><br><span class="line">struct Person &#123;</span><br><span class="line">    char name[50];</span><br><span class="line">    int age;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    struct Person* p = (struct Person*)malloc(sizeof(struct Person));</span><br><span class="line">    <span class="keyword">if</span> (!p) &#123;</span><br><span class="line">        perror(<span class="string">&quot;malloc failed&quot;</span>);</span><br><span class="line">        <span class="built_in">return</span> 1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    strcpy(p-&gt;name, <span class="string">&quot;Bob&quot;</span>);</span><br><span class="line">    p-&gt;age = 30;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Name: %s, Age: %d\n&quot;</span>, p-&gt;name, p-&gt;age);</span><br><span class="line"></span><br><span class="line">    free(p);  // ❗必须释放</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <h2 id="STL六大组件"><a href="#STL六大组件" class="headerlink" title="STL六大组件"></a>STL六大组件</h2><ul>
 <li>仿函数</li>
 <li>算法</li>
@@ -321,6 +324,59 @@
 <h3 id="✨-完整示例：可复制运行"><a href="#✨-完整示例：可复制运行" class="headerlink" title="✨ 完整示例：可复制运行"></a>✨ 完整示例：可复制运行</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 指针操作</span></span><br><span class="line">    <span class="type">int</span> x = <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span> *p = &amp;x;</span><br><span class="line">    *p = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;x = %d\n&quot;</span>, x);  <span class="comment">// 输出：20</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 字符串字面量（只读）</span></span><br><span class="line">    <span class="type">char</span> *s1 = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, s1);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 可修改字符串（数组）</span></span><br><span class="line">    <span class="type">char</span> s2[] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    s2[<span class="number">0</span>] = <span class="string">&#x27;H&#x27;</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, s2);  <span class="comment">// 输出：Hello</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
+<h2 id="define和const的区别"><a href="#define和const的区别" class="headerlink" title="define和const的区别"></a>define和const的区别</h2><p><strong>编译阶段</strong>： define是编译预处理阶段进行简单的文本替换，const是在编译阶段确定其值<br><strong>安全性</strong>： define定义的宏常量没有数据类型，只是进行简单的替换，不会进行类型安全检查；const定义的常量是有类型的，是要进行类型判断的<br><strong>内存占用</strong>： define定义的宏常量，在程序中使用多少次就会进行多少次替换，内存中有多个备份，占用的是代码段的内存；const定义常量占用静态存储区域的空间，程序运行过程中只有一份<br><strong>调试</strong>： define定义的宏常量不能调试，因为在预编译阶段就已经进行替换了；const定义的常量是可以进行调试的。</p>
+<h2 id="程序运动的步骤是什么"><a href="#程序运动的步骤是什么" class="headerlink" title="程序运动的步骤是什么"></a>程序运动的步骤是什么</h2><ul>
+<li>预编译。<br>将头文件编译，进行宏替换，输出.i文件</li>
+<li>编译。<br>将其转换为汇编语言文件，主要做语法分析，语义分析以及检查错误，检查无误后将代码替换成汇编语言，生成.s文件</li>
+<li>汇编。<br>汇编器将汇编语言文件翻译成机器语言，生成.o文件</li>
+<li>链接。<br>将目标文件和库链接到一起，生成可执行文件.exe</li>
+</ul>
+<h2 id="进程之间的通信方式"><a href="#进程之间的通信方式" class="headerlink" title="进程之间的通信方式"></a>进程之间的通信方式</h2><ul>
+<li>管道</li>
+<li>消息队列</li>
+<li>共享内存</li>
+<li>信号量</li>
+<li>信号</li>
+<li>套接字</li>
+</ul>
+<h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><h3 id="建立连接"><a href="#建立连接" class="headerlink" title="建立连接"></a>建立连接</h3><ul>
+<li>第一次握手</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">客户端 --&gt; 服务端 ： SYN = 1， seq = x</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第二次握手</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">服务端 --&gt; 客户端 ： SYN=1, ACK=1, seq=y, ack=x+1</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第三次握手</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">客户端 --&gt; 服务端 ： ACK=1, seq=x+1, ack=y+1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="断开连接"><a href="#断开连接" class="headerlink" title="断开连接"></a>断开连接</h3><ul>
+<li>第一次握手<br>客户端发送<strong>FIN</strong>包,表示自己没有数据要发了，但还能接受数据</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">客户端 --&gt; 服务端 ： FIN=1, seq=u</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第二握手<br>服务端收到 FIN 后，发送 ACK 确认包，表示“我知道你要断了”。</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">服务端 --&gt; 客户端 ： ACK=1, ack=u+1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第三次握手<br>服务端发完剩余数据后，发送自己的 FIN 包，表示也没数据了。</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">服务端 --&gt; 客户端 ： FIN=1, seq=v</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第四次握手（客户端确认）<br>客户端收到服务端的 FIN 后，发送 ACK 确认，表示“好，我知道你也断了”。</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">客户端 --&gt; 服务端 ： ACK=1, ack=v+1</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="动态连接和静态连接"><a href="#动态连接和静态连接" class="headerlink" title="动态连接和静态连接"></a>动态连接和静态连接</h2><p>区别：他们的最大区别就是在于链接的时机不同，静态链接是在形成可执行程序前，而动态链接的进行则是程序执行时。</p>
+<p>静态库：就是将库中的代码包含到自己的程序之中，每个程序链接静态库后，都会包含一份独立的代码，当程序运行起来时，所有这些重复的代码都需要占用独立的存储空间，显然很浪费计算机资源。</p>
+<p>动态库：不会将代码直接复制到自己程序中，只会留下调用接口，程序运行时再去将动态库加载到内存中，所有程序只会共享这一份动态库，因此动态库也被称为共享库。</p>
+<p>动态链接原理：是把程序按照模块拆分成各个相对独立部分，在程序运行时才将它们链接在一起形成一个完整的程序，而不是像静</p>
 
     </div>
 
@@ -398,7 +454,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E9%92%88"><span class="nav-number">1.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#malloc-new"><span class="nav-number">2.</span> <span class="nav-text">malloc&amp;new</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STL%E5%85%AD%E5%A4%A7%E7%BB%84%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">STL六大组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8std-unordered-map%E6%9E%84%E5%BB%BAhash-map"><span class="nav-number">3.1.</span> <span class="nav-text">使用std::unordered_map构建hash map</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81"><span class="nav-number">4.</span> <span class="nav-text">线程状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E8%BF%9E%E6%8E%A5"><span class="nav-number">5.</span> <span class="nav-text">静态连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-number">6.</span> <span class="nav-text">构建结构体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E8%A1%8C%E8%BD%AC%E6%8D%A2%E5%B9%B6%E4%BD%BF%E7%94%A8msgData%E6%8C%87%E9%92%88"><span class="nav-number">6.1.</span> <span class="nav-text">强行转换并使用msgData指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%98-C-%E6%8C%87%E9%92%88%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%97%E9%9D%A2%E9%87%8F%E7%A4%BA%E4%BE%8B"><span class="nav-number">7.</span> <span class="nav-text">📘 C 指针和字符串字面量示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%8C-1-%E5%9F%BA%E7%A1%80%E7%A4%BA%E4%BE%8B%EF%BC%9A%E6%8C%87%E9%92%88%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">7.1.</span> <span class="nav-text">📌 1. 基础示例：指针初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%8C-2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%97%E9%9D%A2%E9%87%8F%E6%98%AF%E5%8F%AA%E8%AF%BB%E7%9A%84"><span class="nav-number">7.2.</span> <span class="nav-text">📌 2. 字符串字面量是只读的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%8C-3-%E5%8F%AF%E4%BF%AE%E6%94%B9%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%9A%E4%BD%BF%E7%94%A8%E6%95%B0%E7%BB%84"><span class="nav-number">7.3.</span> <span class="nav-text">📌 3. 可修改字符串：使用数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%8C-4-%E5%86%85%E5%AD%98%E7%A4%BA%E6%84%8F"><span class="nav-number">7.4.</span> <span class="nav-text">📌 4. 内存示意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%8C-5-char-a-vs-char-a"><span class="nav-number">7.5.</span> <span class="nav-text">📌 5. char *a vs char a[]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%85-%E6%80%BB%E7%BB%93"><span class="nav-number">7.6.</span> <span class="nav-text">✅ 总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%A8-%E5%AE%8C%E6%95%B4%E7%A4%BA%E4%BE%8B%EF%BC%9A%E5%8F%AF%E5%A4%8D%E5%88%B6%E8%BF%90%E8%A1%8C"><span class="nav-number">7.7.</span> <span class="nav-text">✨ 完整示例：可复制运行</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E9%92%88"><span class="nav-number">1.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#malloc-new"><span class="nav-number">2.</span> <span class="nav-text">malloc&amp;new</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STL%E5%85%AD%E5%A4%A7%E7%BB%84%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">STL六大组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8std-unordered-map%E6%9E%84%E5%BB%BAhash-map"><span class="nav-number">3.1.</span> <span class="nav-text">使用std::unordered_map构建hash map</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81"><span class="nav-number">4.</span> <span class="nav-text">线程状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E8%BF%9E%E6%8E%A5"><span class="nav-number">5.</span> <span class="nav-text">静态连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-number">6.</span> <span class="nav-text">构建结构体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E8%A1%8C%E8%BD%AC%E6%8D%A2%E5%B9%B6%E4%BD%BF%E7%94%A8msgData%E6%8C%87%E9%92%88"><span class="nav-number">6.1.</span> <span class="nav-text">强行转换并使用msgData指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%98-C-%E6%8C%87%E9%92%88%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%97%E9%9D%A2%E9%87%8F%E7%A4%BA%E4%BE%8B"><span class="nav-number">7.</span> <span class="nav-text">📘 C 指针和字符串字面量示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%8C-1-%E5%9F%BA%E7%A1%80%E7%A4%BA%E4%BE%8B%EF%BC%9A%E6%8C%87%E9%92%88%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">7.1.</span> <span class="nav-text">📌 1. 基础示例：指针初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%8C-2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%97%E9%9D%A2%E9%87%8F%E6%98%AF%E5%8F%AA%E8%AF%BB%E7%9A%84"><span class="nav-number">7.2.</span> <span class="nav-text">📌 2. 字符串字面量是只读的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%8C-3-%E5%8F%AF%E4%BF%AE%E6%94%B9%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%9A%E4%BD%BF%E7%94%A8%E6%95%B0%E7%BB%84"><span class="nav-number">7.3.</span> <span class="nav-text">📌 3. 可修改字符串：使用数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%8C-4-%E5%86%85%E5%AD%98%E7%A4%BA%E6%84%8F"><span class="nav-number">7.4.</span> <span class="nav-text">📌 4. 内存示意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%8C-5-char-a-vs-char-a"><span class="nav-number">7.5.</span> <span class="nav-text">📌 5. char *a vs char a[]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%85-%E6%80%BB%E7%BB%93"><span class="nav-number">7.6.</span> <span class="nav-text">✅ 总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%A8-%E5%AE%8C%E6%95%B4%E7%A4%BA%E4%BE%8B%EF%BC%9A%E5%8F%AF%E5%A4%8D%E5%88%B6%E8%BF%90%E8%A1%8C"><span class="nav-number">7.7.</span> <span class="nav-text">✨ 完整示例：可复制运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#define%E5%92%8Cconst%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">8.</span> <span class="nav-text">define和const的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E8%BF%90%E5%8A%A8%E7%9A%84%E6%AD%A5%E9%AA%A4%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">9.</span> <span class="nav-text">程序运动的步骤是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F"><span class="nav-number">10.</span> <span class="nav-text">进程之间的通信方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP"><span class="nav-number">11.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5"><span class="nav-number">11.1.</span> <span class="nav-text">建立连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5"><span class="nav-number">11.2.</span> <span class="nav-text">断开连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%BF%9E%E6%8E%A5%E5%92%8C%E9%9D%99%E6%80%81%E8%BF%9E%E6%8E%A5"><span class="nav-number">12.</span> <span class="nav-text">动态连接和静态连接</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -412,7 +468,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
