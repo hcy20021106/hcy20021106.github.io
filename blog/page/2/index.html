@@ -721,69 +721,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/08/numpy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/08/numpy/" class="post-title-link" itemprop="url">numpy</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-06-08 03:53:37 / Modified: 04:04:55" itemprop="dateCreated datePublished" datetime="2025-06-08T03:53:37+08:00">2025-06-08</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <p>将某一数据类型(bytes, array)直接转换成NumPy数组</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.frombuffer()</span><br></pre></td></tr></table></figure>
-<p>将输入的arr数组转为指定形状的arr，可以指定长宽，若某个为-1，则会自动计算其长或宽的大小</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.reshape(arr,(height,depth))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/08/%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -857,6 +794,81 @@
 </ul>
 <h3 id="使用python实现"><a href="#使用python实现" class="headerlink" title="使用python实现"></a>使用python实现</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def convolutional_interleave(data, depth=4):</span><br><span class="line">    length = len(data)</span><br><span class="line">    pad_len = (depth - (length % depth)) % depth</span><br><span class="line">    data_padded = data + bytes([0]*pad_len)</span><br><span class="line">    matrix = np.reshape(np.frombuffer(data_padded, dtype=np.uint8), (-1, depth))</span><br><span class="line">    interleaved = matrix.T.flatten()</span><br><span class="line">    <span class="built_in">return</span> bytes(interleaved)</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
 <h3 id="使用python实现反交织（交织恢复）"><a href="#使用python实现反交织（交织恢复）" class="headerlink" title="使用python实现反交织（交织恢复）"></a>使用python实现反交织（交织恢复）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def convolutional_deinterleave(data, depth=4):</span><br><span class="line">    length = len(data)</span><br><span class="line">    matrix = np.reshape(np.frombuffer(data, dtype=np.uint8), (depth, -1))</span><br><span class="line">    deinterleaved = matrix.T.flatten()</span><br><span class="line">    <span class="built_in">return</span> bytes(deinterleaved)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/07/numpy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/07/numpy/" class="post-title-link" itemprop="url">numpy</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-06-07 21:53:37" itemprop="dateCreated datePublished" datetime="2025-06-07T21:53:37+08:00">2025-06-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-08-05 20:23:30" itemprop="dateModified" datetime="2025-08-05T20:23:30+08:00">2025-08-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="基本转换"><a href="#基本转换" class="headerlink" title="基本转换"></a>基本转换</h2><p>将某一数据类型(bytes, array)直接转换成NumPy数组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.frombuffer()</span><br></pre></td></tr></table></figure>
+<p>将输入的arr数组转为指定形状的arr，可以指定长宽，若某个为-1，则会自动计算其长或宽的大小</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.reshape(arr,(height,depth))</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="np-linalg-norm"><a href="#np-linalg-norm" class="headerlink" title="np.linalg.norm()"></a>np.linalg.norm()</h2><p>默认情况下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.linalg.norm(x)</span><br></pre></td></tr></table></figure>
+<p>计算的是 x 的L2范数，数学表达式是：<br>‖x‖₂ &#x3D; sqrt(∑ |xᵢ|²)<br>如果 x 是 矩阵（2D 数组），默认会把它拉平成一个长向量再计算.<br>如果你写成 np.linalg.norm(x)**2，就相当于只做平方求和，不再开方 —— 等价于：<br>np.sum(np.abs(x)**2)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">x = np.array([[3, 4],</span><br><span class="line">              [1, 2]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认 L2 范数（拉平成向量后）</span></span><br><span class="line">norm_x = np.linalg.norm(x)          <span class="comment"># sqrt(3² + 4² + 1² + 2²) = sqrt(30)</span></span><br><span class="line">norm_x_squared = norm_x ** 2        <span class="comment"># = 30</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 等价写法</span></span><br><span class="line">same_result = np.sum(np.abs(x)**2)  <span class="comment"># 30</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
       
     </div>
 

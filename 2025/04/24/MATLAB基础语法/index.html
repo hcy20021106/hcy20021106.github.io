@@ -28,7 +28,7 @@
 <meta property="og:description" content="向量处理a &#x3D; [1:3:100]其中a是初始值，b是步长，c是终点值返回结果是[1,4,7,…,100]b(a) &#x3D; []把向量b中的a对应索引给删掉 列向量和横向量列向量使用;a &#x3D; [1;2;3]b &#x3D; [4;5;6]c &#x3D; [a;b]其中c将两个列向量进行拼接横向量使用逗号，其他同理如果想使用a&#x3D;(1:100)类似语法构建列向量，">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-04-24T06:50:46.000Z">
-<meta property="article:modified_time" content="2025-08-04T13:05:56.286Z">
+<meta property="article:modified_time" content="2025-08-05T12:15:57.834Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -185,7 +185,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-04 21:05:56" itemprop="dateModified" datetime="2025-08-04T21:05:56+08:00">2025-08-04</time>
+                <time title="Modified: 2025-08-05 20:15:57" itemprop="dateModified" datetime="2025-08-05T20:15:57+08:00">2025-08-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,6 +238,8 @@
 <h3 id="📗-查看某一维的大小"><a href="#📗-查看某一维的大小" class="headerlink" title="📗 查看某一维的大小"></a>📗 查看某一维的大小</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rows = <span class="built_in">size</span>(A, <span class="number">1</span>);     <span class="comment">% 第 1 维度大小（行数） =&gt; 4</span></span><br><span class="line">cols = <span class="built_in">size</span>(A, <span class="number">2</span>);     <span class="comment">% 第 2 维度大小（列数） =&gt; 3</span></span><br><span class="line">depth = <span class="built_in">size</span>(A, <span class="number">3</span>);    <span class="comment">% 第 3 维度大小 =&gt; 2</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="📙-示例：分析-MIMO-信号数组"><a href="#📙-示例：分析-MIMO-信号数组" class="headerlink" title="📙 示例：分析 MIMO 信号数组"></a>📙 示例：分析 MIMO 信号数组</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">inputRXSig = <span class="built_in">rand</span>(<span class="number">234</span>, <span class="number">32</span>, <span class="number">4</span>);   <span class="comment">% 子载波 × 发射天线 × 接收天线</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">size</span>(inputRXSig)</span><br><span class="line"><span class="comment">% 输出：[234  32  4]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">size</span>(inputRXSig, <span class="number">3</span>)</span><br><span class="line"><span class="comment">% 输出：4（即接收天线数）</span></span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
