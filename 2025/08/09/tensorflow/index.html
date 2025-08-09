@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Keras &#x2F; TensorFlow Quick Start Guide 🚀本文记录了 Keras (TensorFlow) 的常用基本概念与操作，方便快速查阅。  📐 常见数据的 Tensor 维度   数据类型 维度说明 Shape 示例    Scalar（标量） 0-D Tensor ( )   Vector（向量） 1-D Tensor (N,)   Audio（音频） 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tensorflow">
+<meta property="og:url" content="https://hechenyi.github.io/2025/08/09/tensorflow/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Keras &#x2F; TensorFlow Quick Start Guide 🚀本文记录了 Keras (TensorFlow) 的常用基本概念与操作，方便快速查阅。  📐 常见数据的 Tensor 维度   数据类型 维度说明 Shape 示例    Scalar（标量） 0-D Tensor ( )   Vector（向量） 1-D Tensor (N,)   Audio（音频） 1">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-08-09T08:16:56.000Z">
+<meta property="article:modified_time" content="2025-08-09T08:18:00.724Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hechenyi.github.io/2025/08/09/tensorflow/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>tensorflow | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/09/tensorflow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          tensorflow
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-09 16:16:56 / Modified: 16:18:00" itemprop="dateCreated datePublished" datetime="2025-08-09T16:16:56+08:00">2025-08-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Keras-TensorFlow-Quick-Start-Guide-🚀"><a href="#Keras-TensorFlow-Quick-Start-Guide-🚀" class="headerlink" title="Keras &#x2F; TensorFlow Quick Start Guide 🚀"></a>Keras &#x2F; TensorFlow Quick Start Guide 🚀</h1><p>本文记录了 <strong>Keras (TensorFlow)</strong> 的常用基本概念与操作，方便快速查阅。</p>
+<hr>
+<h2 id="📐-常见数据的-Tensor-维度"><a href="#📐-常见数据的-Tensor-维度" class="headerlink" title="📐 常见数据的 Tensor 维度"></a>📐 常见数据的 Tensor 维度</h2><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>维度说明</th>
+<th>Shape 示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Scalar（标量）</td>
+<td>0-D Tensor</td>
+<td><code>( )</code></td>
+</tr>
+<tr>
+<td>Vector（向量）</td>
+<td>1-D Tensor</td>
+<td><code>(N,)</code></td>
+</tr>
+<tr>
+<td>Audio（音频）</td>
+<td>1-D 或 2-D（多通道）</td>
+<td><code>(samples,)</code> or <code>(samples, channels)</code></td>
+</tr>
+<tr>
+<td>Grayscale Image</td>
+<td>2-D 或 3-D（加 batch）</td>
+<td><code>(H, W, 1)</code> or <code>(N, H, W, 1)</code></td>
+</tr>
+<tr>
+<td>RGB Image</td>
+<td>3-D（H,W,C）或 4-D（N,H,W,C）</td>
+<td><code>(H, W, 3)</code> or <code>(N, H, W, 3)</code></td>
+</tr>
+<tr>
+<td>Video</td>
+<td>4-D（T,H,W,C）或 5-D（N,T,H,W,C）</td>
+<td><code>(T, H, W, C)</code> or <code>(N, T, H, W, C)</code></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>✅ <strong>常用格式缩写</strong>  </p>
+<ul>
+<li><code>N</code>: Batch size  </li>
+<li><code>C</code>: Channels  </li>
+<li><code>H</code>: Height  </li>
+<li><code>W</code>: Width  </li>
+<li><code>T</code>: Time steps &#x2F; frames<br>⚠️ <strong>注意</strong>：Keras 默认通道在最后 <code>(N, H, W, C)</code>。</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="🔄-常用张量操作"><a href="#🔄-常用张量操作" class="headerlink" title="🔄 常用张量操作"></a>🔄 常用张量操作</h2><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>Keras &#x2F; TF 示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>添加维度</td>
+<td><code>tf.expand_dims(x, axis)</code></td>
+</tr>
+<tr>
+<td>去除维度</td>
+<td><code>tf.squeeze(x, axis)</code></td>
+</tr>
+<tr>
+<td>交换维度</td>
+<td><code>tf.transpose(x, perm)</code></td>
+</tr>
+<tr>
+<td>改变形状</td>
+<td><code>tf.reshape(x, new_shape)</code></td>
+</tr>
+<tr>
+<td>拼接张量</td>
+<td><code>tf.concat([t1, t2], axis)</code></td>
+</tr>
+<tr>
+<td>转换数据类型</td>
+<td><code>tf.cast(x, tf.float32)</code></td>
+</tr>
+<tr>
+<td>自动求导</td>
+<td><code>tf.GradientTape()</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="⚙️-Keras-TensorFlow-操作示例"><a href="#⚙️-Keras-TensorFlow-操作示例" class="headerlink" title="⚙️ Keras &#x2F; TensorFlow 操作示例"></a>⚙️ Keras &#x2F; TensorFlow 操作示例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建随机 RGB 图片 Tensor: (H,W,C)</span></span><br><span class="line">x = tf.random.normal((<span class="number">224</span>, <span class="number">224</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看形状</span></span><br><span class="line"><span class="built_in">print</span>(x.shape)  <span class="comment"># (224, 224, 3)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 拼接</span></span><br><span class="line">x1 = tf.zeros([2, 1, 3])</span><br><span class="line">x2 = tf.zeros([2, 3, 3])</span><br><span class="line">x3 = tf.zeros([2, 2, 3])</span><br><span class="line">x_cat = tf.concat([x1, x2, x3], axis=1)  <span class="comment"># (2, 6, 3)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 转换维度</span></span><br><span class="line">x_transposed = tf.transpose(x, perm=[1, 0, 2])  <span class="comment"># (W, H, C)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 展平</span></span><br><span class="line">x_flatten = tf.reshape(x, [-1])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加 / 去除维度</span></span><br><span class="line">x_batched = tf.expand_dims(x, axis=0)   <span class="comment"># (1, H, W, C)</span></span><br><span class="line">x_squeezed = tf.squeeze(x_batched, axis=0)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据类型转换</span></span><br><span class="line">x_double = tf.cast(x, tf.float64)</span><br><span class="line">x_int = tf.cast(x, tf.int32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动求导</span></span><br><span class="line">w = tf.Variable(tf.random.normal([5]))</span><br><span class="line">with tf.GradientTape() as tape:</span><br><span class="line">    loss = tf.reduce_sum(w ** 2)</span><br><span class="line">grads = tape.gradient(loss, w)</span><br><span class="line"><span class="built_in">print</span>(grads)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Keras-模型训练核心流程"><a href="#Keras-模型训练核心流程" class="headerlink" title="Keras 模型训练核心流程"></a>Keras 模型训练核心流程</h2><p>import tensorflow as tf<br>from tensorflow import keras<br>from tensorflow.keras import layers</p>
+<h1 id="1-定义模型"><a href="#1-定义模型" class="headerlink" title="1. 定义模型"></a>1. 定义模型</h1><p>model &#x3D; keras.Sequential([<br>    layers.Dense(64, activation&#x3D;’relu’, input_shape&#x3D;(100,)),<br>    layers.Dense(10, activation&#x3D;’softmax’)<br>])</p>
+<h1 id="2-编译模型"><a href="#2-编译模型" class="headerlink" title="2. 编译模型"></a>2. 编译模型</h1><p>model.compile(<br>    optimizer&#x3D;’adam’,<br>    loss&#x3D;’sparse_categorical_crossentropy’,<br>    metrics&#x3D;[‘accuracy’]<br>)</p>
+<h1 id="3-训练模型"><a href="#3-训练模型" class="headerlink" title="3. 训练模型"></a>3. 训练模型</h1><p>history &#x3D; model.fit(<br>    train_dataset,                    # 训练数据 (X_train, y_train) 或 tf.data.Dataset<br>    validation_data&#x3D;val_dataset,      # 验证集 (X_val, y_val) 或 tf.data.Dataset<br>    epochs&#x3D;20,<br>    callbacks&#x3D;[<br>        keras.callbacks.EarlyStopping(monitor&#x3D;’val_loss’, patience&#x3D;5),<br>        keras.callbacks.ReduceLROnPlateau(monitor&#x3D;’val_loss’, factor&#x3D;0.5, patience&#x3D;3)<br>    ]<br>)</p>
+<h1 id="4-评估与预测"><a href="#4-评估与预测" class="headerlink" title="4. 评估与预测"></a>4. 评估与预测</h1><p>model.evaluate(test_dataset)<br>preds &#x3D; model.predict(new_data)</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/08/05/Python%E8%AF%BB%E5%8F%96mat%E6%96%87%E4%BB%B6/" rel="prev" title="Python读取mat文件">
+      <i class="fa fa-chevron-left"></i> Python读取mat文件
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras-TensorFlow-Quick-Start-Guide-%F0%9F%9A%80"><span class="nav-number">1.</span> <span class="nav-text">Keras &#x2F; TensorFlow Quick Start Guide 🚀</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%90-%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E7%9A%84-Tensor-%E7%BB%B4%E5%BA%A6"><span class="nav-number">1.1.</span> <span class="nav-text">📐 常见数据的 Tensor 维度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%84-%E5%B8%B8%E7%94%A8%E5%BC%A0%E9%87%8F%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">🔄 常用张量操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%99%EF%B8%8F-Keras-TensorFlow-%E6%93%8D%E4%BD%9C%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.3.</span> <span class="nav-text">⚙️ Keras &#x2F; TensorFlow 操作示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Keras-%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B"><span class="nav-number">1.4.</span> <span class="nav-text">Keras 模型训练核心流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">1. 定义模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E7%BC%96%E8%AF%91%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">2. 编译模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.</span> <span class="nav-text">3. 训练模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%A2%84%E6%B5%8B"><span class="nav-number">5.</span> <span class="nav-text">4. 评估与预测</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

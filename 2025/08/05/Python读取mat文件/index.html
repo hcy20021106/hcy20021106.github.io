@@ -20,13 +20,15 @@
     var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="读取 MATLAB .mat 文件（带有结构体字段）我们经常遇到 MATLAB 中保存的结构体 .mat 文件，例如包含 real 和 imag 字段的 CSI 或 preamble 数据。在 Python 中可以用 h5py + numpy 来处理： 环境准备1pip install h5py numpy torch  示例代码1234567891011121314151617181920212">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Python读取mat文件">
 <meta property="og:url" content="https://hechenyi.github.io/2025/08/05/Python%E8%AF%BB%E5%8F%96mat%E6%96%87%E4%BB%B6/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="读取 MATLAB .mat 文件（带有结构体字段）我们经常遇到 MATLAB 中保存的结构体 .mat 文件，例如包含 real 和 imag 字段的 CSI 或 preamble 数据。在 Python 中可以用 h5py + numpy 来处理： 环境准备1pip install h5py numpy torch  示例代码1234567891011121314151617181920212">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-08-04T16:09:44.000Z">
-<meta property="article:modified_time" content="2025-08-04T16:09:44.326Z">
+<meta property="article:modified_time" content="2025-08-09T02:27:48.798Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -178,6 +180,13 @@
 
               <time title="Created: 2025-08-05 00:09:44" itemprop="dateCreated datePublished" datetime="2025-08-05T00:09:44+08:00">2025-08-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-08-09 10:27:48" itemprop="dateModified" datetime="2025-08-09T10:27:48+08:00">2025-08-09</time>
+              </span>
 
           
 
@@ -190,7 +199,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h2 id="读取-MATLAB-mat-文件（带有结构体字段）"><a href="#读取-MATLAB-mat-文件（带有结构体字段）" class="headerlink" title="读取 MATLAB .mat 文件（带有结构体字段）"></a>读取 MATLAB <code>.mat</code> 文件（带有结构体字段）</h2><p>我们经常遇到 MATLAB 中保存的结构体 <code>.mat</code> 文件，例如包含 <code>real</code> 和 <code>imag</code> 字段的 CSI 或 preamble 数据。在 Python 中可以用 <code>h5py</code> + <code>numpy</code> 来处理：</p>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install h5py numpy torch</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> h5py</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">mat_path = <span class="string">&#x27;your_file_path.mat&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> h5py.File(mat_path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># 访问结构体数组引用（例如 usr_data）</span></span><br><span class="line">    hDp_ref = f[<span class="string">&#x27;usr_data&#x27;</span>]</span><br><span class="line">    hDp_real_refs = hDp_ref[:]  <span class="comment"># 是一组 object reference</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 读取 preamble</span></span><br><span class="line">    preamble_ref = hDp_real_refs[<span class="number">0</span>].item()         <span class="comment"># 解引用</span></span><br><span class="line">    preamble_dataset = f[preamble_ref]             <span class="comment"># 获取对应的数据集</span></span><br><span class="line">    preamble_struct = np.array(preamble_dataset)   <span class="comment"># 转成 numpy 数组</span></span><br><span class="line">    preamble = preamble_struct[<span class="string">&#x27;real&#x27;</span>] + <span class="number">1j</span> * preamble_struct[<span class="string">&#x27;imag&#x27;</span>]  <span class="comment"># 合成为复数</span></span><br><span class="line">    preamble_tensor = torch.tensor(preamble, dtype=torch.complex64)    <span class="comment"># 转为 PyTorch 复数张量</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 读取 CSI（假设是第二个）</span></span><br><span class="line">    csi_ref = hDp_real_refs[<span class="number">1</span>].item()</span><br><span class="line">    csi_dataset = f[csi_ref]</span><br><span class="line">    csi_struct = np.array(csi_dataset)</span><br><span class="line">    csi = csi_struct[<span class="string">&#x27;real&#x27;</span>] + <span class="number">1j</span> * csi_struct[<span class="string">&#x27;imag&#x27;</span>]</span><br><span class="line">    csi_tensor = torch.tensor(csi, dtype=torch.complex64)</span><br></pre></td></tr></table></figure>
+
+<h3 id="常见说明"><a href="#常见说明" class="headerlink" title="常见说明"></a>常见说明</h3><ul>
+<li><code>h5py.File(..., &#39;r&#39;)</code>：读取 <code>.mat</code> 文件（v7.3 格式，基于 HDF5）。</li>
+<li><code>hDp_ref[:]</code>：获取结构体中嵌套的 object reference。</li>
+<li><code>.item()</code>：从 NumPy 的 <code>object</code> 中提取真实的引用。</li>
+<li><code>[&#39;real&#39;] + 1j * [&#39;imag&#39;]</code>：组合为复数。</li>
+<li>使用 <code>torch.tensor(..., dtype=torch.complex64)</code> 转为复数张量，方便用于神经网络输入。</li>
+</ul>
+<p>在 preamble_struct &#x3D; np.array(preamble_dataset) numpy数组中，它的每一个元素仍然是一个类字典对象，拥有字段，比如 ‘real’ 和 ‘imag’，这两个字段就是你要提取的实部和虚部数据。  </p>
+<p>在 PyTorch 中，复数张量（dtype&#x3D;torch.complex64 或 complex128）不是单独的 real&#x2F;imag 张量，而是一个 内建的复数类型，其中每个元素都包含实部和虚部。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([1 + 2j, 3 + 4j], dtype=torch.complex64)，</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>结构上：</p>
+<p>x[0] 是 (1+2j)，即：</p>
+<p>x[0].real &#x3D;&#x3D; 1.0</p>
+<p>x[0].imag &#x3D;&#x3D; 2.0</p>
+
     </div>
 
     
@@ -208,7 +236,10 @@
     <a href="/2025/08/02/CI-CD/" rel="prev" title="CI/CD">
       <i class="fa fa-chevron-left"></i> CI/CD
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2025/08/09/tensorflow/" rel="next" title="tensorflow">
+      tensorflow <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -267,6 +298,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96-MATLAB-mat-%E6%96%87%E4%BB%B6%EF%BC%88%E5%B8%A6%E6%9C%89%E7%BB%93%E6%9E%84%E4%BD%93%E5%AD%97%E6%AE%B5%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">读取 MATLAB .mat 文件（带有结构体字段）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">1.1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">示例代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E8%AF%B4%E6%98%8E"><span class="nav-number">1.3.</span> <span class="nav-text">常见说明</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -280,7 +312,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
