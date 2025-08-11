@@ -181,7 +181,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-06 15:48:24" itemprop="dateModified" datetime="2025-08-06T15:48:24+08:00">2025-08-06</time>
+                <time title="Modified: 2025-08-12 01:02:55" itemprop="dateModified" datetime="2025-08-12T01:02:55+08:00">2025-08-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -834,7 +834,20 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
 <li>最终输出 $y$ 序列中在特定时间步激活（例如输出为 7）。</li>
 </ul>
 <p>通过可视化的矩阵计算，可以看到 LSTM 如何“记住”或“忘记”输入中的关键信息。</p>
-<h5 id="关键计算公式"><a href="#关键计算公式" class="headerlink" title="关键计算公式"></a>关键计算公式</h5><p>$$<br>\begin{aligned}<br>f_t &amp;&#x3D; \sigma(W_f \cdot [h_{t-1}, x_t] + b_f) \\<br>i_t &amp;&#x3D; \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) \\<br>g_t &amp;&#x3D; \tanh(W_g \cdot [h_{t-1}, x_t] + b_g) \\<br>C_t &amp;&#x3D; f_t \cdot C_{t-1} + i_t \cdot g_t \\<br>o_t &amp;&#x3D; \sigma(W_o \cdot [h_{t-1}, x_t] + b_o) \\<br>h_t &amp;&#x3D; o_t \cdot \tanh(C_t)<br>\end{aligned}<br>$$<br>由此可知$W_f, W_i, W_g, W_o$的维度是(hidden_size, input_dim + hidder_size),因为输入是由$h_{t-1}$和$x_t$连接而成。</p>
+<h5 id="关键计算公式"><a href="#关键计算公式" class="headerlink" title="关键计算公式"></a>关键计算公式</h5><p>$$<br>\begin{aligned}<br>f_t &amp;&#x3D; \sigma(W_f \cdot [h_{t-1}, x_t] + b_f) \\<br>i_t &amp;&#x3D; \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) \\<br>g_t &amp;&#x3D; \tanh(W_g \cdot [h_{t-1}, x_t] + b_g) \\<br>C_t &amp;&#x3D; f_t \cdot C_{t-1} + i_t \cdot g_t \\<br>o_t &amp;&#x3D; \sigma(W_o \cdot [h_{t-1}, x_t] + b_o) \\<br>h_t &amp;&#x3D; o_t \cdot \tanh(C_t)<br>\end{aligned}<br>$$<br>由此可知$W_f, W_i, W_g, W_o$的维度是(hidden_size, input_dim + hidder_size),因为输入是由$h_{t-1}$和$x_t$连接而成。<br>记号解释:</p>
+<ul>
+<li><p>隐藏状态向量<br>$h_{t-1} ∈ R^{64}$. </p>
+<p>上一步的隐藏状态，维度为 64（对应 64 个 hidden units 或 memory cells）。</p>
+</li>
+<li><p>当前时间步输入向量<br> $x_t ∈ R^{d}$</p>
+<p>当前时间步的输入，维度为输入特征数 d。</p>
+</li>
+<li><p>权重矩阵<br>$W_f, W_i, W_g, W_o ∈ R^{(64 + d) × 64}$<br>四个门（遗忘门、输入门、候选状态、输出门）的权重矩阵，输入是拼接的 $[h_{t-1}, x_t]$，输出是大小为 64 的门控向量。</p>
+</li>
+<li><p>偏置向量<br>$b_f, b_i, b_g, b_o ∈ R^{64}$. </p>
+<p>四个门对应的偏置项，维度均为 64。</p>
+</li>
+</ul>
 <h4 id="LSTM的模块说明以及应用场景"><a href="#LSTM的模块说明以及应用场景" class="headerlink" title="LSTM的模块说明以及应用场景"></a>LSTM的模块说明以及应用场景</h4><table>
 <thead>
 <tr>
@@ -870,6 +883,8 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
 <li>🗣 语音识别、语音生成</li>
 <li>🔄 序列到序列（Seq2Seq）：机器翻译、摘要生成等</li>
 </ul>
+<h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>Keras 的 LSTM 层接受的输入形状一般是 (batch_size, timesteps, input_dim)，<br>其中 timesteps（序列长度）可以是动态的，或者在模型构建时隐含定义。<br>如果你的 next_layer_in 是一个三维张量，Keras 会自动根据输入的 shape 识别序列长度。<br>只要你传入的数据形状符合要求，Keras 会根据实际输入动态处理序列长度，不必在代码里显式声明。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">seq_in = Input(shape=(timesteps, input_dim))</span><br></pre></td></tr></table></figure>
 <h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>本示例结合一个LSTM模型的完整代码结构，介绍如何使用pandas准备数据、构建LSTM模型及计算参数量，方便初学者理解和应用。</p>
 <h5 id="1-数据预处理（pandas基础）"><a href="#1-数据预处理（pandas基础）" class="headerlink" title="1. 数据预处理（pandas基础）"></a>1. 数据预处理（pandas基础）</h5><ul>
 <li>读取CSV文件</li>
