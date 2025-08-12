@@ -150,6 +150,109 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/04/%E4%BF%A1%E9%81%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/04/%E4%BF%A1%E9%81%93/" class="post-title-link" itemprop="url">信道</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-06-04 22:48:13" itemprop="dateCreated datePublished" datetime="2025-06-04T22:48:13+08:00">2025-06-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-07-02 07:26:24" itemprop="dateModified" datetime="2025-07-02T07:26:24+08:00">2025-07-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="定义与分类"><a href="#定义与分类" class="headerlink" title="定义与分类"></a>定义与分类</h2><ul>
+<li>狭义信道<ul>
+<li>有线信道<br>  同轴电缆，光纤</li>
+<li>无线信道<br>  微波视距传播，卫星中继，移动通信信道</li>
+</ul>
+</li>
+<li>广义信道<ul>
+<li>调制信道<br>  调制器输出-&gt;解调器输入</li>
+<li>编码信道<br>  编码器输出-&gt;译码器输入</li>
+</ul>
+</li>
+</ul>
+<h3 id="调制信道"><a href="#调制信道" class="headerlink" title="调制信道"></a>调制信道</h3><p>有一对一&#x2F;一对多的输入输出端，满足线性叠加原理，对信号有时变和时不变的两种延迟和损耗，其数学模型是叠加有噪声的线性时变&#x2F;时不变滤波器</p>
+<h4 id="恒参信道"><a href="#恒参信道" class="headerlink" title="恒参信道"></a>恒参信道</h4><p>对应的信道特性为线性时不变滤波器。<br>理想恒参信道的特征：<br>$s_0(t) &#x3D; Ks_i(t - t_d)$<br>$H(w) &#x3D; Ke^{-jwt_d}$<br>因此这个恒参信道的幅频特性和相频特性分别为 $|H| &#x3D; K$ 相频特性$\phi(w) &#x3D; -wt_d$， 群时延特性$\tau(w) &#x3D; -\frac{d\phi(w)}{dw} &#x3D; t_d$,  </p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>如果输入的频谱有两个分量，系统的 幅频响应 和 相频响应 会分别对这两个频率分量产生不同的幅度缩放和相位偏移。<br>假如输入信号为两个频域分量的叠加：<br>$x(t) &#x3D; A_1 \cos(\omega_1 t) + A_2 \cos(\omega_2 t)$<br>对应的频域表示为两根谱线：<br>$X(j\omega) &#x3D; \frac{A_1}{2} \left[ \delta(\omega - \omega_1) + \delta(\omega + \omega_1) \right] + \frac{A_2}{2} \left[ \delta(\omega - \omega_2) + \delta(\omega + \omega_2) \right]$<br>系统频率响应表示为：<br>$H(j\omega) &#x3D; |H(j\omega)| e^{j \phi(\omega)}$<br>系统输出频域为输入频谱与频率响应的乘积<br>$Y(j\omega) &#x3D; H(j\omega) \cdot X(j\omega)$<br>分别作用于两个频率分量：<br>$<br>\begin{cases}<br>\text{频率 } \omega_1 \text{ 分量的幅度变为 } A_1 |H(j\omega_1)|, \quad \text{相位增加 } \phi(\omega_1) \<br>\text{频率 } \omega_2 \text{ 分量的幅度变为 } A_2 |H(j\omega_2)|, \quad \text{相位增加 } \phi(\omega_2)<br>\end{cases}<br>$<br>因此，输出信号为：<br>$y(t) &#x3D; A_1 |H(j\omega_1)| \cos\left(\omega_1 t + \phi(\omega_1)\right) + A_2 |H(j\omega_2)| \cos\left(\omega_2 t + \phi(\omega_2)\right)$</p>
+</blockquote>
+<hr>
+<p>由此分析可得对信号不同频率分量放大或衰减倍数相同，由于群时延特性为常数因此信号不同频率分量到底，输出端的时间先后一致<br>然后，现实中的信道会出现幅频失真、相频失真和群时延失真的情况。也就是说对信号不同频率分量放大或者衰减倍数不同。或者信号不同频率分量到达输出端的时间先后不一。但是这些失真不产生新的频率分量，因此均为线性失真。</p>
+<h4 id="随参信道"><a href="#随参信道" class="headerlink" title="随参信道"></a>随参信道</h4><p>原因：<br>由于多径效应产生的时延差。<br>特性：<br>存在时变的衰减和时延<br>存在多径传播现象<br>$r(t) &#x3D; \sum_{i &#x3D; 1}^{n}a_i(t)cosw_c[t-\tau_i(t)] &#x3D; X(t)cosw_ct - Y(t)sinw_ct$<br>其中$a_i(t)$为 <strong>时变衰落</strong> ，$\tau_i(t)$为<strong>时变时延</strong>，X(t)为窄带信号的同相分量，Y(t)为正交分量，其均方和的开方为随机包络，arctan为随机相位。<br>多路传播的影响：<strong>瑞利衰落</strong>.<br>$r(t) &#x3D; \sum_{i&#x3D;1}^{n} a_i(t) \left( \cos \phi_i(t) \cos w_c t - \sin \phi_i(t) \sin w_c t \right)$<br>进一步写成随机包络+随机相位的形式：<br>$r(t) &#x3D; X_t \cos w_c t - Y_t \sin w_c t$<br>其中X(t)和Y(t)分别为同相分量和正交分量,进一步写成随机包络+随机相位的形式<br>$r(t) &#x3D; V(t)cos[w_ct+\phi(t)]$.<br>其中V(t)为X(t)和Y(t)的平方和的开方，服从瑞利分布，$\phi(t)$为$arctan\frac{Y(t)}{X(t)}$,服从均匀分布</p>
+<h4 id="OFDM信号经过随参信道的Python示例代码"><a href="#OFDM信号经过随参信道的Python示例代码" class="headerlink" title="OFDM信号经过随参信道的Python示例代码"></a>OFDM信号经过随参信道的Python示例代码</h4><p>下面示例代码展示如何生成多径瑞利信道的频率响应，及经过该信道的接收pilot信号：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="number">1000</span>;           <span class="comment">% 数据组数</span></span><br><span class="line">L = <span class="number">6</span>;              <span class="comment">% 多径数</span></span><br><span class="line">Nfft = <span class="number">2048</span>;        <span class="comment">% FFT点数</span></span><br><span class="line">pilotLen = <span class="number">128</span>;     <span class="comment">% pilot信号长度</span></span><br><span class="line">snr_dB = <span class="number">20</span>;        <span class="comment">% 信噪比</span></span><br><span class="line"></span><br><span class="line">Hs = <span class="built_in">zeros</span>(N, Nfft);           <span class="comment">% 频率响应矩阵</span></span><br><span class="line">rxSignals = <span class="built_in">zeros</span>(N, pilotLen); <span class="comment">% 接收pilot信号矩阵</span></span><br><span class="line"></span><br><span class="line">f = (<span class="number">0</span>:Nfft<span class="number">-1</span>)/Nfft;          <span class="comment">% 归一化频率</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> idx = <span class="number">1</span>:N</span><br><span class="line">    pathDelay = <span class="built_in">sort</span>(<span class="built_in">rand</span>(<span class="number">1</span>,L) * <span class="number">3e-7</span>);        <span class="comment">% 随机路径时延（秒）</span></span><br><span class="line">    pathPower = <span class="built_in">ones</span>(<span class="number">1</span>,L)/L;                    <span class="comment">% 均匀功率分布</span></span><br><span class="line">    a = <span class="built_in">sqrt</span>(pathPower/<span class="number">2</span>).*(<span class="built_in">randn</span>(<span class="number">1</span>,L)+<span class="number">1</span><span class="built_in">j</span>*<span class="built_in">randn</span>(<span class="number">1</span>,L)); <span class="comment">% 复数瑞利衰落增益</span></span><br><span class="line">    </span><br><span class="line">    H = <span class="built_in">zeros</span>(<span class="number">1</span>, Nfft);</span><br><span class="line">    <span class="keyword">for</span> k = <span class="number">1</span>:Nfft</span><br><span class="line">        H(k) = sum(a .* <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">j</span>*<span class="number">2</span>*<span class="built_in">pi</span>*f(k)*pathDelay)); <span class="comment">% 频率响应叠加</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    Hs(idx,:) = H;</span><br><span class="line">    </span><br><span class="line">    symbols = <span class="built_in">exp</span>(<span class="number">1</span><span class="built_in">j</span>*<span class="built_in">pi</span>/<span class="number">2</span>*randi([<span class="number">0</span> <span class="number">3</span>],<span class="number">1</span>,pilotLen));   <span class="comment">% 随机QPSK pilot信号</span></span><br><span class="line">    </span><br><span class="line">    h_time = <span class="built_in">zeros</span>(<span class="number">1</span>, pilotLen);</span><br><span class="line">    tapIndex = <span class="built_in">round</span>(pathDelay / (<span class="number">3e-7</span>/pilotLen)) + <span class="number">1</span>; <span class="comment">% 时延映射采样点</span></span><br><span class="line">    tapIndex(tapIndex &gt; pilotLen) = pilotLen;         <span class="comment">% 防止超出边界</span></span><br><span class="line">    <span class="keyword">for</span> l = <span class="number">1</span>:L</span><br><span class="line">        h_time(tapIndex(l)) = a(l);                     <span class="comment">% 构造时域冲激响应</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    rxSignal = conv(symbols, h_time, <span class="string">&#x27;same&#x27;</span>);          <span class="comment">% 时域卷积模拟信道传输</span></span><br><span class="line">    signalPower = <span class="built_in">mean</span>(<span class="built_in">abs</span>(rxSignal).^<span class="number">2</span>);</span><br><span class="line">    noisePower = signalPower / (<span class="number">10</span>^(snr_dB/<span class="number">10</span>));</span><br><span class="line">    noise = <span class="built_in">sqrt</span>(noisePower/<span class="number">2</span>)*(<span class="built_in">randn</span>(<span class="built_in">size</span>(rxSignal))+<span class="number">1</span><span class="built_in">j</span>*<span class="built_in">randn</span>(<span class="built_in">size</span>(rxSignal)));</span><br><span class="line">    </span><br><span class="line">    rxSignals(idx,:) = rxSignal + noise;               <span class="comment">% 添加AWGN噪声</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>在实际仿真中，信道时域冲激响应 h_time 的长度（即维度）不必与pilot信号长度相同，<br><br>它只需包含有效的多径分量（即最大时延对应的采样点数），通常远小于 pilotLen，<br><br>这样可以减少计算开销，提高仿真效率。<br><br>只需保证信道时域响应长度足够覆盖所有路径时延即可。<br><br>而且不会影响结果（使用循环卷积）<br></p>
+</blockquote>
+<hr>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/05/13/FFT/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1185,7 +1288,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-12 01:12:23" itemprop="dateModified" datetime="2025-08-12T01:12:23+08:00">2025-08-12</time>
+                <time title="Modified: 2025-08-12 14:36:29" itemprop="dateModified" datetime="2025-08-12T14:36:29+08:00">2025-08-12</time>
               </span>
 
           
@@ -1311,6 +1414,7 @@
 <p>对未来最大的馈赠，就是将一切献给今天</p>
 <p>内图个性之发展，外图贡献于其群</p>
 <p>青春易逝，但成长是永恒的过程，真正有少年心性的人，是不停革新自我的人。</p>
+<p>何须浅碧深红色，自是花中第一流。</p>
 
       
     </div>
@@ -1501,160 +1605,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/23/JavaSwing/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/23/JavaSwing/" class="post-title-link" itemprop="url">JavaSwing</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-04-23 05:20:59" itemprop="dateCreated datePublished" datetime="2025-04-23T05:20:59+08:00">2025-04-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-04-25 19:48:01" itemprop="dateModified" datetime="2025-04-25T19:48:01+08:00">2025-04-25</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>Swing is part of API for providing native look and feel GUI for Java, which has more components than AWT(Abstract Window Toolkit), and these components are more lightweight.  </p>
-<p>Documents:<br><a target="_blank" rel="noopener" href="https://docs.oracle.com/en/java/javase/20/docs/api/java.desktop/javax/swing/package-summary.html">https://docs.oracle.com/en/java/javase/20/docs/api/java.desktop/javax/swing/package-summary.html</a>  </p>
-<p>These components are as below:</p>
-<ul>
-<li>Windows and dialogs<ul>
-<li>JFrame<br>  <strong>JFrame</strong>是一个<strong>顶层容器</strong>，用于创建一个窗口，窗口中可以包含按钮、文本框、标签等各种组件，并且JFrame也可以布局，例如添加BorderLayout</li>
-<li>JDialog</li>
-<li>JColorChooser</li>
-<li>JFileChooser</li>
-<li>JOptionPane</li>
-</ul>
-</li>
-<li>Menus<ul>
-<li>JMenuItem</li>
-<li>JMenu</li>
-<li>JMenuBar</li>
-<li>JCheckBoxMenuItem</li>
-<li>JRadioButtonMenuItem</li>
-<li>JPopupMenu</li>
-<li>JSeparator</li>
-</ul>
-</li>
-<li>Container<ul>
-<li>JPanel<br>  JPanel是面板组件，通常不单独显示，而是作为其他容器（比如JFrame）中的子容器，主要用来：组织组件（比如把按钮、文本框放在一个面板里），配合不同的布局管理器使用（FlowLayout、 BorderLayout、 GridLayout）</li>
-<li>JTappedPane</li>
-<li>JSplitPane</li>
-<li>JScrollPane</li>
-<li>JToolBar</li>
-<li>JDesktopPane</li>
-<li>JInternalFrame</li>
-<li>JLayeredPane</li>
-</ul>
-</li>
-<li>Control elements<ul>
-<li>JLabel</li>
-<li>JButton</li>
-<li>JToggleButton</li>
-<li>JCheckBox<br>  复选框组件，用来让用户在多个选项中进行单选或多选</li>
-<li>JRadioButton</li>
-<li>ButtonGroup</li>
-<li>JComboBox</li>
-<li>JList</li>
-<li>JTextField</li>
-<li>JTextArea</li>
-<li>JSeperator</li>
-</ul>
-</li>
-<li>Event handling<ul>
-<li>ActionEvent</li>
-<li>AdjustmentEvent</li>
-<li>FocusEvent</li>
-<li>ItemEvent</li>
-<li>MouseEvent</li>
-<li>TextEvent</li>
-<li>WindowEvent</li>
-<li>Menuvent</li>
-<li>ListSelectionEvent</li>
-<li>TableModelEvent<br>以WindowEvent为例</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">JFrame testFrame = new JFrame(<span class="string">&quot;Listener Test&quot;</span>);</span><br><span class="line">testFrame.setSize(300,200);</span><br><span class="line">testFrame.addWindowListener(new <span class="function"><span class="title">WindowAdpater</span></span>()&#123;</span><br><span class="line">    public void windowClosing(WindowEvent e)&#123;</span><br><span class="line">        JOptionPane testOpt = new JOptionPane();</span><br><span class="line">        testOpt.showMessageDialog(new JFrame(), <span class="string">&quot;closing Window!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>这里使用了匿名函数，等同于以下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JFrame testFrame = new JFrame(<span class="string">&quot;Listener Test&quot;</span>);</span><br><span class="line">class MyWindowListener extends WindowAdpater&#123;</span><br><span class="line">    public void windowClosing(WindowEvent e)&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;窗口关闭&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">testFrame.addWindowListener(new MyWindowListener());</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Layout manager<ul>
-<li>FlowLayout</li>
-<li>GridLayout</li>
-<li>BorderLayout</li>
-<li>BoxLayout</li>
-<li>CardLayout</li>
-<li>GridBagLayout</li>
-<li>GroupLayout</li>
-<li>SpringLayout</li>
-</ul>
-</li>
-</ul>
-<h2 id="Java的抽象类和接口"><a href="#Java的抽象类和接口" class="headerlink" title="Java的抽象类和接口"></a>Java的抽象类和接口</h2><p>以抽象类WindowAdapter和接口WindowListener为例。<br>通常来说，抽象类继承了接口的方法，但是每个方法都留了个空壳实现，正因为这些空壳，继承了接口的抽象类只需要写像覆盖的那几种方法，而不是被迫写完全部。<br>例如WindowAdapter继承WindowListener</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public abstract class WindowAdapter implements WindowListener&#123;</span><br><span class="line">    public void windowOpened(WindowEvent e)&#123;&#125;</span><br><span class="line">    ...</span><br><span class="line">    public void windowDeactivated(WindowEvent e)&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用继承的方法构建MainFrame类"><a href="#使用继承的方法构建MainFrame类" class="headerlink" title="使用继承的方法构建MainFrame类"></a>使用继承的方法构建MainFrame类</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class MainFrame extends JFrame&#123;</span><br><span class="line">    public <span class="function"><span class="title">MainFrame</span></span>()&#123;</span><br><span class="line">        setTitle(<span class="string">&quot;Choose Your Favorite Items&quot;</span>);</span><br><span class="line">        setSize(400, 300);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以这么理解,以下的JFrame父类的构造函数会在子类MainFrame调用构造函数时被调用，因为如果父类构造函数如果是无参的话那么就会被隐型调用，如果是有参的话需要通过super函数来调用。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class JFrame&#123;</span><br><span class="line">    public <span class="function"><span class="title">JFrame</span></span>()&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>继承了这个父类的MyFrame子类相当于在构造函数里面执行了一遍super()</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public <span class="function"><span class="title">MainFrame</span></span>()&#123;</span><br><span class="line">    super();</span><br><span class="line">    setTitle(<span class="string">&quot;Choose your favourite items&quot;</span>);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<img src="/images/你.jpg">
-你好可爱，为什么我们性格会如何相像
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1724,7 +1674,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

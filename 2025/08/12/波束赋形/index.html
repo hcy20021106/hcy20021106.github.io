@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="PyTorch Quick Start Guide 🚀📚 基本概念📐 常见数据的 Tensor 维度   数据类型 维度说明 示例 Shape    Scalar（标量） 0-D Tensor torch.tensor(3.14)   Vector（向量） 1-D Tensor (N,) → [1, 2, 3]   Audio（音频） 1-D 或 2-D（多通道） (samples,) or">
+  <meta name="description" content="了解发射端数字基带信号txSigSTS与射频波束赋形矩阵mFrf相乘的物理意义，以及波束赋形在无线通信发射链路中的位置和作用。 背景在多天线无线通信系统中，为了提升信号质量、增强覆盖能力或实现空间复用，常采用波束赋形技术。波束赋形可分为数字波束赋形和射频（模拟）波束赋形。 发射端信号处理流程一般发射端信号处理主要包括：  数字基带处理：编码、调制、空间复用（多数据流处理） 数字波束赋形：基带域信号">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PyTorch">
-<meta property="og:url" content="https://hechenyi.github.io/2025/06/17/PyTorch/index.html">
+<meta property="og:title" content="波束赋形">
+<meta property="og:url" content="https://hechenyi.github.io/2025/08/12/%E6%B3%A2%E6%9D%9F%E8%B5%8B%E5%BD%A2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="PyTorch Quick Start Guide 🚀📚 基本概念📐 常见数据的 Tensor 维度   数据类型 维度说明 示例 Shape    Scalar（标量） 0-D Tensor torch.tensor(3.14)   Vector（向量） 1-D Tensor (N,) → [1, 2, 3]   Audio（音频） 1-D 或 2-D（多通道） (samples,) or">
+<meta property="og:description" content="了解发射端数字基带信号txSigSTS与射频波束赋形矩阵mFrf相乘的物理意义，以及波束赋形在无线通信发射链路中的位置和作用。 背景在多天线无线通信系统中，为了提升信号质量、增强覆盖能力或实现空间复用，常采用波束赋形技术。波束赋形可分为数字波束赋形和射频（模拟）波束赋形。 发射端信号处理流程一般发射端信号处理主要包括：  数字基带处理：编码、调制、空间复用（多数据流处理） 数字波束赋形：基带域信号">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-06-17T12:57:35.000Z">
-<meta property="article:modified_time" content="2025-06-30T13:36:25.649Z">
+<meta property="article:published_time" content="2025-08-12T07:30:59.000Z">
+<meta property="article:modified_time" content="2025-08-12T07:32:25.505Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hechenyi.github.io/2025/06/17/PyTorch/">
+<link rel="canonical" href="https://hechenyi.github.io/2025/08/12/%E6%B3%A2%E6%9D%9F%E8%B5%8B%E5%BD%A2/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>PyTorch | Hexo</title>
+  <title>波束赋形 | Hexo</title>
   
 
 
@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/17/PyTorch/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/12/%E6%B3%A2%E6%9D%9F%E8%B5%8B%E5%BD%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -168,7 +168,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          PyTorch
+          波束赋形
         </h1>
 
         <div class="post-meta">
@@ -177,16 +177,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2025-06-17 20:57:35" itemprop="dateCreated datePublished" datetime="2025-06-17T20:57:35+08:00">2025-06-17</time>
+              <time title="Created: 2025-08-12 15:30:59 / Modified: 15:32:25" itemprop="dateCreated datePublished" datetime="2025-08-12T15:30:59+08:00">2025-08-12</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-30 21:36:25" itemprop="dateModified" datetime="2025-06-30T21:36:25+08:00">2025-06-30</time>
-              </span>
 
           
 
@@ -199,134 +193,35 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="PyTorch-Quick-Start-Guide-🚀"><a href="#PyTorch-Quick-Start-Guide-🚀" class="headerlink" title="PyTorch Quick Start Guide 🚀"></a>PyTorch Quick Start Guide 🚀</h1><h2 id="📚-基本概念"><a href="#📚-基本概念" class="headerlink" title="📚 基本概念"></a>📚 基本概念</h2><h3 id="📐-常见数据的-Tensor-维度"><a href="#📐-常见数据的-Tensor-维度" class="headerlink" title="📐 常见数据的 Tensor 维度"></a>📐 常见数据的 Tensor 维度</h3><table>
-<thead>
-<tr>
-<th>数据类型</th>
-<th>维度说明</th>
-<th>示例 Shape</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Scalar（标量）</td>
-<td>0-D Tensor</td>
-<td><code>torch.tensor(3.14)</code></td>
-</tr>
-<tr>
-<td>Vector（向量）</td>
-<td>1-D Tensor</td>
-<td><code>(N,)</code> → <code>[1, 2, 3]</code></td>
-</tr>
-<tr>
-<td>Audio（音频）</td>
-<td>1-D 或 2-D（多通道）</td>
-<td><code>(samples,)</code> or <code>(channels, samples)</code></td>
-</tr>
-<tr>
-<td>Grayscale Image</td>
-<td>2-D 或 3-D（加 batch）</td>
-<td><code>(H, W)</code> or <code>(N, 1, H, W)</code></td>
-</tr>
-<tr>
-<td>RGB Image</td>
-<td>3-D（C,H,W）或 4-D（N,C,H,W）</td>
-<td><code>(3, H, W)</code> or <code>(N, 3, H, W)</code></td>
-</tr>
-<tr>
-<td>Video</td>
-<td>4-D（T,C,H,W）或 5-D（N,T,C,H,W）</td>
-<td><code>(frames, 3, H, W)</code></td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>✅ <strong>常用格式缩写</strong>  </p>
+        <p>了解发射端数字基带信号txSigSTS与射频波束赋形矩阵mFrf相乘的物理意义，以及波束赋形在无线通信发射链路中的位置和作用。</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在多天线无线通信系统中，为了提升信号质量、增强覆盖能力或实现空间复用，常采用波束赋形技术。波束赋形可分为数字波束赋形和射频（模拟）波束赋形。</p>
+<h2 id="发射端信号处理流程"><a href="#发射端信号处理流程" class="headerlink" title="发射端信号处理流程"></a>发射端信号处理流程</h2><p>一般发射端信号处理主要包括：</p>
 <ul>
-<li><code>N</code>: Batch size  </li>
-<li><code>C</code>: Channels  </li>
-<li><code>H</code>: Height  </li>
-<li><code>W</code>: Width  </li>
-<li><code>T</code>: Time steps &#x2F; frames</li>
+<li>数字基带处理：编码、调制、空间复用（多数据流处理）</li>
+<li>数字波束赋形：基带域信号预编码</li>
+<li>数字-模拟转换（DAC）</li>
+<li>射频波束赋形：通过相移器及功率放大器对每个天线的信号加权，控制信号方向和形态</li>
+<li>天线发射</li>
 </ul>
-</blockquote>
+<h2 id="矩阵乘法-txSig-txSigSTS-mFrf-的意义"><a href="#矩阵乘法-txSig-txSigSTS-mFrf-的意义" class="headerlink" title="矩阵乘法 txSig &#x3D; txSigSTS * mFrf 的意义"></a>矩阵乘法 txSig &#x3D; txSigSTS * mFrf 的意义</h2><ul>
+<li>txSigSTS: 形状为 (样本数 × 数据流数) 的数字基带信号矩阵，代表每个独立数据流对应的基带时间序列。</li>
+<li>mFrf: 射频波束赋形矩阵，形状为 (数据流数 × 天线数)，其每个元素为对应数据流在每根天线上的复数加权系数（幅度和相位）。</li>
+</ul>
+<p>通过矩阵乘法，txSigSTS乘以mFrf后，得到 (样本数 × 天线数) 维度的信号矩阵txSig，即为分配给每根天线的发送信号。</p>
+<h2 id="射频波束赋形的作用"><a href="#射频波束赋形的作用" class="headerlink" title="射频波束赋形的作用"></a>射频波束赋形的作用</h2><p>射频波束赋形实现了：</p>
+<ul>
+<li>信号在空间方向上的加权叠加</li>
+<li>聚焦信号能量向目标方向</li>
+<li>减少干扰，提升信道容量与传输质量</li>
+<li>在多流传输中实现信号分离</li>
+</ul>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>射频波束赋形是发射端信号链中从基带信号到天线发射信号转换的关键步骤，通常是发射端的最后一个信号处理阶段。其核心即是将数字基带多流信号通过加权矩阵映射到每个物理天线上，形成定向或多用户信号发射。</p>
+<p>附注：  </p>
+<ul>
+<li>mFrf的设计通常基于信道估计和优化算法（如正交匹配追踪OMP），以实现最佳波束指向和多流分离。  </li>
+<li>此步骤是多输入多输出（MIMO）和混合波束赋形系统的基础。</li>
+</ul>
 <hr>
-<h2 id="常用函数小结"><a href="#常用函数小结" class="headerlink" title="常用函数小结"></a>常用函数小结</h2><table>
-<thead>
-<tr>
-<th>函数</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>unsqueeze(dim)</td>
-<td>插入新维度</td>
-</tr>
-<tr>
-<td>squeeze(dim)</td>
-<td>去除大小为1的维度</td>
-</tr>
-<tr>
-<td>transpose(a,b)</td>
-<td>交换两个维度</td>
-</tr>
-<tr>
-<td>.view()</td>
-<td>改变形状</td>
-</tr>
-<tr>
-<td>.reshape()</td>
-<td>改变形状</td>
-</tr>
-</tbody></table>
-<h2 id="⚙️-常用操作示例"><a href="#⚙️-常用操作示例" class="headerlink" title="⚙️ 常用操作示例"></a>⚙️ 常用操作示例</h2><pre><code class="language-python">import torch
-
-# 创建一个随机的 RGB 图片 Tensor: (C,H,W)
-x = torch.randn(3, 224, 224)
-y = torch.zeros([2,3])
-# 输出size, e.g., torch.Size([2,3])
-x.shape
-# cat: concatenate multiple tensors
-x = torch.zeros([2,1,3])
-y = torch.zeros([2,3,3])
-z = torch.zeros([2,2,3])
-w = torch.cat([x,y,z], dim = 1)
-# torch.Size([2,6,3])
-w.shape
-
-# 查看形状
-print(x.shape)  # torch.Size([3, 224, 224])
-
-# 交换维度: transpose
-x_transposed = x.transpose(1, 2)  # (C, W, H)
-
-# 重新排列所有维度: permute
-x_permuted = x.permute(1, 2, 0)   # (H, W, C)
-
-# 展平为一维
-x_flatten = x.view(-1)
-
-# 添加 batch 维度
-x_batched = x.unsqueeze(0)  # (1, C, H, W)
-
-# 去除维度为 1 的维度
-x_squeezed = x_batched.squeeze(0)  # (C, H, W)
-
-# 数据类型转换
-x_double = x.double()
-x_int = x.int()
-
-# 基本运算
-y = torch.randn_like(x)
-z = x + y  # element-wise 加法
-
-# 移动到 GPU
-x_cuda = x.to(&#39;cuda&#39;)
-
-# 自动求导示例
-w = torch.randn(5, requires_grad=True)
-loss = (w ** 2).sum()
-loss.backward()
-print(w.grad)
-</code></pre>
 
     </div>
 
@@ -342,13 +237,10 @@ print(w.grad)
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/06/16/MachineLearning/" rel="prev" title="MachineLearning">
-      <i class="fa fa-chevron-left"></i> MachineLearning
+    <a href="/2025/08/09/tensorflow/" rel="prev" title="tensorflow">
+      <i class="fa fa-chevron-left"></i> tensorflow
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/06/25/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" rel="next" title="线性代数">
-      线性代数 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -407,7 +299,7 @@ print(w.grad)
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PyTorch-Quick-Start-Guide-%F0%9F%9A%80"><span class="nav-number">1.</span> <span class="nav-text">PyTorch Quick Start Guide 🚀</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%9A-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">📚 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%90-%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E7%9A%84-Tensor-%E7%BB%B4%E5%BA%A6"><span class="nav-number">1.1.1.</span> <span class="nav-text">📐 常见数据的 Tensor 维度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%B0%8F%E7%BB%93"><span class="nav-number">1.2.</span> <span class="nav-text">常用函数小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%99%EF%B8%8F-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.3.</span> <span class="nav-text">⚙️ 常用操作示例</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E5%B0%84%E7%AB%AF%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">发射端信号处理流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95-txSig-txSigSTS-mFrf-%E7%9A%84%E6%84%8F%E4%B9%89"><span class="nav-number">3.</span> <span class="nav-text">矩阵乘法 txSig &#x3D; txSigSTS * mFrf 的意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%84%E9%A2%91%E6%B3%A2%E6%9D%9F%E8%B5%8B%E5%BD%A2%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">射频波束赋形的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">5.</span> <span class="nav-text">结论</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

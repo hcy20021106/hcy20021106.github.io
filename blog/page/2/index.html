@@ -150,6 +150,199 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/17/PyTorch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/17/PyTorch/" class="post-title-link" itemprop="url">PyTorch</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-06-17 20:57:35" itemprop="dateCreated datePublished" datetime="2025-06-17T20:57:35+08:00">2025-06-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-06-30 21:36:25" itemprop="dateModified" datetime="2025-06-30T21:36:25+08:00">2025-06-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h1 id="PyTorch-Quick-Start-Guide-🚀"><a href="#PyTorch-Quick-Start-Guide-🚀" class="headerlink" title="PyTorch Quick Start Guide 🚀"></a>PyTorch Quick Start Guide 🚀</h1><h2 id="📚-基本概念"><a href="#📚-基本概念" class="headerlink" title="📚 基本概念"></a>📚 基本概念</h2><h3 id="📐-常见数据的-Tensor-维度"><a href="#📐-常见数据的-Tensor-维度" class="headerlink" title="📐 常见数据的 Tensor 维度"></a>📐 常见数据的 Tensor 维度</h3><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>维度说明</th>
+<th>示例 Shape</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Scalar（标量）</td>
+<td>0-D Tensor</td>
+<td><code>torch.tensor(3.14)</code></td>
+</tr>
+<tr>
+<td>Vector（向量）</td>
+<td>1-D Tensor</td>
+<td><code>(N,)</code> → <code>[1, 2, 3]</code></td>
+</tr>
+<tr>
+<td>Audio（音频）</td>
+<td>1-D 或 2-D（多通道）</td>
+<td><code>(samples,)</code> or <code>(channels, samples)</code></td>
+</tr>
+<tr>
+<td>Grayscale Image</td>
+<td>2-D 或 3-D（加 batch）</td>
+<td><code>(H, W)</code> or <code>(N, 1, H, W)</code></td>
+</tr>
+<tr>
+<td>RGB Image</td>
+<td>3-D（C,H,W）或 4-D（N,C,H,W）</td>
+<td><code>(3, H, W)</code> or <code>(N, 3, H, W)</code></td>
+</tr>
+<tr>
+<td>Video</td>
+<td>4-D（T,C,H,W）或 5-D（N,T,C,H,W）</td>
+<td><code>(frames, 3, H, W)</code></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>✅ <strong>常用格式缩写</strong>  </p>
+<ul>
+<li><code>N</code>: Batch size  </li>
+<li><code>C</code>: Channels  </li>
+<li><code>H</code>: Height  </li>
+<li><code>W</code>: Width  </li>
+<li><code>T</code>: Time steps &#x2F; frames</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="常用函数小结"><a href="#常用函数小结" class="headerlink" title="常用函数小结"></a>常用函数小结</h2><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>unsqueeze(dim)</td>
+<td>插入新维度</td>
+</tr>
+<tr>
+<td>squeeze(dim)</td>
+<td>去除大小为1的维度</td>
+</tr>
+<tr>
+<td>transpose(a,b)</td>
+<td>交换两个维度</td>
+</tr>
+<tr>
+<td>.view()</td>
+<td>改变形状</td>
+</tr>
+<tr>
+<td>.reshape()</td>
+<td>改变形状</td>
+</tr>
+</tbody></table>
+<h2 id="⚙️-常用操作示例"><a href="#⚙️-常用操作示例" class="headerlink" title="⚙️ 常用操作示例"></a>⚙️ 常用操作示例</h2><pre><code class="language-python">import torch
+
+# 创建一个随机的 RGB 图片 Tensor: (C,H,W)
+x = torch.randn(3, 224, 224)
+y = torch.zeros([2,3])
+# 输出size, e.g., torch.Size([2,3])
+x.shape
+# cat: concatenate multiple tensors
+x = torch.zeros([2,1,3])
+y = torch.zeros([2,3,3])
+z = torch.zeros([2,2,3])
+w = torch.cat([x,y,z], dim = 1)
+# torch.Size([2,6,3])
+w.shape
+
+# 查看形状
+print(x.shape)  # torch.Size([3, 224, 224])
+
+# 交换维度: transpose
+x_transposed = x.transpose(1, 2)  # (C, W, H)
+
+# 重新排列所有维度: permute
+x_permuted = x.permute(1, 2, 0)   # (H, W, C)
+
+# 展平为一维
+x_flatten = x.view(-1)
+
+# 添加 batch 维度
+x_batched = x.unsqueeze(0)  # (1, C, H, W)
+
+# 去除维度为 1 的维度
+x_squeezed = x_batched.squeeze(0)  # (C, H, W)
+
+# 数据类型转换
+x_double = x.double()
+x_int = x.int()
+
+# 基本运算
+y = torch.randn_like(x)
+z = x + y  # element-wise 加法
+
+# 移动到 GPU
+x_cuda = x.to(&#39;cuda&#39;)
+
+# 自动求导示例
+w = torch.randn(5, requires_grad=True)
+loss = (w ** 2).sum()
+loss.backward()
+print(w.grad)
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/16/MachineLearning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -181,7 +374,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-12 01:02:55" itemprop="dateModified" datetime="2025-08-12T01:02:55+08:00">2025-08-12</time>
+                <time title="Modified: 2025-08-12 14:41:40" itemprop="dateModified" datetime="2025-08-12T14:41:40+08:00">2025-08-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -885,6 +1078,14 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
 </ul>
 <h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>Keras 的 LSTM 层接受的输入形状一般是 (batch_size, timesteps, input_dim)，<br>其中 timesteps（序列长度）可以是动态的，或者在模型构建时隐含定义。<br>如果你的 next_layer_in 是一个三维张量，Keras 会自动根据输入的 shape 识别序列长度。<br>只要你传入的数据形状符合要求，Keras 会根据实际输入动态处理序列长度，不必在代码里显式声明。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">seq_in = Input(shape=(timesteps, input_dim))</span><br></pre></td></tr></table></figure>
+
+<h4 id="LSTM参数计算公式"><a href="#LSTM参数计算公式" class="headerlink" title="LSTM参数计算公式"></a>LSTM参数计算公式</h4><p>对于一个LSTM层，参数数量是：<br>numParams &#x3D; 4 x [(units x input_dim + (units x units) + units]</p>
+<ul>
+<li>4 -&gt; 因为LSTM有4个门（输入门、遗忘门、候选单位、输出门），每个门都有一套权重</li>
+<li>units x input_dim -&gt; 输入到隐藏层的权重</li>
+<li>units x units -&gt; 隐藏到隐藏的循环权重</li>
+<li>units -&gt; 每个门的偏置</li>
+</ul>
 <h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>本示例结合一个LSTM模型的完整代码结构，介绍如何使用pandas准备数据、构建LSTM模型及计算参数量，方便初学者理解和应用。</p>
 <h5 id="1-数据预处理（pandas基础）"><a href="#1-数据预处理（pandas基础）" class="headerlink" title="1. 数据预处理（pandas基础）"></a>1. 数据预处理（pandas基础）</h5><ul>
 <li>读取CSV文件</li>
@@ -2339,109 +2540,6 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/04/%E4%BF%A1%E9%81%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/04/%E4%BF%A1%E9%81%93/" class="post-title-link" itemprop="url">信道</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-06-04 22:48:13" itemprop="dateCreated datePublished" datetime="2025-06-04T22:48:13+08:00">2025-06-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-02 07:26:24" itemprop="dateModified" datetime="2025-07-02T07:26:24+08:00">2025-07-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="定义与分类"><a href="#定义与分类" class="headerlink" title="定义与分类"></a>定义与分类</h2><ul>
-<li>狭义信道<ul>
-<li>有线信道<br>  同轴电缆，光纤</li>
-<li>无线信道<br>  微波视距传播，卫星中继，移动通信信道</li>
-</ul>
-</li>
-<li>广义信道<ul>
-<li>调制信道<br>  调制器输出-&gt;解调器输入</li>
-<li>编码信道<br>  编码器输出-&gt;译码器输入</li>
-</ul>
-</li>
-</ul>
-<h3 id="调制信道"><a href="#调制信道" class="headerlink" title="调制信道"></a>调制信道</h3><p>有一对一&#x2F;一对多的输入输出端，满足线性叠加原理，对信号有时变和时不变的两种延迟和损耗，其数学模型是叠加有噪声的线性时变&#x2F;时不变滤波器</p>
-<h4 id="恒参信道"><a href="#恒参信道" class="headerlink" title="恒参信道"></a>恒参信道</h4><p>对应的信道特性为线性时不变滤波器。<br>理想恒参信道的特征：<br>$s_0(t) &#x3D; Ks_i(t - t_d)$<br>$H(w) &#x3D; Ke^{-jwt_d}$<br>因此这个恒参信道的幅频特性和相频特性分别为 $|H| &#x3D; K$ 相频特性$\phi(w) &#x3D; -wt_d$， 群时延特性$\tau(w) &#x3D; -\frac{d\phi(w)}{dw} &#x3D; t_d$,  </p>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>如果输入的频谱有两个分量，系统的 幅频响应 和 相频响应 会分别对这两个频率分量产生不同的幅度缩放和相位偏移。<br>假如输入信号为两个频域分量的叠加：<br>$x(t) &#x3D; A_1 \cos(\omega_1 t) + A_2 \cos(\omega_2 t)$<br>对应的频域表示为两根谱线：<br>$X(j\omega) &#x3D; \frac{A_1}{2} \left[ \delta(\omega - \omega_1) + \delta(\omega + \omega_1) \right] + \frac{A_2}{2} \left[ \delta(\omega - \omega_2) + \delta(\omega + \omega_2) \right]$<br>系统频率响应表示为：<br>$H(j\omega) &#x3D; |H(j\omega)| e^{j \phi(\omega)}$<br>系统输出频域为输入频谱与频率响应的乘积<br>$Y(j\omega) &#x3D; H(j\omega) \cdot X(j\omega)$<br>分别作用于两个频率分量：<br>$<br>\begin{cases}<br>\text{频率 } \omega_1 \text{ 分量的幅度变为 } A_1 |H(j\omega_1)|, \quad \text{相位增加 } \phi(\omega_1) \<br>\text{频率 } \omega_2 \text{ 分量的幅度变为 } A_2 |H(j\omega_2)|, \quad \text{相位增加 } \phi(\omega_2)<br>\end{cases}<br>$<br>因此，输出信号为：<br>$y(t) &#x3D; A_1 |H(j\omega_1)| \cos\left(\omega_1 t + \phi(\omega_1)\right) + A_2 |H(j\omega_2)| \cos\left(\omega_2 t + \phi(\omega_2)\right)$</p>
-</blockquote>
-<hr>
-<p>由此分析可得对信号不同频率分量放大或衰减倍数相同，由于群时延特性为常数因此信号不同频率分量到底，输出端的时间先后一致<br>然后，现实中的信道会出现幅频失真、相频失真和群时延失真的情况。也就是说对信号不同频率分量放大或者衰减倍数不同。或者信号不同频率分量到达输出端的时间先后不一。但是这些失真不产生新的频率分量，因此均为线性失真。</p>
-<h4 id="随参信道"><a href="#随参信道" class="headerlink" title="随参信道"></a>随参信道</h4><p>原因：<br>由于多径效应产生的时延差。<br>特性：<br>存在时变的衰减和时延<br>存在多径传播现象<br>$r(t) &#x3D; \sum_{i &#x3D; 1}^{n}a_i(t)cosw_c[t-\tau_i(t)] &#x3D; X(t)cosw_ct - Y(t)sinw_ct$<br>其中$a_i(t)$为 <strong>时变衰落</strong> ，$\tau_i(t)$为<strong>时变时延</strong>，X(t)为窄带信号的同相分量，Y(t)为正交分量，其均方和的开方为随机包络，arctan为随机相位。<br>多路传播的影响：<strong>瑞利衰落</strong>.<br>$r(t) &#x3D; \sum_{i&#x3D;1}^{n} a_i(t) \left( \cos \phi_i(t) \cos w_c t - \sin \phi_i(t) \sin w_c t \right)$<br>进一步写成随机包络+随机相位的形式：<br>$r(t) &#x3D; X_t \cos w_c t - Y_t \sin w_c t$<br>其中X(t)和Y(t)分别为同相分量和正交分量,进一步写成随机包络+随机相位的形式<br>$r(t) &#x3D; V(t)cos[w_ct+\phi(t)]$.<br>其中V(t)为X(t)和Y(t)的平方和的开方，服从瑞利分布，$\phi(t)$为$arctan\frac{Y(t)}{X(t)}$,服从均匀分布</p>
-<h4 id="OFDM信号经过随参信道的Python示例代码"><a href="#OFDM信号经过随参信道的Python示例代码" class="headerlink" title="OFDM信号经过随参信道的Python示例代码"></a>OFDM信号经过随参信道的Python示例代码</h4><p>下面示例代码展示如何生成多径瑞利信道的频率响应，及经过该信道的接收pilot信号：</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="number">1000</span>;           <span class="comment">% 数据组数</span></span><br><span class="line">L = <span class="number">6</span>;              <span class="comment">% 多径数</span></span><br><span class="line">Nfft = <span class="number">2048</span>;        <span class="comment">% FFT点数</span></span><br><span class="line">pilotLen = <span class="number">128</span>;     <span class="comment">% pilot信号长度</span></span><br><span class="line">snr_dB = <span class="number">20</span>;        <span class="comment">% 信噪比</span></span><br><span class="line"></span><br><span class="line">Hs = <span class="built_in">zeros</span>(N, Nfft);           <span class="comment">% 频率响应矩阵</span></span><br><span class="line">rxSignals = <span class="built_in">zeros</span>(N, pilotLen); <span class="comment">% 接收pilot信号矩阵</span></span><br><span class="line"></span><br><span class="line">f = (<span class="number">0</span>:Nfft<span class="number">-1</span>)/Nfft;          <span class="comment">% 归一化频率</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> idx = <span class="number">1</span>:N</span><br><span class="line">    pathDelay = <span class="built_in">sort</span>(<span class="built_in">rand</span>(<span class="number">1</span>,L) * <span class="number">3e-7</span>);        <span class="comment">% 随机路径时延（秒）</span></span><br><span class="line">    pathPower = <span class="built_in">ones</span>(<span class="number">1</span>,L)/L;                    <span class="comment">% 均匀功率分布</span></span><br><span class="line">    a = <span class="built_in">sqrt</span>(pathPower/<span class="number">2</span>).*(<span class="built_in">randn</span>(<span class="number">1</span>,L)+<span class="number">1</span><span class="built_in">j</span>*<span class="built_in">randn</span>(<span class="number">1</span>,L)); <span class="comment">% 复数瑞利衰落增益</span></span><br><span class="line">    </span><br><span class="line">    H = <span class="built_in">zeros</span>(<span class="number">1</span>, Nfft);</span><br><span class="line">    <span class="keyword">for</span> k = <span class="number">1</span>:Nfft</span><br><span class="line">        H(k) = sum(a .* <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">j</span>*<span class="number">2</span>*<span class="built_in">pi</span>*f(k)*pathDelay)); <span class="comment">% 频率响应叠加</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    Hs(idx,:) = H;</span><br><span class="line">    </span><br><span class="line">    symbols = <span class="built_in">exp</span>(<span class="number">1</span><span class="built_in">j</span>*<span class="built_in">pi</span>/<span class="number">2</span>*randi([<span class="number">0</span> <span class="number">3</span>],<span class="number">1</span>,pilotLen));   <span class="comment">% 随机QPSK pilot信号</span></span><br><span class="line">    </span><br><span class="line">    h_time = <span class="built_in">zeros</span>(<span class="number">1</span>, pilotLen);</span><br><span class="line">    tapIndex = <span class="built_in">round</span>(pathDelay / (<span class="number">3e-7</span>/pilotLen)) + <span class="number">1</span>; <span class="comment">% 时延映射采样点</span></span><br><span class="line">    tapIndex(tapIndex &gt; pilotLen) = pilotLen;         <span class="comment">% 防止超出边界</span></span><br><span class="line">    <span class="keyword">for</span> l = <span class="number">1</span>:L</span><br><span class="line">        h_time(tapIndex(l)) = a(l);                     <span class="comment">% 构造时域冲激响应</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    rxSignal = conv(symbols, h_time, <span class="string">&#x27;same&#x27;</span>);          <span class="comment">% 时域卷积模拟信道传输</span></span><br><span class="line">    signalPower = <span class="built_in">mean</span>(<span class="built_in">abs</span>(rxSignal).^<span class="number">2</span>);</span><br><span class="line">    noisePower = signalPower / (<span class="number">10</span>^(snr_dB/<span class="number">10</span>));</span><br><span class="line">    noise = <span class="built_in">sqrt</span>(noisePower/<span class="number">2</span>)*(<span class="built_in">randn</span>(<span class="built_in">size</span>(rxSignal))+<span class="number">1</span><span class="built_in">j</span>*<span class="built_in">randn</span>(<span class="built_in">size</span>(rxSignal)));</span><br><span class="line">    </span><br><span class="line">    rxSignals(idx,:) = rxSignal + noise;               <span class="comment">% 添加AWGN噪声</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>在实际仿真中，信道时域冲激响应 h_time 的长度（即维度）不必与pilot信号长度相同，<br><br>它只需包含有效的多径分量（即最大时延对应的采样点数），通常远小于 pilotLen，<br><br>这样可以减少计算开销，提高仿真效率。<br><br>只需保证信道时域响应长度足够覆盖所有路径时延即可。<br><br>而且不会影响结果（使用循环卷积）<br></p>
-</blockquote>
-<hr>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2511,7 +2609,7 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
