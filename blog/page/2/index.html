@@ -374,7 +374,7 @@ print(w.grad)
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-19 12:50:41" itemprop="dateModified" datetime="2025-08-19T12:50:41+08:00">2025-08-19</time>
+                <time title="Modified: 2025-08-19 23:23:42" itemprop="dateModified" datetime="2025-08-19T23:23:42+08:00">2025-08-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -543,7 +543,8 @@ print(w.grad)
 </blockquote>
 <hr>
 <ul>
-<li><p><strong>展平层</strong>: 将卷积层输出展平成一维向量<br>输入维度为：<br>$$<br>32 \times 64 \times 64 &#x3D; 131072<br>$$</p>
+<li><p><strong>展平层</strong>: 将卷积层输出展平成一维向量<br>Flatten是将卷积层中提取到的空间特征展开为一维向量。用于后续全连接层。</p>
+<p>输入维度为：<br>$$<br>32 \times 64 \times 64 &#x3D; 131072<br>$$</p>
 </li>
 <li><p><strong>全连接层1</strong>: <code>nn.Linear(131072, 64)</code>  </p>
 </li>
@@ -597,6 +598,20 @@ print(w.grad)
 </ul>
 <h4 id="训练循环"><a href="#训练循环" class="headerlink" title="训练循环"></a>训练循环</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">n_epochs = 10</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(n_epochs):</span><br><span class="line">    model.train()</span><br><span class="line">    running_loss = 0.0</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> dataloader:</span><br><span class="line">        x, y = x.to(device), y.float().to(device)</span><br><span class="line">        </span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        pred = model(x)</span><br><span class="line">        loss = criterion(pred, y)</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line"></span><br><span class="line">        running_loss += loss.item() * x.size(0)</span><br><span class="line"></span><br><span class="line">    epoch_loss = running_loss / len(dataset)</span><br><span class="line">    <span class="built_in">print</span>(f<span class="string">&quot;Epoch &#123;epoch+1&#125;/&#123;n_epochs&#125; - Loss: &#123;epoch_loss:.4f&#125;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;训练完成！&quot;</span>)</span><br></pre></td></tr></table></figure>
 
+<h3 id="CNN-ResNet-Residual-Network"><a href="#CNN-ResNet-Residual-Network" class="headerlink" title="CNN + ResNet (Residual Network)"></a>CNN + ResNet (Residual Network)</h3><p>残差结构:<br>$y &#x3D; F(x) + x$<br>解决了深层网络梯度消失、退化问题<br>RestNet还会应用在Attention&#x2F;Transformer中，例如在Transformer中大量使用了残差连接+LayerNorm，在Attention中，每个Self-Attention层、Feed Forward层外面都有一个残差。没有残差，Transformer就很难训练深层结构。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">from torch import nn</span><br><span class="line">from torch.nn import functional as F</span><br><span class="line">from d2l import torch as d2l</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">class Residual(nn.Module):  </span><br><span class="line">    def __init__(self, input_channels, num_channels,</span><br><span class="line">                 use_1x1conv=False, strides=1):</span><br><span class="line">        super().__init__()</span><br><span class="line">        self.conv1 = nn.Conv2d(input_channels, num_channels,</span><br><span class="line">                               kernel_size=3, padding=1, stride=strides)</span><br><span class="line">        self.conv2 = nn.Conv2d(num_channels, num_channels,</span><br><span class="line">                               kernel_size=3, padding=1)</span><br><span class="line">        <span class="keyword">if</span> use_1x1conv:</span><br><span class="line">            self.conv3 = nn.Conv2d(input_channels, num_channels,</span><br><span class="line">                                   kernel_size=1, stride=strides)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.conv3 = None</span><br><span class="line">        self.bn1 = nn.BatchNorm2d(num_channels)</span><br><span class="line">        self.bn2 = nn.BatchNorm2d(num_channels)</span><br><span class="line"> </span><br><span class="line">    def forward(self, X):</span><br><span class="line">        Y = F.relu(self.bn1(self.conv1(X)))</span><br><span class="line">        Y = self.bn2(self.conv2(Y))</span><br><span class="line">        <span class="keyword">if</span> self.conv3:</span><br><span class="line">            X = self.conv3(X)</span><br><span class="line">        Y += X</span><br><span class="line">        <span class="built_in">return</span> F.relu(Y)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这段代码实现了RestNet的残差块:</p>
+<ul>
+<li>两个3x3卷积+BN</li>
+<li>可选1x1卷积来匹配通道或大小</li>
+<li>残差连接Y + X</li>
+<li>最后经过ReLU</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>1x1的卷积层通常用来调整输出的通道维度，因为1x1卷积不会局部空间特征。<br></p>
+</blockquote>
+<hr>
 <h3 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h3><p>在分类中，需要讲线性输出映射到概率</p>
 <h4 id="Sigmoid（二分类）"><a href="#Sigmoid（二分类）" class="headerlink" title="Sigmoid（二分类）"></a>Sigmoid（二分类）</h4><p>模型：<br>$p &#x3D; \sigma(z) &#x3D; \frac{1}{1 + e^{-z}},\quad z &#x3D; b + \sum_j w_j x_j$.<br>预测类别：<br>$\hat{y} &#x3D;\begin{cases} 1 &amp; \text{if } p &gt; 0.5 \ 0 &amp; \text{otherwise} \end{cases}$.<br>Binary Cross-Entropy Loss (BCL):<br>$L(b, w) &#x3D; -\frac{1}{N} \sum_{n&#x3D;1}^{N} [, y_n \log p_n + (1 - y_n) \log (1 - p_n)$</p>
 <h4 id="Softmax（多分类）"><a href="#Softmax（多分类）" class="headerlink" title="Softmax（多分类）"></a>Softmax（多分类）</h4><p>对于$K$个类别<br>$p_k &#x3D; \frac{e^{z_k}}{\sum_{j&#x3D;1}^{K} e^{z_j}},\quad z_k &#x3D; b_k + \sum_j w_{kj} x_j \quad k&#x3D;1 \dots,K$.<br>Multiclass Cross-Entropy Loss:<br>$L(b, w) &#x3D; -\frac{1}{N} \sum_{n&#x3D;1}^{N} \sum_{k&#x3D;1}^{K} y_{nk} \log p_{nk}$。<br>其中：<br>$y_{nk} &#x3D; 1$ if sample $n$ is of class $k$, otherwise $0$.<br>因此这里用了one-hot编码，因为只考虑了只有真实类别对应的$y_{nk} &#x3D; 1$,其余为0，$p_{nk}$是Softmax后预测属于类别k的概率</p>
@@ -1093,7 +1108,7 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
 <li>units x units -&gt; 隐藏到隐藏的循环权重</li>
 <li>units -&gt; 每个门的偏置</li>
 </ul>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>本示例结合一个LSTM模型的完整代码结构，介绍如何使用pandas准备数据、构建LSTM模型及计算参数量，方便初学者理解和应用。</p>
+<h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><p>本示例结合一个LSTM模型的完整代码结构，介绍如何使用pandas准备数据、构建LSTM模型及计算参数量，方便初学者理解和应用。</p>
 <h5 id="1-数据预处理（pandas基础）"><a href="#1-数据预处理（pandas基础）" class="headerlink" title="1. 数据预处理（pandas基础）"></a>1. 数据预处理（pandas基础）</h5><ul>
 <li>读取CSV文件</li>
 </ul>
