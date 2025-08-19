@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="基本转换将某一数据类型(bytes, array)直接转换成NumPy数组 1np.frombuffer() 将输入的arr数组转为指定形状的arr，可以指定长宽，若某个为-1，则会自动计算其长或宽的大小 1np.reshape(arr,(height,depth))   np.linalg.norm()默认情况下： 1np.linalg.norm(x) 计算的是 x 的L2范数，数学表达式是：‖">
+  <meta name="description" content="从Python 列表&#x2F;元组构建1234567import numpy as npa &#x3D; np.array([1, 2, 3])        # 1D 数组print(a, type(a))              # [1 2 3] &lt;class &#x27;numpy.ndarray&#x27;&gt;b &#x3D; np.array([[1, 2], [3, 4]]) # 2D 数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="numpy">
 <meta property="og:url" content="https://hechenyi.github.io/2025/06/07/numpy/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="基本转换将某一数据类型(bytes, array)直接转换成NumPy数组 1np.frombuffer() 将输入的arr数组转为指定形状的arr，可以指定长宽，若某个为-1，则会自动计算其长或宽的大小 1np.reshape(arr,(height,depth))   np.linalg.norm()默认情况下： 1np.linalg.norm(x) 计算的是 x 的L2范数，数学表达式是：‖">
+<meta property="og:description" content="从Python 列表&#x2F;元组构建1234567import numpy as npa &#x3D; np.array([1, 2, 3])        # 1D 数组print(a, type(a))              # [1 2 3] &lt;class &#x27;numpy.ndarray&#x27;&gt;b &#x3D; np.array([[1, 2], [3, 4]]) # 2D 数">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-07T13:53:37.000Z">
-<meta property="article:modified_time" content="2025-08-05T12:23:30.516Z">
+<meta property="article:modified_time" content="2025-08-19T07:37:40.008Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -185,7 +185,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-05 20:23:30" itemprop="dateModified" datetime="2025-08-05T20:23:30+08:00">2025-08-05</time>
+                <time title="Modified: 2025-08-19 15:37:40" itemprop="dateModified" datetime="2025-08-19T15:37:40+08:00">2025-08-19</time>
               </span>
 
           
@@ -199,7 +199,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="基本转换"><a href="#基本转换" class="headerlink" title="基本转换"></a>基本转换</h2><p>将某一数据类型(bytes, array)直接转换成NumPy数组</p>
+        <h2 id="从Python-列表-元组构建"><a href="#从Python-列表-元组构建" class="headerlink" title="从Python 列表&#x2F;元组构建"></a>从Python 列表&#x2F;元组构建</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">a = np.array([1, 2, 3])        <span class="comment"># 1D 数组</span></span><br><span class="line"><span class="built_in">print</span>(a, <span class="built_in">type</span>(a))              <span class="comment"># [1 2 3] &lt;class &#x27;numpy.ndarray&#x27;&gt;</span></span><br><span class="line"></span><br><span class="line">b = np.array([[1, 2], [3, 4]]) <span class="comment"># 2D 数组</span></span><br><span class="line"><span class="built_in">print</span>(b)</span><br></pre></td></tr></table></figure>
+<h2 id="创建特殊数组"><a href="#创建特殊数组" class="headerlink" title="创建特殊数组"></a>创建特殊数组</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">np.zeros((<span class="number">3</span>, <span class="number">4</span>))     <span class="comment"># 3x4 全零数组</span></span><br><span class="line">np.ones((<span class="number">2</span>, <span class="number">3</span>))      <span class="comment"># 2x3 全 1 数组</span></span><br><span class="line">np.eye(3)            <span class="comment"># 3x3 单位矩阵</span></span><br><span class="line">np.full((<span class="number">2</span>,<span class="number">2</span>), <span class="number">7</span>)    # <span class="number">2</span>x2 全部填充 <span class="number">7</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="随机数组"><a href="#随机数组" class="headerlink" title="随机数组"></a>随机数组</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">np.random.rand(2, 3)          <span class="comment"># 2x3 [0,1) 均匀分布</span></span><br><span class="line">np.random.randn(2, 3)         <span class="comment"># 2x3 标准正态分布</span></span><br><span class="line">np.random.randint(0, 10, (2,3)) <span class="comment"># 2x3 整数 [0,10)</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="基本转换"><a href="#基本转换" class="headerlink" title="基本转换"></a>基本转换</h2><p>将某一数据类型(bytes, array)直接转换成NumPy数组</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.frombuffer()</span><br></pre></td></tr></table></figure>
 <p>将输入的arr数组转为指定形状的arr，可以指定长宽，若某个为-1，则会自动计算其长或宽的大小</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.reshape(arr,(height,depth))</span><br></pre></td></tr></table></figure>
@@ -209,6 +212,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.linalg.norm(x)</span><br></pre></td></tr></table></figure>
 <p>计算的是 x 的L2范数，数学表达式是：<br>‖x‖₂ &#x3D; sqrt(∑ |xᵢ|²)<br>如果 x 是 矩阵（2D 数组），默认会把它拉平成一个长向量再计算.<br>如果你写成 np.linalg.norm(x)**2，就相当于只做平方求和，不再开方 —— 等价于：<br>np.sum(np.abs(x)**2)</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">x = np.array([[3, 4],</span><br><span class="line">              [1, 2]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认 L2 范数（拉平成向量后）</span></span><br><span class="line">norm_x = np.linalg.norm(x)          <span class="comment"># sqrt(3² + 4² + 1² + 2²) = sqrt(30)</span></span><br><span class="line">norm_x_squared = norm_x ** 2        <span class="comment"># = 30</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 等价写法</span></span><br><span class="line">same_result = np.sum(np.abs(x)**2)  <span class="comment"># 30</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="np-unique"><a href="#np-unique" class="headerlink" title="np.unique"></a>np.unique</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unique_hashes = np.unique(self.dataset[<span class="string">&#x27;X&#x27;</span>][:, 0])</span><br><span class="line"><span class="built_in">print</span>(len(unique_hashes))</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -289,7 +294,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.</span> <span class="nav-text">基本转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#np-linalg-norm"><span class="nav-number">2.</span> <span class="nav-text">np.linalg.norm()</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8EPython-%E5%88%97%E8%A1%A8-%E5%85%83%E7%BB%84%E6%9E%84%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">从Python 列表&#x2F;元组构建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%89%B9%E6%AE%8A%E6%95%B0%E7%BB%84"><span class="nav-number">2.</span> <span class="nav-text">创建特殊数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%BB%84"><span class="nav-number">3.</span> <span class="nav-text">随机数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%BD%AC%E6%8D%A2"><span class="nav-number">4.</span> <span class="nav-text">基本转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#np-linalg-norm"><span class="nav-number">5.</span> <span class="nav-text">np.linalg.norm()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#np-unique"><span class="nav-number">6.</span> <span class="nav-text">np.unique</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -374,7 +374,7 @@ print(w.grad)
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-12 14:41:40" itemprop="dateModified" datetime="2025-08-12T14:41:40+08:00">2025-08-12</time>
+                <time title="Modified: 2025-08-19 12:50:41" itemprop="dateModified" datetime="2025-08-19T12:50:41+08:00">2025-08-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -407,7 +407,9 @@ print(w.grad)
 <h3 id="Linear-Model"><a href="#Linear-Model" class="headerlink" title="Linear Model"></a>Linear Model</h3><h4 id="Define-function-with-unknown-parameters"><a href="#Define-function-with-unknown-parameters" class="headerlink" title="Define function with unknown parameters"></a>Define function with unknown parameters</h4><p>Model: $y &#x3D; b + w_1x_1$ based on domain knowledge<br>w (weight) and b (bias) are unknown parameters (learn from data)<br>如果是一组包含有多个feature（例如同时考虑前七天的数据来进行预测）<br>那么$y &#x3D; b + \sum_j w_jx_j$</p>
 <h4 id="Define-Loss-from-Training-Data"><a href="#Define-Loss-from-Training-Data" class="headerlink" title="Define Loss from Training Data"></a>Define Loss from Training Data</h4><p>Loss is a function of the unknown parameters: L(b,w)<br>e.g., L(0.5k, 1) corresponding to $\hat{y} &#x3D; 0.5k + 1x_1$.<br>$\hat{y}$ is predicted value, y is ground truth (target)<br>我们定义一个loss function为:<br>$e_n &#x3D; |y_n - \hat{y_n}|$  </p>
 <p>Loss: $L(b, w) &#x3D; \frac{1}{N} \sum_{n&#x3D;1}^{N} \left| y_n - \hat{y}_n \right|$</p>
-<h2 id="其中y为真实值，-hat-y-为预测值-这里我们定义的Loss是mean-absolute-error-（MAE），如果是mean-square-error（MSE），则是差值的的平方。"><a href="#其中y为真实值，-hat-y-为预测值-这里我们定义的Loss是mean-absolute-error-（MAE），如果是mean-square-error（MSE），则是差值的的平方。" class="headerlink" title="其中y为真实值，$\hat{y}$为预测值,这里我们定义的Loss是mean absolute error （MAE），如果是mean square error（MSE），则是差值的的平方。"></a>其中y为真实值，$\hat{y}$为预测值,这里我们定义的Loss是mean absolute error （MAE），如果是mean square error（MSE），则是差值的的平方。</h2><blockquote>
+<p>其中y为真实值，$\hat{y}$为预测值,这里我们定义的Loss是mean absolute error （MAE），如果是mean square error（MSE），则是差值的的平方。</p>
+<hr>
+<blockquote>
 <p><strong>Notice</strong><br><br>除了常见的 MAE（平均绝对误差）和 MSE（均方误差）之外，NMSE（归一化均方误差）也是一种常用的评价指标。NMSE<br><br>是将均方误差归一化到真实信号的能量上，计算公式为：<br><br>$\text{NMSE} &#x3D; \frac{\sum ( \hat{y}_i - y_i )^2}{\sum y_i^2}$<br><br>它衡量的是预测误差相对于真实信号强度的比例，适合用于信号处理、通信等领域，可以更公平地反映预测性能，特别是在信号幅度变化较大时。<br></p>
 </blockquote>
 <hr>
@@ -485,6 +487,11 @@ print(w.grad)
 <li>Conv1d.<br>一维卷积，常用于处理时间序列，文本序列等。在构建时需要设定out_channels, kernel_size, stride, padding等参数<br>输入张量维度为（batch_size, channels, length）</li>
 <li>Conv2d.<br>二维卷积，常用于图像处理。在构建时同样需要设定out_channels, kernel_size, stride, padding等参数<br>输入张量形状为(batch_size, channels, height, width),</li>
 </ul>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>所以在model.summay()里，第一个维度显示为<strong>None</strong>, 这就是batch size可变的占位符<br></p>
+</blockquote>
+<hr>
 <h5 id="输入数据格式"><a href="#输入数据格式" class="headerlink" title="输入数据格式"></a>输入数据格式</h5><ul>
 <li>输入图像为彩色图像（RGB），尺寸统一为 256×256 像素。</li>
 <li>输入张量形状为 <code>[batch_size, 3, 256, 256]</code>，其中 <code>3</code> 是通道数（RGB），<code>batch_size</code> 是批量大小。</li>
@@ -2179,7 +2186,7 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-05 20:23:30" itemprop="dateModified" datetime="2025-08-05T20:23:30+08:00">2025-08-05</time>
+                <time title="Modified: 2025-08-19 15:37:40" itemprop="dateModified" datetime="2025-08-19T15:37:40+08:00">2025-08-19</time>
               </span>
 
           
@@ -2194,7 +2201,10 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
 
       
       
-          <h2 id="基本转换"><a href="#基本转换" class="headerlink" title="基本转换"></a>基本转换</h2><p>将某一数据类型(bytes, array)直接转换成NumPy数组</p>
+          <h2 id="从Python-列表-元组构建"><a href="#从Python-列表-元组构建" class="headerlink" title="从Python 列表&#x2F;元组构建"></a>从Python 列表&#x2F;元组构建</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">a = np.array([1, 2, 3])        <span class="comment"># 1D 数组</span></span><br><span class="line"><span class="built_in">print</span>(a, <span class="built_in">type</span>(a))              <span class="comment"># [1 2 3] &lt;class &#x27;numpy.ndarray&#x27;&gt;</span></span><br><span class="line"></span><br><span class="line">b = np.array([[1, 2], [3, 4]]) <span class="comment"># 2D 数组</span></span><br><span class="line"><span class="built_in">print</span>(b)</span><br></pre></td></tr></table></figure>
+<h2 id="创建特殊数组"><a href="#创建特殊数组" class="headerlink" title="创建特殊数组"></a>创建特殊数组</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">np.zeros((<span class="number">3</span>, <span class="number">4</span>))     <span class="comment"># 3x4 全零数组</span></span><br><span class="line">np.ones((<span class="number">2</span>, <span class="number">3</span>))      <span class="comment"># 2x3 全 1 数组</span></span><br><span class="line">np.eye(3)            <span class="comment"># 3x3 单位矩阵</span></span><br><span class="line">np.full((<span class="number">2</span>,<span class="number">2</span>), <span class="number">7</span>)    # <span class="number">2</span>x2 全部填充 <span class="number">7</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="随机数组"><a href="#随机数组" class="headerlink" title="随机数组"></a>随机数组</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">np.random.rand(2, 3)          <span class="comment"># 2x3 [0,1) 均匀分布</span></span><br><span class="line">np.random.randn(2, 3)         <span class="comment"># 2x3 标准正态分布</span></span><br><span class="line">np.random.randint(0, 10, (2,3)) <span class="comment"># 2x3 整数 [0,10)</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="基本转换"><a href="#基本转换" class="headerlink" title="基本转换"></a>基本转换</h2><p>将某一数据类型(bytes, array)直接转换成NumPy数组</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.frombuffer()</span><br></pre></td></tr></table></figure>
 <p>将输入的arr数组转为指定形状的arr，可以指定长宽，若某个为-1，则会自动计算其长或宽的大小</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.reshape(arr,(height,depth))</span><br></pre></td></tr></table></figure>
@@ -2204,6 +2214,8 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.linalg.norm(x)</span><br></pre></td></tr></table></figure>
 <p>计算的是 x 的L2范数，数学表达式是：<br>‖x‖₂ &#x3D; sqrt(∑ |xᵢ|²)<br>如果 x 是 矩阵（2D 数组），默认会把它拉平成一个长向量再计算.<br>如果你写成 np.linalg.norm(x)**2，就相当于只做平方求和，不再开方 —— 等价于：<br>np.sum(np.abs(x)**2)</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">x = np.array([[3, 4],</span><br><span class="line">              [1, 2]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认 L2 范数（拉平成向量后）</span></span><br><span class="line">norm_x = np.linalg.norm(x)          <span class="comment"># sqrt(3² + 4² + 1² + 2²) = sqrt(30)</span></span><br><span class="line">norm_x_squared = norm_x ** 2        <span class="comment"># = 30</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 等价写法</span></span><br><span class="line">same_result = np.sum(np.abs(x)**2)  <span class="comment"># 30</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="np-unique"><a href="#np-unique" class="headerlink" title="np.unique"></a>np.unique</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unique_hashes = np.unique(self.dataset[<span class="string">&#x27;X&#x27;</span>][:, 0])</span><br><span class="line"><span class="built_in">print</span>(len(unique_hashes))</span><br></pre></td></tr></table></figure>
 
       
     </div>
