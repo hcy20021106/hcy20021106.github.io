@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="🧠 MVC Architecture🟢 Model (PizzaModel.java) Manages pizza size and toppings Maintains pricing data for sizes and toppings Calculates total price dynamically  Size Prices   Size Base Price    Small">
+  <meta name="description" content="基本概念使用网络结构来降维，降维的网络被称为Encoder，这个Encoder就是很多个隐藏层网络的网络结构，它也有一个对应的Decoder，也是网络结构。 例子123Input Image (28 x 28 &#x3D; 784) -&gt; Encoder -&gt; codeword (&lt; 784)codeword -&gt; Decoder -&gt; Output Image Encoder">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MVC">
-<meta property="og:url" content="https://hechenyi.github.io/2025/06/12/MVC/index.html">
+<meta property="og:title" content="DeepAutoencoder">
+<meta property="og:url" content="https://hechenyi.github.io/2025/08/20/DeepAutoencoder/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="🧠 MVC Architecture🟢 Model (PizzaModel.java) Manages pizza size and toppings Maintains pricing data for sizes and toppings Calculates total price dynamically  Size Prices   Size Base Price    Small">
+<meta property="og:description" content="基本概念使用网络结构来降维，降维的网络被称为Encoder，这个Encoder就是很多个隐藏层网络的网络结构，它也有一个对应的Decoder，也是网络结构。 例子123Input Image (28 x 28 &#x3D; 784) -&gt; Encoder -&gt; codeword (&lt; 784)codeword -&gt; Decoder -&gt; Output Image Encoder">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-06-12T13:42:50.000Z">
-<meta property="article:modified_time" content="2025-06-12T13:51:23.895Z">
+<meta property="article:published_time" content="2025-08-20T15:05:37.000Z">
+<meta property="article:modified_time" content="2025-08-20T15:36:09.278Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hechenyi.github.io/2025/06/12/MVC/">
+<link rel="canonical" href="https://hechenyi.github.io/2025/08/20/DeepAutoencoder/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>MVC | Hexo</title>
+  <title>DeepAutoencoder | Hexo</title>
   
 
 
@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/12/MVC/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/20/DeepAutoencoder/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -168,7 +168,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          MVC
+          DeepAutoencoder
         </h1>
 
         <div class="post-meta">
@@ -179,7 +179,16 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-06-12 21:42:50 / Modified: 21:51:23" itemprop="dateCreated datePublished" datetime="2025-06-12T21:42:50+08:00">2025-06-12</time>
+              <time title="Created: 2025-08-20 23:05:37 / Modified: 23:36:09" itemprop="dateCreated datePublished" datetime="2025-08-20T23:05:37+08:00">2025-08-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                </span>
             </span>
 
           
@@ -193,90 +202,43 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <hr>
-<h2 id="🧠-MVC-Architecture"><a href="#🧠-MVC-Architecture" class="headerlink" title="🧠 MVC Architecture"></a>🧠 MVC Architecture</h2><h3 id="🟢-Model-PizzaModel-java"><a href="#🟢-Model-PizzaModel-java" class="headerlink" title="🟢 Model (PizzaModel.java)"></a>🟢 Model (<code>PizzaModel.java</code>)</h3><ul>
-<li>Manages pizza size and toppings</li>
-<li>Maintains pricing data for sizes and toppings</li>
-<li>Calculates total price dynamically</li>
-</ul>
-<h4 id="Size-Prices"><a href="#Size-Prices" class="headerlink" title="Size Prices"></a>Size Prices</h4><table>
-<thead>
-<tr>
-<th>Size</th>
-<th>Base Price</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Small</td>
-<td>€4.00</td>
-</tr>
-<tr>
-<td>Medium</td>
-<td>€5.50</td>
-</tr>
-<tr>
-<td>Large</td>
-<td>€7.00</td>
-</tr>
-</tbody></table>
-<h4 id="Topping-Price-based-on-selected-size"><a href="#Topping-Price-based-on-selected-size" class="headerlink" title="Topping Price (based on selected size)"></a>Topping Price (based on selected size)</h4><table>
-<thead>
-<tr>
-<th>Size</th>
-<th>Topping Price</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Small</td>
-<td>€0.75</td>
-</tr>
-<tr>
-<td>Medium</td>
-<td>€1.00</td>
-</tr>
-<tr>
-<td>Large</td>
-<td>€1.45</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="🟡-View-PizzaView-java"><a href="#🟡-View-PizzaView-java" class="headerlink" title="🟡 View (PizzaView.java)"></a>🟡 View (<code>PizzaView.java</code>)</h3><ul>
-<li>Built with Java Swing</li>
-<li>Contains:<ul>
-<li>Size selection (radio buttons)</li>
-<li>Toppings selection (radio buttons)</li>
-<li>Total price display (<code>JTextField</code>)</li>
-<li>Pizza image (<code>Pizza.jpeg</code>)</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>Layout uses <code>BorderLayout</code> with components divided into size panel, topping panel, total price panel, and center image.</p>
-</blockquote>
-<hr>
-<h3 id="🔵-Controller-PizzaController-java"><a href="#🔵-Controller-PizzaController-java" class="headerlink" title="🔵 Controller (PizzaController.java)"></a>🔵 Controller (<code>PizzaController.java</code>)</h3><p>绑定View与Model</p>
+        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>使用网络结构来降维，降维的网络被称为Encoder，这个Encoder就是很多个隐藏层网络的网络结构，它也有一个对应的Decoder，也是网络结构。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input Image (28 x 28 = 784) -&gt; Encoder -&gt; codeword (&lt; 784)</span><br><span class="line"></span><br><span class="line">codeword -&gt; Decoder -&gt; Output Image</span><br></pre></td></tr></table></figure>
+<p>Encoder和Decoder需要learn together</p>
+<h2 id="以CSI压缩为例"><a href="#以CSI压缩为例" class="headerlink" title="以CSI压缩为例"></a>以CSI压缩为例</h2><p>在无线通信中，为了进一步压缩CSI矩阵，可以使用基于深度自动编码器的策略</p>
 <ul>
-<li>Binds user interaction to logic</li>
-<li>Registers <code>ActionListener</code> to size and topping buttons<br>使用SizeRadioButtonListener类实现了ActionListener接口，用来监听用户点击按钮的行为。<br>然后给button通过addActionListener这个类从而实现监听功能</li>
-<li>On user interaction:<ul>
-<li>Updates model with size&#x2F;toppings</li>
-<li>Recalculates and updates price in the view</li>
+<li><ol>
+<li>编码压缩：</li>
+</ol>
+<ul>
+<li>输入： 稀疏化后的CSI矩阵Ha</li>
+<li>编码器$E(\theta_1, ⋅ )$将$H_a$压缩成低维码字向量v：<br>  $v &#x3D; E(\theta_1, H_a)$</li>
+<li>$\theta_1$是编码器网络的参数，需要通过训练学习</li>
+</ul>
+</li>
+<li><ol start="2">
+<li>反馈传输</li>
+</ol>
+<ul>
+<li>压缩后的码字v通过uplink反馈给BS</li>
+<li>这种低维表示大幅减少uplink反馈开销</li>
+</ul>
+</li>
+<li><ol start="3">
+<li>解码恢复</li>
+</ol>
+<ul>
+<li>基站接收到v后，通过解码器$D(\theta_2, ⋅)$恢复CSI矩阵：<br>  $\hat{H}_a &#x3D; D(\theta_2,v)$</li>
+</ul>
+</li>
+<li><ol start="4">
+<li>训练目标</li>
+</ol>
+<ul>
+<li>编码器和解码器共同训练，目标是最小化重建误差：<br>  $min_{\theta_1, \theta_2} E || H_a - \hat{H}_a ||^2$。<br>  这个也是均方差，因此也是loss function，其中E表示对训练样本取平均，</li>
 </ul>
 </li>
 </ul>
-<hr>
-<h2 id="💡-How-It-Works"><a href="#💡-How-It-Works" class="headerlink" title="💡 How It Works"></a>💡 How It Works</h2><ol>
-<li>User selects a pizza size.</li>
-<li>Topping prices are adjusted based on size.</li>
-<li>User selects&#x2F;deselects toppings.</li>
-<li>Total price updates live on the GUI.</li>
-</ol>
-<hr>
-<h2 id="🖼️-GUI-Screenshot-Placeholder"><a href="#🖼️-GUI-Screenshot-Placeholder" class="headerlink" title="🖼️ GUI Screenshot Placeholder"></a>🖼️ GUI Screenshot Placeholder</h2><blockquote>
-<p>Make sure to include <code>Pizza.jpeg</code> in the <code>pizzacalculationtool</code> package folder.</p>
-</blockquote>
-<pre><code class="language-java">new ImageIcon(getClass().getResource(&quot;Pizza.jpeg&quot;))
-</code></pre>
 
     </div>
 
@@ -292,13 +254,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/06/11/MyBatis/" rel="prev" title="MyBatis">
-      <i class="fa fa-chevron-left"></i> MyBatis
+    <a href="/2025/08/20/CSI%E5%8E%8B%E7%BC%A9/" rel="prev" title="CSI压缩">
+      <i class="fa fa-chevron-left"></i> CSI压缩
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/06/15/C++/" rel="next" title="C++">
-      C++ <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -357,7 +316,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%A0-MVC-Architecture"><span class="nav-number">1.</span> <span class="nav-text">🧠 MVC Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9F%A2-Model-PizzaModel-java"><span class="nav-number">1.1.</span> <span class="nav-text">🟢 Model (PizzaModel.java)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Size-Prices"><span class="nav-number">1.1.1.</span> <span class="nav-text">Size Prices</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Topping-Price-based-on-selected-size"><span class="nav-number">1.1.2.</span> <span class="nav-text">Topping Price (based on selected size)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9F%A1-View-PizzaView-java"><span class="nav-number">1.2.</span> <span class="nav-text">🟡 View (PizzaView.java)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%B5-Controller-PizzaController-java"><span class="nav-number">1.3.</span> <span class="nav-text">🔵 Controller (PizzaController.java)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%A1-How-It-Works"><span class="nav-number">2.</span> <span class="nav-text">💡 How It Works</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%96%BC%EF%B8%8F-GUI-Screenshot-Placeholder"><span class="nav-number">3.</span> <span class="nav-text">🖼️ GUI Screenshot Placeholder</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A5CSI%E5%8E%8B%E7%BC%A9%E4%B8%BA%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">以CSI压缩为例</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
