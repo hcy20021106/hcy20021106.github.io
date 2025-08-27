@@ -175,7 +175,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-08-27 17:28:49 / Modified: 19:22:32" itemprop="dateCreated datePublished" datetime="2025-08-27T17:28:49+08:00">2025-08-27</time>
+              <time title="Created: 2025-08-27 17:28:49 / Modified: 19:57:27" itemprop="dateCreated datePublished" datetime="2025-08-27T17:28:49+08:00">2025-08-27</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -284,7 +284,15 @@
 <p>说明：</p>
 <ul>
 <li>Q(s, a) 更新时结合 当前奖励 r 和 未来潜在收益 max_a Q(s’, a’)</li>
-<li>随着循环进行，Q表会收敛，最终为每个CQI提供最优MCS</li>
+<li>随着循环进行，Q表会收敛，最终为每个CQI提供最优MCS，示例如下：</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">         MCS1   MCS2   MCS3  ...  </span><br><span class="line">CQI0      Q0,0   Q0,1   Q0,2</span><br><span class="line">CQI1      Q1,0   Q1,1   Q1,2</span><br><span class="line">CQI2      Q2,0   Q2,1   Q2,2</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<ul>
+<li>最后的Q表的用途是用于决策.</li>
+</ul>
+<p>$ a* &#x3D; argmax_a Q(s, a)$.<br>也就是对当前CQI s，选择Q值最大的MCS</p>
+<ul>
+<li>学习经验<br>Q表保留了 RL agent对环境的经验，反映了不同信道条件下选择MCS的最优策略</li>
 </ul>
 
       
