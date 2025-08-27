@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Basic conceptFFT是在时间复杂度为$\mathcal{O}(n \log n)$完成的离散傅立叶变换（Discrete Fourier transform， DFT）算法，主要应用是加速多项式乘法计算。 NoticeDFT用于有限长的离散信号（通常为有限长度N）DTFT用于无限长的离散信号（理论上）DFT用于实际信号处理，如FFT算法   FFT的实际应用在实际信号收发中，信号在经过">
+  <meta name="description" content="强化学习概念 RL 是一种机器学习方法，通过与环境交互的试错经验学习最优行为（policy），以最大化累计奖励（accumulated reward） 与监督学习不同：RL不需要“正确答案”做训练，而是通过奖励反馈自主学习  RL系统组成：  Agent: 学习者和决策者 Environment: 智能体作用的外部系统 State($s_t$)： 智能体感知到的环境信息 Action($a_t$)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FFT">
-<meta property="og:url" content="https://hechenyi.github.io/2025/05/13/FFT/index.html">
+<meta property="og:title" content="Reinforcement Learning">
+<meta property="og:url" content="https://hechenyi.github.io/2025/08/27/Reinforcement-Learning/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Basic conceptFFT是在时间复杂度为$\mathcal{O}(n \log n)$完成的离散傅立叶变换（Discrete Fourier transform， DFT）算法，主要应用是加速多项式乘法计算。 NoticeDFT用于有限长的离散信号（通常为有限长度N）DTFT用于无限长的离散信号（理论上）DFT用于实际信号处理，如FFT算法   FFT的实际应用在实际信号收发中，信号在经过">
+<meta property="og:description" content="强化学习概念 RL 是一种机器学习方法，通过与环境交互的试错经验学习最优行为（policy），以最大化累计奖励（accumulated reward） 与监督学习不同：RL不需要“正确答案”做训练，而是通过奖励反馈自主学习  RL系统组成：  Agent: 学习者和决策者 Environment: 智能体作用的外部系统 State($s_t$)： 智能体感知到的环境信息 Action($a_t$)">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-05-12T19:31:45.000Z">
-<meta property="article:modified_time" content="2025-05-12T21:14:41.841Z">
+<meta property="article:published_time" content="2025-08-27T09:28:49.000Z">
+<meta property="article:modified_time" content="2025-08-27T11:22:32.102Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hechenyi.github.io/2025/05/13/FFT/">
+<link rel="canonical" href="https://hechenyi.github.io/2025/08/27/Reinforcement-Learning/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>FFT | Hexo</title>
+  <title>Reinforcement Learning | Hexo</title>
   
 
 
@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/05/13/FFT/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/27/Reinforcement-Learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -168,7 +168,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          FFT
+          Reinforcement Learning
         </h1>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-05-13 03:31:45 / Modified: 05:14:41" itemprop="dateCreated datePublished" datetime="2025-05-13T03:31:45+08:00">2025-05-13</time>
+              <time title="Created: 2025-08-27 17:28:49 / Modified: 19:22:32" itemprop="dateCreated datePublished" datetime="2025-08-27T17:28:49+08:00">2025-08-27</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -187,7 +187,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
                 </span>
             </span>
 
@@ -202,17 +202,92 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Basic-concept"><a href="#Basic-concept" class="headerlink" title="Basic concept"></a>Basic concept</h2><h2 id="FFT是在时间复杂度为-mathcal-O-n-log-n-完成的离散傅立叶变换（Discrete-Fourier-transform，-DFT）算法，主要应用是加速多项式乘法计算。"><a href="#FFT是在时间复杂度为-mathcal-O-n-log-n-完成的离散傅立叶变换（Discrete-Fourier-transform，-DFT）算法，主要应用是加速多项式乘法计算。" class="headerlink" title="FFT是在时间复杂度为$\mathcal{O}(n \log n)$完成的离散傅立叶变换（Discrete Fourier transform， DFT）算法，主要应用是加速多项式乘法计算。"></a>FFT是在时间复杂度为$\mathcal{O}(n \log n)$完成的离散傅立叶变换（Discrete Fourier transform， DFT）算法，主要应用是加速多项式乘法计算。</h2><blockquote>
-<p><strong>Notice</strong><br><br>DFT用于有限长的离散信号（通常为有限长度N）<br><br>DTFT用于无限长的离散信号（理论上）<br><br>DFT用于<strong>实际信号</strong>处理，如<strong>FFT</strong>算法<br></p>
+        <h2 id="强化学习概念"><a href="#强化学习概念" class="headerlink" title="强化学习概念"></a>强化学习概念</h2><ul>
+<li>RL 是一种机器学习方法，通过与环境交互的试错经验学习最优行为（policy），以最大化累计奖励（accumulated reward）</li>
+<li>与监督学习不同：RL不需要“正确答案”做训练，而是通过奖励反馈自主学习</li>
+</ul>
+<p>RL系统组成：</p>
+<ul>
+<li>Agent: 学习者和决策者</li>
+<li>Environment: 智能体作用的外部系统</li>
+<li>State($s_t$)： 智能体感知到的环境信息</li>
+<li>Action($a_t$)：智能体在状态下采取的操作</li>
+<li>Reward($r_{t+1}$)：动作的即时反馈</li>
+<li>Goal: 找到最佳策略𝜋，实现状态 → 动作的最优映射，使累积奖励最大化。</li>
+</ul>
+<h2 id="Q-learning算法"><a href="#Q-learning算法" class="headerlink" title="Q-learning算法"></a>Q-learning算法</h2><p>核心思想：通过不断更新动作价值函数Q(s,a)来学习最佳策略<br>Q值更新公式：<br>$Q(s_t, a_t) &lt;- (1 - \alpha) * Q(s_t, a_t) + \alpha * [ r_{t+1} + \gamma * max_{a_{t+1}​∈A} * Q(s_{t+1}, a_{t+1}) ]$。</p>
+<p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$Q(s_t, a_t)$</td>
+<td>状态 $s_t$ 下执行动作 $a_t$ 的当前 Q 值</td>
+</tr>
+<tr>
+<td>$\alpha$</td>
+<td>学习率（0~1），控制新信息更新 Q 值的权重</td>
+</tr>
+<tr>
+<td>$r_{t+1}$</td>
+<td>执行动作 $a_t$ 后在下一个状态获得的即时奖励</td>
+</tr>
+<tr>
+<td>$\gamma$</td>
+<td>折扣因子（0~1），衡量未来奖励的重要性</td>
+</tr>
+<tr>
+<td>$s_{t+1}$</td>
+<td>执行动作后的下一状态</td>
+</tr>
+<tr>
+<td>$a_{t+1}$</td>
+<td>下一步选择的动作</td>
+</tr>
+<tr>
+<td>$A_{\text{max}}$</td>
+<td>在下一状态下可选择的最大 Q 值动作集合</td>
+</tr>
+<tr>
+<td></td>
+<td>指示函数，如果 $a_{t+1}$ 是最大动作之一，则为 1，否则为 0</td>
+</tr>
+</tbody></table>
+<h2 id="QL-AMC"><a href="#QL-AMC" class="headerlink" title="QL-AMC"></a>QL-AMC</h2><p>基于Q-learning的自适应调制编码，用于在无线通信系统中在不同信道条件下动态选择最优MCS</p>
+<h3 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h3><p>传统方法：<br>固定查表（look-up table）：根据SNR对应的BLER曲线预先生成CQI -&gt; MCS的映射</p>
+<h3 id="QL-AMC方案"><a href="#QL-AMC方案" class="headerlink" title="QL-AMC方案"></a>QL-AMC方案</h3><p>Q(s,a): 动作-价值函数，表示在动态<strong>s</strong>下选择动作<strong>a</strong>的价值<br>State: 状态集合，在这里状态是CQI（Channel Quality Indicator），即信道质量指标<br>Action：动作集合，这里是可选的MCS（调制与编码方案）</p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>Q可以理解为通过RL来推导CQI-&gt;MCS的映射，因此不局限于表格的推荐，而是根据环境反馈动态优化。</p>
 </blockquote>
 <hr>
-<h2 id="FFT的实际应用"><a href="#FFT的实际应用" class="headerlink" title="FFT的实际应用"></a>FFT的实际应用</h2><p>在实际信号收发中，信号在经过调制后输出的复数对是频域信号，这是因为它们表示的是各个子载波上的频域符号，还没有经过IFFT转换为时域波形。通过IFFT后这些复数对才会映射到各个子载波上。例如有四个QPSK符号，对它们进行IFFT：<br>x[n] &#x3D; $\frac{1}{4}\sum_{k&#x3D;0}^{3}e^{j\frac{2{\pi}nk}{4}}$</p>
-<h2 id="FFT原理"><a href="#FFT原理" class="headerlink" title="FFT原理"></a>FFT原理</h2><h3 id="多项式"><a href="#多项式" class="headerlink" title="多项式"></a>多项式</h3><p>A(x) &#x3D; $\sum_{i&#x3D;0}^{n-1}{a_i}x^i$ 与 B(x) &#x3D; $\sum_{i&#x3D;0}^{n-1}{b_i}x^i$相乘的结果为<br>C(x) &#x3D; $\sum_{k&#x3D;0}^{2n-2}(\sum_{k&#x3D;i+j}a_ib_j)x^k$<br>那么这四个点就用来表示这一个OFDM符号对应的四个采样点它们的时域波形。时域信号有以下几个特性：</p>
+<p>Reward function:</p>
 <ul>
-<li>是4个子载波复数调制符号在频域上的逆变换（IFFT）</li>
-<li>保证正交性</li>
-<li>可以加循环前缀后发射</li>
-<li>接收端做FFT可以完美还原出X[k]</li>
+<li><p>R1 基于BLER的非线形奖励。</p>
+<ul>
+<li>μ: 每个符号的比特数 (bits per modulation symbol)</li>
+<li>ν: 编码率 (code rate)</li>
+<li>BLER: 当前传输块误块率</li>
+<li>BLER_T: 系统目标 BLER (例如 10% 对 eMBB).</li>
+</ul>
+  <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">R1 = μ * ν     , if BLER &lt;= BLER_T</span><br><span class="line">R1 = -1        , else</span><br></pre></td></tr></table></figure>
+<p>  如果MCS满足BLER目标，奖励等于理论传输速率μ*ν<br>  否则给惩罚值-1，避免过激MCS</p>
+</li>
+<li><p>R2 基于光谱效率的奖励。</p>
+<ul>
+<li>奖励考虑实际成功传输比特数</li>
+<li>agent 会尝试最大化光谱效率.</li>
+</ul>
+  <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">R2 = (1 - BLER) * μ * ν</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>说明：</p>
+<ul>
+<li>Q(s, a) 更新时结合 当前奖励 r 和 未来潜在收益 max_a Q(s’, a’)</li>
+<li>随着循环进行，Q表会收敛，最终为每个CQI提供最优MCS</li>
 </ul>
 
     </div>
@@ -229,13 +304,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/05/04/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" rel="prev" title="算法基础">
-      <i class="fa fa-chevron-left"></i> 算法基础
+    <a href="/2025/08/27/EVM-based-SNR-Calculation/" rel="prev" title="EVM-based SNR Calculation">
+      <i class="fa fa-chevron-left"></i> EVM-based SNR Calculation
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/06/04/%E4%BF%A1%E9%81%93/" rel="next" title="信道">
-      信道 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -294,7 +366,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-concept"><span class="nav-number">1.</span> <span class="nav-text">Basic concept</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FFT%E6%98%AF%E5%9C%A8%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%BA-mathcal-O-n-log-n-%E5%AE%8C%E6%88%90%E7%9A%84%E7%A6%BB%E6%95%A3%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2%EF%BC%88Discrete-Fourier-transform%EF%BC%8C-DFT%EF%BC%89%E7%AE%97%E6%B3%95%EF%BC%8C%E4%B8%BB%E8%A6%81%E5%BA%94%E7%94%A8%E6%98%AF%E5%8A%A0%E9%80%9F%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B9%98%E6%B3%95%E8%AE%A1%E7%AE%97%E3%80%82"><span class="nav-number">2.</span> <span class="nav-text">FFT是在时间复杂度为$\mathcal{O}(n \log n)$完成的离散傅立叶变换（Discrete Fourier transform， DFT）算法，主要应用是加速多项式乘法计算。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FFT%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">FFT的实际应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FFT%E5%8E%9F%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">FFT原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E9%A1%B9%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text">多项式</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">强化学习概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-learning%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">Q-learning算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QL-AMC"><span class="nav-number">3.</span> <span class="nav-text">QL-AMC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%83%8C%E6%99%AF"><span class="nav-number">3.1.</span> <span class="nav-text">问题背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QL-AMC%E6%96%B9%E6%A1%88"><span class="nav-number">3.2.</span> <span class="nav-text">QL-AMC方案</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

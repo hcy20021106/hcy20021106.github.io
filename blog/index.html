@@ -150,6 +150,431 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/27/Reinforcement-Learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/27/Reinforcement-Learning/" class="post-title-link" itemprop="url">Reinforcement Learning</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-27 17:28:49 / Modified: 19:22:32" itemprop="dateCreated datePublished" datetime="2025-08-27T17:28:49+08:00">2025-08-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="强化学习概念"><a href="#强化学习概念" class="headerlink" title="强化学习概念"></a>强化学习概念</h2><ul>
+<li>RL 是一种机器学习方法，通过与环境交互的试错经验学习最优行为（policy），以最大化累计奖励（accumulated reward）</li>
+<li>与监督学习不同：RL不需要“正确答案”做训练，而是通过奖励反馈自主学习</li>
+</ul>
+<p>RL系统组成：</p>
+<ul>
+<li>Agent: 学习者和决策者</li>
+<li>Environment: 智能体作用的外部系统</li>
+<li>State($s_t$)： 智能体感知到的环境信息</li>
+<li>Action($a_t$)：智能体在状态下采取的操作</li>
+<li>Reward($r_{t+1}$)：动作的即时反馈</li>
+<li>Goal: 找到最佳策略𝜋，实现状态 → 动作的最优映射，使累积奖励最大化。</li>
+</ul>
+<h2 id="Q-learning算法"><a href="#Q-learning算法" class="headerlink" title="Q-learning算法"></a>Q-learning算法</h2><p>核心思想：通过不断更新动作价值函数Q(s,a)来学习最佳策略<br>Q值更新公式：<br>$Q(s_t, a_t) &lt;- (1 - \alpha) * Q(s_t, a_t) + \alpha * [ r_{t+1} + \gamma * max_{a_{t+1}​∈A} * Q(s_{t+1}, a_{t+1}) ]$。</p>
+<p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$Q(s_t, a_t)$</td>
+<td>状态 $s_t$ 下执行动作 $a_t$ 的当前 Q 值</td>
+</tr>
+<tr>
+<td>$\alpha$</td>
+<td>学习率（0~1），控制新信息更新 Q 值的权重</td>
+</tr>
+<tr>
+<td>$r_{t+1}$</td>
+<td>执行动作 $a_t$ 后在下一个状态获得的即时奖励</td>
+</tr>
+<tr>
+<td>$\gamma$</td>
+<td>折扣因子（0~1），衡量未来奖励的重要性</td>
+</tr>
+<tr>
+<td>$s_{t+1}$</td>
+<td>执行动作后的下一状态</td>
+</tr>
+<tr>
+<td>$a_{t+1}$</td>
+<td>下一步选择的动作</td>
+</tr>
+<tr>
+<td>$A_{\text{max}}$</td>
+<td>在下一状态下可选择的最大 Q 值动作集合</td>
+</tr>
+<tr>
+<td></td>
+<td>指示函数，如果 $a_{t+1}$ 是最大动作之一，则为 1，否则为 0</td>
+</tr>
+</tbody></table>
+<h2 id="QL-AMC"><a href="#QL-AMC" class="headerlink" title="QL-AMC"></a>QL-AMC</h2><p>基于Q-learning的自适应调制编码，用于在无线通信系统中在不同信道条件下动态选择最优MCS</p>
+<h3 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h3><p>传统方法：<br>固定查表（look-up table）：根据SNR对应的BLER曲线预先生成CQI -&gt; MCS的映射</p>
+<h3 id="QL-AMC方案"><a href="#QL-AMC方案" class="headerlink" title="QL-AMC方案"></a>QL-AMC方案</h3><p>Q(s,a): 动作-价值函数，表示在动态<strong>s</strong>下选择动作<strong>a</strong>的价值<br>State: 状态集合，在这里状态是CQI（Channel Quality Indicator），即信道质量指标<br>Action：动作集合，这里是可选的MCS（调制与编码方案）</p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>Q可以理解为通过RL来推导CQI-&gt;MCS的映射，因此不局限于表格的推荐，而是根据环境反馈动态优化。</p>
+</blockquote>
+<hr>
+<p>Reward function:</p>
+<ul>
+<li><p>R1 基于BLER的非线形奖励。</p>
+<ul>
+<li>μ: 每个符号的比特数 (bits per modulation symbol)</li>
+<li>ν: 编码率 (code rate)</li>
+<li>BLER: 当前传输块误块率</li>
+<li>BLER_T: 系统目标 BLER (例如 10% 对 eMBB).</li>
+</ul>
+  <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">R1 = μ * ν     , if BLER &lt;= BLER_T</span><br><span class="line">R1 = -1        , else</span><br></pre></td></tr></table></figure>
+<p>  如果MCS满足BLER目标，奖励等于理论传输速率μ*ν<br>  否则给惩罚值-1，避免过激MCS</p>
+</li>
+<li><p>R2 基于光谱效率的奖励。</p>
+<ul>
+<li>奖励考虑实际成功传输比特数</li>
+<li>agent 会尝试最大化光谱效率.</li>
+</ul>
+  <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">R2 = (1 - BLER) * μ * ν</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>说明：</p>
+<ul>
+<li>Q(s, a) 更新时结合 当前奖励 r 和 未来潜在收益 max_a Q(s’, a’)</li>
+<li>随着循环进行，Q表会收敛，最终为每个CQI提供最优MCS</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/27/EVM-based-SNR-Calculation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/27/EVM-based-SNR-Calculation/" class="post-title-link" itemprop="url">EVM-based SNR Calculation</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-27 16:47:08 / Modified: 16:52:20" itemprop="dateCreated datePublished" datetime="2025-08-27T16:47:08+08:00">2025-08-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="1-PSD-Based-SNR-Estimation-ANN-Method"><a href="#1-PSD-Based-SNR-Estimation-ANN-Method" class="headerlink" title="1. PSD-Based SNR Estimation (ANN Method)"></a>1. PSD-Based SNR Estimation (ANN Method)</h2><ul>
+<li><p><strong>概念</strong>: PSD (Power Spectral Density) 表示接收信号功率在频率域的分布。</p>
+</li>
+<li><p>接收信号 r(t) &#x3D; s(t) + n(t)，其中 s(t) 是有效信号，n(t) 是噪声。</p>
+</li>
+<li><p>PSD 包含了信号功率和噪声功率。</p>
+</li>
+<li><p>ANN 方法流程:</p>
+<ol>
+<li>接收信号 -&gt; 提取 PSD 特征。</li>
+<li>ANN 输入 PSD -&gt; 输出 SNR 分类。</li>
+<li>SNR 分类映射到最优 MCS（调制与编码方案）。</li>
+</ol>
+</li>
+<li><p>优点:</p>
+<ul>
+<li>不依赖解调符号或误差向量。</li>
+<li>高速移动环境中稳健（PSD 不受多普勒效应显著影响）。</li>
+<li>推理计算量低，实时性好。</li>
+</ul>
+</li>
+<li><p>平均功率计算:</p>
+<ul>
+<li>平均功率 $P &#x3D; ∫ S_x(f) df$（连续信号）或 $P &#x3D; (1&#x2F;N) Σ |X[k]|^2$（离散信号）。</li>
+<li>PSD 积分得到总功率，可用于 SNR 计算: $SNR &#x3D; P_signal &#x2F; P_noise$。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-EVM-Based-SNR-Estimation"><a href="#2-EVM-Based-SNR-Estimation" class="headerlink" title="2. EVM-Based SNR Estimation"></a>2. EVM-Based SNR Estimation</h2><ul>
+<li><strong>EVM (Error Vector Magnitude)</strong> 衡量接收符号与理想符号的误差：<br>$EVM &#x3D; sqrt(Σ |r_i - s_i|^2 &#x2F; Σ |s_i|^2)$<ul>
+<li>$r_i$: 接收符号</li>
+<li>$s_i$: 理想符号（通常是 pilot&#x2F;reference symbols）</li>
+</ul>
+</li>
+<li>流程:<ol>
+<li>接收 pilot 符号。</li>
+<li>计算误差向量 $e &#x3D; r_p - s_p$。</li>
+<li>得到 EVM -&gt; 间接推算 SNR -&gt; 映射到 CQI -&gt; 选择 MCS。</li>
+</ol>
+</li>
+<li>局限:<ul>
+<li>依赖 pilot。</li>
+<li>高速移动或多普勒环境下 EVM 会受到星座漂移影响，SNR 估计不稳定。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="3-LS-Based-SNR-Estimation"><a href="#3-LS-Based-SNR-Estimation" class="headerlink" title="3. LS-Based SNR Estimation"></a>3. LS-Based SNR Estimation</h2><ul>
+<li><strong>LS (Least Squares) 方法</strong>用于信道估计:<ul>
+<li>基本公式: $h_hat &#x3D; r_p &#x2F; s_p$（简单 LS）</li>
+<li>信道估计后计算 SNR: $SNR &#x3D; E[|h s|^2] &#x2F; E[|r - h s|^2]$</li>
+</ul>
+</li>
+<li>特点:<ul>
+<li>通过信道增益和噪声功率直接计算 SNR。</li>
+<li>也依赖 pilot。</li>
+<li>高速移动环境中相对稳健，但需要频繁更新信道估计。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="4-区别总结-EVM-vs-LS-vs-PSD-ANN"><a href="#4-区别总结-EVM-vs-LS-vs-PSD-ANN" class="headerlink" title="4. 区别总结: EVM vs LS vs PSD+ANN"></a>4. 区别总结: EVM vs LS vs PSD+ANN</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>EVM-based</th>
+<th>LS-based</th>
+<th>PSD+ANN</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>原理</td>
+<td>接收符号 vs 理想符号误差</td>
+<td>信道估计 + 噪声功率</td>
+<td>PSD 特征 + ANN 分类</td>
+</tr>
+<tr>
+<td>输入</td>
+<td>Pilot &#x2F; Reference</td>
+<td>Pilot &#x2F; Reference</td>
+<td>接收信号 PSD</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>SNR (间接)</td>
+<td>SNR (直接)</td>
+<td>SNR 分类</td>
+</tr>
+<tr>
+<td>高速移动适应性</td>
+<td>差</td>
+<td>较好</td>
+<td>很好，鲁棒</td>
+</tr>
+<tr>
+<td>复杂度</td>
+<td>低</td>
+<td>中等</td>
+<td>低，推理快</td>
+</tr>
+<tr>
+<td>使用场景</td>
+<td>AMC &#x2F; CQI映射</td>
+<td>信道估计、AMC、功率控制</td>
+<td>AMC &#x2F; CQI映射</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="5-AMC应用总结"><a href="#5-AMC应用总结" class="headerlink" title="5. AMC应用总结"></a>5. AMC应用总结</h2><ul>
+<li><p>CQI驱动 AMC:</p>
+<ul>
+<li>基站根据 UE 反馈的 CQI 动态选择 MCS。</li>
+<li>高 SNR → 高阶调制 + 高码率 → 高吞吐量。</li>
+<li>低 SNR → 低阶调制 + 低码率 → 保证可靠性。</li>
+<li>优点: 动态适应信道，频谱效率高。</li>
+<li>缺点: 需要反馈，系统复杂。</li>
+</ul>
+</li>
+<li><p>固定 MCS:</p>
+<ul>
+<li>不考虑信道变化，固定使用某个 MCS。</li>
+<li>简单，但在差信道下 BLER 高，信道好时未充分利用频谱。</li>
+<li>吞吐量和可靠性都不如 CQI 驱动方法。</li>
+</ul>
+</li>
+<li><p>ANN+PSD 方法:</p>
+<ul>
+<li>跳过 EVM 或 LS 复杂计算。</li>
+<li>利用 PSD 特征直接预测 SNR 分类。</li>
+<li>在高速移动信道下鲁棒性更强。</li>
+<li>可快速选择最优 MCS，提高系统吞吐量。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="6-结论"><a href="#6-结论" class="headerlink" title="6. 结论"></a>6. 结论</h2><ol>
+<li>PSD 中包含信号和噪声，可以通过积分或求和得到平均功率，从而估计 SNR。</li>
+<li>EVM 基于 pilot 符号计算误差向量，间接得到 SNR。</li>
+<li>LS 基于 pilot 符号做信道估计，再计算 SNR。</li>
+<li>ANN+PSD 方法在高速移动场景下性能优于传统 EVM 方法，计算量低且稳健。</li>
+<li>CQI 驱动 AMC 与固定 MCS 的区别在于系统能否动态适应信道变化，前者性能更优。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/26/Semantic-Communication/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/26/Semantic-Communication/" class="post-title-link" itemprop="url">Semantic Communication</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-26 19:06:04 / Modified: 19:13:43" itemprop="dateCreated datePublished" datetime="2025-08-26T19:06:04+08:00">2025-08-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input video</span><br><span class="line">1080p         -&gt;              360p        -&gt;            token   -&gt; decoder  </span><br><span class="line">8x1920x1080   downsampling     640x360    encoder(8x16x16)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/20/DeepAutoencoder/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -938,439 +1363,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/21/pandas/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/07/21/pandas/" class="post-title-link" itemprop="url">pandas</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-07-21 20:17:58 / Modified: 22:26:15" itemprop="dateCreated datePublished" datetime="2025-07-21T20:17:58+08:00">2025-07-21</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h1 id="pandas-基础语法速查"><a href="#pandas-基础语法速查" class="headerlink" title="pandas 基础语法速查"></a>pandas 基础语法速查</h1><p>以下内容基于对 pandas 基础用法的常见问题整理，方便快速入门和复习。</p>
-<hr>
-<h2 id="1-查看数据"><a href="#1-查看数据" class="headerlink" title="1. 查看数据"></a>1. 查看数据</h2><ul>
-<li><p><code>df.head()</code><br>返回数据框前 5 行（默认），可以用 <code>df.head(n)</code> 查看前 n 行。<br>用于快速预览数据。</p>
-</li>
-<li><p><code>df.iloc[:, :-1].values</code><br>用 <code>.iloc</code> 按位置索引，<code>:,:-1</code> 表示所有行，除最后一列以外的所有列。<br><code>.values</code> 返回对应的 NumPy 数组。</p>
-</li>
-<li><p><code>df.values</code><br>将整个 DataFrame 转换为 NumPy 数组，包含所有数据（数值和非数值都可能存在）。</p>
-</li>
-</ul>
-<hr>
-<h2 id="2-处理缺失值"><a href="#2-处理缺失值" class="headerlink" title="2. 处理缺失值"></a>2. 处理缺失值</h2><ul>
-<li><code>df.fillna(0, inplace=True)</code><br>将所有缺失值（NaN）替换为 0，<code>inplace=True</code> 代表直接修改原 DataFrame。</li>
-</ul>
-<hr>
-<h2 id="3-唯一值和类别编码"><a href="#3-唯一值和类别编码" class="headerlink" title="3. 唯一值和类别编码"></a>3. 唯一值和类别编码</h2><ul>
-<li><p><code>df.Summary.unique()</code><br>返回列 <code>Summary</code> 中所有唯一的值（去重后的列表）。</p>
-</li>
-<li><p><code>df.LoudCover.unique()</code><br>类似，返回 <code>LoudCover</code> 列所有唯一值。</p>
-</li>
-<li><p>Label Encoding  </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line">  labelencoder = LabelEncoder()</span><br><span class="line">  df[<span class="string">&#x27;Summary&#x27;</span>] = labelencoder.fit_transform(df[<span class="string">&#x27;Summary&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">## 4. 相关性分析</span></span><br><span class="line">- df.corr()</span><br><span class="line">计算数值列之间的相关系数矩阵（默认是 Pearson 相关系数）。</span><br><span class="line"></span><br><span class="line">注意：执行 df.corr() 前，确保 DataFrame 中只包含数值列，否则可能报错。</span><br><span class="line">- 热力图可视化</span><br><span class="line">```bash</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sn</span><br><span class="line">sn.heatmap(df.select_dtypes(include=[<span class="string">&#x27;number&#x27;</span>]).corr())</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="5-数据拼接与转换"><a href="#5-数据拼接与转换" class="headerlink" title="5. 数据拼接与转换"></a>5. 数据拼接与转换</h2><ul>
-<li>pd.concat(cols, axis &#x3D; 1)<br>将列表 cols 中的多个 DataFrame 按列合并成一个大 DataFrame。</li>
-<li>.shift(n)<br>对时间序列数据进行平移（滞后或提前）。<br>例如：df.shift(1) 会将所有数据下移一行，原第一行变为 NaN。</li>
-</ul>
-<h2 id="6-Numpy与Pandas转换"><a href="#6-Numpy与Pandas转换" class="headerlink" title="6. Numpy与Pandas转换"></a>6. Numpy与Pandas转换</h2><ul>
-<li>DataFrame转为NumPy数组</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = df.values</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>只保留数值列转为数组</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = df.select_dtypes(include=[<span class="string">&#x27;number&#x27;</span>]).values</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/21/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/07/21/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">数字信号处理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-07-21 15:13:01 / Modified: 16:01:38" itemprop="dateCreated datePublished" datetime="2025-07-21T15:13:01+08:00">2025-07-21</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h1 id="数字信号处理-—-DFT和DTFT简介"><a href="#数字信号处理-—-DFT和DTFT简介" class="headerlink" title="数字信号处理 — DFT和DTFT简介"></a>数字信号处理 — DFT和DTFT简介</h1><h2 id="离散时间傅里叶变换（DTFT）"><a href="#离散时间傅里叶变换（DTFT）" class="headerlink" title="离散时间傅里叶变换（DTFT）"></a>离散时间傅里叶变换（DTFT）</h2><p>DTFT（Discrete-Time Fourier Transform）是离散时间信号的傅里叶变换，定义为将离散时间信号映射到连续的频率域。<br>它的数学表达式为：</p>
-<p>$$<br>X(\omega) &#x3D; \sum_{n&#x3D;-\infty}^{\infty} x[n] e^{-j \omega n}<br>$$</p>
-<ul>
-<li>其中，$x[n]$ 是离散时间信号，  </li>
-<li>$\omega$ 是连续频率变量，取值范围为 $-\pi \leq \omega \leq \pi$。  </li>
-<li>DTFT结果是频率的连续函数。</li>
-</ul>
-<p>DTFT适合分析无限长或有限长信号的频率特性。</p>
-<hr>
-<h2 id="连续时间信号采样与离散时间傅里叶变换-DTFT-推导"><a href="#连续时间信号采样与离散时间傅里叶变换-DTFT-推导" class="headerlink" title="连续时间信号采样与离散时间傅里叶变换 (DTFT) 推导"></a>连续时间信号采样与离散时间傅里叶变换 (DTFT) 推导</h2><p>设连续时间信号的傅里叶变换为：</p>
-<p>$$<br>X_s(j\omega) &#x3D; \int_{-\infty}^{\infty} x_s(t) \cdot e^{-j \omega t} , dt<br>$$</p>
-<p>其中，采样后的信号 $x_s(t)$ 可以表示为：</p>
-<p>$$<br>x_s(t) &#x3D; \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot \delta(t - k T_s)<br>$$</p>
-<p>代入傅里叶变换：</p>
-<p>$$<br>\begin{aligned}<br>X_s(j\omega) &amp;&#x3D; \int_{-\infty}^{\infty} \left( \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot \delta(t - k T_s) \right) e^{-j \omega t} , dt \<br>&amp;&#x3D; \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot e^{-j \omega k T_s} \int_{-\infty}^{\infty} \delta(t - k T_s) , dt \quad \text{(利用线性性质和 $x(t)\delta(t - t_0) &#x3D; x(t_0) \delta(t - t_0)$)} \<br>&amp;&#x3D; \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot e^{-j \omega k T_s}<br>\end{aligned}<br>$$</p>
-<p>令</p>
-<ul>
-<li>$\Omega &#x3D; \omega T_s$ （连续时间角频率转换为数字频率），  </li>
-<li>$x[k] &#x3D; x(k T_s)$ （离散时间信号样本），</li>
-</ul>
-<p>则上述式子可写为：</p>
-<p>$$<br>X(e^{j \Omega}) &#x3D; \sum_{k&#x3D;-\infty}^{\infty} x[k] \cdot e^{-j \Omega k}<br>$$</p>
-<p>这就是离散时间傅里叶变换（DTFT）的定义。</p>
-<hr>
-<p><strong>总结：</strong></p>
-<ul>
-<li>通过采样，将连续时间信号转换为离散时间信号；  </li>
-<li>连续时间傅里叶变换 $X_s(j\omega)$ 可表达为离散时间傅里叶变换 $X(e^{j \Omega})$ 的形式，连接了连续与离散频域。</li>
-</ul>
-<h2 id="离散傅里叶变换（DFT）"><a href="#离散傅里叶变换（DFT）" class="headerlink" title="离散傅里叶变换（DFT）"></a>离散傅里叶变换（DFT）</h2><p>DFT（Discrete Fourier Transform）是DTFT的离散版本，适用于有限长度的序列。<br>它将一个长度为$N$的序列转换为长度为$N$的频域序列，计算公式为：</p>
-<p>$$<br>X[k] &#x3D; \sum_{n&#x3D;0}^{N-1} x[n] e^{-j \frac{2\pi}{N} k n}, \quad k&#x3D;0,1,\ldots,N-1<br>$$</p>
-<ul>
-<li>$x[n]$ 是长度为$N$的离散信号，  </li>
-<li>$X[k]$ 是离散的频率样本点，  </li>
-<li>DFT的频率点是均匀分布在 $[0, 2\pi)$ 上。</li>
-</ul>
-<p>DFT广泛应用于数字信号处理中的频谱分析和滤波。</p>
-<hr>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li><strong>DTFT</strong>：频率连续，信号长度可以无限，理论分析工具。  </li>
-<li><strong>DFT</strong>：频率离散，信号长度有限，数值计算工具，常用快速算法FFT实现。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/07/%E5%85%B6%E4%BB%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/07/07/%E5%85%B6%E4%BB%96/" class="post-title-link" itemprop="url">其他</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-07-07 17:20:33" itemprop="dateCreated datePublished" datetime="2025-07-07T17:20:33+08:00">2025-07-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-19 14:44:22" itemprop="dateModified" datetime="2025-07-19T14:44:22+08:00">2025-07-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="周期冲激序列的傅立叶变换"><a href="#周期冲激序列的傅立叶变换" class="headerlink" title="周期冲激序列的傅立叶变换"></a>周期冲激序列的傅立叶变换</h2><p>求冲激串 $ \sum_{k&#x3D;-\infty}^{\infty}\delta(t-kT) $ 的傅立叶变换。</p>
-<hr>
-<h3 id="🚩-思路一：傅立叶级数展开"><a href="#🚩-思路一：傅立叶级数展开" class="headerlink" title="🚩 思路一：傅立叶级数展开"></a>🚩 思路一：傅立叶级数展开</h3><ul>
-<li>时间域是周期信号，周期 $T$，所以可以写成傅立叶级数：</li>
-</ul>
-<p>$$<br>x(t) &#x3D; \sum_{n&#x3D;-\infty}^{\infty} c_n e^{j n \Omega_s t}, \quad \Omega_s &#x3D; \frac{2\pi}{T}.<br>$$</p>
-<ul>
-<li>求傅立叶系数，对于冲激串：</li>
-</ul>
-<p>$$<br>c_n &#x3D; \frac{1}{T} \int_{-T&#x2F;2}^{T&#x2F;2} \sum_{k&#x3D;-\infty}^{\infty} \delta(t - kT) e^{-j n \Omega_s t} dt.<br>$$</p>
-<p>只会取到 $k &#x3D; 0$：</p>
-<p>$$<br>c_n &#x3D; \frac{1}{T}.<br>$$</p>
-<ul>
-<li>所以：</li>
-</ul>
-<p>$$<br>x(t) &#x3D; \frac{1}{T} \sum_{n&#x3D;-\infty}^{\infty} e^{j n \Omega_s t}.<br>$$</p>
-<ul>
-<li>利用傅立叶变换性质，复指数 $e^{j n \Omega_s t}$ 的傅立叶变换：</li>
-</ul>
-<p>$$<br>\mathcal{F}[e^{j n \Omega_s t}] &#x3D; 2\pi \delta(\omega - n\Omega_s).<br>$$</p>
-<ul>
-<li>所以：</li>
-</ul>
-<p>$$<br>X(j\omega) &#x3D; \frac{1}{T} \sum_{n&#x3D;-\infty}^{\infty} 2\pi \delta(\omega - n\Omega_s)<br>&#x3D; \frac{2\pi}{T} \sum_{n&#x3D;-\infty}^{\infty} \delta(\omega - n\Omega_s).<br>$$</p>
-<hr>
-<h3 id="🚩-思路二：直接利用时移性质"><a href="#🚩-思路二：直接利用时移性质" class="headerlink" title="🚩 思路二：直接利用时移性质"></a>🚩 思路二：直接利用时移性质</h3><hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>时移性质是指信号在时域中的时间延迟会导致其傅立叶变换在相位上发生线性变化。<br><br>f(t)沿时间右轴t0得到f(t-t0),则傅立叶变换F(w)将在所有频率点上乘上一个相位因子$e^{-jwt_0}$<br></p>
-</blockquote>
-<hr>
-<ul>
-<li>单个冲激的傅立叶变换：</li>
-</ul>
-<p>$$<br>\mathcal{F}[\delta(t)] &#x3D; 1, \quad \mathcal{F}[\delta(t - kT)] &#x3D; e^{-j \omega kT}.<br>$$</p>
-<ul>
-<li>求和：</li>
-</ul>
-<p>$$<br>X(j\omega) &#x3D; \sum_{k&#x3D;-\infty}^{\infty} e^{-j \omega kT}<br>&#x3D; \sum_{k&#x3D;-\infty}^{\infty} e^{-j k \omega T}.<br>$$</p>
-<ul>
-<li>这本质上是一个无限等比数列在单位圆上的和，用冲激串采样定理：</li>
-</ul>
-<p>$$<br>\sum_{k&#x3D;-\infty}^{\infty} e^{-j k \omega T}<br>&#x3D; 2\pi \sum_{n&#x3D;-\infty}^{\infty} \delta(\omega - n\Omega_s) \cdot \frac{1}{T}.<br>$$</p>
-<ul>
-<li>所以同样得到：</li>
-</ul>
-<p>$$<br>X(j\omega) &#x3D; \frac{2\pi}{T} \sum_{n&#x3D;-\infty}^{\infty} \delta(\omega - n\Omega_s).<br>$$</p>
-<hr>
-<h2 id="✅-总结"><a href="#✅-总结" class="headerlink" title="✅ 总结"></a>✅ 总结</h2><ul>
-<li><p>时间域：周期冲激串，周期 $T$</p>
-</li>
-<li><p>频域：等间隔频域冲激串，间隔 $\Omega_s &#x3D; \frac{2\pi}{T}$，幅度系数 $\frac{2\pi}{T}$</p>
-</li>
-</ul>
-<h2 id="拉丁字母"><a href="#拉丁字母" class="headerlink" title="拉丁字母"></a>拉丁字母</h2><table>
-<thead>
-<tr>
-<th>LaTeX代码</th>
-<th>渲染效果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>$\alpha$</td>
-<td>α</td>
-</tr>
-<tr>
-<td>$\beta$</td>
-<td>β</td>
-</tr>
-<tr>
-<td>$\gamma$</td>
-<td>γ</td>
-</tr>
-<tr>
-<td>$\delta$</td>
-<td>δ</td>
-</tr>
-<tr>
-<td>$\epsilon$</td>
-<td>ε</td>
-</tr>
-<tr>
-<td>$\zeta$</td>
-<td>ζ</td>
-</tr>
-<tr>
-<td>$\eta$</td>
-<td>η</td>
-</tr>
-<tr>
-<td>$\theta$</td>
-<td>θ</td>
-</tr>
-<tr>
-<td>$\iota$</td>
-<td>ι</td>
-</tr>
-<tr>
-<td>$\kappa$</td>
-<td>κ</td>
-</tr>
-<tr>
-<td>$\lambda$</td>
-<td>λ</td>
-</tr>
-<tr>
-<td>$\mu$</td>
-<td>μ</td>
-</tr>
-<tr>
-<td>$\nu$</td>
-<td>ν</td>
-</tr>
-<tr>
-<td>$\xi$</td>
-<td>ξ</td>
-</tr>
-<tr>
-<td>$\pi$</td>
-<td>π</td>
-</tr>
-<tr>
-<td>$\rho$</td>
-<td>ρ</td>
-</tr>
-<tr>
-<td>$\sigma$</td>
-<td>σ</td>
-</tr>
-<tr>
-<td>$\varsigma$</td>
-<td>ς</td>
-</tr>
-<tr>
-<td>$\tau$</td>
-<td>τ</td>
-</tr>
-<tr>
-<td>$\upsilon$</td>
-<td>υ</td>
-</tr>
-<tr>
-<td>$\phi$</td>
-<td>φ</td>
-</tr>
-<tr>
-<td>$\varphi$</td>
-<td>ϕ</td>
-</tr>
-<tr>
-<td>$\chi$</td>
-<td>χ</td>
-</tr>
-<tr>
-<td>$\psi$</td>
-<td>ψ</td>
-</tr>
-<tr>
-<td>$\omega$</td>
-<td>ω</td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/">4</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/5/">5</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1436,7 +1432,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -150,6 +150,435 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/21/pandas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/07/21/pandas/" class="post-title-link" itemprop="url">pandas</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-07-21 20:17:58 / Modified: 22:26:15" itemprop="dateCreated datePublished" datetime="2025-07-21T20:17:58+08:00">2025-07-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h1 id="pandas-基础语法速查"><a href="#pandas-基础语法速查" class="headerlink" title="pandas 基础语法速查"></a>pandas 基础语法速查</h1><p>以下内容基于对 pandas 基础用法的常见问题整理，方便快速入门和复习。</p>
+<hr>
+<h2 id="1-查看数据"><a href="#1-查看数据" class="headerlink" title="1. 查看数据"></a>1. 查看数据</h2><ul>
+<li><p><code>df.head()</code><br>返回数据框前 5 行（默认），可以用 <code>df.head(n)</code> 查看前 n 行。<br>用于快速预览数据。</p>
+</li>
+<li><p><code>df.iloc[:, :-1].values</code><br>用 <code>.iloc</code> 按位置索引，<code>:,:-1</code> 表示所有行，除最后一列以外的所有列。<br><code>.values</code> 返回对应的 NumPy 数组。</p>
+</li>
+<li><p><code>df.values</code><br>将整个 DataFrame 转换为 NumPy 数组，包含所有数据（数值和非数值都可能存在）。</p>
+</li>
+</ul>
+<hr>
+<h2 id="2-处理缺失值"><a href="#2-处理缺失值" class="headerlink" title="2. 处理缺失值"></a>2. 处理缺失值</h2><ul>
+<li><code>df.fillna(0, inplace=True)</code><br>将所有缺失值（NaN）替换为 0，<code>inplace=True</code> 代表直接修改原 DataFrame。</li>
+</ul>
+<hr>
+<h2 id="3-唯一值和类别编码"><a href="#3-唯一值和类别编码" class="headerlink" title="3. 唯一值和类别编码"></a>3. 唯一值和类别编码</h2><ul>
+<li><p><code>df.Summary.unique()</code><br>返回列 <code>Summary</code> 中所有唯一的值（去重后的列表）。</p>
+</li>
+<li><p><code>df.LoudCover.unique()</code><br>类似，返回 <code>LoudCover</code> 列所有唯一值。</p>
+</li>
+<li><p>Label Encoding  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line">  labelencoder = LabelEncoder()</span><br><span class="line">  df[<span class="string">&#x27;Summary&#x27;</span>] = labelencoder.fit_transform(df[<span class="string">&#x27;Summary&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">## 4. 相关性分析</span></span><br><span class="line">- df.corr()</span><br><span class="line">计算数值列之间的相关系数矩阵（默认是 Pearson 相关系数）。</span><br><span class="line"></span><br><span class="line">注意：执行 df.corr() 前，确保 DataFrame 中只包含数值列，否则可能报错。</span><br><span class="line">- 热力图可视化</span><br><span class="line">```bash</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sn</span><br><span class="line">sn.heatmap(df.select_dtypes(include=[<span class="string">&#x27;number&#x27;</span>]).corr())</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="5-数据拼接与转换"><a href="#5-数据拼接与转换" class="headerlink" title="5. 数据拼接与转换"></a>5. 数据拼接与转换</h2><ul>
+<li>pd.concat(cols, axis &#x3D; 1)<br>将列表 cols 中的多个 DataFrame 按列合并成一个大 DataFrame。</li>
+<li>.shift(n)<br>对时间序列数据进行平移（滞后或提前）。<br>例如：df.shift(1) 会将所有数据下移一行，原第一行变为 NaN。</li>
+</ul>
+<h2 id="6-Numpy与Pandas转换"><a href="#6-Numpy与Pandas转换" class="headerlink" title="6. Numpy与Pandas转换"></a>6. Numpy与Pandas转换</h2><ul>
+<li>DataFrame转为NumPy数组</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = df.values</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>只保留数值列转为数组</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = df.select_dtypes(include=[<span class="string">&#x27;number&#x27;</span>]).values</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/21/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/07/21/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">数字信号处理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-07-21 15:13:01 / Modified: 16:01:38" itemprop="dateCreated datePublished" datetime="2025-07-21T15:13:01+08:00">2025-07-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h1 id="数字信号处理-—-DFT和DTFT简介"><a href="#数字信号处理-—-DFT和DTFT简介" class="headerlink" title="数字信号处理 — DFT和DTFT简介"></a>数字信号处理 — DFT和DTFT简介</h1><h2 id="离散时间傅里叶变换（DTFT）"><a href="#离散时间傅里叶变换（DTFT）" class="headerlink" title="离散时间傅里叶变换（DTFT）"></a>离散时间傅里叶变换（DTFT）</h2><p>DTFT（Discrete-Time Fourier Transform）是离散时间信号的傅里叶变换，定义为将离散时间信号映射到连续的频率域。<br>它的数学表达式为：</p>
+<p>$$<br>X(\omega) &#x3D; \sum_{n&#x3D;-\infty}^{\infty} x[n] e^{-j \omega n}<br>$$</p>
+<ul>
+<li>其中，$x[n]$ 是离散时间信号，  </li>
+<li>$\omega$ 是连续频率变量，取值范围为 $-\pi \leq \omega \leq \pi$。  </li>
+<li>DTFT结果是频率的连续函数。</li>
+</ul>
+<p>DTFT适合分析无限长或有限长信号的频率特性。</p>
+<hr>
+<h2 id="连续时间信号采样与离散时间傅里叶变换-DTFT-推导"><a href="#连续时间信号采样与离散时间傅里叶变换-DTFT-推导" class="headerlink" title="连续时间信号采样与离散时间傅里叶变换 (DTFT) 推导"></a>连续时间信号采样与离散时间傅里叶变换 (DTFT) 推导</h2><p>设连续时间信号的傅里叶变换为：</p>
+<p>$$<br>X_s(j\omega) &#x3D; \int_{-\infty}^{\infty} x_s(t) \cdot e^{-j \omega t} , dt<br>$$</p>
+<p>其中，采样后的信号 $x_s(t)$ 可以表示为：</p>
+<p>$$<br>x_s(t) &#x3D; \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot \delta(t - k T_s)<br>$$</p>
+<p>代入傅里叶变换：</p>
+<p>$$<br>\begin{aligned}<br>X_s(j\omega) &amp;&#x3D; \int_{-\infty}^{\infty} \left( \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot \delta(t - k T_s) \right) e^{-j \omega t} , dt \<br>&amp;&#x3D; \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot e^{-j \omega k T_s} \int_{-\infty}^{\infty} \delta(t - k T_s) , dt \quad \text{(利用线性性质和 $x(t)\delta(t - t_0) &#x3D; x(t_0) \delta(t - t_0)$)} \<br>&amp;&#x3D; \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot e^{-j \omega k T_s}<br>\end{aligned}<br>$$</p>
+<p>令</p>
+<ul>
+<li>$\Omega &#x3D; \omega T_s$ （连续时间角频率转换为数字频率），  </li>
+<li>$x[k] &#x3D; x(k T_s)$ （离散时间信号样本），</li>
+</ul>
+<p>则上述式子可写为：</p>
+<p>$$<br>X(e^{j \Omega}) &#x3D; \sum_{k&#x3D;-\infty}^{\infty} x[k] \cdot e^{-j \Omega k}<br>$$</p>
+<p>这就是离散时间傅里叶变换（DTFT）的定义。</p>
+<hr>
+<p><strong>总结：</strong></p>
+<ul>
+<li>通过采样，将连续时间信号转换为离散时间信号；  </li>
+<li>连续时间傅里叶变换 $X_s(j\omega)$ 可表达为离散时间傅里叶变换 $X(e^{j \Omega})$ 的形式，连接了连续与离散频域。</li>
+</ul>
+<h2 id="离散傅里叶变换（DFT）"><a href="#离散傅里叶变换（DFT）" class="headerlink" title="离散傅里叶变换（DFT）"></a>离散傅里叶变换（DFT）</h2><p>DFT（Discrete Fourier Transform）是DTFT的离散版本，适用于有限长度的序列。<br>它将一个长度为$N$的序列转换为长度为$N$的频域序列，计算公式为：</p>
+<p>$$<br>X[k] &#x3D; \sum_{n&#x3D;0}^{N-1} x[n] e^{-j \frac{2\pi}{N} k n}, \quad k&#x3D;0,1,\ldots,N-1<br>$$</p>
+<ul>
+<li>$x[n]$ 是长度为$N$的离散信号，  </li>
+<li>$X[k]$ 是离散的频率样本点，  </li>
+<li>DFT的频率点是均匀分布在 $[0, 2\pi)$ 上。</li>
+</ul>
+<p>DFT广泛应用于数字信号处理中的频谱分析和滤波。</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><strong>DTFT</strong>：频率连续，信号长度可以无限，理论分析工具。  </li>
+<li><strong>DFT</strong>：频率离散，信号长度有限，数值计算工具，常用快速算法FFT实现。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/07/%E5%85%B6%E4%BB%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/07/07/%E5%85%B6%E4%BB%96/" class="post-title-link" itemprop="url">其他</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-07-07 17:20:33" itemprop="dateCreated datePublished" datetime="2025-07-07T17:20:33+08:00">2025-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-07-19 14:44:22" itemprop="dateModified" datetime="2025-07-19T14:44:22+08:00">2025-07-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="周期冲激序列的傅立叶变换"><a href="#周期冲激序列的傅立叶变换" class="headerlink" title="周期冲激序列的傅立叶变换"></a>周期冲激序列的傅立叶变换</h2><p>求冲激串 $ \sum_{k&#x3D;-\infty}^{\infty}\delta(t-kT) $ 的傅立叶变换。</p>
+<hr>
+<h3 id="🚩-思路一：傅立叶级数展开"><a href="#🚩-思路一：傅立叶级数展开" class="headerlink" title="🚩 思路一：傅立叶级数展开"></a>🚩 思路一：傅立叶级数展开</h3><ul>
+<li>时间域是周期信号，周期 $T$，所以可以写成傅立叶级数：</li>
+</ul>
+<p>$$<br>x(t) &#x3D; \sum_{n&#x3D;-\infty}^{\infty} c_n e^{j n \Omega_s t}, \quad \Omega_s &#x3D; \frac{2\pi}{T}.<br>$$</p>
+<ul>
+<li>求傅立叶系数，对于冲激串：</li>
+</ul>
+<p>$$<br>c_n &#x3D; \frac{1}{T} \int_{-T&#x2F;2}^{T&#x2F;2} \sum_{k&#x3D;-\infty}^{\infty} \delta(t - kT) e^{-j n \Omega_s t} dt.<br>$$</p>
+<p>只会取到 $k &#x3D; 0$：</p>
+<p>$$<br>c_n &#x3D; \frac{1}{T}.<br>$$</p>
+<ul>
+<li>所以：</li>
+</ul>
+<p>$$<br>x(t) &#x3D; \frac{1}{T} \sum_{n&#x3D;-\infty}^{\infty} e^{j n \Omega_s t}.<br>$$</p>
+<ul>
+<li>利用傅立叶变换性质，复指数 $e^{j n \Omega_s t}$ 的傅立叶变换：</li>
+</ul>
+<p>$$<br>\mathcal{F}[e^{j n \Omega_s t}] &#x3D; 2\pi \delta(\omega - n\Omega_s).<br>$$</p>
+<ul>
+<li>所以：</li>
+</ul>
+<p>$$<br>X(j\omega) &#x3D; \frac{1}{T} \sum_{n&#x3D;-\infty}^{\infty} 2\pi \delta(\omega - n\Omega_s)<br>&#x3D; \frac{2\pi}{T} \sum_{n&#x3D;-\infty}^{\infty} \delta(\omega - n\Omega_s).<br>$$</p>
+<hr>
+<h3 id="🚩-思路二：直接利用时移性质"><a href="#🚩-思路二：直接利用时移性质" class="headerlink" title="🚩 思路二：直接利用时移性质"></a>🚩 思路二：直接利用时移性质</h3><hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>时移性质是指信号在时域中的时间延迟会导致其傅立叶变换在相位上发生线性变化。<br><br>f(t)沿时间右轴t0得到f(t-t0),则傅立叶变换F(w)将在所有频率点上乘上一个相位因子$e^{-jwt_0}$<br></p>
+</blockquote>
+<hr>
+<ul>
+<li>单个冲激的傅立叶变换：</li>
+</ul>
+<p>$$<br>\mathcal{F}[\delta(t)] &#x3D; 1, \quad \mathcal{F}[\delta(t - kT)] &#x3D; e^{-j \omega kT}.<br>$$</p>
+<ul>
+<li>求和：</li>
+</ul>
+<p>$$<br>X(j\omega) &#x3D; \sum_{k&#x3D;-\infty}^{\infty} e^{-j \omega kT}<br>&#x3D; \sum_{k&#x3D;-\infty}^{\infty} e^{-j k \omega T}.<br>$$</p>
+<ul>
+<li>这本质上是一个无限等比数列在单位圆上的和，用冲激串采样定理：</li>
+</ul>
+<p>$$<br>\sum_{k&#x3D;-\infty}^{\infty} e^{-j k \omega T}<br>&#x3D; 2\pi \sum_{n&#x3D;-\infty}^{\infty} \delta(\omega - n\Omega_s) \cdot \frac{1}{T}.<br>$$</p>
+<ul>
+<li>所以同样得到：</li>
+</ul>
+<p>$$<br>X(j\omega) &#x3D; \frac{2\pi}{T} \sum_{n&#x3D;-\infty}^{\infty} \delta(\omega - n\Omega_s).<br>$$</p>
+<hr>
+<h2 id="✅-总结"><a href="#✅-总结" class="headerlink" title="✅ 总结"></a>✅ 总结</h2><ul>
+<li><p>时间域：周期冲激串，周期 $T$</p>
+</li>
+<li><p>频域：等间隔频域冲激串，间隔 $\Omega_s &#x3D; \frac{2\pi}{T}$，幅度系数 $\frac{2\pi}{T}$</p>
+</li>
+</ul>
+<h2 id="拉丁字母"><a href="#拉丁字母" class="headerlink" title="拉丁字母"></a>拉丁字母</h2><table>
+<thead>
+<tr>
+<th>LaTeX代码</th>
+<th>渲染效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\alpha$</td>
+<td>α</td>
+</tr>
+<tr>
+<td>$\beta$</td>
+<td>β</td>
+</tr>
+<tr>
+<td>$\gamma$</td>
+<td>γ</td>
+</tr>
+<tr>
+<td>$\delta$</td>
+<td>δ</td>
+</tr>
+<tr>
+<td>$\epsilon$</td>
+<td>ε</td>
+</tr>
+<tr>
+<td>$\zeta$</td>
+<td>ζ</td>
+</tr>
+<tr>
+<td>$\eta$</td>
+<td>η</td>
+</tr>
+<tr>
+<td>$\theta$</td>
+<td>θ</td>
+</tr>
+<tr>
+<td>$\iota$</td>
+<td>ι</td>
+</tr>
+<tr>
+<td>$\kappa$</td>
+<td>κ</td>
+</tr>
+<tr>
+<td>$\lambda$</td>
+<td>λ</td>
+</tr>
+<tr>
+<td>$\mu$</td>
+<td>μ</td>
+</tr>
+<tr>
+<td>$\nu$</td>
+<td>ν</td>
+</tr>
+<tr>
+<td>$\xi$</td>
+<td>ξ</td>
+</tr>
+<tr>
+<td>$\pi$</td>
+<td>π</td>
+</tr>
+<tr>
+<td>$\rho$</td>
+<td>ρ</td>
+</tr>
+<tr>
+<td>$\sigma$</td>
+<td>σ</td>
+</tr>
+<tr>
+<td>$\varsigma$</td>
+<td>ς</td>
+</tr>
+<tr>
+<td>$\tau$</td>
+<td>τ</td>
+</tr>
+<tr>
+<td>$\upsilon$</td>
+<td>υ</td>
+</tr>
+<tr>
+<td>$\phi$</td>
+<td>φ</td>
+</tr>
+<tr>
+<td>$\varphi$</td>
+<td>ϕ</td>
+</tr>
+<tr>
+<td>$\chi$</td>
+<td>χ</td>
+</tr>
+<tr>
+<td>$\psi$</td>
+<td>ψ</td>
+</tr>
+<tr>
+<td>$\omega$</td>
+<td>ω</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/02/%E5%BE%AA%E7%8E%AF%E5%8D%B7%E7%A7%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -729,7 +1158,7 @@ print(w.grad)
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-20 10:06:49" itemprop="dateModified" datetime="2025-08-20T10:06:49+08:00">2025-08-20</time>
+                <time title="Modified: 2025-08-26 10:03:49" itemprop="dateModified" datetime="2025-08-26T10:03:49+08:00">2025-08-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -853,7 +1282,7 @@ print(w.grad)
 </ul>
 <h5 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h5><h5 id="卷积层和池化层流程"><a href="#卷积层和池化层流程" class="headerlink" title="卷积层和池化层流程"></a>卷积层和池化层流程</h5><hr>
 <blockquote>
-<p><strong>Notice</strong><br><br>池化层使用的kernel_size通常与stride步长相等<br></p>
+<p><strong>Notice</strong><br><br>池化层使用的kernel_size通常与stride步长相等<br><br>池化层的目的是对特征图进行下采样（如最大池化、平均池化），减小特征图的宽高，从而减小后续层的参数量和计算量<br><br>保留主要信息，丢弃不重要的细节<br><br>通过信息压缩和参数减小，降低模型过拟合风险<br></p>
 </blockquote>
 <hr>
 <ul>
@@ -2366,256 +2795,10 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/11/%E6%95%B0%E5%AD%97%E5%9F%BA%E5%B8%A6%E4%BF%A1%E5%8F%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/11/%E6%95%B0%E5%AD%97%E5%9F%BA%E5%B8%A6%E4%BF%A1%E5%8F%B7/" class="post-title-link" itemprop="url">数字基带信号</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-06-11 00:03:04" itemprop="dateCreated datePublished" datetime="2025-06-11T00:03:04+08:00">2025-06-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-08 00:31:43" itemprop="dateModified" datetime="2025-07-08T00:31:43+08:00">2025-07-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="基带信号波形"><a href="#基带信号波形" class="headerlink" title="基带信号波形"></a>基带信号波形</h2><h3 id="单极性不归零信号（单极性NRZ）"><a href="#单极性不归零信号（单极性NRZ）" class="headerlink" title="单极性不归零信号（单极性NRZ）"></a>单极性不归零信号（单极性NRZ）</h3><h3 id="双极性不归零信号（双极性NRZ）"><a href="#双极性不归零信号（双极性NRZ）" class="headerlink" title="双极性不归零信号（双极性NRZ）"></a>双极性不归零信号（双极性NRZ）</h3><h3 id="单极性归零信号（单极性RZ）"><a href="#单极性归零信号（单极性RZ）" class="headerlink" title="单极性归零信号（单极性RZ）"></a>单极性归零信号（单极性RZ）</h3><h3 id="双极性归零信号（双极性RZ）"><a href="#双极性归零信号（双极性RZ）" class="headerlink" title="双极性归零信号（双极性RZ）"></a>双极性归零信号（双极性RZ）</h3><h2 id="功率谱密度"><a href="#功率谱密度" class="headerlink" title="功率谱密度"></a>功率谱密度</h2><h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="基带传输的常用码型"><a href="#基带传输的常用码型" class="headerlink" title="基带传输的常用码型"></a>基带传输的常用码型</h2><h2 id="码间干扰ISI"><a href="#码间干扰ISI" class="headerlink" title="码间干扰ISI"></a>码间干扰ISI</h2><h2 id="抗噪声性能（分析无码间干扰条件）"><a href="#抗噪声性能（分析无码间干扰条件）" class="headerlink" title="抗噪声性能（分析无码间干扰条件）"></a>抗噪声性能（分析无码间干扰条件）</h2><p>由于无ISI，并且根据抽样判决$x(kT_B+t_0) &#x3D; a_kh(t_0)+n_R(kT_B+t_0)$<br>其中$a_k$为数字基带信号，如1和-1。<br>若考虑ISI，那么$x(kT_B+t_0) &#x3D; a_kh(t_0)+ \sum_{n !&#x3D; k}a_nh[(k-n)T_B + t_0] + n_R(kT_B+t_0)$</p>
-<h2 id="均衡技术"><a href="#均衡技术" class="headerlink" title="均衡技术"></a>均衡技术</h2><h2 id="部分响应技术"><a href="#部分响应技术" class="headerlink" title="部分响应技术"></a>部分响应技术</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/08/%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/08/%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/" class="post-title-link" itemprop="url">信源编码</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-06-08 03:37:43 / Modified: 04:06:27" itemprop="dateCreated datePublished" datetime="2025-06-08T03:37:43+08:00">2025-06-08</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>信源编码主要用于提高数据传输的可靠性，纠正通信过程中可能发生的错误。常用的信源编码包括：</p>
-<ul>
-<li><strong>Reed-Solomon（RS）编码</strong>：一种块编码，擅长纠正突发错误。</li>
-<li><strong>卷积编码</strong>：一种常见的前向纠错码，适用于连续数据流。</li>
-<li><strong>交织（Interleaving）</strong>：重排数据顺序，扩散突发错误，提高纠错效果。</li>
-</ul>
-<p>整体收发流程为:</p>
-<ol>
-<li>发射端<br>视频源-》RS编码-》卷积交织-》数据流标记-》</li>
-<li>接收端<br>解调后的基带数字信号-》维特比解码-》解交织-》RS解码</li>
-</ol>
-<h2 id="Reed-Solomon-RS-编码"><a href="#Reed-Solomon-RS-编码" class="headerlink" title="Reed-Solomon (RS) 编码"></a>Reed-Solomon (RS) 编码</h2><h3 id="RS编码基本概念"><a href="#RS编码基本概念" class="headerlink" title="RS编码基本概念"></a>RS编码基本概念</h3><ul>
-<li>RS编码在数据块后添加冗余校验码，能纠正一定数量的错误字节。</li>
-<li>典型参数：RS(n, k)，n为编码后数据长度，k为原始数据长度。</li>
-<li>纠错能力为 <code>t = (n - k) / 2</code>。</li>
-</ul>
-<h3 id="Python实现（基于reedsolo库）"><a href="#Python实现（基于reedsolo库）" class="headerlink" title="Python实现（基于reedsolo库）"></a>Python实现（基于reedsolo库）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> reedsolo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化RS编码器，n=255, k=223是常见参数</span></span><br><span class="line">rs = reedsolo.RSCodec(<span class="number">32</span>)</span><br><span class="line"></span><br><span class="line">data = <span class="string">b&#x27;Hello, this is a test message for RS encoding.&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 编码</span></span><br><span class="line">encoded = rs.encode(data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解码（自动纠错）</span></span><br><span class="line">decoded = rs.decode(encoded)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Original:&quot;</span>, data)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Encoded:&quot;</span>, encoded)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Decoded:&quot;</span>, decoded)</span><br></pre></td></tr></table></figure>
-
-<h2 id="卷积交织-Convolutional-Interleaving"><a href="#卷积交织-Convolutional-Interleaving" class="headerlink" title="卷积交织(Convolutional Interleaving)"></a>卷积交织(Convolutional Interleaving)</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
-<li>把相邻字节分散到不连续的位置</li>
-<li>把突发错误转换为随机错误，提高纠错性能</li>
-</ul>
-<h3 id="使用python实现"><a href="#使用python实现" class="headerlink" title="使用python实现"></a>使用python实现</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def convolutional_interleave(data, depth=4):</span><br><span class="line">    length = len(data)</span><br><span class="line">    pad_len = (depth - (length % depth)) % depth</span><br><span class="line">    data_padded = data + bytes([0]*pad_len)</span><br><span class="line">    matrix = np.reshape(np.frombuffer(data_padded, dtype=np.uint8), (-1, depth))</span><br><span class="line">    interleaved = matrix.T.flatten()</span><br><span class="line">    <span class="built_in">return</span> bytes(interleaved)</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-<h3 id="使用python实现反交织（交织恢复）"><a href="#使用python实现反交织（交织恢复）" class="headerlink" title="使用python实现反交织（交织恢复）"></a>使用python实现反交织（交织恢复）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def convolutional_deinterleave(data, depth=4):</span><br><span class="line">    length = len(data)</span><br><span class="line">    matrix = np.reshape(np.frombuffer(data, dtype=np.uint8), (depth, -1))</span><br><span class="line">    deinterleaved = matrix.T.flatten()</span><br><span class="line">    <span class="built_in">return</span> bytes(deinterleaved)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/07/numpy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/07/numpy/" class="post-title-link" itemprop="url">numpy</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-06-07 21:53:37" itemprop="dateCreated datePublished" datetime="2025-06-07T21:53:37+08:00">2025-06-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-19 15:37:40" itemprop="dateModified" datetime="2025-08-19T15:37:40+08:00">2025-08-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="从Python-列表-元组构建"><a href="#从Python-列表-元组构建" class="headerlink" title="从Python 列表&#x2F;元组构建"></a>从Python 列表&#x2F;元组构建</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">a = np.array([1, 2, 3])        <span class="comment"># 1D 数组</span></span><br><span class="line"><span class="built_in">print</span>(a, <span class="built_in">type</span>(a))              <span class="comment"># [1 2 3] &lt;class &#x27;numpy.ndarray&#x27;&gt;</span></span><br><span class="line"></span><br><span class="line">b = np.array([[1, 2], [3, 4]]) <span class="comment"># 2D 数组</span></span><br><span class="line"><span class="built_in">print</span>(b)</span><br></pre></td></tr></table></figure>
-<h2 id="创建特殊数组"><a href="#创建特殊数组" class="headerlink" title="创建特殊数组"></a>创建特殊数组</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">np.zeros((<span class="number">3</span>, <span class="number">4</span>))     <span class="comment"># 3x4 全零数组</span></span><br><span class="line">np.ones((<span class="number">2</span>, <span class="number">3</span>))      <span class="comment"># 2x3 全 1 数组</span></span><br><span class="line">np.eye(3)            <span class="comment"># 3x3 单位矩阵</span></span><br><span class="line">np.full((<span class="number">2</span>,<span class="number">2</span>), <span class="number">7</span>)    # <span class="number">2</span>x2 全部填充 <span class="number">7</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="随机数组"><a href="#随机数组" class="headerlink" title="随机数组"></a>随机数组</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">np.random.rand(2, 3)          <span class="comment"># 2x3 [0,1) 均匀分布</span></span><br><span class="line">np.random.randn(2, 3)         <span class="comment"># 2x3 标准正态分布</span></span><br><span class="line">np.random.randint(0, 10, (2,3)) <span class="comment"># 2x3 整数 [0,10)</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="基本转换"><a href="#基本转换" class="headerlink" title="基本转换"></a>基本转换</h2><p>将某一数据类型(bytes, array)直接转换成NumPy数组</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.frombuffer()</span><br></pre></td></tr></table></figure>
-<p>将输入的arr数组转为指定形状的arr，可以指定长宽，若某个为-1，则会自动计算其长或宽的大小</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.reshape(arr,(height,depth))</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="np-linalg-norm"><a href="#np-linalg-norm" class="headerlink" title="np.linalg.norm()"></a>np.linalg.norm()</h2><p>默认情况下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.linalg.norm(x)</span><br></pre></td></tr></table></figure>
-<p>计算的是 x 的L2范数，数学表达式是：<br>‖x‖₂ &#x3D; sqrt(∑ |xᵢ|²)<br>如果 x 是 矩阵（2D 数组），默认会把它拉平成一个长向量再计算.<br>如果你写成 np.linalg.norm(x)**2，就相当于只做平方求和，不再开方 —— 等价于：<br>np.sum(np.abs(x)**2)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">x = np.array([[3, 4],</span><br><span class="line">              [1, 2]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认 L2 范数（拉平成向量后）</span></span><br><span class="line">norm_x = np.linalg.norm(x)          <span class="comment"># sqrt(3² + 4² + 1² + 2²) = sqrt(30)</span></span><br><span class="line">norm_x_squared = norm_x ** 2        <span class="comment"># = 30</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 等价写法</span></span><br><span class="line">same_result = np.sum(np.abs(x)**2)  <span class="comment"># 30</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="np-unique"><a href="#np-unique" class="headerlink" title="np.unique"></a>np.unique</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unique_hashes = np.unique(self.dataset[<span class="string">&#x27;X&#x27;</span>][:, 0])</span><br><span class="line"><span class="built_in">print</span>(len(unique_hashes))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/blog/">1</a><span class="page-number current">2</span><a class="page-number" href="/blog/page/3/">3</a><a class="page-number" href="/blog/page/4/">4</a><a class="extend next" rel="next" href="/blog/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/blog/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/blog/">1</a><span class="page-number current">2</span><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/5/">5</a><a class="extend next" rel="next" href="/blog/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2681,7 +2864,7 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Basic conceptFFT是在时间复杂度为$\mathcal{O}(n \log n)$完成的离散傅立叶变换（Discrete Fourier transform， DFT）算法，主要应用是加速多项式乘法计算。 NoticeDFT用于有限长的离散信号（通常为有限长度N）DTFT用于无限长的离散信号（理论上）DFT用于实际信号处理，如FFT算法   FFT的实际应用在实际信号收发中，信号在经过">
+  <meta name="description" content="1. PSD-Based SNR Estimation (ANN Method) 概念: PSD (Power Spectral Density) 表示接收信号功率在频率域的分布。  接收信号 r(t) &#x3D; s(t) + n(t)，其中 s(t) 是有效信号，n(t) 是噪声。  PSD 包含了信号功率和噪声功率。  ANN 方法流程:  接收信号 -&gt; 提取 PSD 特征。 AN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FFT">
-<meta property="og:url" content="https://hechenyi.github.io/2025/05/13/FFT/index.html">
+<meta property="og:title" content="EVM-based SNR Calculation">
+<meta property="og:url" content="https://hechenyi.github.io/2025/08/27/EVM-based-SNR-Calculation/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Basic conceptFFT是在时间复杂度为$\mathcal{O}(n \log n)$完成的离散傅立叶变换（Discrete Fourier transform， DFT）算法，主要应用是加速多项式乘法计算。 NoticeDFT用于有限长的离散信号（通常为有限长度N）DTFT用于无限长的离散信号（理论上）DFT用于实际信号处理，如FFT算法   FFT的实际应用在实际信号收发中，信号在经过">
+<meta property="og:description" content="1. PSD-Based SNR Estimation (ANN Method) 概念: PSD (Power Spectral Density) 表示接收信号功率在频率域的分布。  接收信号 r(t) &#x3D; s(t) + n(t)，其中 s(t) 是有效信号，n(t) 是噪声。  PSD 包含了信号功率和噪声功率。  ANN 方法流程:  接收信号 -&gt; 提取 PSD 特征。 AN">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-05-12T19:31:45.000Z">
-<meta property="article:modified_time" content="2025-05-12T21:14:41.841Z">
+<meta property="article:published_time" content="2025-08-27T08:47:08.000Z">
+<meta property="article:modified_time" content="2025-08-27T08:52:20.059Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hechenyi.github.io/2025/05/13/FFT/">
+<link rel="canonical" href="https://hechenyi.github.io/2025/08/27/EVM-based-SNR-Calculation/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>FFT | Hexo</title>
+  <title>EVM-based SNR Calculation | Hexo</title>
   
 
 
@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/05/13/FFT/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/27/EVM-based-SNR-Calculation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -168,7 +168,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          FFT
+          EVM-based SNR Calculation
         </h1>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-05-13 03:31:45 / Modified: 05:14:41" itemprop="dateCreated datePublished" datetime="2025-05-13T03:31:45+08:00">2025-05-13</time>
+              <time title="Created: 2025-08-27 16:47:08 / Modified: 16:52:20" itemprop="dateCreated datePublished" datetime="2025-08-27T16:47:08+08:00">2025-08-27</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -187,7 +187,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
                 </span>
             </span>
 
@@ -202,18 +202,149 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Basic-concept"><a href="#Basic-concept" class="headerlink" title="Basic concept"></a>Basic concept</h2><h2 id="FFT是在时间复杂度为-mathcal-O-n-log-n-完成的离散傅立叶变换（Discrete-Fourier-transform，-DFT）算法，主要应用是加速多项式乘法计算。"><a href="#FFT是在时间复杂度为-mathcal-O-n-log-n-完成的离散傅立叶变换（Discrete-Fourier-transform，-DFT）算法，主要应用是加速多项式乘法计算。" class="headerlink" title="FFT是在时间复杂度为$\mathcal{O}(n \log n)$完成的离散傅立叶变换（Discrete Fourier transform， DFT）算法，主要应用是加速多项式乘法计算。"></a>FFT是在时间复杂度为$\mathcal{O}(n \log n)$完成的离散傅立叶变换（Discrete Fourier transform， DFT）算法，主要应用是加速多项式乘法计算。</h2><blockquote>
-<p><strong>Notice</strong><br><br>DFT用于有限长的离散信号（通常为有限长度N）<br><br>DTFT用于无限长的离散信号（理论上）<br><br>DFT用于<strong>实际信号</strong>处理，如<strong>FFT</strong>算法<br></p>
-</blockquote>
-<hr>
-<h2 id="FFT的实际应用"><a href="#FFT的实际应用" class="headerlink" title="FFT的实际应用"></a>FFT的实际应用</h2><p>在实际信号收发中，信号在经过调制后输出的复数对是频域信号，这是因为它们表示的是各个子载波上的频域符号，还没有经过IFFT转换为时域波形。通过IFFT后这些复数对才会映射到各个子载波上。例如有四个QPSK符号，对它们进行IFFT：<br>x[n] &#x3D; $\frac{1}{4}\sum_{k&#x3D;0}^{3}e^{j\frac{2{\pi}nk}{4}}$</p>
-<h2 id="FFT原理"><a href="#FFT原理" class="headerlink" title="FFT原理"></a>FFT原理</h2><h3 id="多项式"><a href="#多项式" class="headerlink" title="多项式"></a>多项式</h3><p>A(x) &#x3D; $\sum_{i&#x3D;0}^{n-1}{a_i}x^i$ 与 B(x) &#x3D; $\sum_{i&#x3D;0}^{n-1}{b_i}x^i$相乘的结果为<br>C(x) &#x3D; $\sum_{k&#x3D;0}^{2n-2}(\sum_{k&#x3D;i+j}a_ib_j)x^k$<br>那么这四个点就用来表示这一个OFDM符号对应的四个采样点它们的时域波形。时域信号有以下几个特性：</p>
+        <h2 id="1-PSD-Based-SNR-Estimation-ANN-Method"><a href="#1-PSD-Based-SNR-Estimation-ANN-Method" class="headerlink" title="1. PSD-Based SNR Estimation (ANN Method)"></a>1. PSD-Based SNR Estimation (ANN Method)</h2><ul>
+<li><p><strong>概念</strong>: PSD (Power Spectral Density) 表示接收信号功率在频率域的分布。</p>
+</li>
+<li><p>接收信号 r(t) &#x3D; s(t) + n(t)，其中 s(t) 是有效信号，n(t) 是噪声。</p>
+</li>
+<li><p>PSD 包含了信号功率和噪声功率。</p>
+</li>
+<li><p>ANN 方法流程:</p>
+<ol>
+<li>接收信号 -&gt; 提取 PSD 特征。</li>
+<li>ANN 输入 PSD -&gt; 输出 SNR 分类。</li>
+<li>SNR 分类映射到最优 MCS（调制与编码方案）。</li>
+</ol>
+</li>
+<li><p>优点:</p>
 <ul>
-<li>是4个子载波复数调制符号在频域上的逆变换（IFFT）</li>
-<li>保证正交性</li>
-<li>可以加循环前缀后发射</li>
-<li>接收端做FFT可以完美还原出X[k]</li>
+<li>不依赖解调符号或误差向量。</li>
+<li>高速移动环境中稳健（PSD 不受多普勒效应显著影响）。</li>
+<li>推理计算量低，实时性好。</li>
 </ul>
+</li>
+<li><p>平均功率计算:</p>
+<ul>
+<li>平均功率 $P &#x3D; ∫ S_x(f) df$（连续信号）或 $P &#x3D; (1&#x2F;N) Σ |X[k]|^2$（离散信号）。</li>
+<li>PSD 积分得到总功率，可用于 SNR 计算: $SNR &#x3D; P_signal &#x2F; P_noise$。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-EVM-Based-SNR-Estimation"><a href="#2-EVM-Based-SNR-Estimation" class="headerlink" title="2. EVM-Based SNR Estimation"></a>2. EVM-Based SNR Estimation</h2><ul>
+<li><strong>EVM (Error Vector Magnitude)</strong> 衡量接收符号与理想符号的误差：<br>$EVM &#x3D; sqrt(Σ |r_i - s_i|^2 &#x2F; Σ |s_i|^2)$<ul>
+<li>$r_i$: 接收符号</li>
+<li>$s_i$: 理想符号（通常是 pilot&#x2F;reference symbols）</li>
+</ul>
+</li>
+<li>流程:<ol>
+<li>接收 pilot 符号。</li>
+<li>计算误差向量 $e &#x3D; r_p - s_p$。</li>
+<li>得到 EVM -&gt; 间接推算 SNR -&gt; 映射到 CQI -&gt; 选择 MCS。</li>
+</ol>
+</li>
+<li>局限:<ul>
+<li>依赖 pilot。</li>
+<li>高速移动或多普勒环境下 EVM 会受到星座漂移影响，SNR 估计不稳定。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="3-LS-Based-SNR-Estimation"><a href="#3-LS-Based-SNR-Estimation" class="headerlink" title="3. LS-Based SNR Estimation"></a>3. LS-Based SNR Estimation</h2><ul>
+<li><strong>LS (Least Squares) 方法</strong>用于信道估计:<ul>
+<li>基本公式: $h_hat &#x3D; r_p &#x2F; s_p$（简单 LS）</li>
+<li>信道估计后计算 SNR: $SNR &#x3D; E[|h s|^2] &#x2F; E[|r - h s|^2]$</li>
+</ul>
+</li>
+<li>特点:<ul>
+<li>通过信道增益和噪声功率直接计算 SNR。</li>
+<li>也依赖 pilot。</li>
+<li>高速移动环境中相对稳健，但需要频繁更新信道估计。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="4-区别总结-EVM-vs-LS-vs-PSD-ANN"><a href="#4-区别总结-EVM-vs-LS-vs-PSD-ANN" class="headerlink" title="4. 区别总结: EVM vs LS vs PSD+ANN"></a>4. 区别总结: EVM vs LS vs PSD+ANN</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>EVM-based</th>
+<th>LS-based</th>
+<th>PSD+ANN</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>原理</td>
+<td>接收符号 vs 理想符号误差</td>
+<td>信道估计 + 噪声功率</td>
+<td>PSD 特征 + ANN 分类</td>
+</tr>
+<tr>
+<td>输入</td>
+<td>Pilot &#x2F; Reference</td>
+<td>Pilot &#x2F; Reference</td>
+<td>接收信号 PSD</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>SNR (间接)</td>
+<td>SNR (直接)</td>
+<td>SNR 分类</td>
+</tr>
+<tr>
+<td>高速移动适应性</td>
+<td>差</td>
+<td>较好</td>
+<td>很好，鲁棒</td>
+</tr>
+<tr>
+<td>复杂度</td>
+<td>低</td>
+<td>中等</td>
+<td>低，推理快</td>
+</tr>
+<tr>
+<td>使用场景</td>
+<td>AMC &#x2F; CQI映射</td>
+<td>信道估计、AMC、功率控制</td>
+<td>AMC &#x2F; CQI映射</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="5-AMC应用总结"><a href="#5-AMC应用总结" class="headerlink" title="5. AMC应用总结"></a>5. AMC应用总结</h2><ul>
+<li><p>CQI驱动 AMC:</p>
+<ul>
+<li>基站根据 UE 反馈的 CQI 动态选择 MCS。</li>
+<li>高 SNR → 高阶调制 + 高码率 → 高吞吐量。</li>
+<li>低 SNR → 低阶调制 + 低码率 → 保证可靠性。</li>
+<li>优点: 动态适应信道，频谱效率高。</li>
+<li>缺点: 需要反馈，系统复杂。</li>
+</ul>
+</li>
+<li><p>固定 MCS:</p>
+<ul>
+<li>不考虑信道变化，固定使用某个 MCS。</li>
+<li>简单，但在差信道下 BLER 高，信道好时未充分利用频谱。</li>
+<li>吞吐量和可靠性都不如 CQI 驱动方法。</li>
+</ul>
+</li>
+<li><p>ANN+PSD 方法:</p>
+<ul>
+<li>跳过 EVM 或 LS 复杂计算。</li>
+<li>利用 PSD 特征直接预测 SNR 分类。</li>
+<li>在高速移动信道下鲁棒性更强。</li>
+<li>可快速选择最优 MCS，提高系统吞吐量。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="6-结论"><a href="#6-结论" class="headerlink" title="6. 结论"></a>6. 结论</h2><ol>
+<li>PSD 中包含信号和噪声，可以通过积分或求和得到平均功率，从而估计 SNR。</li>
+<li>EVM 基于 pilot 符号计算误差向量，间接得到 SNR。</li>
+<li>LS 基于 pilot 符号做信道估计，再计算 SNR。</li>
+<li>ANN+PSD 方法在高速移动场景下性能优于传统 EVM 方法，计算量低且稳健。</li>
+<li>CQI 驱动 AMC 与固定 MCS 的区别在于系统能否动态适应信道变化，前者性能更优。</li>
+</ol>
 
     </div>
 
@@ -229,12 +360,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/05/04/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" rel="prev" title="算法基础">
-      <i class="fa fa-chevron-left"></i> 算法基础
+    <a href="/2025/08/26/Semantic-Communication/" rel="prev" title="Semantic Communication">
+      <i class="fa fa-chevron-left"></i> Semantic Communication
     </a></div>
       <div class="post-nav-item">
-    <a href="/2025/06/04/%E4%BF%A1%E9%81%93/" rel="next" title="信道">
-      信道 <i class="fa fa-chevron-right"></i>
+    <a href="/2025/08/27/Reinforcement-Learning/" rel="next" title="Reinforcement Learning">
+      Reinforcement Learning <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -294,7 +425,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-concept"><span class="nav-number">1.</span> <span class="nav-text">Basic concept</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FFT%E6%98%AF%E5%9C%A8%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%BA-mathcal-O-n-log-n-%E5%AE%8C%E6%88%90%E7%9A%84%E7%A6%BB%E6%95%A3%E5%82%85%E7%AB%8B%E5%8F%B6%E5%8F%98%E6%8D%A2%EF%BC%88Discrete-Fourier-transform%EF%BC%8C-DFT%EF%BC%89%E7%AE%97%E6%B3%95%EF%BC%8C%E4%B8%BB%E8%A6%81%E5%BA%94%E7%94%A8%E6%98%AF%E5%8A%A0%E9%80%9F%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B9%98%E6%B3%95%E8%AE%A1%E7%AE%97%E3%80%82"><span class="nav-number">2.</span> <span class="nav-text">FFT是在时间复杂度为$\mathcal{O}(n \log n)$完成的离散傅立叶变换（Discrete Fourier transform， DFT）算法，主要应用是加速多项式乘法计算。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FFT%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">FFT的实际应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FFT%E5%8E%9F%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">FFT原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E9%A1%B9%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text">多项式</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-PSD-Based-SNR-Estimation-ANN-Method"><span class="nav-number">1.</span> <span class="nav-text">1. PSD-Based SNR Estimation (ANN Method)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-EVM-Based-SNR-Estimation"><span class="nav-number">2.</span> <span class="nav-text">2. EVM-Based SNR Estimation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-LS-Based-SNR-Estimation"><span class="nav-number">3.</span> <span class="nav-text">3. LS-Based SNR Estimation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%8C%BA%E5%88%AB%E6%80%BB%E7%BB%93-EVM-vs-LS-vs-PSD-ANN"><span class="nav-number">4.</span> <span class="nav-text">4. 区别总结: EVM vs LS vs PSD+ANN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-AMC%E5%BA%94%E7%94%A8%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">5. AMC应用总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E7%BB%93%E8%AE%BA"><span class="nav-number">6.</span> <span class="nav-text">6. 结论</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
