@@ -150,6 +150,256 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/28/JSCC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/28/JSCC/" class="post-title-link" itemprop="url">JSCC</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-28 19:27:17 / Modified: 21:48:39" itemprop="dateCreated datePublished" datetime="2025-08-28T19:27:17+08:00">2025-08-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/5g/" itemprop="url" rel="index"><span itemprop="name">5g</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="JSCC模型说明"><a href="#JSCC模型说明" class="headerlink" title="JSCC模型说明"></a>JSCC模型说明</h2><p>JSCC（Joint Source-Channel Coding）数字联合信源信道编码，特点包括：</p>
+<ul>
+<li><strong>端到端训练</strong>：支持latent feature -&gt; 调制符号的可微训练</li>
+<li><strong>软条件化</strong>（Soft Conditioning）：编码器可根据调制阶数（M-QAM）和信道SNR自适应调制特征  </li>
+<li><strong>噪声近似训练</strong>：训练阶段使用连续噪声替代调制&#x2F;解调操作，使梯度可回传</li>
+</ul>
+<h2 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h2><h3 id="1-输入信号处理"><a href="#1-输入信号处理" class="headerlink" title="1. 输入信号处理"></a>1. 输入信号处理</h3><ul>
+<li><strong>AnalysisTransform (NTC)</strong>：将原始图像降维到 latent feature，输出形状 <code>[B, C, H&#39;, W&#39;]</code>  </li>
+<li>降维作用：<ul>
+<li>将图像信息压缩成潜在特征  </li>
+<li>便于 JSCC 编码器处理</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-JSCC编码器（JSCCEncoder）"><a href="#2-JSCC编码器（JSCCEncoder）" class="headerlink" title="2. JSCC编码器（JSCCEncoder）"></a>2. JSCC编码器（JSCCEncoder）</h3><p>主要组成：</p>
+<ul>
+<li><strong>Swin Transformer Blocks</strong>：提取高级特征  </li>
+<li><strong>Rate Adaption Layer</strong>：根据熵模型和信道需求动态调整编码长度  </li>
+<li><strong>MergingNet (Modulation Conditional Module, MCM)</strong>：<ul>
+<li>输入：latent feature + 调制阶数 M  </li>
+<li>对特征进行 <strong>软条件化</strong>：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = x * softplus(M_onehot1) + M_onehot2</span><br></pre></td></tr></table></figure></li>
+<li>作用：让编码器特征适应不同调制阶数</li>
+</ul>
+</li>
+<li><strong>AF (Adaptive Feature Layer)</strong>：<ul>
+<li>输入：latent feature + 信道 SNR  </li>
+<li>对特征进行缩放和平移：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">z = z * scale + shift</span><br></pre></td></tr></table></figure></li>
+<li>作用：信道条件自适应，提升鲁棒性</li>
+</ul>
+</li>
+<li>输出：经过软条件化和可选调制处理的连续 latent feature</li>
+</ul>
+<h3 id="3-调制近似"><a href="#3-调制近似" class="headerlink" title="3. 调制近似"></a>3. 调制近似</h3><ul>
+<li>将连续latent feature 映射成离散QAM符号</li>
+<li>训练阶段使用<strong>均匀噪声近似调制</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d = sqrt(3*power / (2*M-2))</span><br><span class="line">u ~ Uniform(-d, d)</span><br><span class="line">channel_input += u</span><br></pre></td></tr></table></figure>
+<p>其中M是调制阶数，d是半符号间距，用来保证噪声幅度与符号间距一致</p>
+<h3 id="4-调制与信道"><a href="#4-调制与信道" class="headerlink" title="4. 调制与信道"></a>4. 调制与信道</h3><h4 id="测试阶段"><a href="#测试阶段" class="headerlink" title="测试阶段"></a>测试阶段</h4><ul>
+<li>连续latent feature -》 正常QAM调制</li>
+<li>经过AWGN或其他信道传输</li>
+</ul>
+<h4 id="训练阶段："><a href="#训练阶段：" class="headerlink" title="训练阶段："></a>训练阶段：</h4><ul>
+<li>使用连续噪声近似调制，使梯度可回传</li>
+</ul>
+<p>并且支持不同调制阶数的条件训练</p>
+<h3 id="5-JSCC解码器"><a href="#5-JSCC解码器" class="headerlink" title="5. JSCC解码器"></a>5. JSCC解码器</h3><ul>
+<li>将收到的信道符号（或连续近似特征）解码为latent feature</li>
+<li>可结合hyperprior</li>
+</ul>
+<h2 id="理论支持"><a href="#理论支持" class="headerlink" title="理论支持"></a>理论支持</h2><h3 id="符号平均功率归一化："><a href="#符号平均功率归一化：" class="headerlink" title="符号平均功率归一化："></a>符号平均功率归一化：</h3><p>对于 M-QAM（平方型），设符号幅度按标准格排列：</p>
+<ul>
+<li>水平&#x2F;垂直方向的符号坐标:{$-\sqrt M + 1$, $-\sqrt M + 3$, … , $\sqrt M - 1$}. </li>
+<li>平均符号功率$P_{avg}$为：$P_{avg} &#x3D; \frac{2(M-1)}{3}$</li>
+</ul>
+<h3 id="噪声近似"><a href="#噪声近似" class="headerlink" title="噪声近似"></a>噪声近似</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d = sqrt(3*power / (2*modulation_order - 2))</span><br><span class="line">u ~ Uniform(-d, d)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>d对应符号间距的一半</li>
+<li>对于均匀量化<br>$x_{quantized} ​≈ x_{continuous}​ + u,u ∼ Uniform(−d,d)$</li>
+<li>这样训练时梯度可回传，同时模拟调制离散化误差</li>
+</ul>
+<h3 id="软条件化"><a href="#软条件化" class="headerlink" title="软条件化"></a>软条件化</h3><ul>
+<li>调制阶数和信道SNR作为条件输入</li>
+<li>通过线性层 + 非线性激活（Softplus &#x2F; Sigmoid）调整 latent feature</li>
+<li>增强编码器对不同调制阶数和信道条件的适应能力</li>
+</ul>
+<h3 id="端到端可微训练"><a href="#端到端可微训练" class="headerlink" title="端到端可微训练"></a>端到端可微训练</h3><ul>
+<li>连续噪声替代离散调制，使梯度可回传</li>
+<li>后续可结合 STE 或软硬退火进行微调</li>
+</ul>
+<h2 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h2><h3 id="阶段一：source-coding-training"><a href="#阶段一：source-coding-training" class="headerlink" title="阶段一：source coding training"></a>阶段一：source coding training</h3><ul>
+<li><strong>目标</strong>：单独训练基于学习的图像压缩器，使其具备良好的表示能力。</li>
+<li><strong>固定参数</strong>：冻结 JSC 编码器与解码器 (θf, ϕf)。</li>
+<li><strong>训练参数</strong>：θg, θh, ϕg, ϕh。</li>
+<li><strong>损失函数</strong>：<br>L(x, x̂, λ) &#x3D; R + λD(x, x̂)<br>其中 R 为比特率，D 为失真 (如 MSE)，λ 为拉格朗日乘子。</li>
+<li><strong>说明</strong>：这一阶段只关注图像压缩，不涉及信道。</li>
+</ul>
+<h3 id="阶段二：JSC-encoder和JSC-decoder训练"><a href="#阶段二：JSC-encoder和JSC-decoder训练" class="headerlink" title="阶段二：JSC encoder和JSC decoder训练"></a>阶段二：JSC encoder和JSC decoder训练</h3><ul>
+<li><strong>目标</strong>：在端到端系统中引入“连续噪声近似调制”，使系统在训练时保持可微，便于联合优化。</li>
+<li><strong>初始化</strong>：加载阶段一训练好的参数。</li>
+<li><strong>训练参数</strong>：θg, θh, θf, ϕg, ϕh, ϕf (全模型参与)。</li>
+<li><strong>步骤</strong>：<ol>
+<li>从训练数据中采样图像 x。</li>
+<li>从目标范围内均匀采样 SNR。</li>
+<li>随机选择调制阶数 M。</li>
+<li>根据 M 与功率约束 Es 计算调制间距 d。</li>
+<li>使用 <strong>连续噪声近似</strong> 通过信道。</li>
+</ol>
+</li>
+<li><strong>损失函数</strong>：<br>L(x, x̂, λ, M, SNR) &#x3D; R + λ [ D(x, x̂) + D(x, x̂MD) ]<br>其中 x̂ 为压缩器重建图像，x̂MD 为经过端到端 JSCC 模块后的图像。</li>
+</ul>
+<h2 id="阶段三：基于-STE-的精调-STE-based-Finetuning"><a href="#阶段三：基于-STE-的精调-STE-based-Finetuning" class="headerlink" title="阶段三：基于 STE 的精调 (STE-based Finetuning)"></a>阶段三：基于 STE 的精调 (STE-based Finetuning)</h2><ul>
+<li><strong>目标</strong>：解决训练与测试阶段之间的不匹配（真实调制是确定性的，不是加噪声），提升模型在实际信道上的性能。</li>
+<li><strong>初始化</strong>：加载阶段二训练好的参数。</li>
+<li><strong>固定参数</strong>：冻结发射端参数 (θg, θh, θf)。</li>
+<li><strong>训练参数</strong>：ϕg, ϕh, ϕf (接收端)。</li>
+<li><strong>步骤</strong>：<ol>
+<li>重复阶段二的数据采样步骤（x, M, SNR, d）。</li>
+</ol>
+</li>
+<li><strong>损失函数</strong>：<br>与阶段二相同：<br>L(x, x̂, λ, M, SNR) &#x3D; R + λ [ D(x, x̂) + D(x, x̂MD) ]</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>其中JSC编码器&#x2F;解码器是一个神经网络模块，以SNR和mcs为输入，学习如何把特征编码成可传输的信号，再从信号中恢复。<br></p>
+</blockquote>
+<hr>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/28/One-Shot-Coding/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/28/One-Shot-Coding/" class="post-title-link" itemprop="url">One-Shot Coding</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-28 15:07:00 / Modified: 15:14:32" itemprop="dateCreated datePublished" datetime="2025-08-28T15:07:00+08:00">2025-08-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>一次性编码，不需要序列式迭代或多步计算，输出是用向量表示</p>
+<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>将离散信息转为神经网络可处理的连续特征。因此one-shot coding后可以用MLP来处理。<br>类似NLP里的word embedding。<br>One-shot具有可微性（一对一映射），因此可以进行反向传播。</p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>信号量化具有不可微性（多对一映射）<br></p>
+</blockquote>
+<hr>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/27/Reinforcement-Learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1138,239 +1388,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/02/CI-CD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/08/02/CI-CD/" class="post-title-link" itemprop="url">CI/CD</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-08-02 13:32:29 / Modified: 14:35:07" itemprop="dateCreated datePublished" datetime="2025-08-02T13:32:29+08:00">2025-08-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h1 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h1><h2 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h2><p>GitLab -&gt; Jenkins -&gt; Docker 构建 -&gt; 推送到JFrog Artifactory -&gt; K8s 滚动部署</p>
-<h2 id="详细流程"><a href="#详细流程" class="headerlink" title="详细流程"></a>详细流程</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[开发者] git push</span><br><span class="line">        ↓</span><br><span class="line">[GitLab Webhook] 通知 Jenkins</span><br><span class="line">        ↓</span><br><span class="line">[Jenkins Pipeline]</span><br><span class="line">   1. 拉取 GitLab 源码</span><br><span class="line">   2. 构建 Docker 镜像（基于 Dockerfile）</span><br><span class="line">   3. 登录 JFrog Artifactory 仓库</span><br><span class="line">   4. 推送镜像到 Artifactory Docker 仓库</span><br><span class="line">   5. 使用 kubeconfig/kubectl 更新 Kubernetes Deployment 中的镜像</span><br><span class="line">        ↓</span><br><span class="line">[Kubernetes]</span><br><span class="line">   6. 自动滚动更新容器，部署新版应用</span><br></pre></td></tr></table></figure>
-<h2 id="使用组件及角色"><a href="#使用组件及角色" class="headerlink" title="使用组件及角色"></a>使用组件及角色</h2><table>
-<thead>
-<tr>
-<th>组件</th>
-<th>角色说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>GitLab</td>
-<td>源码托管、触发构建 Webhook</td>
-</tr>
-<tr>
-<td>Jenkins</td>
-<td>核心 CI&#x2F;CD 执行器，运行流水线</td>
-</tr>
-<tr>
-<td>Docker</td>
-<td>构建容器镜像</td>
-</tr>
-<tr>
-<td>JFrog Artifactory</td>
-<td>存储容器镜像（Docker Registry）</td>
-</tr>
-<tr>
-<td>Kubernetes</td>
-<td>运行你的后端服务，部署并自动滚动更新</td>
-</tr>
-</tbody></table>
-<h2 id="示例Jenkinsfile"><a href="#示例Jenkinsfile" class="headerlink" title="示例Jenkinsfile"></a>示例Jenkinsfile</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line"></span><br><span class="line">    environment &#123;</span><br><span class="line">        ARTIFACTORY_DOCKER_CREDENTIALS = <span class="string">&#x27;artifactory-docker-creds&#x27;</span> // Jenkins中配置</span><br><span class="line">        ARTIFACTORY_DOCKER_REGISTRY = <span class="string">&#x27;jfrog.mycompany.com&#x27;</span></span><br><span class="line">        ARTIFACTORY_REPO = <span class="string">&#x27;docker-local&#x27;</span>  // 你在 Artifactory 中的 Docker 仓库名</span><br><span class="line">        IMAGE_NAME = <span class="string">&#x27;myapp&#x27;</span></span><br><span class="line">        IMAGE_TAG = <span class="string">&quot;<span class="variable">$&#123;BUILD_NUMBER&#125;</span>&quot;</span>      // 每次构建使用不同 tag</span><br><span class="line"></span><br><span class="line">        DEPLOYMENT_NAME = <span class="string">&quot;myapp-deployment&quot;</span></span><br><span class="line">        CONTAINER_NAME = <span class="string">&quot;myapp-container&quot;</span></span><br><span class="line">        NAMESPACE = <span class="string">&quot;test&quot;</span></span><br><span class="line">        KUBECONFIG_CRED = <span class="string">&#x27;kubeconfig-file&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;Clone Code&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                checkout scm</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">&#x27;Build Docker Image&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                script &#123;</span><br><span class="line">                    docker.withRegistry(<span class="string">&quot;https://<span class="variable">$&#123;ARTIFACTORY_DOCKER_REGISTRY&#125;</span>&quot;</span>, ARTIFACTORY_DOCKER_CREDENTIALS) &#123;</span><br><span class="line">                        def image = docker.build(<span class="string">&quot;<span class="variable">$&#123;ARTIFACTORY_DOCKER_REGISTRY&#125;</span>/<span class="variable">$&#123;ARTIFACTORY_REPO&#125;</span>/<span class="variable">$&#123;IMAGE_NAME&#125;</span>:<span class="variable">$&#123;IMAGE_TAG&#125;</span>&quot;</span>)</span><br><span class="line">                        image.push()</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">&#x27;Update K8s Deployment&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                withCredentials([file(credentialsId: KUBECONFIG_CRED, variable: <span class="string">&#x27;KUBECONFIG&#x27;</span>)]) &#123;</span><br><span class="line">                    sh <span class="string">&#x27;&#x27;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">                    kubectl --kubeconfig=$KUBECONFIG -n $&#123;NAMESPACE&#125; set image deployment/$&#123;DEPLOYMENT_NAME&#125; $&#123;CONTAINER_NAME&#125;=$&#123;ARTIFACTORY_DOCKER_REGISTRY&#125;/$&#123;ARTIFACTORY_REPO&#125;/$&#123;IMAGE_NAME&#125;:$&#123;IMAGE_TAG&#125;</span></span><br><span class="line"><span class="string">                    kubectl --kubeconfig=$KUBECONFIG -n $&#123;NAMESPACE&#125; rollout status deployment/$&#123;DEPLOYMENT_NAME&#125;</span></span><br><span class="line"><span class="string">                    &#x27;</span><span class="string">&#x27;&#x27;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="准备工作（一次性配置）"><a href="#准备工作（一次性配置）" class="headerlink" title="准备工作（一次性配置）"></a>准备工作（一次性配置）</h2><ul>
-<li>GitLab 配置好Webhook：指向Jenkins Job URL</li>
-<li>Artifactory 建好Docker仓库（如docker-local）</li>
-<li>Jenkins凭据配置<ul>
-<li>artifactory-docker-creds （用户名&#x2F;密码或API Token）</li>
-<li>kubeconfig-file（K8s访问配置文件）</li>
-</ul>
-</li>
-<li>Jenkins安装插件<ul>
-<li>Docker plugin</li>
-<li>Git plugin</li>
-<li>Pipeline plugin</li>
-<li>Credentials plugin</li>
-</ul>
-</li>
-</ul>
-<h2 id="部署效果"><a href="#部署效果" class="headerlink" title="部署效果"></a>部署效果</h2><p>只需一条git push:</p>
-<ul>
-<li>Jenkins 自动构建镜像</li>
-<li>推送Artifactory</li>
-<li>更新K8s应用，自动滚动升级</li>
-</ul>
-<h1 id="Ansible"><a href="#Ansible" class="headerlink" title="Ansible"></a>Ansible</h1><p>Ansible 角色 （Role）是对自动化任务的模块化封装，方便复用和管理。一个完整的role通常包含以下目录和文件，每个目录复制不同的职责：</p>
-<h2 id="defaults"><a href="#defaults" class="headerlink" title="defaults"></a>defaults</h2><ul>
-<li>作用：存放角色的默认变量</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">core_executable: <span class="string">&quot;&#123;&#123; free5gc_src.dest_dir &#125;&#125;/run.sh&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">core_apn: <span class="string">&quot;internet&quot;</span></span><br><span class="line">core_sst: <span class="string">&quot;1&quot;</span></span><br><span class="line">core_sd: <span class="string">&quot;000000&quot;</span></span><br><span class="line"></span><br><span class="line">core_mcc: <span class="string">&quot;999&quot;</span></span><br><span class="line">core_mnc: <span class="string">&quot;70&quot;</span></span><br><span class="line"></span><br><span class="line">core_plmn: <span class="string">&quot;&#123;&#123;core_mcc&#125;&#125;&#123;&#123;core_mcn&#125;&#125;&quot;</span></span><br><span class="line"></span><br><span class="line">core_tac: <span class="string">&quot;000001&quot;</span></span><br><span class="line"></span><br><span class="line">core_simcard_inventory_file: deploy-config-simcards.yml</span><br><span class="line">amf_ipv4_net: <span class="string">&quot;10.0.2.10&quot;</span></span><br><span class="line">upf_ipv4_net: <span class="string">&quot;10.0.2.12&quot;</span></span><br><span class="line"></span><br><span class="line">sim_cards:</span><br><span class="line">- name: <span class="string">&quot;Sim26&quot;</span></span><br><span class="line">  imsi: <span class="string">&quot;imsi-999700000128110&quot;</span></span><br><span class="line">  key: <span class="string">&quot;E501DCD94E0912B04AE041619DA43421&quot;</span></span><br><span class="line">  opc: <span class="string">&quot;13082466301232D8B8BB299F1867A861&quot;</span></span><br><span class="line">  apn: <span class="string">&quot;internet&quot;</span></span><br><span class="line">  sst: <span class="string">&quot;1&quot;</span></span><br><span class="line">  sd: <span class="string">&quot;000000&quot;</span></span><br><span class="line">  gpsis: <span class="string">&quot;msisdn-0900000005&quot;</span></span><br><span class="line"></span><br><span class="line">- name: <span class="string">&quot;Sim28&quot;</span></span><br><span class="line">  imsi: <span class="string">&quot;imsi-001010000105331&quot;</span></span><br><span class="line">  key: <span class="string">&quot;22231214410527097343456132856119&quot;</span></span><br><span class="line">  opc: <span class="string">&quot;35400111987345158373161168419158&quot;</span></span><br><span class="line">  apn: <span class="string">&quot;internet&quot;</span></span><br><span class="line">  sst: <span class="string">&quot;1&quot;</span></span><br><span class="line">  sd: <span class="string">&quot;000000&quot;</span></span><br><span class="line">  gpsis: <span class="string">&quot;msisdn-0900000006&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="vars"><a href="#vars" class="headerlink" title="vars"></a>vars</h2><ul>
-<li>作用： 存放角色的变量（优先级高于defaults）</li>
-<li>用于定义角色强制需要的变量，通常不建议轻易覆盖</li>
-</ul>
-<h2 id="tasks"><a href="#tasks" class="headerlink" title="tasks"></a>tasks</h2><ul>
-<li>作用： 角色的核心任务清单，定义执行的操作步骤</li>
-<li>文件一般为main.yml</li>
-<li>例如安装软件、复制文件、配置服务等</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- name: Install Corepack</span><br><span class="line">  become: <span class="built_in">yes</span></span><br><span class="line">  npm:</span><br><span class="line">    name: corepack</span><br><span class="line">    global: <span class="built_in">yes</span></span><br><span class="line"></span><br><span class="line">- name: Enable corepark</span><br><span class="line">  <span class="built_in">command</span>: corepack <span class="built_in">enable</span></span><br><span class="line">  <span class="comment"># when: yarn_version.rc != 0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- name: <span class="string">&quot;INSTALL-TASKS-gtp5g-SOURCE - Run gtp5g build&quot;</span></span><br><span class="line">  tags: gtp5g build</span><br><span class="line">  <span class="comment"># become_user: &quot;&#123;&#123; normal_user_id &#125;&#125;&quot;</span></span><br><span class="line">  become: <span class="built_in">yes</span></span><br><span class="line">  <span class="built_in">command</span>: <span class="built_in">sudo</span> make</span><br><span class="line">  args:</span><br><span class="line">    <span class="built_in">chdir</span>: <span class="string">&quot;&#123;&#123; gtp5g_src.dest_dir &#125;&#125;&quot;</span></span><br><span class="line">  when: gtp5g_module.rc != 0</span><br><span class="line"></span><br><span class="line">- name: <span class="string">&quot;INSTALL-TASKS-gtp5g-SOURCE - Run gtp5g install&quot;</span></span><br><span class="line">  tags: gtp5g install</span><br><span class="line">  become: <span class="built_in">yes</span></span><br><span class="line">  <span class="built_in">command</span>:   make install</span><br><span class="line">  args:</span><br><span class="line">    <span class="built_in">chdir</span>: <span class="string">&quot;&#123;&#123; gtp5g_src.dest_dir &#125;&#125;&quot;</span></span><br><span class="line">  when: gtp5g_module.rc != 0</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="templates"><a href="#templates" class="headerlink" title="templates"></a>templates</h2><ul>
-<li>作用： 存放jinja2模板文件，用于生成动态配置文件</li>
-<li>在模版文件中可以使用变量、 条件语句等</li>
-<li>在tasks中通过template模板调用</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line">info:</span><br><span class="line">  version: 1.0.9</span><br><span class="line">  description: AMF initial <span class="built_in">local</span> configuration</span><br><span class="line"></span><br><span class="line">configuration:</span><br><span class="line">  amfName: AMF <span class="comment"># the name of this AMF</span></span><br><span class="line">  ngapIpList:  <span class="comment"># the IP list of N2 interfaces on this AMF</span></span><br><span class="line">    - &#123;&#123; amf_ipv4_net &#125;&#125;</span><br><span class="line">  ngapPort: 38412 <span class="comment"># the SCTP port listened by NGAP</span></span><br><span class="line">  sbi: <span class="comment"># Service-based interface information</span></span><br><span class="line">    scheme: http <span class="comment"># the protocol for sbi (http or https)</span></span><br><span class="line">    registerIPv4: 127.0.0.18 <span class="comment"># IP used to register to NRF</span></span><br><span class="line">    bindingIPv4: 127.0.0.18  <span class="comment"># IP used to bind the service</span></span><br><span class="line">    port: 8000 <span class="comment"># port used to bind the service</span></span><br><span class="line">    tls: <span class="comment"># the local path of TLS key</span></span><br><span class="line">      pem: cert/amf.pem <span class="comment"># AMF TLS Certificate</span></span><br><span class="line">      key: cert/amf.key <span class="comment"># AMF TLS Private key</span></span><br><span class="line">  serviceNameList: <span class="comment"># the SBI services provided by this AMF, refer to TS 29.518</span></span><br><span class="line">    - namf-comm <span class="comment"># Namf_Communication service</span></span><br><span class="line">    - namf-evts <span class="comment"># Namf_EventExposure service</span></span><br><span class="line">    - namf-mt   <span class="comment"># Namf_MT service</span></span><br><span class="line">    - namf-loc  <span class="comment"># Namf_Location service</span></span><br><span class="line">    - namf-oam  <span class="comment"># OAM service</span></span><br><span class="line">  servedGuamiList: <span class="comment"># Guami (Globally Unique AMF ID) list supported by this AMF</span></span><br><span class="line">    <span class="comment"># &lt;GUAMI&gt; = &lt;MCC&gt;&lt;MNC&gt;&lt;AMF ID&gt;</span></span><br><span class="line">    - plmnId: <span class="comment"># Public Land Mobile Network ID, &lt;PLMN ID&gt; = &lt;MCC&gt;&lt;MNC&gt;</span></span><br><span class="line">        mcc: &#123;&#123; core_mcc &#125;&#125; <span class="comment"># Mobile Country Code (3 digits string, digit: 0~9)</span></span><br><span class="line">        mnc: &#123;&#123; core_mnc &#125;&#125; <span class="comment"># Mobile Network Code (2 or 3 digits string, digit: 0~9)</span></span><br><span class="line">      amfId: cafe00 <span class="comment"># AMF identifier (3 bytes hex string, range: 000000~FFFFFF)</span></span><br><span class="line">  supportTaiList:  <span class="comment"># the TAI (Tracking Area Identifier) list supported by this AMF</span></span><br><span class="line">    - plmnId: <span class="comment"># Public Land Mobile Network ID, &lt;PLMN ID&gt; = &lt;MCC&gt;&lt;MNC&gt;</span></span><br><span class="line">        mcc: &#123;&#123; core_mcc &#125;&#125; <span class="comment"># Mobile Country Code (3 digits string, digit: 0~9)</span></span><br><span class="line">        mnc: &#123;&#123; core_mnc &#125;&#125; <span class="comment"># Mobile Network Code (2 or 3 digits string, digit: 0~9)</span></span><br><span class="line">      <span class="built_in">tac</span>: &#123;&#123; core_tac &#125;&#125; <span class="comment"># Tracking Area Code (3 bytes hex string, range: 000000~FFFFFF)</span></span><br><span class="line">  plmnSupportList: <span class="comment"># the PLMNs (Public land mobile network) list supported by this AMF</span></span><br><span class="line">    - plmnId: <span class="comment"># Public Land Mobile Network ID, &lt;PLMN ID&gt; = &lt;MCC&gt;&lt;MNC&gt;</span></span><br><span class="line">        mcc: &#123;&#123; core_mcc &#125;&#125; <span class="comment"># Mobile Country Code (3 digits string, digit: 0~9)</span></span><br><span class="line">        mnc: &#123;&#123; core_mnc &#125;&#125; <span class="comment"># Mobile Network Code (2 or 3 digits string, digit: 0~9)</span></span><br><span class="line">      snssaiList: <span class="comment"># the S-NSSAI (Single Network Slice Selection Assistance Information) list supported by this AMF</span></span><br><span class="line">        - sst: &#123;&#123; core_sst &#125;&#125; <span class="comment"># Slice/Service Type (uinteger, range: 0~255)</span></span><br><span class="line">          sd: &#123;&#123; core_sd &#125;&#125; <span class="comment"># Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)</span></span><br><span class="line">        - sst: 1 <span class="comment"># Slice/Service Type (uinteger, range: 0~255)</span></span><br><span class="line">          sd: 112233 <span class="comment"># Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)</span></span><br><span class="line">  supportDnnList:  <span class="comment"># the DNN (Data Network Name) list supported by this AMF</span></span><br><span class="line">    - internet</span><br><span class="line">  nrfUri: http://127.0.0.10:8000 <span class="comment"># a valid URI of NRF</span></span><br><span class="line">  nrfCertPem: cert/nrf.pem <span class="comment"># NRF Certificate</span></span><br><span class="line">  security:  <span class="comment"># NAS security parameters</span></span><br><span class="line">    integrityOrder: <span class="comment"># the priority of integrity algorithms</span></span><br><span class="line">      - NIA2</span><br><span class="line">      <span class="comment"># - NIA0</span></span><br><span class="line">    cipheringOrder: <span class="comment"># the priority of ciphering algorithms</span></span><br><span class="line">      - NEA0</span><br><span class="line">      - NEA2</span><br><span class="line">  networkName:  <span class="comment"># the name of this core network</span></span><br><span class="line">    full: free5GC</span><br><span class="line">    short: free</span><br><span class="line">  ngapIE: <span class="comment"># Optional NGAP IEs</span></span><br><span class="line">    mobilityRestrictionList: <span class="comment"># Mobility Restriction List IE, refer to TS 38.413</span></span><br><span class="line">      <span class="built_in">enable</span>: <span class="literal">true</span> <span class="comment"># append this IE in related message or not</span></span><br><span class="line">    maskedIMEISV: <span class="comment"># Masked IMEISV IE, refer to TS 38.413</span></span><br><span class="line">      <span class="built_in">enable</span>: <span class="literal">true</span> <span class="comment"># append this IE in related message or not</span></span><br><span class="line">    redirectionVoiceFallback: <span class="comment"># Redirection Voice Fallback IE, refer to TS 38.413</span></span><br><span class="line">      <span class="built_in">enable</span>: <span class="literal">false</span> <span class="comment"># append this IE in related message or not</span></span><br><span class="line">  nasIE: <span class="comment"># Optional NAS IEs</span></span><br><span class="line">    networkFeatureSupport5GS: <span class="comment"># 5gs Network Feature Support IE, refer to TS 24.501</span></span><br><span class="line">      <span class="built_in">enable</span>: <span class="literal">true</span> <span class="comment"># append this IE in Registration accept or not</span></span><br><span class="line">      length: 1 <span class="comment"># IE content length (uinteger, range: 1~3)</span></span><br><span class="line">      imsVoPS: 0 <span class="comment"># IMS voice over PS session indicator (uinteger, range: 0~1)</span></span><br><span class="line">      emc: 0 <span class="comment"># Emergency service support indicator for 3GPP access (uinteger, range: 0~3)</span></span><br><span class="line">      emf: 0 <span class="comment"># Emergency service fallback indicator for 3GPP access (uinteger, range: 0~3)</span></span><br><span class="line">      iwkN26: 0 <span class="comment"># Interworking without N26 interface indicator (uinteger, range: 0~1)</span></span><br><span class="line">      mpsi: 0 <span class="comment"># MPS indicator (uinteger, range: 0~1)</span></span><br><span class="line">      emcN3: 0 <span class="comment"># Emergency service support indicator for Non-3GPP access (uinteger, range: 0~1)</span></span><br><span class="line">      mcsi: 0 <span class="comment"># MCS indicator (uinteger, range: 0~1)</span></span><br><span class="line">  t3502Value: 720  <span class="comment"># timer value (seconds) at UE side</span></span><br><span class="line">  t3512Value: 3600 <span class="comment"># timer value (seconds) at UE side</span></span><br><span class="line">  non3gppDeregTimerValue: 3240 <span class="comment"># timer value (seconds) at UE side</span></span><br><span class="line">  <span class="comment"># retransmission timer for paging message</span></span><br><span class="line">  t3513:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  <span class="comment"># retransmission timer for NAS Deregistration Request message</span></span><br><span class="line">  t3522:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  <span class="comment"># retransmission timer for NAS Registration Accept message</span></span><br><span class="line">  t3550:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  <span class="comment"># retransmission timer for NAS Configuration Update Command message</span></span><br><span class="line">  t3555:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  <span class="comment"># retransmission timer for NAS Authentication Request/Security Mode Command message</span></span><br><span class="line">  t3560:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  <span class="comment"># retransmission timer for NAS Notification message</span></span><br><span class="line">  t3565:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  <span class="comment"># retransmission timer for NAS Identity Request message</span></span><br><span class="line">  t3570:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  locality: area1 <span class="comment"># Name of the location where a set of AMF, SMF, PCF and UPFs are located</span></span><br><span class="line">  sctp: <span class="comment"># set the sctp server setting &lt;optinal&gt;, once this field is set, please also add maxInputStream, maxOsStream, maxAttempts, maxInitTimeOut</span></span><br><span class="line">    numOstreams: 3 <span class="comment"># the maximum out streams of each sctp connection</span></span><br><span class="line">    maxInstreams: 5 <span class="comment"># the maximum in streams of each sctp connection</span></span><br><span class="line">    maxAttempts: 2 <span class="comment"># the maximum attempts of each sctp connection</span></span><br><span class="line">    maxInitTimeout: 2 <span class="comment"># the maximum init timeout of each sctp connection</span></span><br><span class="line">  defaultUECtxReq: <span class="literal">false</span> <span class="comment"># the default value of UE Context Request to decide when triggering Initial Context Setup procedure</span></span><br><span class="line"></span><br><span class="line">logger: <span class="comment"># log output setting</span></span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span> <span class="comment"># true or false</span></span><br><span class="line">  level: info <span class="comment"># how detailed to output, value: trace, debug, info, warn, error, fatal, panic</span></span><br><span class="line">  reportCaller: <span class="literal">false</span> <span class="comment"># enable the caller report or not, value: true or false</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/01/MIMOBeamforming/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/08/01/MIMOBeamforming/" class="post-title-link" itemprop="url">MIMOBeamforming</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-08-01 00:58:24 / Modified: 01:21:46" itemprop="dateCreated datePublished" datetime="2025-08-01T00:58:24+08:00">2025-08-01</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h1 id="MIMO-OFDM-波束成形系统理论介绍"><a href="#MIMO-OFDM-波束成形系统理论介绍" class="headerlink" title="MIMO-OFDM 波束成形系统理论介绍"></a>MIMO-OFDM 波束成形系统理论介绍</h1><h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><p>现代无线通信系统（如 5G NR、LTE、WLAN）普遍采用 <strong>MIMO-OFDM</strong> 技术，因其对频率选择性衰落信道的鲁棒性及高数据速率的支持。随着应用需求的增加，系统配置日益复杂，天线阵列规模和子载波数量大幅提升，多天线、多流传输成为主流。</p>
-<h2 id="2-天线阵列与波束成形"><a href="#2-天线阵列与波束成形" class="headerlink" title="2. 天线阵列与波束成形"></a>2. 天线阵列与波束成形</h2><p>通过多个天线元素组成的阵列，系统可实现<strong>空间复用</strong>和<strong>波束成形</strong>。波束成形（Beamforming）是利用空间信号处理技术调整发射信号的相位和幅度，使信号在目标方向上增强，同时抑制干扰，提高信噪比（SNR）和系统性能（如降低误码率 BER）。<br>在多天线系统中，除了数字基带层面的预编码外，通常还会应用 射频波束成形矩阵 (Frf)，这是在模拟射频前端对信号进行加权处理，实现对天线阵列的物理波束成形。</p>
-<p>射频波束成形通过对数字基带信号乘以 Frf 矩阵，将信号映射到各个天线单元。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">% RF beamforming: Apply Frf to the digital signal            </span><br><span class="line">% Each antenna element is connected to each data stream</span><br><span class="line">txSig = txSigSTS*mFrf;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-波束成形的关键流程"><a href="#3-波束成形的关键流程" class="headerlink" title="3. 波束成形的关键流程"></a>3. 波束成形的关键流程</h2><h3 id="接收端-Channel-Sounding"><a href="#接收端-Channel-Sounding" class="headerlink" title="接收端(Channel Sounding)"></a>接收端(Channel Sounding)</h3><p>Preamble Tx -&gt; MIMO Channel -&gt; OFDM Rx -&gt; MIMO Channel Estimate -&gt; SVD -&gt; nfrf</p>
-<h3 id="发射端-Precoding-from-channel-sounding"><a href="#发射端-Precoding-from-channel-sounding" class="headerlink" title="发射端 (Precoding from channel sounding)"></a>发射端 (Precoding from channel sounding)</h3><p>系统建模时，将天线阵列位置、天线方向图和空间信道特性纳入设计，采用如下流程：</p>
-<p>数据编码 → 预编码（基于信道测量）→ OFDM调制 → 发射波束成形 → MIMO信道 → 接收波束成形 → OFDM解调 → 数据恢复</p>
-<h3 id="具体步骤说明："><a href="#具体步骤说明：" class="headerlink" title="具体步骤说明："></a>具体步骤说明：</h3><ol>
-<li><p><strong>编码与调制</strong><br>发送数据先经过信源编码和信道编码提升可靠性，再映射成数字调制符号。</p>
-</li>
-<li><p><strong>信道测量与预编码</strong><br>通过信道探测（Channel Sounding）获取信道状态信息（CSI），基于 CSI 设计预编码矩阵，实现多流的空间分离和干扰抑制。</p>
-</li>
-<li><p><strong>OFDM 调制</strong><br>将频域符号映射到多个正交子载波，经过 IFFT 生成时域 OFDM 符号，并添加循环前缀以抵抗符号间干扰。</p>
-</li>
-<li><p><strong>发射波束成形</strong><br>通过射频预编码矩阵对数字基带信号进行加权组合，形成定向的传输波束，提高发射信号的方向增益。</p>
-</li>
-<li><p><strong>MIMO 空间信道</strong><br>模拟多径衰落、散射及路径损耗，采用 WINNER II 等复杂空间信道模型，真实反映无线环境。</p>
-</li>
-<li><p><strong>接收波束成形</strong><br>接收端根据信道特性调整接收波束，最大化信号质量。</p>
-</li>
-<li><p><strong>OFDM 解调与数据恢复</strong><br>移除循环前缀，FFT 变换回频域，进行符号检测和译码，恢复原始数据。</p>
-</li>
-</ol>
-<h2 id="4-系统优势"><a href="#4-系统优势" class="headerlink" title="4. 系统优势"></a>4. 系统优势</h2><ul>
-<li><strong>抗频率选择性衰落</strong>：OFDM 将宽带信道分解为多个平坦子信道。</li>
-<li><strong>空间复用</strong>：多天线支持多数据流并行传输，提升频谱效率。</li>
-<li><strong>波束成形提升 SNR</strong>：信号能量聚焦于接收端，提高可靠性。</li>
-<li><strong>灵活信道模型</strong>：支持多种空间信道模型，便于性能评估和系统设计。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1440,12 +1457,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">categories</span>
       </div>
   </nav>

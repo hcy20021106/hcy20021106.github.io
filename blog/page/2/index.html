@@ -150,6 +150,239 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/02/CI-CD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/02/CI-CD/" class="post-title-link" itemprop="url">CI/CD</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-02 13:32:29 / Modified: 14:35:07" itemprop="dateCreated datePublished" datetime="2025-08-02T13:32:29+08:00">2025-08-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h1 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h1><h2 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h2><p>GitLab -&gt; Jenkins -&gt; Docker 构建 -&gt; 推送到JFrog Artifactory -&gt; K8s 滚动部署</p>
+<h2 id="详细流程"><a href="#详细流程" class="headerlink" title="详细流程"></a>详细流程</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[开发者] git push</span><br><span class="line">        ↓</span><br><span class="line">[GitLab Webhook] 通知 Jenkins</span><br><span class="line">        ↓</span><br><span class="line">[Jenkins Pipeline]</span><br><span class="line">   1. 拉取 GitLab 源码</span><br><span class="line">   2. 构建 Docker 镜像（基于 Dockerfile）</span><br><span class="line">   3. 登录 JFrog Artifactory 仓库</span><br><span class="line">   4. 推送镜像到 Artifactory Docker 仓库</span><br><span class="line">   5. 使用 kubeconfig/kubectl 更新 Kubernetes Deployment 中的镜像</span><br><span class="line">        ↓</span><br><span class="line">[Kubernetes]</span><br><span class="line">   6. 自动滚动更新容器，部署新版应用</span><br></pre></td></tr></table></figure>
+<h2 id="使用组件及角色"><a href="#使用组件及角色" class="headerlink" title="使用组件及角色"></a>使用组件及角色</h2><table>
+<thead>
+<tr>
+<th>组件</th>
+<th>角色说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GitLab</td>
+<td>源码托管、触发构建 Webhook</td>
+</tr>
+<tr>
+<td>Jenkins</td>
+<td>核心 CI&#x2F;CD 执行器，运行流水线</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td>构建容器镜像</td>
+</tr>
+<tr>
+<td>JFrog Artifactory</td>
+<td>存储容器镜像（Docker Registry）</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>运行你的后端服务，部署并自动滚动更新</td>
+</tr>
+</tbody></table>
+<h2 id="示例Jenkinsfile"><a href="#示例Jenkinsfile" class="headerlink" title="示例Jenkinsfile"></a>示例Jenkinsfile</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line"></span><br><span class="line">    environment &#123;</span><br><span class="line">        ARTIFACTORY_DOCKER_CREDENTIALS = <span class="string">&#x27;artifactory-docker-creds&#x27;</span> // Jenkins中配置</span><br><span class="line">        ARTIFACTORY_DOCKER_REGISTRY = <span class="string">&#x27;jfrog.mycompany.com&#x27;</span></span><br><span class="line">        ARTIFACTORY_REPO = <span class="string">&#x27;docker-local&#x27;</span>  // 你在 Artifactory 中的 Docker 仓库名</span><br><span class="line">        IMAGE_NAME = <span class="string">&#x27;myapp&#x27;</span></span><br><span class="line">        IMAGE_TAG = <span class="string">&quot;<span class="variable">$&#123;BUILD_NUMBER&#125;</span>&quot;</span>      // 每次构建使用不同 tag</span><br><span class="line"></span><br><span class="line">        DEPLOYMENT_NAME = <span class="string">&quot;myapp-deployment&quot;</span></span><br><span class="line">        CONTAINER_NAME = <span class="string">&quot;myapp-container&quot;</span></span><br><span class="line">        NAMESPACE = <span class="string">&quot;test&quot;</span></span><br><span class="line">        KUBECONFIG_CRED = <span class="string">&#x27;kubeconfig-file&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;Clone Code&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                checkout scm</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">&#x27;Build Docker Image&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                script &#123;</span><br><span class="line">                    docker.withRegistry(<span class="string">&quot;https://<span class="variable">$&#123;ARTIFACTORY_DOCKER_REGISTRY&#125;</span>&quot;</span>, ARTIFACTORY_DOCKER_CREDENTIALS) &#123;</span><br><span class="line">                        def image = docker.build(<span class="string">&quot;<span class="variable">$&#123;ARTIFACTORY_DOCKER_REGISTRY&#125;</span>/<span class="variable">$&#123;ARTIFACTORY_REPO&#125;</span>/<span class="variable">$&#123;IMAGE_NAME&#125;</span>:<span class="variable">$&#123;IMAGE_TAG&#125;</span>&quot;</span>)</span><br><span class="line">                        image.push()</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">&#x27;Update K8s Deployment&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                withCredentials([file(credentialsId: KUBECONFIG_CRED, variable: <span class="string">&#x27;KUBECONFIG&#x27;</span>)]) &#123;</span><br><span class="line">                    sh <span class="string">&#x27;&#x27;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">                    kubectl --kubeconfig=$KUBECONFIG -n $&#123;NAMESPACE&#125; set image deployment/$&#123;DEPLOYMENT_NAME&#125; $&#123;CONTAINER_NAME&#125;=$&#123;ARTIFACTORY_DOCKER_REGISTRY&#125;/$&#123;ARTIFACTORY_REPO&#125;/$&#123;IMAGE_NAME&#125;:$&#123;IMAGE_TAG&#125;</span></span><br><span class="line"><span class="string">                    kubectl --kubeconfig=$KUBECONFIG -n $&#123;NAMESPACE&#125; rollout status deployment/$&#123;DEPLOYMENT_NAME&#125;</span></span><br><span class="line"><span class="string">                    &#x27;</span><span class="string">&#x27;&#x27;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="准备工作（一次性配置）"><a href="#准备工作（一次性配置）" class="headerlink" title="准备工作（一次性配置）"></a>准备工作（一次性配置）</h2><ul>
+<li>GitLab 配置好Webhook：指向Jenkins Job URL</li>
+<li>Artifactory 建好Docker仓库（如docker-local）</li>
+<li>Jenkins凭据配置<ul>
+<li>artifactory-docker-creds （用户名&#x2F;密码或API Token）</li>
+<li>kubeconfig-file（K8s访问配置文件）</li>
+</ul>
+</li>
+<li>Jenkins安装插件<ul>
+<li>Docker plugin</li>
+<li>Git plugin</li>
+<li>Pipeline plugin</li>
+<li>Credentials plugin</li>
+</ul>
+</li>
+</ul>
+<h2 id="部署效果"><a href="#部署效果" class="headerlink" title="部署效果"></a>部署效果</h2><p>只需一条git push:</p>
+<ul>
+<li>Jenkins 自动构建镜像</li>
+<li>推送Artifactory</li>
+<li>更新K8s应用，自动滚动升级</li>
+</ul>
+<h1 id="Ansible"><a href="#Ansible" class="headerlink" title="Ansible"></a>Ansible</h1><p>Ansible 角色 （Role）是对自动化任务的模块化封装，方便复用和管理。一个完整的role通常包含以下目录和文件，每个目录复制不同的职责：</p>
+<h2 id="defaults"><a href="#defaults" class="headerlink" title="defaults"></a>defaults</h2><ul>
+<li>作用：存放角色的默认变量</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">core_executable: <span class="string">&quot;&#123;&#123; free5gc_src.dest_dir &#125;&#125;/run.sh&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">core_apn: <span class="string">&quot;internet&quot;</span></span><br><span class="line">core_sst: <span class="string">&quot;1&quot;</span></span><br><span class="line">core_sd: <span class="string">&quot;000000&quot;</span></span><br><span class="line"></span><br><span class="line">core_mcc: <span class="string">&quot;999&quot;</span></span><br><span class="line">core_mnc: <span class="string">&quot;70&quot;</span></span><br><span class="line"></span><br><span class="line">core_plmn: <span class="string">&quot;&#123;&#123;core_mcc&#125;&#125;&#123;&#123;core_mcn&#125;&#125;&quot;</span></span><br><span class="line"></span><br><span class="line">core_tac: <span class="string">&quot;000001&quot;</span></span><br><span class="line"></span><br><span class="line">core_simcard_inventory_file: deploy-config-simcards.yml</span><br><span class="line">amf_ipv4_net: <span class="string">&quot;10.0.2.10&quot;</span></span><br><span class="line">upf_ipv4_net: <span class="string">&quot;10.0.2.12&quot;</span></span><br><span class="line"></span><br><span class="line">sim_cards:</span><br><span class="line">- name: <span class="string">&quot;Sim26&quot;</span></span><br><span class="line">  imsi: <span class="string">&quot;imsi-999700000128110&quot;</span></span><br><span class="line">  key: <span class="string">&quot;E501DCD94E0912B04AE041619DA43421&quot;</span></span><br><span class="line">  opc: <span class="string">&quot;13082466301232D8B8BB299F1867A861&quot;</span></span><br><span class="line">  apn: <span class="string">&quot;internet&quot;</span></span><br><span class="line">  sst: <span class="string">&quot;1&quot;</span></span><br><span class="line">  sd: <span class="string">&quot;000000&quot;</span></span><br><span class="line">  gpsis: <span class="string">&quot;msisdn-0900000005&quot;</span></span><br><span class="line"></span><br><span class="line">- name: <span class="string">&quot;Sim28&quot;</span></span><br><span class="line">  imsi: <span class="string">&quot;imsi-001010000105331&quot;</span></span><br><span class="line">  key: <span class="string">&quot;22231214410527097343456132856119&quot;</span></span><br><span class="line">  opc: <span class="string">&quot;35400111987345158373161168419158&quot;</span></span><br><span class="line">  apn: <span class="string">&quot;internet&quot;</span></span><br><span class="line">  sst: <span class="string">&quot;1&quot;</span></span><br><span class="line">  sd: <span class="string">&quot;000000&quot;</span></span><br><span class="line">  gpsis: <span class="string">&quot;msisdn-0900000006&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="vars"><a href="#vars" class="headerlink" title="vars"></a>vars</h2><ul>
+<li>作用： 存放角色的变量（优先级高于defaults）</li>
+<li>用于定义角色强制需要的变量，通常不建议轻易覆盖</li>
+</ul>
+<h2 id="tasks"><a href="#tasks" class="headerlink" title="tasks"></a>tasks</h2><ul>
+<li>作用： 角色的核心任务清单，定义执行的操作步骤</li>
+<li>文件一般为main.yml</li>
+<li>例如安装软件、复制文件、配置服务等</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- name: Install Corepack</span><br><span class="line">  become: <span class="built_in">yes</span></span><br><span class="line">  npm:</span><br><span class="line">    name: corepack</span><br><span class="line">    global: <span class="built_in">yes</span></span><br><span class="line"></span><br><span class="line">- name: Enable corepark</span><br><span class="line">  <span class="built_in">command</span>: corepack <span class="built_in">enable</span></span><br><span class="line">  <span class="comment"># when: yarn_version.rc != 0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- name: <span class="string">&quot;INSTALL-TASKS-gtp5g-SOURCE - Run gtp5g build&quot;</span></span><br><span class="line">  tags: gtp5g build</span><br><span class="line">  <span class="comment"># become_user: &quot;&#123;&#123; normal_user_id &#125;&#125;&quot;</span></span><br><span class="line">  become: <span class="built_in">yes</span></span><br><span class="line">  <span class="built_in">command</span>: <span class="built_in">sudo</span> make</span><br><span class="line">  args:</span><br><span class="line">    <span class="built_in">chdir</span>: <span class="string">&quot;&#123;&#123; gtp5g_src.dest_dir &#125;&#125;&quot;</span></span><br><span class="line">  when: gtp5g_module.rc != 0</span><br><span class="line"></span><br><span class="line">- name: <span class="string">&quot;INSTALL-TASKS-gtp5g-SOURCE - Run gtp5g install&quot;</span></span><br><span class="line">  tags: gtp5g install</span><br><span class="line">  become: <span class="built_in">yes</span></span><br><span class="line">  <span class="built_in">command</span>:   make install</span><br><span class="line">  args:</span><br><span class="line">    <span class="built_in">chdir</span>: <span class="string">&quot;&#123;&#123; gtp5g_src.dest_dir &#125;&#125;&quot;</span></span><br><span class="line">  when: gtp5g_module.rc != 0</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="templates"><a href="#templates" class="headerlink" title="templates"></a>templates</h2><ul>
+<li>作用： 存放jinja2模板文件，用于生成动态配置文件</li>
+<li>在模版文件中可以使用变量、 条件语句等</li>
+<li>在tasks中通过template模板调用</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line">info:</span><br><span class="line">  version: 1.0.9</span><br><span class="line">  description: AMF initial <span class="built_in">local</span> configuration</span><br><span class="line"></span><br><span class="line">configuration:</span><br><span class="line">  amfName: AMF <span class="comment"># the name of this AMF</span></span><br><span class="line">  ngapIpList:  <span class="comment"># the IP list of N2 interfaces on this AMF</span></span><br><span class="line">    - &#123;&#123; amf_ipv4_net &#125;&#125;</span><br><span class="line">  ngapPort: 38412 <span class="comment"># the SCTP port listened by NGAP</span></span><br><span class="line">  sbi: <span class="comment"># Service-based interface information</span></span><br><span class="line">    scheme: http <span class="comment"># the protocol for sbi (http or https)</span></span><br><span class="line">    registerIPv4: 127.0.0.18 <span class="comment"># IP used to register to NRF</span></span><br><span class="line">    bindingIPv4: 127.0.0.18  <span class="comment"># IP used to bind the service</span></span><br><span class="line">    port: 8000 <span class="comment"># port used to bind the service</span></span><br><span class="line">    tls: <span class="comment"># the local path of TLS key</span></span><br><span class="line">      pem: cert/amf.pem <span class="comment"># AMF TLS Certificate</span></span><br><span class="line">      key: cert/amf.key <span class="comment"># AMF TLS Private key</span></span><br><span class="line">  serviceNameList: <span class="comment"># the SBI services provided by this AMF, refer to TS 29.518</span></span><br><span class="line">    - namf-comm <span class="comment"># Namf_Communication service</span></span><br><span class="line">    - namf-evts <span class="comment"># Namf_EventExposure service</span></span><br><span class="line">    - namf-mt   <span class="comment"># Namf_MT service</span></span><br><span class="line">    - namf-loc  <span class="comment"># Namf_Location service</span></span><br><span class="line">    - namf-oam  <span class="comment"># OAM service</span></span><br><span class="line">  servedGuamiList: <span class="comment"># Guami (Globally Unique AMF ID) list supported by this AMF</span></span><br><span class="line">    <span class="comment"># &lt;GUAMI&gt; = &lt;MCC&gt;&lt;MNC&gt;&lt;AMF ID&gt;</span></span><br><span class="line">    - plmnId: <span class="comment"># Public Land Mobile Network ID, &lt;PLMN ID&gt; = &lt;MCC&gt;&lt;MNC&gt;</span></span><br><span class="line">        mcc: &#123;&#123; core_mcc &#125;&#125; <span class="comment"># Mobile Country Code (3 digits string, digit: 0~9)</span></span><br><span class="line">        mnc: &#123;&#123; core_mnc &#125;&#125; <span class="comment"># Mobile Network Code (2 or 3 digits string, digit: 0~9)</span></span><br><span class="line">      amfId: cafe00 <span class="comment"># AMF identifier (3 bytes hex string, range: 000000~FFFFFF)</span></span><br><span class="line">  supportTaiList:  <span class="comment"># the TAI (Tracking Area Identifier) list supported by this AMF</span></span><br><span class="line">    - plmnId: <span class="comment"># Public Land Mobile Network ID, &lt;PLMN ID&gt; = &lt;MCC&gt;&lt;MNC&gt;</span></span><br><span class="line">        mcc: &#123;&#123; core_mcc &#125;&#125; <span class="comment"># Mobile Country Code (3 digits string, digit: 0~9)</span></span><br><span class="line">        mnc: &#123;&#123; core_mnc &#125;&#125; <span class="comment"># Mobile Network Code (2 or 3 digits string, digit: 0~9)</span></span><br><span class="line">      <span class="built_in">tac</span>: &#123;&#123; core_tac &#125;&#125; <span class="comment"># Tracking Area Code (3 bytes hex string, range: 000000~FFFFFF)</span></span><br><span class="line">  plmnSupportList: <span class="comment"># the PLMNs (Public land mobile network) list supported by this AMF</span></span><br><span class="line">    - plmnId: <span class="comment"># Public Land Mobile Network ID, &lt;PLMN ID&gt; = &lt;MCC&gt;&lt;MNC&gt;</span></span><br><span class="line">        mcc: &#123;&#123; core_mcc &#125;&#125; <span class="comment"># Mobile Country Code (3 digits string, digit: 0~9)</span></span><br><span class="line">        mnc: &#123;&#123; core_mnc &#125;&#125; <span class="comment"># Mobile Network Code (2 or 3 digits string, digit: 0~9)</span></span><br><span class="line">      snssaiList: <span class="comment"># the S-NSSAI (Single Network Slice Selection Assistance Information) list supported by this AMF</span></span><br><span class="line">        - sst: &#123;&#123; core_sst &#125;&#125; <span class="comment"># Slice/Service Type (uinteger, range: 0~255)</span></span><br><span class="line">          sd: &#123;&#123; core_sd &#125;&#125; <span class="comment"># Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)</span></span><br><span class="line">        - sst: 1 <span class="comment"># Slice/Service Type (uinteger, range: 0~255)</span></span><br><span class="line">          sd: 112233 <span class="comment"># Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)</span></span><br><span class="line">  supportDnnList:  <span class="comment"># the DNN (Data Network Name) list supported by this AMF</span></span><br><span class="line">    - internet</span><br><span class="line">  nrfUri: http://127.0.0.10:8000 <span class="comment"># a valid URI of NRF</span></span><br><span class="line">  nrfCertPem: cert/nrf.pem <span class="comment"># NRF Certificate</span></span><br><span class="line">  security:  <span class="comment"># NAS security parameters</span></span><br><span class="line">    integrityOrder: <span class="comment"># the priority of integrity algorithms</span></span><br><span class="line">      - NIA2</span><br><span class="line">      <span class="comment"># - NIA0</span></span><br><span class="line">    cipheringOrder: <span class="comment"># the priority of ciphering algorithms</span></span><br><span class="line">      - NEA0</span><br><span class="line">      - NEA2</span><br><span class="line">  networkName:  <span class="comment"># the name of this core network</span></span><br><span class="line">    full: free5GC</span><br><span class="line">    short: free</span><br><span class="line">  ngapIE: <span class="comment"># Optional NGAP IEs</span></span><br><span class="line">    mobilityRestrictionList: <span class="comment"># Mobility Restriction List IE, refer to TS 38.413</span></span><br><span class="line">      <span class="built_in">enable</span>: <span class="literal">true</span> <span class="comment"># append this IE in related message or not</span></span><br><span class="line">    maskedIMEISV: <span class="comment"># Masked IMEISV IE, refer to TS 38.413</span></span><br><span class="line">      <span class="built_in">enable</span>: <span class="literal">true</span> <span class="comment"># append this IE in related message or not</span></span><br><span class="line">    redirectionVoiceFallback: <span class="comment"># Redirection Voice Fallback IE, refer to TS 38.413</span></span><br><span class="line">      <span class="built_in">enable</span>: <span class="literal">false</span> <span class="comment"># append this IE in related message or not</span></span><br><span class="line">  nasIE: <span class="comment"># Optional NAS IEs</span></span><br><span class="line">    networkFeatureSupport5GS: <span class="comment"># 5gs Network Feature Support IE, refer to TS 24.501</span></span><br><span class="line">      <span class="built_in">enable</span>: <span class="literal">true</span> <span class="comment"># append this IE in Registration accept or not</span></span><br><span class="line">      length: 1 <span class="comment"># IE content length (uinteger, range: 1~3)</span></span><br><span class="line">      imsVoPS: 0 <span class="comment"># IMS voice over PS session indicator (uinteger, range: 0~1)</span></span><br><span class="line">      emc: 0 <span class="comment"># Emergency service support indicator for 3GPP access (uinteger, range: 0~3)</span></span><br><span class="line">      emf: 0 <span class="comment"># Emergency service fallback indicator for 3GPP access (uinteger, range: 0~3)</span></span><br><span class="line">      iwkN26: 0 <span class="comment"># Interworking without N26 interface indicator (uinteger, range: 0~1)</span></span><br><span class="line">      mpsi: 0 <span class="comment"># MPS indicator (uinteger, range: 0~1)</span></span><br><span class="line">      emcN3: 0 <span class="comment"># Emergency service support indicator for Non-3GPP access (uinteger, range: 0~1)</span></span><br><span class="line">      mcsi: 0 <span class="comment"># MCS indicator (uinteger, range: 0~1)</span></span><br><span class="line">  t3502Value: 720  <span class="comment"># timer value (seconds) at UE side</span></span><br><span class="line">  t3512Value: 3600 <span class="comment"># timer value (seconds) at UE side</span></span><br><span class="line">  non3gppDeregTimerValue: 3240 <span class="comment"># timer value (seconds) at UE side</span></span><br><span class="line">  <span class="comment"># retransmission timer for paging message</span></span><br><span class="line">  t3513:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  <span class="comment"># retransmission timer for NAS Deregistration Request message</span></span><br><span class="line">  t3522:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  <span class="comment"># retransmission timer for NAS Registration Accept message</span></span><br><span class="line">  t3550:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  <span class="comment"># retransmission timer for NAS Configuration Update Command message</span></span><br><span class="line">  t3555:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  <span class="comment"># retransmission timer for NAS Authentication Request/Security Mode Command message</span></span><br><span class="line">  t3560:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  <span class="comment"># retransmission timer for NAS Notification message</span></span><br><span class="line">  t3565:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  <span class="comment"># retransmission timer for NAS Identity Request message</span></span><br><span class="line">  t3570:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  locality: area1 <span class="comment"># Name of the location where a set of AMF, SMF, PCF and UPFs are located</span></span><br><span class="line">  sctp: <span class="comment"># set the sctp server setting &lt;optinal&gt;, once this field is set, please also add maxInputStream, maxOsStream, maxAttempts, maxInitTimeOut</span></span><br><span class="line">    numOstreams: 3 <span class="comment"># the maximum out streams of each sctp connection</span></span><br><span class="line">    maxInstreams: 5 <span class="comment"># the maximum in streams of each sctp connection</span></span><br><span class="line">    maxAttempts: 2 <span class="comment"># the maximum attempts of each sctp connection</span></span><br><span class="line">    maxInitTimeout: 2 <span class="comment"># the maximum init timeout of each sctp connection</span></span><br><span class="line">  defaultUECtxReq: <span class="literal">false</span> <span class="comment"># the default value of UE Context Request to decide when triggering Initial Context Setup procedure</span></span><br><span class="line"></span><br><span class="line">logger: <span class="comment"># log output setting</span></span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span> <span class="comment"># true or false</span></span><br><span class="line">  level: info <span class="comment"># how detailed to output, value: trace, debug, info, warn, error, fatal, panic</span></span><br><span class="line">  reportCaller: <span class="literal">false</span> <span class="comment"># enable the caller report or not, value: true or false</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/01/MIMOBeamforming/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/01/MIMOBeamforming/" class="post-title-link" itemprop="url">MIMOBeamforming</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-01 00:58:24 / Modified: 01:21:46" itemprop="dateCreated datePublished" datetime="2025-08-01T00:58:24+08:00">2025-08-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h1 id="MIMO-OFDM-波束成形系统理论介绍"><a href="#MIMO-OFDM-波束成形系统理论介绍" class="headerlink" title="MIMO-OFDM 波束成形系统理论介绍"></a>MIMO-OFDM 波束成形系统理论介绍</h1><h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><p>现代无线通信系统（如 5G NR、LTE、WLAN）普遍采用 <strong>MIMO-OFDM</strong> 技术，因其对频率选择性衰落信道的鲁棒性及高数据速率的支持。随着应用需求的增加，系统配置日益复杂，天线阵列规模和子载波数量大幅提升，多天线、多流传输成为主流。</p>
+<h2 id="2-天线阵列与波束成形"><a href="#2-天线阵列与波束成形" class="headerlink" title="2. 天线阵列与波束成形"></a>2. 天线阵列与波束成形</h2><p>通过多个天线元素组成的阵列，系统可实现<strong>空间复用</strong>和<strong>波束成形</strong>。波束成形（Beamforming）是利用空间信号处理技术调整发射信号的相位和幅度，使信号在目标方向上增强，同时抑制干扰，提高信噪比（SNR）和系统性能（如降低误码率 BER）。<br>在多天线系统中，除了数字基带层面的预编码外，通常还会应用 射频波束成形矩阵 (Frf)，这是在模拟射频前端对信号进行加权处理，实现对天线阵列的物理波束成形。</p>
+<p>射频波束成形通过对数字基带信号乘以 Frf 矩阵，将信号映射到各个天线单元。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">% RF beamforming: Apply Frf to the digital signal            </span><br><span class="line">% Each antenna element is connected to each data stream</span><br><span class="line">txSig = txSigSTS*mFrf;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-波束成形的关键流程"><a href="#3-波束成形的关键流程" class="headerlink" title="3. 波束成形的关键流程"></a>3. 波束成形的关键流程</h2><h3 id="接收端-Channel-Sounding"><a href="#接收端-Channel-Sounding" class="headerlink" title="接收端(Channel Sounding)"></a>接收端(Channel Sounding)</h3><p>Preamble Tx -&gt; MIMO Channel -&gt; OFDM Rx -&gt; MIMO Channel Estimate -&gt; SVD -&gt; nfrf</p>
+<h3 id="发射端-Precoding-from-channel-sounding"><a href="#发射端-Precoding-from-channel-sounding" class="headerlink" title="发射端 (Precoding from channel sounding)"></a>发射端 (Precoding from channel sounding)</h3><p>系统建模时，将天线阵列位置、天线方向图和空间信道特性纳入设计，采用如下流程：</p>
+<p>数据编码 → 预编码（基于信道测量）→ OFDM调制 → 发射波束成形 → MIMO信道 → 接收波束成形 → OFDM解调 → 数据恢复</p>
+<h3 id="具体步骤说明："><a href="#具体步骤说明：" class="headerlink" title="具体步骤说明："></a>具体步骤说明：</h3><ol>
+<li><p><strong>编码与调制</strong><br>发送数据先经过信源编码和信道编码提升可靠性，再映射成数字调制符号。</p>
+</li>
+<li><p><strong>信道测量与预编码</strong><br>通过信道探测（Channel Sounding）获取信道状态信息（CSI），基于 CSI 设计预编码矩阵，实现多流的空间分离和干扰抑制。</p>
+</li>
+<li><p><strong>OFDM 调制</strong><br>将频域符号映射到多个正交子载波，经过 IFFT 生成时域 OFDM 符号，并添加循环前缀以抵抗符号间干扰。</p>
+</li>
+<li><p><strong>发射波束成形</strong><br>通过射频预编码矩阵对数字基带信号进行加权组合，形成定向的传输波束，提高发射信号的方向增益。</p>
+</li>
+<li><p><strong>MIMO 空间信道</strong><br>模拟多径衰落、散射及路径损耗，采用 WINNER II 等复杂空间信道模型，真实反映无线环境。</p>
+</li>
+<li><p><strong>接收波束成形</strong><br>接收端根据信道特性调整接收波束，最大化信号质量。</p>
+</li>
+<li><p><strong>OFDM 解调与数据恢复</strong><br>移除循环前缀，FFT 变换回频域，进行符号检测和译码，恢复原始数据。</p>
+</li>
+</ol>
+<h2 id="4-系统优势"><a href="#4-系统优势" class="headerlink" title="4. 系统优势"></a>4. 系统优势</h2><ul>
+<li><strong>抗频率选择性衰落</strong>：OFDM 将宽带信道分解为多个平坦子信道。</li>
+<li><strong>空间复用</strong>：多天线支持多数据流并行传输，提升频谱效率。</li>
+<li><strong>波束成形提升 SNR</strong>：信号能量聚焦于接收端，提高可靠性。</li>
+<li><strong>灵活信道模型</strong>：支持多种空间信道模型，便于性能评估和系统设计。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/21/pandas/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2531,270 +2764,6 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/12/MVC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/12/MVC/" class="post-title-link" itemprop="url">MVC</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-06-12 21:42:50 / Modified: 21:51:23" itemprop="dateCreated datePublished" datetime="2025-06-12T21:42:50+08:00">2025-06-12</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <hr>
-<h2 id="🧠-MVC-Architecture"><a href="#🧠-MVC-Architecture" class="headerlink" title="🧠 MVC Architecture"></a>🧠 MVC Architecture</h2><h3 id="🟢-Model-PizzaModel-java"><a href="#🟢-Model-PizzaModel-java" class="headerlink" title="🟢 Model (PizzaModel.java)"></a>🟢 Model (<code>PizzaModel.java</code>)</h3><ul>
-<li>Manages pizza size and toppings</li>
-<li>Maintains pricing data for sizes and toppings</li>
-<li>Calculates total price dynamically</li>
-</ul>
-<h4 id="Size-Prices"><a href="#Size-Prices" class="headerlink" title="Size Prices"></a>Size Prices</h4><table>
-<thead>
-<tr>
-<th>Size</th>
-<th>Base Price</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Small</td>
-<td>€4.00</td>
-</tr>
-<tr>
-<td>Medium</td>
-<td>€5.50</td>
-</tr>
-<tr>
-<td>Large</td>
-<td>€7.00</td>
-</tr>
-</tbody></table>
-<h4 id="Topping-Price-based-on-selected-size"><a href="#Topping-Price-based-on-selected-size" class="headerlink" title="Topping Price (based on selected size)"></a>Topping Price (based on selected size)</h4><table>
-<thead>
-<tr>
-<th>Size</th>
-<th>Topping Price</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Small</td>
-<td>€0.75</td>
-</tr>
-<tr>
-<td>Medium</td>
-<td>€1.00</td>
-</tr>
-<tr>
-<td>Large</td>
-<td>€1.45</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="🟡-View-PizzaView-java"><a href="#🟡-View-PizzaView-java" class="headerlink" title="🟡 View (PizzaView.java)"></a>🟡 View (<code>PizzaView.java</code>)</h3><ul>
-<li>Built with Java Swing</li>
-<li>Contains:<ul>
-<li>Size selection (radio buttons)</li>
-<li>Toppings selection (radio buttons)</li>
-<li>Total price display (<code>JTextField</code>)</li>
-<li>Pizza image (<code>Pizza.jpeg</code>)</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>Layout uses <code>BorderLayout</code> with components divided into size panel, topping panel, total price panel, and center image.</p>
-</blockquote>
-<hr>
-<h3 id="🔵-Controller-PizzaController-java"><a href="#🔵-Controller-PizzaController-java" class="headerlink" title="🔵 Controller (PizzaController.java)"></a>🔵 Controller (<code>PizzaController.java</code>)</h3><p>绑定View与Model</p>
-<ul>
-<li>Binds user interaction to logic</li>
-<li>Registers <code>ActionListener</code> to size and topping buttons<br>使用SizeRadioButtonListener类实现了ActionListener接口，用来监听用户点击按钮的行为。<br>然后给button通过addActionListener这个类从而实现监听功能</li>
-<li>On user interaction:<ul>
-<li>Updates model with size&#x2F;toppings</li>
-<li>Recalculates and updates price in the view</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="💡-How-It-Works"><a href="#💡-How-It-Works" class="headerlink" title="💡 How It Works"></a>💡 How It Works</h2><ol>
-<li>User selects a pizza size.</li>
-<li>Topping prices are adjusted based on size.</li>
-<li>User selects&#x2F;deselects toppings.</li>
-<li>Total price updates live on the GUI.</li>
-</ol>
-<hr>
-<h2 id="🖼️-GUI-Screenshot-Placeholder"><a href="#🖼️-GUI-Screenshot-Placeholder" class="headerlink" title="🖼️ GUI Screenshot Placeholder"></a>🖼️ GUI Screenshot Placeholder</h2><blockquote>
-<p>Make sure to include <code>Pizza.jpeg</code> in the <code>pizzacalculationtool</code> package folder.</p>
-</blockquote>
-<pre><code class="language-java">new ImageIcon(getClass().getResource(&quot;Pizza.jpeg&quot;))
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/11/MyBatis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/11/MyBatis/" class="post-title-link" itemprop="url">MyBatis</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-06-11 22:51:28" itemprop="dateCreated datePublished" datetime="2025-06-11T22:51:28+08:00">2025-06-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-12 21:24:36" itemprop="dateModified" datetime="2025-06-12T21:24:36+08:00">2025-06-12</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>Maven项目的配置文件包括<strong>pom.xml</strong>和<strong>mybatis-config.xml</strong>（核心配置文件）</p>
-<h3 id="mybatis-config-xml组成部分"><a href="#mybatis-config-xml组成部分" class="headerlink" title="mybatis-config.xml组成部分"></a>mybatis-config.xml组成部分</h3><ul>
-<li>properties<br>读取数据库连接参数（外部配置）</li>
-<li>typeAliases<br>简化JavaBean类型写法</li>
-<li>environments</li>
-<li><strong>mappers</strong><br>扫描Mapper接口所在包，自动注册为映射器</li>
-</ul>
-<h3 id="pom-xml组成部分"><a href="#pom-xml组成部分" class="headerlink" title="pom.xml组成部分"></a>pom.xml组成部分</h3><ul>
-<li>project标签</li>
-<li>公司，项目名，项目版本标签</li>
-<li>properties标签<br>  定义项目中的一些变量，方便统一管理<ul>
-<li>Java版本</li>
-<li>编码</li>
-<li>JavaFX版本</li>
-</ul>
-</li>
-<li>dependencies<br>  定义项目依赖的第三方库<ul>
-<li>MyBatis（Java ORM框架）</li>
-<li>MySQL JDBC驱动（mysql-connector-j）</li>
-<li>JUnit和Mockito（测试框架）</li>
-<li>JavaFX相关库</li>
-</ul>
-</li>
-</ul>
-<h2 id="映射器接口Mapper"><a href="#映射器接口Mapper" class="headerlink" title="映射器接口Mapper"></a>映射器接口Mapper</h2><p>DAO层（Data Access Object），也就是数据访问对象，和Mapper接口一致。</p>
-<h3 id="PreparationStep（实体类）"><a href="#PreparationStep（实体类）" class="headerlink" title="PreparationStep（实体类）"></a>PreparationStep（实体类）</h3><p>表示数据库中<strong>preparationstep</strong>表中的一条记录<br>用于封装数据表中的一行数据<br>同时可以作为PreparationStepMapper接口中方法的传递参数</p>
-<h3 id="PreparationStepMapper"><a href="#PreparationStepMapper" class="headerlink" title="PreparationStepMapper"></a>PreparationStepMapper</h3><p>用于定义数据库操作的方法，MyBatis会将其自动生成实现类<br>@Param(“xxx”)给参数命名，供XML中引用</p>
-<p>mapper接口的实例化</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">recipeIngredientMapper = sqlSession.getMapper(RecipeIngredientMapper.class);</span><br></pre></td></tr></table></figure>
-<p>目的是让MyBatis自动生成RecipeIngredientMapper接口的实现类，并返回其实例，然后可以调用这个类里通过调用其方法，并通过xml来进行sql映射。</p>
-<h3 id="PreparationStepMapper-xml（映射SQL文件）"><a href="#PreparationStepMapper-xml（映射SQL文件）" class="headerlink" title="PreparationStepMapper.xml（映射SQL文件）"></a>PreparationStepMapper.xml（映射SQL文件）</h3><p>负责将Mapper接口中定义的方法与具体SQL语句绑定</p>
-<h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><h3 id="View类"><a href="#View类" class="headerlink" title="View类"></a>View类</h3><ul>
-<li>MainPageView</li>
-<li>RecipeCreateView</li>
-<li>RecipeDisplayView</li>
-<li>RecipeSelectView</li>
-<li>SignView</li>
-</ul>
-<p>使用javafx来设计GUI</p>
-<h3 id="Model类"><a href="#Model类" class="headerlink" title="Model类"></a>Model类</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);  </span><br><span class="line">sqlSession = sqlSessionFactory.openSession();</span><br><span class="line">recipeIngredientMapper = sqlSession.getMapper(RecipeIngredientMapper.class);</span><br></pre></td></tr></table></figure>
-<p>先构建sqlSession，用于和sql会话交互，然后再分别getMapper获取每个Mapper</p>
-<h3 id="Controller类"><a href="#Controller类" class="headerlink" title="Controller类"></a>Controller类</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public class RecipeDisplayController implements EventHandler&lt;ActionEvent&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<p>其中EventHandler为接口，里面有handle方法，需要在RecipeDisplayControlle类里写这个方法，从而实现鼠标点击响应的功能</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">this.model = new Model();</span><br><span class="line">selectedRecipe = model.getRecipeByID(selectedRecipeNumber);</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>调用model里定义的方法</p>
-<h2 id="EC-BVA"><a href="#EC-BVA" class="headerlink" title="EC&#x2F;BVA"></a>EC&#x2F;BVA</h2><h3 id="EC"><a href="#EC" class="headerlink" title="EC"></a>EC</h3><p>有效等价类&#x2F;无效等价类<br>以username为例<br>username:<br>Value: String<br>ECs:<br>Valid:<br>EC V1 &#x3D; {userName | userName is a unique string, not purely numeric, and less<br>than 18 digits}<br>Invalid:<br>EC V2 &#x3D; {userName | userName duplicates an exsiting userName in the<br>database e.g. userName &#x3D; “HeChenyi”}<br>EC V3 &#x3D; {userName | userName is a purely numeric string}<br>EC V4 &#x3D; {userName | userName is more than 18 digits}<br>EC V5 &#x3D; {userName | userName is more than 18 digits}<br>EC V6 &#x3D; {userName | userName &#x3D; null}</p>
-<h3 id="Junit测试"><a href="#Junit测试" class="headerlink" title="Junit测试"></a>Junit测试</h3><p>也就是单元测试（Unit Test）类，用的是Junit5（org.junit.jupiter）编写的。<br>以下为Model.sign()方法设计的功能性单元测试，并且按照EC方法设计的测试用例，其包含以下方法名:</p>
-<ul>
-<li>testSignUserAlreadyExists</li>
-<li>testSignUserNameIsPureInteger</li>
-<li>testSignPasswordIsPureInteger</li>
-<li>testSignSuccess</li>
-</ul>
-<h3 id="BVA测试"><a href="#BVA测试" class="headerlink" title="BVA测试"></a>BVA测试</h3><p>可以测试密码最小长度，密码最大长度</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2864,12 +2833,12 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">categories</span>
       </div>
   </nav>
