@@ -150,6 +150,90 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/05/Python%E8%AF%BB%E5%8F%96mat%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/05/Python%E8%AF%BB%E5%8F%96mat%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">Python读取mat文件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-08-05 00:09:44" itemprop="dateCreated datePublished" datetime="2025-08-05T00:09:44+08:00">2025-08-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-08-09 10:27:48" itemprop="dateModified" datetime="2025-08-09T10:27:48+08:00">2025-08-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="读取-MATLAB-mat-文件（带有结构体字段）"><a href="#读取-MATLAB-mat-文件（带有结构体字段）" class="headerlink" title="读取 MATLAB .mat 文件（带有结构体字段）"></a>读取 MATLAB <code>.mat</code> 文件（带有结构体字段）</h2><p>我们经常遇到 MATLAB 中保存的结构体 <code>.mat</code> 文件，例如包含 <code>real</code> 和 <code>imag</code> 字段的 CSI 或 preamble 数据。在 Python 中可以用 <code>h5py</code> + <code>numpy</code> 来处理：</p>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install h5py numpy torch</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> h5py</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">mat_path = <span class="string">&#x27;your_file_path.mat&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> h5py.File(mat_path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># 访问结构体数组引用（例如 usr_data）</span></span><br><span class="line">    hDp_ref = f[<span class="string">&#x27;usr_data&#x27;</span>]</span><br><span class="line">    hDp_real_refs = hDp_ref[:]  <span class="comment"># 是一组 object reference</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 读取 preamble</span></span><br><span class="line">    preamble_ref = hDp_real_refs[<span class="number">0</span>].item()         <span class="comment"># 解引用</span></span><br><span class="line">    preamble_dataset = f[preamble_ref]             <span class="comment"># 获取对应的数据集</span></span><br><span class="line">    preamble_struct = np.array(preamble_dataset)   <span class="comment"># 转成 numpy 数组</span></span><br><span class="line">    preamble = preamble_struct[<span class="string">&#x27;real&#x27;</span>] + <span class="number">1j</span> * preamble_struct[<span class="string">&#x27;imag&#x27;</span>]  <span class="comment"># 合成为复数</span></span><br><span class="line">    preamble_tensor = torch.tensor(preamble, dtype=torch.complex64)    <span class="comment"># 转为 PyTorch 复数张量</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 读取 CSI（假设是第二个）</span></span><br><span class="line">    csi_ref = hDp_real_refs[<span class="number">1</span>].item()</span><br><span class="line">    csi_dataset = f[csi_ref]</span><br><span class="line">    csi_struct = np.array(csi_dataset)</span><br><span class="line">    csi = csi_struct[<span class="string">&#x27;real&#x27;</span>] + <span class="number">1j</span> * csi_struct[<span class="string">&#x27;imag&#x27;</span>]</span><br><span class="line">    csi_tensor = torch.tensor(csi, dtype=torch.complex64)</span><br></pre></td></tr></table></figure>
+
+<h3 id="常见说明"><a href="#常见说明" class="headerlink" title="常见说明"></a>常见说明</h3><ul>
+<li><code>h5py.File(..., &#39;r&#39;)</code>：读取 <code>.mat</code> 文件（v7.3 格式，基于 HDF5）。</li>
+<li><code>hDp_ref[:]</code>：获取结构体中嵌套的 object reference。</li>
+<li><code>.item()</code>：从 NumPy 的 <code>object</code> 中提取真实的引用。</li>
+<li><code>[&#39;real&#39;] + 1j * [&#39;imag&#39;]</code>：组合为复数。</li>
+<li>使用 <code>torch.tensor(..., dtype=torch.complex64)</code> 转为复数张量，方便用于神经网络输入。</li>
+</ul>
+<p>在 preamble_struct &#x3D; np.array(preamble_dataset) numpy数组中，它的每一个元素仍然是一个类字典对象，拥有字段，比如 ‘real’ 和 ‘imag’，这两个字段就是你要提取的实部和虚部数据。  </p>
+<p>在 PyTorch 中，复数张量（dtype&#x3D;torch.complex64 或 complex128）不是单独的 real&#x2F;imag 张量，而是一个 内建的复数类型，其中每个元素都包含实部和虚部。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([1 + 2j, 3 + 4j], dtype=torch.complex64)，</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>结构上：</p>
+<p>x[0] 是 (1+2j)，即：</p>
+<p>x[0].real &#x3D;&#x3D; 1.0</p>
+<p>x[0].imag &#x3D;&#x3D; 2.0</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/02/CI-CD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2532,238 +2616,6 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/15/C++/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/15/C++/" class="post-title-link" itemprop="url">C++</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-06-15 13:13:04" itemprop="dateCreated datePublished" datetime="2025-06-15T13:13:04+08:00">2025-06-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-04 13:16:00" itemprop="dateModified" datetime="2025-08-04T13:16:00+08:00">2025-08-04</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h1 id="C-STL容器"><a href="#C-STL容器" class="headerlink" title="C++ STL容器"></a>C++ STL容器</h1><h2 id="unordered-set与unordered-map"><a href="#unordered-set与unordered-map" class="headerlink" title="unordered_set与unordered_map"></a>unordered_set与unordered_map</h2><table>
-<thead>
-<tr>
-<th>特性</th>
-<th><code>std::unordered_set</code></th>
-<th><code>std::unordered_map</code></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>存储内容</strong></td>
-<td>只存储 <strong>键</strong>（key）</td>
-<td>存储 <strong>键值对</strong>（key-value）</td>
-</tr>
-<tr>
-<td><strong>访问方式</strong></td>
-<td>只能通过键判断元素是否存在</td>
-<td>通过键访问对应的值，例如：<code>map[key]</code></td>
-</tr>
-<tr>
-<td><strong>典型用途</strong></td>
-<td>用于判断元素是否存在、集合操作</td>
-<td>用于映射关系，如字符串到整数的字典映射</td>
-</tr>
-<tr>
-<td><strong>示例声明</strong></td>
-<td><code>std::unordered_set&lt;int&gt; s;</code></td>
-<td><code>std::unordered_map&lt;std::string, int&gt; m;</code></td>
-</tr>
-<tr>
-<td><strong>内部实现</strong></td>
-<td>哈希表（只哈希 key）</td>
-<td>哈希表（key 哈希 + value 存储）</td>
-</tr>
-</tbody></table>
-<p>unordered_set常用来代替vector来判断元素是否存在，因为它的find操作的时间复杂度是O(1)</p>
-<h2 id="vector基本用法"><a href="#vector基本用法" class="headerlink" title="vector基本用法"></a>vector基本用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;int&gt; v1;                  // 空 vector</span><br><span class="line">std::vector&lt;int&gt; v2(5);               // 5 个默认值元素（0）</span><br><span class="line">std::vector&lt;int&gt; v3(5, 42);           // 5 个元素，值为 42</span><br><span class="line">std::vector&lt;int&gt; v4 = &#123;1, 2, 3&#125;;      // 使用列表初始化</span><br><span class="line">v.push_back(x);     // 添加元素</span><br><span class="line">v.pop_back();       // 删除最后一个元素</span><br><span class="line">v.size();           // 返回元素个数</span><br><span class="line">v.empty();          // 是否为空</span><br><span class="line">v.clear();          // 清空所有元素</span><br><span class="line">v.front();          // 返回第一个元素</span><br><span class="line">v.back();           // 返回最后一个元素</span><br><span class="line">v[i];               // 访问第 i 个元素</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="vector遍历方式"><a href="#vector遍历方式" class="headerlink" title="vector遍历方式"></a>vector遍历方式</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;int&gt; v = &#123;1, 2, 3&#125;;</span><br><span class="line"></span><br><span class="line">// 方法 1：范围 <span class="keyword">for</span> 循环</span><br><span class="line"><span class="keyword">for</span> (int x : v) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">x &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 方法 2：索引访问</span></span><br><span class="line"><span class="string">for (int i = 0; i &lt; v.size(); ++i) &#123;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; v[i] &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 方法 3：普通迭代器</span></span><br><span class="line"><span class="string">for (auto it = v.begin(); it != v.end(); ++it) &#123;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; *it &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 方法 4：反向迭代器</span></span><br><span class="line"><span class="string">for (auto rit = v.rbegin(); rit != v.rend(); ++rit) &#123;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; *rit &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="迭代器基本用法"><a href="#迭代器基本用法" class="headerlink" title="迭代器基本用法"></a>迭代器基本用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">begin()	指向第一个元素的迭代器</span><br><span class="line">end()	指向最后一个元素之后的位置</span><br><span class="line">rbegin()	反向迭代器，指向最后一个元素</span><br><span class="line">rend()	反向迭代器，指向第一个元素之前</span><br><span class="line">cbegin()	常量迭代器，不能修改元素</span><br><span class="line">cend()	常量迭代器，指向末尾</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用迭代器拷贝容器"><a href="#使用迭代器拷贝容器" class="headerlink" title="使用迭代器拷贝容器"></a>使用迭代器拷贝容器</h2><p>std::vector<T> subvec(start_iter, end_iter);</p>
-<p>需注意这是左闭右开</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;vector&gt;</span></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    std::vector&lt;int&gt; original = &#123;1, 2, 3, 4, 5&#125;;</span><br><span class="line"></span><br><span class="line">    // 拷贝整个 original 到 copy（完整复制）</span><br><span class="line">    std::vector&lt;int&gt; copy(original.begin(), original.end());</span><br><span class="line"></span><br><span class="line">    // 拷贝 original 的前 3 个元素 [0,3) -&gt; 元素 1, 2, 3</span><br><span class="line">    std::vector&lt;int&gt; firstHalf(original.begin(), original.begin() + 3);</span><br><span class="line"></span><br><span class="line">    // 拷贝 original 的后两个元素 [3,5) -&gt; 元素 4, 5</span><br><span class="line">    std::vector&lt;int&gt; lastPart(original.begin() + 3, original.end());</span><br><span class="line"></span><br><span class="line">    // 输出结果</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;copy: &quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (int num : copy) std::cout &lt;&lt; <span class="string">num &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; &quot;\nfirstHalf: &quot;;</span></span><br><span class="line"><span class="string">    for (int num</span> : firstHalf) std::cout &lt;&lt; <span class="string">num &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; &quot;\nlastPart: &quot;;</span></span><br><span class="line"><span class="string">    for (int num</span> : lastPart) std::cout &lt;&lt; <span class="string">num &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; std::endl;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>输出结构：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">copy: 1 2 3 4 5</span><br><span class="line">firstHalf: 1 2 3</span><br><span class="line">lastPart: 4 5</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h1 id="引用"><a href="#引用" class="headerlink" title="&amp;引用"></a>&amp;引用</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">string res;</span><br><span class="line"><span class="keyword">for</span> (const string &amp;row : rows)</span><br><span class="line">    res += row;</span><br><span class="line"><span class="built_in">return</span> res;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th>写法</th>
-<th>拷贝？</th>
-<th>推荐？</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>const string &amp;row</code></td>
-<td>❌ 否</td>
-<td>✅ 是</td>
-</tr>
-<tr>
-<td><code>const string row</code></td>
-<td>✅ 是</td>
-<td>⚠️ 否</td>
-</tr>
-</tbody></table>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>凡是遍历容器但不需要修改元素时，都用 const T&amp;，可以大大减少不必要的拷贝。<br></p>
-</blockquote>
-<hr>
-<h2 id="右键引用"><a href="#右键引用" class="headerlink" title="右键引用"></a>右键引用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 右值引用（C++11）</span><br><span class="line">int &amp;&amp;rref = 10; // rref 是 10 的别名（只能绑定临时对象）</span><br></pre></td></tr></table></figure>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><ul>
-<li>函数接收临时对象进行移动构造或资源转移</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">void setValue(std::string&amp;&amp; s) &#123;</span><br><span class="line">    value = std::move(s); // 转移 s 的内容</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其中std::string&amp;&amp; s接受一个右值引用（临时对象），如：setValue(“hello”).<br>需要注意的是虽然s是右值引用，但它在函数体中是一个左值变量，会调用拷贝赋值，浪费性能。因此我们需要使用<strong>move</strong>来将s明确标记为右值。</p>
-<h1 id="C-Lambda-表达式（匿名函数）使用"><a href="#C-Lambda-表达式（匿名函数）使用" class="headerlink" title="C++ Lambda 表达式（匿名函数）使用"></a>C++ Lambda 表达式（匿名函数）使用</h1><p>Lambda表达式是C++11引入的一种简洁方式，用于定义匿名函数。适用于临时定义函数逻辑，可以在函数内定义</p>
-<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><ul>
-<li><strong>capture</strong> 捕捉外部变量</li>
-<li><strong>parameter_list</strong> 参数列表</li>
-<li><strong>return_type</strong>(可选) 返回类型</li>
-<li><strong>function_body</strong> 函数体</li>
-</ul>
-<h2 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 最基本的Lambda</span><br><span class="line">auto add = [](int a, int b)&#123;</span><br><span class="line">    <span class="built_in">return</span> a + b;</span><br><span class="line">&#125;;</span><br><span class="line">int result = add(3,4);</span><br><span class="line">// 捕捉外部变量</span><br><span class="line">int x = 10;</span><br><span class="line">auto printX = [=]()&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">x &lt;&lt; std::endl;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">// 捕捉外部变量(按引用)</span></span><br><span class="line"><span class="string">int y = 5;</span></span><br><span class="line"><span class="string">auto increaseY = [&amp;]()&#123;</span></span><br><span class="line"><span class="string">    y += 1;</span></span><br><span class="line"><span class="string">&#125;;</span></span><br><span class="line"><span class="string">increaseY();</span></span><br></pre></td></tr></table></figure>
-<h2 id="捕捉列表说明"><a href="#捕捉列表说明" class="headerlink" title="捕捉列表说明"></a>捕捉列表说明</h2><table>
-<thead>
-<tr>
-<th>写法</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>[=]</code></td>
-<td>按值捕获所有外部变量（不可修改）</td>
-</tr>
-<tr>
-<td><code>[&amp;]</code></td>
-<td>按引用捕获所有外部变量（可修改）</td>
-</tr>
-<tr>
-<td><code>[=, &amp;x]</code></td>
-<td>除 <code>x</code> 外按值捕获，<code>x</code> 按引用捕获</td>
-</tr>
-<tr>
-<td><code>[x, &amp;y]</code></td>
-<td><code>x</code> 按值捕获，<code>y</code> 按引用捕获</td>
-</tr>
-<tr>
-<td><code>[this]</code></td>
-<td>捕获当前类对象指针</td>
-</tr>
-</tbody></table>
-<h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><h3 id="string-substr"><a href="#string-substr" class="headerlink" title="string.substr"></a>string.substr</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string x=<span class="string">&quot;abc&quot;</span>;</span><br><span class="line">string y = x.substr(0,1);</span><br></pre></td></tr></table></figure>
-
-<h2 id="Heap"><a href="#Heap" class="headerlink" title="Heap"></a>Heap</h2><p>std::priority_queue构建max heap或min heap, 用于：  </p>
-<ul>
-<li>插入元素 push</li>
-<li>获取最大值 top</li>
-<li>删除最大值 pop</li>
-</ul>
-<p>最大堆不是平衡数或哈希表，因此只允许删除堆顶元素</p>
-<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;queue&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    std::priority_queue&lt;int&gt; maxHeap;</span><br><span class="line"></span><br><span class="line">    // 插入元素</span><br><span class="line">    maxHeap.push(10);</span><br><span class="line">    maxHeap.push(50);</span><br><span class="line">    maxHeap.push(30);</span><br><span class="line"></span><br><span class="line">    // 获取最大值</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;最大值: &quot;</span> &lt;&lt; <span class="string">maxHeap.top() &lt;&lt; std::endl;  // 50</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    // 删除最大值</span></span><br><span class="line"><span class="string">    maxHeap</span>.pop();</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;新的最大值: &quot;</span> &lt;&lt; <span class="string">maxHeap.top() &lt;&lt; std::endl;  // 30</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="红黑树-multiset"><a href="#红黑树-multiset" class="headerlink" title="红黑树(multiset)"></a>红黑树(multiset)</h2><p>红黑树的本质是一个<strong>自平衡的二叉搜索树</strong>,它通过着色和旋转操作，在插入和删除节点时保证树的高度近似平衡，从而让基本操作（查找，插入，删除）都能在O(logn)时间内完成<br>如果要频繁删除任意值，改用std::multiset，而不是heap. </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;set&gt;</span></span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    std::multiset&lt;int&gt; s;</span><br><span class="line"></span><br><span class="line">    s.insert(30);</span><br><span class="line">    s.insert(10);</span><br><span class="line">    s.insert(50);</span><br><span class="line"></span><br><span class="line">    // 获取最大值：反向迭代器 rbegin()</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;最大值: &quot;</span> &lt;&lt; *s.rbegin() &lt;&lt; <span class="string">std::endl;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    // 删除某个值（只删除一个）</span></span><br><span class="line"><span class="string">    s.erase(s.find(30));</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    std</span>::cout &lt;&lt; <span class="string">&quot;删除30后最大值: &quot;</span> &lt;&lt; *s.rbegin() &lt;&lt; <span class="string">std::endl;</span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
-<h2 id="红黑树-和-最大-最小堆-的对比"><a href="#红黑树-和-最大-最小堆-的对比" class="headerlink" title="红黑树 和 最大&#x2F;最小堆 的对比"></a>红黑树 和 最大&#x2F;最小堆 的对比</h2><table>
-<thead>
-<tr>
-<th>功能</th>
-<th><code>priority_queue</code></th>
-<th><code>multiset</code></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>获取最大值（O(1)）</td>
-<td>✅ 是</td>
-<td>❌ O(log n)</td>
-</tr>
-<tr>
-<td>删除堆顶</td>
-<td>✅ 是</td>
-<td>✅ 是（尾部删除）</td>
-</tr>
-<tr>
-<td>删除任意元素</td>
-<td>❌ 否</td>
-<td>✅ 支持（O(log n)）</td>
-</tr>
-<tr>
-<td>插入元素</td>
-<td>✅ O(log n)</td>
-<td>✅ O(log n)</td>
-</tr>
-<tr>
-<td>保持排序</td>
-<td>❌ 否</td>
-<td>✅ 自动排序</td>
-</tr>
-</tbody></table>
-<h2 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include&lt;queue&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">    queue&lt;int&gt; q;</span><br><span class="line">    q.push(5);</span><br><span class="line">    q.push(10);</span><br><span class="line">    q.push(15);</span><br><span class="line">    q.pop();</span><br><span class="line">    // 输出队首与队尾</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Front: &quot;</span> &lt;&lt; <span class="string">q.front() &lt;&lt; endl; // 5</span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;Back: &quot; &lt;&lt; q</span>.back() &lt;&lt; <span class="string">endl;   // 15</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
-<h1 id="拷贝"><a href="#拷贝" class="headerlink" title="拷贝"></a>拷贝</h1><h3 id="值拷贝"><a href="#值拷贝" class="headerlink" title="值拷贝"></a>值拷贝</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">void rotate(vector&lt;vector&lt;int&gt;&gt;&amp; matrix)&#123;</span><br><span class="line">    auto matrix_new = matrix;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>C++ 这里的 &#x3D; 拷贝是值拷贝，会得到一个新的数组</p>
-<h3 id="指针赋值"><a href="#指针赋值" class="headerlink" title="指针赋值"></a>指针赋值</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ListNode* smallHead = small;</span><br></pre></td></tr></table></figure>
-<p><strong>smallHead</strong>是另一个指针，它指向与small相同的节点（即两者指向的是同一个内存地址）<br>类似浅拷贝操作，都只是简单的指针赋值</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2833,7 +2685,7 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

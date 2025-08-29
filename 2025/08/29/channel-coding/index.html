@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="了解发射端数字基带信号txSigSTS与射频波束赋形矩阵mFrf相乘的物理意义，以及波束赋形在无线通信发射链路中的位置和作用。 背景在多天线无线通信系统中，为了提升信号质量、增强覆盖能力或实现空间复用，常采用波束赋形技术。波束赋形可分为数字波束赋形和射频（模拟）波束赋形。 发射端信号处理流程一般发射端信号处理主要包括：  数字基带处理：编码、调制、空间复用（多数据流处理） 数字波束赋形：基带域信号">
+  <meta name="description" content="1. 基本概念 信道编码 (Channel Coding)：在数字通信中，为了抵抗信道噪声和衰落，将信息比特加冗余形成码字。 目标： 提高抗噪能力 减少误码率 在有限信道资源下尽可能可靠传输    2. 块码 (Block Codes) 描述形式：(N, L) 块码 N：信息比特数 L：编码比特数（码字长度） 码率：Rc &#x3D; N &#x2F; L   功能： 将 N 个信息比特编码成 L">
 <meta property="og:type" content="article">
-<meta property="og:title" content="波束赋形">
-<meta property="og:url" content="https://hechenyi.github.io/2025/08/12/%E6%B3%A2%E6%9D%9F%E8%B5%8B%E5%BD%A2/index.html">
+<meta property="og:title" content="channel coding">
+<meta property="og:url" content="https://hechenyi.github.io/2025/08/29/channel-coding/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="了解发射端数字基带信号txSigSTS与射频波束赋形矩阵mFrf相乘的物理意义，以及波束赋形在无线通信发射链路中的位置和作用。 背景在多天线无线通信系统中，为了提升信号质量、增强覆盖能力或实现空间复用，常采用波束赋形技术。波束赋形可分为数字波束赋形和射频（模拟）波束赋形。 发射端信号处理流程一般发射端信号处理主要包括：  数字基带处理：编码、调制、空间复用（多数据流处理） 数字波束赋形：基带域信号">
+<meta property="og:description" content="1. 基本概念 信道编码 (Channel Coding)：在数字通信中，为了抵抗信道噪声和衰落，将信息比特加冗余形成码字。 目标： 提高抗噪能力 减少误码率 在有限信道资源下尽可能可靠传输    2. 块码 (Block Codes) 描述形式：(N, L) 块码 N：信息比特数 L：编码比特数（码字长度） 码率：Rc &#x3D; N &#x2F; L   功能： 将 N 个信息比特编码成 L">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-08-12T07:30:59.000Z">
-<meta property="article:modified_time" content="2025-08-12T07:32:25.505Z">
+<meta property="article:published_time" content="2025-08-29T02:50:15.000Z">
+<meta property="article:modified_time" content="2025-08-29T02:58:27.723Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hechenyi.github.io/2025/08/12/%E6%B3%A2%E6%9D%9F%E8%B5%8B%E5%BD%A2/">
+<link rel="canonical" href="https://hechenyi.github.io/2025/08/29/channel-coding/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>波束赋形 | Hexo</title>
+  <title>channel coding | Hexo</title>
   
 
 
@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/12/%E6%B3%A2%E6%9D%9F%E8%B5%8B%E5%BD%A2/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/29/channel-coding/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -168,7 +168,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          波束赋形
+          channel coding
         </h1>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-08-12 15:30:59 / Modified: 15:32:25" itemprop="dateCreated datePublished" datetime="2025-08-12T15:30:59+08:00">2025-08-12</time>
+              <time title="Created: 2025-08-29 10:50:15 / Modified: 10:58:27" itemprop="dateCreated datePublished" datetime="2025-08-29T10:50:15+08:00">2025-08-29</time>
             </span>
 
           
@@ -193,35 +193,89 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>了解发射端数字基带信号txSigSTS与射频波束赋形矩阵mFrf相乘的物理意义，以及波束赋形在无线通信发射链路中的位置和作用。</p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在多天线无线通信系统中，为了提升信号质量、增强覆盖能力或实现空间复用，常采用波束赋形技术。波束赋形可分为数字波束赋形和射频（模拟）波束赋形。</p>
-<h2 id="发射端信号处理流程"><a href="#发射端信号处理流程" class="headerlink" title="发射端信号处理流程"></a>发射端信号处理流程</h2><p>一般发射端信号处理主要包括：</p>
+        <h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h2><ul>
+<li><strong>信道编码 (Channel Coding)</strong>：在数字通信中，为了抵抗信道噪声和衰落，将信息比特加冗余形成码字。</li>
+<li><strong>目标</strong>：<ul>
+<li>提高抗噪能力</li>
+<li>减少误码率</li>
+<li>在有限信道资源下尽可能可靠传输</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-块码-Block-Codes"><a href="#2-块码-Block-Codes" class="headerlink" title="2. 块码 (Block Codes)"></a>2. 块码 (Block Codes)</h2><ul>
+<li>描述形式：<strong>(N, L) 块码</strong><ul>
+<li>N：信息比特数</li>
+<li>L：编码比特数（码字长度）</li>
+<li>码率：Rc &#x3D; N &#x2F; L</li>
+</ul>
+</li>
+<li>功能：<ul>
+<li>将 N 个信息比特编码成 L 个比特</li>
+<li>添加冗余，提高鲁棒性</li>
+</ul>
+</li>
+</ul>
+<h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><ul>
+<li>LDPC 编码<ul>
+<li>输入：100 个信息比特</li>
+<li>输出：200 个编码比特</li>
+<li>Rc &#x3D; 100 &#x2F; 200 &#x3D; 1&#x2F;2</li>
+</ul>
+</li>
+<li>输出的 200 个编码比特还属于比特序列，未调制前不能直接发送</li>
+</ul>
+<h2 id="3-调制-Modulation"><a href="#3-调制-Modulation" class="headerlink" title="3. 调制 (Modulation)"></a>3. 调制 (Modulation)</h2><ul>
+<li>将编码比特映射为可在物理信道上发送的信号</li>
+<li>例子：16-QAM<ul>
+<li>每个符号承载 4 个比特</li>
+<li>200 个编码比特 → 50 个 QAM 符号</li>
+</ul>
+</li>
+<li>调制后的符号是复数信号点 (I&#x2F;Q)</li>
+</ul>
+<h2 id="4-端到端流程-传统数字通信"><a href="#4-端到端流程-传统数字通信" class="headerlink" title="4. 端到端流程 (传统数字通信)"></a>4. 端到端流程 (传统数字通信)</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">源编码器（JPEG/BPG）</span><br><span class="line">|</span><br><span class="line">信道编码器（LDPC/Polar）</span><br><span class="line">|</span><br><span class="line">调制器(QAM/BPSK)</span><br><span class="line">|</span><br><span class="line">信道传输</span><br><span class="line">|</span><br><span class="line">解码器</span><br><span class="line">|</span><br><span class="line">信道解码器</span><br><span class="line">|</span><br><span class="line">源解码器</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-通用-N-L-块码理解"><a href="#5-通用-N-L-块码理解" class="headerlink" title="5. 通用(N,L)块码理解"></a>5. 通用(N,L)块码理解</h2><ul>
+<li>论文中常用抽象描述：<ul>
+<li>“通用信道编码器” &#x3D;&#x3D; 抽象块码模块</li>
+<li>可以选择任意具体实现：<ul>
+<li>LDPC</li>
+<li>Polar Code</li>
+<li>BCH</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>输入： N比特</li>
+<li>输出： L个比特</li>
+<li>调制映射后形成物理符号发送</li>
+</ul>
+<h2 id="6-JSCC与深度学习端到端通信"><a href="#6-JSCC与深度学习端到端通信" class="headerlink" title="6. JSCC与深度学习端到端通信"></a>6. JSCC与深度学习端到端通信</h2><ul>
+<li><p><strong>端到端联合源信道编码（JSCC）</strong></p>
 <ul>
-<li>数字基带处理：编码、调制、空间复用（多数据流处理）</li>
-<li>数字波束赋形：基带域信号预编码</li>
-<li>数字-模拟转换（DAC）</li>
-<li>射频波束赋形：通过相移器及功率放大器对每个天线的信号加权，控制信号方向和形态</li>
-<li>天线发射</li>
+<li>不再分开源编码、信道编码和调制</li>
+<li>一个深度网络直接学习：<ul>
+<li>压缩特征</li>
+<li>抗噪鲁棒性</li>
+<li>可调制映射</li>
 </ul>
-<h2 id="矩阵乘法-txSig-txSigSTS-mFrf-的意义"><a href="#矩阵乘法-txSig-txSigSTS-mFrf-的意义" class="headerlink" title="矩阵乘法 txSig &#x3D; txSigSTS * mFrf 的意义"></a>矩阵乘法 txSig &#x3D; txSigSTS * mFrf 的意义</h2><ul>
-<li>txSigSTS: 形状为 (样本数 × 数据流数) 的数字基带信号矩阵，代表每个独立数据流对应的基带时间序列。</li>
-<li>mFrf: 射频波束赋形矩阵，形状为 (数据流数 × 天线数)，其每个元素为对应数据流在每根天线上的复数加权系数（幅度和相位）。</li>
+</li>
 </ul>
-<p>通过矩阵乘法，txSigSTS乘以mFrf后，得到 (样本数 × 天线数) 维度的信号矩阵txSig，即为分配给每根天线的发送信号。</p>
-<h2 id="射频波束赋形的作用"><a href="#射频波束赋形的作用" class="headerlink" title="射频波束赋形的作用"></a>射频波束赋形的作用</h2><p>射频波束赋形实现了：</p>
+</li>
+<li><p>例：MDJCM</p>
 <ul>
-<li>信号在空间方向上的加权叠加</li>
-<li>聚焦信号能量向目标方向</li>
-<li>减少干扰，提升信道容量与传输质量</li>
-<li>在多流传输中实现信号分离</li>
+<li>Encoder：输出可在信道直接传输的符号序列</li>
+<li>Decoder：直接恢复原始数据</li>
+<li>不依赖传统信道编码器</li>
 </ul>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>射频波束赋形是发射端信号链中从基带信号到天线发射信号转换的关键步骤，通常是发射端的最后一个信号处理阶段。其核心即是将数字基带多流信号通过加权矩阵映射到每个物理天线上，形成定向或多用户信号发射。</p>
-<p>附注：  </p>
-<ul>
-<li>mFrf的设计通常基于信道估计和优化算法（如正交匹配追踪OMP），以实现最佳波束指向和多流分离。  </li>
-<li>此步骤是多输入多输出（MIMO）和混合波束赋形系统的基础。</li>
+</li>
 </ul>
-<hr>
+<h2 id="7-笔记总结"><a href="#7-笔记总结" class="headerlink" title="7. 笔记总结"></a>7. 笔记总结</h2><ol>
+<li>信道编码器是为了在数字传输中增加冗余保护比特</li>
+<li>(N, L) 块码是最常用抽象形式</li>
+<li>输出编码比特在调制前仍是比特，调制后成为符号（复数信号）</li>
+<li>JSCC&#x2F;MDJCM 是端到端学习方法，可替代传统源编码 + 信道编码 + 调制流程</li>
+</ol>
 
     </div>
 
@@ -237,13 +291,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/08/09/tensorflow/" rel="prev" title="tensorflow">
-      <i class="fa fa-chevron-left"></i> tensorflow
+    <a href="/2025/08/28/JSCC/" rel="prev" title="JSCC">
+      <i class="fa fa-chevron-left"></i> JSCC
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/08/20/CSI%E5%8E%8B%E7%BC%A9/" rel="next" title="CSI压缩">
-      CSI压缩 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -302,7 +353,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E5%B0%84%E7%AB%AF%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">发射端信号处理流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95-txSig-txSigSTS-mFrf-%E7%9A%84%E6%84%8F%E4%B9%89"><span class="nav-number">3.</span> <span class="nav-text">矩阵乘法 txSig &#x3D; txSigSTS * mFrf 的意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%84%E9%A2%91%E6%B3%A2%E6%9D%9F%E8%B5%8B%E5%BD%A2%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">射频波束赋形的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">5.</span> <span class="nav-text">结论</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">1. 基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%9D%97%E7%A0%81-Block-Codes"><span class="nav-number">2.</span> <span class="nav-text">2. 块码 (Block Codes)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">示例：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%B0%83%E5%88%B6-Modulation"><span class="nav-number">3.</span> <span class="nav-text">3. 调制 (Modulation)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%AB%AF%E5%88%B0%E7%AB%AF%E6%B5%81%E7%A8%8B-%E4%BC%A0%E7%BB%9F%E6%95%B0%E5%AD%97%E9%80%9A%E4%BF%A1"><span class="nav-number">4.</span> <span class="nav-text">4. 端到端流程 (传统数字通信)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%80%9A%E7%94%A8-N-L-%E5%9D%97%E7%A0%81%E7%90%86%E8%A7%A3"><span class="nav-number">5.</span> <span class="nav-text">5. 通用(N,L)块码理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-JSCC%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AB%AF%E5%88%B0%E7%AB%AF%E9%80%9A%E4%BF%A1"><span class="nav-number">6.</span> <span class="nav-text">6. JSCC与深度学习端到端通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">7. 笔记总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

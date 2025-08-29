@@ -150,6 +150,238 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/15/C++/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/15/C++/" class="post-title-link" itemprop="url">C++</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-06-15 13:13:04" itemprop="dateCreated datePublished" datetime="2025-06-15T13:13:04+08:00">2025-06-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-08-04 13:16:00" itemprop="dateModified" datetime="2025-08-04T13:16:00+08:00">2025-08-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h1 id="C-STL容器"><a href="#C-STL容器" class="headerlink" title="C++ STL容器"></a>C++ STL容器</h1><h2 id="unordered-set与unordered-map"><a href="#unordered-set与unordered-map" class="headerlink" title="unordered_set与unordered_map"></a>unordered_set与unordered_map</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th><code>std::unordered_set</code></th>
+<th><code>std::unordered_map</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>存储内容</strong></td>
+<td>只存储 <strong>键</strong>（key）</td>
+<td>存储 <strong>键值对</strong>（key-value）</td>
+</tr>
+<tr>
+<td><strong>访问方式</strong></td>
+<td>只能通过键判断元素是否存在</td>
+<td>通过键访问对应的值，例如：<code>map[key]</code></td>
+</tr>
+<tr>
+<td><strong>典型用途</strong></td>
+<td>用于判断元素是否存在、集合操作</td>
+<td>用于映射关系，如字符串到整数的字典映射</td>
+</tr>
+<tr>
+<td><strong>示例声明</strong></td>
+<td><code>std::unordered_set&lt;int&gt; s;</code></td>
+<td><code>std::unordered_map&lt;std::string, int&gt; m;</code></td>
+</tr>
+<tr>
+<td><strong>内部实现</strong></td>
+<td>哈希表（只哈希 key）</td>
+<td>哈希表（key 哈希 + value 存储）</td>
+</tr>
+</tbody></table>
+<p>unordered_set常用来代替vector来判断元素是否存在，因为它的find操作的时间复杂度是O(1)</p>
+<h2 id="vector基本用法"><a href="#vector基本用法" class="headerlink" title="vector基本用法"></a>vector基本用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;int&gt; v1;                  // 空 vector</span><br><span class="line">std::vector&lt;int&gt; v2(5);               // 5 个默认值元素（0）</span><br><span class="line">std::vector&lt;int&gt; v3(5, 42);           // 5 个元素，值为 42</span><br><span class="line">std::vector&lt;int&gt; v4 = &#123;1, 2, 3&#125;;      // 使用列表初始化</span><br><span class="line">v.push_back(x);     // 添加元素</span><br><span class="line">v.pop_back();       // 删除最后一个元素</span><br><span class="line">v.size();           // 返回元素个数</span><br><span class="line">v.empty();          // 是否为空</span><br><span class="line">v.clear();          // 清空所有元素</span><br><span class="line">v.front();          // 返回第一个元素</span><br><span class="line">v.back();           // 返回最后一个元素</span><br><span class="line">v[i];               // 访问第 i 个元素</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="vector遍历方式"><a href="#vector遍历方式" class="headerlink" title="vector遍历方式"></a>vector遍历方式</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;int&gt; v = &#123;1, 2, 3&#125;;</span><br><span class="line"></span><br><span class="line">// 方法 1：范围 <span class="keyword">for</span> 循环</span><br><span class="line"><span class="keyword">for</span> (int x : v) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">x &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 方法 2：索引访问</span></span><br><span class="line"><span class="string">for (int i = 0; i &lt; v.size(); ++i) &#123;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; v[i] &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 方法 3：普通迭代器</span></span><br><span class="line"><span class="string">for (auto it = v.begin(); it != v.end(); ++it) &#123;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; *it &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 方法 4：反向迭代器</span></span><br><span class="line"><span class="string">for (auto rit = v.rbegin(); rit != v.rend(); ++rit) &#123;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; *rit &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="迭代器基本用法"><a href="#迭代器基本用法" class="headerlink" title="迭代器基本用法"></a>迭代器基本用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">begin()	指向第一个元素的迭代器</span><br><span class="line">end()	指向最后一个元素之后的位置</span><br><span class="line">rbegin()	反向迭代器，指向最后一个元素</span><br><span class="line">rend()	反向迭代器，指向第一个元素之前</span><br><span class="line">cbegin()	常量迭代器，不能修改元素</span><br><span class="line">cend()	常量迭代器，指向末尾</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用迭代器拷贝容器"><a href="#使用迭代器拷贝容器" class="headerlink" title="使用迭代器拷贝容器"></a>使用迭代器拷贝容器</h2><p>std::vector<T> subvec(start_iter, end_iter);</p>
+<p>需注意这是左闭右开</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;vector&gt;</span></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    std::vector&lt;int&gt; original = &#123;1, 2, 3, 4, 5&#125;;</span><br><span class="line"></span><br><span class="line">    // 拷贝整个 original 到 copy（完整复制）</span><br><span class="line">    std::vector&lt;int&gt; copy(original.begin(), original.end());</span><br><span class="line"></span><br><span class="line">    // 拷贝 original 的前 3 个元素 [0,3) -&gt; 元素 1, 2, 3</span><br><span class="line">    std::vector&lt;int&gt; firstHalf(original.begin(), original.begin() + 3);</span><br><span class="line"></span><br><span class="line">    // 拷贝 original 的后两个元素 [3,5) -&gt; 元素 4, 5</span><br><span class="line">    std::vector&lt;int&gt; lastPart(original.begin() + 3, original.end());</span><br><span class="line"></span><br><span class="line">    // 输出结果</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;copy: &quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (int num : copy) std::cout &lt;&lt; <span class="string">num &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; &quot;\nfirstHalf: &quot;;</span></span><br><span class="line"><span class="string">    for (int num</span> : firstHalf) std::cout &lt;&lt; <span class="string">num &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; &quot;\nlastPart: &quot;;</span></span><br><span class="line"><span class="string">    for (int num</span> : lastPart) std::cout &lt;&lt; <span class="string">num &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; std::endl;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>输出结构：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">copy: 1 2 3 4 5</span><br><span class="line">firstHalf: 1 2 3</span><br><span class="line">lastPart: 4 5</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="引用"><a href="#引用" class="headerlink" title="&amp;引用"></a>&amp;引用</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">string res;</span><br><span class="line"><span class="keyword">for</span> (const string &amp;row : rows)</span><br><span class="line">    res += row;</span><br><span class="line"><span class="built_in">return</span> res;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>拷贝？</th>
+<th>推荐？</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>const string &amp;row</code></td>
+<td>❌ 否</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><code>const string row</code></td>
+<td>✅ 是</td>
+<td>⚠️ 否</td>
+</tr>
+</tbody></table>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>凡是遍历容器但不需要修改元素时，都用 const T&amp;，可以大大减少不必要的拷贝。<br></p>
+</blockquote>
+<hr>
+<h2 id="右键引用"><a href="#右键引用" class="headerlink" title="右键引用"></a>右键引用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 右值引用（C++11）</span><br><span class="line">int &amp;&amp;rref = 10; // rref 是 10 的别名（只能绑定临时对象）</span><br></pre></td></tr></table></figure>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><ul>
+<li>函数接收临时对象进行移动构造或资源转移</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">void setValue(std::string&amp;&amp; s) &#123;</span><br><span class="line">    value = std::move(s); // 转移 s 的内容</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中std::string&amp;&amp; s接受一个右值引用（临时对象），如：setValue(“hello”).<br>需要注意的是虽然s是右值引用，但它在函数体中是一个左值变量，会调用拷贝赋值，浪费性能。因此我们需要使用<strong>move</strong>来将s明确标记为右值。</p>
+<h1 id="C-Lambda-表达式（匿名函数）使用"><a href="#C-Lambda-表达式（匿名函数）使用" class="headerlink" title="C++ Lambda 表达式（匿名函数）使用"></a>C++ Lambda 表达式（匿名函数）使用</h1><p>Lambda表达式是C++11引入的一种简洁方式，用于定义匿名函数。适用于临时定义函数逻辑，可以在函数内定义</p>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><ul>
+<li><strong>capture</strong> 捕捉外部变量</li>
+<li><strong>parameter_list</strong> 参数列表</li>
+<li><strong>return_type</strong>(可选) 返回类型</li>
+<li><strong>function_body</strong> 函数体</li>
+</ul>
+<h2 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 最基本的Lambda</span><br><span class="line">auto add = [](int a, int b)&#123;</span><br><span class="line">    <span class="built_in">return</span> a + b;</span><br><span class="line">&#125;;</span><br><span class="line">int result = add(3,4);</span><br><span class="line">// 捕捉外部变量</span><br><span class="line">int x = 10;</span><br><span class="line">auto printX = [=]()&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">x &lt;&lt; std::endl;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">// 捕捉外部变量(按引用)</span></span><br><span class="line"><span class="string">int y = 5;</span></span><br><span class="line"><span class="string">auto increaseY = [&amp;]()&#123;</span></span><br><span class="line"><span class="string">    y += 1;</span></span><br><span class="line"><span class="string">&#125;;</span></span><br><span class="line"><span class="string">increaseY();</span></span><br></pre></td></tr></table></figure>
+<h2 id="捕捉列表说明"><a href="#捕捉列表说明" class="headerlink" title="捕捉列表说明"></a>捕捉列表说明</h2><table>
+<thead>
+<tr>
+<th>写法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>[=]</code></td>
+<td>按值捕获所有外部变量（不可修改）</td>
+</tr>
+<tr>
+<td><code>[&amp;]</code></td>
+<td>按引用捕获所有外部变量（可修改）</td>
+</tr>
+<tr>
+<td><code>[=, &amp;x]</code></td>
+<td>除 <code>x</code> 外按值捕获，<code>x</code> 按引用捕获</td>
+</tr>
+<tr>
+<td><code>[x, &amp;y]</code></td>
+<td><code>x</code> 按值捕获，<code>y</code> 按引用捕获</td>
+</tr>
+<tr>
+<td><code>[this]</code></td>
+<td>捕获当前类对象指针</td>
+</tr>
+</tbody></table>
+<h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><h3 id="string-substr"><a href="#string-substr" class="headerlink" title="string.substr"></a>string.substr</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string x=<span class="string">&quot;abc&quot;</span>;</span><br><span class="line">string y = x.substr(0,1);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Heap"><a href="#Heap" class="headerlink" title="Heap"></a>Heap</h2><p>std::priority_queue构建max heap或min heap, 用于：  </p>
+<ul>
+<li>插入元素 push</li>
+<li>获取最大值 top</li>
+<li>删除最大值 pop</li>
+</ul>
+<p>最大堆不是平衡数或哈希表，因此只允许删除堆顶元素</p>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;queue&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    std::priority_queue&lt;int&gt; maxHeap;</span><br><span class="line"></span><br><span class="line">    // 插入元素</span><br><span class="line">    maxHeap.push(10);</span><br><span class="line">    maxHeap.push(50);</span><br><span class="line">    maxHeap.push(30);</span><br><span class="line"></span><br><span class="line">    // 获取最大值</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;最大值: &quot;</span> &lt;&lt; <span class="string">maxHeap.top() &lt;&lt; std::endl;  // 50</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    // 删除最大值</span></span><br><span class="line"><span class="string">    maxHeap</span>.pop();</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;新的最大值: &quot;</span> &lt;&lt; <span class="string">maxHeap.top() &lt;&lt; std::endl;  // 30</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="红黑树-multiset"><a href="#红黑树-multiset" class="headerlink" title="红黑树(multiset)"></a>红黑树(multiset)</h2><p>红黑树的本质是一个<strong>自平衡的二叉搜索树</strong>,它通过着色和旋转操作，在插入和删除节点时保证树的高度近似平衡，从而让基本操作（查找，插入，删除）都能在O(logn)时间内完成<br>如果要频繁删除任意值，改用std::multiset，而不是heap. </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;set&gt;</span></span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    std::multiset&lt;int&gt; s;</span><br><span class="line"></span><br><span class="line">    s.insert(30);</span><br><span class="line">    s.insert(10);</span><br><span class="line">    s.insert(50);</span><br><span class="line"></span><br><span class="line">    // 获取最大值：反向迭代器 rbegin()</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;最大值: &quot;</span> &lt;&lt; *s.rbegin() &lt;&lt; <span class="string">std::endl;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    // 删除某个值（只删除一个）</span></span><br><span class="line"><span class="string">    s.erase(s.find(30));</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    std</span>::cout &lt;&lt; <span class="string">&quot;删除30后最大值: &quot;</span> &lt;&lt; *s.rbegin() &lt;&lt; <span class="string">std::endl;</span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="红黑树-和-最大-最小堆-的对比"><a href="#红黑树-和-最大-最小堆-的对比" class="headerlink" title="红黑树 和 最大&#x2F;最小堆 的对比"></a>红黑树 和 最大&#x2F;最小堆 的对比</h2><table>
+<thead>
+<tr>
+<th>功能</th>
+<th><code>priority_queue</code></th>
+<th><code>multiset</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>获取最大值（O(1)）</td>
+<td>✅ 是</td>
+<td>❌ O(log n)</td>
+</tr>
+<tr>
+<td>删除堆顶</td>
+<td>✅ 是</td>
+<td>✅ 是（尾部删除）</td>
+</tr>
+<tr>
+<td>删除任意元素</td>
+<td>❌ 否</td>
+<td>✅ 支持（O(log n)）</td>
+</tr>
+<tr>
+<td>插入元素</td>
+<td>✅ O(log n)</td>
+<td>✅ O(log n)</td>
+</tr>
+<tr>
+<td>保持排序</td>
+<td>❌ 否</td>
+<td>✅ 自动排序</td>
+</tr>
+</tbody></table>
+<h2 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include&lt;queue&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">    queue&lt;int&gt; q;</span><br><span class="line">    q.push(5);</span><br><span class="line">    q.push(10);</span><br><span class="line">    q.push(15);</span><br><span class="line">    q.pop();</span><br><span class="line">    // 输出队首与队尾</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Front: &quot;</span> &lt;&lt; <span class="string">q.front() &lt;&lt; endl; // 5</span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;Back: &quot; &lt;&lt; q</span>.back() &lt;&lt; <span class="string">endl;   // 15</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+<h1 id="拷贝"><a href="#拷贝" class="headerlink" title="拷贝"></a>拷贝</h1><h3 id="值拷贝"><a href="#值拷贝" class="headerlink" title="值拷贝"></a>值拷贝</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">void rotate(vector&lt;vector&lt;int&gt;&gt;&amp; matrix)&#123;</span><br><span class="line">    auto matrix_new = matrix;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>C++ 这里的 &#x3D; 拷贝是值拷贝，会得到一个新的数组</p>
+<h3 id="指针赋值"><a href="#指针赋值" class="headerlink" title="指针赋值"></a>指针赋值</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ListNode* smallHead = small;</span><br></pre></td></tr></table></figure>
+<p><strong>smallHead</strong>是另一个指针，它指向与small相同的节点（即两者指向的是同一个内存地址）<br>类似浅拷贝操作，都只是简单的指针赋值</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/12/MVC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1180,94 +1412,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/05/04/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/05/04/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">算法基础</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-05-04 01:42:52" itemprop="dateCreated datePublished" datetime="2025-05-04T01:42:52+08:00">2025-05-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-16 23:37:42" itemprop="dateModified" datetime="2025-06-16T23:37:42+08:00">2025-06-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h2><h3 id="计算树的节点"><a href="#计算树的节点" class="headerlink" title="计算树的节点"></a>计算树的节点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">// Created by 何晨易 on 2025/5/3.</span><br><span class="line">//</span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">struct TreeNode &#123;</span><br><span class="line">  int data;</span><br><span class="line">  TreeNode *left;</span><br><span class="line">  TreeNode *right;</span><br><span class="line">  TreeNode(): data(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="line">&#125; treeNode;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">TreeNode *<span class="function"><span class="title">createTreeNode</span></span>()&#123;</span><br><span class="line">    TreeNode *root = new TreeNode();</span><br><span class="line">    root-&gt;left = new TreeNode();</span><br><span class="line">    root-&gt;right = new TreeNode();</span><br><span class="line">    root-&gt;left-&gt;right = new TreeNode();</span><br><span class="line">    root-&gt;left-&gt;left = new TreeNode();</span><br><span class="line">    <span class="built_in">return</span> root;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">void countNodes(TreeNode* node, int&amp; internalCount, int&amp; leafCount)&#123;</span><br><span class="line">  <span class="keyword">if</span>(node == nullptr)&#123;</span><br><span class="line">    <span class="built_in">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(node-&gt;left == nullptr &amp;&amp; node-&gt;right == nullptr)&#123;</span><br><span class="line">    leafCount++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span>&#123;</span><br><span class="line">    internalCount++;</span><br><span class="line">  &#125;</span><br><span class="line">  countNodes(node-&gt;left, internalCount, leafCount);</span><br><span class="line">  countNodes(node-&gt;right, internalCount, leafCount);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">    TreeNode *root = createTreeNode();</span><br><span class="line">//      0</span><br><span class="line">//     / \</span><br><span class="line">//    0   0</span><br><span class="line">//   / \</span><br><span class="line">//  0  0</span><br><span class="line">    int internalCount = 0;</span><br><span class="line">    int   leafCount = 0;</span><br><span class="line">    countNodes(root, internalCount, leafCount);</span><br><span class="line">    cout &lt;&lt; <span class="string">internalCount &lt;&lt; endl;</span></span><br><span class="line"><span class="string">    cout &lt;&lt; leafCount &lt;&lt; endl;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
-
-<p>C++在构建定义结构体的时候，可以如上述代码使用TreeNode(): data(0), left(nullptr), right(nullptr) {}方式来构造。如果不在定义结构体内使用构造函数，那么可以用{}的方式来构造  </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">struct Item&#123;</span><br><span class="line">    string name;</span><br><span class="line">    int w, v, u;</span><br><span class="line">&#125;</span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line"></span><br><span class="line">    vector&lt;Item&gt; items = &#123;</span><br><span class="line">        &#123;<span class="string">&quot;Hocker&quot;</span>, 5, 5, 0&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;Handy&quot;</span>, 1, 20, 1&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><h3 id="mergeSort"><a href="#mergeSort" class="headerlink" title="mergeSort"></a>mergeSort</h3><p>使用了<strong>分治</strong>的思想，将数组进行分块，并且每次分块是用二分法来进行划分，划分次数为log2(n)，n为数组长度<br>然后对每次划分得到的两个数组进行合并排序。由于每次合并排序都是对n个数字进行操作，因此时间复杂度为nlog2(n)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">// Created by 何晨易 on 2025/6/14.</span><br><span class="line">//</span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;vector&gt;</span></span><br><span class="line">std::vector&lt;int&gt; merge(std::vector&lt;int&gt;&amp; nums1, std::vector&lt;int&gt;&amp; nums2) &#123;</span><br><span class="line">  int i = 0, j = 0;</span><br><span class="line">  int size1 = nums1.size(), size2 = nums2.size();</span><br><span class="line"></span><br><span class="line">  nums1.push_back(INT_MAX);</span><br><span class="line">  nums2.push_back(INT_MAX);</span><br><span class="line"></span><br><span class="line">  std::vector&lt;int&gt; temp(size1 + size2);</span><br><span class="line">  <span class="keyword">for</span> (int n = 0; n &lt; size1 + size2; ++n) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nums1[i] &lt; nums2[j]) &#123;</span><br><span class="line">      temp[n] = nums1[i++];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      temp[n] = nums2[j++];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void mergeSort(std::vector&lt;int&gt;&amp; nums, int left, int right) &#123;</span><br><span class="line">  <span class="keyword">if</span>(left &gt;= right)&#123;</span><br><span class="line">    <span class="built_in">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  int mid = left + (right - left) / 2 ;</span><br><span class="line">  mergeSort(nums, left, mid);</span><br><span class="line">  mergeSort(nums, mid + 1, right);</span><br><span class="line"></span><br><span class="line">  std::vector&lt;int&gt; leftarray(nums.begin() + left, nums.begin() + mid + 1);</span><br><span class="line">  std::vector&lt;int&gt; rightarray(nums.begin() + mid + 1, nums.begin() + right + 1);</span><br><span class="line"></span><br><span class="line">  std::vector&lt;int&gt; merged = merge(leftarray, rightarray);</span><br><span class="line">  // 拷贝回原数组</span><br><span class="line">  <span class="keyword">for</span> (int i = 0; i &lt; merged.size(); ++i) &#123;</span><br><span class="line">    nums[left + i] = merged[i];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">  std::vector&lt;int&gt; nums1 = &#123;1,2,3,4,5,6,7,8,9&#125;;</span><br><span class="line">  std::vector&lt;int&gt; nums2 = &#123;9,10,11,100,200&#125;;</span><br><span class="line">//  std::vector&lt;int&gt; merged = merge(nums1, nums2);</span><br><span class="line">  std::vector&lt;int&gt; nums3 = &#123;3,2,5,1,6&#125;;</span><br><span class="line">  mergeSort(nums3, 0, nums3.size() - 1);</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;合并后数组：&quot;</span>;</span><br><span class="line">  <span class="keyword">for</span> (int num : nums3) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">num &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  std::cout &lt;&lt; std::endl;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  return 0;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="heapSort"><a href="#heapSort" class="headerlink" title="heapSort"></a>heapSort</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">// Created by 何晨易 on 2025/6/16.</span><br><span class="line">//</span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;vector&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">// 向下堆化（heapify）</span><br><span class="line">void heapify(vector&lt;int&gt;&amp; arr, int n, int i) &#123;</span><br><span class="line">    int largest = i;       // 当前节点索引</span><br><span class="line">    int left = 2 * i + 1;  // 左子节点</span><br><span class="line">    int right = 2 * i + 2; // 右子节点</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (left &lt; n &amp;&amp; arr[left] &gt; arr[largest])</span><br><span class="line">        largest = left;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (right &lt; n &amp;&amp; arr[right] &gt; arr[largest])</span><br><span class="line">        largest = right;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (largest != i) &#123;</span><br><span class="line">        swap(arr[i], arr[largest]);</span><br><span class="line">        heapify(arr, n, largest);  // 递归下沉</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 堆排序</span><br><span class="line">void heapSort(vector&lt;int&gt;&amp; arr) &#123;</span><br><span class="line">    int n = arr.size();</span><br><span class="line"></span><br><span class="line">    // 构建最大堆</span><br><span class="line">    <span class="keyword">for</span> (int i = n / 2 - 1; i &gt;= 0; i--) &#123;</span><br><span class="line">        heapify(arr, n, i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 逐个取出最大元素，并重新堆化</span><br><span class="line">    <span class="keyword">for</span> (int i = n - 1; i &gt; 0; i--) &#123;</span><br><span class="line">        swap(arr[0], arr[i]);       // 将当前最大值（堆顶）放到末尾</span><br><span class="line">        heapify(arr, i, 0);         // 对剩余部分进行堆化</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 打印数组</span><br><span class="line">void printArray(const vector&lt;int&gt;&amp; arr) &#123;</span><br><span class="line">    <span class="keyword">for</span> (int val : arr)</span><br><span class="line">        cout &lt;&lt; <span class="string">val &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    cout &lt;&lt; endl;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 测试</span></span><br><span class="line"><span class="string">int main() &#123;</span></span><br><span class="line"><span class="string">    vector&lt;int&gt; arr = &#123;40, 30, 25, 50, 20, 10&#125;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;原始数组: &quot;;</span></span><br><span class="line"><span class="string">    printArray(arr);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    heapSort(arr);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;排序后数组: &quot;;</span></span><br><span class="line"><span class="string">    printArray(arr);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h2><h3 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h3><p>可以先计算每一个物品的性价比，也就是价值&#x2F;质量</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1337,7 +1481,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

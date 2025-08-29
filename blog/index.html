@@ -150,6 +150,148 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/29/channel-coding/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/29/channel-coding/" class="post-title-link" itemprop="url">channel coding</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-29 10:50:15 / Modified: 10:58:27" itemprop="dateCreated datePublished" datetime="2025-08-29T10:50:15+08:00">2025-08-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h2><ul>
+<li><strong>信道编码 (Channel Coding)</strong>：在数字通信中，为了抵抗信道噪声和衰落，将信息比特加冗余形成码字。</li>
+<li><strong>目标</strong>：<ul>
+<li>提高抗噪能力</li>
+<li>减少误码率</li>
+<li>在有限信道资源下尽可能可靠传输</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-块码-Block-Codes"><a href="#2-块码-Block-Codes" class="headerlink" title="2. 块码 (Block Codes)"></a>2. 块码 (Block Codes)</h2><ul>
+<li>描述形式：<strong>(N, L) 块码</strong><ul>
+<li>N：信息比特数</li>
+<li>L：编码比特数（码字长度）</li>
+<li>码率：Rc &#x3D; N &#x2F; L</li>
+</ul>
+</li>
+<li>功能：<ul>
+<li>将 N 个信息比特编码成 L 个比特</li>
+<li>添加冗余，提高鲁棒性</li>
+</ul>
+</li>
+</ul>
+<h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><ul>
+<li>LDPC 编码<ul>
+<li>输入：100 个信息比特</li>
+<li>输出：200 个编码比特</li>
+<li>Rc &#x3D; 100 &#x2F; 200 &#x3D; 1&#x2F;2</li>
+</ul>
+</li>
+<li>输出的 200 个编码比特还属于比特序列，未调制前不能直接发送</li>
+</ul>
+<h2 id="3-调制-Modulation"><a href="#3-调制-Modulation" class="headerlink" title="3. 调制 (Modulation)"></a>3. 调制 (Modulation)</h2><ul>
+<li>将编码比特映射为可在物理信道上发送的信号</li>
+<li>例子：16-QAM<ul>
+<li>每个符号承载 4 个比特</li>
+<li>200 个编码比特 → 50 个 QAM 符号</li>
+</ul>
+</li>
+<li>调制后的符号是复数信号点 (I&#x2F;Q)</li>
+</ul>
+<h2 id="4-端到端流程-传统数字通信"><a href="#4-端到端流程-传统数字通信" class="headerlink" title="4. 端到端流程 (传统数字通信)"></a>4. 端到端流程 (传统数字通信)</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">源编码器（JPEG/BPG）</span><br><span class="line">|</span><br><span class="line">信道编码器（LDPC/Polar）</span><br><span class="line">|</span><br><span class="line">调制器(QAM/BPSK)</span><br><span class="line">|</span><br><span class="line">信道传输</span><br><span class="line">|</span><br><span class="line">解码器</span><br><span class="line">|</span><br><span class="line">信道解码器</span><br><span class="line">|</span><br><span class="line">源解码器</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-通用-N-L-块码理解"><a href="#5-通用-N-L-块码理解" class="headerlink" title="5. 通用(N,L)块码理解"></a>5. 通用(N,L)块码理解</h2><ul>
+<li>论文中常用抽象描述：<ul>
+<li>“通用信道编码器” &#x3D;&#x3D; 抽象块码模块</li>
+<li>可以选择任意具体实现：<ul>
+<li>LDPC</li>
+<li>Polar Code</li>
+<li>BCH</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>输入： N比特</li>
+<li>输出： L个比特</li>
+<li>调制映射后形成物理符号发送</li>
+</ul>
+<h2 id="6-JSCC与深度学习端到端通信"><a href="#6-JSCC与深度学习端到端通信" class="headerlink" title="6. JSCC与深度学习端到端通信"></a>6. JSCC与深度学习端到端通信</h2><ul>
+<li><p><strong>端到端联合源信道编码（JSCC）</strong></p>
+<ul>
+<li>不再分开源编码、信道编码和调制</li>
+<li>一个深度网络直接学习：<ul>
+<li>压缩特征</li>
+<li>抗噪鲁棒性</li>
+<li>可调制映射</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>例：MDJCM</p>
+<ul>
+<li>Encoder：输出可在信道直接传输的符号序列</li>
+<li>Decoder：直接恢复原始数据</li>
+<li>不依赖传统信道编码器</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-笔记总结"><a href="#7-笔记总结" class="headerlink" title="7. 笔记总结"></a>7. 笔记总结</h2><ol>
+<li>信道编码器是为了在数字传输中增加冗余保护比特</li>
+<li>(N, L) 块码是最常用抽象形式</li>
+<li>输出编码比特在调制前仍是比特，调制后成为符号（复数信号）</li>
+<li>JSCC&#x2F;MDJCM 是端到端学习方法，可替代传统源编码 + 信道编码 + 调制流程</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/28/JSCC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1304,90 +1446,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/05/Python%E8%AF%BB%E5%8F%96mat%E6%96%87%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/08/05/Python%E8%AF%BB%E5%8F%96mat%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">Python读取mat文件</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-08-05 00:09:44" itemprop="dateCreated datePublished" datetime="2025-08-05T00:09:44+08:00">2025-08-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-09 10:27:48" itemprop="dateModified" datetime="2025-08-09T10:27:48+08:00">2025-08-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="读取-MATLAB-mat-文件（带有结构体字段）"><a href="#读取-MATLAB-mat-文件（带有结构体字段）" class="headerlink" title="读取 MATLAB .mat 文件（带有结构体字段）"></a>读取 MATLAB <code>.mat</code> 文件（带有结构体字段）</h2><p>我们经常遇到 MATLAB 中保存的结构体 <code>.mat</code> 文件，例如包含 <code>real</code> 和 <code>imag</code> 字段的 CSI 或 preamble 数据。在 Python 中可以用 <code>h5py</code> + <code>numpy</code> 来处理：</p>
-<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install h5py numpy torch</span><br></pre></td></tr></table></figure>
-
-<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> h5py</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">mat_path = <span class="string">&#x27;your_file_path.mat&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> h5py.File(mat_path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># 访问结构体数组引用（例如 usr_data）</span></span><br><span class="line">    hDp_ref = f[<span class="string">&#x27;usr_data&#x27;</span>]</span><br><span class="line">    hDp_real_refs = hDp_ref[:]  <span class="comment"># 是一组 object reference</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 读取 preamble</span></span><br><span class="line">    preamble_ref = hDp_real_refs[<span class="number">0</span>].item()         <span class="comment"># 解引用</span></span><br><span class="line">    preamble_dataset = f[preamble_ref]             <span class="comment"># 获取对应的数据集</span></span><br><span class="line">    preamble_struct = np.array(preamble_dataset)   <span class="comment"># 转成 numpy 数组</span></span><br><span class="line">    preamble = preamble_struct[<span class="string">&#x27;real&#x27;</span>] + <span class="number">1j</span> * preamble_struct[<span class="string">&#x27;imag&#x27;</span>]  <span class="comment"># 合成为复数</span></span><br><span class="line">    preamble_tensor = torch.tensor(preamble, dtype=torch.complex64)    <span class="comment"># 转为 PyTorch 复数张量</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 读取 CSI（假设是第二个）</span></span><br><span class="line">    csi_ref = hDp_real_refs[<span class="number">1</span>].item()</span><br><span class="line">    csi_dataset = f[csi_ref]</span><br><span class="line">    csi_struct = np.array(csi_dataset)</span><br><span class="line">    csi = csi_struct[<span class="string">&#x27;real&#x27;</span>] + <span class="number">1j</span> * csi_struct[<span class="string">&#x27;imag&#x27;</span>]</span><br><span class="line">    csi_tensor = torch.tensor(csi, dtype=torch.complex64)</span><br></pre></td></tr></table></figure>
-
-<h3 id="常见说明"><a href="#常见说明" class="headerlink" title="常见说明"></a>常见说明</h3><ul>
-<li><code>h5py.File(..., &#39;r&#39;)</code>：读取 <code>.mat</code> 文件（v7.3 格式，基于 HDF5）。</li>
-<li><code>hDp_ref[:]</code>：获取结构体中嵌套的 object reference。</li>
-<li><code>.item()</code>：从 NumPy 的 <code>object</code> 中提取真实的引用。</li>
-<li><code>[&#39;real&#39;] + 1j * [&#39;imag&#39;]</code>：组合为复数。</li>
-<li>使用 <code>torch.tensor(..., dtype=torch.complex64)</code> 转为复数张量，方便用于神经网络输入。</li>
-</ul>
-<p>在 preamble_struct &#x3D; np.array(preamble_dataset) numpy数组中，它的每一个元素仍然是一个类字典对象，拥有字段，比如 ‘real’ 和 ‘imag’，这两个字段就是你要提取的实部和虚部数据。  </p>
-<p>在 PyTorch 中，复数张量（dtype&#x3D;torch.complex64 或 complex128）不是单独的 real&#x2F;imag 张量，而是一个 内建的复数类型，其中每个元素都包含实部和虚部。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([1 + 2j, 3 + 4j], dtype=torch.complex64)，</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>结构上：</p>
-<p>x[0] 是 (1+2j)，即：</p>
-<p>x[0].real &#x3D;&#x3D; 1.0</p>
-<p>x[0].imag &#x3D;&#x3D; 2.0</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1457,7 +1515,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
