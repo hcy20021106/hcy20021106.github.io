@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="1. Basic ConceptIn TDD (Time division duplexing) mode, physical uplink shared channel (PUSCH) and physical downlink shared channel (PDSCH) transmissions are scheduled in the same frequency band with s">
+  <meta name="description" content="1. 基本概念 熵编码（Entropy Coding）是一种无损压缩方法，目的是将符号序列用尽可能少的比特表示。 核心思想来自信息论：$H(X) &#x3D; -\sum_x P(x) \log_2 P(x)$ $H(X)$：理论最少平均比特数（香农熵）   $P(x)$：符号 $x$ 出现概率   核心原则： 高频符号 → 用较少比特表示   低频符号 → 用较多比特表示     2. 常见熵编">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NRTDDPerformanceEvaluation">
-<meta property="og:url" content="https://hechenyi.github.io/2025/04/24/NRTDDPerformanceEvaluation/index.html">
+<meta property="og:title" content="熵编码">
+<meta property="og:url" content="https://hechenyi.github.io/2025/08/29/%E7%86%B5%E7%BC%96%E7%A0%81/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1. Basic ConceptIn TDD (Time division duplexing) mode, physical uplink shared channel (PUSCH) and physical downlink shared channel (PDSCH) transmissions are scheduled in the same frequency band with s">
+<meta property="og:description" content="1. 基本概念 熵编码（Entropy Coding）是一种无损压缩方法，目的是将符号序列用尽可能少的比特表示。 核心思想来自信息论：$H(X) &#x3D; -\sum_x P(x) \log_2 P(x)$ $H(X)$：理论最少平均比特数（香农熵）   $P(x)$：符号 $x$ 出现概率   核心原则： 高频符号 → 用较少比特表示   低频符号 → 用较多比特表示     2. 常见熵编">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-04-23T21:47:47.000Z">
-<meta property="article:modified_time" content="2025-04-24T10:56:11.766Z">
+<meta property="article:published_time" content="2025-08-29T03:11:52.000Z">
+<meta property="article:modified_time" content="2025-08-29T03:15:31.351Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hechenyi.github.io/2025/04/24/NRTDDPerformanceEvaluation/">
+<link rel="canonical" href="https://hechenyi.github.io/2025/08/29/%E7%86%B5%E7%BC%96%E7%A0%81/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>NRTDDPerformanceEvaluation | Hexo</title>
+  <title>熵编码 | Hexo</title>
   
 
 
@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/24/NRTDDPerformanceEvaluation/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/29/%E7%86%B5%E7%BC%96%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -168,7 +168,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          NRTDDPerformanceEvaluation
+          熵编码
         </h1>
 
         <div class="post-meta">
@@ -179,7 +179,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-04-24 05:47:47 / Modified: 18:56:11" itemprop="dateCreated datePublished" datetime="2025-04-24T05:47:47+08:00">2025-04-24</time>
+              <time title="Created: 2025-08-29 11:11:52 / Modified: 11:15:31" itemprop="dateCreated datePublished" datetime="2025-08-29T11:11:52+08:00">2025-08-29</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -187,7 +187,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
                 </span>
             </span>
 
@@ -202,8 +202,116 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1-Basic-Concept"><a href="#1-Basic-Concept" class="headerlink" title="1. Basic Concept"></a>1. Basic Concept</h2><p>In TDD (Time division duplexing) mode, physical uplink shared channel (PUSCH) and physical downlink shared channel (PDSCH) transmissions are scheduled in the same frequency band with separation in time domain. The scheduling strategy can be customized and network performance can be evaluated accordingly. </p>
-<h3 id="1-1-举例说明"><a href="#1-1-举例说明" class="headerlink" title="1.1 举例说明"></a>1.1 举例说明</h3><p>matlab里面参数设置如下<br>reference_scs &#x3D; 15kHz(i.e. 1 ms slot), DLULPeriodicity &#x3D; 5 ms, numDLSlots &#x3D; 3, numDLSyms &#x3D; 7, numULSlots &#x3D; 1, numULSyms &#x3D; 5<br>所以Number of slots in DL-UL periodicity with respect to reference SCS of 15 kHz对应的NumSlotsDLULPeriodicity &#x3D; 5<br>最后Slot分布图如下<br>Slot Index:     0   1   2    3    4<br>            +—–+—+—-+—-+—–+<br>Slot Type:  DL     Dl   Dl    Up   UL<br>Symbol Use: full   full  7sym  full 5sym</p>
+        <h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h2><ul>
+<li><strong>熵编码</strong>（Entropy Coding）是一种<strong>无损压缩方法</strong>，目的是将符号序列用尽可能少的比特表示。</li>
+<li>核心思想来自信息论：<br>$H(X) &#x3D; -\sum_x P(x) \log_2 P(x)$<ul>
+<li>$H(X)$：理论最少平均比特数（香农熵）  </li>
+<li>$P(x)$：符号 $x$ 出现概率</li>
+</ul>
+</li>
+<li>核心原则：<ul>
+<li>高频符号 → 用较少比特表示  </li>
+<li>低频符号 → 用较多比特表示</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-常见熵编码方法"><a href="#2-常见熵编码方法" class="headerlink" title="2. 常见熵编码方法"></a>2. 常见熵编码方法</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>特点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>霍夫曼编码 (Huffman)</td>
+<td>构建前缀码二叉树</td>
+<td>符号少，离散概率</td>
+</tr>
+<tr>
+<td>算术编码 (Arithmetic)</td>
+<td>将整个序列映射到 [0,1) → 二进制</td>
+<td>高维连续概率，精细概率分布</td>
+</tr>
+<tr>
+<td>范围编码 (Range)</td>
+<td>算术编码优化实现</td>
+<td>类似算术编码，效率高</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Deep Source Encoder 中使用 <strong>算术编码</strong>。</p>
+</blockquote>
+<hr>
+<h2 id="3-熵编码在深度源编码中的流程"><a href="#3-熵编码在深度源编码中的流程" class="headerlink" title="3. 熵编码在深度源编码中的流程"></a>3. 熵编码在深度源编码中的流程</h2><ol>
+<li><strong>DNN 特征提取</strong>：<ul>
+<li>输入图像 $x \in X^M$ → DNN → 连续特征向量 $y \in \mathbb{R}^K$</li>
+</ul>
+</li>
+<li><strong>量化</strong>：<ul>
+<li>连续特征 $y$ → 离散符号 $\tilde{y} \in \mathbb{Z}^K$</li>
+</ul>
+</li>
+<li><strong>概率建模</strong>：<ul>
+<li>使用侧信息 $\tilde{z}$ 建模条件概率：<br>$P_{\tilde{y}|\tilde{z}}(\tilde{y}|\tilde{z})$</li>
+<li>使得特征在条件下近似独立，便于编码</li>
+</ul>
+</li>
+<li><strong>熵编码生成比特流</strong>：<ul>
+<li>对每个量化符号根据概率分配比特长度</li>
+<li>高频符号少比特，低频符号多比特</li>
+</ul>
+</li>
+<li><strong>输出比特流</strong>：<br>$b &#x3D; [b_y, b_z]$<ul>
+<li>$b_y$：特征比特  </li>
+<li>$b_z$：侧信息比特</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="4-示例"><a href="#4-示例" class="headerlink" title="4. 示例"></a>4. 示例</h2><ul>
+<li>量化后的符号序列：<br>$\tilde{y} &#x3D; [0, 0, 1, 0, 2, 0, 1, 0]$</li>
+<li>概率：<ul>
+<li>0 → 0.625  </li>
+<li>1 → 0.25  </li>
+<li>2 → 0.125</li>
+</ul>
+</li>
+<li>熵编码生成比特数：<ul>
+<li>0 → $\sim 0.678$ bit  </li>
+<li>1 → 2 bit  </li>
+<li>2 → 3 bit</li>
+</ul>
+</li>
+<li>平均比特数：<br>$B_\text{avg} \approx 10.39$ bit</li>
+<li>对比固定长度编码 (3 bit × 8 &#x3D; 24 bit) → 节省比特</li>
+</ul>
+<hr>
+<h2 id="5-不使用熵编码的情况"><a href="#5-不使用熵编码的情况" class="headerlink" title="5. 不使用熵编码的情况"></a>5. 不使用熵编码的情况</h2><ul>
+<li><strong>固定比特编码</strong>：<ul>
+<li>每个量化符号用相同长度的比特表示</li>
+<li>示例：特征范围 0–255 → 每个符号 8 bit</li>
+<li>序列 $[3,128,255] \to 00000011\ 10000000\ 11111111$</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：<ul>
+<li>不能利用符号概率 → 压缩效率低  </li>
+<li>总比特数大于熵编码</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h2><ul>
+<li>熵编码是无损压缩的核心方法，用概率分配比特，理论上最接近熵极限  </li>
+<li>在 Deep Source Encoder 中：<ol>
+<li>DNN 提取特征  </li>
+<li>量化离散化  </li>
+<li>条件概率建模 + 熵编码生成比特流</li>
+</ol>
+</li>
+<li>相比固定比特编码，熵编码显著减少比特数，提高压缩效率</li>
+</ul>
 
     </div>
 
@@ -219,13 +327,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/04/23/JavaSwing/" rel="prev" title="JavaSwing">
-      <i class="fa fa-chevron-left"></i> JavaSwing
+    <a href="/2025/08/29/channel-coding/" rel="prev" title="channel coding">
+      <i class="fa fa-chevron-left"></i> channel coding
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/04/24/MATLAB%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" rel="next" title="MATLAB基础语法">
-      MATLAB基础语法 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -284,7 +389,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Basic-Concept"><span class="nav-number">1.</span> <span class="nav-text">1. Basic Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 举例说明</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">1. 基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%B8%B8%E8%A7%81%E7%86%B5%E7%BC%96%E7%A0%81%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">2. 常见熵编码方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%86%B5%E7%BC%96%E7%A0%81%E5%9C%A8%E6%B7%B1%E5%BA%A6%E6%BA%90%E7%BC%96%E7%A0%81%E4%B8%AD%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">3. 熵编码在深度源编码中的流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%A4%BA%E4%BE%8B"><span class="nav-number">4.</span> <span class="nav-text">4. 示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E4%B8%8D%E4%BD%BF%E7%94%A8%E7%86%B5%E7%BC%96%E7%A0%81%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-number">5.</span> <span class="nav-text">5. 不使用熵编码的情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">6. 总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

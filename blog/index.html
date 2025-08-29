@@ -150,6 +150,184 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/29/%E7%86%B5%E7%BC%96%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/29/%E7%86%B5%E7%BC%96%E7%A0%81/" class="post-title-link" itemprop="url">熵编码</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-29 11:11:52 / Modified: 11:15:31" itemprop="dateCreated datePublished" datetime="2025-08-29T11:11:52+08:00">2025-08-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h2><ul>
+<li><strong>熵编码</strong>（Entropy Coding）是一种<strong>无损压缩方法</strong>，目的是将符号序列用尽可能少的比特表示。</li>
+<li>核心思想来自信息论：<br>$H(X) &#x3D; -\sum_x P(x) \log_2 P(x)$<ul>
+<li>$H(X)$：理论最少平均比特数（香农熵）  </li>
+<li>$P(x)$：符号 $x$ 出现概率</li>
+</ul>
+</li>
+<li>核心原则：<ul>
+<li>高频符号 → 用较少比特表示  </li>
+<li>低频符号 → 用较多比特表示</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-常见熵编码方法"><a href="#2-常见熵编码方法" class="headerlink" title="2. 常见熵编码方法"></a>2. 常见熵编码方法</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>特点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>霍夫曼编码 (Huffman)</td>
+<td>构建前缀码二叉树</td>
+<td>符号少，离散概率</td>
+</tr>
+<tr>
+<td>算术编码 (Arithmetic)</td>
+<td>将整个序列映射到 [0,1) → 二进制</td>
+<td>高维连续概率，精细概率分布</td>
+</tr>
+<tr>
+<td>范围编码 (Range)</td>
+<td>算术编码优化实现</td>
+<td>类似算术编码，效率高</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Deep Source Encoder 中使用 <strong>算术编码</strong>。</p>
+</blockquote>
+<hr>
+<h2 id="3-熵编码在深度源编码中的流程"><a href="#3-熵编码在深度源编码中的流程" class="headerlink" title="3. 熵编码在深度源编码中的流程"></a>3. 熵编码在深度源编码中的流程</h2><ol>
+<li><strong>DNN 特征提取</strong>：<ul>
+<li>输入图像 $x \in X^M$ → DNN → 连续特征向量 $y \in \mathbb{R}^K$</li>
+</ul>
+</li>
+<li><strong>量化</strong>：<ul>
+<li>连续特征 $y$ → 离散符号 $\tilde{y} \in \mathbb{Z}^K$</li>
+</ul>
+</li>
+<li><strong>概率建模</strong>：<ul>
+<li>使用侧信息 $\tilde{z}$ 建模条件概率：<br>$P_{\tilde{y}|\tilde{z}}(\tilde{y}|\tilde{z})$</li>
+<li>使得特征在条件下近似独立，便于编码</li>
+</ul>
+</li>
+<li><strong>熵编码生成比特流</strong>：<ul>
+<li>对每个量化符号根据概率分配比特长度</li>
+<li>高频符号少比特，低频符号多比特</li>
+</ul>
+</li>
+<li><strong>输出比特流</strong>：<br>$b &#x3D; [b_y, b_z]$<ul>
+<li>$b_y$：特征比特  </li>
+<li>$b_z$：侧信息比特</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="4-示例"><a href="#4-示例" class="headerlink" title="4. 示例"></a>4. 示例</h2><ul>
+<li>量化后的符号序列：<br>$\tilde{y} &#x3D; [0, 0, 1, 0, 2, 0, 1, 0]$</li>
+<li>概率：<ul>
+<li>0 → 0.625  </li>
+<li>1 → 0.25  </li>
+<li>2 → 0.125</li>
+</ul>
+</li>
+<li>熵编码生成比特数：<ul>
+<li>0 → $\sim 0.678$ bit  </li>
+<li>1 → 2 bit  </li>
+<li>2 → 3 bit</li>
+</ul>
+</li>
+<li>平均比特数：<br>$B_\text{avg} \approx 10.39$ bit</li>
+<li>对比固定长度编码 (3 bit × 8 &#x3D; 24 bit) → 节省比特</li>
+</ul>
+<hr>
+<h2 id="5-不使用熵编码的情况"><a href="#5-不使用熵编码的情况" class="headerlink" title="5. 不使用熵编码的情况"></a>5. 不使用熵编码的情况</h2><ul>
+<li><strong>固定比特编码</strong>：<ul>
+<li>每个量化符号用相同长度的比特表示</li>
+<li>示例：特征范围 0–255 → 每个符号 8 bit</li>
+<li>序列 $[3,128,255] \to 00000011\ 10000000\ 11111111$</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：<ul>
+<li>不能利用符号概率 → 压缩效率低  </li>
+<li>总比特数大于熵编码</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h2><ul>
+<li>熵编码是无损压缩的核心方法，用概率分配比特，理论上最接近熵极限  </li>
+<li>在 Deep Source Encoder 中：<ol>
+<li>DNN 提取特征  </li>
+<li>量化离散化  </li>
+<li>条件概率建模 + 熵编码生成比特流</li>
+</ol>
+</li>
+<li>相比固定比特编码，熵编码显著减少比特数，提高压缩效率</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/29/channel-coding/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1256,196 +1434,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/09/tensorflow/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/08/09/tensorflow/" class="post-title-link" itemprop="url">tensorflow</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-08-09 16:16:56" itemprop="dateCreated datePublished" datetime="2025-08-09T16:16:56+08:00">2025-08-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-19 18:41:29" itemprop="dateModified" datetime="2025-08-19T18:41:29+08:00">2025-08-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h1 id="Keras-TensorFlow-Quick-Start-Guide-🚀"><a href="#Keras-TensorFlow-Quick-Start-Guide-🚀" class="headerlink" title="Keras &#x2F; TensorFlow Quick Start Guide 🚀"></a>Keras &#x2F; TensorFlow Quick Start Guide 🚀</h1><p>本文记录了 <strong>Keras (TensorFlow)</strong> 的常用基本概念与操作，方便快速查阅。</p>
-<hr>
-<h2 id="📐-常见数据的-Tensor-维度"><a href="#📐-常见数据的-Tensor-维度" class="headerlink" title="📐 常见数据的 Tensor 维度"></a>📐 常见数据的 Tensor 维度</h2><table>
-<thead>
-<tr>
-<th>数据类型</th>
-<th>维度说明</th>
-<th>Shape 示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Scalar（标量）</td>
-<td>0-D Tensor</td>
-<td><code>( )</code></td>
-</tr>
-<tr>
-<td>Vector（向量）</td>
-<td>1-D Tensor</td>
-<td><code>(N,)</code></td>
-</tr>
-<tr>
-<td>Audio（音频）</td>
-<td>1-D 或 2-D（多通道）</td>
-<td><code>(samples,)</code> or <code>(samples, channels)</code></td>
-</tr>
-<tr>
-<td>Grayscale Image</td>
-<td>2-D 或 3-D（加 batch）</td>
-<td><code>(H, W, 1)</code> or <code>(N, H, W, 1)</code></td>
-</tr>
-<tr>
-<td>RGB Image</td>
-<td>3-D（H,W,C）或 4-D（N,H,W,C）</td>
-<td><code>(H, W, 3)</code> or <code>(N, H, W, 3)</code></td>
-</tr>
-<tr>
-<td>Video</td>
-<td>4-D（T,H,W,C）或 5-D（N,T,H,W,C）</td>
-<td><code>(T, H, W, C)</code> or <code>(N, T, H, W, C)</code></td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>✅ <strong>常用格式缩写</strong>  </p>
-<ul>
-<li><code>N</code>: Batch size  </li>
-<li><code>C</code>: Channels  </li>
-<li><code>H</code>: Height  </li>
-<li><code>W</code>: Width  </li>
-<li><code>T</code>: Time steps &#x2F; frames<br>⚠️ <strong>注意</strong>：Keras 默认通道在最后 <code>(N, H, W, C)</code>。</li>
-</ul>
-</blockquote>
-<hr>
-<h2 id="🔄-常用张量操作"><a href="#🔄-常用张量操作" class="headerlink" title="🔄 常用张量操作"></a>🔄 常用张量操作</h2><table>
-<thead>
-<tr>
-<th>功能</th>
-<th>Keras &#x2F; TF 示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>添加维度</td>
-<td><code>tf.expand_dims(x, axis)</code></td>
-</tr>
-<tr>
-<td>去除维度</td>
-<td><code>tf.squeeze(x, axis)</code></td>
-</tr>
-<tr>
-<td>交换维度</td>
-<td><code>tf.transpose(x, perm)</code></td>
-</tr>
-<tr>
-<td>改变形状</td>
-<td><code>tf.reshape(x, new_shape)</code></td>
-</tr>
-<tr>
-<td>拼接张量</td>
-<td><code>tf.concat([t1, t2], axis)</code></td>
-</tr>
-<tr>
-<td>转换数据类型</td>
-<td><code>tf.cast(x, tf.float32)</code></td>
-</tr>
-<tr>
-<td>自动求导</td>
-<td><code>tf.GradientTape()</code></td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="⚙️-Keras-TensorFlow-操作示例"><a href="#⚙️-Keras-TensorFlow-操作示例" class="headerlink" title="⚙️ Keras &#x2F; TensorFlow 操作示例"></a>⚙️ Keras &#x2F; TensorFlow 操作示例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建随机 RGB 图片 Tensor: (H,W,C)</span></span><br><span class="line">x = tf.random.normal((<span class="number">224</span>, <span class="number">224</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看形状</span></span><br><span class="line"><span class="built_in">print</span>(x.shape)  <span class="comment"># (224, 224, 3)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 拼接</span></span><br><span class="line">x1 = tf.zeros([2, 1, 3])</span><br><span class="line">x2 = tf.zeros([2, 3, 3])</span><br><span class="line">x3 = tf.zeros([2, 2, 3])</span><br><span class="line">x_cat = tf.concat([x1, x2, x3], axis=1)  <span class="comment"># (2, 6, 3)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 转换维度</span></span><br><span class="line">x_transposed = tf.transpose(x, perm=[1, 0, 2])  <span class="comment"># (W, H, C)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 展平</span></span><br><span class="line">x_flatten = tf.reshape(x, [-1])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加 / 去除维度</span></span><br><span class="line">x_batched = tf.expand_dims(x, axis=0)   <span class="comment"># (1, H, W, C)</span></span><br><span class="line">x_squeezed = tf.squeeze(x_batched, axis=0)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据类型转换</span></span><br><span class="line">x_double = tf.cast(x, tf.float64)</span><br><span class="line">x_int = tf.cast(x, tf.int32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动求导</span></span><br><span class="line">w = tf.Variable(tf.random.normal([5]))</span><br><span class="line">with tf.GradientTape() as tape:</span><br><span class="line">    loss = tf.reduce_sum(w ** 2)</span><br><span class="line">grads = tape.gradient(loss, w)</span><br><span class="line"><span class="built_in">print</span>(grads)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="Keras-模型训练核心流程"><a href="#Keras-模型训练核心流程" class="headerlink" title="Keras 模型训练核心流程"></a>Keras 模型训练核心流程</h2><p>import tensorflow as tf<br>from tensorflow import keras<br>from tensorflow.keras import layers</p>
-<h1 id="1-定义模型"><a href="#1-定义模型" class="headerlink" title="1. 定义模型"></a>1. 定义模型</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">model = keras.Sequential([</span><br><span class="line">    layers.Dense(64, activation=<span class="string">&#x27;relu&#x27;</span>, input_shape=(100,)),</span><br><span class="line">    layers.Dense(10, activation=<span class="string">&#x27;softmax&#x27;</span>)</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
-<h1 id="2-编译模型"><a href="#2-编译模型" class="headerlink" title="2. 编译模型"></a>2. 编译模型</h1><p>在编译模型时指定损失函数和优化器。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">model.compile(</span><br><span class="line">    optimizer=<span class="string">&#x27;adam&#x27;</span>,</span><br><span class="line">    loss=<span class="string">&#x27;sparse_categorical_crossentropy&#x27;</span>,</span><br><span class="line">    metrics=[<span class="string">&#x27;accuracy&#x27;</span>]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<h1 id="3-训练模型"><a href="#3-训练模型" class="headerlink" title="3. 训练模型"></a>3. 训练模型</h1><ul>
-<li>fit()默认在 训练集 (x&#x3D;train_generator[d]) 上计算 loss 并进行梯度下降更新权重。</li>
-<li>同时，如果提供了 validation_data，在每个 epoch 结束时，会额外在验证集<br>(valid_generator[d]) 上计算一次 loss (val_loss) 和指标 (如 val_accuracy)。</li>
-<li>训练过程中显示的 loss 就是 训练集的 loss，val_loss 才是验证集的 loss。</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">history</span> = model.fit(</span><br><span class="line">    train_dataset,                    <span class="comment"># 训练数据 (X_train, y_train) 或 tf.data.Dataset</span></span><br><span class="line">    validation_data=val_dataset,      <span class="comment"># 验证集 (X_val, y_val) 或 tf.data.Dataset</span></span><br><span class="line">    epochs=20,</span><br><span class="line">    callbacks=[</span><br><span class="line">        keras.callbacks.EarlyStopping(monitor=<span class="string">&#x27;val_loss&#x27;</span>, patience=5),</span><br><span class="line">        keras.callbacks.ReduceLROnPlateau(monitor=<span class="string">&#x27;val_loss&#x27;</span>, <span class="built_in">factor</span>=0.5, patience=3)</span><br><span class="line">    ]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h1 id="4-评估与预测"><a href="#4-评估与预测" class="headerlink" title="4. 评估与预测"></a>4. 评估与预测</h1><p>model.evaluate(test_dataset)<br>preds &#x3D; model.predict(new_data)</p>
-<h2 id="Keras-LSTM模型结构示例（截取核心代码）"><a href="#Keras-LSTM模型结构示例（截取核心代码）" class="headerlink" title="Keras LSTM模型结构示例（截取核心代码）"></a>Keras LSTM模型结构示例（截取核心代码）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">from tensorflow.keras.models import Model</span><br><span class="line">from tensorflow.keras.layers import Input, LSTM, Dense, Concatenate, BatchNormalization, Dropout</span><br><span class="line">from tensorflow.keras.optimizers import Adam</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输入定义</span></span><br><span class="line">seq_in = Input(shape=(10240, 1), name=<span class="string">&#x27;seq_in&#x27;</span>)   <span class="comment"># 时间序列输入，10240时间步，每步1维特征</span></span><br><span class="line">seq_p = Input(shape=(32,), name=<span class="string">&#x27;seq_p&#x27;</span>)          <span class="comment"># 辅助特征输入，固定32维</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># LSTM层，输出维度32</span></span><br><span class="line">lstm_out = LSTM(32, return_sequences=False, name=<span class="string">&#x27;lstm_1&#x27;</span>)(seq_in)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拼接LSTM输出与辅助输入</span></span><br><span class="line">next_layer_in = Concatenate(axis=1)([lstm_out, seq_p])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全连接层堆叠（假设nn为列表，如[64, 32]）</span></span><br><span class="line"><span class="keyword">for</span> i, n <span class="keyword">in</span> enumerate(nn):</span><br><span class="line">    dense = Dense(n, activation=<span class="string">&#x27;relu&#x27;</span>, kernel_initializer=<span class="string">&#x27;glorot_uniform&#x27;</span>, name=f<span class="string">&#x27;fc_dense&#123;i&#125;&#x27;</span>)(next_layer_in)</span><br><span class="line">    <span class="keyword">if</span> useBN:</span><br><span class="line">        dense = BatchNormalization()(dense)</span><br><span class="line">    next_layer_in = dense</span><br><span class="line">    <span class="keyword">if</span> i &lt; len(nn) - 1:</span><br><span class="line">        next_layer_in = Dropout(dropout_rate)(next_layer_in)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出层</span></span><br><span class="line">encoder = Dense(simParams[<span class="string">&#x27;nSubCarr&#x27;</span>], activation=<span class="string">&#x27;linear&#x27;</span>, kernel_initializer=<span class="string">&#x27;glorot_uniform&#x27;</span>, name=<span class="string">&#x27;fc_regressor&#x27;</span>)(next_layer_in)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模型定义</span></span><br><span class="line">CSI_predictor = Model([seq_in, seq_p], encoder)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译模型</span></span><br><span class="line">opt = Adam(lr=lr)</span><br><span class="line">CSI_predictor.compile(optimizer=opt, loss=<span class="string">&#x27;mse&#x27;</span>)</span><br><span class="line"></span><br><span class="line">CSI_predictor.summary()</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>输入格式说明。</p>
-<table>
-<thead>
-<tr>
-<th>输入名</th>
-<th>形状示例</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>seq_in</code></td>
-<td><code>(batch_size, 10240, 1)</code></td>
-<td>时间序列输入，长度10240的序列，每时间步1维特征</td>
-</tr>
-<tr>
-<td><code>seq_p</code></td>
-<td><code>(batch_size, 32)</code></td>
-<td>辅助特征，无时间步，长度32的向量</td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1515,7 +1503,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-count">47</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -150,6 +150,196 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/09/tensorflow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/09/tensorflow/" class="post-title-link" itemprop="url">tensorflow</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-08-09 16:16:56" itemprop="dateCreated datePublished" datetime="2025-08-09T16:16:56+08:00">2025-08-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-08-19 18:41:29" itemprop="dateModified" datetime="2025-08-19T18:41:29+08:00">2025-08-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h1 id="Keras-TensorFlow-Quick-Start-Guide-🚀"><a href="#Keras-TensorFlow-Quick-Start-Guide-🚀" class="headerlink" title="Keras &#x2F; TensorFlow Quick Start Guide 🚀"></a>Keras &#x2F; TensorFlow Quick Start Guide 🚀</h1><p>本文记录了 <strong>Keras (TensorFlow)</strong> 的常用基本概念与操作，方便快速查阅。</p>
+<hr>
+<h2 id="📐-常见数据的-Tensor-维度"><a href="#📐-常见数据的-Tensor-维度" class="headerlink" title="📐 常见数据的 Tensor 维度"></a>📐 常见数据的 Tensor 维度</h2><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>维度说明</th>
+<th>Shape 示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Scalar（标量）</td>
+<td>0-D Tensor</td>
+<td><code>( )</code></td>
+</tr>
+<tr>
+<td>Vector（向量）</td>
+<td>1-D Tensor</td>
+<td><code>(N,)</code></td>
+</tr>
+<tr>
+<td>Audio（音频）</td>
+<td>1-D 或 2-D（多通道）</td>
+<td><code>(samples,)</code> or <code>(samples, channels)</code></td>
+</tr>
+<tr>
+<td>Grayscale Image</td>
+<td>2-D 或 3-D（加 batch）</td>
+<td><code>(H, W, 1)</code> or <code>(N, H, W, 1)</code></td>
+</tr>
+<tr>
+<td>RGB Image</td>
+<td>3-D（H,W,C）或 4-D（N,H,W,C）</td>
+<td><code>(H, W, 3)</code> or <code>(N, H, W, 3)</code></td>
+</tr>
+<tr>
+<td>Video</td>
+<td>4-D（T,H,W,C）或 5-D（N,T,H,W,C）</td>
+<td><code>(T, H, W, C)</code> or <code>(N, T, H, W, C)</code></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>✅ <strong>常用格式缩写</strong>  </p>
+<ul>
+<li><code>N</code>: Batch size  </li>
+<li><code>C</code>: Channels  </li>
+<li><code>H</code>: Height  </li>
+<li><code>W</code>: Width  </li>
+<li><code>T</code>: Time steps &#x2F; frames<br>⚠️ <strong>注意</strong>：Keras 默认通道在最后 <code>(N, H, W, C)</code>。</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="🔄-常用张量操作"><a href="#🔄-常用张量操作" class="headerlink" title="🔄 常用张量操作"></a>🔄 常用张量操作</h2><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>Keras &#x2F; TF 示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>添加维度</td>
+<td><code>tf.expand_dims(x, axis)</code></td>
+</tr>
+<tr>
+<td>去除维度</td>
+<td><code>tf.squeeze(x, axis)</code></td>
+</tr>
+<tr>
+<td>交换维度</td>
+<td><code>tf.transpose(x, perm)</code></td>
+</tr>
+<tr>
+<td>改变形状</td>
+<td><code>tf.reshape(x, new_shape)</code></td>
+</tr>
+<tr>
+<td>拼接张量</td>
+<td><code>tf.concat([t1, t2], axis)</code></td>
+</tr>
+<tr>
+<td>转换数据类型</td>
+<td><code>tf.cast(x, tf.float32)</code></td>
+</tr>
+<tr>
+<td>自动求导</td>
+<td><code>tf.GradientTape()</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="⚙️-Keras-TensorFlow-操作示例"><a href="#⚙️-Keras-TensorFlow-操作示例" class="headerlink" title="⚙️ Keras &#x2F; TensorFlow 操作示例"></a>⚙️ Keras &#x2F; TensorFlow 操作示例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建随机 RGB 图片 Tensor: (H,W,C)</span></span><br><span class="line">x = tf.random.normal((<span class="number">224</span>, <span class="number">224</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看形状</span></span><br><span class="line"><span class="built_in">print</span>(x.shape)  <span class="comment"># (224, 224, 3)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 拼接</span></span><br><span class="line">x1 = tf.zeros([2, 1, 3])</span><br><span class="line">x2 = tf.zeros([2, 3, 3])</span><br><span class="line">x3 = tf.zeros([2, 2, 3])</span><br><span class="line">x_cat = tf.concat([x1, x2, x3], axis=1)  <span class="comment"># (2, 6, 3)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 转换维度</span></span><br><span class="line">x_transposed = tf.transpose(x, perm=[1, 0, 2])  <span class="comment"># (W, H, C)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 展平</span></span><br><span class="line">x_flatten = tf.reshape(x, [-1])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加 / 去除维度</span></span><br><span class="line">x_batched = tf.expand_dims(x, axis=0)   <span class="comment"># (1, H, W, C)</span></span><br><span class="line">x_squeezed = tf.squeeze(x_batched, axis=0)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据类型转换</span></span><br><span class="line">x_double = tf.cast(x, tf.float64)</span><br><span class="line">x_int = tf.cast(x, tf.int32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动求导</span></span><br><span class="line">w = tf.Variable(tf.random.normal([5]))</span><br><span class="line">with tf.GradientTape() as tape:</span><br><span class="line">    loss = tf.reduce_sum(w ** 2)</span><br><span class="line">grads = tape.gradient(loss, w)</span><br><span class="line"><span class="built_in">print</span>(grads)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Keras-模型训练核心流程"><a href="#Keras-模型训练核心流程" class="headerlink" title="Keras 模型训练核心流程"></a>Keras 模型训练核心流程</h2><p>import tensorflow as tf<br>from tensorflow import keras<br>from tensorflow.keras import layers</p>
+<h1 id="1-定义模型"><a href="#1-定义模型" class="headerlink" title="1. 定义模型"></a>1. 定义模型</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">model = keras.Sequential([</span><br><span class="line">    layers.Dense(64, activation=<span class="string">&#x27;relu&#x27;</span>, input_shape=(100,)),</span><br><span class="line">    layers.Dense(10, activation=<span class="string">&#x27;softmax&#x27;</span>)</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<h1 id="2-编译模型"><a href="#2-编译模型" class="headerlink" title="2. 编译模型"></a>2. 编译模型</h1><p>在编译模型时指定损失函数和优化器。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">model.compile(</span><br><span class="line">    optimizer=<span class="string">&#x27;adam&#x27;</span>,</span><br><span class="line">    loss=<span class="string">&#x27;sparse_categorical_crossentropy&#x27;</span>,</span><br><span class="line">    metrics=[<span class="string">&#x27;accuracy&#x27;</span>]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-训练模型"><a href="#3-训练模型" class="headerlink" title="3. 训练模型"></a>3. 训练模型</h1><ul>
+<li>fit()默认在 训练集 (x&#x3D;train_generator[d]) 上计算 loss 并进行梯度下降更新权重。</li>
+<li>同时，如果提供了 validation_data，在每个 epoch 结束时，会额外在验证集<br>(valid_generator[d]) 上计算一次 loss (val_loss) 和指标 (如 val_accuracy)。</li>
+<li>训练过程中显示的 loss 就是 训练集的 loss，val_loss 才是验证集的 loss。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">history</span> = model.fit(</span><br><span class="line">    train_dataset,                    <span class="comment"># 训练数据 (X_train, y_train) 或 tf.data.Dataset</span></span><br><span class="line">    validation_data=val_dataset,      <span class="comment"># 验证集 (X_val, y_val) 或 tf.data.Dataset</span></span><br><span class="line">    epochs=20,</span><br><span class="line">    callbacks=[</span><br><span class="line">        keras.callbacks.EarlyStopping(monitor=<span class="string">&#x27;val_loss&#x27;</span>, patience=5),</span><br><span class="line">        keras.callbacks.ReduceLROnPlateau(monitor=<span class="string">&#x27;val_loss&#x27;</span>, <span class="built_in">factor</span>=0.5, patience=3)</span><br><span class="line">    ]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h1 id="4-评估与预测"><a href="#4-评估与预测" class="headerlink" title="4. 评估与预测"></a>4. 评估与预测</h1><p>model.evaluate(test_dataset)<br>preds &#x3D; model.predict(new_data)</p>
+<h2 id="Keras-LSTM模型结构示例（截取核心代码）"><a href="#Keras-LSTM模型结构示例（截取核心代码）" class="headerlink" title="Keras LSTM模型结构示例（截取核心代码）"></a>Keras LSTM模型结构示例（截取核心代码）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">from tensorflow.keras.models import Model</span><br><span class="line">from tensorflow.keras.layers import Input, LSTM, Dense, Concatenate, BatchNormalization, Dropout</span><br><span class="line">from tensorflow.keras.optimizers import Adam</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输入定义</span></span><br><span class="line">seq_in = Input(shape=(10240, 1), name=<span class="string">&#x27;seq_in&#x27;</span>)   <span class="comment"># 时间序列输入，10240时间步，每步1维特征</span></span><br><span class="line">seq_p = Input(shape=(32,), name=<span class="string">&#x27;seq_p&#x27;</span>)          <span class="comment"># 辅助特征输入，固定32维</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># LSTM层，输出维度32</span></span><br><span class="line">lstm_out = LSTM(32, return_sequences=False, name=<span class="string">&#x27;lstm_1&#x27;</span>)(seq_in)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拼接LSTM输出与辅助输入</span></span><br><span class="line">next_layer_in = Concatenate(axis=1)([lstm_out, seq_p])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全连接层堆叠（假设nn为列表，如[64, 32]）</span></span><br><span class="line"><span class="keyword">for</span> i, n <span class="keyword">in</span> enumerate(nn):</span><br><span class="line">    dense = Dense(n, activation=<span class="string">&#x27;relu&#x27;</span>, kernel_initializer=<span class="string">&#x27;glorot_uniform&#x27;</span>, name=f<span class="string">&#x27;fc_dense&#123;i&#125;&#x27;</span>)(next_layer_in)</span><br><span class="line">    <span class="keyword">if</span> useBN:</span><br><span class="line">        dense = BatchNormalization()(dense)</span><br><span class="line">    next_layer_in = dense</span><br><span class="line">    <span class="keyword">if</span> i &lt; len(nn) - 1:</span><br><span class="line">        next_layer_in = Dropout(dropout_rate)(next_layer_in)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出层</span></span><br><span class="line">encoder = Dense(simParams[<span class="string">&#x27;nSubCarr&#x27;</span>], activation=<span class="string">&#x27;linear&#x27;</span>, kernel_initializer=<span class="string">&#x27;glorot_uniform&#x27;</span>, name=<span class="string">&#x27;fc_regressor&#x27;</span>)(next_layer_in)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模型定义</span></span><br><span class="line">CSI_predictor = Model([seq_in, seq_p], encoder)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译模型</span></span><br><span class="line">opt = Adam(lr=lr)</span><br><span class="line">CSI_predictor.compile(optimizer=opt, loss=<span class="string">&#x27;mse&#x27;</span>)</span><br><span class="line"></span><br><span class="line">CSI_predictor.summary()</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输入格式说明。</p>
+<table>
+<thead>
+<tr>
+<th>输入名</th>
+<th>形状示例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>seq_in</code></td>
+<td><code>(batch_size, 10240, 1)</code></td>
+<td>时间序列输入，长度10240的序列，每时间步1维特征</td>
+</tr>
+<tr>
+<td><code>seq_p</code></td>
+<td><code>(batch_size, 32)</code></td>
+<td>辅助特征，无时间步，长度32的向量</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/05/Python%E8%AF%BB%E5%8F%96mat%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1440,1182 +1630,6 @@ print(w.grad)
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/16/MachineLearning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/16/MachineLearning/" class="post-title-link" itemprop="url">MachineLearning</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-06-16 23:42:25" itemprop="dateCreated datePublished" datetime="2025-06-16T23:42:25+08:00">2025-06-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-26 10:03:49" itemprop="dateModified" datetime="2025-08-26T10:03:49+08:00">2025-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>Look for a function for e.g., image recognition, speech recognition.  </p>
-<ul>
-<li>Regression<br>The function outputs a scalar</li>
-<li>Classification<br>Given options (classes), the function outputs the correct one.</li>
-<li>Structured Learning</li>
-</ul>
-<h3 id="Linear-Model"><a href="#Linear-Model" class="headerlink" title="Linear Model"></a>Linear Model</h3><h4 id="Define-function-with-unknown-parameters"><a href="#Define-function-with-unknown-parameters" class="headerlink" title="Define function with unknown parameters"></a>Define function with unknown parameters</h4><p>Model: $y &#x3D; b + w_1x_1$ based on domain knowledge<br>w (weight) and b (bias) are unknown parameters (learn from data)<br>如果是一组包含有多个feature（例如同时考虑前七天的数据来进行预测）<br>那么$y &#x3D; b + \sum_j w_jx_j$</p>
-<h4 id="Define-Loss-from-Training-Data"><a href="#Define-Loss-from-Training-Data" class="headerlink" title="Define Loss from Training Data"></a>Define Loss from Training Data</h4><p>Loss is a function of the unknown parameters: L(b,w)<br>e.g., L(0.5k, 1) corresponding to $\hat{y} &#x3D; 0.5k + 1x_1$.<br>$\hat{y}$ is predicted value, y is ground truth (target)<br>我们定义一个loss function为:<br>$e_n &#x3D; |y_n - \hat{y_n}|$  </p>
-<p>Loss: $L(b, w) &#x3D; \frac{1}{N} \sum_{n&#x3D;1}^{N} \left| y_n - \hat{y}_n \right|$</p>
-<p>其中y为真实值，$\hat{y}$为预测值,这里我们定义的Loss是mean absolute error （MAE），如果是mean square error（MSE），则是差值的的平方。</p>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>除了常见的 MAE（平均绝对误差）和 MSE（均方误差）之外，NMSE（归一化均方误差）也是一种常用的评价指标。NMSE<br><br>是将均方误差归一化到真实信号的能量上，计算公式为：<br><br>$\text{NMSE} &#x3D; \frac{\sum ( \hat{y}_i - y_i )^2}{\sum y_i^2}$<br><br>它衡量的是预测误差相对于真实信号强度的比例，适合用于信号处理、通信等领域，可以更公平地反映预测性能，特别是在信号幅度变化较大时。<br></p>
-</blockquote>
-<hr>
-<h4 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h4><p>我们通过最小化损失函数 <em>L(b, w)</em> 来学习未知参数 b 和 w。优化目标为：</p>
-<p>$b^<em>, w^</em> &#x3D; \arg\min_{b, w} L(b, w)$</p>
-<p>我们可以使用梯度下降法进行优化，参数更新如下：</p>
-<p>$w \leftarrow w - \eta \frac{\partial L}{\partial w}, \quad<br>b \leftarrow b - \eta \frac{\partial L}{\partial b}$</p>
-<p>其中 $\eta$ 为学习率。对于 MAE 损失，由于其不可导点较多，可以使用次梯度法；对于 MSE 损失，则可以直接使用标准梯度下降算法。</p>
-<h3 id="Sophisticated-Models"><a href="#Sophisticated-Models" class="headerlink" title="Sophisticated Models"></a>Sophisticated Models</h3><p>Beacuse linear models have severe limitation (model bias), so we include more sophisticated models.</p>
-<h4 id="Sigmoid-function（logistic-regression）"><a href="#Sigmoid-function（logistic-regression）" class="headerlink" title="Sigmoid function（logistic regression）"></a>Sigmoid function（logistic regression）</h4><p>$y &#x3D; b + wx_1 &#x3D;&gt; y &#x3D; b + \sum_i c_i \cdot \sigma(b_i + w_ix_1)$<br>注：不同的w，b，c可以让sigmoid曲线可以拟合不同的曲线。</p>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>输入层: $x_j (j &#x3D; 1…d)$<br><br>   ↓ <br><br>隐藏层: $h_i &#x3D; \sigma(b_i + \sum w_ij x_j) (i &#x3D; 1…N)$<br><br>   ↓ <br><br>输出层: $y &#x3D; b + \sum c_i h_i$ (标量输出)<br></p>
-</blockquote>
-<hr>
-<p>因此这里设计到deep learning中的<strong>hiden node</strong>的概念(hiden node的数量可以理解为用来拟合的ReLU曲线数量)，隐藏点越多，能够拟合出来的function越准确。<br>注意这里是多个sigmoid的和，因为实际情况可能是由多个sigmoid拟合而成。<br>相对应的，对于$y &#x3D; b + \sum_j w_jx_j$, 则有$y &#x3D; b + \sum_i c_i \cdot \sigma(b_i + \sum_j w_{ij} x_j)$  </p>
-<p>示例：i &#x3D; 1,2,3; j &#x3D; 1,2,3 时的显式形式<br>$$<br>r_1 &#x3D; b_1 + w_{11}x_1 + w_{12}x_2 + w_{13}x_3<br>$$</p>
-<p>$$<br>r_2 &#x3D; b_2 + w_{21}x_1 + w_{22}x_2 + w_{23}x_3<br>$$</p>
-<p>$$<br>r_3 &#x3D; b_3 + w_{31}x_1 + w_{32}x_2 + w_{33}x_3<br>$$</p>
-<p>向量化（矩阵）形式<br>$$<br>\mathbf{r} &#x3D; W \mathbf{x} + \mathbf{b}<br>$$</p>
-<p>然后对生成的r做sigmoid函数，矩阵表达形式如下</p>
-<p>$$<br>\mathbf{a} &#x3D; \sigma(\mathbf{r})<br>$$</p>
-<p>最后的输出y矩阵表达形式如下：<br>$$<br>y &#x3D; b + \mathbf{c}^T \mathbf{a}<br>$$</p>
-<p>Optimization部分，先将所有unknown parameters放到$\mathbf{\theta}$向量中<br>$$<br>\mathbf{\theta} &#x3D; \left[ b,\ c_1,\ \dots,\ c_i,\ b_1,\ \dots,\ b_i,\ w_{11},\ \dots,\ w_{ij} \right]<br>$$</p>
-<p>定义Loss function $L(\theta)$,最后想要取得的 $\mathbf{\theta^{*}} &#x3D; \arg\min_{\theta} L$  </p>
-<p>因此我们同样的使用梯度下降更新去得到最后的$\mathbf{\theta^{*}}$<br>$$<br>\theta \leftarrow \theta - \eta \cdot \nabla_\theta L(\theta)<br>$$  </p>
-<p><strong>Batch Size</strong>, <strong>Epoch</strong>, <strong>N</strong><br>1,000 examples (N &#x3D; 1,000), Batch size is 100, so 100 update in 1 epoch (10 Batch).</p>
-<h3 id="Use-Quadratic-and-Higher-Order-Terms"><a href="#Use-Quadratic-and-Higher-Order-Terms" class="headerlink" title="Use Quadratic and Higher-Order Terms"></a>Use Quadratic and Higher-Order Terms</h3><p>To increase model expressiveness, you can replace the linear input with polynomial terms.</p>
-<p>For example, a quadratic input:<br>$$<br>y &#x3D; b + w_1 \cdot x_1 + w_2 \cdot x_1^2 + w_3 \cdot x_1^3 + … + w_n \cdot x_1^n<br>$$</p>
-<h4 id="Overfitting-Risk"><a href="#Overfitting-Risk" class="headerlink" title="Overfitting Risk"></a>Overfitting Risk</h4><ul>
-<li>Adding higher-degree polynomials increases the parameter space.</li>
-<li>The model can fit training data too well, including noise.</li>
-<li>This leads to poor generalization on unseen data.</li>
-</ul>
-<h5 id="Rugularization-to-Prevent-Overfitting"><a href="#Rugularization-to-Prevent-Overfitting" class="headerlink" title="Rugularization to Prevent Overfitting"></a>Rugularization to Prevent Overfitting</h5><p>Add a penalty term to the loss function:</p>
-<p>为了防止过拟合，通常在损失函数中加入正则化项，对权重进行惩罚。<br>常见的有 <strong>L2 正则化（权重衰减）</strong>：</p>
-<p>$\text{Loss} &#x3D; \text{MSE} + \lambda \sum_{i} w_i^2$</p>
-<ul>
-<li>其中，$\lambda$ 是正则化系数（也叫 <strong>weight decay</strong>）。</li>
-<li>通过限制权重 $w_i 的大小，减少模型对高阶项的过度依赖，从而降低过拟合风险。</li>
-</ul>
-<h5 id="训练时如何加上正则化相"><a href="#训练时如何加上正则化相" class="headerlink" title="训练时如何加上正则化相"></a>训练时如何加上正则化相</h5><p>训练模型时，需要在参数更新步骤中加上正则化项。<br>以 <strong>L2 正则化</strong> 为例，每次参数更新公式：</p>
-<p>$w :&#x3D; w - \eta (\nabla L + \lambda w)$</p>
-<ul>
-<li>$\eta$：学习率（learning rate）</li>
-<li>$\nabla L$：损失函数对参数的梯度</li>
-<li>$\lambda w$：正则化项对参数的梯度（L2 正则化）</li>
-</ul>
-<h5 id="Dropout-Randomly-Dropping-Neurons"><a href="#Dropout-Randomly-Dropping-Neurons" class="headerlink" title="Dropout: Randomly Dropping Neurons"></a>Dropout: Randomly Dropping Neurons</h5><p>Dropout is a technique where randomly selected neurons are ignored during training.</p>
-<ul>
-<li>For each training iteration, with probability <code>p</code>, a neuron’s output is set to 0.</li>
-<li>At test time, all neurons are active, but their outputs are scaled by <code>p</code>.</li>
-</ul>
-<p><strong>Training Phase Formula:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">h̃ = h * m</span><br></pre></td></tr></table></figure>
-
-<p>需要注意的是：这个矩阵乘法是按元素一一相乘（逐元素屏蔽）。并且dropout不会减少神经元数量和模型参数数量，只是使在训练时部分神经元临时失活。</p>
-<ul>
-<li><code>h</code> &#x3D; hidden activation vector  </li>
-<li><code>m</code> &#x3D; Bernoulli mask vector (with probability <code>p</code>)</li>
-</ul>
-<p>✅ <em>Benefits</em>:</p>
-<ul>
-<li>Reduces co-dependence between neurons  </li>
-<li>Acts like an ensemble of multiple sub-models  </li>
-<li>Improves robustness and generalization</li>
-</ul>
-<hr>
-<p>✅ 直观理解</p>
-<p>每次更新时，把权重往 0 再拉一点，<br>防止它们变得太大，避免模型拟合噪声，提升泛化能力。</p>
-<h3 id="PyTorch-CNN-二分类示例"><a href="#PyTorch-CNN-二分类示例" class="headerlink" title="PyTorch CNN 二分类示例"></a>PyTorch CNN 二分类示例</h3><h4 id="预处理transform"><a href="#预处理transform" class="headerlink" title="预处理transform"></a>预处理transform</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">transform = transforms.Compose([</span><br><span class="line">    transforms.Resize((<span class="number">256</span>, <span class="number">256</span>)),</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
-<h4 id="自定义Dataset"><a href="#自定义Dataset" class="headerlink" title="自定义Dataset"></a>自定义Dataset</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class MyData(Dataset):</span><br><span class="line">    def __init__(self, root_dir, classes, transform=None):</span><br><span class="line">        self.root_dir = root_dir</span><br><span class="line">        self.classes = classes</span><br><span class="line">        self.transform = transform</span><br><span class="line"></span><br><span class="line">        self.img_paths = []</span><br><span class="line">        self.labels = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> idx, cls <span class="keyword">in</span> enumerate(classes):</span><br><span class="line">            cls_path = os.path.join(root_dir, cls)</span><br><span class="line">            <span class="keyword">for</span> img_name <span class="keyword">in</span> os.listdir(cls_path):</span><br><span class="line">                self.img_paths.append(os.path.join(cls_path, img_name))</span><br><span class="line">                self.labels.append(idx)</span><br><span class="line"></span><br><span class="line">    def __getitem__(self, idx):</span><br><span class="line">        img_path = self.img_paths[idx]</span><br><span class="line">        img = Image.open(img_path).convert(<span class="string">&#x27;RGB&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> self.transform:</span><br><span class="line">            img = self.transform(img)</span><br><span class="line">        label = self.labels[idx]</span><br><span class="line">        <span class="built_in">return</span> img, label</span><br><span class="line"></span><br><span class="line">    def __len__(self):</span><br><span class="line">        <span class="built_in">return</span> len(self.img_paths)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="简单CNN模型"><a href="#简单CNN模型" class="headerlink" title="简单CNN模型"></a>简单CNN模型</h4><p>CNN通常用PyTorch的nn.Conv1d和nn.Conv2d或者keras实现卷积操作</p>
-<ul>
-<li>Conv1d.<br>一维卷积，常用于处理时间序列，文本序列等。在构建时需要设定out_channels, kernel_size, stride, padding等参数<br>输入张量维度为（batch_size, channels, length）</li>
-<li>Conv2d.<br>二维卷积，常用于图像处理。在构建时同样需要设定out_channels, kernel_size, stride, padding等参数<br>输入张量形状为(batch_size, channels, height, width),</li>
-</ul>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>所以在model.summay()里，第一个维度显示为<strong>None</strong>, 这就是batch size可变的占位符<br></p>
-</blockquote>
-<hr>
-<h5 id="输入数据格式"><a href="#输入数据格式" class="headerlink" title="输入数据格式"></a>输入数据格式</h5><ul>
-<li>输入图像为彩色图像（RGB），尺寸统一为 256×256 像素。</li>
-<li>输入张量形状为 <code>[batch_size, 3, 256, 256]</code>，其中 <code>3</code> 是通道数（RGB），<code>batch_size</code> 是批量大小。</li>
-</ul>
-<h5 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h5><h5 id="卷积层和池化层流程"><a href="#卷积层和池化层流程" class="headerlink" title="卷积层和池化层流程"></a>卷积层和池化层流程</h5><hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>池化层使用的kernel_size通常与stride步长相等<br><br>池化层的目的是对特征图进行下采样（如最大池化、平均池化），减小特征图的宽高，从而减小后续层的参数量和计算量<br><br>保留主要信息，丢弃不重要的细节<br><br>通过信息压缩和参数减小，降低模型过拟合风险<br></p>
-</blockquote>
-<hr>
-<ul>
-<li><p><strong>第一层卷积</strong>: <code>nn.Conv2d(3, 16, kernel_size=3, padding=1)</code></p>
-<ul>
-<li>输入通道数：3</li>
-<li>输出通道数：16</li>
-<li>卷积核大小：3×3</li>
-<li>填充大小：1，步长默认1</li>
-<li>输出尺寸计算公式：<br>$$<br>\text{Output Size} &#x3D; \left\lfloor \frac{\text{Input Size} + 2 \times \text{padding} - \text{kernel size}}{\text{stride}} \right\rfloor + 1<br>代入参数：<br>\frac{256 + 2 \times 1 - 3}{1} + 1 &#x3D; 256<br>$$</li>
-<li>输出张量形状：<code>[batch_size, 16, 256, 256]</code></li>
-</ul>
-</li>
-<li><p><strong>ReLU激活</strong></p>
-</li>
-<li><p><strong>第一次池化</strong>: <code>nn.MaxPool2d(2)</code></p>
-<ul>
-<li>池化窗口大小：2×2，步长2</li>
-<li>尺寸减半，输出形状为：<code>[batch_size, 16, 128, 128]</code></li>
-</ul>
-</li>
-<li><p><strong>第二层卷积</strong>: <code>nn.Conv2d(16, 32, kernel_size=3, padding=1)</code></p>
-<ul>
-<li>输入通道数：16</li>
-<li>输出通道数：32</li>
-<li>卷积核大小：3×3，填充1，步长1</li>
-<li>输出尺寸同理计算为：<code>128</code></li>
-<li>输出张量形状：<code>[batch_size, 32, 128, 128]</code></li>
-</ul>
-</li>
-<li><p><strong>ReLU激活</strong></p>
-</li>
-<li><p><strong>第二次池化</strong>: <code>nn.MaxPool2d(2)</code></p>
-<ul>
-<li>尺寸减半，输出形状为：<code>[batch_size, 32, 64, 64]</code></li>
-</ul>
-</li>
-</ul>
-<h5 id="全连接层流程。"><a href="#全连接层流程。" class="headerlink" title="全连接层流程。"></a>全连接层流程。</h5><hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>中间层激活函数通常用ReLU，最后分类通常使用Sigmoid函数<br></p>
-</blockquote>
-<hr>
-<ul>
-<li><p><strong>展平层</strong>: 将卷积层输出展平成一维向量<br>Flatten是将卷积层中提取到的空间特征展开为一维向量。用于后续全连接层。</p>
-<p>输入维度为：<br>$$<br>32 \times 64 \times 64 &#x3D; 131072<br>$$</p>
-</li>
-<li><p><strong>全连接层1</strong>: <code>nn.Linear(131072, 64)</code>  </p>
-</li>
-<li><p><strong>ReLU激活</strong></p>
-</li>
-<li><p><strong>全连接层2</strong>: <code>nn.Linear(64, 1)</code></p>
-</li>
-<li><p><strong>Sigmoid激活</strong>: 输出概率值，范围在[0,1]之间</p>
-</li>
-<li><p><strong>输出</strong>: 使用 <code>.squeeze(1)</code> 将输出维度从 <code>[batch_size, 1]</code> 转换为 <code>[batch_size]</code>，便于计算损失函数。</p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class SimpleCNN(nn.Module):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super().__init__()</span><br><span class="line">        self.conv = nn.Sequential(</span><br><span class="line">            nn.Conv2d(3,16,3,padding = 1);</span><br><span class="line">            nn.ReLU(),</span><br><span class="line">            nn.MaxPool2d(2),</span><br><span class="line">            nn.Conv2d(16,32,3,padding = 1);</span><br><span class="line">            nn.ReLU(),</span><br><span class="line">            nn.MaxPool2d(2),</span><br><span class="line">        )</span><br><span class="line">        self.fc = nn.Sequential(</span><br><span class="line">            nn.Flatten(),</span><br><span class="line">            nn.Linear(32 * 64 * 64, 64),  <span class="comment"># 256-&gt;128-&gt;64，宽高减半两次</span></span><br><span class="line">            nn.ReLU(),</span><br><span class="line">            nn.Linear(64, 1),</span><br><span class="line">            nn.Sigmoid(),</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        def forward(self, x):</span><br><span class="line">            x = self.conv(x)</span><br><span class="line">            x = self.fc(x)</span><br><span class="line">            <span class="built_in">return</span> x.squeeze(1)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="准备数据和模型"><a href="#准备数据和模型" class="headerlink" title="准备数据和模型"></a>准备数据和模型</h4><h5 id="train-validate-test数据集的区别"><a href="#train-validate-test数据集的区别" class="headerlink" title="train,validate,test数据集的区别"></a>train,validate,test数据集的区别</h5><table>
-<thead>
-<tr>
-<th>集合</th>
-<th>作用</th>
-<th>使用阶段</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>训练集 (Train)</td>
-<td>用于模型训练，更新模型参数</td>
-<td>训练阶段</td>
-<td>占比最大，数据多样性丰富</td>
-</tr>
-<tr>
-<td>验证集 (Validation)</td>
-<td>用于调参和模型选择，监控过拟合情况</td>
-<td>训练过程中的评估阶段</td>
-<td>不参与训练，用于调节超参数和模型结构</td>
-</tr>
-<tr>
-<td>测试集 (Test)</td>
-<td>用于评估最终模型性能</td>
-<td>训练完成后的性能评估</td>
-<td>完全独立，不参与训练和调参</td>
-</tr>
-</tbody></table>
-<h5 id="train-validate-test数据集的划分"><a href="#train-validate-test数据集的划分" class="headerlink" title="train,validate,test数据集的划分"></a>train,validate,test数据集的划分</h5><ul>
-<li><p>创建完整数据集<br>dataset &#x3D; MyData(root_dir, classes, transform&#x3D;transform)</p>
-</li>
-<li><p>按比例划分训练、验证、测试集 70%, 15%, 15%<br>total_size &#x3D; len(dataset)<br>train_size &#x3D; int(0.7 * total_size)<br>val_size &#x3D; int(0.15 * total_size)<br>test_size &#x3D; total_size - train_size - val_size</p>
-</li>
-</ul>
-<p>train_dataset, val_dataset, test_dataset &#x3D; random_split(dataset, [train_size, val_size, test_size])</p>
-<ul>
-<li>创建DataLoader<br>train_loader &#x3D; DataLoader(train_dataset, batch_size&#x3D;64, shuffle&#x3D;True)<br>val_loader &#x3D; DataLoader(val_dataset, batch_size&#x3D;64, shuffle&#x3D;False)<br>test_loader &#x3D; DataLoader(test_dataset, batch_size&#x3D;64, shuffle&#x3D;False)</li>
-</ul>
-<h4 id="训练循环"><a href="#训练循环" class="headerlink" title="训练循环"></a>训练循环</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">n_epochs = 10</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(n_epochs):</span><br><span class="line">    model.train()</span><br><span class="line">    running_loss = 0.0</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> dataloader:</span><br><span class="line">        x, y = x.to(device), y.float().to(device)</span><br><span class="line">        </span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        pred = model(x)</span><br><span class="line">        loss = criterion(pred, y)</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line"></span><br><span class="line">        running_loss += loss.item() * x.size(0)</span><br><span class="line"></span><br><span class="line">    epoch_loss = running_loss / len(dataset)</span><br><span class="line">    <span class="built_in">print</span>(f<span class="string">&quot;Epoch &#123;epoch+1&#125;/&#123;n_epochs&#125; - Loss: &#123;epoch_loss:.4f&#125;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;训练完成！&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="CNN-ResNet-Residual-Network"><a href="#CNN-ResNet-Residual-Network" class="headerlink" title="CNN + ResNet (Residual Network)"></a>CNN + ResNet (Residual Network)</h3><p>残差结构:<br>$y &#x3D; F(x) + x$<br>解决了深层网络梯度消失、退化问题<br>RestNet还会应用在Attention&#x2F;Transformer中，例如在Transformer中大量使用了残差连接+LayerNorm，在Attention中，每个Self-Attention层、Feed Forward层外面都有一个残差。没有残差，Transformer就很难训练深层结构。</p>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">from torch import nn</span><br><span class="line">from torch.nn import functional as F</span><br><span class="line">from d2l import torch as d2l</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">class Residual(nn.Module):  </span><br><span class="line">    def __init__(self, input_channels, num_channels,</span><br><span class="line">                 use_1x1conv=False, strides=1):</span><br><span class="line">        super().__init__()</span><br><span class="line">        self.conv1 = nn.Conv2d(input_channels, num_channels,</span><br><span class="line">                               kernel_size=3, padding=1, stride=strides)</span><br><span class="line">        self.conv2 = nn.Conv2d(num_channels, num_channels,</span><br><span class="line">                               kernel_size=3, padding=1)</span><br><span class="line">        <span class="keyword">if</span> use_1x1conv:</span><br><span class="line">            self.conv3 = nn.Conv2d(input_channels, num_channels,</span><br><span class="line">                                   kernel_size=1, stride=strides)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.conv3 = None</span><br><span class="line">        self.bn1 = nn.BatchNorm2d(num_channels)</span><br><span class="line">        self.bn2 = nn.BatchNorm2d(num_channels)</span><br><span class="line"> </span><br><span class="line">    def forward(self, X):</span><br><span class="line">        Y = F.relu(self.bn1(self.conv1(X)))</span><br><span class="line">        Y = self.bn2(self.conv2(Y))</span><br><span class="line">        <span class="keyword">if</span> self.conv3:</span><br><span class="line">            X = self.conv3(X)</span><br><span class="line">        Y += X</span><br><span class="line">        <span class="built_in">return</span> F.relu(Y)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>这段代码实现了RestNet的残差块:</p>
-<ul>
-<li>两个3x3卷积+BN</li>
-<li>可选1x1卷积来匹配通道或大小</li>
-<li>残差连接Y + X</li>
-<li>最后经过ReLU</li>
-</ul>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>1x1的卷积层通常用来调整输出的通道维度，因为1x1卷积不会局部空间特征。<br></p>
-</blockquote>
-<hr>
-<h3 id="膨胀卷积（Dilated-Convolution）"><a href="#膨胀卷积（Dilated-Convolution）" class="headerlink" title="膨胀卷积（Dilated Convolution）"></a>膨胀卷积（Dilated Convolution）</h3><p>既可以增大感受野，又能保持输入特征图的W和H不变（通过padding和stride配合，保证输入特征图的尺寸）<br>原因：<br>在原CNN网络中，使用Maxpooling层就是通过池化操作使得后续的卷积层获得更大的感受野，但是这样会带来两个问题：</p>
-<ul>
-<li>池化操作会丢失一些微小信息</li>
-<li>池化操作会使得下采样倍率进一步变大</li>
-</ul>
-<h4 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h4><p>$y[i] &#x3D; \sum_{k&#x3D;0}^{K-1} w[k] * x[i + r * k] + b$. </p>
-<ul>
-<li>r 是 dilation rate（膨胀率）</li>
-<li>当 r &#x3D; 1时，退化为普通卷积</li>
-<li>当 r &gt; 1时，相当于在输入上跳步采样，扩大感受野</li>
-</ul>
-<h3 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h3><p>在分类中，需要讲线性输出映射到概率</p>
-<h4 id="Sigmoid（二分类）"><a href="#Sigmoid（二分类）" class="headerlink" title="Sigmoid（二分类）"></a>Sigmoid（二分类）</h4><p>模型：<br>$p &#x3D; \sigma(z) &#x3D; \frac{1}{1 + e^{-z}},\quad z &#x3D; b + \sum_j w_j x_j$.<br>预测类别：<br>$\hat{y} &#x3D;\begin{cases} 1 &amp; \text{if } p &gt; 0.5 \ 0 &amp; \text{otherwise} \end{cases}$.<br>Binary Cross-Entropy Loss (BCL):<br>$L(b, w) &#x3D; -\frac{1}{N} \sum_{n&#x3D;1}^{N} [, y_n \log p_n + (1 - y_n) \log (1 - p_n)$</p>
-<h4 id="Softmax（多分类）"><a href="#Softmax（多分类）" class="headerlink" title="Softmax（多分类）"></a>Softmax（多分类）</h4><p>对于$K$个类别<br>$p_k &#x3D; \frac{e^{z_k}}{\sum_{j&#x3D;1}^{K} e^{z_j}},\quad z_k &#x3D; b_k + \sum_j w_{kj} x_j \quad k&#x3D;1 \dots,K$.<br>Multiclass Cross-Entropy Loss:<br>$L(b, w) &#x3D; -\frac{1}{N} \sum_{n&#x3D;1}^{N} \sum_{k&#x3D;1}^{K} y_{nk} \log p_{nk}$。<br>其中：<br>$y_{nk} &#x3D; 1$ if sample $n$ is of class $k$, otherwise $0$.<br>因此这里用了one-hot编码，因为只考虑了只有真实类别对应的$y_{nk} &#x3D; 1$,其余为0，$p_{nk}$是Softmax后预测属于类别k的概率</p>
-<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><h4 id="Linear-Regression-vs-Sigmoid-Regression"><a href="#Linear-Regression-vs-Sigmoid-Regression" class="headerlink" title="Linear Regression vs Sigmoid Regression"></a>Linear Regression vs Sigmoid Regression</h4><table>
-<thead>
-<tr>
-<th>Task</th>
-<th>Output Function</th>
-<th>Activation</th>
-<th>Loss Function</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Regression</td>
-<td>$y$</td>
-<td>Linear</td>
-<td>MAE &#x2F; MSE</td>
-</tr>
-<tr>
-<td>Binary Classification</td>
-<td>$p$</td>
-<td>Sigmoid</td>
-<td>Binary Cross-Entropy (BCE)</td>
-</tr>
-<tr>
-<td>Multiclass Classification</td>
-<td>$p_k$</td>
-<td>Softmax</td>
-<td>Multiclass Cross-Entropy</td>
-</tr>
-</tbody></table>
-<h4 id="MSE-vs-Binary-Cross-Entropy"><a href="#MSE-vs-Binary-Cross-Entropy" class="headerlink" title="MSE vs Binary Cross-Entropy"></a>MSE vs Binary Cross-Entropy</h4><table>
-<thead>
-<tr>
-<th></th>
-<th>Linear Regression</th>
-<th>Logistic Regression</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>🎯 任务</td>
-<td>预测连续值（回归）</td>
-<td>预测二分类（分类）</td>
-</tr>
-<tr>
-<td>📈 模型</td>
-<td>$y_hat &#x3D; b + Σ w_j * x_j$</td>
-<td>$p &#x3D; σ(z) &#x3D; 1&#x2F;(1+exp(-z)), z &#x3D; b + Σ w_j * x_j$</td>
-</tr>
-<tr>
-<td>📊 输出</td>
-<td>实数 (-∞, +∞)</td>
-<td>概率 [0, 1]</td>
-</tr>
-<tr>
-<td>📚 分布</td>
-<td>假设输出服从高斯分布</td>
-<td>假设输出服从伯努利分布</td>
-</tr>
-<tr>
-<td>🔗 损失</td>
-<td>均方误差 (MSE: Mean Squared Error)</td>
-<td>二元交叉熵 (BCE: Binary Cross-Entropy)</td>
-</tr>
-<tr>
-<td>⚡ 目标</td>
-<td>最大化高斯似然</td>
-<td>最大化伯努利似然</td>
-</tr>
-<tr>
-<td>⚙️ 梯度</td>
-<td>梯度线性，更新相对平滑</td>
-<td>梯度在非饱和区间较大，下降快，但接近 0&#x2F;1 时可能饱和</td>
-</tr>
-<tr>
-<td>总体来说，Cross-Entropy效果更好一点</td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<h3 id="Support-Vector-Machine"><a href="#Support-Vector-Machine" class="headerlink" title="Support Vector Machine"></a>Support Vector Machine</h3><p><strong>Support Vector Machine(SVM)</strong> 是一种常见的监督学习方法，常用于二分类任务，核心思想是通过寻找一个最优的分割超平面，使得不同类别之间的间隔（margin）最大化。</p>
-<h4 id="Linear-Model-1"><a href="#Linear-Model-1" class="headerlink" title="Linear Model"></a>Linear Model</h4><p>对于线性可分数据，SVM定义一个线性决策函数：<br>$$<br>f(x) &#x3D; w^T x + b<br>$$</p>
-<p>其中：</p>
-<ul>
-<li>$w$ 是权重向量，</li>
-<li>$b$ 是偏置项。</li>
-</ul>
-<p>分类规则：</p>
-<p>$$<br>\hat{y} &#x3D; \text{sign}(f(x)) &#x3D;<br>\begin{cases}<br>+1 &amp; \text{if } f(x) \ge 0 \\<br>-1 &amp; \text{if } f(x) &lt; 0<br>\end{cases}<br>$$</p>
-<h4 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h4><p>SVM 常用 <strong>合页损失（Hinge Loss）</strong>：</p>
-<p>$$<br>L_n &#x3D; \max(0,, 1 - y_n f(x_n))<br>$$</p>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>如果$y_nf(x_n)&gt;0$则说明分类正确<br><br>但是,$y_nf(x_n)&gt;&#x3D;1$才完美，因为SVM不仅要求分类正确，还要最大化间隔，也就是安全间隔，所以在合页损失中有1<br></p>
-</blockquote>
-<hr>
-<p>整体目标函数：</p>
-<h2 id="L-w-b-frac-1-2-w-2-C-sum-n-1-N-max-0-1-y-n-w-T-x-n-b"><a href="#L-w-b-frac-1-2-w-2-C-sum-n-1-N-max-0-1-y-n-w-T-x-n-b" class="headerlink" title="$$L(w,b) &#x3D; \frac{1}{2} |w|^2 + C \sum_{n&#x3D;1}^N \max(0,, 1 - y_n (w^T x_n + b)).$$"></a>$$<br>L(w,b) &#x3D; \frac{1}{2} |w|^2 + C \sum_{n&#x3D;1}^N \max(0,, 1 - y_n (w^T x_n + b)).<br>$$</h2><blockquote>
-<p><strong>Notice</strong><br><br>$\frac{1}{2}|w|^2$是正则化项，用于控制模型的复杂度，防止过拟合，权重不要太大。<br><br>$C \sum_{n&#x3D;1}^N \max(0,, 1 - y_n (w^T x_n + b))$是所有样本的合页损失的加权和。<br></p>
-</blockquote>
-<hr>
-<h4 id="Optimization-Gradient-Descent"><a href="#Optimization-Gradient-Descent" class="headerlink" title="Optimization (Gradient Descent)"></a>Optimization (Gradient Descent)</h4><p>合页损失可以用梯度下降或随机梯度下降（SGD）优化：</p>
-<p>$$<br>w \leftarrow w - \eta (w - C \sum_{n \in M} y_n x_n),<br>\quad<br>M &#x3D; { n ,|, 1 - y_n f(x_n) &gt; 0 }<br>$$</p>
-<p>其中：</p>
-<ul>
-<li>$\eta$ 是学习率，</li>
-<li>$M$ 是当前违反 margin 条件的样本集合。</li>
-</ul>
-<h3 id="朴素贝叶斯（Naive-Bayes）"><a href="#朴素贝叶斯（Naive-Bayes）" class="headerlink" title="朴素贝叶斯（Naive Bayes）"></a>朴素贝叶斯（Naive Bayes）</h3><p>利用贝叶斯公式根据某特征的先验概率计算出其后验概率，然后选择具有最大后验概率的类作为该特征所属的类</p>
-<h4 id="条件概率。"><a href="#条件概率。" class="headerlink" title="条件概率。"></a>条件概率。</h4><p>就是在事件B发生的情况下，事件A发生的概率，用P(A|B)来表示<br>$P(A|B) &#x3D; \frac{P(B|A)P(A)}{P(B)}$</p>
-<h4 id="全概率"><a href="#全概率" class="headerlink" title="全概率"></a>全概率</h4><p>如果事件A1,A2,…,An构成一个完备事件都有正概率，那么对于任意一个事件B则有：<br>$P(B)&#x3D;\sum_{i&#x3D;1}^{n}P(A_i)P(B|A_i)$</p>
-<h4 id="贝叶斯推断"><a href="#贝叶斯推断" class="headerlink" title="贝叶斯推断"></a>贝叶斯推断</h4><p>$P(A|B) &#x3D; \frac{P(B|A)P(A)}{P(B)}$ </p>
-<p>$P(A_i|B) &#x3D; P(A_i)\frac{P(B|A_i)}{\sum_{i&#x3D;1}^{n}P(A_i)P(B|A_i)}$<br>其中P(A)为先验概率，$P(A|B)$为后验概率，$\frac{P(B|A)}{P(B)}$为可能性函数（Likely hood）<br>转换成分类任务的表达式：<br>$P(类别|特征) &#x3D; P(类别)\frac{P(特征|类别)}{P(特征)}$。</p>
-<h4 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h4><p>$P(帅 性格不好 不上进) &#x3D; P(嫁)P(帅|嫁)P(性格不好|嫁)P(不上进｜嫁) +  P(不嫁)P(帅|不嫁)P(性格不好|不嫁)P(不上进｜不嫁) &#x3D; 2&#x2F;125 + 3&#x2F;125$  </p>
-<p>最终计算结果：<br>P(嫁|帅 性格不好 不上进) &#x3D; P(嫁)P(帅|嫁)P(性格不好|嫁)P(不上进｜嫁) &#x2F; P(帅 性格不好 不上进) &#x3D; (2&#x2F;125) &#x2F; (2&#x2F;125 + 3&#x2F;125) &#x3D; 0.4.<br>P(嫁|帅 性格不好 不上进) &#x3D; (3&#x2F;125) &#x2F; (2&#x2F;125 + 3&#x2F;125) &#x3D; 0.6. </p>
-<h4 id="最大似然估计"><a href="#最大似然估计" class="headerlink" title="最大似然估计"></a>最大似然估计</h4><h4 id="最大似然估计（MLE）及-GaussianNB-示例"><a href="#最大似然估计（MLE）及-GaussianNB-示例" class="headerlink" title="最大似然估计（MLE）及 GaussianNB 示例"></a>最大似然估计（MLE）及 GaussianNB 示例</h4><hr>
-<p>观测数据：<br>$$<br>X &#x3D; {x_1, x_2, \ldots, x_n}<br>$$</p>
-<p>参数：<br>$$<br>\theta<br>$$</p>
-<p>那么数据的似然函数是：<br>$$<br>L(\theta; X) &#x3D; P(X \mid \theta)<br>$$</p>
-<p>最大似然估计就是：<br>$$<br>\hat{\theta}<em>{MLE} &#x3D; \arg\max</em>{\theta} L(\theta; X)<br>$$</p>
-<hr>
-<p>🔬 <strong>用在 GaussianNB 的例子</strong>  </p>
-<p>在高斯朴素贝叶斯中，假设每个特征<br>$$<br>X_j<br>$$<br>在类别<br>$$<br>C_k<br>$$<br>下服从正态分布。</p>
-<p>那么对应参数的估计为：</p>
-<ul>
-<li><p>均值：<br>$$<br>\mu_{jk} &#x3D; \frac{1}{n_k} \sum_{i&#x3D;1}^{n_k} x_j^{(i)}<br>$$</p>
-</li>
-<li><p>方差：<br>$$<br>\sigma_{jk}^2 &#x3D; \frac{1}{n_k} \sum_{i&#x3D;1}^{n_k} \left( x_j^{(i)} - \mu_{jk} \right)^2<br>$$</p>
-</li>
-</ul>
-<p>其中，  </p>
-<ul>
-<li>$n_k$ 是类别 $C_k$ 的样本数，  </li>
-<li>$x_j^{(i)}$ 表示类别 $C_k$ 中第 i 个样本的第 j 个特征值。</li>
-</ul>
-<hr>
-<h4 id="朴素贝叶斯中后验概率计算（以高斯朴素贝叶斯为例）"><a href="#朴素贝叶斯中后验概率计算（以高斯朴素贝叶斯为例）" class="headerlink" title="朴素贝叶斯中后验概率计算（以高斯朴素贝叶斯为例）"></a>朴素贝叶斯中后验概率计算（以高斯朴素贝叶斯为例）</h4><hr>
-<p>给定类别集合 $A_1, A_2, \ldots, A_n$ 和观察到的特征向量 $B &#x3D; (x_1, x_2, \ldots, x_d)$，<br>后验概率计算公式为：</p>
-<p>$$<br>P(A_i \mid B) &#x3D; \frac{P(A_i) , P(B \mid A_i)}{\sum_{j&#x3D;1}^n P(A_j) , P(B \mid A_j)}<br>$$</p>
-<hr>
-<p>在高斯朴素贝叶斯中，假设特征条件独立且服从高斯分布，<br>则类别 $A_i$ 下特征 $x_k$ 的条件概率为：</p>
-<p>$$<br>P(x_k \mid A_i) &#x3D; \frac{1}{\sqrt{2\pi \sigma_{ik}^2}} \exp\left( -\frac{(x_k - \mu_{ik})^2}{2\sigma_{ik}^2} \right)<br>$$</p>
-<p>其中：  </p>
-<ul>
-<li>$\mu_{ik}$ 和 $\sigma_{ik}^2$ 是类别 $A_i$ 下第 k 个特征的均值和方差。</li>
-</ul>
-<hr>
-<p>根据特征独立性假设，整体似然为：</p>
-<p>$$<br>P(B \mid A_i) &#x3D; \prod_{k&#x3D;1}^d P(x_k \mid A_i)<br>$$</p>
-<hr>
-<p>综上，后验概率计算步骤为：</p>
-<ol>
-<li>计算先验概率 $P(A_i)$，一般为类别样本比例；</li>
-<li>利用高斯分布计算每个特征的条件概率 $P(x_k \mid A_i)$；</li>
-<li>计算似然 $P(B \mid A_i) &#x3D; \prod_{k&#x3D;1}^d P(x_k \mid A_i)$；</li>
-<li>代入贝叶斯公式求得后验概率：</li>
-</ol>
-<p>$$<br>P(A_i \mid B) &#x3D; \frac{P(A_i) \prod_{k&#x3D;1}^d P(x_k \mid A_i)}{\sum_{j&#x3D;1}^n P(A_j) \prod_{k&#x3D;1}^d P(x_k \mid A_j)}<br>$$</p>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>在 高斯朴素贝叶斯（Gaussian Naive Bayes） 中，每个类别（target）都会单独拟合一个高斯分布，而且是针对每个特征分别计算。<br><br>在同一个类别（target）下，多个特征是条件独立的（<strong>朴素贝叶斯的前提</strong>,便于求得<strong>联合概率</strong>）<br></p>
-</blockquote>
-<hr>
-<h3 id="Discriminative-Model-vs-Generative-Model"><a href="#Discriminative-Model-vs-Generative-Model" class="headerlink" title="Discriminative Model vs Generative Model"></a>Discriminative Model vs Generative Model</h3><h4 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h4><table>
-<thead>
-<tr>
-<th></th>
-<th><strong>Discriminative Model (判别式模型)</strong></th>
-<th><strong>Generative Model (生成式模型)</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>核心思想</strong></td>
-<td>直接学习 <strong>后验分布</strong> $p(y|x)$</td>
-<td>先学习 <strong>联合分布</strong> $p(x,y)$，或条件分布 $p(x|y)$ 和先验 $p(y)$</td>
-</tr>
-<tr>
-<td><strong>关键任务</strong></td>
-<td>找到最好的决策边界，分清类别</td>
-<td>理解数据是如何生成的，可用于生成新样本</td>
-</tr>
-<tr>
-<td><strong>举个例子</strong></td>
-<td>Logistic Regression, SVM, Neural Network</td>
-<td>Naive Bayes, GMM, HMM, GAN, VAE</td>
-</tr>
-</tbody></table>
-<h4 id="公式对比"><a href="#公式对比" class="headerlink" title="公式对比"></a>公式对比</h4><table>
-<thead>
-<tr>
-<th></th>
-<th><strong>判别式</strong></th>
-<th><strong>生成式</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>核心建模</strong></td>
-<td>$p(y|x)$</td>
-<td>$p(x,y) &#x3D; p(x|y) p(y)$</td>
-</tr>
-<tr>
-<td><strong>目标</strong></td>
-<td>最大化条件似然：$\max_\theta p(y|x)$</td>
-<td>最大化联合似然：$\max_\theta p(x,y)$</td>
-</tr>
-</tbody></table>
-<hr>
-<h4 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h4><table>
-<thead>
-<tr>
-<th></th>
-<th><strong>判别式</strong></th>
-<th><strong>生成式</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>优点</strong></td>
-<td>- 不需要建模输入分布，简单高效  <br> - 一般分类准确率更高</td>
-<td>- 可生成新数据  <br> - 可处理缺失值  <br> - 对小样本问题有优势</td>
-</tr>
-<tr>
-<td><strong>缺点</strong></td>
-<td>- 无法生成数据  <br> - 对缺失值敏感</td>
-<td>- 对输入分布需要假设  <br> - 特征条件独立假设可能太强</td>
-</tr>
-</tbody></table>
-<hr>
-<h4 id="常见示例"><a href="#常见示例" class="headerlink" title="常见示例"></a>常见示例</h4><table>
-<thead>
-<tr>
-<th></th>
-<th><strong>判别式</strong></th>
-<th><strong>生成式</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>线性模型</strong></td>
-<td>Logistic Regression</td>
-<td>Naive Bayes (Gaussian&#x2F;Multinomial)</td>
-</tr>
-<tr>
-<td><strong>非线性</strong></td>
-<td>Neural Network, SVM</td>
-<td>GMM, HMM, GAN, VAE</td>
-</tr>
-</tbody></table>
-<h3 id="Optimization-1"><a href="#Optimization-1" class="headerlink" title="Optimization"></a>Optimization</h3><h4 id="使用Hessian分析Saddle-Point和Local-Minimal"><a href="#使用Hessian分析Saddle-Point和Local-Minimal" class="headerlink" title="使用Hessian分析Saddle Point和Local Minimal"></a>使用Hessian分析Saddle Point和Local Minimal</h4><p>At critical point: $L(\theta) &#x3D; L(\theta_0) + \frac{1}{2}(\theta - \theta_0)^TH(\theta - \theta_0)$.<br>我们把u(an eigen vector of H)当作$\theta - \theta_0$,$\lambda$为eigen value. </p>
-<p>那么$u^T H u &#x3D; u^T(\lambda u) &#x3D; \lambda|u|^2 $.<br>因此$\lambda$正负会直接L的increase or decrease<br>根据这个公式可知解决saddle point问题步骤如下：  </p>
-<ul>
-<li>找到H</li>
-<li>找到H的某个负特征值</li>
-<li>对应的特征向量u就是想找的下降方向</li>
-<li>$\theta &#x3D; \theta_0 + u$</li>
-</ul>
-<h4 id="Adaptive-Learning-Rate"><a href="#Adaptive-Learning-Rate" class="headerlink" title="Adaptive Learning Rate"></a>Adaptive Learning Rate</h4><h5 id="Root-Mean-Square"><a href="#Root-Mean-Square" class="headerlink" title="Root Mean Square"></a>Root Mean Square</h5><p><strong>定义：</strong><br>Root Mean Square（RMS）是指一组数平方后求平均再开方，反映平均“能量”大小。</p>
-<p>公式如下：</p>
-<p>$\sigma_i^t &#x3D; \sqrt{\frac{1}{t+1}\sum_{i&#x3D;0}^t (g_i^t)^2}$.  </p>
-<p>$\theta_i^{t+1} &#x3D; \theta_i^t - \frac{\eta}{\sigma_i^t}g_i^t$</p>
-<p>在优化中，用于衡量梯度大小，作为学习率调整的依据。</p>
-<h5 id="RMSProp-Root-Mean-Square-Propagation"><a href="#RMSProp-Root-Mean-Square-Propagation" class="headerlink" title="RMSProp (Root Mean Square Propagation)"></a>RMSProp (Root Mean Square Propagation)</h5><ul>
-<li>梯度平方滑动平均：</li>
-</ul>
-<p>$\sigma_i^t &#x3D; \sqrt{\alpha (\sigma_i^{t-1})^2 + (1-\alpha)(g_i^t)^2}$</p>
-<ul>
-<li>参数更新：</li>
-</ul>
-<p>$θ_i^{t+1} &#x3D; θ_i^t - \frac{\eta}{\sigma_i^t}g_i^t$</p>
-<p>其中：</p>
-<ul>
-<li>ρ 是衰减率（常用 0.9）</li>
-<li>η 是基础学习率</li>
-<li>ε 是防止除以 0 的小常数（如 1e-8）</li>
-</ul>
-<h5 id="直觉理解："><a href="#直觉理解：" class="headerlink" title="直觉理解："></a>直觉理解：</h5><ul>
-<li>梯度大的参数方向：步长缩小，避免震荡</li>
-<li>梯度小的参数方向：步长放大，避免停滞</li>
-<li>RMSProp 根据每个参数的历史梯度自动调整学习率，实现更稳定的收敛过程</li>
-</ul>
-<h4 id="总结对比"><a href="#总结对比" class="headerlink" title="总结对比"></a>总结对比</h4><table>
-<thead>
-<tr>
-<th>概念</th>
-<th>含义 &#x2F; 作用</th>
-<th>与 RMSProp 的关系</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Adaptive Learning Rate</td>
-<td>每个参数独立学习率，动态调整</td>
-<td>RMSProp 是其代表性实现方法</td>
-</tr>
-<tr>
-<td>Root Mean Square</td>
-<td>用于估计梯度平均能量，控制步长</td>
-<td>被 RMSProp 用于缩放学习率</td>
-</tr>
-<tr>
-<td>RMSProp</td>
-<td>自适应优化算法，防止学习率过早衰减</td>
-<td>实现了 adaptive learning rate</td>
-</tr>
-</tbody></table>
-<h5 id="Learning-Rate-Scheduling"><a href="#Learning-Rate-Scheduling" class="headerlink" title="Learning Rate Scheduling"></a>Learning Rate Scheduling</h5><h4 id="Batch-和-Momentum简要说明"><a href="#Batch-和-Momentum简要说明" class="headerlink" title="Batch 和 Momentum简要说明"></a>Batch 和 Momentum简要说明</h4><h5 id="Batch（小批量）"><a href="#Batch（小批量）" class="headerlink" title="Batch（小批量）"></a>Batch（小批量）</h5><p>在训练神经网络时，我们通常不会每次使用整个训练集来更新参数，而是将数据划分为多个“小批量”，每个 batch 包含若干样本。</p>
-<p>例如：</p>
-<ul>
-<li>数据总量为 10,000，batch size &#x3D; 32</li>
-<li>则每个 epoch 有约 312 次更新</li>
-</ul>
-<h6 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h6><ul>
-<li>提高训练效率（相比使用整个数据集）</li>
-<li>提供更稳定的梯度估计（相比单个样本）</li>
-<li>有利于 GPU 并行计算</li>
-</ul>
-<h6 id="直觉："><a href="#直觉：" class="headerlink" title="直觉："></a>直觉：</h6><ul>
-<li>小 batch：训练快但不稳定，梯度噪声大</li>
-<li>大 batch：训练稳定但计算开销大，收敛可能慢</li>
-</ul>
-<h5 id="Momentum（动量）"><a href="#Momentum（动量）" class="headerlink" title="Momentum（动量）"></a>Momentum（动量）</h5><p>Momentum 是优化器的一种加速技巧，通过引入“动量”，在梯度方向上积累速度。</p>
-<p>常规梯度下降公式：</p>
-<pre><code>$θ_&#123;t+1&#125; = θ_t - η ∇L(θ_t)$
-</code></pre>
-<p>加入动量后的更新规则：</p>
-<pre><code>$v_&#123;t+1&#125; = γ v_t - η ∇L(θ_t)$
-$θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
-</code></pre>
-<p>其中：</p>
-<ul>
-<li>η 是学习率</li>
-<li>γ 是动量系数（如 0.9）</li>
-<li>v 是“速度向量”，表示历史梯度累积效果</li>
-</ul>
-<h6 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h6><ul>
-<li>加快收敛速度</li>
-<li>减少梯度震荡</li>
-<li>更容易跳出局部最小值</li>
-</ul>
-<h6 id="直觉：-1"><a href="#直觉：-1" class="headerlink" title="直觉："></a>直觉：</h6><p>像滚动的小球有惯性，动量让优化器在梯度一致的方向上加速前进，在梯度变化剧烈的方向上稳定下来。</p>
-<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><table>
-<thead>
-<tr>
-<th>概念</th>
-<th>定义</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Batch</td>
-<td>一次更新中使用的样本子集</td>
-<td>提高效率、平滑梯度估计</td>
-</tr>
-<tr>
-<td>Momentum</td>
-<td>使用历史梯度加速更新</td>
-<td>加速收敛、减少震荡、跳出局部最小值</td>
-</tr>
-</tbody></table>
-<h3 id="Self-attention"><a href="#Self-attention" class="headerlink" title="Self-attention"></a>Self-attention</h3><p>无论是在图像识别，音频处理等应用中，输入都可以看作是一个向量，输出是一个数值或类别。然而，若输入是<strong>一系列向量</strong>,同时长度会改变，例如把句子里的单词都描述为向量，那么模型的输入就是一个向量集合，并且每个向量的大小都不一样。<br>对于这个一系列向量，或者说是向量集合，我们通常会考虑上下文，因此我们会引入滑动窗口机制，每个向量查看窗口中相邻的其他向量的性质。为了量化地计算向量之间的相关性，我们引入了Self-attention技术。</p>
-<h4 id="Basic-Concept-1"><a href="#Basic-Concept-1" class="headerlink" title="Basic Concept"></a>Basic Concept</h4><p>在注意力机制中，主要涉及三个向量：Query、Key 和 Value。</p>
-<p>给定一个输入向量集合 ${a^1, a^2, \dots, a^n}$，我们对每个向量 $a^i$ 进行线性变换以获得对应的 Query、Key 和 Value 向量。</p>
-<h4 id="向量计算"><a href="#向量计算" class="headerlink" title="向量计算"></a>向量计算</h4><ul>
-<li>Query 向量：$q^i &#x3D; a^i W^q$</li>
-<li>Key 向量：$k^i &#x3D; a^i W^k$</li>
-<li>Value 向量：$v^i &#x3D; a^i W^v$</li>
-</ul>
-<p>其中，$W^q$、$W^k$、$W^v$ 是可学习的参数矩阵，维度通常为：</p>
-<ul>
-<li>$W^q \in \mathbb{R}^{d_{model} \times d_k}$</li>
-<li>$W^k \in \mathbb{R}^{d_{model} \times d_k}$</li>
-<li>$W^v \in \mathbb{R}^{d_{model} \times d_v}$</li>
-</ul>
-<h4 id="注意力打分机制"><a href="#注意力打分机制" class="headerlink" title="注意力打分机制"></a>注意力打分机制</h4><p>对于一个查询向量 $q^i$，其对应的注意力权重是通过它与所有 Key 向量的点积计算得到的：</p>
-<p>$$<br>\text{score}_{ij} &#x3D; \frac{q^i \cdot (k^j)^T}{\sqrt{d_k}}<br>$$</p>
-<p>然后使用 Softmax 函数对所有得分进行归一化，得到注意力分布：</p>
-<p>$$<br>\alpha_{ij} &#x3D; \text{softmax}(\text{score}<em>{ij}) &#x3D; \frac{\exp(\text{score}</em>{ij})}{\sum_{j&#x3D;1}^{n} \exp(\text{score}_{ij})}<br>$$</p>
-<h4 id="加权求和得到输出"><a href="#加权求和得到输出" class="headerlink" title="加权求和得到输出"></a>加权求和得到输出</h4><p>最后，使用这些注意力权重对对应的 Value 向量加权求和，得到最终的注意力输出向量：</p>
-<p>$$<br>z^i &#x3D; \sum_{j&#x3D;1}^{n} \alpha_{ij} v^j<br>$$</p>
-<p>这个过程可以表示为矩阵形式：</p>
-<p>$$<br>\text{Attention}(Q, K, V) &#x3D; \text{softmax}\left( \frac{QK^T}{\sqrt{d_k}} \right) V<br>$$</p>
-<hr>
-<h4 id="总结流程："><a href="#总结流程：" class="headerlink" title="总结流程："></a>总结流程：</h4><ol>
-<li>输入向量集 $a^i$</li>
-<li>计算 Query: $q^i &#x3D; a^i W^q$</li>
-<li>计算 Key: $k^i &#x3D; a^i W^k$</li>
-<li>计算 Value: $v^i &#x3D; a^i W^v$</li>
-<li>计算注意力得分（点积）：$q^i \cdot (k^j)^T$</li>
-<li>通过 Softmax 得到注意力权重</li>
-<li>对 Value 加权求和得到输出 $z^i$</li>
-</ol>
-<hr>
-<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><ul>
-<li>$d_k$ 是 Key 向量的维度</li>
-<li>$d_v$ 是 Value 向量的维度</li>
-<li>注意力机制允许模型动态地聚焦于输入序列中最相关的部分</li>
-</ul>
-<h4 id="Local-Attention"><a href="#Local-Attention" class="headerlink" title="Local Attention"></a>Local Attention</h4><p>In <strong>local attention</strong>, each position only attends to a limited number of nearby positions (i.e., a fixed-size window). It mimics sliding-window machanims.<br><strong>Example (window size &#x3D; 2):</strong><br>$$<br>a_i attends to {a_{i-2}, a_{i-1}, a_i, a_{i+1}, a_{i+2}}<br>$$</p>
-<h5 id="Pros"><a href="#Pros" class="headerlink" title="Pros:"></a>Pros:</h5><ul>
-<li>Reduces computation to 0(nw), where w is the window size</li>
-<li>Works well in spatial&#x2F;temporal data (e.g., images, audio)</li>
-</ul>
-<h4 id="Global-Attention"><a href="#Global-Attention" class="headerlink" title="Global Attention"></a>Global Attention</h4><p>In <strong>global attention</strong>, each query attends to <strong>all positions</strong> in the sequence.</p>
-<h5 id="Pros-1"><a href="#Pros-1" class="headerlink" title="Pros:"></a>Pros:</h5><ul>
-<li>Captures long-range dependencies</li>
-<li>Powerful and general-purpose</li>
-</ul>
-<h5 id="Cons"><a href="#Cons" class="headerlink" title="Cons:"></a>Cons:</h5><ul>
-<li>High computational cost</li>
-</ul>
-<h4 id="Clustering-based-Attention"><a href="#Clustering-based-Attention" class="headerlink" title="Clustering-based Attention"></a>Clustering-based Attention</h4><h3 id="RNN-Recurrent-Neural-Network"><a href="#RNN-Recurrent-Neural-Network" class="headerlink" title="RNN (Recurrent Neural Network)"></a>RNN (Recurrent Neural Network)</h3><h4 id="Long-Short-Term-Memory-LSTM-Cell-Explanation"><a href="#Long-Short-Term-Memory-LSTM-Cell-Explanation" class="headerlink" title="Long Short-Term Memory (LSTM) Cell Explanation"></a>Long Short-Term Memory (LSTM) Cell Explanation</h4><p>一个LSTM cell可以理解为一个cnn中的neuron<br>This project contains visual illustrations and numerical examples of how an LSTM (Long Short-Term Memory) cell works internally. The LSTM is a type of recurrent neural network (RNN) that is capable of learning long-term dependencies and solving the vanishing gradient problem.</p>
-<h4 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h4><p>LSTMs introduce <strong>memory cells</strong> and <strong>gating mechanisms</strong> to control the flow of information. The key gates in an LSTM cell are:</p>
-<ul>
-<li><p><strong>遗忘门（Forget Gate）</strong><br>控制保留多少过去的记忆。<br>计算方式：$f(z_f)$，使用 sigmoid 激活函数，输出范围在 $[0, 1]$，模拟“开”与“关”。</p>
-</li>
-<li><p><strong>输入门（Input Gate）</strong><br>决定当前输入中保留哪些信息。<br>表达式为：$f(z_i)$ 和 $g(z)$。</p>
-</li>
-<li><p><strong>记忆单元状态（Cell State）</strong><br>状态更新公式：<br>$$<br>C_{\text{new}} &#x3D; f(z_f) \cdot C_{\text{old}} + f(z_i) \cdot g(z)<br>$$</p>
-</li>
-<li><p><strong>输出门（Output Gate）</strong><br>决定当前时刻的隐藏状态输出 $a$：<br>$$<br>a &#x3D; f(z_o) \cdot h(C)<br>$$</p>
-</li>
-</ul>
-<p>激活函数说明：</p>
-<ul>
-<li>$f(\cdot)$ 表示 sigmoid（$\sigma$ 函数），控制门的开关；</li>
-<li>$g(\cdot)$ 表示 tanh，处理输入的候选记忆；</li>
-<li>$h(\cdot)$ 通常也是 tanh，用于输出处理。</li>
-</ul>
-<hr>
-<h4 id="LSTM-数值计算示例"><a href="#LSTM-数值计算示例" class="headerlink" title="LSTM 数值计算示例"></a>LSTM 数值计算示例</h4><img src="/images/LSTM_Formulation.png">
-
-<p>该图展示了一个完整的 <strong>LSTM 单元的前向传播数值过程</strong>，主要特征包括：</p>
-<ul>
-<li>输入特征向量 $x_1$, $x_2$, $x_3$ 及偏置项；</li>
-<li>不同门控的权重矩阵、偏置与线性组合；</li>
-<li>显式显示了输入门、遗忘门、输出门的计算过程；</li>
-<li>Cell 的状态值如何随着时间变化更新；</li>
-<li>最终输出 $y$ 序列中在特定时间步激活（例如输出为 7）。</li>
-</ul>
-<p>通过可视化的矩阵计算，可以看到 LSTM 如何“记住”或“忘记”输入中的关键信息。</p>
-<h5 id="关键计算公式"><a href="#关键计算公式" class="headerlink" title="关键计算公式"></a>关键计算公式</h5><p>$$<br>\begin{aligned}<br>f_t &amp;&#x3D; \sigma(W_f \cdot [h_{t-1}, x_t] + b_f) \\<br>i_t &amp;&#x3D; \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) \\<br>g_t &amp;&#x3D; \tanh(W_g \cdot [h_{t-1}, x_t] + b_g) \\<br>C_t &amp;&#x3D; f_t \cdot C_{t-1} + i_t \cdot g_t \\<br>o_t &amp;&#x3D; \sigma(W_o \cdot [h_{t-1}, x_t] + b_o) \\<br>h_t &amp;&#x3D; o_t \cdot \tanh(C_t)<br>\end{aligned}<br>$$<br>由此可知$W_f, W_i, W_g, W_o$的维度是(hidden_size, input_dim + hidder_size),因为输入是由$h_{t-1}$和$x_t$连接而成。<br>记号解释:</p>
-<ul>
-<li><p>隐藏状态向量<br>$h_{t-1} ∈ R^{64}$. </p>
-<p>上一步的隐藏状态，维度为 64（对应 64 个 hidden units 或 memory cells）。</p>
-</li>
-<li><p>当前时间步输入向量<br> $x_t ∈ R^{d}$</p>
-<p>当前时间步的输入，维度为输入特征数 d。</p>
-</li>
-<li><p>权重矩阵<br>$W_f, W_i, W_g, W_o ∈ R^{(64 + d) × 64}$<br>四个门（遗忘门、输入门、候选状态、输出门）的权重矩阵，输入是拼接的 $[h_{t-1}, x_t]$，输出是大小为 64 的门控向量。</p>
-</li>
-<li><p>偏置向量<br>$b_f, b_i, b_g, b_o ∈ R^{64}$. </p>
-<p>四个门对应的偏置项，维度均为 64。</p>
-</li>
-</ul>
-<h4 id="LSTM的模块说明以及应用场景"><a href="#LSTM的模块说明以及应用场景" class="headerlink" title="LSTM的模块说明以及应用场景"></a>LSTM的模块说明以及应用场景</h4><table>
-<thead>
-<tr>
-<th>模块</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>遗忘门</td>
-<td>学习去“忘记”无关记忆</td>
-</tr>
-<tr>
-<td>输入门</td>
-<td>学习将当前输入写入记忆</td>
-</tr>
-<tr>
-<td>候选记忆块</td>
-<td>生成当前输入的表示</td>
-</tr>
-<tr>
-<td>Cell 状态</td>
-<td>长期记忆存储通道</td>
-</tr>
-<tr>
-<td>输出门</td>
-<td>控制当前输出暴露多少内部记忆</td>
-</tr>
-</tbody></table>
-<p>LSTM 网络适用于处理<strong>时间相关性较强</strong>的任务，例如：</p>
-<ul>
-<li>🧠 自然语言处理（NLP）：文本分类、情感分析、语言建模</li>
-<li>📈 时间序列预测：股价、传感器数据、气象数据</li>
-<li>🗣 语音识别、语音生成</li>
-<li>🔄 序列到序列（Seq2Seq）：机器翻译、摘要生成等</li>
-</ul>
-<h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>Keras 的 LSTM 层接受的输入形状一般是 (batch_size, timesteps, input_dim)，<br>其中 timesteps（序列长度）可以是动态的，或者在模型构建时隐含定义。<br>如果你的 next_layer_in 是一个三维张量，Keras 会自动根据输入的 shape 识别序列长度。<br>只要你传入的数据形状符合要求，Keras 会根据实际输入动态处理序列长度，不必在代码里显式声明。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">seq_in = Input(shape=(timesteps, input_dim))</span><br></pre></td></tr></table></figure>
-
-<h4 id="LSTM参数计算公式"><a href="#LSTM参数计算公式" class="headerlink" title="LSTM参数计算公式"></a>LSTM参数计算公式</h4><p>对于一个LSTM层，参数数量是：<br>numParams &#x3D; 4 x [(units x input_dim + (units x units) + units]</p>
-<ul>
-<li>4 -&gt; 因为LSTM有4个门（输入门、遗忘门、候选单位、输出门），每个门都有一套权重</li>
-<li>units x input_dim -&gt; 输入到隐藏层的权重</li>
-<li>units x units -&gt; 隐藏到隐藏的循环权重</li>
-<li>units -&gt; 每个门的偏置</li>
-</ul>
-<h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><p>本示例结合一个LSTM模型的完整代码结构，介绍如何使用pandas准备数据、构建LSTM模型及计算参数量，方便初学者理解和应用。</p>
-<h5 id="1-数据预处理（pandas基础）"><a href="#1-数据预处理（pandas基础）" class="headerlink" title="1. 数据预处理（pandas基础）"></a>1. 数据预处理（pandas基础）</h5><ul>
-<li>读取CSV文件</li>
-</ul>
-<p>import pandas as pd<br>df &#x3D; pd.read_csv(“weatherHistory.csv”)</p>
-<ul>
-<li>查看数据前几行</li>
-</ul>
-<p>df.head()</p>
-<ul>
-<li>选取数值型列计算相关性</li>
-</ul>
-<p>num_df &#x3D; df.select_dtypes(include&#x3D;[‘number’])<br>corr_matrix &#x3D; num_df.corr()</p>
-<ul>
-<li>处理缺失值</li>
-</ul>
-<p>df.fillna(0, inplace&#x3D;True)</p>
-<ul>
-<li>标签编码</li>
-</ul>
-<p>from sklearn.preprocessing import LabelEncoder<br>labelencoder &#x3D; LabelEncoder()<br>df[‘Summary’] &#x3D; labelencoder.fit_transform(df[‘Summary’])</p>
-<ul>
-<li>时间序列转监督学习格式</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):</span><br><span class="line">    n_vars = 1 <span class="keyword">if</span> <span class="built_in">type</span>(data) is list <span class="keyword">else</span> data.shape[1]</span><br><span class="line">    <span class="built_in">df</span> = pd.DataFrame(data)</span><br><span class="line">    cols, names = [], []</span><br><span class="line">    <span class="comment"># 过去时间步 (t-n, ... t-1)</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n_in, 0, -1):</span><br><span class="line">        cols.append(df.shift(i))</span><br><span class="line">        names += [f<span class="string">&#x27;var&#123;j+1&#125;(t-&#123;i&#125;)&#x27;</span> <span class="keyword">for</span> j <span class="keyword">in</span> range(n_vars)]</span><br><span class="line">    <span class="comment"># 未来时间步 (t, t+1, ... t+n)</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n_out):</span><br><span class="line">        cols.append(df.shift(-i))</span><br><span class="line">        <span class="keyword">if</span> i == 0:</span><br><span class="line">            names += [f<span class="string">&#x27;var&#123;j+1&#125;(t)&#x27;</span> <span class="keyword">for</span> j <span class="keyword">in</span> range(n_vars)]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            names += [f<span class="string">&#x27;var&#123;j+1&#125;(t+&#123;i&#125;)&#x27;</span> <span class="keyword">for</span> j <span class="keyword">in</span> range(n_vars)]</span><br><span class="line">    agg = pd.concat(cols, axis=1)</span><br><span class="line">    agg.columns = names</span><br><span class="line">    <span class="keyword">if</span> dropnan:</span><br><span class="line">        agg.dropna(inplace=True)</span><br><span class="line">    <span class="built_in">return</span> agg</span><br></pre></td></tr></table></figure>
-<hr>
-<h5 id="2-数据分割与准备"><a href="#2-数据分割与准备" class="headerlink" title="2. 数据分割与准备"></a>2. 数据分割与准备</h5><p>假设有 n_hours 过去时间步，和 n_features 特征数：</p>
-<p>n_obs &#x3D; n_hours * n_features<br>train_X, train_Y &#x3D; train[:, :n_obs], train[:, -6]   # 以倒数第6列为输出变量<br>test_X, test_Y &#x3D; test[:, :n_obs], test[:, -6]</p>
-<hr>
-<h5 id="3-模型结构示例（Keras）"><a href="#3-模型结构示例（Keras）" class="headerlink" title="3. 模型结构示例（Keras）"></a>3. 模型结构示例（Keras）</h5><p>Model: “sequential”</p>
-<table>
-<thead>
-<tr>
-<th>Layer (type)</th>
-<th>Output Shape</th>
-<th>Param #</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>LSTM (lstm)</td>
-<td>(None, 30)</td>
-<td>4680</td>
-</tr>
-<tr>
-<td>Dense (FC1)</td>
-<td>(None, 256)</td>
-<td>7936</td>
-</tr>
-<tr>
-<td>Activation</td>
-<td>(None, 256)</td>
-<td>0</td>
-</tr>
-<tr>
-<td>Dropout</td>
-<td>(None, 256)</td>
-<td>0</td>
-</tr>
-<tr>
-<td>Dense (out_layer)</td>
-<td>(None, 1)</td>
-<td>257</td>
-</tr>
-<tr>
-<td><strong>Total Params</strong></td>
-<td></td>
-<td><strong>12873</strong></td>
-</tr>
-</tbody></table>
-<ul>
-<li>LSTM层参数计算公式：</li>
-</ul>
-<p>Param &#x3D; 4 × [(input_dim + hidden_dim) × hidden_dim + hidden_dim]</p>
-<p>其中，<br>input_dim 是输入特征维度，<br>hidden_dim 是LSTM隐藏单元数量（本例为30）。</p>
-<hr>
-<h5 id="4-LSTM细胞状态计算简述"><a href="#4-LSTM细胞状态计算简述" class="headerlink" title="4. LSTM细胞状态计算简述"></a>4. LSTM细胞状态计算简述</h5><p>细胞状态更新：</p>
-<p>$C_new &#x3D; f(z_f) * C_old + f(z_i) * g(z)$</p>
-<p>隐藏状态输出：</p>
-<p>$a &#x3D; f(z_o) * h(C)$</p>
-<p>其中：<br>f 是sigmoid激活函数，<br>g 是tanh激活函数，<br>维度均为 (hidden_dim,)。</p>
-<hr>
-<h5 id="5-预测测试集时的说明"><a href="#5-预测测试集时的说明" class="headerlink" title="5. 预测测试集时的说明"></a>5. 预测测试集时的说明</h5><p>训练完模型后，预测测试集时，需保证测试集的输入格式与训练集一致，包含足够的过去时间步作为输入。</p>
-<hr>
-<p>以上为LSTM时间序列预测的关键步骤与概念总结，结合pandas数据处理及模型搭建，适合初学者快速理解和实践。</p>
-<h3 id="GNN-Graph-Neural-Network"><a href="#GNN-Graph-Neural-Network" class="headerlink" title="GNN(Graph Neural Network)"></a>GNN(Graph Neural Network)</h3><h4 id="NN4G-Contextual-Model"><a href="#NN4G-Contextual-Model" class="headerlink" title="NN4G (Contextual Model)"></a>NN4G (Contextual Model)</h4><h5 id="Hidden-Units-State-Variables"><a href="#Hidden-Units-State-Variables" class="headerlink" title="Hidden Units (State Variables)"></a>Hidden Units (State Variables)</h5><p>节点 v 的第 i  个隐藏单元（状态变量）$x_i(v)$ 通过以下公式计算：</p>
-<p>$$<br>x_i(v) &#x3D; f\left( \sum_{j&#x3D;0}^L w_{ij} l_j(v) + \sum_{k&#x3D;1}^{i-1} \sum_{u \in \mathcal{N}(v)} w_{ijk}^{(u,v)} , x_k(u) \right)<br>$$</p>
-<p>其中：</p>
-<ul>
-<li>$x_i(v)$ 表示节点 $v$ 第 $i$ 个隐藏单元状态。</li>
-<li>$l_j(v)$ 是节点 $v$ 的第 $j$ 个输入特征。</li>
-<li>$w_{ij}$ 是输入特征到隐藏单元的权重。</li>
-<li>$\mathcal{N}(v)$ 是节点 $v$ 的邻居集合。</li>
-<li>$x_k(u)$ 是邻居节点 $u$ 的第 $k$ 个隐藏单元状态。</li>
-<li>$w_{ijk}^{(u,v)}$ 是邻居隐藏单元到当前隐藏单元的权重，带有邻居 $u$ 和节点 $v$ 的标记。</li>
-<li>$f(\cdot)$ 是激活函数（如 sigmoid 或 tanh）。</li>
-</ul>
-<h3 id="Feature-Normalization（特征归一化）"><a href="#Feature-Normalization（特征归一化）" class="headerlink" title="Feature Normalization（特征归一化）"></a>Feature Normalization（特征归一化）</h3><p>在图神经网络（GNN）或一般的深度学习任务中，特征归一化（Normalization）在不同阶段有不同作用。它可以显著提升训练稳定性、收敛速度，并具备隐式正则化的效果。以下是几种常见的归一化方式：</p>
-<h4 id="🔹-1-输入特征归一化（Input-Feature-Normalization）"><a href="#🔹-1-输入特征归一化（Input-Feature-Normalization）" class="headerlink" title="🔹 1. 输入特征归一化（Input Feature Normalization）"></a>🔹 1. 输入特征归一化（Input Feature Normalization）</h4><p>对输入节点特征 $x_v$ 做归一化是数据预处理的一部分，通常在模型训练前执行。常见方式包括：</p>
-<ul>
-<li><p><strong>Z-score 标准化</strong>：</p>
-<p>$$<br>x_v^{\text{norm}} &#x3D; \frac{x_v - \mu}{\sigma}<br>$$</p>
-</li>
-<li><p><strong>Min-Max 缩放</strong>：</p>
-<p>$$<br>x_v^{\text{norm}} &#x3D; \frac{x_v - x_{\text{min}}}{x_{\text{max}} - x_{\text{min}}}<br>$$</p>
-</li>
-</ul>
-<p><strong>作用</strong>：</p>
-<ul>
-<li>使所有维度特征处于相似数值范围</li>
-<li>防止特征值差异过大导致模型训练不稳定</li>
-<li>提高模型收敛速度</li>
-</ul>
-<hr>
-<h4 id="🔹-2-中间输出归一化（对线性层输出-z-做-Normalization）"><a href="#🔹-2-中间输出归一化（对线性层输出-z-做-Normalization）" class="headerlink" title="🔹 2. 中间输出归一化（对线性层输出 $z$ 做 Normalization）"></a>🔹 2. 中间输出归一化（对线性层输出 $z$ 做 Normalization）</h4><p>在深度网络的每一层中，线性变换的输出（如 $z &#x3D; Wx$）可能存在均值偏移或方差爆炸，容易导致梯度消失或梯度爆炸。为了解决这个问题，通常会对 $z$ 进行归一化：</p>
-<ul>
-<li><p><strong>标准化公式</strong>：</p>
-<p>$$<br>\tilde{z} &#x3D; \frac{z - \mu_z}{\sigma_z}<br>$$</p>
-<p>在此基础上通常还会加入可学习的缩放与偏移参数：</p>
-<p>$$<br>\tilde{z} &#x3D; \gamma \cdot \frac{z - \mu_z}{\sigma_z} + \beta<br>$$</p>
-</li>
-</ul>
-<hr>
-<h4 id="🔹-3-Batch-Normalization（BN）"><a href="#🔹-3-Batch-Normalization（BN）" class="headerlink" title="🔹 3. Batch Normalization（BN）"></a>🔹 3. Batch Normalization（BN）</h4><p><strong>BatchNorm</strong> 是最常用的中间层归一化技术，作用于小批量训练样本的每一层输出。</p>
-<h5 id="📌-训练阶段："><a href="#📌-训练阶段：" class="headerlink" title="📌 训练阶段："></a>📌 训练阶段：</h5><p>对每个 feature 维度 $z$：</p>
-<p>$$<br>\tilde{z}^{(i)} &#x3D; \frac{z^{(i)} - \mu_{\text{batch}}}{\sqrt{\sigma_{\text{batch}}^2 + \epsilon}}<br>$$</p>
-<p>然后进行仿射变换：</p>
-<p>$$<br>y^{(i)} &#x3D; \gamma \tilde{z}^{(i)} + \beta<br>$$</p>
-<p>其中：</p>
-<ul>
-<li>$\mu_{\text{batch}}, \sigma_{\text{batch}}$：当前 batch 内的均值与方差</li>
-<li>$\gamma, \beta$：可学习参数</li>
-<li>$\epsilon$：为避免除以 0 的一个小常数</li>
-</ul>
-<h5 id="🧮-统计更新（用于测试）："><a href="#🧮-统计更新（用于测试）：" class="headerlink" title="🧮 统计更新（用于测试）："></a>🧮 统计更新（用于测试）：</h5><p>在训练过程中同时维护滑动平均统计量：</p>
-<p>$$<br>\bar{\mu} \leftarrow p \cdot \bar{\mu} + (1 - p) \cdot \mu_{\text{batch}}<br>$$</p>
-<p>$$<br>\bar{\sigma}^2 \leftarrow p \cdot \bar{\sigma}^2 + (1 - p) \cdot \sigma_{\text{batch}}^2<br>$$</p>
-<p>测试时使用：</p>
-<p>$$<br>\tilde{z}_{\text{test}} &#x3D; \frac{z - \bar{\mu}}{\sqrt{\bar{\sigma}^2 + \epsilon}}<br>$$</p>
-<h5 id="✅-优点："><a href="#✅-优点：" class="headerlink" title="✅ 优点："></a>✅ 优点：</h5><ul>
-<li>减少内部协变量偏移（Internal Covariate Shift）</li>
-<li>提升收敛速度</li>
-<li>在训练中具备隐式正则化作用</li>
-<li>对深层神经网络特别有效</li>
-</ul>
-<hr>
-<h4 id="🔍-其他归一化方法（补充）"><a href="#🔍-其他归一化方法（补充）" class="headerlink" title="🔍 其他归一化方法（补充）"></a>🔍 其他归一化方法（补充）</h4><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>场景</th>
-<th>是否依赖 batch</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>LayerNorm</td>
-<td>NLP、GNN、Transformer</td>
-<td>否</td>
-<td>对每个样本单独归一化</td>
-</tr>
-<tr>
-<td>InstanceNorm</td>
-<td>图像生成</td>
-<td>否</td>
-<td>对每个样本的每个通道归一化</td>
-</tr>
-<tr>
-<td>GraphNorm</td>
-<td>图神经网络</td>
-<td>否</td>
-<td>考虑图结构的特征归一化策略</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="📌-小结"><a href="#📌-小结" class="headerlink" title="📌 小结"></a>📌 小结</h3><table>
-<thead>
-<tr>
-<th>阶段</th>
-<th>方法</th>
-<th>目的</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>输入阶段</td>
-<td>Z-score、Min-Max</td>
-<td>消除不同特征量纲差异</td>
-</tr>
-<tr>
-<td>网络中间层</td>
-<td>BatchNorm、LayerNorm</td>
-<td>稳定训练、加速收敛</td>
-</tr>
-<tr>
-<td>测试阶段</td>
-<td>使用 EMA 平滑统计</td>
-<td>保证预测一致性和稳定性</td>
-</tr>
-</tbody></table>
-<h3 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h3><h4 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h4><p>Input -&gt; Positional Encoding -&gt; Self-attention -&gt; 加residual -&gt; layer norm -&gt; FC的feed forward network -&gt; 加residual -&gt; layer norm<br>Encoder所需要做的事情：给一排向量输出另外一排向量，这个工作RNN、CNN也可以做。在Transformer里面，用的encoder是self-attention。<br>encoder分成了很多个block，每一个block都是输入一排向量、输出一排向量</p>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>不是每一个block是一个layer，因为一个block是好几个layer组合<br></p>
-</blockquote>
-<hr>
-<h5 id="输入定义"><a href="#输入定义" class="headerlink" title="输入定义"></a>输入定义</h5><p>设输入序列为<br>$X \in \mathbb{R}^{T \times d_{\text{model}}}$</p>
-<ul>
-<li>$T$：序列长度  </li>
-<li>$d_{\text{model}}$：每个 token 的特征维度</li>
-</ul>
-<p>加入位置编码：</p>
-<p>$H^{(0)} &#x3D; X + PE$</p>
-<p>其中 $PE \in \mathbb{R}^{T \times d_{\text{model}}}$ 是位置编码。</p>
-<h5 id="第-l-层-Encoder-Block"><a href="#第-l-层-Encoder-Block" class="headerlink" title="第 l 层 Encoder Block"></a>第 l 层 Encoder Block</h5><p>每一层包含两个子层（Sub-layer）：</p>
-<ol>
-<li>多头自注意力（Multi-head Self-Attention）</li>
-<li>前馈神经网络（Feed Forward Network, FFN）</li>
-</ol>
-<p>每一子层后面都接有残差连接和 Layer Normalization。</p>
-<h6 id="Multi-head-Self-Attention"><a href="#Multi-head-Self-Attention" class="headerlink" title="Multi-head Self-Attention"></a>Multi-head Self-Attention</h6><p>首先计算Query, Key, Value:<br>$$<br>Q &#x3D; H^{(l-1)} W^Q,\quad K &#x3D; H^{(l-1)} W^K,\quad V &#x3D; H^{(l-1)} W^V<br>$$</p>
-<p>其中：</p>
-<ul>
-<li>$W^Q, W^K, W^V \in \mathbb{R}^{d_{\text{model}} \times d_k}$<br>$d_model$通常等于输入或输出的特征维度 </li>
-<li>通常 $d_k &#x3D; \frac{d_{\text{model}}}{h}$，$h$ 为注意力头数</li>
-</ul>
-<p>单个注意力头的输出：</p>
-<p>$$<br>\text{Attention}(Q, K, V) &#x3D; \text{softmax}\left( \frac{Q K^\top}{\sqrt{d_k}} \right) V<br>$$</p>
-<p>多个头拼接：</p>
-<p>$$<br>\text{MultiHead}(H) &#x3D; \text{Concat}(\text{head}_1, …, \text{head}_h) W^O<br>$$</p>
-<p>加残差连接与 LayerNorm：</p>
-<p>$$<br>\tilde{H}^{(l)} &#x3D; \text{LayerNorm}\left( H^{(l-1)} + \text{MultiHead}(H^{(l-1)}) \right)<br>$$</p>
-<h6 id="前馈网络-Feed-Forward-Network-（MLP）"><a href="#前馈网络-Feed-Forward-Network-（MLP）" class="headerlink" title="前馈网络(Feed Forward Network)（MLP）"></a>前馈网络(Feed Forward Network)（MLP）</h6><p>位置前馈网络(Position-wise FFN)作用于每个位置的向量：<br>$$<br>\text{FFN}(x) &#x3D; \max(0, x W_1 + b_1) W_2 + b_2<br>$$<br>其中：</p>
-<ul>
-<li>$W_1 \in \mathbb{R}^{d_{\text{model}} \times d_{\text{ff}}}$</li>
-<li>$W_2 \in \mathbb{R}^{d_{\text{ff}} \times d_{\text{model}}}$</li>
-</ul>
-<p>加残差与 LayerNorm：<br>$$<br>H^{(l)} &#x3D; \text{LayerNorm} \left( \tilde{H}^{(l)} + \text{FFN}(\tilde{H}^{(l)}) \right)<br>$$</p>
-<h5 id="堆叠多个Encoder-Block"><a href="#堆叠多个Encoder-Block" class="headerlink" title="堆叠多个Encoder Block"></a>堆叠多个Encoder Block</h5><p>总共堆叠$L$层Encoder:<br>$$<br>H^{(L)} &#x3D; \text{Encoder}(X) &#x3D; \text{EncoderBlock}^{(L)} \circ \cdots \circ \text{EncoderBlock}^{(1)}(X + PE)<br>$$</p>
-<p>每一层输入输出的维度保持为 $\mathbb{R}^{T \times d_{\text{model}}}$。</p>
-<h4 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h4><p>decoder首先要读取encoder的输出，docoder先会输出一个distribution，选取得分最大的值（概率）输出</p>
-<p>Transformer Decoder 接收两个输入：</p>
-<ol>
-<li>编码器输出 $H^{(L)} \in \mathbb{R}^{T_{\text{enc}} \times d_{\text{model}}}$</li>
-<li>目标序列的前缀（在训练时为 ground truth，推理时为模型历史预测）(也就是已经生成的目标序列target sequence前缀的embedding向量 + 位置信息) e.g., 法语目标句: begin Je suis étudiant<br>由此可知在Transformer的训练过程中，target序列是明确参与训练的，这也叫<strong>teacher forcing</strong>的方法:</li>
-</ol>
-<ul>
-<li>Transformer的Decoder输入是目标序列的前缀（即target的部分或全部已知部分），模型学习预测下一个token。</li>
-<li>换句话说，模型“看到”正确的历史target作为上下文来训练，减少误差积累。</li>
-</ul>
-<p>Decoder 输出目标序列的每一个 token 表示（最终输入 softmax 得出概率分布）。</p>
-<h5 id="第-l-层Decoder-Block构成"><a href="#第-l-层Decoder-Block构成" class="headerlink" title="第$l$层Decoder Block构成"></a>第$l$层Decoder Block构成</h5><p>每一层 decoder block 包含三个子层：</p>
-<ol>
-<li>Masked Multi-head Self-Attention（对目标序列自身）</li>
-<li>Multi-head Encoder-Decoder Attention（使用 encoder 输出）</li>
-<li>Feed Forward Network（FFN）</li>
-</ol>
-<p>每一子层后均使用残差连接和 LayerNorm。</p>
-<h6 id="Masked-Multi-head-Self-Attention-对decoder输入做自注意"><a href="#Masked-Multi-head-Self-Attention-对decoder输入做自注意" class="headerlink" title="Masked Multi-head Self-Attention (对decoder输入做自注意)"></a>Masked Multi-head Self-Attention (对decoder输入做自注意)</h6><p>避免看到未来的消息，使用mask:<br>$$<br>Q^{\text{dec}} &#x3D; H_{\text{dec}}^{(l-1)} W^Q, \quad<br>K^{\text{dec}} &#x3D; H_{\text{dec}}^{(l-1)} W^K, \quad<br>V^{\text{dec}} &#x3D; H_{\text{dec}}^{(l-1)} W^V<br>$$</p>
-<p>计算 masked attention：</p>
-<p>$$<br>\text{MaskedAttention}(Q, K, V) &#x3D; \text{softmax}\left( \frac{Q K^\top}{\sqrt{d_k}} + M \right) V<br>$$</p>
-<ul>
-<li>$M$ 是 mask 矩阵，用于遮蔽未来的 token</li>
-</ul>
-<p>添加残差连接：</p>
-<p>$$<br>\tilde{H}<em>{\text{dec}}^{(l,1)} &#x3D; \text{LayerNorm}\left( H</em>{\text{dec}}^{(l-1)} + \text{MaskedAttention}(\cdot) \right)<br>$$</p>
-<h6 id="Encoder-Decoder-Attention-查询encoder输出"><a href="#Encoder-Decoder-Attention-查询encoder输出" class="headerlink" title="Encoder-Decoder Attention (查询encoder输出)"></a>Encoder-Decoder Attention (查询encoder输出)</h6><p>$$<br>Q^{\text{dec-enc}} &#x3D; \tilde{H}<em>{\text{dec}}^{(l,1)} W^Q, \quad<br>K^{\text{enc}} &#x3D; H</em>{\text{enc}}^{(L)} W^K, \quad<br>V^{\text{enc}} &#x3D; H_{\text{enc}}^{(L)} W^V<br>$$</p>
-<p>$$<br>\text{CrossAttention}(Q, K, V) &#x3D; \text{softmax}\left( \frac{Q K^\top}{\sqrt{d_k}} \right) V<br>$$</p>
-<p>残差连接：</p>
-<p>$$<br>\tilde{H}<em>{\text{dec}}^{(l,2)} &#x3D; \text{LayerNorm}\left( \tilde{H}</em>{\text{dec}}^{(l,1)} + \text{CrossAttention}(\cdot) \right)<br>$$</p>
-<h6 id="Feed-Forward-Network"><a href="#Feed-Forward-Network" class="headerlink" title="Feed Forward Network"></a>Feed Forward Network</h6><p>$$<br>H_{\text{dec}}^{(l)} &#x3D; \text{LayerNorm}\left( \tilde{H}<em>{\text{dec}}^{(l,2)} + \text{FFN}(\tilde{H}</em>{\text{dec}}^{(l,2)}) \right)<br>$$</p>
-<h6 id="最终输出"><a href="#最终输出" class="headerlink" title="最终输出"></a>最终输出</h6><p>输出：</p>
-<p>$$<br>Y &#x3D; \text{Decoder}(H_{\text{enc}}^{(L)}, Y_{\text{in}}) \in \mathbb{R}^{T_{\text{dec}} \times d_{\text{model}}}<br>$$</p>
-<p>最终通过一个线性变换 $W_o$ 和 softmax 映射为词表分布：</p>
-<p>$$<br>P(y_t | y_{&lt;t}, X) &#x3D; \text{softmax}(W_o H_{\text{dec}, t}^{(L)} + b_o)<br>$$</p>
-<h5 id="自回归-vs-非自回归"><a href="#自回归-vs-非自回归" class="headerlink" title="自回归 vs 非自回归"></a>自回归 vs 非自回归</h5><h6 id="Autoregressive-Transformer-AT"><a href="#Autoregressive-Transformer-AT" class="headerlink" title="Autoregressive Transformer (AT)"></a>Autoregressive Transformer (AT)</h6><ul>
-<li>Decoder 每一步只接收过去的输出，逐步生成</li>
-<li>序列生成是 <strong>逐步预测</strong> 的，无法并行</li>
-<li>使用 Masked Self-Attention 限制信息流方向</li>
-</ul>
-<h6 id="Non-Autoregressive-Transformer-NAT"><a href="#Non-Autoregressive-Transformer-NAT" class="headerlink" title="Non-Autoregressive Transformer (NAT)"></a>Non-Autoregressive Transformer (NAT)</h6><ul>
-<li>一次性生成全部 token，跳过逐步预测</li>
-<li>模型需额外 <strong>预测输出长度</strong>，或引入特殊机制（如 mask、编辑路径、latent alignment）</li>
-<li>编码器输出需携带更多信息</li>
-<li>速度快，但精度通常低于 AT</li>
-</ul>
-<h3 id="Vision-Transformer-ViT"><a href="#Vision-Transformer-ViT" class="headerlink" title="Vision Transformer (ViT)"></a>Vision Transformer (ViT)</h3><p>ViT和一般的Transformer不同，不需要decoder，只需要encoder。<br>ViT将输入图片分为多个patch(16x16),再将每个patch投影为固定长度的向量送入Transformer，后续encoder的操作和原始Transformer中完全相同。<br>对于图片分类，因此在输入序列中加入一个<strong>特殊的</strong>token，该token对应的输出即为最后的类别预测。</p>
-<ul>
-<li>patch embedding:<br>例如输入图片大小为224x224，将图片分为固定大小的patch，patch大小为16x16，则每张图像会生成224x224&#x2F;16x16&#x3D;196个patch，也就是说sequence length &#x3D; 196，每个patch维度16x16x3 &#x3D; 768。因此输入通过线性投射层之后的维度依然为196x768，即一共有196个token，每个token的维度是768。这里还需要加上一个特殊字符cls，因此最终的维度是197x768。因此，通过patch embedding可以将vision问题转为一个seq2seq问题</li>
-<li>positional encoding<br>和basic transformer一样,可以理解为为一张表，表一共有N行，N的大小和输入序列长度相同，每一行代表一个向量，向量的维度和输入序列embedding的维度相同（768）</li>
-<li>Layer Normalization&#x2F;multi-head attention&#x2F;Layer Normalization<br>LN输出维度依然是197x768。多头自注意力时，先将输入映射到q，k，v，如果只有一个头，qkv的维度都是197x768，如果有12个头（768&#x2F;12&#x3D;64），则qkv的维度是197x64，一共有12组qkv，最后再将12组qkv的输出拼接起来，输出维度是197x768，然后在过一层LN，维度依然是197x768</li>
-<li>MLP（Feed Forward Network FFN）<br>将维度放大再缩小回去，197x768放大为197x3072，再缩小变为197x768</li>
-</ul>
-<p>一个block之后维度依然和输入相同，都是197x768，因此可以堆叠多个block。最后会将特殊字符cls对应的输出<br>作为encoder的最终输出 ，代表最终的image presentation（另一种做法是不加cls字符，对所有的tokens的输出做一个平均）</p>
-<h3 id="Generative-Adversarial-Networks-GAN"><a href="#Generative-Adversarial-Networks-GAN" class="headerlink" title="Generative Adversarial Networks (GAN)"></a>Generative Adversarial Networks (GAN)</h3><p>Generative Adversarial Networks (GANs) are a class of deep learning models in which <strong>two networks compete</strong>: a <strong>generator</strong> tries to produce realistic data, and a <strong>discriminator</strong> tries to distinguish between real and fake data. This adversarial setup drives both networks to improve.</p>
-<h4 id="Key-Components"><a href="#Key-Components" class="headerlink" title="Key Components"></a>Key Components</h4><h5 id="1-Generator-G"><a href="#1-Generator-G" class="headerlink" title="1. Generator (G)"></a>1. Generator (G)</h5><ul>
-<li><strong>Input</strong>: random noise vector <code>z</code> (e.g., 100-dimensional Gaussian)</li>
-<li><strong>Output</strong>: fake data (e.g., an image)</li>
-<li><strong>Goal</strong>: generate samples that look like real data and <strong>fool the discriminator</strong></li>
-</ul>
-<h5 id="2-Discriminator-D"><a href="#2-Discriminator-D" class="headerlink" title="2. Discriminator (D)"></a>2. Discriminator (D)</h5><ul>
-<li><strong>Input</strong>: real or generated data</li>
-<li><strong>Output</strong>: a probability (0 &#x3D; fake, 1 &#x3D; real)</li>
-<li><strong>Goal</strong>: correctly distinguish real data from generated (fake) data</li>
-</ul>
-<h4 id="Overall-Objective"><a href="#Overall-Objective" class="headerlink" title="Overall Objective"></a>Overall Objective</h4><p>The two networks play a <strong>minimax game</strong><br>$$<br>\min_G \max_D V(D, G) &#x3D; \mathbb{E}<em>{x \sim p</em>{\text{data}}}[\log D(x)] + \mathbb{E}_{z \sim p_z}[\log(1 - D(G(z)))]<br>$$</p>
-<ul>
-<li>Discriminator <code>D</code> tries to <strong>maximize</strong> the ability to classify real vs fake.</li>
-<li>Generator <code>G</code> tries to <strong>minimize</strong> the ability of <code>D</code> to detect its fakes.</li>
-</ul>
-<h4 id="Train"><a href="#Train" class="headerlink" title="Train"></a>Train</h4><h5 id="Step-1-Fix-Generator-Train-Discriminator"><a href="#Step-1-Fix-Generator-Train-Discriminator" class="headerlink" title="Step 1: Fix Generator, Train Discriminator"></a>Step 1: Fix Generator, Train Discriminator</h5><p><strong>Goal</strong>: Teach <code>D</code> to distinguish real and fake data</p>
-<ol>
-<li>Sample a batch of real data <code>x_real</code> from the dataset.</li>
-<li>Sample random noise <code>z</code>, and generate fake data <code>x_fake = G(z)</code>.</li>
-<li>Compute discriminator outputs:<ul>
-<li><code>D(x_real)</code> → should be close to 1</li>
-<li><code>D(G(z))</code> → should be close to 0</li>
-</ul>
-</li>
-<li>Compute discriminator loss:</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">L_D = -[ \log D(x_&#123;\text&#123;real&#125;&#125;) + \log(1 - D(G(z))) ]</span><br></pre></td></tr></table></figure>
-<p>用GAN原始论文中判别器的目标函数表达的是同一个意思，只是换了视角：<br>$$<br>\mathbb{E}<em>{x \sim P</em>{\text{data}}}[\log D(x)] + \mathbb{E}_{x’ \sim P_g}[\log(1 - D(x’))]<br>$$</p>
-<ul>
-<li>D(x) is the discriminator’s estimated probability that x is real</li>
-<li>G(z) maps a noise vector z to a generated sample x’ &#x3D; G(z)</li>
-<li>$P_{data}$是real image集，也是随机变量，$P_g$是经过generator后产生的数据集。</li>
-</ul>
-<ol start="5">
-<li>Update only <strong>D’s parameters</strong> (freeze G).</li>
-</ol>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>Assuming an optimal discriminator $D^<em>(x) &#x3D; \frac{P_{\text{data}}(x)}{P_{\text{data}}(x) + P_g(x)}$, plugging this into the value function yields:<br><br>$V(D^</em>, G) &#x3D; -\log(4) + 2 \cdot D_{JS}(P_{\text{data}} | P_g)$<br><br>This means <strong>minimizing $V(D^*, G)$ is equivalent to minimizing JS divergence</strong>. Hence, improving the generator means reducing<br> divergence between the two distributions.<br></p>
-</blockquote>
-<hr>
-<h6 id="Step-2-Fix-Discriminator-Train-Generator"><a href="#Step-2-Fix-Discriminator-Train-Generator" class="headerlink" title="Step 2: Fix Discriminator, Train Generator"></a>Step 2: Fix Discriminator, Train Generator</h6><p><strong>Goal</strong>: Improve <code>G</code> so that <code>D</code> can’t tell its output is fake</p>
-<ol>
-<li>Sample new random noise <code>z</code></li>
-<li>Generate fake data <code>x_fake = G(z)</code></li>
-<li>Compute discriminator prediction <code>D(G(z))</code></li>
-<li>Generator loss (trying to <strong>maximize</strong> D’s confidence that fakes are real):</li>
-</ol>
-<p>$$<br>L_G &#x3D; -\log D(G(z))<br>$$</p>
-<ol start="5">
-<li>Update only <strong>G’s parameters</strong> (freeze D)</li>
-</ol>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>可以把Generator和Discriminator合成一个large network来看待<br><br>例如Genrator有5层神经网络，Discriminator有5层神经网络，那么我们一共要训练的就是10层神经网络<br></p>
-</blockquote>
-<hr>
-<h3 id="Self-Supervised"><a href="#Self-Supervised" class="headerlink" title="Self-Supervised"></a>Self-Supervised</h3><p>Self-supervised learning（自监督学习）是一种无需人工标注标签的训练方法。它从<strong>数据本身构造训练信号</strong>，本质上是监督学习，但标签是自动生成的。</p>
-<h4 id="BERT"><a href="#BERT" class="headerlink" title="BERT"></a>BERT</h4><p>BERT（Bidirectional Encoder Representations from Transformers）是 Google 提出的语言模型，它基于 Transformer 编码器结构，利用双向上下文信息对文本进行深度理解。BERT 在多个自然语言处理任务上实现了 SOTA（state-of-the-art）性能。<br>BERT 的训练不需要人工标注数据，而是通过两种任务<strong>自动生成标签</strong>：</p>
-<h5 id="Masked-Language-Modeling-MLM"><a href="#Masked-Language-Modeling-MLM" class="headerlink" title="Masked Language Modeling (MLM)"></a>Masked Language Modeling (MLM)</h5><ul>
-<li>原始句子：<code>I love spicy food</code></li>
-<li>遮盖构造：<code>I love [MASK] food</code></li>
-<li>模型目标：预测 <code>[MASK]</code> 是 <code>spicy</code></li>
-</ul>
-<p><strong>标签 spicy 是从原始句子自动提取的，而不是人工写入。</strong></p>
-<p>这就是自监督的关键点：<strong>标签自动构造。</strong></p>
-<h5 id="Next-Sentence-Prediction-NSP"><a href="#Next-Sentence-Prediction-NSP" class="headerlink" title="Next Sentence Prediction (NSP)"></a>Next Sentence Prediction (NSP)</h5><ul>
-<li>给定句子 A 和句子 B：<ul>
-<li>有 50% 情况：B 是 A 的下一句（真实）</li>
-<li>有 50% 情况：B 是随机句子（非真实）</li>
-</ul>
-</li>
-<li>模型目标：预测 B 是否是 A 的下一句</li>
-</ul>
-<p><strong>这同样不需要人工标注，BERT 从语料库中自动采样句子构造标签。</strong></p>
-<h5 id="BERT的训练流程"><a href="#BERT的训练流程" class="headerlink" title="BERT的训练流程"></a>BERT的训练流程</h5><ol>
-<li><strong>输入构造</strong>：<ul>
-<li>输入句子对 + Token Embeddings + Segment Embeddings + Positional Embeddings</li>
-</ul>
-</li>
-<li><strong>通过多层 Transformer Encoder 处理</strong></li>
-<li><strong>MLM 预测遮盖的词，NSP 判断句子顺序</strong></li>
-</ol>
-<h5 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h5><ul>
-<li>BERT 使用了自监督学习方法训练，无需人工标签</li>
-<li>虽然它是一个监督学习问题（有输入和目标），但这些目标是从数据本身自动生成的。</li>
-<li>自监督学习让模型能利用大规模未标注语料，提升预训练效果。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2685,7 +1699,7 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-count">47</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
