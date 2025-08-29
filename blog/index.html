@@ -150,6 +150,190 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/29/D%C2%B2-JSCC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/29/D%C2%B2-JSCC/" class="post-title-link" itemprop="url">D²-JSCC</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-29 21:44:15 / Modified: 21:46:40" itemprop="dateCreated datePublished" datetime="2025-08-29T21:44:15+08:00">2025-08-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h2><ul>
+<li><strong>JSCC (Joint Source Channel Coding)</strong> &#x3D; 联合信源信道编码。</li>
+<li>传统方案：<ul>
+<li><strong>纯数字传输 (JPEG + LDPC&#x2F;Polar)</strong><br>高 SNR 时接近容量，但低 SNR 时一旦出错会“花屏”。</li>
+<li><strong>纯模拟 JSCC</strong><br>没有信道编码，失真随 SNR 平滑退化，但高 SNR 浪费容量。</li>
+<li><strong>深度 JSCC</strong><br>用神经网络直接端到端映射图像→信道符号。鲁棒，但高 SNR 不如数字系统。</li>
+</ul>
+</li>
+<li><strong>D²-JSCC</strong>（本文提出）：<br>结合 <strong>深度信源编码 (Deep Source Coding)</strong> + <strong>数字信道编码 (Digital Channel Coding)</strong>，兼顾鲁棒性与容量利用率。</li>
+</ul>
+<hr>
+<h2 id="2-深度-JSCC-vs-D²-JSCC"><a href="#2-深度-JSCC-vs-D²-JSCC" class="headerlink" title="2. 深度 JSCC vs D²-JSCC"></a>2. 深度 JSCC vs D²-JSCC</h2><h3 id="深度-JSCC"><a href="#深度-JSCC" class="headerlink" title="深度 JSCC"></a>深度 JSCC</h3><ul>
+<li><strong>没有传统意义上的信道编码</strong>。</li>
+<li>图像 → CNN 编码 → 信道符号 → 解码器 CNN → 图像恢复。</li>
+<li>鲁棒性来自神经网络自动学到的冗余映射。</li>
+<li><strong>优点</strong>：低 SNR 下平滑退化，不会突然花屏。  </li>
+<li><strong>缺点</strong>：高 SNR 下码率固定，不能榨干信道容量。</li>
+</ul>
+<h3 id="D²-JSCC"><a href="#D²-JSCC" class="headerlink" title="D²-JSCC"></a>D²-JSCC</h3><ul>
+<li><strong>有传统意义上的信道编码</strong>（如 LDPC、Polar）。  </li>
+<li>流程：<br>图像 → 深度信源编码 (DNN) → 比特流<br>→ 信道编码 (LDPC&#x2F;Polar) → 符号<br>→ 无线信道 → 解调&#x2F;译码<br>→ 深度信源解码 (DNN) → 重建图像</li>
+<li><strong>优点</strong>：  </li>
+<li>低 SNR 下鲁棒（深度信源编码不会像 JPEG 那样产生花屏）；  </li>
+<li>高 SNR 下接近信道容量（因为仍有传统信道编码）。</li>
+</ul>
+<h2 id="3-为什么-D²-JSCC-更鲁棒"><a href="#3-为什么-D²-JSCC-更鲁棒" class="headerlink" title="3. 为什么 D²-JSCC 更鲁棒"></a>3. 为什么 D²-JSCC 更鲁棒</h2><h3 id="JPEG-LDPC-的问题"><a href="#JPEG-LDPC-的问题" class="headerlink" title="JPEG+LDPC 的问题"></a>JPEG+LDPC 的问题</h3><ul>
+<li>熵编码比特流对错误极度敏感。</li>
+<li>一旦信道码解码失败 → 整帧报废 → 花屏。</li>
+</ul>
+<h3 id="深度信源编码的优势"><a href="#深度信源编码的优势" class="headerlink" title="深度信源编码的优势"></a>深度信源编码的优势</h3><ul>
+<li>DNN 学到的特征是 <strong>分布式冗余</strong>，不依赖严格语法。</li>
+<li>即使部分比特错误，解码器 CNN 仍能通过上下文恢复合理图像。</li>
+<li>结果：低 SNR 下 <strong>平滑退化</strong>，而不是突然崩溃。</li>
+</ul>
+<h2 id="4-为什么深度-JSCC-高-SNR-下浪费容量"><a href="#4-为什么深度-JSCC-高-SNR-下浪费容量" class="headerlink" title="4. 为什么深度 JSCC 高 SNR 下浪费容量"></a>4. 为什么深度 JSCC 高 SNR 下浪费容量</h2><h3 id="信道容量"><a href="#信道容量" class="headerlink" title="信道容量"></a>信道容量</h3><ul>
+<li>高斯信道容量：<br>[<br>C &#x3D; \log_2(1+\text{SNR})<br>]</li>
+<li>数字系统（LDPC&#x2F;Polar）：高 SNR 时码率随 SNR 提升，逼近容量。</li>
+</ul>
+<h3 id="深度-JSCC-的限制"><a href="#深度-JSCC-的限制" class="headerlink" title="深度 JSCC 的限制"></a>深度 JSCC 的限制</h3><ul>
+<li>符号映射是固定的，不会随 SNR 动态提升码率。</li>
+<li>优化目标是失真最小化，而不是“码率 &#x3D; 容量”。</li>
+<li>即使噪声趋近于 0，仍存在一定的重建误差。</li>
+</ul>
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><ul>
+<li>高 SNR 下，深度 JSCC 的失真有下限，无法无限逼近零失真。</li>
+<li>数字系统能充分利用信道容量，而深度 JSCC 会浪费容量。</li>
+</ul>
+<h2 id="5-本文创新点"><a href="#5-本文创新点" class="headerlink" title="5. 本文创新点"></a>5. 本文创新点</h2><ol>
+<li><p><strong>架构创新</strong><br> 提出 D²-JSCC，把深度信源编码和传统数字信道编码结合。</p>
+</li>
+<li><p><strong>信源端优化</strong><br> 使用自适应概率模型（辅助潜变量 z + 条件高斯分布）提升压缩效率。</p>
+</li>
+<li><p><strong>理论贡献</strong><br> 推导了 <strong>端到端失真上界 (Theorem 3.1)</strong>，把信道误块率和系统参数引入到失真公式中。</p>
+</li>
+<li><p><strong>性能优势</strong></p>
+</li>
+</ol>
+<ul>
+<li>低 SNR：比 JPEG+LDPC 鲁棒。  </li>
+<li>高 SNR：比深度 JSCC 更接近信道容量。  </li>
+<li>实现了“既鲁棒又高效”的传输。</li>
+</ul>
+<h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h2><ul>
+<li><strong>深度 JSCC</strong>：没有信道编码，低 SNR 鲁棒但高 SNR 浪费容量。  </li>
+<li><strong>D²-JSCC</strong>：有信道编码，兼顾低 SNR 鲁棒性和高 SNR 容量利用率。  </li>
+<li>本文的价值在于把深度学习的信源编码与传统通信理论结合，提出了一个 <strong>既有实践性能，又有理论保证</strong> 的新型通信框架。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/29/Hyperprior/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/29/Hyperprior/" class="post-title-link" itemprop="url">Hyperprior</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-08-29 11:37:52" itemprop="dateCreated datePublished" datetime="2025-08-29T11:37:52+08:00">2025-08-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/29/%E7%86%B5%E7%BC%96%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -353,7 +537,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-08-29 10:50:15 / Modified: 10:58:27" itemprop="dateCreated datePublished" datetime="2025-08-29T10:50:15+08:00">2025-08-29</time>
+              <time title="Created: 2025-08-29 10:50:15 / Modified: 20:49:26" itemprop="dateCreated datePublished" datetime="2025-08-29T10:50:15+08:00">2025-08-29</time>
             </span>
 
           
@@ -391,13 +575,16 @@
 </li>
 </ul>
 <h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><ul>
-<li>LDPC 编码<ul>
+<li><p>LDPC 编码</p>
+<ul>
 <li>输入：100 个信息比特</li>
 <li>输出：200 个编码比特</li>
 <li>Rc &#x3D; 100 &#x2F; 200 &#x3D; 1&#x2F;2</li>
+<li>输出的 200 个编码比特还属于比特序列，未调制前不能直接发送</li>
 </ul>
 </li>
-<li>输出的 200 个编码比特还属于比特序列，未调制前不能直接发送</li>
+<li><p>卷积码（Convolution Code）<br>若卷积码编码（r&#x3D;1&#x2F;2），也就是速率r&#x3D;1&#x2F;2，输入1bit，输出2bits，等效于在发射端增加冗余，方便接收端做错误检测和纠错。</p>
+</li>
 </ul>
 <h2 id="3-调制-Modulation"><a href="#3-调制-Modulation" class="headerlink" title="3. 调制 (Modulation)"></a>3. 调制 (Modulation)</h2><ul>
 <li>将编码比特映射为可在物理信道上发送的信号</li>
@@ -493,10 +680,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-08-28 19:27:17 / Modified: 21:48:39" itemprop="dateCreated datePublished" datetime="2025-08-28T19:27:17+08:00">2025-08-28</time>
+              <time title="Created: 2025-08-28 19:27:17" itemprop="dateCreated datePublished" datetime="2025-08-28T19:27:17+08:00">2025-08-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-08-29 16:29:43" itemprop="dateModified" datetime="2025-08-29T16:29:43+08:00">2025-08-29</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -525,31 +718,70 @@
 <li><strong>软条件化</strong>（Soft Conditioning）：编码器可根据调制阶数（M-QAM）和信道SNR自适应调制特征  </li>
 <li><strong>噪声近似训练</strong>：训练阶段使用连续噪声替代调制&#x2F;解调操作，使梯度可回传</li>
 </ul>
-<h2 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h2><h3 id="1-输入信号处理"><a href="#1-输入信号处理" class="headerlink" title="1. 输入信号处理"></a>1. 输入信号处理</h3><ul>
-<li><strong>AnalysisTransform (NTC)</strong>：将原始图像降维到 latent feature，输出形状 <code>[B, C, H&#39;, W&#39;]</code>  </li>
-<li>降维作用：<ul>
-<li>将图像信息压缩成潜在特征  </li>
-<li>便于 JSCC 编码器处理</li>
+<h2 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h2><h3 id="1-输入信号处理（AnalysisTransform-NTC-）"><a href="#1-输入信号处理（AnalysisTransform-NTC-）" class="headerlink" title="1. 输入信号处理（AnalysisTransform (NTC)）"></a>1. 输入信号处理（AnalysisTransform (NTC)）</h3><ul>
+<li><p><strong>功能</strong>：</p>
+<ul>
+<li>将原始图像 <code>[B, C, H, W]</code> 映射为潜在表示 <code>[B, C&#39;, H&#39;, W&#39;]</code>。</li>
+<li>降低空间维度，同时提取局部和全局特征。</li>
+<li>为 JSCC 编码器提供高效的潜在特征表示。</li>
+</ul>
+</li>
+<li><p><strong>实现细节</strong>：</p>
+<ul>
+<li>使用 <strong>Swin Transformer</strong> 模块和 Patch Embedding 层。</li>
+<li>通过多层 Swin Transformer Block 进行特征提取。</li>
+<li>输出的潜在特征维度：<ul>
+<li><code>C&#39;</code>：潜在通道数（例如 256），表示潜在特征维度。</li>
+<li><code>H&#39;, W&#39;</code>：空间分辨率，经降采样后通常为原图的 1&#x2F;16。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>降维作用</strong>：</p>
+<ul>
+<li>将高维图像信息压缩为低维潜在特征，减少信道传输冗余。</li>
+<li>提取关键特征，增强潜在表示的表达能力。</li>
+<li>为后续 <strong>JSCC 编码器&#x2F;信道模块</strong>提供适合连续编码的特征表示。</li>
+</ul>
+</li>
+<li><p><strong>后续处理</strong>：</p>
+<ul>
+<li>潜在表示 <code>y</code> 可通过 <strong>Hyperprior 模块</strong>估计尺度参数 (<code>scales_hat</code>) 和均值 (<code>means_hat</code>)。</li>
+<li>潜在表示进一步量化为 <code>y_hat</code>，并输入 <strong>SynthesisTransform</strong> 或 JSCC 编码器进行压缩传输。</li>
 </ul>
 </li>
 </ul>
 <h3 id="2-JSCC编码器（JSCCEncoder）"><a href="#2-JSCC编码器（JSCCEncoder）" class="headerlink" title="2. JSCC编码器（JSCCEncoder）"></a>2. JSCC编码器（JSCCEncoder）</h3><p>主要组成：</p>
 <ul>
-<li><strong>Swin Transformer Blocks</strong>：提取高级特征  </li>
-<li><strong>Rate Adaption Layer</strong>：根据熵模型和信道需求动态调整编码长度  </li>
-<li><strong>MergingNet (Modulation Conditional Module, MCM)</strong>：<ul>
+<li><p><strong>Swin Transformer Blocks</strong>：</p>
+<ul>
+<li>自注意力机制<br>  每个patch可访问其他patch的信息，类似<strong>冗余信息分布</strong></li>
+<li>多层堆叠<br>  高纬特征融合，增加了特征的鲁棒性</li>
+<li>MLP变换。<br>  非线性映射，把信息分布在多个通道-》类似把信号映射到冗余码字空间<br>  因此刚好满足信道编码的功能：增加冗余、增强抗噪声能力</li>
+</ul>
+</li>
+<li><p><strong>Rate Adaption Layer</strong>：根据熵模型和信道需求动态调整编码长度。</p>
+<ul>
+<li>根据每个patch的信息量（或者说熵）选择不同的编码率</li>
+<li>通过可学习的weight和bias对输入特征进行线性变换，然后用mask限制每个patch的有效长度，实现自适应编码。</li>
+</ul>
+</li>
+<li><p><strong>MergingNet (Modulation Conditional Module, MCM)</strong>：</p>
+<ul>
 <li>输入：latent feature + 调制阶数 M  </li>
 <li>对特征进行 <strong>软条件化</strong>：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = x * softplus(M_onehot1) + M_onehot2</span><br></pre></td></tr></table></figure></li>
 <li>作用：让编码器特征适应不同调制阶数</li>
 </ul>
 </li>
-<li><strong>AF (Adaptive Feature Layer)</strong>：<ul>
+<li><p><strong>AF (Adaptive Feature Layer)</strong>：</p>
+<ul>
 <li>输入：latent feature + 信道 SNR  </li>
 <li>对特征进行缩放和平移：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">z = z * scale + shift</span><br></pre></td></tr></table></figure></li>
 <li>作用：信道条件自适应，提升鲁棒性</li>
 </ul>
 </li>
-<li>输出：经过软条件化和可选调制处理的连续 latent feature</li>
+<li><p>输出：经过软条件化和可选调制处理的连续 latent feature</p>
+</li>
 </ul>
 <h3 id="3-调制近似"><a href="#3-调制近似" class="headerlink" title="3. 调制近似"></a>3. 调制近似</h3><ul>
 <li>将连续latent feature 映射成离散QAM符号</li>
@@ -1254,186 +1486,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/20/CSI%E5%8E%8B%E7%BC%A9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/08/20/CSI%E5%8E%8B%E7%BC%A9/" class="post-title-link" itemprop="url">CSI压缩</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-08-20 18:43:08 / Modified: 22:12:16" itemprop="dateCreated datePublished" datetime="2025-08-20T18:43:08+08:00">2025-08-20</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="CSI基本表示"><a href="#CSI基本表示" class="headerlink" title="CSI基本表示"></a>CSI基本表示</h2><p>CSI用来描述无线信道的频率响应。<br>在OFDM系统中，CSI常用矩阵表示：</p>
-<ul>
-<li>行方向：天线</li>
-<li>列方向：子载波</li>
-<li>例如：$H ∈ C^{Nc × Nt}$，其中<ul>
-<li>Nc &#x3D; 天线数</li>
-<li>Nt &#x3D; 子载波数.</li>
-</ul>
-</li>
-</ul>
-<h2 id="时域和频域的关系"><a href="#时域和频域的关系" class="headerlink" title="时域和频域的关系"></a>时域和频域的关系</h2><p>H[t] -&gt; DFT -&gt; 频域CSI。<br>DFT表达式:  </p>
-<p>$H[k] &#x3D; \sum_{l&#x3D;0}^{L-1} h[l] \cdot e^{-j \frac{2\pi k l}{N}}$.<br>也可以将其写成矩阵形式：<br>H &#x3D; W h<br>其中 W 是 DFT 矩阵，$W ∈ C^{N_c × L}$, $h ∈ C^{L × N_t}$, $H ∈ C^{N_c × N_t}$. </p>
-<h2 id="CSI的角度-延迟域变换"><a href="#CSI的角度-延迟域变换" class="headerlink" title="CSI的角度-延迟域变换"></a>CSI的角度-延迟域变换</h2><p>$\hat{H}_~ &#x3D; F_c * H * F_t^H$. </p>
-<ul>
-<li>Fc: Nc x Nc 的 DFT 矩阵，作用在行方向（天线 -&gt; 角度域）</li>
-<li>Ft: Nt x Nt 的 DFT 矩阵，作用在列方向（子载波 -&gt; 延迟域）</li>
-</ul>
-<p>第一步是计算H与$F_t^H$进行右乘，相当于对每一行（固定天线）都会把“跨子载波的频域响应”做IDFT（因为是对Ft求共轭处理），得到“跨延迟抽头的时延响应”，然后第二步是将计算得到的与Fc进行左乘，相当于对每一列（固定延迟抽头）做DFT，把天线域的信号转换到角度域。  </p>
-<h2 id="最终结果"><a href="#最终结果" class="headerlink" title="最终结果"></a>最终结果</h2><p>$\hat{H}_~$在角度-延迟域往往呈现出稀疏性：</p>
-<ul>
-<li>多径信道只在延迟bins和角度bins上有能量</li>
-<li>其他位置接近0</li>
-</ul>
-<p>正是这种稀疏性，使得CSI可以高效压缩和反馈</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/12/%E6%B3%A2%E6%9D%9F%E8%B5%8B%E5%BD%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/08/12/%E6%B3%A2%E6%9D%9F%E8%B5%8B%E5%BD%A2/" class="post-title-link" itemprop="url">波束赋形</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-08-12 15:30:59 / Modified: 15:32:25" itemprop="dateCreated datePublished" datetime="2025-08-12T15:30:59+08:00">2025-08-12</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <p>了解发射端数字基带信号txSigSTS与射频波束赋形矩阵mFrf相乘的物理意义，以及波束赋形在无线通信发射链路中的位置和作用。</p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在多天线无线通信系统中，为了提升信号质量、增强覆盖能力或实现空间复用，常采用波束赋形技术。波束赋形可分为数字波束赋形和射频（模拟）波束赋形。</p>
-<h2 id="发射端信号处理流程"><a href="#发射端信号处理流程" class="headerlink" title="发射端信号处理流程"></a>发射端信号处理流程</h2><p>一般发射端信号处理主要包括：</p>
-<ul>
-<li>数字基带处理：编码、调制、空间复用（多数据流处理）</li>
-<li>数字波束赋形：基带域信号预编码</li>
-<li>数字-模拟转换（DAC）</li>
-<li>射频波束赋形：通过相移器及功率放大器对每个天线的信号加权，控制信号方向和形态</li>
-<li>天线发射</li>
-</ul>
-<h2 id="矩阵乘法-txSig-txSigSTS-mFrf-的意义"><a href="#矩阵乘法-txSig-txSigSTS-mFrf-的意义" class="headerlink" title="矩阵乘法 txSig &#x3D; txSigSTS * mFrf 的意义"></a>矩阵乘法 txSig &#x3D; txSigSTS * mFrf 的意义</h2><ul>
-<li>txSigSTS: 形状为 (样本数 × 数据流数) 的数字基带信号矩阵，代表每个独立数据流对应的基带时间序列。</li>
-<li>mFrf: 射频波束赋形矩阵，形状为 (数据流数 × 天线数)，其每个元素为对应数据流在每根天线上的复数加权系数（幅度和相位）。</li>
-</ul>
-<p>通过矩阵乘法，txSigSTS乘以mFrf后，得到 (样本数 × 天线数) 维度的信号矩阵txSig，即为分配给每根天线的发送信号。</p>
-<h2 id="射频波束赋形的作用"><a href="#射频波束赋形的作用" class="headerlink" title="射频波束赋形的作用"></a>射频波束赋形的作用</h2><p>射频波束赋形实现了：</p>
-<ul>
-<li>信号在空间方向上的加权叠加</li>
-<li>聚焦信号能量向目标方向</li>
-<li>减少干扰，提升信道容量与传输质量</li>
-<li>在多流传输中实现信号分离</li>
-</ul>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>射频波束赋形是发射端信号链中从基带信号到天线发射信号转换的关键步骤，通常是发射端的最后一个信号处理阶段。其核心即是将数字基带多流信号通过加权矩阵映射到每个物理天线上，形成定向或多用户信号发射。</p>
-<p>附注：  </p>
-<ul>
-<li>mFrf的设计通常基于信道估计和优化算法（如正交匹配追踪OMP），以实现最佳波束指向和多流分离。  </li>
-<li>此步骤是多输入多输出（MIMO）和混合波束赋形系统的基础。</li>
-</ul>
-<hr>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1503,7 +1555,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

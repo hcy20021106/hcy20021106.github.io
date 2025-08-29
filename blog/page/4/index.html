@@ -150,6 +150,367 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/05/%E6%A8%A1%E6%8B%9F%E8%B0%83%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/05/%E6%A8%A1%E6%8B%9F%E8%B0%83%E5%88%B6/" class="post-title-link" itemprop="url">模拟调制</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-06-05 03:19:42" itemprop="dateCreated datePublished" datetime="2025-06-05T03:19:42+08:00">2025-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-06-24 22:14:20" itemprop="dateModified" datetime="2025-06-24T22:14:20+08:00">2025-06-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="AM（Amplitude-Modulation）调幅"><a href="#AM（Amplitude-Modulation）调幅" class="headerlink" title="AM（Amplitude Modulation）调幅"></a>AM（Amplitude Modulation）调幅</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li>通过改变载波信号的<strong>幅度</strong>来携带信息信号。</li>
+<li>调制信号形式：</li>
+</ul>
+<p>$$<br>s(t) &#x3D; [A_0 + m(t)] \cos(2\pi f_c t)<br>$$</p>
+<p>其中$A_0\cos(2\pi f_c t)$为载波，$m(t)$为调制信号，$s(t)$为已调信号</p>
+<ul>
+<li>简单易实现。</li>
+<li>带宽为 (2B)，其中 (B) 为信号带宽。</li>
+<li>存在包络检波方式，易于接收。</li>
+<li>效率低，载波本身不包含信息但占用功率。</li>
+</ul>
+<p>包络检波器包括全波整流器和低通滤波器两部分组成，其中全波整流器用于将负半轴的波形翻到正半轴</p>
+<h4 id="功率计算"><a href="#功率计算" class="headerlink" title="功率计算"></a>功率计算</h4><p>$S_{AM}(t) &#x3D; [A_0 + m(t)]cosw_ct &#x3D; A_0cosw_ct + m(t)cosw_ct$<br>其中$A_0cosw_ct$和$m(t)cosw_ct$分别是载波相和边带相，其功率分别是$\frac{A_0^2}{2}$和$\frac{\overline{m(t)}^2}{2}$</p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>$\overline{m(t)}^2$表示m(t)的均方值<br>对随机过程或者给定信号都能求均方值，并且其都用来求平均功率</p>
+</blockquote>
+<hr>
+<h3 id="DSB（Double-Side-Band）双边带调制"><a href="#DSB（Double-Side-Band）双边带调制" class="headerlink" title="DSB（Double Side Band）双边带调制"></a>DSB（Double Side Band）双边带调制</h3><p>由于包络与m(t)不成正比，不能使用包络检波法，此时解调需要使用相干解调法</p>
+<ul>
+<li>又称 DSB-SC（Suppressed Carrier）。</li>
+<li>将基带信号与载波相乘，抑制直流项。</li>
+<li>形式：</li>
+</ul>
+<p>$s(t) &#x3D; m(t) \cos(2\pi f_c t)$</p>
+<p>特点:</p>
+<ul>
+<li>没有载波，传输效率高于 AM。</li>
+<li>但接收时需要载波同步，复杂度增加。</li>
+<li>频谱包含上下两个边带，带宽为 (2B)。</li>
+</ul>
+<h3 id="SSB（Single-Side-Band）单边带调制"><a href="#SSB（Single-Side-Band）单边带调制" class="headerlink" title="SSB（Single Side Band）单边带调制"></a>SSB（Single Side Band）单边带调制</h3><p>以调制信号为单频正弦波$m(t)&#x3D;A_mcosw_mt$为例<br>$s_{DSB}(t) &#x3D; A_m  cosw_mtcosw_ct &#x3D; \frac{1}{2}A_mcos(w_c+w_m)t + \frac{1}{2}A_mcos(w_c-w_m)t$  </p>
+<p>其中上边带$s_{USB}(t) &#x3D; \frac{1}{2}A_mcos(w_c+w_m)t$<br>下边带$s_{LSB}(t) &#x3D; \frac{1}{2}A_mcos(w_c-w_m)t$  </p>
+<p>基本概念</p>
+<ul>
+<li>在 <strong>DSB</strong>的基础上，仅保留一个边带（上边带或下边带）。</li>
+<li>去除冗余频谱部分，提高频谱效率。</li>
+</ul>
+<p>生成方法:</p>
+<ul>
+<li>滤波法：滤除一个边带。</li>
+<li>平衡调制 + 相移法（Hilbert 变换）：生成正交信号组合消除一个边带。</li>
+</ul>
+<p>特点:</p>
+<ul>
+<li>带宽减半，仅为 (B)。</li>
+<li>频谱效率高，适合长距离传输（如语音通信）。</li>
+<li>实现复杂，载波恢复要求高。</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>Hilbert滤波器使得信号在时域上偏移$\pi&#x2F;2$<br>$A_mcosw_mt$经过Hibert变换后得到$A_mcos(w_mt-\pi&#x2F;2)$，也就是$A_msinw_mt$<br>因此Hilbert滤波器的冲击响应$h_h(t) &#x3D; \frac{1}{\pi t}$,其传递函数$H_h(w)&#x3D;-jsgn(w)$，<br>其中$\operatorname{sgn}(\omega) &#x3D;\begin{cases}<br>+1, &amp; \omega &gt; 0 \<br>0, &amp; \omega &#x3D; 0 \<br>-1, &amp; \omega &lt; 0<br>\end{cases}$</p>
+</blockquote>
+<hr>
+<h3 id="VSB（Vestigial-Side-Band）残留边带调制"><a href="#VSB（Vestigial-Side-Band）残留边带调制" class="headerlink" title="VSB（Vestigial Side Band）残留边带调制"></a>VSB（Vestigial Side Band）残留边带调制</h3><ul>
+<li>在 SSB 基础上，保留一个完整边带 + 另一个边带的一小部分（残留边带）。</li>
+<li>实际用于电视视频信号等高带宽场景。</li>
+</ul>
+<p>特点:</p>
+<ul>
+<li>兼顾频谱利用与实现难度。</li>
+<li>能较好保留低频成分，解决 SSB 滤波困难问题。</li>
+<li>广泛用于模拟电视广播（如 NTSC、PAL）。</li>
+</ul>
+<h2 id="FM-PM（角度调制）"><a href="#FM-PM（角度调制）" class="headerlink" title="FM&#x2F;PM（角度调制）"></a>FM&#x2F;PM（角度调制）</h2><p>$S_m(t) &#x3D; Acos[w_ct+\phi(t)]$<br>其中：<br>顺时位移&#x3D;$w_ct+\phi(t)$<br>瞬时角频率&#x3D;$w_c+\frac{d\phi(t)}{dt}$<br>PM调相是让其中的$\phi(t)$与调制信号成正比，也就是$\phi(t)&#x3D;k_pm(t)$<br>FM调频是让其中的$\frac{d\phi(t)}{dt}$与调制信号成正比，也就是$\frac{d\phi(t)}{dt}&#x3D;k_fm(t)$<br>实际应用中通常使用FM调频  </p>
+<h3 id="FM"><a href="#FM" class="headerlink" title="FM"></a>FM</h3><p>令$m(t)&#x3D;A_mcos(w_mt)$<br>这个调制信号也是单因信号<br>根据$\frac{d\phi(t)}{dt}&#x3D;k_fm(t)$可知<br>$\phi(t) &#x3D; K_fA_m\int cos(w_m\tau)d\tau$ &#x3D; $\frac{K_fA_m}{w_m}sin(w_mt)$<br>其中$m_f$为调频指数</p>
+<h3 id="NBFM"><a href="#NBFM" class="headerlink" title="NBFM"></a>NBFM</h3><p>FM信号的最大瞬时相位偏移满足远小于pi&#x2F;6(0.5)<br>通过化简可得<br>$S_{NBFM}(t) &#x3D; Acos(w_ct)-[AK_f\int m(\tau)d\tau]sin(w_ct)$  </p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>对于直流分量为0的信号，也就是其傅立叶变换后的w&#x3D;0处为0的信号，有<br>$\mathcal{F}\left(\int m(t),dt \right) &#x3D; \frac{M(\omega)}{j\omega}$</p>
+</blockquote>
+<hr>
+<p>hint：<br>不定积分可以写成原信号和单位阶跃函数卷积的形式，然后单位阶跃信号的傅立叶变换为 $\frac{1}{jw} + \pi\delta(w)$<br>由于原信号的傅立叶变换后的w&#x3D;0处为0，因此与冲击信号乘积的部分可除去。</p>
+<h3 id="FM信号的解调"><a href="#FM信号的解调" class="headerlink" title="FM信号的解调"></a>FM信号的解调</h3><p>$s_{FM}(t)$经过在接收端经过带通滤波器及限幅后再经过<strong>微分电路</strong>然后再经过包络检波以及低通滤波器<br>$s_{FM}(t)$在经过微分后生成的$s_d(t) &#x3D; -A[w_c+K_fm(t)]sin[w_ct+K_f\int m(\tau)d\tau]$  </p>
+<p>然后经过包络检波后可以得到$-A[w_c + K_fm(t)]$，最后经过低通滤波器滤去wc从而得到m(t)</p>
+<h2 id="模拟调制系统的抗噪声性能"><a href="#模拟调制系统的抗噪声性能" class="headerlink" title="模拟调制系统的抗噪声性能"></a>模拟调制系统的抗噪声性能</h2><h3 id="相干解调法"><a href="#相干解调法" class="headerlink" title="相干解调法"></a>相干解调法</h3><p>研究抗噪声性能也就是在研究SNR，为了研究模拟调制对系统的抗噪声能力，我们重点关注已调信号$s_m(t)$与n(t)在经过带通滤波器（输入端的接收滤波器）后生成的$s_m(t)$与$n_i(t)$的$\frac{S_0}{N_0}$与经过解调器后形成的$\frac{S_i}{N_i}$之间的比值。<br>结论：<br>以DSB为例，最后的信噪比经过相干解调后会改善一倍，也就是$G_{DSB} &#x3D; \frac{S_0&#x2F;N_0}{S_i&#x2F;N_i}&#x3D;2$<br>这是因为在相干解调的过程中噪声的正交分量被低通滤波器滤除了</p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>实质上已调信号$s_m(t)$会经过发送滤波器和信道，但我们在这里将其忽略，因此只需考虑$s_m(t)$<br>另外，我们假设$s_m(t)$经过带通滤波器后的保持不变，仍为$s_m(t)$<br>而对于噪声n(t) (我们通常假设其为高斯白噪声)，在经过带通滤波器的传信滤噪后，会生成窄带噪声，因此我们用窄带噪声的特性来分析</p>
+</blockquote>
+<hr>
+<table>
+<thead>
+<tr>
+<th>调制方式</th>
+<th>解调前信噪比 $\frac{S_0}{N_0}$</th>
+<th>解调后信噪比 $\frac{S_i}{N_i}$</th>
+<th>抗噪声能力 $G &#x3D; \frac{S_i&#x2F;N_i}{S_0&#x2F;N_0}$</th>
+<th>特点说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AM（含载波）</td>
+<td>$\frac{\frac{A_0^2}{2}+\frac{\overline{m^2(t)}}{2}}{n_0B(N_i)}$</td>
+<td>$\frac{1}{4}\overline{m^2(t)}&#x2F; \frac{1}{4}N_i(N_0)$</td>
+<td>$\frac{2\overline{m^2(t)}}{A_0^2+\overline{m^2(t)}}$</td>
+<td>信噪比依赖调幅指数，抗噪性能最弱</td>
+</tr>
+<tr>
+<td>DSB（无载波）</td>
+<td>$\frac{1}{2} \overline{m^2(t)} &#x2F; n_0B(N_i)$</td>
+<td>$\frac{1}{4}\overline{m^2(t)} &#x2F; \frac{1}{4}N_i(N_0)$</td>
+<td><strong>2</strong></td>
+<td>相干解调提升一倍信噪比</td>
+</tr>
+<tr>
+<td>SSB</td>
+<td>$\frac{1}{4}\overline{m^2(t)} &#x2F; n_0B(N_i)$</td>
+<td>$\frac{1}{16}overline{m^2(t)} &#x2F; \frac{1}{4}N_i(N_0)$</td>
+<td><strong>1</strong></td>
+<td>最佳带宽效率，抗噪不变</td>
+</tr>
+</tbody></table>
+<h3 id="包络检测法"><a href="#包络检测法" class="headerlink" title="包络检测法"></a>包络检测法</h3><h4 id="AM系统"><a href="#AM系统" class="headerlink" title="AM系统"></a>AM系统</h4><p>非线性解调，不能分别处理信号和噪声<br>输入信号$S_{AM}(t) &#x3D; [A_0 + m(t)]cosw_ct$<br>由于输入会经过带通滤波器，因此输入噪声会成为窄带高斯白噪声，根据窄带高斯白噪声的性质可将其分为正交部分和同相部分两部分，如下输入噪声所示：<br>输入噪声$n_i(t) &#x3D; n_c(t)cosw_ct - n_s(t)sinw_ct$</p>
+<p>将二者信号相加并通过包络检测可得到<br>所含包络$E(t) &#x3D; \sqrt{ \left[ A_0 + m(t) + n_c(t) \right]^2 + n_s^2(t) }$<br>后面需要分析大信噪比和小信噪比两种情况 </p>
+<h5 id="大信噪比"><a href="#大信噪比" class="headerlink" title="大信噪比"></a>大信噪比</h5><p>信号包络远超过噪声包络<br>也就是$A_0+m(t)&gt;&gt;\sqrt{n_c(t)^2 + n_s(t)^2}$<br>因此$E(t) \approx \sqrt{[A_0+m(t)]^2 + 2[A_0 + m(t)]n_c(t)} \approx A_0 + m(t) + n_c(t) $  </p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>$(1+x)^{1&#x2F;2} \approx 1 + \frac{x}{2}$</p>
+</blockquote>
+<hr>
+<p>因此输出信号中信号(m(t))的平均功率为$\overline{m(t)^2}$, 噪声的平均功率为$\overline{n_c(t)^2}$<br>其中$n_c(t)$为窄带高斯噪声，功率为其均方值，也就是$E[n_c(t)^2]$,根据窄带信号的统计特性可知，其本身的数学期望和方差都和其正交部分和同相部分相等（E&#x3D;0，D&#x3D;$\sigma^2$），因此均方值也相同<br>因此此时输出信噪比$S_0&#x2F;N_0$与相干检波时一样，又因为输入信噪比也一样（易知），因此抗噪声性一样（大信噪比情况下）  </p>
+<h4 id="小信噪比"><a href="#小信噪比" class="headerlink" title="小信噪比"></a>小信噪比</h4><p>也就是信号包络远小于噪声包络<br>通过分析合成的信号的包络E(t)，可知信号会被检测器扰乱为噪声。因此此时输出信噪比急剧恶化<br>这也就是门限效应，是由于包络检测器的非线性解调作用而产生的。（相干解调是线性解调，不存在门限效应）<br>在大信噪比环境下抗噪声能力与相干解调在任意信噪比时几乎相同，而在小信噪比时会很弱，因此会有一个拐点，也就是会出现门限效应。</p>
+<p><strong>小结</strong></p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>带宽</th>
+<th>是否包含载波</th>
+<th>频谱效率</th>
+<th>接收复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AM</td>
+<td>2B</td>
+<td>✅ 是</td>
+<td>低</td>
+<td>低（可包络检波）</td>
+</tr>
+<tr>
+<td>DSB</td>
+<td>2B</td>
+<td>❌ 否</td>
+<td>中</td>
+<td>中（需同步）</td>
+</tr>
+<tr>
+<td>SSB</td>
+<td>B</td>
+<td>❌ 否</td>
+<td>高</td>
+<td>高（需精确滤波&#x2F;相移）</td>
+</tr>
+<tr>
+<td>VSB</td>
+<td>≈B~1.5B</td>
+<td>❌&#x2F;部分载波</td>
+<td>较高</td>
+<td>中高（电视常用）</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/04/%E4%BF%A1%E9%81%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/04/%E4%BF%A1%E9%81%93/" class="post-title-link" itemprop="url">信道</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-06-04 16:48:13" itemprop="dateCreated datePublished" datetime="2025-06-04T16:48:13+08:00">2025-06-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-08-26 21:28:24" itemprop="dateModified" datetime="2025-08-26T21:28:24+08:00">2025-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="定义与分类"><a href="#定义与分类" class="headerlink" title="定义与分类"></a>定义与分类</h2><ul>
+<li>狭义信道<ul>
+<li>有线信道<br>  同轴电缆，光纤</li>
+<li>无线信道<br>  微波视距传播，卫星中继，移动通信信道</li>
+</ul>
+</li>
+<li>广义信道<ul>
+<li>调制信道<br>  调制器输出-&gt;解调器输入</li>
+<li>编码信道<br>  编码器输出-&gt;译码器输入</li>
+</ul>
+</li>
+</ul>
+<h3 id="调制信道"><a href="#调制信道" class="headerlink" title="调制信道"></a>调制信道</h3><p>有一对一&#x2F;一对多的输入输出端，满足线性叠加原理，对信号有时变和时不变的两种延迟和损耗，其数学模型是叠加有噪声的线性时变&#x2F;时不变滤波器</p>
+<h4 id="恒参信道"><a href="#恒参信道" class="headerlink" title="恒参信道"></a>恒参信道</h4><p>对应的信道特性为线性时不变滤波器。<br>我们先考虑一个多径衰落信道（fading channel）：</p>
+<p>$y(t) &#x3D; \sum_{i&#x3D;1}^{L}h_i(t)x(t-\tau_i)+n(t)$. </p>
+<ul>
+<li>x(t): 发射信号。</li>
+<li>y(t): 接收信号</li>
+<li>$h_i(t)$: 第i条路径的时变衰落增益（包含幅度和相位）</li>
+<li>$\tau_i$: 第i条路径的传播延迟</li>
+</ul>
+<p>理想恒参信道的特征：<br>$s_0(t) &#x3D; Ks_i(t - t_d)$<br>$H(w) &#x3D; Ke^{-jwt_d}$<br>因此这个恒参信道的幅频特性和相频特性分别为 $|H| &#x3D; K$ 相频特性$\phi(w) &#x3D; -wt_d$， 群时延特性$\tau(w) &#x3D; -\frac{d\phi(w)}{dw} &#x3D; t_d$,  </p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>如果输入的频谱有两个分量，系统的 幅频响应 和 相频响应 会分别对这两个频率分量产生不同的幅度缩放和相位偏移。<br>假如输入信号为两个频域分量的叠加：<br>$x(t) &#x3D; A_1 \cos(\omega_1 t) + A_2 \cos(\omega_2 t)$<br>对应的频域表示为两根谱线：<br>$X(j\omega) &#x3D; \frac{A_1}{2} \left[ \delta(\omega - \omega_1) + \delta(\omega + \omega_1) \right] + \frac{A_2}{2} \left[ \delta(\omega - \omega_2) + \delta(\omega + \omega_2) \right]$<br>系统频率响应表示为：<br>$H(j\omega) &#x3D; |H(j\omega)| e^{j \phi(\omega)}$<br>系统输出频域为输入频谱与频率响应的乘积<br>$Y(j\omega) &#x3D; H(j\omega) \cdot X(j\omega)$<br>分别作用于两个频率分量：<br>$<br>\begin{cases}<br>\text{频率 } \omega_1 \text{ 分量的幅度变为 } A_1 |H(j\omega_1)|, \quad \text{相位增加 } \phi(\omega_1) \<br>\text{频率 } \omega_2 \text{ 分量的幅度变为 } A_2 |H(j\omega_2)|, \quad \text{相位增加 } \phi(\omega_2)<br>\end{cases}<br>$<br>因此，输出信号为：<br>$y(t) &#x3D; A_1 |H(j\omega_1)| \cos\left(\omega_1 t + \phi(\omega_1)\right) + A_2 |H(j\omega_2)| \cos\left(\omega_2 t + \phi(\omega_2)\right)$</p>
+</blockquote>
+<hr>
+<p>由此分析可得对信号不同频率分量放大或衰减倍数相同，由于群时延特性为常数因此信号不同频率分量到底，输出端的时间先后一致<br>然后，现实中的信道会出现幅频失真、相频失真和群时延失真的情况。也就是说对信号不同频率分量放大或者衰减倍数不同。或者信号不同频率分量到达输出端的时间先后不一。但是这些失真不产生新的频率分量，因此均为线性失真。</p>
+<h4 id="随参信道"><a href="#随参信道" class="headerlink" title="随参信道"></a>随参信道</h4><p>原因：<br>由于多径效应产生的时延差。<br>特性：<br>存在时变的衰减和时延<br>存在多径传播现象<br>$r(t) &#x3D; \sum_{i &#x3D; 1}^{n}a_i(t)cosw_c[t-\tau_i(t)] &#x3D; X(t)cosw_ct - Y(t)sinw_ct$<br>其中$a_i(t)$为 <strong>时变衰落</strong> ，$\tau_i(t)$为<strong>时变时延</strong>，X(t)为窄带信号的同相分量，Y(t)为正交分量，其均方和的开方为随机包络，arctan为随机相位。<br>多路传播的影响：<strong>瑞利衰落</strong>.<br>$r(t) &#x3D; \sum_{i&#x3D;1}^{n} a_i(t) \left( \cos \phi_i(t) \cos w_c t - \sin \phi_i(t) \sin w_c t \right)$<br>进一步写成随机包络+随机相位的形式：<br>$r(t) &#x3D; X_t \cos w_c t - Y_t \sin w_c t$<br>其中X(t)和Y(t)分别为同相分量和正交分量,进一步写成随机包络+随机相位的形式<br>$r(t) &#x3D; V(t)cos[w_ct+\phi(t)]$.<br>其中V(t)为X(t)和Y(t)的平方和的开方，服从瑞利分布，$\phi(t)$为$arctan\frac{Y(t)}{X(t)}$,服从均匀分布</p>
+<h4 id="OFDM信号经过随参信道的Python示例代码"><a href="#OFDM信号经过随参信道的Python示例代码" class="headerlink" title="OFDM信号经过随参信道的Python示例代码"></a>OFDM信号经过随参信道的Python示例代码</h4><p>下面示例代码展示如何生成多径瑞利信道的频率响应，及经过该信道的接收pilot信号：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="number">1000</span>;           <span class="comment">% 数据组数</span></span><br><span class="line">L = <span class="number">6</span>;              <span class="comment">% 多径数</span></span><br><span class="line">Nfft = <span class="number">2048</span>;        <span class="comment">% FFT点数</span></span><br><span class="line">pilotLen = <span class="number">128</span>;     <span class="comment">% pilot信号长度</span></span><br><span class="line">snr_dB = <span class="number">20</span>;        <span class="comment">% 信噪比</span></span><br><span class="line"></span><br><span class="line">Hs = <span class="built_in">zeros</span>(N, Nfft);           <span class="comment">% 频率响应矩阵</span></span><br><span class="line">rxSignals = <span class="built_in">zeros</span>(N, pilotLen); <span class="comment">% 接收pilot信号矩阵</span></span><br><span class="line"></span><br><span class="line">f = (<span class="number">0</span>:Nfft<span class="number">-1</span>)/Nfft;          <span class="comment">% 归一化频率</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> idx = <span class="number">1</span>:N</span><br><span class="line">    pathDelay = <span class="built_in">sort</span>(<span class="built_in">rand</span>(<span class="number">1</span>,L) * <span class="number">3e-7</span>);        <span class="comment">% 随机路径时延（秒）</span></span><br><span class="line">    pathPower = <span class="built_in">ones</span>(<span class="number">1</span>,L)/L;                    <span class="comment">% 均匀功率分布</span></span><br><span class="line">    a = <span class="built_in">sqrt</span>(pathPower/<span class="number">2</span>).*(<span class="built_in">randn</span>(<span class="number">1</span>,L)+<span class="number">1</span><span class="built_in">j</span>*<span class="built_in">randn</span>(<span class="number">1</span>,L)); <span class="comment">% 复数瑞利衰落增益</span></span><br><span class="line">    </span><br><span class="line">    H = <span class="built_in">zeros</span>(<span class="number">1</span>, Nfft);</span><br><span class="line">    <span class="keyword">for</span> k = <span class="number">1</span>:Nfft</span><br><span class="line">        H(k) = sum(a .* <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">j</span>*<span class="number">2</span>*<span class="built_in">pi</span>*f(k)*pathDelay)); <span class="comment">% 频率响应叠加</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    Hs(idx,:) = H;</span><br><span class="line">    </span><br><span class="line">    symbols = <span class="built_in">exp</span>(<span class="number">1</span><span class="built_in">j</span>*<span class="built_in">pi</span>/<span class="number">2</span>*randi([<span class="number">0</span> <span class="number">3</span>],<span class="number">1</span>,pilotLen));   <span class="comment">% 随机QPSK pilot信号</span></span><br><span class="line">    </span><br><span class="line">    h_time = <span class="built_in">zeros</span>(<span class="number">1</span>, pilotLen);</span><br><span class="line">    tapIndex = <span class="built_in">round</span>(pathDelay / (<span class="number">3e-7</span>/pilotLen)) + <span class="number">1</span>; <span class="comment">% 时延映射采样点</span></span><br><span class="line">    tapIndex(tapIndex &gt; pilotLen) = pilotLen;         <span class="comment">% 防止超出边界</span></span><br><span class="line">    <span class="keyword">for</span> l = <span class="number">1</span>:L</span><br><span class="line">        h_time(tapIndex(l)) = a(l);                     <span class="comment">% 构造时域冲激响应</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    rxSignal = conv(symbols, h_time, <span class="string">&#x27;same&#x27;</span>);          <span class="comment">% 时域卷积模拟信道传输</span></span><br><span class="line">    signalPower = <span class="built_in">mean</span>(<span class="built_in">abs</span>(rxSignal).^<span class="number">2</span>);</span><br><span class="line">    noisePower = signalPower / (<span class="number">10</span>^(snr_dB/<span class="number">10</span>));</span><br><span class="line">    noise = <span class="built_in">sqrt</span>(noisePower/<span class="number">2</span>)*(<span class="built_in">randn</span>(<span class="built_in">size</span>(rxSignal))+<span class="number">1</span><span class="built_in">j</span>*<span class="built_in">randn</span>(<span class="built_in">size</span>(rxSignal)));</span><br><span class="line">    </span><br><span class="line">    rxSignals(idx,:) = rxSignal + noise;               <span class="comment">% 添加AWGN噪声</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>在实际仿真中，信道时域冲激响应 h_time 的长度（即维度）不必与pilot信号长度相同，<br><br>它只需包含有效的多径分量（即最大时延对应的采样点数），通常远小于 pilotLen，<br><br>这样可以减少计算开销，提高仿真效率。<br><br>只需保证信道时域响应长度足够覆盖所有路径时延即可。<br><br>而且不会影响结果（使用循环卷积）<br></p>
+</blockquote>
+<hr>
+<h2 id="OFDM信道延迟域与频域CSI"><a href="#OFDM信道延迟域与频域CSI" class="headerlink" title="OFDM信道延迟域与频域CSI"></a>OFDM信道延迟域与频域CSI</h2><h3 id="时域CSI表达式"><a href="#时域CSI表达式" class="headerlink" title="时域CSI表达式"></a>时域CSI表达式</h3><p>H[t]是离散时间的信道冲激响应:<br>H[t] &#x3D; h[0], h[1], … , h[N - 1]. </p>
+<ul>
+<li>每一个h[n]对应信号经过多经传播后的延迟bin的复数增益（幅度+相位）。</li>
+<li>如果发送信号是s[n]，接收信号就是卷积：<br>$r[n] &#x3D; \sum_k H[k] s[n-k] + 噪声 $.</li>
+</ul>
+<h3 id="DFT矩阵以及对H-t-进行DFT处理"><a href="#DFT矩阵以及对H-t-进行DFT处理" class="headerlink" title="DFT矩阵以及对H[t]进行DFT处理"></a>DFT矩阵以及对H[t]进行DFT处理</h3><p>H[t] -&gt; DFT -&gt; 频域CSI。<br>DFT表达式:  </p>
+<p>$H[k] &#x3D; \sum_{l&#x3D;0}^{L-1} h[l] \cdot e^{-j \frac{2\pi k l}{N}}$.<br>其中$nSubcarr &#x3D; N_c$,因此得到的H[k]刚好可以用每个k对应一个子载波。</p>
+<p>可以用DFT矩阵$F_c$来做DFT处理，其中$F_c$维度为$N_c * N_c$. </p>
+<h2 id="自适应调制"><a href="#自适应调制" class="headerlink" title="自适应调制"></a>自适应调制</h2><ul>
+<li>子载波信道好(|H_k|大)： 可以用高阶调制（如64-QAM）提高速率</li>
+<li>子载波信道差（｜H_k｜小）：改用低阶调制（如QPSK），保证可靠性</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/05/13/FFT/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1444,230 +1805,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/24/NRTDDPerformanceEvaluation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/24/NRTDDPerformanceEvaluation/" class="post-title-link" itemprop="url">NRTDDPerformanceEvaluation</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-04-24 05:47:47 / Modified: 18:56:11" itemprop="dateCreated datePublished" datetime="2025-04-24T05:47:47+08:00">2025-04-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="1-Basic-Concept"><a href="#1-Basic-Concept" class="headerlink" title="1. Basic Concept"></a>1. Basic Concept</h2><p>In TDD (Time division duplexing) mode, physical uplink shared channel (PUSCH) and physical downlink shared channel (PDSCH) transmissions are scheduled in the same frequency band with separation in time domain. The scheduling strategy can be customized and network performance can be evaluated accordingly. </p>
-<h3 id="1-1-举例说明"><a href="#1-1-举例说明" class="headerlink" title="1.1 举例说明"></a>1.1 举例说明</h3><p>matlab里面参数设置如下<br>reference_scs &#x3D; 15kHz(i.e. 1 ms slot), DLULPeriodicity &#x3D; 5 ms, numDLSlots &#x3D; 3, numDLSyms &#x3D; 7, numULSlots &#x3D; 1, numULSyms &#x3D; 5<br>所以Number of slots in DL-UL periodicity with respect to reference SCS of 15 kHz对应的NumSlotsDLULPeriodicity &#x3D; 5<br>最后Slot分布图如下<br>Slot Index:     0   1   2    3    4<br>            +—–+—+—-+—-+—–+<br>Slot Type:  DL     Dl   Dl    Up   UL<br>Symbol Use: full   full  7sym  full 5sym</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/23/JavaSwing/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/23/JavaSwing/" class="post-title-link" itemprop="url">JavaSwing</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-04-23 05:20:59" itemprop="dateCreated datePublished" datetime="2025-04-23T05:20:59+08:00">2025-04-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-04-25 19:48:01" itemprop="dateModified" datetime="2025-04-25T19:48:01+08:00">2025-04-25</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>Swing is part of API for providing native look and feel GUI for Java, which has more components than AWT(Abstract Window Toolkit), and these components are more lightweight.  </p>
-<p>Documents:<br><a target="_blank" rel="noopener" href="https://docs.oracle.com/en/java/javase/20/docs/api/java.desktop/javax/swing/package-summary.html">https://docs.oracle.com/en/java/javase/20/docs/api/java.desktop/javax/swing/package-summary.html</a>  </p>
-<p>These components are as below:</p>
-<ul>
-<li>Windows and dialogs<ul>
-<li>JFrame<br>  <strong>JFrame</strong>是一个<strong>顶层容器</strong>，用于创建一个窗口，窗口中可以包含按钮、文本框、标签等各种组件，并且JFrame也可以布局，例如添加BorderLayout</li>
-<li>JDialog</li>
-<li>JColorChooser</li>
-<li>JFileChooser</li>
-<li>JOptionPane</li>
-</ul>
-</li>
-<li>Menus<ul>
-<li>JMenuItem</li>
-<li>JMenu</li>
-<li>JMenuBar</li>
-<li>JCheckBoxMenuItem</li>
-<li>JRadioButtonMenuItem</li>
-<li>JPopupMenu</li>
-<li>JSeparator</li>
-</ul>
-</li>
-<li>Container<ul>
-<li>JPanel<br>  JPanel是面板组件，通常不单独显示，而是作为其他容器（比如JFrame）中的子容器，主要用来：组织组件（比如把按钮、文本框放在一个面板里），配合不同的布局管理器使用（FlowLayout、 BorderLayout、 GridLayout）</li>
-<li>JTappedPane</li>
-<li>JSplitPane</li>
-<li>JScrollPane</li>
-<li>JToolBar</li>
-<li>JDesktopPane</li>
-<li>JInternalFrame</li>
-<li>JLayeredPane</li>
-</ul>
-</li>
-<li>Control elements<ul>
-<li>JLabel</li>
-<li>JButton</li>
-<li>JToggleButton</li>
-<li>JCheckBox<br>  复选框组件，用来让用户在多个选项中进行单选或多选</li>
-<li>JRadioButton</li>
-<li>ButtonGroup</li>
-<li>JComboBox</li>
-<li>JList</li>
-<li>JTextField</li>
-<li>JTextArea</li>
-<li>JSeperator</li>
-</ul>
-</li>
-<li>Event handling<ul>
-<li>ActionEvent</li>
-<li>AdjustmentEvent</li>
-<li>FocusEvent</li>
-<li>ItemEvent</li>
-<li>MouseEvent</li>
-<li>TextEvent</li>
-<li>WindowEvent</li>
-<li>Menuvent</li>
-<li>ListSelectionEvent</li>
-<li>TableModelEvent<br>以WindowEvent为例</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">JFrame testFrame = new JFrame(<span class="string">&quot;Listener Test&quot;</span>);</span><br><span class="line">testFrame.setSize(300,200);</span><br><span class="line">testFrame.addWindowListener(new <span class="function"><span class="title">WindowAdpater</span></span>()&#123;</span><br><span class="line">    public void windowClosing(WindowEvent e)&#123;</span><br><span class="line">        JOptionPane testOpt = new JOptionPane();</span><br><span class="line">        testOpt.showMessageDialog(new JFrame(), <span class="string">&quot;closing Window!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>这里使用了匿名函数，等同于以下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JFrame testFrame = new JFrame(<span class="string">&quot;Listener Test&quot;</span>);</span><br><span class="line">class MyWindowListener extends WindowAdpater&#123;</span><br><span class="line">    public void windowClosing(WindowEvent e)&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;窗口关闭&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">testFrame.addWindowListener(new MyWindowListener());</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Layout manager<ul>
-<li>FlowLayout</li>
-<li>GridLayout</li>
-<li>BorderLayout</li>
-<li>BoxLayout</li>
-<li>CardLayout</li>
-<li>GridBagLayout</li>
-<li>GroupLayout</li>
-<li>SpringLayout</li>
-</ul>
-</li>
-</ul>
-<h2 id="Java的抽象类和接口"><a href="#Java的抽象类和接口" class="headerlink" title="Java的抽象类和接口"></a>Java的抽象类和接口</h2><p>以抽象类WindowAdapter和接口WindowListener为例。<br>通常来说，抽象类继承了接口的方法，但是每个方法都留了个空壳实现，正因为这些空壳，继承了接口的抽象类只需要写像覆盖的那几种方法，而不是被迫写完全部。<br>例如WindowAdapter继承WindowListener</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public abstract class WindowAdapter implements WindowListener&#123;</span><br><span class="line">    public void windowOpened(WindowEvent e)&#123;&#125;</span><br><span class="line">    ...</span><br><span class="line">    public void windowDeactivated(WindowEvent e)&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用继承的方法构建MainFrame类"><a href="#使用继承的方法构建MainFrame类" class="headerlink" title="使用继承的方法构建MainFrame类"></a>使用继承的方法构建MainFrame类</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class MainFrame extends JFrame&#123;</span><br><span class="line">    public <span class="function"><span class="title">MainFrame</span></span>()&#123;</span><br><span class="line">        setTitle(<span class="string">&quot;Choose Your Favorite Items&quot;</span>);</span><br><span class="line">        setSize(400, 300);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以这么理解,以下的JFrame父类的构造函数会在子类MainFrame调用构造函数时被调用，因为如果父类构造函数如果是无参的话那么就会被隐型调用，如果是有参的话需要通过super函数来调用。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class JFrame&#123;</span><br><span class="line">    public <span class="function"><span class="title">JFrame</span></span>()&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>继承了这个父类的MyFrame子类相当于在构造函数里面执行了一遍super()</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public <span class="function"><span class="title">MainFrame</span></span>()&#123;</span><br><span class="line">    super();</span><br><span class="line">    setTitle(<span class="string">&quot;Choose your favourite items&quot;</span>);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<img src="/images/你.jpg">
-你好可爱，为什么我们性格会如何相像
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1737,7 +1874,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

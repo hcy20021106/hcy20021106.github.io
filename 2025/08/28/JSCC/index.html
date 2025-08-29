@@ -28,7 +28,7 @@
 <meta property="og:description" content="JSCC模型说明JSCC（Joint Source-Channel Coding）数字联合信源信道编码，特点包括：  端到端训练：支持latent feature -&gt; 调制符号的可微训练 软条件化（Soft Conditioning）：编码器可根据调制阶数（M-QAM）和信道SNR自适应调制特征   噪声近似训练：训练阶段使用连续噪声替代调制&#x2F;解调操作，使梯度可回传  模型结构1">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-08-28T11:27:17.000Z">
-<meta property="article:modified_time" content="2025-08-28T13:48:39.283Z">
+<meta property="article:modified_time" content="2025-08-29T08:29:43.601Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -177,10 +177,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-08-28 19:27:17 / Modified: 21:48:39" itemprop="dateCreated datePublished" datetime="2025-08-28T19:27:17+08:00">2025-08-28</time>
+              <time title="Created: 2025-08-28 19:27:17" itemprop="dateCreated datePublished" datetime="2025-08-28T19:27:17+08:00">2025-08-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-08-29 16:29:43" itemprop="dateModified" datetime="2025-08-29T16:29:43+08:00">2025-08-29</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -208,31 +214,70 @@
 <li><strong>软条件化</strong>（Soft Conditioning）：编码器可根据调制阶数（M-QAM）和信道SNR自适应调制特征  </li>
 <li><strong>噪声近似训练</strong>：训练阶段使用连续噪声替代调制&#x2F;解调操作，使梯度可回传</li>
 </ul>
-<h2 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h2><h3 id="1-输入信号处理"><a href="#1-输入信号处理" class="headerlink" title="1. 输入信号处理"></a>1. 输入信号处理</h3><ul>
-<li><strong>AnalysisTransform (NTC)</strong>：将原始图像降维到 latent feature，输出形状 <code>[B, C, H&#39;, W&#39;]</code>  </li>
-<li>降维作用：<ul>
-<li>将图像信息压缩成潜在特征  </li>
-<li>便于 JSCC 编码器处理</li>
+<h2 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h2><h3 id="1-输入信号处理（AnalysisTransform-NTC-）"><a href="#1-输入信号处理（AnalysisTransform-NTC-）" class="headerlink" title="1. 输入信号处理（AnalysisTransform (NTC)）"></a>1. 输入信号处理（AnalysisTransform (NTC)）</h3><ul>
+<li><p><strong>功能</strong>：</p>
+<ul>
+<li>将原始图像 <code>[B, C, H, W]</code> 映射为潜在表示 <code>[B, C&#39;, H&#39;, W&#39;]</code>。</li>
+<li>降低空间维度，同时提取局部和全局特征。</li>
+<li>为 JSCC 编码器提供高效的潜在特征表示。</li>
+</ul>
+</li>
+<li><p><strong>实现细节</strong>：</p>
+<ul>
+<li>使用 <strong>Swin Transformer</strong> 模块和 Patch Embedding 层。</li>
+<li>通过多层 Swin Transformer Block 进行特征提取。</li>
+<li>输出的潜在特征维度：<ul>
+<li><code>C&#39;</code>：潜在通道数（例如 256），表示潜在特征维度。</li>
+<li><code>H&#39;, W&#39;</code>：空间分辨率，经降采样后通常为原图的 1&#x2F;16。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>降维作用</strong>：</p>
+<ul>
+<li>将高维图像信息压缩为低维潜在特征，减少信道传输冗余。</li>
+<li>提取关键特征，增强潜在表示的表达能力。</li>
+<li>为后续 <strong>JSCC 编码器&#x2F;信道模块</strong>提供适合连续编码的特征表示。</li>
+</ul>
+</li>
+<li><p><strong>后续处理</strong>：</p>
+<ul>
+<li>潜在表示 <code>y</code> 可通过 <strong>Hyperprior 模块</strong>估计尺度参数 (<code>scales_hat</code>) 和均值 (<code>means_hat</code>)。</li>
+<li>潜在表示进一步量化为 <code>y_hat</code>，并输入 <strong>SynthesisTransform</strong> 或 JSCC 编码器进行压缩传输。</li>
 </ul>
 </li>
 </ul>
 <h3 id="2-JSCC编码器（JSCCEncoder）"><a href="#2-JSCC编码器（JSCCEncoder）" class="headerlink" title="2. JSCC编码器（JSCCEncoder）"></a>2. JSCC编码器（JSCCEncoder）</h3><p>主要组成：</p>
 <ul>
-<li><strong>Swin Transformer Blocks</strong>：提取高级特征  </li>
-<li><strong>Rate Adaption Layer</strong>：根据熵模型和信道需求动态调整编码长度  </li>
-<li><strong>MergingNet (Modulation Conditional Module, MCM)</strong>：<ul>
+<li><p><strong>Swin Transformer Blocks</strong>：</p>
+<ul>
+<li>自注意力机制<br>  每个patch可访问其他patch的信息，类似<strong>冗余信息分布</strong></li>
+<li>多层堆叠<br>  高纬特征融合，增加了特征的鲁棒性</li>
+<li>MLP变换。<br>  非线性映射，把信息分布在多个通道-》类似把信号映射到冗余码字空间<br>  因此刚好满足信道编码的功能：增加冗余、增强抗噪声能力</li>
+</ul>
+</li>
+<li><p><strong>Rate Adaption Layer</strong>：根据熵模型和信道需求动态调整编码长度。</p>
+<ul>
+<li>根据每个patch的信息量（或者说熵）选择不同的编码率</li>
+<li>通过可学习的weight和bias对输入特征进行线性变换，然后用mask限制每个patch的有效长度，实现自适应编码。</li>
+</ul>
+</li>
+<li><p><strong>MergingNet (Modulation Conditional Module, MCM)</strong>：</p>
+<ul>
 <li>输入：latent feature + 调制阶数 M  </li>
 <li>对特征进行 <strong>软条件化</strong>：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = x * softplus(M_onehot1) + M_onehot2</span><br></pre></td></tr></table></figure></li>
 <li>作用：让编码器特征适应不同调制阶数</li>
 </ul>
 </li>
-<li><strong>AF (Adaptive Feature Layer)</strong>：<ul>
+<li><p><strong>AF (Adaptive Feature Layer)</strong>：</p>
+<ul>
 <li>输入：latent feature + 信道 SNR  </li>
 <li>对特征进行缩放和平移：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">z = z * scale + shift</span><br></pre></td></tr></table></figure></li>
 <li>作用：信道条件自适应，提升鲁棒性</li>
 </ul>
 </li>
-<li>输出：经过软条件化和可选调制处理的连续 latent feature</li>
+<li><p>输出：经过软条件化和可选调制处理的连续 latent feature</p>
+</li>
 </ul>
 <h3 id="3-调制近似"><a href="#3-调制近似" class="headerlink" title="3. 调制近似"></a>3. 调制近似</h3><ul>
 <li>将连续latent feature 映射成离散QAM符号</li>
@@ -389,7 +434,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSCC%E6%A8%A1%E5%9E%8B%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">JSCC模型说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">模型结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%BE%93%E5%85%A5%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">1. 输入信号处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-JSCC%E7%BC%96%E7%A0%81%E5%99%A8%EF%BC%88JSCCEncoder%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">2. JSCC编码器（JSCCEncoder）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%B0%83%E5%88%B6%E8%BF%91%E4%BC%BC"><span class="nav-number">2.3.</span> <span class="nav-text">3. 调制近似</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%B0%83%E5%88%B6%E4%B8%8E%E4%BF%A1%E9%81%93"><span class="nav-number">2.4.</span> <span class="nav-text">4. 调制与信道</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E9%98%B6%E6%AE%B5"><span class="nav-number">2.4.1.</span> <span class="nav-text">测试阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E9%98%B6%E6%AE%B5%EF%BC%9A"><span class="nav-number">2.4.2.</span> <span class="nav-text">训练阶段：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-JSCC%E8%A7%A3%E7%A0%81%E5%99%A8"><span class="nav-number">2.5.</span> <span class="nav-text">5. JSCC解码器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%90%86%E8%AE%BA%E6%94%AF%E6%8C%81"><span class="nav-number">3.</span> <span class="nav-text">理论支持</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E5%B9%B3%E5%9D%87%E5%8A%9F%E7%8E%87%E5%BD%92%E4%B8%80%E5%8C%96%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">符号平均功率归一化：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%99%AA%E5%A3%B0%E8%BF%91%E4%BC%BC"><span class="nav-number">3.2.</span> <span class="nav-text">噪声近似</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E6%9D%A1%E4%BB%B6%E5%8C%96"><span class="nav-number">3.3.</span> <span class="nav-text">软条件化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%88%B0%E7%AB%AF%E5%8F%AF%E5%BE%AE%E8%AE%AD%E7%BB%83"><span class="nav-number">3.4.</span> <span class="nav-text">端到端可微训练</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">训练过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E4%B8%80%EF%BC%9Asource-coding-training"><span class="nav-number">4.1.</span> <span class="nav-text">阶段一：source coding training</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E4%BA%8C%EF%BC%9AJSC-encoder%E5%92%8CJSC-decoder%E8%AE%AD%E7%BB%83"><span class="nav-number">4.2.</span> <span class="nav-text">阶段二：JSC encoder和JSC decoder训练</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E4%B8%89%EF%BC%9A%E5%9F%BA%E4%BA%8E-STE-%E7%9A%84%E7%B2%BE%E8%B0%83-STE-based-Finetuning"><span class="nav-number">5.</span> <span class="nav-text">阶段三：基于 STE 的精调 (STE-based Finetuning)</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSCC%E6%A8%A1%E5%9E%8B%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">JSCC模型说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">模型结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%BE%93%E5%85%A5%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%EF%BC%88AnalysisTransform-NTC-%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">1. 输入信号处理（AnalysisTransform (NTC)）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-JSCC%E7%BC%96%E7%A0%81%E5%99%A8%EF%BC%88JSCCEncoder%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">2. JSCC编码器（JSCCEncoder）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%B0%83%E5%88%B6%E8%BF%91%E4%BC%BC"><span class="nav-number">2.3.</span> <span class="nav-text">3. 调制近似</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%B0%83%E5%88%B6%E4%B8%8E%E4%BF%A1%E9%81%93"><span class="nav-number">2.4.</span> <span class="nav-text">4. 调制与信道</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E9%98%B6%E6%AE%B5"><span class="nav-number">2.4.1.</span> <span class="nav-text">测试阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E9%98%B6%E6%AE%B5%EF%BC%9A"><span class="nav-number">2.4.2.</span> <span class="nav-text">训练阶段：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-JSCC%E8%A7%A3%E7%A0%81%E5%99%A8"><span class="nav-number">2.5.</span> <span class="nav-text">5. JSCC解码器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%90%86%E8%AE%BA%E6%94%AF%E6%8C%81"><span class="nav-number">3.</span> <span class="nav-text">理论支持</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E5%B9%B3%E5%9D%87%E5%8A%9F%E7%8E%87%E5%BD%92%E4%B8%80%E5%8C%96%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">符号平均功率归一化：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%99%AA%E5%A3%B0%E8%BF%91%E4%BC%BC"><span class="nav-number">3.2.</span> <span class="nav-text">噪声近似</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E6%9D%A1%E4%BB%B6%E5%8C%96"><span class="nav-number">3.3.</span> <span class="nav-text">软条件化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%88%B0%E7%AB%AF%E5%8F%AF%E5%BE%AE%E8%AE%AD%E7%BB%83"><span class="nav-number">3.4.</span> <span class="nav-text">端到端可微训练</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">训练过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E4%B8%80%EF%BC%9Asource-coding-training"><span class="nav-number">4.1.</span> <span class="nav-text">阶段一：source coding training</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E4%BA%8C%EF%BC%9AJSC-encoder%E5%92%8CJSC-decoder%E8%AE%AD%E7%BB%83"><span class="nav-number">4.2.</span> <span class="nav-text">阶段二：JSC encoder和JSC decoder训练</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E4%B8%89%EF%BC%9A%E5%9F%BA%E4%BA%8E-STE-%E7%9A%84%E7%B2%BE%E8%B0%83-STE-based-Finetuning"><span class="nav-number">5.</span> <span class="nav-text">阶段三：基于 STE 的精调 (STE-based Finetuning)</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -403,7 +448,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
