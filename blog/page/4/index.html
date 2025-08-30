@@ -150,6 +150,89 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/05/%E6%95%B0%E5%AD%97%E8%B0%83%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/05/%E6%95%B0%E5%AD%97%E8%B0%83%E5%88%B6/" class="post-title-link" itemprop="url">数字调制</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-06-05 05:18:05" itemprop="dateCreated datePublished" datetime="2025-06-05T05:18:05+08:00">2025-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-06-15 22:49:42" itemprop="dateModified" datetime="2025-06-15T22:49:42+08:00">2025-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="二进制调制"><a href="#二进制调制" class="headerlink" title="二进制调制"></a>二进制调制</h2><h3 id="解调"><a href="#解调" class="headerlink" title="解调"></a>解调</h3><p>2ASK可以用包络检测法，而2PSK不行，只能用相干解调法</p>
+<h2 id="多进制调制"><a href="#多进制调制" class="headerlink" title="多进制调制"></a>多进制调制</h2><h3 id="正交调制"><a href="#正交调制" class="headerlink" title="正交调制"></a>正交调制</h3><p>已调信号表示为正交调制信号的组合<br>$u(t)&#x3D;A(t)cos[w_ct+\phi(t)] &#x3D; I(t)cosw_ct-Q(t)sinw_ct$  </p>
+<p>其中$I(t)&#x3D;A(t)cos\phi(t)$为同相分量<br>$Q(t)&#x3D;A(t)sin\phi(t)$为正交分量<br>易见I(t)和Q(t)都是成形滤波，因此在生成I(t)和Q(t)我们先引入In和Qn，可以在信号矢量图&#x2F;星座图上面显示In，Qn<br>$u_n(t-nT_B) &#x3D; A_ng(t-nT_B)cos[w_ct+\phi_n] &#x3D; I_ng(t-nT_B)cosw_ct-Q_ng(t-nT_B)sinw_ct$<br>注意u(t)和$u_n(t)$的区别在于是否对单个码元进行分析，$I_n$和$I_t$的区别也是如此。<br>其中对$I_ng(t-nT_B)$和$Q_ng(t-nT_B)$求累加可以分别表示I(t)和Q(t)，因此In和Qn可以表征It和Qt</p>
+<h3 id="正交调制的相干解调法"><a href="#正交调制的相干解调法" class="headerlink" title="正交调制的相干解调法"></a>正交调制的相干解调法</h3><p>由于$u(t) &#x3D; I(t)cosw_ct-Q(t)sinw_ct$  </p>
+<ul>
+<li>获取In<br>与本地载波$cosw_ct$相乘后经过低通滤波器后生成$\frac{1}{2}I(t)$,然后经过抽样判决后生成In</li>
+<li>获取Qn<br>与本地载波$-sinw_ct$相乘同理获取Qn</li>
+</ul>
+<p>然后In与Qn经过并&#x2F;串变换后得到输出01序列</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/05/%E6%A8%A1%E6%8B%9F%E8%B0%83%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1700,111 +1783,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/24/MATLAB%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/24/MATLAB%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">MATLAB基础语法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-04-24 14:50:46" itemprop="dateCreated datePublished" datetime="2025-04-24T14:50:46+08:00">2025-04-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-05 20:15:57" itemprop="dateModified" datetime="2025-08-05T20:15:57+08:00">2025-08-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MATLAB/" itemprop="url" rel="index"><span itemprop="name">MATLAB</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="向量处理"><a href="#向量处理" class="headerlink" title="向量处理"></a>向量处理</h2><p>a &#x3D; [1:3:100]<br>其中a是初始值，b是步长，c是终点值<br>返回结果是[1,4,7,…,100]<br>b(a) &#x3D; []<br>把向量b中的a对应索引给删掉</p>
-<h2 id="列向量和横向量"><a href="#列向量和横向量" class="headerlink" title="列向量和横向量"></a>列向量和横向量</h2><p>列向量使用;<br>a &#x3D; [1;2;3]<br>b &#x3D; [4;5;6]<br>c &#x3D; [a;b]<br>其中c将两个列向量进行拼接<br>横向量使用逗号，其他同理<br>如果想使用a&#x3D;(1:100)类似语法构建列向量，可以先构建横向量，例如a&#x3D;(1:100),然后再使用(:)进行转换a&#x3D;a(:)</p>
-<h2 id="table"><a href="#table" class="headerlink" title="table"></a>table</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">% 构建table</span><br><span class="line">RNTI = [1;2;3];</span><br><span class="line">LogicalChannelID = [3;4;5];</span><br><span class="line">RLCEntityType = [<span class="string">&quot;AM&quot;</span>; <span class="string">&quot;AM&quot;</span>; <span class="string">&quot;UM&quot;</span>];</span><br><span class="line">RLCChannelConfig = table(</span><br><span class="line">    RNTI, LogicalChannelID,LogicalChannelGroup,RLCEntityType,...</span><br><span class="line"></span><br><span class="line">);</span><br><span class="line">% 查询表的行数</span><br><span class="line">nRows = size(RLCChannelConfig, 1);</span><br><span class="line">% 查询表的列数</span><br><span class="line">nCols = size(RLCChannelConfig, 2);</span><br><span class="line">% 把table保存成.mat文件</span><br><span class="line">save(<span class="string">&#x27;RLCChannelConfig.mat&#x27;</span>, <span class="string">&#x27;RLCChannelConfig&#x27;</span>)</span><br><span class="line">% 取出table中的某个字段中的某一行的数据</span><br><span class="line">data = RLCChannelConfig.RNTI(1);</span><br><span class="line">% 把table转成struct</span><br><span class="line">myStruct = table2struct(RLCChannelConfig)</span><br><span class="line">myStruct_1 = table2struct(RLCChannelConfig(1,2:end));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="对角矩阵操作"><a href="#对角矩阵操作" class="headerlink" title="对角矩阵操作"></a>对角矩阵操作</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">% 创建对角矩阵</span><br><span class="line">A = diag([1 2 3]);   % 生成对角线为 [1 2 3] 的矩阵</span><br><span class="line"></span><br><span class="line">% 提取矩阵的对角线</span><br><span class="line">d = diag(A);         % 返回 A 的主对角线</span><br><span class="line"></span><br><span class="line">% 生成偏移对角矩阵</span><br><span class="line">B = diag([4 5 6], 1);  % 将 [4 5 6] 放在主对角线上方一条对角线上</span><br><span class="line">X = diag((<span class="number">1</span>+<span class="number">1</span>i)*ones(<span class="number">1</span>,Pilot_num));   % all pilots are 1+1i.</span><br><span class="line">    </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="Cell"><a href="#Cell" class="headerlink" title="Cell"></a>Cell</h2><p>Cell 是 MATLAB 中一种特殊的数据结构，可以存储不同类型或大小的数据项。与常规数组只能存储同一类型不同，Cell 非常适合用来组织杂类信息，比如混合了字符串、向量、矩阵等数据的集合。</p>
-<h3 id="✅-创建-Cell-数组"><a href="#✅-创建-Cell-数组" class="headerlink" title="✅ 创建 Cell 数组"></a>✅ 创建 Cell 数组</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 创建一个空的 cell 数组</span></span><br><span class="line">x = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 分别向不同位置添加不同类型的数据</span></span><br><span class="line">x&#123;<span class="number">1</span>&#125; = <span class="number">1</span>;                  <span class="comment">% 数字标量</span></span><br><span class="line">x&#123;<span class="number">2</span>&#125; = <span class="string">&#x27;hello&#x27;</span>;            <span class="comment">% 字符串</span></span><br><span class="line">x&#123;<span class="number">3</span>&#125; = [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>];            <span class="comment">% 向量</span></span><br><span class="line">x&#123;<span class="number">4</span>&#125; = <span class="built_in">rand</span>(<span class="number">2</span>, <span class="number">2</span>);         <span class="comment">% 矩阵</span></span><br><span class="line">x&#123;<span class="number">5</span>&#125; = &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>&#125;;         <span class="comment">% 嵌套 cell 数组</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="🔍-访问-Cell-中的元素"><a href="#🔍-访问-Cell-中的元素" class="headerlink" title="🔍 访问 Cell 中的元素"></a>🔍 访问 Cell 中的元素</h3><ul>
-<li><p>使用 <code>&#123;&#125;</code> 获取内容本身（解包）：</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val = x&#123;<span class="number">2</span>&#125;;    <span class="comment">% 返回 &#x27;hello&#x27;，类型为 char</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用 <code>()</code> 获取一个 cell（未解包）：</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val = x(<span class="number">2</span>);    <span class="comment">% 返回 &#123;&#x27;hello&#x27;&#125;，类型为 1×1 cell</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h3 id="🔄-遍历-Cell-数组"><a href="#🔄-遍历-Cell-数组" class="headerlink" title="🔄 遍历 Cell 数组"></a>🔄 遍历 Cell 数组</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:<span class="built_in">length</span>(x)</span><br><span class="line">    <span class="built_in">disp</span>(x&#123;<span class="built_in">i</span>&#125;);   <span class="comment">% 解包并显示每个元素</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="class"><a href="#class" class="headerlink" title="class"></a>class</h2><p>假设有一个nrUE类<br>构建nrUEs数组很简单</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UEs = nrUE(Name=ueNames,Position=uePositions, Receive=11);</span><br></pre></td></tr></table></figure>
-<p>只需要在传参时将数组传进去即可，这样输出自动成为数组</p>
-<h2 id="size函数：-查看数组尺寸"><a href="#size函数：-查看数组尺寸" class="headerlink" title="size函数： 查看数组尺寸"></a>size函数： 查看数组尺寸</h2><p>MATLAB 中的 <code>size</code> 函数用于查看数组或矩阵的每个维度的大小。</p>
-<h3 id="📘-基本用法"><a href="#📘-基本用法" class="headerlink" title="📘 基本用法"></a>📘 基本用法</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A = <span class="built_in">rand</span>(<span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>);     <span class="comment">% 创建一个 4×3×2 的三维数组</span></span><br><span class="line">s = <span class="built_in">size</span>(A);           <span class="comment">% s = [4 3 2]</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="📗-查看某一维的大小"><a href="#📗-查看某一维的大小" class="headerlink" title="📗 查看某一维的大小"></a>📗 查看某一维的大小</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rows = <span class="built_in">size</span>(A, <span class="number">1</span>);     <span class="comment">% 第 1 维度大小（行数） =&gt; 4</span></span><br><span class="line">cols = <span class="built_in">size</span>(A, <span class="number">2</span>);     <span class="comment">% 第 2 维度大小（列数） =&gt; 3</span></span><br><span class="line">depth = <span class="built_in">size</span>(A, <span class="number">3</span>);    <span class="comment">% 第 3 维度大小 =&gt; 2</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="📙-示例：分析-MIMO-信号数组"><a href="#📙-示例：分析-MIMO-信号数组" class="headerlink" title="📙 示例：分析 MIMO 信号数组"></a>📙 示例：分析 MIMO 信号数组</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">inputRXSig = <span class="built_in">rand</span>(<span class="number">234</span>, <span class="number">32</span>, <span class="number">4</span>);   <span class="comment">% 子载波 × 发射天线 × 接收天线</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">size</span>(inputRXSig)</span><br><span class="line"><span class="comment">% 输出：[234  32  4]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">size</span>(inputRXSig, <span class="number">3</span>)</span><br><span class="line"><span class="comment">% 输出：4（即接收天线数）</span></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1874,7 +1852,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

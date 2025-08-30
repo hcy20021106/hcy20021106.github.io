@@ -150,6 +150,191 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/02/%E5%BE%AA%E7%8E%AF%E5%8D%B7%E7%A7%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/07/02/%E5%BE%AA%E7%8E%AF%E5%8D%B7%E7%A7%AF/" class="post-title-link" itemprop="url">循环卷积</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-07-02 06:39:15 / Modified: 06:56:43" itemprop="dateCreated datePublished" datetime="2025-07-02T06:39:15+08:00">2025-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="循环卷积定义"><a href="#循环卷积定义" class="headerlink" title="循环卷积定义"></a>循环卷积定义</h2><p>给定两个长度为 ( N ) 的序列 ( x[n] ) 和 ( h[n] )，它们的循环卷积定义为：</p>
+<p>$$<br>y_{\text{circ}}[n] &#x3D; \sum_{m&#x3D;0}^{N-1} x[m] \cdot h[(n - m) \bmod N], \quad n&#x3D;0,1,\ldots,N-1<br>$$</p>
+<p>其中，( \bmod ) 表示取模运算，序列被视为周期为 ( N )。</p>
+<h2 id="循环卷积与-DFT-的关系"><a href="#循环卷积与-DFT-的关系" class="headerlink" title="循环卷积与 DFT 的关系"></a>循环卷积与 DFT 的关系</h2><p>离散傅里叶变换（DFT）定义为：</p>
+<p>$$<br>X[k] &#x3D; \sum_{n&#x3D;0}^{N-1} x[n] \cdot e^{-j \frac{2\pi}{N} kn}, \quad k&#x3D;0,1,\ldots,N-1<br>$$</p>
+<p>逆变换为：</p>
+<p>$$<br>x[n] &#x3D; \frac{1}{N} \sum_{k&#x3D;0}^{N-1} X[k] \cdot e^{j \frac{2\pi}{N} kn}<br>$$</p>
+<p>关键结论：</p>
+<p>两个长度为 ( N ) 的序列 ( x[n] ) 和 ( h[n] ) 的循环卷积 ( y_{\text{circ}}[n] ) 的 DFT 等于它们的 DFT 乘积：</p>
+<p>$$<br>Y[k] &#x3D; X[k] \cdot H[k]<br>$$</p>
+<p>反过来，循环卷积可通过 IDFT 计算：</p>
+<p>$$<br>y_{\text{circ}}[n] &#x3D; \text{IDFT}{ X[k] \cdot H[k] }<br>$$</p>
+<h2 id="傅立叶变换等于-DFT-的说明"><a href="#傅立叶变换等于-DFT-的说明" class="headerlink" title="傅立叶变换等于 DFT 的说明"></a>傅立叶变换等于 DFT 的说明</h2><ul>
+<li>离散时间傅立叶变换（DTFT）是连续频率的变换。</li>
+<li>DFT 是对长度为 ( N ) 的序列 DTFT 在均匀采样点 ( \omega &#x3D; \frac{2\pi k}{N} ) 上的采样。</li>
+<li>因此，DFT 是 DTFT 的离散版本。</li>
+</ul>
+<h2 id="线性卷积与循环卷积的区别与联系"><a href="#线性卷积与循环卷积的区别与联系" class="headerlink" title="线性卷积与循环卷积的区别与联系"></a>线性卷积与循环卷积的区别与联系</h2><ul>
+<li>线性卷积长度为 ( N_x + N_h - 1 )，无周期性。</li>
+<li>循环卷积长度固定为 ( N )，信号视为周期为 ( N )。</li>
+<li>对 ( x[n], h[n] ) 零填充至长度 ( N \geq N_x + N_h -1 )，线性卷积结果等于循环卷积的前 ( N_x + N_h -1 ) 项。</li>
+</ul>
+<h2 id="在-OFDM-中的应用"><a href="#在-OFDM-中的应用" class="headerlink" title="在 OFDM 中的应用"></a>在 OFDM 中的应用</h2><ul>
+<li>OFDM 信号长度为 ( N )，添加长度大于等于 ( L-1 ) 的循环前缀（CP），其中 ( L ) 是信道长度。</li>
+<li>CP 使得线性卷积等价于循环卷积。</li>
+<li>接收端去除 CP 后，信号通过循环卷积传输，可用 FFT 频域乘法实现均衡。</li>
+</ul>
+<h2 id="关键公式汇总"><a href="#关键公式汇总" class="headerlink" title="关键公式汇总"></a>关键公式汇总</h2><p>循环卷积：</p>
+<p>$$<br>y_{\text{circ}}[n] &#x3D; \sum_{m&#x3D;0}^{N-1} x[m] \cdot h[(n - m) \bmod N]<br>$$</p>
+<p>DFT 计算循环卷积：</p>
+<p>$$<br>Y[k] &#x3D; X[k] \cdot H[k]<br>$$</p>
+<p>$$<br>y_{\text{circ}}[n] &#x3D; \text{IDFT}{ Y[k] }<br>$$</p>
+<h2 id="代码示范"><a href="#代码示范" class="headerlink" title="代码示范"></a>代码示范</h2><p>下面是一个最小可运行的示例，演示 <strong>OFDM 信号添加循环前缀后经过线性卷积，与去除 CP 后与循环卷积一致</strong> 的原理。</p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# ----------------------------
+# 参数设置
+N = 8          # IFFT/FFT 大小（子载波数）
+L = 3          # 信道脉冲响应长度
+CP = L - 1     # 循环前缀长度，必须 &gt;= L - 1
+
+# ----------------------------
+# 生成随机 OFDM 符号（频域）
+# np.random.seed(0)  # 不设置种子，每次随机
+X = np.random.randn(N) + 1j*np.random.randn(N)
+
+# IFFT 变换到时域
+x = np.fft.ifft(X)
+
+# 添加循环前缀：复制末尾 CP 位到前面
+x_cp = np.concatenate([x[-CP:], x])
+
+# ----------------------------
+# 信道冲激响应
+h = np.array([0.5, 0.3, 0.2])
+
+# 线性卷积：通过信道传输
+y = np.convolve(x_cp, h)
+
+# 接收端去除 CP：保留长度 N 的有效符号
+y_cp_removed = y[CP : CP + N]
+
+# ----------------------------
+# 循环卷积（频域等效）
+# 零填充信道到长度 N
+h_padded = np.pad(h, (0, N - L))
+H = np.fft.fft(h_padded)
+
+# 频域点乘
+Y_freq = np.fft.fft(x) * H
+
+# IFFT 得到循环卷积结果
+y_circular = np.fft.ifft(Y_freq)
+
+# ----------------------------
+# 可视化结果对比
+fig, axs = plt.subplots(4, 1, figsize=(10, 10))
+
+# IFFT 后的时域符号
+axs[0].stem(np.arange(N), np.real(x), basefmt=&quot; &quot;, use_line_collection=True)
+axs[0].set_title(&#39;1. IFFT 时域信号 (未加 CP)&#39;)
+axs[0].grid()
+
+# 加 CP 后的时域符号
+axs[1].stem(np.arange(len(x_cp)), np.real(x_cp), basefmt=&quot; &quot;, use_line_collection=True)
+axs[1].set_title(f&#39;2. 加 CP 后时域信号 (CP length = &#123;CP&#125;)&#39;)
+axs[1].axvspan(0, CP-1, color=&#39;orange&#39;, alpha=0.3, label=&#39;Cyclic Prefix&#39;)
+axs[1].legend()
+axs[1].grid()
+
+# 通过信道后的线性卷积
+axs[2].stem(np.arange(len(y)), np.real(y), basefmt=&quot; &quot;, use_line_collection=True)
+axs[2].set_title(&#39;3. 经过信道: 线性卷积&#39;)
+axs[2].axvspan(0, CP-1, color=&#39;orange&#39;, alpha=0.3, label=&#39;CP to discard&#39;)
+axs[2].legend()
+axs[2].grid()
+
+# 去除 CP 后 vs 循环卷积结果
+axs[3].stem(np.arange(N), np.real(y_cp_removed), markerfmt=&#39;bo&#39;,
+            label=&#39;Linear conv. + CP removed&#39;,
+            basefmt=&quot; &quot;, use_line_collection=True)
+axs[3].stem(np.arange(N), np.real(y_circular), markerfmt=&#39;rx&#39;,
+            label=&#39;Circular conv.&#39;,
+            basefmt=&quot; &quot;, use_line_collection=True)
+axs[3].set_title(&#39;4. 对比: 线性卷积去 CP vs. 循环卷积&#39;)
+axs[3].legend()
+axs[3].grid()
+
+plt.tight_layout()
+plt.show()
+
+# ----------------------------
+# 计算误差（验证一致性）
+error = np.linalg.norm(y_cp_removed - y_circular)
+print(f&quot;Difference (CP removed vs. circular): &#123;error:.3e&#125;&quot;)
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/25/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2551,89 +2736,6 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/05/%E6%95%B0%E5%AD%97%E8%B0%83%E5%88%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/05/%E6%95%B0%E5%AD%97%E8%B0%83%E5%88%B6/" class="post-title-link" itemprop="url">数字调制</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-06-05 05:18:05" itemprop="dateCreated datePublished" datetime="2025-06-05T05:18:05+08:00">2025-06-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-15 22:49:42" itemprop="dateModified" datetime="2025-06-15T22:49:42+08:00">2025-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="二进制调制"><a href="#二进制调制" class="headerlink" title="二进制调制"></a>二进制调制</h2><h3 id="解调"><a href="#解调" class="headerlink" title="解调"></a>解调</h3><p>2ASK可以用包络检测法，而2PSK不行，只能用相干解调法</p>
-<h2 id="多进制调制"><a href="#多进制调制" class="headerlink" title="多进制调制"></a>多进制调制</h2><h3 id="正交调制"><a href="#正交调制" class="headerlink" title="正交调制"></a>正交调制</h3><p>已调信号表示为正交调制信号的组合<br>$u(t)&#x3D;A(t)cos[w_ct+\phi(t)] &#x3D; I(t)cosw_ct-Q(t)sinw_ct$  </p>
-<p>其中$I(t)&#x3D;A(t)cos\phi(t)$为同相分量<br>$Q(t)&#x3D;A(t)sin\phi(t)$为正交分量<br>易见I(t)和Q(t)都是成形滤波，因此在生成I(t)和Q(t)我们先引入In和Qn，可以在信号矢量图&#x2F;星座图上面显示In，Qn<br>$u_n(t-nT_B) &#x3D; A_ng(t-nT_B)cos[w_ct+\phi_n] &#x3D; I_ng(t-nT_B)cosw_ct-Q_ng(t-nT_B)sinw_ct$<br>注意u(t)和$u_n(t)$的区别在于是否对单个码元进行分析，$I_n$和$I_t$的区别也是如此。<br>其中对$I_ng(t-nT_B)$和$Q_ng(t-nT_B)$求累加可以分别表示I(t)和Q(t)，因此In和Qn可以表征It和Qt</p>
-<h3 id="正交调制的相干解调法"><a href="#正交调制的相干解调法" class="headerlink" title="正交调制的相干解调法"></a>正交调制的相干解调法</h3><p>由于$u(t) &#x3D; I(t)cosw_ct-Q(t)sinw_ct$  </p>
-<ul>
-<li>获取In<br>与本地载波$cosw_ct$相乘后经过低通滤波器后生成$\frac{1}{2}I(t)$,然后经过抽样判决后生成In</li>
-<li>获取Qn<br>与本地载波$-sinw_ct$相乘同理获取Qn</li>
-</ul>
-<p>然后In与Qn经过并&#x2F;串变换后得到输出01序列</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2703,7 +2805,7 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

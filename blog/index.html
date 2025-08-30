@@ -150,6 +150,64 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/30/AWGN%E4%BF%A1%E9%81%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/30/AWGN%E4%BF%A1%E9%81%93/" class="post-title-link" itemprop="url">AWGN信道</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-08-30 11:02:27" itemprop="dateCreated datePublished" datetime="2025-08-30T11:02:27+08:00">2025-08-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/29/D%C2%B2-JSCC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1381,111 +1439,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/20/DeepAutoencoder/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/08/20/DeepAutoencoder/" class="post-title-link" itemprop="url">DeepAutoencoder</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-08-20 23:05:37 / Modified: 23:36:09" itemprop="dateCreated datePublished" datetime="2025-08-20T23:05:37+08:00">2025-08-20</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>使用网络结构来降维，降维的网络被称为Encoder，这个Encoder就是很多个隐藏层网络的网络结构，它也有一个对应的Decoder，也是网络结构。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input Image (28 x 28 = 784) -&gt; Encoder -&gt; codeword (&lt; 784)</span><br><span class="line"></span><br><span class="line">codeword -&gt; Decoder -&gt; Output Image</span><br></pre></td></tr></table></figure>
-<p>Encoder和Decoder需要learn together</p>
-<h2 id="以CSI压缩为例"><a href="#以CSI压缩为例" class="headerlink" title="以CSI压缩为例"></a>以CSI压缩为例</h2><p>在无线通信中，为了进一步压缩CSI矩阵，可以使用基于深度自动编码器的策略</p>
-<ul>
-<li><ol>
-<li>编码压缩：</li>
-</ol>
-<ul>
-<li>输入： 稀疏化后的CSI矩阵Ha</li>
-<li>编码器$E(\theta_1, ⋅ )$将$H_a$压缩成低维码字向量v：<br>  $v &#x3D; E(\theta_1, H_a)$</li>
-<li>$\theta_1$是编码器网络的参数，需要通过训练学习</li>
-</ul>
-</li>
-<li><ol start="2">
-<li>反馈传输</li>
-</ol>
-<ul>
-<li>压缩后的码字v通过uplink反馈给BS</li>
-<li>这种低维表示大幅减少uplink反馈开销</li>
-</ul>
-</li>
-<li><ol start="3">
-<li>解码恢复</li>
-</ol>
-<ul>
-<li>基站接收到v后，通过解码器$D(\theta_2, ⋅)$恢复CSI矩阵：<br>  $\hat{H}_a &#x3D; D(\theta_2,v)$</li>
-</ul>
-</li>
-<li><ol start="4">
-<li>训练目标</li>
-</ol>
-<ul>
-<li>编码器和解码器共同训练，目标是最小化重建误差：<br>  $min_{\theta_1, \theta_2} E || H_a - \hat{H}_a ||^2$。<br>  这个也是均方差，因此也是loss function，其中E表示对训练样本取平均，</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1555,7 +1508,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
