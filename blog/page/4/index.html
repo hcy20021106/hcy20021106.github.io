@@ -150,6 +150,221 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/07/%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/07/%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/" class="post-title-link" itemprop="url">信源编码</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-06-07 21:37:43" itemprop="dateCreated datePublished" datetime="2025-06-07T21:37:43+08:00">2025-06-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-08-29 11:29:30" itemprop="dateModified" datetime="2025-08-29T11:29:30+08:00">2025-08-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="1-信源编码基本概念"><a href="#1-信源编码基本概念" class="headerlink" title="1. 信源编码基本概念"></a>1. 信源编码基本概念</h2><ul>
+<li><p>信源编码 (Source Coding &#x2F; Data Compression)</p>
+<ul>
+<li>目标：将原始数据压缩成比特流，同时尽量保持低失真</li>
+<li>函数表示：<br>$$<br>F: X^M \to {0,1}^B, \quad F^{-1}: {0,1}^B \to X^M<br>$$<ul>
+<li>$X^M$：原始数据集合（维度 $M$）</li>
+<li>$B$：编码后的比特长度</li>
+</ul>
+</li>
+<li>失真度量（均方误差 MSE）：<br>$$<br>D_s &#x3D; \mathbb{E}\Big[\frac{1}{M}|x - F^{-1}(F(x))|^2\Big]<br>$$</li>
+</ul>
+</li>
+<li><p>基本流程：</p>
+<ol>
+<li>特征提取</li>
+<li>量化（连续 $\to$ 离散符号）</li>
+<li>熵编码（生成比特流）</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="2-熵编码"><a href="#2-熵编码" class="headerlink" title="2. 熵编码"></a>2. 熵编码</h2><ul>
+<li>核心思想：利用符号概率分布，将高频符号用较少比特表示，低频符号用较多比特表示</li>
+<li>信息论公式：<br>$$<br>H(X) &#x3D; - \sum_x P(x) \log_2 P(x)<br>$$</li>
+<li>常用方法：<ul>
+<li>霍夫曼编码 (Huffman)：构建前缀码二叉树</li>
+<li>算术编码 (Arithmetic)：整个序列映射到 $[0,1)$，适合连续概率</li>
+<li>范围编码 (Range)：算术编码优化实现</li>
+</ul>
+</li>
+<li>在深度源编码中的应用：<ol>
+<li>对量化后的特征 $\tilde{y}$ 进行条件概率建模：<br>$$<br>P_{\tilde{y}|\tilde{z}}(\tilde{y}|\tilde{z})<br>$$</li>
+<li>对侧信息 $\tilde{z}$ 进行熵编码：<br>$$<br>P_{\tilde{z}}(\tilde{z})<br>$$</li>
+<li>生成比特流：<br>$$<br>b &#x3D; [b_y, b_z]<br>$$</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="3-深度信源编码-Deep-Source-Coding"><a href="#3-深度信源编码-Deep-Source-Coding" class="headerlink" title="3. 深度信源编码 (Deep Source Coding)"></a>3. 深度信源编码 (Deep Source Coding)</h2><ul>
+<li><p>核心思想：利用深度神经网络自动学习接近最优的编码和解码函数</p>
+</li>
+<li><p>流程：</p>
+<ol>
+<li>特征提取：<br>$$<br>y &#x3D; F_\phi(x) \in \mathbb{R}^K \quad (K \ll M)<br>$$</li>
+<li>量化：<br>$$<br>\tilde{y} &#x3D; \lceil y \rfloor<br>$$<br>（连续 $\to$ 离散符号）</li>
+<li>条件概率建模：使用侧信息 $z$<br>$$<br>P_{\tilde{y}|\tilde{z}}(\tilde{y}|\tilde{z})<br>$$</li>
+<li>熵编码：根据符号概率生成比特流 $b_y, b_z$</li>
+<li>解码：<br>$$<br>\hat{x} &#x3D; G_\psi(\tilde{y})<br>$$</li>
+</ol>
+</li>
+<li><p>优势：</p>
+<ul>
+<li>自动学习特征表示</li>
+<li>可接近理论最优压缩性能</li>
+<li>支持图像、视频等高维数据</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="4-传统视频编码（H-26x）特征提取"><a href="#4-传统视频编码（H-26x）特征提取" class="headerlink" title="4. 传统视频编码（H.26x）特征提取"></a>4. 传统视频编码（H.26x）特征提取</h2><ul>
+<li>特征提取依赖经典信号处理，不依赖 DNN</li>
+<li>核心目标：<ul>
+<li>空间冗余：帧内相邻像素高度相关</li>
+<li>时间冗余：视频帧间存在运动相关性</li>
+<li>频域冗余：像素在变换域存在非均匀分布</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-块划分与运动补偿"><a href="#1-块划分与运动补偿" class="headerlink" title="(1) 块划分与运动补偿"></a>(1) 块划分与运动补偿</h3><ul>
+<li>图像&#x2F;视频帧划分为 Macroblock (MB)</li>
+<li>运动估计：<ul>
+<li>提取运动矢量 (MV)</li>
+<li>提取残差块 (Residual)</li>
+</ul>
+</li>
+<li>特征意义：<ul>
+<li>MV 捕捉帧间变化</li>
+<li>残差捕捉帧内细节</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-变换编码"><a href="#2-变换编码" class="headerlink" title="(2) 变换编码"></a>(2) 变换编码</h3><ul>
+<li>对残差块做离散余弦变换 (DCT)：<br>$$<br>R(u,v) &#x3D; \sum_{x&#x3D;0}^{N-1}\sum_{y&#x3D;0}^{N-1} r(x,y) \cos\left[\frac{(2x+1)u\pi}{2N}\right]\cos\left[\frac{(2y+1)v\pi}{2N}\right]<br>$$<ul>
+<li>$r(x,y)$：残差块像素</li>
+<li>$R(u,v)$：变换系数</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-量化"><a href="#3-量化" class="headerlink" title="(3) 量化"></a>(3) 量化</h3><ul>
+<li>对变换系数量化：<br>$$<br>\tilde{R}(u,v) &#x3D; \text{round}\Big(\frac{R(u,v)}{Q(u,v)}\Big)<br>$$<ul>
+<li>$Q(u,v)$：量化步长</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-熵编码"><a href="#4-熵编码" class="headerlink" title="(4) 熵编码"></a>(4) 熵编码</h3><ul>
+<li>H.264&#x2F;H.265 使用 CABAC 或 CAVLC</li>
+<li>对量化系数进行无损压缩</li>
+</ul>
+<h3 id="5-对比深度信源编码"><a href="#5-对比深度信源编码" class="headerlink" title="(5) 对比深度信源编码"></a>(5) 对比深度信源编码</h3><table>
+<thead>
+<tr>
+<th>方面</th>
+<th>传统信源编码 (H.26x)</th>
+<th>深度信源编码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>特征提取</td>
+<td>块划分 + 运动估计 + 残差 + 变换</td>
+<td>DNN 自动学习语义特征</td>
+</tr>
+<tr>
+<td>量化</td>
+<td>对 DCT&#x2F;变换系数量化</td>
+<td>对 DNN 输出连续特征量化</td>
+</tr>
+<tr>
+<td>熵编码</td>
+<td>CABAC &#x2F; CAVLC</td>
+<td>算术编码 &#x2F; 其他熵编码</td>
+</tr>
+<tr>
+<td>数据依赖</td>
+<td>无需训练</td>
+<td>需要训练数据集</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="5-小结"><a href="#5-小结" class="headerlink" title="5. 小结"></a>5. 小结</h2><ul>
+<li>信源编码目标：压缩数据，降低冗余</li>
+<li>熵编码核心方法：通过概率分配比特，实现接近熵极限的压缩</li>
+<li>深度信源编码：<ul>
+<li>利用 DNN 自动学习编码、量化、条件概率建模和解码</li>
+</ul>
+</li>
+<li>传统信源编码：<ul>
+<li>H.26x 系列通过块划分、运动估计、DCT 变换和量化提取特征</li>
+<li>熵编码 (CABAC &#x2F; CAVLC) 压缩量化系数</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/05/%E6%95%B0%E5%AD%97%E8%B0%83%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1594,199 +1809,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/24/%E9%9A%8F%E7%AC%94/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/24/%E9%9A%8F%E7%AC%94/" class="post-title-link" itemprop="url">随笔</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-04-24 22:32:31" itemprop="dateCreated datePublished" datetime="2025-04-24T22:32:31+08:00">2025-04-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-28 14:48:50" itemprop="dateModified" datetime="2025-08-28T14:48:50+08:00">2025-08-28</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <p>It did not take evil to produce evil.</p>
-<p>你要是没有碰到那个坏事，你就学不到对付那个坏事的本事，所以艰难困苦能使我们的事业成功</p>
-<p>在危险环境中表示绝望的人，在黑暗中看不见光明的人，只是懦夫与机会主义者  </p>
-<p>有利的条件和主动的恢复，产生于再坚持一下的努力之中  </p>
-<p>泱泱华夏，一撇一捺皆是脊梁<br>神州大地，一丝一念皆是未来<br>浩浩九州，一文一墨均是骄阳</p>
-<p>在坚冰还盖着北海的时候，我看到了怒放的梅花  </p>
-<p>政治越改进，抗战越能坚持；抗战越坚持，政治就越能改进。抗战的经验已经证明，十个月的中国人民的进步抵得上过去多少年的进步。</p>
-<p>A person with a similar soul is like gift.</p>
-<p>读万卷书行万里路，胸中脱去尘埃。 </p>
-<p>有一个喜欢的人真的太重要了，在你打算稀里糊涂过这普普通通一生的时候，会因为对方而再想要努力一下，在那么多疲惫不堪甚至抬不起头的日子里，会因为对方而觉得人生还有盼头。因为有念想，才有动力，对生活才会释放更多热情。总之岁月漫长，然而值得等待。  – 村上春树</p>
-<p>爱情不是整天无所事事的黏在一起</p>
-<p>人民民主专政的基础是工人阶级、农民阶级和城市小资产阶级的联盟，而主要是工人和农民的联盟，因为这两个阶级占了中国人口的百分之八十到九十。推翻帝国主义和国民党反动派，主要是这个两个阶级的力量。由新民主主义到社会主义，主要依靠这两个阶级的联盟。孙中山的“唤起民众”“扶助农工”的意思是说小资产阶级和民族资产阶级。</p>
-<p>我们必须克服苦难，我们必须学会自己不懂的东西。我们必须向一切内行的人们（不管什么人）学经济工作。拜他们做老师，恭恭敬敬地学，老老实实地学。不懂就是不懂，不要装懂。</p>
-<p>life always finds its own way out.</p>
-<p>好像那时我们都在，当时的事都记了起来，时间真的像是长了脚的妖怪，跑的飞快。<br>往事只是冰冷冷的过往，只是因为人的到来而变的温暖。</p>
-<p>我和你投缘，你和我同频，我们俩就这样在一起吧</p>
-<p>始于颜值，敬于才华，合于性格，久于善良，终于人品<br>和漂亮的人在一起，会越来越美，和阳光的人在一起，心里就会很阳光，和快乐的人在一起，嘴角就常带微笑，和聪明的人在一起，做事就变机敏，和大方的人在一起，出事就不小气，和睿智的人在一起，遇事就不迷茫。<br>而你，漂亮阳光快乐聪明大方睿智，夫欲何求。</p>
-<p>一个人真正值得炫耀的东西，是善良，是教养，是包容。是见过世面的涵养，向阳而生，努力向上，做一个温暖的人。 </p>
-<p>本质是在失去后显现</p>
-<p>享受阳光，保证休息，坚持锻炼，健康饮食，强大自信，真心的朋友</p>
-<p>坚持原则的你，被说固执；推陈出新的你，被指激进。<br>改变世界的人，不需要掌声铺路；那些撼动时代的理想，往往先把自己活成火炬。<br>花不语，<br>跪着把理想捂热的人，站着看的世界更辽阔</p>
-<p>If your feelings are still what they were last April, tell me so at once, my affections and wishes have not changed.</p>
-<p>Dear Cecilia, the story can resume.  </p>
-<p>Do not go gentle into that good night. Old age should burn and rave at close of day. Rage, rage against the dying light.</p>
-<p>So do you want to take a leap of faith, or become an old man, filled with regret waiting to die alone?</p>
-<p>分享欲是靠回应来延续的，热情也是</p>
-<p>社会形态的转变需要时间，而在一个历史角度上很短篇幅的转变时间，落在一代人身上就是他们的一身</p>
-<p>但我所说的中国革命高潮快要到来，决不是如有些人所谓“有到来之可能”那样完全没有行动意义的、可望而不可即的一种空的东西。它是站在海岸遥望海中已经看得见桅杆尖头了的一只航船，它是立于高山之巅远看东方已见光芒四射喷薄欲出的一轮朝日，它是躁动于母腹中的快要成熟了的一个婴儿。</p>
-<p>天在将黑未黑时最美，爱在将爱未爱时最迷人</p>
-<p>只有知道了书的结尾，才会明白书的开头。可正在阅读开头之时又怎知故事结尾</p>
-<p>枯木会逢春</p>
-<p>当牵牛花初开的时节，葬礼的号角就已吹响。但是太阳，它每时每刻都是夕阳也都是旭日。当它熄灭着走下山去收尽苍凉残照之际，正是它在另一面燃烧着爬上山巅布满烈烈朝晖之时。</p>
-<p>时间可以吞噬一切，但它丝毫不能减少的是你伟大的思想，你的幽默，你的善良，还有你的勇气。</p>
-<p>我们并不是生活在土地上，事实上我们生活在时间里。田野、街道、河流、房屋是我们置身度外时间之中的伙伴。时间将我们推移向前或向后，并改变这我们的模样</p>
-<p>节省每一个铜板为着战争和革命事业，为着我们的经济建设，是我们的会计制度的原则。</p>
-<p>尊重，是一种被教育出来的浪漫，穿上它是荣耀，铺下来是敬重，大学是文明的灯塔，也是人性的熔炉。在毕业典礼的人潮中回望，才会明白这方天地最珍贵的从不是文凭，而是他慷慨赠予每个闯入者的礼物。<br>永远对未知保持最谦卑的热望，这不仅是人类文明的保险柜，放着千年智慧的结晶，更是未来的孵化器，脚踏先辈脊梁，触碰更耀眼的光芒。</p>
-<p>春华秋实，生命的意义就在于它的无意义，花海盛开的璀璨，燕子归来的安心，有闪光就会有坠落的必经之路，吟唱声声，像是一句句呼唤，呼唤遗落在远方的人的心。情绪的荒岛一定会生出灿烂的玫瑰，在温润有力又极具故事感的声音里，感受到了坚定存在的信念，在浩瀚星辰里看到平凡生活里的闪光。</p>
-<p>如果你站在童年的位置，展望未来，你会说前途无量，但是你如果站在终点看生命的轨迹，你就只能看到一条命运之路。你不知道命运是什么，才知道什么是命运，所以很多人口中说的，看不到孩子的未来，其实是看到了未来，人生唯一的确定性，就是不确定。所以大胆的让孩子去做他想做的任何事情，任何美好的事情，活在当下，抓住一切的美好。</p>
-<p>我站在今天设想过去又幻想未来，过去和未来在今天随意交叉，因而过去和未来都刮着现在的风。</p>
-<p>时间是个怪物，最令人不解的迷，同时时间又是长了脚的妖怪，跑的飞快。</p>
-<p>莫逆之交</p>
-<p>我在感情上的愚钝就像是门窗紧闭的屋子，虽然爱情的脚步在屋前走过去又走过来，我也听到了，可是我觉得那是路过的脚步，那是走向别人的脚步。直到有一天，这个脚步停留在这里，然后门铃响了。</p>
-<p>任何影响，只会让一个人变得越来越像他自己，而不会像别人，这就是阅读和学习爱给我们最好的一个体会。</p>
-<p>环境不能影响一个人，而是揭示一个人</p>
-<p>But poetry, beauty, romance, love … these are what we stay alive for.</p>
-<p>生活的意义在于独立自我，教育的本质在于独立思考。从老师的角度来说先传道后有授业解惑，而从学生的角度出发行有余力则以学文，教育往往不必将学习直至首位，精神的建立，思想的塑造，才是真正的重要。</p>
-<p>被动和逃避总是很容易让人错失那些美好，而只有懂得了真正的勇敢和真正的释怀，生者才可以更好地生，死亡才能不成为伤疤，而成为释怀的记忆。</p>
-<p>并未在一起亦无从离弃<br>不用沦为伴侣别寻是惹非<br>就像蝴恋花后无凭无据<br>亲密维持十秒又随伴远飞</p>
-<p>曾谈情到天亮</p>
-<p>“I know of no better life purpose than to perish in attempting the great and the impossible…”  —  Nietzsche, 1873.</p>
-<p>生命就像是一个疗伤的过程，我们受伤，痊愈，再受伤。每一次的痊愈好像都是为了迎接下一次的受伤。或许总要彻彻底底的绝望一次，才能重新再活一次。</p>
-<p>大江歌罢掉头东，邃密群科济世穷。<br>面壁十年图破壁，难酬蹈海亦英雄。</p>
-<p>无由见颜色，还自托微波</p>
-<p>无论海角与天涯，大抵心安即是家</p>
-<p>一个真正的强者，在面对着非常严峻的形势，面对着命运的折磨的时候，他们能够挽救自己，他们有坚强的神经，钢铁一般的意志。</p>
-<p>归梦碧纱窗，说与人人道</p>
-<p>秀色空绝世，馨香为谁传</p>
-<p>This is the dream! It is conflict and it is compromise, and it is very, very exciting!</p>
-<p>“余致力国民革命凡四十年，其目的在求中国之自由平等。积四十年之经验，深知欲达到此目的，必须唤起民众及联合世界上以平等待我之民族共同奋斗” – 孙中山</p>
-<p>自主的，而非奴隶的。<br>进步的，而非保守的<br>进取的，而非退隐的<br>世界的，而非锁国的<br>实利的，而非虚文的<br>科学的，而非想象的<br>健壮的，而非体弱的</p>
-<p>那个为中华之崛起而读书，全民讨论中国往何处去的历史是<strong>真实存在</strong>的，甚至很难相信，在那苦难的年代，认真竟是被大家所推崇的，理性的争论竟然是可以实现的。在这样的国土上，真的有这样一群人，一种生活方式，他们能为了国家付出，为了理想奋斗，而不仅仅只是关注自己基金的涨跌，脸上痘痘的多少，又或者新发的朋友圈有多少人点赞。总之，理想可以以真实的形式存在。</p>
-<p>醒时同交欢，醉后各分离</p>
-<p>理性认识依赖于感性认识，理性的东西所以靠得住，正是由于它来源于感性，否则理性的东西就成了无源之水，无木之本，而只是主观自生的靠不住的东西了。此外，也，认识有待于深化就是说认识不能只停顿在低级的感性阶段，否则就成了“经验论”的错误，因而不能通观客观过程的全体，也称为庸俗的事务主义家。理性认识之后需行动起来，在懂得了客观世界的规律性后需要去解释世界，也就是拿了这种对于客观规律性的认识去能动地改造世界，也可称之为改造世界的实践过程。总的来说，通过实践而发现真理，又通过实践而证实真理和发展真理。从感性认识而能动地发展到理性认识，又从理性认识而能动地指导革命实践，改造主观世界和客观世界。这就是辩证唯物论的知行统一观。</p>
-<p>密切联系人民群众，洞悉社会弊病的人，然后将基于此形成的理性认识，并投入改造世界的实践过程的人，可称为先生。而大多是的人只了解少数精英阶层，而忽视底层的大多数。</p>
-<p>中国人的性格和中国文明的三大特征，正是深沉，博大和淳朴，此外还有灵敏<br>—— 辜鸿铭《中国人的精神》</p>
-<p>真正的平等，意味着一视同仁，门户开放，有教无类，或像伟大的拿破仑所表述的人尽其才，而不是将笨蛋与非笨蛋的头脑弄平，使国家中最好之人与最差之人一样差的绝对平等；真正的自由，并不意味着可以随心所欲，而是可以自由地做正确的事情，即中国经书中所谓率性之谓道。真正的民主，是指敞开的大门，没有出身、地位和种族之别，而不是指没有君、王权，更不是指庶民议政。大多数永远是不好的，他们不具备参政议政的能力。近代西方由大多数人来参与和支配政治的观念为群氓崇拜，它是非理性民主政治的来源，是欧美近来所有社会、政治和世界无政府状态的根源，也是导致欧洲大战的非直接原因。</p>
-<p>不觉碧山暮，秋云暗几重</p>
-<p>你终会明白前途比爱情重要，你还会明白爱情比前途更难得，但最后你会明白，对的人，会站在你的前途里。</p>
-<p>不必听自暴自弃者流的话，只是向上走。不必等待炬火，此后如竟没有炬火，我便是唯一的光</p>
-<p>犹记碧桃影里，誓三生。</p>
-<p>千年史册耻无名，一片丹心报天子。</p>
-<p>楚虽三户能亡秦，岂有堂堂中国空无人！</p>
-<p>“我也明知白驹过隙，逝者如斯，未来可能讲更有意思的话，著更其完美的文，做更其壮丽的事业，但今天只是今天，未来也只是今天的未来。”</p>
-<p>一点浩然气，千里快哉风。</p>
-<p>过去都是假的，回忆是一条没有归途的路。过去的一切春天都不复存在，纵然最狂热、最坚定的爱情，归根结底不过是一种转瞬即逝的现实</p>
-<p>大学ending，其实在ending前也时常会思考有什么遗憾的事情，我感觉大学四年还是很完美的，有在为成为更好的自己不断努力，也认识到了很多很好的朋友。以赴德为界，在华理认识到的班上的同学、隔壁班的德环同学还有学弟学妹们，后面在德国认识到的教会朋友还有德国朋友。我喜欢跟优秀的人交往，所幸的是大学四年我认识到的人都很优秀，也都很可爱。<br>那么真正遗憾的是什么，是因为水课导致均分0.04的分差与国奖失之交臂，还是六进五评选DAAD奖学金我却成为了那个一。感觉都不是，真正的遗憾是，苦于学生思维太久了，大一大二只知学习课本知识，沿用初高中的how to study而从未思考过why to stusy，这也导致了科研上手的太晚了，也做的不温不火，不过还是找到并确定了方向。当然这也是遗憾之一，还有其实性格上虽然改变了不少，我变得更加主动更加开朗了，也做到了基本上不发火不说脏话。但我知道这还远远不够，我还需要更加阳光积极，少一些焦躁。<br>无论如何，我很庆幸、很感激自己还是曾经预想的模样。没有哪一天是在浑浑噩噩中度过的，在思考和困惑中努力成长。</p>
-<p>相逢一醉是前缘，风雨散、飘然何处  </p>
-<p>求田问舍，怕应羞见，刘郎才气。可惜流年，忧愁风雨，树犹如此。  </p>
-<p>因笑王谢诸人，登高怀远，也学英雄涕</p>
-<p>悟已往之不谏，知来者之可追。</p>
-<p>二十余年如一梦，此身虽在堪惊</p>
-<p>一点浩然气，千里快哉风</p>
-<p>古今如梦，何曾梦觉，但有旧欢新怨</p>
-<p>可惜一溪风月，莫教踏碎琼瑶</p>
-<p>你就是我的处境，我想逃离这个处境，已经跑到了“对跖点”的时候，我已发现无路可退。因为多迈一步，我就离我的处境有多了一步。但是如果走心的话，我们是最近的，不走心，可能就是最远的。</p>
-<p>一个人能力有大小，但只要有这点精神（毫无自私自利之心的精神），就是一个高尚的人，一个纯粹的人，一个有道德的人，一个脱离了低级趣味的人，一个有益于人民的人。</p>
-<p>做官之道，其实就三句话：和光同尘，雨露均沾，花花轿子众人抬。一人吃独食，是吃不长久的。</p>
-<p>就算失败，我也想知道，自己倒在距离终点多远的地方。</p>
-<p>给历史以一定的科学的地位，是尊重历史的辩证法的发展，而不是颂古非今，不是赞扬任何封建的毒素。对于人民群众和青年学生，主要地不是要引导他们向后看，而是要引导他们向前看。</p>
-<p>你像是海鸥，强健，难以约束，喜欢狂风暴雨，远远飞向大海，自得其乐。</p>
-<p>I am not throwing away my shot.</p>
-<p>Raise a glass to the four of us. Tomorrow, there will be more of us.</p>
-<p>教敷营，雨花台，挹江门，中山门，中华门</p>
-<p>what is next? Shall we go next? How to go next?</p>
-<p>须知少日拏云志，曾许人间第一流</p>
-<p>不同时期中的青年有不同的使命。新民主主义革命时期，青春是慢慢长征路上那一声坚定的“跟着走”，走向柳暗花明的胜利之路；社会主义革命和建设时期，青春是一穷二白下的艰苦奋斗，向科学进军，向困难进军，向荒原进军；改革开放和社会主义现代化建设新时期，青春是勇立潮头，作改革闯将，开风气之先。而经济形势、就业形势欠佳的今天，我们青年又该何去何从，实质上奋斗永远是底色，昭昭前世，激励后人，勿负时代，勿负人民。</p>
-<p>不必形色匆匆，不必光芒万丈，不必成为别人，只需做自己</p>
-<p>君子疾夫舍曰欲之而必为之辞</p>
-<p>我们读所有的书，最终的目的都是读到自己。让焦虑的心平息下来，突然有种豁然开朗的安全感，你会发现你百思不得其解的困惑，千百年来被无数的人思考过，而答案也就书中。</p>
-<p>大江歌罢掉头东，邃密群科济世穷。<br>面壁十年图破壁，难酬蹈海亦英雄</p>
-<p>青年如初春，如朝日，如百卉之萌动，如利刃之新发于石刑，人生之最可贵之时期也 – 陈独秀</p>
-<p>绘事后素</p>
-<p>注重外在文饰的同时，莫忘追求其本质，如西西弗斯一般，在虚无中扼杀虚无，在绝望中超越绝望，在不断的滚石途中磨砺自己的斗志，这才是真正的质。</p>
-<p>岁月悠悠，衰微只及肌肤。热忱抛却，颓废必致灵魂。</p>
-<p>不言而喻之中，一切自有深意</p>
-<p>路虽远行则将至，事虽难做则必成</p>
-<p>一个人时不辜负自己，玩的时候不辜负风景，爱的时候不辜负人</p>
-<p>在自己身上克服这个时代 – 尼采</p>
-<p>对未来最大的馈赠，就是将一切献给今天</p>
-<p>内图个性之发展，外图贡献于其群</p>
-<p>青春易逝，但成长是永恒的过程，真正有少年心性的人，是不停革新自我的人。</p>
-<p>何须浅碧深红色，自是花中第一流。</p>
-<p>每个人都是孤独地出生，在这世间恍惚几十年并不漫长的日子转眼就远去了，然后再孤独地死去。生命注定是个悲剧，因为我们从没有融入世界，世界永远是身外之物。如果有幸，能在茫茫人海寻得一个身体与灵魂都与自己万分契合的人，与之存在一种可以称之为爱情的联系，然后一起承受生命中不可逃离不可消除的深沉的宿命的孤独。可是这般的幸运艰深难得。有的已失去了爱的能力，有的爱得深沉却无法安放，有的死在这爱里。在所有的爱里，孤独有增无减。生命只是一场幻梦。</p>
-<p>我们趋行在人生这个亘古的旅途，在坎坷中奔跑，在挫折里涅盘，忧愁缠满全身，痛苦飘洒一地。我们累，却无从止歇；我们苦，却无法回避。</p>
-<p>迷茫的时候，充满活力也是浪费时间</p>
-<p>民国时期的四大家族（蒋宋孔陈），既掌握政权和土地，又勾结外国资本，典型地表现为<strong>封建-买办的结合体</strong>。买办属于资产阶级的一部分，但他们并不独立发展资本，而是依附外国资本。</p>
-<p>封建地主包括有大地主（地方豪绅、士绅），中小地主，官僚地主</p>
-<p>因为当时马孔多百业待兴，时间不够。人们那么勤奋地工作，在短时间内就把一切都做完了，现在早晨三点就双臂交叉地坐着，计算自鸣钟的华尔兹舞曲有多少段曲调。想睡的人–井非由于疲乏，而是渴望做梦–采取各种办法把自己弄得精疲力尽，他们聚在一起，不住地絮絮叨叨，一连几小时把同样的奇闻说了又说，大讲特讲白色阉(又鸟)的故事。一直把故事搞得复杂到了极点。这是一种没完没了的玩耍–讲故事的人问其余的人。</p>
-<p>一个孤立于现实、脱离社会的梦想者，注定被时间与孤独吞没</p>
-<p>每个人都有一个觉醒期，但觉醒的早晚决定个人的命运</p>
-<p>无论精神多么独立的人，感情却总是在寻找一种依附，寻找一种归附</p>
-<p>君子博学于文，约之以礼，亦可以弗畔矣夫</p>
-<p>科研评价指标的衍生问题。对于做通信来说，重在推公式的优化类文章，无论是在文章的生产速度上来说还是评审时的认可度来说，都是绝对优于脚踏实地做无线系统实验的文章。A博千辛万苦搭建了一个SDR系统，正准备在上面优化一些算法，然后发现无线复杂无比，哪哪下手都不容易，系统在跑的时候还动不动崩溃了(没错我说的就是OAI)。等好不容易在上面实现了创新，写成了paper，投稿还可能面临创新点不足(公式不够多)的风险，这个时候已经2-3年过去了。然后B博上来就是一堆优化公式，花了一年多时间小试身手，一区论文到手，接下来几年有了第一篇的经验，稳定产出。4年下来从评价指标来说，B博远远优秀与A博。面临科研和考核压力的博士和青年教师，会选择哪一条路显而易见。</p>
-<p>以淡字交友，以聋字止谤；以刻字责己，以弱字御悔恨。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/blog/page/5/">5</a><a class="extend next" rel="next" href="/blog/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/blog/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/blog/page/5/">5</a><a class="page-number" href="/blog/page/6/">6</a><a class="extend next" rel="next" href="/blog/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1852,7 +1878,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-count">51</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
