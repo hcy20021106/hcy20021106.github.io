@@ -717,7 +717,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-26 21:28:24" itemprop="dateModified" datetime="2025-08-26T21:28:24+08:00">2025-08-26</time>
+                <time title="Modified: 2025-09-09 11:21:06" itemprop="dateModified" datetime="2025-09-09T11:21:06+08:00">2025-09-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -790,6 +790,9 @@
 <li>子载波信道好(|H_k|大)： 可以用高阶调制（如64-QAM）提高速率</li>
 <li>子载波信道差（｜H_k｜小）：改用低阶调制（如QPSK），保证可靠性</li>
 </ul>
+<h2 id="信道能量归一化"><a href="#信道能量归一化" class="headerlink" title="信道能量归一化"></a>信道能量归一化</h2><h3 id="时域"><a href="#时域" class="headerlink" title="时域"></a>时域</h3><p>$$<br>|h|^2 &#x3D; \sum_{\ell&#x3D;0}^{L-1} |h[\ell]|^2<br>$$</p>
+<p>其期望为<br>$$<br>\mathbb{E}\left[|h|^2\right]<br>&#x3D; \sum_{\ell&#x3D;0}^{L-1} \mathbb{E}[|h[\ell]|^2]<br>&#x3D; L \cdot \frac{1}{L}<br>&#x3D; 1<br>$$.<br>h[ℓ] ~ CN(0, 1&#x2F;L), ℓ &#x3D; 0, …, L-1. </p>
+<h3 id="频域"><a href="#频域" class="headerlink" title="频域"></a>频域</h3><p>$$<br>H[k] &#x3D; \sum_{\ell&#x3D;0}^{L-1} h[\ell] , e^{-j \tfrac{2\pi}{N} k \ell},<br>\quad k&#x3D;0,1,\dots,N-1<br>$$<br>其期望为：<br>$$<br>\mathbb{E}[|H[k]|^2]<br>&#x3D; \sum_{\ell&#x3D;0}^{L-1} \mathbb{E}[|h[\ell]|^2]<br>&#x3D; 1,<br>\quad \forall k<br>$$</p>
 
       
     </div>
