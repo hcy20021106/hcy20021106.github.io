@@ -150,6 +150,217 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/27/EVM-based-SNR-Calculation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/27/EVM-based-SNR-Calculation/" class="post-title-link" itemprop="url">EVM-based SNR Calculation</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-27 16:47:08 / Modified: 16:52:20" itemprop="dateCreated datePublished" datetime="2025-08-27T16:47:08+08:00">2025-08-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="1-PSD-Based-SNR-Estimation-ANN-Method"><a href="#1-PSD-Based-SNR-Estimation-ANN-Method" class="headerlink" title="1. PSD-Based SNR Estimation (ANN Method)"></a>1. PSD-Based SNR Estimation (ANN Method)</h2><ul>
+<li><p><strong>概念</strong>: PSD (Power Spectral Density) 表示接收信号功率在频率域的分布。</p>
+</li>
+<li><p>接收信号 r(t) &#x3D; s(t) + n(t)，其中 s(t) 是有效信号，n(t) 是噪声。</p>
+</li>
+<li><p>PSD 包含了信号功率和噪声功率。</p>
+</li>
+<li><p>ANN 方法流程:</p>
+<ol>
+<li>接收信号 -&gt; 提取 PSD 特征。</li>
+<li>ANN 输入 PSD -&gt; 输出 SNR 分类。</li>
+<li>SNR 分类映射到最优 MCS（调制与编码方案）。</li>
+</ol>
+</li>
+<li><p>优点:</p>
+<ul>
+<li>不依赖解调符号或误差向量。</li>
+<li>高速移动环境中稳健（PSD 不受多普勒效应显著影响）。</li>
+<li>推理计算量低，实时性好。</li>
+</ul>
+</li>
+<li><p>平均功率计算:</p>
+<ul>
+<li>平均功率 $P &#x3D; ∫ S_x(f) df$（连续信号）或 $P &#x3D; (1&#x2F;N) Σ |X[k]|^2$（离散信号）。</li>
+<li>PSD 积分得到总功率，可用于 SNR 计算: $SNR &#x3D; P_signal &#x2F; P_noise$。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-EVM-Based-SNR-Estimation"><a href="#2-EVM-Based-SNR-Estimation" class="headerlink" title="2. EVM-Based SNR Estimation"></a>2. EVM-Based SNR Estimation</h2><ul>
+<li><strong>EVM (Error Vector Magnitude)</strong> 衡量接收符号与理想符号的误差：<br>$EVM &#x3D; sqrt(Σ |r_i - s_i|^2 &#x2F; Σ |s_i|^2)$<ul>
+<li>$r_i$: 接收符号</li>
+<li>$s_i$: 理想符号（通常是 pilot&#x2F;reference symbols）</li>
+</ul>
+</li>
+<li>流程:<ol>
+<li>接收 pilot 符号。</li>
+<li>计算误差向量 $e &#x3D; r_p - s_p$。</li>
+<li>得到 EVM -&gt; 间接推算 SNR -&gt; 映射到 CQI -&gt; 选择 MCS。</li>
+</ol>
+</li>
+<li>局限:<ul>
+<li>依赖 pilot。</li>
+<li>高速移动或多普勒环境下 EVM 会受到星座漂移影响，SNR 估计不稳定。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="3-LS-Based-SNR-Estimation"><a href="#3-LS-Based-SNR-Estimation" class="headerlink" title="3. LS-Based SNR Estimation"></a>3. LS-Based SNR Estimation</h2><ul>
+<li><strong>LS (Least Squares) 方法</strong>用于信道估计:<ul>
+<li>基本公式: $h_hat &#x3D; r_p &#x2F; s_p$（简单 LS）</li>
+<li>信道估计后计算 SNR: $SNR &#x3D; E[|h s|^2] &#x2F; E[|r - h s|^2]$</li>
+</ul>
+</li>
+<li>特点:<ul>
+<li>通过信道增益和噪声功率直接计算 SNR。</li>
+<li>也依赖 pilot。</li>
+<li>高速移动环境中相对稳健，但需要频繁更新信道估计。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="4-区别总结-EVM-vs-LS-vs-PSD-ANN"><a href="#4-区别总结-EVM-vs-LS-vs-PSD-ANN" class="headerlink" title="4. 区别总结: EVM vs LS vs PSD+ANN"></a>4. 区别总结: EVM vs LS vs PSD+ANN</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>EVM-based</th>
+<th>LS-based</th>
+<th>PSD+ANN</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>原理</td>
+<td>接收符号 vs 理想符号误差</td>
+<td>信道估计 + 噪声功率</td>
+<td>PSD 特征 + ANN 分类</td>
+</tr>
+<tr>
+<td>输入</td>
+<td>Pilot &#x2F; Reference</td>
+<td>Pilot &#x2F; Reference</td>
+<td>接收信号 PSD</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>SNR (间接)</td>
+<td>SNR (直接)</td>
+<td>SNR 分类</td>
+</tr>
+<tr>
+<td>高速移动适应性</td>
+<td>差</td>
+<td>较好</td>
+<td>很好，鲁棒</td>
+</tr>
+<tr>
+<td>复杂度</td>
+<td>低</td>
+<td>中等</td>
+<td>低，推理快</td>
+</tr>
+<tr>
+<td>使用场景</td>
+<td>AMC &#x2F; CQI映射</td>
+<td>信道估计、AMC、功率控制</td>
+<td>AMC &#x2F; CQI映射</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="5-AMC应用总结"><a href="#5-AMC应用总结" class="headerlink" title="5. AMC应用总结"></a>5. AMC应用总结</h2><ul>
+<li><p>CQI驱动 AMC:</p>
+<ul>
+<li>基站根据 UE 反馈的 CQI 动态选择 MCS。</li>
+<li>高 SNR → 高阶调制 + 高码率 → 高吞吐量。</li>
+<li>低 SNR → 低阶调制 + 低码率 → 保证可靠性。</li>
+<li>优点: 动态适应信道，频谱效率高。</li>
+<li>缺点: 需要反馈，系统复杂。</li>
+</ul>
+</li>
+<li><p>固定 MCS:</p>
+<ul>
+<li>不考虑信道变化，固定使用某个 MCS。</li>
+<li>简单，但在差信道下 BLER 高，信道好时未充分利用频谱。</li>
+<li>吞吐量和可靠性都不如 CQI 驱动方法。</li>
+</ul>
+</li>
+<li><p>ANN+PSD 方法:</p>
+<ul>
+<li>跳过 EVM 或 LS 复杂计算。</li>
+<li>利用 PSD 特征直接预测 SNR 分类。</li>
+<li>在高速移动信道下鲁棒性更强。</li>
+<li>可快速选择最优 MCS，提高系统吞吐量。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="6-结论"><a href="#6-结论" class="headerlink" title="6. 结论"></a>6. 结论</h2><ol>
+<li>PSD 中包含信号和噪声，可以通过积分或求和得到平均功率，从而估计 SNR。</li>
+<li>EVM 基于 pilot 符号计算误差向量，间接得到 SNR。</li>
+<li>LS 基于 pilot 符号做信道估计，再计算 SNR。</li>
+<li>ANN+PSD 方法在高速移动场景下性能优于传统 EVM 方法，计算量低且稳健。</li>
+<li>CQI 驱动 AMC 与固定 MCS 的区别在于系统能否动态适应信道变化，前者性能更优。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/26/Semantic-Communication/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1090,107 +1301,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/21/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/07/21/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">数字信号处理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-07-21 15:13:01 / Modified: 16:01:38" itemprop="dateCreated datePublished" datetime="2025-07-21T15:13:01+08:00">2025-07-21</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h1 id="数字信号处理-—-DFT和DTFT简介"><a href="#数字信号处理-—-DFT和DTFT简介" class="headerlink" title="数字信号处理 — DFT和DTFT简介"></a>数字信号处理 — DFT和DTFT简介</h1><h2 id="离散时间傅里叶变换（DTFT）"><a href="#离散时间傅里叶变换（DTFT）" class="headerlink" title="离散时间傅里叶变换（DTFT）"></a>离散时间傅里叶变换（DTFT）</h2><p>DTFT（Discrete-Time Fourier Transform）是离散时间信号的傅里叶变换，定义为将离散时间信号映射到连续的频率域。<br>它的数学表达式为：</p>
-<p>$$<br>X(\omega) &#x3D; \sum_{n&#x3D;-\infty}^{\infty} x[n] e^{-j \omega n}<br>$$</p>
-<ul>
-<li>其中，$x[n]$ 是离散时间信号，  </li>
-<li>$\omega$ 是连续频率变量，取值范围为 $-\pi \leq \omega \leq \pi$。  </li>
-<li>DTFT结果是频率的连续函数。</li>
-</ul>
-<p>DTFT适合分析无限长或有限长信号的频率特性。</p>
-<hr>
-<h2 id="连续时间信号采样与离散时间傅里叶变换-DTFT-推导"><a href="#连续时间信号采样与离散时间傅里叶变换-DTFT-推导" class="headerlink" title="连续时间信号采样与离散时间傅里叶变换 (DTFT) 推导"></a>连续时间信号采样与离散时间傅里叶变换 (DTFT) 推导</h2><p>设连续时间信号的傅里叶变换为：</p>
-<p>$$<br>X_s(j\omega) &#x3D; \int_{-\infty}^{\infty} x_s(t) \cdot e^{-j \omega t} , dt<br>$$</p>
-<p>其中，采样后的信号 $x_s(t)$ 可以表示为：</p>
-<p>$$<br>x_s(t) &#x3D; \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot \delta(t - k T_s)<br>$$</p>
-<p>代入傅里叶变换：</p>
-<p>$$<br>\begin{aligned}<br>X_s(j\omega) &amp;&#x3D; \int_{-\infty}^{\infty} \left( \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot \delta(t - k T_s) \right) e^{-j \omega t} , dt \<br>&amp;&#x3D; \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot e^{-j \omega k T_s} \int_{-\infty}^{\infty} \delta(t - k T_s) , dt \quad \text{(利用线性性质和 $x(t)\delta(t - t_0) &#x3D; x(t_0) \delta(t - t_0)$)} \<br>&amp;&#x3D; \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot e^{-j \omega k T_s}<br>\end{aligned}<br>$$</p>
-<p>令</p>
-<ul>
-<li>$\Omega &#x3D; \omega T_s$ （连续时间角频率转换为数字频率），  </li>
-<li>$x[k] &#x3D; x(k T_s)$ （离散时间信号样本），</li>
-</ul>
-<p>则上述式子可写为：</p>
-<p>$$<br>X(e^{j \Omega}) &#x3D; \sum_{k&#x3D;-\infty}^{\infty} x[k] \cdot e^{-j \Omega k}<br>$$</p>
-<p>这就是离散时间傅里叶变换（DTFT）的定义。</p>
-<hr>
-<p><strong>总结：</strong></p>
-<ul>
-<li>通过采样，将连续时间信号转换为离散时间信号；  </li>
-<li>连续时间傅里叶变换 $X_s(j\omega)$ 可表达为离散时间傅里叶变换 $X(e^{j \Omega})$ 的形式，连接了连续与离散频域。</li>
-</ul>
-<h2 id="离散傅里叶变换（DFT）"><a href="#离散傅里叶变换（DFT）" class="headerlink" title="离散傅里叶变换（DFT）"></a>离散傅里叶变换（DFT）</h2><p>DFT（Discrete Fourier Transform）是DTFT的离散版本，适用于有限长度的序列。<br>它将一个长度为$N$的序列转换为长度为$N$的频域序列，计算公式为：</p>
-<p>$$<br>X[k] &#x3D; \sum_{n&#x3D;0}^{N-1} x[n] e^{-j \frac{2\pi}{N} k n}, \quad k&#x3D;0,1,\ldots,N-1<br>$$</p>
-<ul>
-<li>$x[n]$ 是长度为$N$的离散信号，  </li>
-<li>$X[k]$ 是离散的频率样本点，  </li>
-<li>DFT的频率点是均匀分布在 $[0, 2\pi)$ 上。</li>
-</ul>
-<p>DFT广泛应用于数字信号处理中的频谱分析和滤波。</p>
-<hr>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li><strong>DTFT</strong>：频率连续，信号长度可以无限，理论分析工具。  </li>
-<li><strong>DFT</strong>：频率离散，信号长度有限，数值计算工具，常用快速算法FFT实现。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1260,7 +1370,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

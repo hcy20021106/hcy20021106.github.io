@@ -150,6 +150,107 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/21/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/07/21/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">数字信号处理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-07-21 15:13:01 / Modified: 16:01:38" itemprop="dateCreated datePublished" datetime="2025-07-21T15:13:01+08:00">2025-07-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h1 id="数字信号处理-—-DFT和DTFT简介"><a href="#数字信号处理-—-DFT和DTFT简介" class="headerlink" title="数字信号处理 — DFT和DTFT简介"></a>数字信号处理 — DFT和DTFT简介</h1><h2 id="离散时间傅里叶变换（DTFT）"><a href="#离散时间傅里叶变换（DTFT）" class="headerlink" title="离散时间傅里叶变换（DTFT）"></a>离散时间傅里叶变换（DTFT）</h2><p>DTFT（Discrete-Time Fourier Transform）是离散时间信号的傅里叶变换，定义为将离散时间信号映射到连续的频率域。<br>它的数学表达式为：</p>
+<p>$$<br>X(\omega) &#x3D; \sum_{n&#x3D;-\infty}^{\infty} x[n] e^{-j \omega n}<br>$$</p>
+<ul>
+<li>其中，$x[n]$ 是离散时间信号，  </li>
+<li>$\omega$ 是连续频率变量，取值范围为 $-\pi \leq \omega \leq \pi$。  </li>
+<li>DTFT结果是频率的连续函数。</li>
+</ul>
+<p>DTFT适合分析无限长或有限长信号的频率特性。</p>
+<hr>
+<h2 id="连续时间信号采样与离散时间傅里叶变换-DTFT-推导"><a href="#连续时间信号采样与离散时间傅里叶变换-DTFT-推导" class="headerlink" title="连续时间信号采样与离散时间傅里叶变换 (DTFT) 推导"></a>连续时间信号采样与离散时间傅里叶变换 (DTFT) 推导</h2><p>设连续时间信号的傅里叶变换为：</p>
+<p>$$<br>X_s(j\omega) &#x3D; \int_{-\infty}^{\infty} x_s(t) \cdot e^{-j \omega t} , dt<br>$$</p>
+<p>其中，采样后的信号 $x_s(t)$ 可以表示为：</p>
+<p>$$<br>x_s(t) &#x3D; \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot \delta(t - k T_s)<br>$$</p>
+<p>代入傅里叶变换：</p>
+<p>$$<br>\begin{aligned}<br>X_s(j\omega) &amp;&#x3D; \int_{-\infty}^{\infty} \left( \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot \delta(t - k T_s) \right) e^{-j \omega t} , dt \<br>&amp;&#x3D; \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot e^{-j \omega k T_s} \int_{-\infty}^{\infty} \delta(t - k T_s) , dt \quad \text{(利用线性性质和 $x(t)\delta(t - t_0) &#x3D; x(t_0) \delta(t - t_0)$)} \<br>&amp;&#x3D; \sum_{k&#x3D;-\infty}^{\infty} x(k T_s) \cdot e^{-j \omega k T_s}<br>\end{aligned}<br>$$</p>
+<p>令</p>
+<ul>
+<li>$\Omega &#x3D; \omega T_s$ （连续时间角频率转换为数字频率），  </li>
+<li>$x[k] &#x3D; x(k T_s)$ （离散时间信号样本），</li>
+</ul>
+<p>则上述式子可写为：</p>
+<p>$$<br>X(e^{j \Omega}) &#x3D; \sum_{k&#x3D;-\infty}^{\infty} x[k] \cdot e^{-j \Omega k}<br>$$</p>
+<p>这就是离散时间傅里叶变换（DTFT）的定义。</p>
+<hr>
+<p><strong>总结：</strong></p>
+<ul>
+<li>通过采样，将连续时间信号转换为离散时间信号；  </li>
+<li>连续时间傅里叶变换 $X_s(j\omega)$ 可表达为离散时间傅里叶变换 $X(e^{j \Omega})$ 的形式，连接了连续与离散频域。</li>
+</ul>
+<h2 id="离散傅里叶变换（DFT）"><a href="#离散傅里叶变换（DFT）" class="headerlink" title="离散傅里叶变换（DFT）"></a>离散傅里叶变换（DFT）</h2><p>DFT（Discrete Fourier Transform）是DTFT的离散版本，适用于有限长度的序列。<br>它将一个长度为$N$的序列转换为长度为$N$的频域序列，计算公式为：</p>
+<p>$$<br>X[k] &#x3D; \sum_{n&#x3D;0}^{N-1} x[n] e^{-j \frac{2\pi}{N} k n}, \quad k&#x3D;0,1,\ldots,N-1<br>$$</p>
+<ul>
+<li>$x[n]$ 是长度为$N$的离散信号，  </li>
+<li>$X[k]$ 是离散的频率样本点，  </li>
+<li>DFT的频率点是均匀分布在 $[0, 2\pi)$ 上。</li>
+</ul>
+<p>DFT广泛应用于数字信号处理中的频谱分析和滤波。</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><strong>DTFT</strong>：频率连续，信号长度可以无限，理论分析工具。  </li>
+<li><strong>DFT</strong>：频率离散，信号长度有限，数值计算工具，常用快速算法FFT实现。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/07/%E5%85%B6%E4%BB%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -764,14 +865,14 @@ print(f&quot;Difference (CP removed vs. circular): &#123;error:.3e&#125;&quot;)
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2025-06-17 20:57:35" itemprop="dateCreated datePublished" datetime="2025-06-17T20:57:35+08:00">2025-06-17</time>
+              <time title="Created: 2025-06-17 14:57:35" itemprop="dateCreated datePublished" datetime="2025-06-17T14:57:35+08:00">2025-06-17</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-30 21:36:25" itemprop="dateModified" datetime="2025-06-30T21:36:25+08:00">2025-06-30</time>
+                <time title="Modified: 2025-09-14 21:31:21" itemprop="dateModified" datetime="2025-09-14T21:31:21+08:00">2025-09-14</time>
               </span>
 
           
@@ -826,7 +927,7 @@ print(f&quot;Difference (CP removed vs. circular): &#123;error:.3e&#125;&quot;)
 </tr>
 </tbody></table>
 <blockquote>
-<p>✅ <strong>常用格式缩写</strong>  </p>
+<p>✅ <strong>常用缩写</strong>  </p>
 <ul>
 <li><code>N</code>: Batch size  </li>
 <li><code>C</code>: Channels  </li>
@@ -836,7 +937,7 @@ print(f&quot;Difference (CP removed vs. circular): &#123;error:.3e&#125;&quot;)
 </ul>
 </blockquote>
 <hr>
-<h2 id="常用函数小结"><a href="#常用函数小结" class="headerlink" title="常用函数小结"></a>常用函数小结</h2><table>
+<h2 id="🔧-Tensor-基本操作"><a href="#🔧-Tensor-基本操作" class="headerlink" title="🔧 Tensor 基本操作"></a>🔧 Tensor 基本操作</h2><table>
 <thead>
 <tr>
 <th>函数</th>
@@ -844,77 +945,40 @@ print(f&quot;Difference (CP removed vs. circular): &#123;error:.3e&#125;&quot;)
 </tr>
 </thead>
 <tbody><tr>
-<td>unsqueeze(dim)</td>
+<td><code>unsqueeze(dim)</code></td>
 <td>插入新维度</td>
 </tr>
 <tr>
-<td>squeeze(dim)</td>
-<td>去除大小为1的维度</td>
+<td><code>squeeze(dim)</code></td>
+<td>去除大小为 1 的维度</td>
 </tr>
 <tr>
-<td>transpose(a,b)</td>
+<td><code>transpose(a,b)</code></td>
 <td>交换两个维度</td>
 </tr>
 <tr>
-<td>.view()</td>
-<td>改变形状</td>
+<td><code>permute(dims)</code></td>
+<td>重新排列所有维度</td>
 </tr>
 <tr>
-<td>.reshape()</td>
-<td>改变形状</td>
+<td><code>.view()</code></td>
+<td>改变形状（需保证内存连续）</td>
+</tr>
+<tr>
+<td><code>.reshape()</code></td>
+<td>改变形状（更灵活）</td>
+</tr>
+<tr>
+<td><code>.flatten()</code></td>
+<td>展平为一维</td>
+</tr>
+<tr>
+<td><code>torch.topk()</code></td>
+<td>取前 k 大或前 k 小的值</td>
 </tr>
 </tbody></table>
-<h2 id="⚙️-常用操作示例"><a href="#⚙️-常用操作示例" class="headerlink" title="⚙️ 常用操作示例"></a>⚙️ 常用操作示例</h2><pre><code class="language-python">import torch
-
-# 创建一个随机的 RGB 图片 Tensor: (C,H,W)
-x = torch.randn(3, 224, 224)
-y = torch.zeros([2,3])
-# 输出size, e.g., torch.Size([2,3])
-x.shape
-# cat: concatenate multiple tensors
-x = torch.zeros([2,1,3])
-y = torch.zeros([2,3,3])
-z = torch.zeros([2,2,3])
-w = torch.cat([x,y,z], dim = 1)
-# torch.Size([2,6,3])
-w.shape
-
-# 查看形状
-print(x.shape)  # torch.Size([3, 224, 224])
-
-# 交换维度: transpose
-x_transposed = x.transpose(1, 2)  # (C, W, H)
-
-# 重新排列所有维度: permute
-x_permuted = x.permute(1, 2, 0)   # (H, W, C)
-
-# 展平为一维
-x_flatten = x.view(-1)
-
-# 添加 batch 维度
-x_batched = x.unsqueeze(0)  # (1, C, H, W)
-
-# 去除维度为 1 的维度
-x_squeezed = x_batched.squeeze(0)  # (C, H, W)
-
-# 数据类型转换
-x_double = x.double()
-x_int = x.int()
-
-# 基本运算
-y = torch.randn_like(x)
-z = x + y  # element-wise 加法
-
-# 移动到 GPU
-x_cuda = x.to(&#39;cuda&#39;)
-
-# 自动求导示例
-w = torch.randn(5, requires_grad=True)
-loss = (w ** 2).sum()
-loss.backward()
-print(w.grad)
-</code></pre>
-
+<hr>
+<h2 id="⚙️-常用操作示例"><a href="#⚙️-常用操作示例" class="headerlink" title="⚙️ 常用操作示例"></a>⚙️ 常用操作示例</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个随机的 RGB 图片 Tensor: (C,H,W)</span></span><br><span class="line">x = torch.randn(<span class="number">3</span>, <span class="number">224</span>, <span class="number">224</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看形状</span></span><br><span class="line"><span class="built_in">print</span>(x.shape)  <span class="comment"># torch.Size([3, 224, 224])</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 交换维度: transpose</span></span><br><span class="line">x_transposed = x.transpose(<span class="number">1</span>, <span class="number">2</span>)  <span class="comment"># (3, W, H)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新排列所有维度: permute</span></span><br><span class="line">x_permuted = x.permute(<span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>)   <span class="comment"># (H, W, C)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 展平为一维</span></span><br><span class="line">x_flatten = x.view(-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加 batch 维度</span></span><br><span class="line">x_batched = x.unsqueeze(<span class="number">0</span>)  <span class="comment"># (1, 3, 224, 224)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 去除维度为 1 的维度</span></span><br><span class="line">x_squeezed = x_batched.squeeze(<span class="number">0</span>)  <span class="comment"># (3, 224, 224)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># cat: 拼接多个 tensor</span></span><br><span class="line">a = torch.zeros([<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>])</span><br><span class="line">b = torch.zeros([<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>])</span><br><span class="line">c = torch.zeros([<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">d = torch.cat([a,b,c], dim=<span class="number">1</span>)      <span class="comment"># [2,6,3]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># reshape: 灵活改变形状</span></span><br><span class="line">t = torch.arange(<span class="number">12</span>)          <span class="comment"># [0,...,11], shape=(12,)</span></span><br><span class="line"><span class="built_in">print</span>(t.reshape(<span class="number">3</span>,<span class="number">4</span>))         <span class="comment"># (3,4)</span></span><br><span class="line"><span class="built_in">print</span>(t.reshape(-<span class="number">1</span>,<span class="number">6</span>))        <span class="comment"># 自动推断: (2,6)</span></span><br><span class="line"><span class="built_in">print</span>(t.reshape(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>))       <span class="comment"># (2,2,3)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># topk: 取最小/最大值</span></span><br><span class="line">vals, idxs = torch.topk(t, <span class="number">3</span>, largest=<span class="literal">False</span>)  <span class="comment"># 取最小的 3 个</span></span><br><span class="line"><span class="built_in">print</span>(vals, idxs)</span><br><span class="line"><span class="comment"># tensor([0, 1, 2]) tensor([0, 1, 2])</span></span><br><span class="line">vals, idxs = torch.topk(t, <span class="number">3</span>, largest=<span class="literal">True</span>)   <span class="comment"># 取最大的 3 个</span></span><br><span class="line"><span class="built_in">print</span>(vals, idxs)</span><br><span class="line"><span class="comment"># tensor([11, 10,  9]) tensor([11, 10,  9])</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据类型转换</span></span><br><span class="line">x_double = x.double()</span><br><span class="line">x_int = x.<span class="built_in">int</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 基本运算</span></span><br><span class="line">y = torch.randn_like(x)</span><br><span class="line">z = x + y  <span class="comment"># element-wise 加法</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 移动到 GPU</span></span><br><span class="line">x_cuda = x.to(<span class="string">&#x27;cuda&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动求导示例</span></span><br><span class="line">w = torch.randn(<span class="number">5</span>, requires_grad=<span class="literal">True</span>)</span><br><span class="line">loss = (w ** <span class="number">2</span>).<span class="built_in">sum</span>()</span><br><span class="line">loss.backward()</span><br><span class="line"><span class="built_in">print</span>(w.grad)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -2676,89 +2740,6 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/07/numpy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/07/numpy/" class="post-title-link" itemprop="url">numpy</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-06-07 21:53:37" itemprop="dateCreated datePublished" datetime="2025-06-07T21:53:37+08:00">2025-06-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-09-04 23:02:45" itemprop="dateModified" datetime="2025-09-04T23:02:45+08:00">2025-09-04</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="从Python-列表-元组构建"><a href="#从Python-列表-元组构建" class="headerlink" title="从Python 列表&#x2F;元组构建"></a>从Python 列表&#x2F;元组构建</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">a = np.array([1, 2, 3])        <span class="comment"># 1D 数组</span></span><br><span class="line"><span class="built_in">print</span>(a, <span class="built_in">type</span>(a))              <span class="comment"># [1 2 3] &lt;class &#x27;numpy.ndarray&#x27;&gt;</span></span><br><span class="line"></span><br><span class="line">b = np.array([[1, 2], [3, 4]]) <span class="comment"># 2D 数组</span></span><br><span class="line"><span class="built_in">print</span>(b)</span><br></pre></td></tr></table></figure>
-<h2 id="创建特殊数组"><a href="#创建特殊数组" class="headerlink" title="创建特殊数组"></a>创建特殊数组</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">np.zeros(10, dtype=<span class="built_in">float</span>)        <span class="comment"># 长度为10的一维数组</span></span><br><span class="line">np.zeros((<span class="number">3</span>, <span class="number">4</span>))     <span class="comment"># 3x4 全零数组</span></span><br><span class="line">np.ones((<span class="number">2</span>, <span class="number">3</span>))      <span class="comment"># 2x3 全 1 数组</span></span><br><span class="line">np.eye(3)            <span class="comment"># 3x3 单位矩阵</span></span><br><span class="line">np.full((<span class="number">2</span>,<span class="number">2</span>), <span class="number">7</span>)    # <span class="number">2</span>x2 全部填充 <span class="number">7</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## end:结束索引（不包含），默认到数组末尾</span></span><br><span class="line">arr[start:end:step]</span><br><span class="line">A = np.array([[1, 2, 3],</span><br><span class="line">              [4, 5, 6],</span><br><span class="line">              [7, 8, 9]])</span><br><span class="line"></span><br><span class="line">A[0, :]      <span class="comment"># 第 1 行: [1 2 3]</span></span><br><span class="line">A[:, 1]      <span class="comment"># 第 2 列: [2 5 8]</span></span><br><span class="line">A[1:, :2]    <span class="comment"># 第 2~3 行，第 1~2 列</span></span><br><span class="line"></span><br><span class="line">A = np.array([10, 20, 30, 40, 50])</span><br><span class="line">A[-3:]     <span class="comment"># 从倒数第三个到结尾 → [30 40 50]</span></span><br><span class="line">A[:-2]     <span class="comment"># 从开头到倒数第二个之前 → [10 20 30]</span></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="随机数组"><a href="#随机数组" class="headerlink" title="随机数组"></a>随机数组</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">np.random.rand(2, 3)          <span class="comment"># 2x3 [0,1) 均匀分布</span></span><br><span class="line">np.random.randn(2, 3)         <span class="comment"># 2x3 标准正态分布</span></span><br><span class="line">np.random.randint(0, 10, (2,3)) <span class="comment"># 2x3 整数 [0,10)</span></span><br><span class="line">np.random.normal(mean, std)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="基本转换"><a href="#基本转换" class="headerlink" title="基本转换"></a>基本转换</h2><p>将某一数据类型(bytes, array)直接转换成NumPy数组</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.frombuffer()</span><br></pre></td></tr></table></figure>
-<p>将输入的arr数组转为指定形状的arr，可以指定长宽，若某个为-1，则会自动计算其长或宽的大小</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.reshape(arr,(height,depth))</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="np-linalg-norm"><a href="#np-linalg-norm" class="headerlink" title="np.linalg.norm()"></a>np.linalg.norm()</h2><p>默认情况下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.linalg.norm(x)</span><br></pre></td></tr></table></figure>
-<p>计算的是 x 的L2范数，数学表达式是：<br>‖x‖₂ &#x3D; sqrt(∑ |xᵢ|²)<br>如果 x 是 矩阵（2D 数组），默认会把它拉平成一个长向量再计算.<br>如果你写成 np.linalg.norm(x)**2，就相当于只做平方求和，不再开方 —— 等价于：<br>np.sum(np.abs(x)**2)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">x = np.array([[3, 4],</span><br><span class="line">              [1, 2]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认 L2 范数（拉平成向量后）</span></span><br><span class="line">norm_x = np.linalg.norm(x)          <span class="comment"># sqrt(3² + 4² + 1² + 2²) = sqrt(30)</span></span><br><span class="line">norm_x_squared = norm_x ** 2        <span class="comment"># = 30</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 等价写法</span></span><br><span class="line">same_result = np.sum(np.abs(x)**2)  <span class="comment"># 30</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="np-unique"><a href="#np-unique" class="headerlink" title="np.unique"></a>np.unique</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unique_hashes = np.unique(self.dataset[<span class="string">&#x27;X&#x27;</span>][:, 0])</span><br><span class="line"><span class="built_in">print</span>(len(unique_hashes))</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2828,7 +2809,7 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

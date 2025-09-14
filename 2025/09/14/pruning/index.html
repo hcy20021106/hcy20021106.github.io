@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="README — PyTorch 模型剪枝总结1. 基本概念 剪枝 (Pruning)：通过将部分权重置零，来减少模型的有效参数量，从而降低计算量和显存开销。   剪枝方式： 非结构化剪枝 (Unstructured Pruning)：在权重矩阵中逐元素置零，灵活但实际加速有限。 结构化剪枝 (Structured Pruning)：直接删除整个卷积核、通道或层，更适合硬件加速。    2. na">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pruning">
+<meta property="og:url" content="https://hechenyi.github.io/2025/09/14/pruning/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="README — PyTorch 模型剪枝总结1. 基本概念 剪枝 (Pruning)：通过将部分权重置零，来减少模型的有效参数量，从而降低计算量和显存开销。   剪枝方式： 非结构化剪枝 (Unstructured Pruning)：在权重矩阵中逐元素置零，灵活但实际加速有限。 结构化剪枝 (Structured Pruning)：直接删除整个卷积核、通道或层，更适合硬件加速。    2. na">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-09-14T09:03:44.000Z">
+<meta property="article:modified_time" content="2025-09-14T13:26:41.712Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hechenyi.github.io/2025/09/14/pruning/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>pruning | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/09/14/pruning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          pruning
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-09-14 17:03:44 / Modified: 21:26:41" itemprop="dateCreated datePublished" datetime="2025-09-14T17:03:44+08:00">2025-09-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="README-—-PyTorch-模型剪枝总结"><a href="#README-—-PyTorch-模型剪枝总结" class="headerlink" title="README — PyTorch 模型剪枝总结"></a>README — PyTorch 模型剪枝总结</h1><h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h2><ul>
+<li><strong>剪枝 (Pruning)</strong>：通过将部分权重置零，来减少模型的有效参数量，从而降低计算量和显存开销。  </li>
+<li><strong>剪枝方式</strong>：<ul>
+<li><strong>非结构化剪枝 (Unstructured Pruning)</strong>：在权重矩阵中逐元素置零，灵活但实际加速有限。</li>
+<li><strong>结构化剪枝 (Structured Pruning)</strong>：直接删除整个卷积核、通道或层，更适合硬件加速。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-named-parameters-vs-named-modules"><a href="#2-named-parameters-vs-named-modules" class="headerlink" title="2. named_parameters() vs named_modules()"></a>2. <code>named_parameters()</code> vs <code>named_modules()</code></h2><ul>
+<li><code>named_parameters()</code>  <ul>
+<li>返回 <strong>参数名 + 张量</strong>  </li>
+<li>常用于直接操作 <code>weight</code> &#x2F; <code>bias</code>。  </li>
+<li>例如剪枝时需要传入 <code>(module, &quot;weight&quot;)</code> 就必须从参数开始。</li>
+</ul>
+</li>
+<li><code>named_modules()</code>  <ul>
+<li>返回 <strong>模块名 + 子模块</strong>  </li>
+<li>可以枚举出所有子模块 (Conv、Linear、BN 等)。  </li>
+<li>适合筛选特定层（比如 Conv3d），再去访问其参数。</li>
+</ul>
+</li>
+</ul>
+<p>总结：  </p>
+<ul>
+<li><strong>要找到具体层</strong> → 用 <code>named_modules()</code>  </li>
+<li><strong>要操作参数</strong> → 用 <code>named_parameters()</code></li>
+</ul>
+<h2 id="3-TorchScript-下的剪枝"><a href="#3-TorchScript-下的剪枝" class="headerlink" title="3. TorchScript 下的剪枝"></a>3. TorchScript 下的剪枝</h2><ul>
+<li>TorchScript 模型的子模块 (<code>encoder.jit</code>) 会变成 <code>RecursiveScriptModule</code>。  </li>
+<li>可以通过 <code>hasattr(module, &quot;original_name&quot;)</code> 判断模块原始类型，比如 <code>&quot;Conv3d&quot;</code>。  </li>
+<li>TorchScript 下不能直接用 <code>torch.nn.utils.prune</code>，因为它需要注册新的 <code>Parameter</code>，而 <code>jit</code> 的权重不是标准 <code>Parameter</code> 类型。</li>
+</ul>
+<p>解决方案：<strong>手动实现剪枝逻辑</strong>：  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">prune_jit_global</span>(<span class="params">encoder, amount=<span class="number">0.2</span></span>):</span><br><span class="line">    conv_weights, conv_modules = [], []</span><br><span class="line">    <span class="keyword">for</span> name, module <span class="keyword">in</span> encoder.named_modules():</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">hasattr</span>(module, <span class="string">&quot;original_name&quot;</span>) <span class="keyword">and</span> module.original_name == <span class="string">&quot;Conv3d&quot;</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;quant_conv&quot;</span> <span class="keyword">in</span> name <span class="keyword">or</span> <span class="string">&quot;shortcut&quot;</span> <span class="keyword">in</span> name <span class="keyword">or</span> <span class="string">&quot;conv_out.1.conv3d&quot;</span> <span class="keyword">in</span> name:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            conv_weights.append(module.weight.detach().<span class="built_in">abs</span>().flatten())</span><br><span class="line">            conv_modules.append((name, module))</span><br><span class="line"></span><br><span class="line">    all_weights = torch.cat(conv_weights)</span><br><span class="line">    k = <span class="built_in">int</span>(amount * all_weights.numel())</span><br><span class="line">    threshold = torch.topk(all_weights, k, largest=<span class="literal">False</span>).values.<span class="built_in">max</span>()</span><br><span class="line"></span><br><span class="line">    total_pruned, total_params = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> name, module <span class="keyword">in</span> conv_modules:</span><br><span class="line">        W = module.weight.data</span><br><span class="line">        mask = (W.<span class="built_in">abs</span>() &gt; threshold).to(W.dtype)</span><br><span class="line">        pruned = W.numel() - mask.<span class="built_in">sum</span>().item()</span><br><span class="line">        total_pruned += pruned; total_params += W.numel()</span><br><span class="line">        module.weight.data = W * mask</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;name:&lt;<span class="number">50</span>&#125;</span> 剪掉 <span class="subst">&#123;pruned&#125;</span>/<span class="subst">&#123;W.numel()&#125;</span> (<span class="subst">&#123;pruned/W.numel():<span class="number">.2</span>%&#125;</span>)&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;✅ 全局剪枝完成，总共剪掉 <span class="subst">&#123;total_pruned&#125;</span>/<span class="subst">&#123;total_params&#125;</span> (<span class="subst">&#123;total_pruned/total_params:<span class="number">.2</span>%&#125;</span>)&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> encoder</span><br></pre></td></tr></table></figure>
+<h2 id="4-全局剪枝-Global-Unstructured-Pruning"><a href="#4-全局剪枝-Global-Unstructured-Pruning" class="headerlink" title="4. 全局剪枝(Global Unstructured Pruning)"></a>4. 全局剪枝(Global Unstructured Pruning)</h2><p>思路：收集所有层的权重 → 拼接成一个大向量 → 找到全局阈值 → 应用到所有层。</p>
+<p>优点：稀疏性分布更均匀，能自动选择“最不重要”的参数。</p>
+<p>上述 prune_jit_global 就是全局非结构化剪枝的实现。</p>
+<h2 id="5-使用流程"><a href="#5-使用流程" class="headerlink" title="5. 使用流程"></a>5. 使用流程</h2><ul>
+<li>加载TorchScript模型</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">encoder = torch.jit.load(<span class="string">&quot;encoder.jit&quot;</span>, map_location=<span class="string">&quot;cuda&quot;</span>).to(dtype=torch.bfloat16)</span><br><span class="line">encoder.eval()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>筛选出需要剪枝的模块 (Conv3d)</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name, module <span class="keyword">in</span> encoder.named_modules():</span><br><span class="line">    <span class="keyword">if</span> hasattr(module, <span class="string">&quot;original_name&quot;</span>) and module.original_name == <span class="string">&quot;Conv3d&quot;</span>:</span><br><span class="line">        <span class="built_in">print</span>(name, module)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>应用全局剪枝</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">encoder = prune_jit_global(encoder, amount=0.3)  <span class="comment"># 剪掉 30%</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-注意事项"><a href="#6-注意事项" class="headerlink" title="6. 注意事项"></a>6. 注意事项</h2><p>TorchScript 的权重是 Tensor，而不是 nn.Parameter → 无法用 torch.nn.utils.prune 的官方 API。</p>
+<p>必须手动覆盖 module.weight.data。</p>
+<p>剪枝后的权重仍占显存，只是大部分被置零（稀疏矩阵计算需要进一步优化）。</p>
+<p>如果想获得实际加速，需要配合 稀疏矩阵库 或 结构化剪枝。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/09/01/Log-Likelihood-Ratio/" rel="prev" title="Log-Likelihood Ratio">
+      <i class="fa fa-chevron-left"></i> Log-Likelihood Ratio
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#README-%E2%80%94-PyTorch-%E6%A8%A1%E5%9E%8B%E5%89%AA%E6%9E%9D%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">README — PyTorch 模型剪枝总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">1. 基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-named-parameters-vs-named-modules"><span class="nav-number">1.2.</span> <span class="nav-text">2. named_parameters() vs named_modules()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-TorchScript-%E4%B8%8B%E7%9A%84%E5%89%AA%E6%9E%9D"><span class="nav-number">1.3.</span> <span class="nav-text">3. TorchScript 下的剪枝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%85%A8%E5%B1%80%E5%89%AA%E6%9E%9D-Global-Unstructured-Pruning"><span class="nav-number">1.4.</span> <span class="nav-text">4. 全局剪枝(Global Unstructured Pruning)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">1.5.</span> <span class="nav-text">5. 使用流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.6.</span> <span class="nav-text">6. 注意事项</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
