@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="DINOv2DINOv2对普通ViT-B&#x2F;14的backbone做了很多改进，如下：  使用Conv2d来实现PatchEmbed，不用原生ViT的线性patch projection（Flatten -&gt; Linear）  Memory Efficient Attention  自己的更“搞笑注意力”实现  MemEffAttention(dim &#x3D; 768, num_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AutoEncoder">
+<meta property="og:url" content="https://hechenyi.github.io/2025/11/19/AutoEncoder/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="DINOv2DINOv2对普通ViT-B&#x2F;14的backbone做了很多改进，如下：  使用Conv2d来实现PatchEmbed，不用原生ViT的线性patch projection（Flatten -&gt; Linear）  Memory Efficient Attention  自己的更“搞笑注意力”实现  MemEffAttention(dim &#x3D; 768, num_">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-11-18T17:26:42.000Z">
+<meta property="article:modified_time" content="2025-11-19T08:51:17.732Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hechenyi.github.io/2025/11/19/AutoEncoder/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>AutoEncoder | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/19/AutoEncoder/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AutoEncoder
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-11-19 01:26:42 / Modified: 16:51:17" itemprop="dateCreated datePublished" datetime="2025-11-19T01:26:42+08:00">2025-11-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="DINOv2"><a href="#DINOv2" class="headerlink" title="DINOv2"></a>DINOv2</h2><p>DINOv2对普通ViT-B&#x2F;14的backbone做了很多改进，如下：</p>
+<ul>
+<li><p>使用Conv2d来实现PatchEmbed，不用原生ViT的线性patch projection（Flatten -&gt; Linear）</p>
+</li>
+<li><p>Memory Efficient Attention<br>  自己的更“搞笑注意力”实现<br>  MemEffAttention(dim &#x3D; 768, num_heads &#x3D; 12)</p>
+</li>
+<li><p>LayerScale<br>  对稳定大规模训练非常重要<br>  抑制梯度爆炸</p>
+</li>
+<li><p>DropPath</p>
+</li>
+<li><p>LayerNorm</p>
+</li>
+<li><p>MLP</p>
+</li>
+<li><p>Token</p>
+</li>
+<li><p>Antialias Positional Interpolation</p>
+</li>
+<li><p>Weighted Global Pooling<br>  对所有patch进行加权相加，优于CLS token(CLS在分类任务有效，对于LLM的视觉前端，用的是所有patch)</p>
+</li>
+</ul>
+<h3 id="Conv2d与Linear的转换"><a href="#Conv2d与Linear的转换" class="headerlink" title="Conv2d与Linear的转换"></a>Conv2d与Linear的转换</h3><p>Linear projection 对每个 patch 的投影公式是一样的<br>以DINOv2的patch embedding为例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">patch_flat: shape=(14*14*3)</span><br><span class="line">↓</span><br><span class="line">Linear(14*14*3 → 768)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Conv2d(<span class="keyword">in</span>=3, out=768, kernel=14, stride=14)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Swin-Transformer"><a href="#Swin-Transformer" class="headerlink" title="Swin Transformer"></a>Swin Transformer</h2><p>借用CNN下采样思路，每次downsample用的是parch merging，patch个数减少，patch的通道数增加。</p>
+<h2 id="RAE"><a href="#RAE" class="headerlink" title="RAE"></a>RAE</h2><p>RAE (Representative AutoEncoder) 是使用预训练表征编码器 (如DINOv2) 替代VAE encoder，目的是让扩散模型在更优、语义更丰富的latent空间中工作，从而提高训练效率和最终生成质量。<br>因此使用SOTA表征模型提供更强latent表示：DINO、SigLIP和MAE等<br>论文提出的 RAE（Representation Autoencoder）结合：</p>
+<ul>
+<li><p>预训练 encoder（冻结，不再训练）</p>
+</li>
+<li><p>轻量 ViT decoder（可监督训练）</p>
+</li>
+</ul>
+<h2 id="CLIP"><a href="#CLIP" class="headerlink" title="CLIP"></a>CLIP</h2><h2 id="UNet"><a href="#UNet" class="headerlink" title="UNet"></a>UNet</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">hs = []</span><br><span class="line">t_emb = timestep_embedding(timesteps, self.model_channels, repeat_only=False)</span><br><span class="line">emb = self.time_embed(t_emb)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> self.num_classes is not None:</span><br><span class="line">    assert y.shape == (x.shape[0],)</span><br><span class="line">    emb = emb + self.label_emb(y)</span><br><span class="line"></span><br><span class="line">h = x.type(self.dtype)</span><br><span class="line"><span class="keyword">for</span> module <span class="keyword">in</span> self.input_blocks:</span><br><span class="line">    h = module(h, emb, context)</span><br><span class="line">    hs.append(h)</span><br><span class="line">h = self.middle_block(h, emb, context)</span><br><span class="line"><span class="keyword">for</span> module <span class="keyword">in</span> self.output_blocks:</span><br><span class="line">    h = th.cat([h, hs.pop()], dim=1)</span><br><span class="line">    h = module(h, emb, context)</span><br><span class="line">h = h.type(x.dtype)</span><br><span class="line"><span class="keyword">if</span> self.predict_codebook_ids:</span><br><span class="line">    <span class="built_in">return</span> self.id_predictor(h)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">return</span> self.out(h)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>decode每层的输出和encoder对应的每层直接相加</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/11/11/gpu/" rel="prev" title="gpu">
+      <i class="fa fa-chevron-left"></i> gpu
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/11/19/Image/" rel="next" title="Image">
+      Image <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DINOv2"><span class="nav-number">1.</span> <span class="nav-text">DINOv2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Conv2d%E4%B8%8ELinear%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.1.</span> <span class="nav-text">Conv2d与Linear的转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swin-Transformer"><span class="nav-number">2.</span> <span class="nav-text">Swin Transformer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAE"><span class="nav-number">3.</span> <span class="nav-text">RAE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CLIP"><span class="nav-number">4.</span> <span class="nav-text">CLIP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UNet"><span class="nav-number">5.</span> <span class="nav-text">UNet</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

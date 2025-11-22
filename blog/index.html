@@ -150,6 +150,311 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/23/11-22/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/23/11-22/" class="post-title-link" itemprop="url">11-22</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-11-23 00:43:02 / Modified: 02:25:57" itemprop="dateCreated datePublished" datetime="2025-11-23T00:43:02+08:00">2025-11-23</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="online视频传输"><a href="#online视频传输" class="headerlink" title="online视频传输"></a>online视频传输</h2><p>transmitter + receiver 进行收发</p>
+<p>数据格式转化方式：<br>tensor(int32) -&gt; socket payload (比特流(比特数由max K 决定) -&gt; byte)<br>打包成字节的函数：<br><strong>packed &#x3D; np.packbits(bits_1d, bitorder&#x3D;BITORDER)</strong></p>
+<p>tranmitter.py中为了简化，没有按这个方式转为比特流，而是:<br>**latent_np.tobytes()**将int32直接转为4bytes</p>
+<h3 id="推流方式"><a href="#推流方式" class="headerlink" title="推流方式"></a>推流方式</h3><ul>
+<li>HLS + FFmpeg<br>FFmpeg 负责生成 HLS 分片与 playlist<br>Web 服务器（Nginx&#x2F;Apache&#x2F;S3&#x2F;OSS&#x2F;本地 HTTP）负责提供访问<br>播放端使用浏览器或播放器拉取 m3u8 文件即可</li>
+<li>RTMP</li>
+<li>SRT</li>
+<li>WebRTC<br>不需要FFmpeg编码，<br>浏览器会自动处理：<br>封装 RTP packet<br>发送<br>重传<br>丢包修复<br>抖动控制<br>SRTP 加密</li>
+<li>RTSP</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/19/Image/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/19/Image/" class="post-title-link" itemprop="url">Image</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-11-19 15:45:03 / Modified: 16:50:03" itemprop="dateCreated datePublished" datetime="2025-11-19T15:45:03+08:00">2025-11-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <p>图像中，<strong>频率</strong>是指像素变化的快慢，不是出现次数：</p>
+<ul>
+<li>纹理</li>
+<li>边缘</li>
+<li>细小颗粒</li>
+<li>噪声</li>
+</ul>
+<p>低频是指像素变化慢的部分：</p>
+<ul>
+<li>天空的渐变</li>
+<li>大区域的平滑颜色</li>
+<li>物体的整体轮廓</li>
+<li>大形状<br>这些都是颜色&#x2F;亮度变化慢的</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/19/AutoEncoder/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/19/AutoEncoder/" class="post-title-link" itemprop="url">AutoEncoder</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-11-19 01:26:42 / Modified: 16:51:17" itemprop="dateCreated datePublished" datetime="2025-11-19T01:26:42+08:00">2025-11-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="DINOv2"><a href="#DINOv2" class="headerlink" title="DINOv2"></a>DINOv2</h2><p>DINOv2对普通ViT-B&#x2F;14的backbone做了很多改进，如下：</p>
+<ul>
+<li><p>使用Conv2d来实现PatchEmbed，不用原生ViT的线性patch projection（Flatten -&gt; Linear）</p>
+</li>
+<li><p>Memory Efficient Attention<br>  自己的更“搞笑注意力”实现<br>  MemEffAttention(dim &#x3D; 768, num_heads &#x3D; 12)</p>
+</li>
+<li><p>LayerScale<br>  对稳定大规模训练非常重要<br>  抑制梯度爆炸</p>
+</li>
+<li><p>DropPath</p>
+</li>
+<li><p>LayerNorm</p>
+</li>
+<li><p>MLP</p>
+</li>
+<li><p>Token</p>
+</li>
+<li><p>Antialias Positional Interpolation</p>
+</li>
+<li><p>Weighted Global Pooling<br>  对所有patch进行加权相加，优于CLS token(CLS在分类任务有效，对于LLM的视觉前端，用的是所有patch)</p>
+</li>
+</ul>
+<h3 id="Conv2d与Linear的转换"><a href="#Conv2d与Linear的转换" class="headerlink" title="Conv2d与Linear的转换"></a>Conv2d与Linear的转换</h3><p>Linear projection 对每个 patch 的投影公式是一样的<br>以DINOv2的patch embedding为例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">patch_flat: shape=(14*14*3)</span><br><span class="line">↓</span><br><span class="line">Linear(14*14*3 → 768)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Conv2d(<span class="keyword">in</span>=3, out=768, kernel=14, stride=14)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Swin-Transformer"><a href="#Swin-Transformer" class="headerlink" title="Swin Transformer"></a>Swin Transformer</h2><p>借用CNN下采样思路，每次downsample用的是parch merging，patch个数减少，patch的通道数增加。</p>
+<h2 id="RAE"><a href="#RAE" class="headerlink" title="RAE"></a>RAE</h2><p>RAE (Representative AutoEncoder) 是使用预训练表征编码器 (如DINOv2) 替代VAE encoder，目的是让扩散模型在更优、语义更丰富的latent空间中工作，从而提高训练效率和最终生成质量。<br>因此使用SOTA表征模型提供更强latent表示：DINO、SigLIP和MAE等<br>论文提出的 RAE（Representation Autoencoder）结合：</p>
+<ul>
+<li><p>预训练 encoder（冻结，不再训练）</p>
+</li>
+<li><p>轻量 ViT decoder（可监督训练）</p>
+</li>
+</ul>
+<h2 id="CLIP"><a href="#CLIP" class="headerlink" title="CLIP"></a>CLIP</h2><h2 id="UNet"><a href="#UNet" class="headerlink" title="UNet"></a>UNet</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">hs = []</span><br><span class="line">t_emb = timestep_embedding(timesteps, self.model_channels, repeat_only=False)</span><br><span class="line">emb = self.time_embed(t_emb)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> self.num_classes is not None:</span><br><span class="line">    assert y.shape == (x.shape[0],)</span><br><span class="line">    emb = emb + self.label_emb(y)</span><br><span class="line"></span><br><span class="line">h = x.type(self.dtype)</span><br><span class="line"><span class="keyword">for</span> module <span class="keyword">in</span> self.input_blocks:</span><br><span class="line">    h = module(h, emb, context)</span><br><span class="line">    hs.append(h)</span><br><span class="line">h = self.middle_block(h, emb, context)</span><br><span class="line"><span class="keyword">for</span> module <span class="keyword">in</span> self.output_blocks:</span><br><span class="line">    h = th.cat([h, hs.pop()], dim=1)</span><br><span class="line">    h = module(h, emb, context)</span><br><span class="line">h = h.type(x.dtype)</span><br><span class="line"><span class="keyword">if</span> self.predict_codebook_ids:</span><br><span class="line">    <span class="built_in">return</span> self.id_predictor(h)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">return</span> self.out(h)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>decode每层的输出和encoder对应的每层直接相加</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/11/gpu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/11/gpu/" class="post-title-link" itemprop="url">gpu</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-11-11 14:27:21" itemprop="dateCreated datePublished" datetime="2025-11-11T14:27:21+08:00">2025-11-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-11-13 10:43:26" itemprop="dateModified" datetime="2025-11-13T10:43:26+08:00">2025-11-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <pre><code class="language-bash">nvidia-smi
+CUDA_VISIBLE_DEVICES=5 python .py
+```+
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/09/14/pruning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -826,609 +1131,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/29/channel-coding/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/08/29/channel-coding/" class="post-title-link" itemprop="url">channel coding</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-08-29 10:50:15 / Modified: 20:49:26" itemprop="dateCreated datePublished" datetime="2025-08-29T10:50:15+08:00">2025-08-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h2><ul>
-<li><strong>信道编码 (Channel Coding)</strong>：在数字通信中，为了抵抗信道噪声和衰落，将信息比特加冗余形成码字。</li>
-<li><strong>目标</strong>：<ul>
-<li>提高抗噪能力</li>
-<li>减少误码率</li>
-<li>在有限信道资源下尽可能可靠传输</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-块码-Block-Codes"><a href="#2-块码-Block-Codes" class="headerlink" title="2. 块码 (Block Codes)"></a>2. 块码 (Block Codes)</h2><ul>
-<li>描述形式：<strong>(N, L) 块码</strong><ul>
-<li>N：信息比特数</li>
-<li>L：编码比特数（码字长度）</li>
-<li>码率：Rc &#x3D; N &#x2F; L</li>
-</ul>
-</li>
-<li>功能：<ul>
-<li>将 N 个信息比特编码成 L 个比特</li>
-<li>添加冗余，提高鲁棒性</li>
-</ul>
-</li>
-</ul>
-<h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><ul>
-<li><p>LDPC 编码</p>
-<ul>
-<li>输入：100 个信息比特</li>
-<li>输出：200 个编码比特</li>
-<li>Rc &#x3D; 100 &#x2F; 200 &#x3D; 1&#x2F;2</li>
-<li>输出的 200 个编码比特还属于比特序列，未调制前不能直接发送</li>
-</ul>
-</li>
-<li><p>卷积码（Convolution Code）<br>若卷积码编码（r&#x3D;1&#x2F;2），也就是速率r&#x3D;1&#x2F;2，输入1bit，输出2bits，等效于在发射端增加冗余，方便接收端做错误检测和纠错。</p>
-</li>
-</ul>
-<h2 id="3-调制-Modulation"><a href="#3-调制-Modulation" class="headerlink" title="3. 调制 (Modulation)"></a>3. 调制 (Modulation)</h2><ul>
-<li>将编码比特映射为可在物理信道上发送的信号</li>
-<li>例子：16-QAM<ul>
-<li>每个符号承载 4 个比特</li>
-<li>200 个编码比特 → 50 个 QAM 符号</li>
-</ul>
-</li>
-<li>调制后的符号是复数信号点 (I&#x2F;Q)</li>
-</ul>
-<h2 id="4-端到端流程-传统数字通信"><a href="#4-端到端流程-传统数字通信" class="headerlink" title="4. 端到端流程 (传统数字通信)"></a>4. 端到端流程 (传统数字通信)</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">源编码器（JPEG/BPG）</span><br><span class="line">|</span><br><span class="line">信道编码器（LDPC/Polar）</span><br><span class="line">|</span><br><span class="line">调制器(QAM/BPSK)</span><br><span class="line">|</span><br><span class="line">信道传输</span><br><span class="line">|</span><br><span class="line">解码器</span><br><span class="line">|</span><br><span class="line">信道解码器</span><br><span class="line">|</span><br><span class="line">源解码器</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-通用-N-L-块码理解"><a href="#5-通用-N-L-块码理解" class="headerlink" title="5. 通用(N,L)块码理解"></a>5. 通用(N,L)块码理解</h2><ul>
-<li>论文中常用抽象描述：<ul>
-<li>“通用信道编码器” &#x3D;&#x3D; 抽象块码模块</li>
-<li>可以选择任意具体实现：<ul>
-<li>LDPC</li>
-<li>Polar Code</li>
-<li>BCH</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>输入： N比特</li>
-<li>输出： L个比特</li>
-<li>调制映射后形成物理符号发送</li>
-</ul>
-<h2 id="6-JSCC与深度学习端到端通信"><a href="#6-JSCC与深度学习端到端通信" class="headerlink" title="6. JSCC与深度学习端到端通信"></a>6. JSCC与深度学习端到端通信</h2><ul>
-<li><p><strong>端到端联合源信道编码（JSCC）</strong></p>
-<ul>
-<li>不再分开源编码、信道编码和调制</li>
-<li>一个深度网络直接学习：<ul>
-<li>压缩特征</li>
-<li>抗噪鲁棒性</li>
-<li>可调制映射</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>例：MDJCM</p>
-<ul>
-<li>Encoder：输出可在信道直接传输的符号序列</li>
-<li>Decoder：直接恢复原始数据</li>
-<li>不依赖传统信道编码器</li>
-</ul>
-</li>
-</ul>
-<h2 id="7-笔记总结"><a href="#7-笔记总结" class="headerlink" title="7. 笔记总结"></a>7. 笔记总结</h2><ol>
-<li>信道编码器是为了在数字传输中增加冗余保护比特</li>
-<li>(N, L) 块码是最常用抽象形式</li>
-<li>输出编码比特在调制前仍是比特，调制后成为符号（复数信号）</li>
-<li>JSCC&#x2F;MDJCM 是端到端学习方法，可替代传统源编码 + 信道编码 + 调制流程</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/28/JSCC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/08/28/JSCC/" class="post-title-link" itemprop="url">JSCC</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-08-28 19:27:17" itemprop="dateCreated datePublished" datetime="2025-08-28T19:27:17+08:00">2025-08-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-29 16:29:43" itemprop="dateModified" datetime="2025-08-29T16:29:43+08:00">2025-08-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5g/" itemprop="url" rel="index"><span itemprop="name">5g</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="JSCC模型说明"><a href="#JSCC模型说明" class="headerlink" title="JSCC模型说明"></a>JSCC模型说明</h2><p>JSCC（Joint Source-Channel Coding）数字联合信源信道编码，特点包括：</p>
-<ul>
-<li><strong>端到端训练</strong>：支持latent feature -&gt; 调制符号的可微训练</li>
-<li><strong>软条件化</strong>（Soft Conditioning）：编码器可根据调制阶数（M-QAM）和信道SNR自适应调制特征  </li>
-<li><strong>噪声近似训练</strong>：训练阶段使用连续噪声替代调制&#x2F;解调操作，使梯度可回传</li>
-</ul>
-<h2 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h2><h3 id="1-输入信号处理（AnalysisTransform-NTC-）"><a href="#1-输入信号处理（AnalysisTransform-NTC-）" class="headerlink" title="1. 输入信号处理（AnalysisTransform (NTC)）"></a>1. 输入信号处理（AnalysisTransform (NTC)）</h3><ul>
-<li><p><strong>功能</strong>：</p>
-<ul>
-<li>将原始图像 <code>[B, C, H, W]</code> 映射为潜在表示 <code>[B, C&#39;, H&#39;, W&#39;]</code>。</li>
-<li>降低空间维度，同时提取局部和全局特征。</li>
-<li>为 JSCC 编码器提供高效的潜在特征表示。</li>
-</ul>
-</li>
-<li><p><strong>实现细节</strong>：</p>
-<ul>
-<li>使用 <strong>Swin Transformer</strong> 模块和 Patch Embedding 层。</li>
-<li>通过多层 Swin Transformer Block 进行特征提取。</li>
-<li>输出的潜在特征维度：<ul>
-<li><code>C&#39;</code>：潜在通道数（例如 256），表示潜在特征维度。</li>
-<li><code>H&#39;, W&#39;</code>：空间分辨率，经降采样后通常为原图的 1&#x2F;16。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>降维作用</strong>：</p>
-<ul>
-<li>将高维图像信息压缩为低维潜在特征，减少信道传输冗余。</li>
-<li>提取关键特征，增强潜在表示的表达能力。</li>
-<li>为后续 <strong>JSCC 编码器&#x2F;信道模块</strong>提供适合连续编码的特征表示。</li>
-</ul>
-</li>
-<li><p><strong>后续处理</strong>：</p>
-<ul>
-<li>潜在表示 <code>y</code> 可通过 <strong>Hyperprior 模块</strong>估计尺度参数 (<code>scales_hat</code>) 和均值 (<code>means_hat</code>)。</li>
-<li>潜在表示进一步量化为 <code>y_hat</code>，并输入 <strong>SynthesisTransform</strong> 或 JSCC 编码器进行压缩传输。</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-JSCC编码器（JSCCEncoder）"><a href="#2-JSCC编码器（JSCCEncoder）" class="headerlink" title="2. JSCC编码器（JSCCEncoder）"></a>2. JSCC编码器（JSCCEncoder）</h3><p>主要组成：</p>
-<ul>
-<li><p><strong>Swin Transformer Blocks</strong>：</p>
-<ul>
-<li>自注意力机制<br>  每个patch可访问其他patch的信息，类似<strong>冗余信息分布</strong></li>
-<li>多层堆叠<br>  高纬特征融合，增加了特征的鲁棒性</li>
-<li>MLP变换。<br>  非线性映射，把信息分布在多个通道-》类似把信号映射到冗余码字空间<br>  因此刚好满足信道编码的功能：增加冗余、增强抗噪声能力</li>
-</ul>
-</li>
-<li><p><strong>Rate Adaption Layer</strong>：根据熵模型和信道需求动态调整编码长度。</p>
-<ul>
-<li>根据每个patch的信息量（或者说熵）选择不同的编码率</li>
-<li>通过可学习的weight和bias对输入特征进行线性变换，然后用mask限制每个patch的有效长度，实现自适应编码。</li>
-</ul>
-</li>
-<li><p><strong>MergingNet (Modulation Conditional Module, MCM)</strong>：</p>
-<ul>
-<li>输入：latent feature + 调制阶数 M  </li>
-<li>对特征进行 <strong>软条件化</strong>：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = x * softplus(M_onehot1) + M_onehot2</span><br></pre></td></tr></table></figure></li>
-<li>作用：让编码器特征适应不同调制阶数</li>
-</ul>
-</li>
-<li><p><strong>AF (Adaptive Feature Layer)</strong>：</p>
-<ul>
-<li>输入：latent feature + 信道 SNR  </li>
-<li>对特征进行缩放和平移：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">z = z * scale + shift</span><br></pre></td></tr></table></figure></li>
-<li>作用：信道条件自适应，提升鲁棒性</li>
-</ul>
-</li>
-<li><p>输出：经过软条件化和可选调制处理的连续 latent feature</p>
-</li>
-</ul>
-<h3 id="3-调制近似"><a href="#3-调制近似" class="headerlink" title="3. 调制近似"></a>3. 调制近似</h3><ul>
-<li>将连续latent feature 映射成离散QAM符号</li>
-<li>训练阶段使用<strong>均匀噪声近似调制</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d = sqrt(3*power / (2*M-2))</span><br><span class="line">u ~ Uniform(-d, d)</span><br><span class="line">channel_input += u</span><br></pre></td></tr></table></figure>
-<p>其中M是调制阶数，d是半符号间距，用来保证噪声幅度与符号间距一致</p>
-<h3 id="4-调制与信道"><a href="#4-调制与信道" class="headerlink" title="4. 调制与信道"></a>4. 调制与信道</h3><h4 id="测试阶段"><a href="#测试阶段" class="headerlink" title="测试阶段"></a>测试阶段</h4><ul>
-<li>连续latent feature -》 正常QAM调制</li>
-<li>经过AWGN或其他信道传输</li>
-</ul>
-<h4 id="训练阶段："><a href="#训练阶段：" class="headerlink" title="训练阶段："></a>训练阶段：</h4><ul>
-<li>使用连续噪声近似调制，使梯度可回传</li>
-</ul>
-<p>并且支持不同调制阶数的条件训练</p>
-<h3 id="5-JSCC解码器"><a href="#5-JSCC解码器" class="headerlink" title="5. JSCC解码器"></a>5. JSCC解码器</h3><ul>
-<li>将收到的信道符号（或连续近似特征）解码为latent feature</li>
-<li>可结合hyperprior</li>
-</ul>
-<h2 id="理论支持"><a href="#理论支持" class="headerlink" title="理论支持"></a>理论支持</h2><h3 id="符号平均功率归一化："><a href="#符号平均功率归一化：" class="headerlink" title="符号平均功率归一化："></a>符号平均功率归一化：</h3><p>对于 M-QAM（平方型），设符号幅度按标准格排列：</p>
-<ul>
-<li>水平&#x2F;垂直方向的符号坐标:{$-\sqrt M + 1$, $-\sqrt M + 3$, … , $\sqrt M - 1$}. </li>
-<li>平均符号功率$P_{avg}$为：$P_{avg} &#x3D; \frac{2(M-1)}{3}$</li>
-</ul>
-<h3 id="噪声近似"><a href="#噪声近似" class="headerlink" title="噪声近似"></a>噪声近似</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d = sqrt(3*power / (2*modulation_order - 2))</span><br><span class="line">u ~ Uniform(-d, d)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>d对应符号间距的一半</li>
-<li>对于均匀量化<br>$x_{quantized} ​≈ x_{continuous}​ + u,u ∼ Uniform(−d,d)$</li>
-<li>这样训练时梯度可回传，同时模拟调制离散化误差</li>
-</ul>
-<h3 id="软条件化"><a href="#软条件化" class="headerlink" title="软条件化"></a>软条件化</h3><ul>
-<li>调制阶数和信道SNR作为条件输入</li>
-<li>通过线性层 + 非线性激活（Softplus &#x2F; Sigmoid）调整 latent feature</li>
-<li>增强编码器对不同调制阶数和信道条件的适应能力</li>
-</ul>
-<h3 id="端到端可微训练"><a href="#端到端可微训练" class="headerlink" title="端到端可微训练"></a>端到端可微训练</h3><ul>
-<li>连续噪声替代离散调制，使梯度可回传</li>
-<li>后续可结合 STE 或软硬退火进行微调</li>
-</ul>
-<h2 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h2><h3 id="阶段一：source-coding-training"><a href="#阶段一：source-coding-training" class="headerlink" title="阶段一：source coding training"></a>阶段一：source coding training</h3><ul>
-<li><strong>目标</strong>：单独训练基于学习的图像压缩器，使其具备良好的表示能力。</li>
-<li><strong>固定参数</strong>：冻结 JSC 编码器与解码器 (θf, ϕf)。</li>
-<li><strong>训练参数</strong>：θg, θh, ϕg, ϕh。</li>
-<li><strong>损失函数</strong>：<br>L(x, x̂, λ) &#x3D; R + λD(x, x̂)<br>其中 R 为比特率，D 为失真 (如 MSE)，λ 为拉格朗日乘子。</li>
-<li><strong>说明</strong>：这一阶段只关注图像压缩，不涉及信道。</li>
-</ul>
-<h3 id="阶段二：JSC-encoder和JSC-decoder训练"><a href="#阶段二：JSC-encoder和JSC-decoder训练" class="headerlink" title="阶段二：JSC encoder和JSC decoder训练"></a>阶段二：JSC encoder和JSC decoder训练</h3><ul>
-<li><strong>目标</strong>：在端到端系统中引入“连续噪声近似调制”，使系统在训练时保持可微，便于联合优化。</li>
-<li><strong>初始化</strong>：加载阶段一训练好的参数。</li>
-<li><strong>训练参数</strong>：θg, θh, θf, ϕg, ϕh, ϕf (全模型参与)。</li>
-<li><strong>步骤</strong>：<ol>
-<li>从训练数据中采样图像 x。</li>
-<li>从目标范围内均匀采样 SNR。</li>
-<li>随机选择调制阶数 M。</li>
-<li>根据 M 与功率约束 Es 计算调制间距 d。</li>
-<li>使用 <strong>连续噪声近似</strong> 通过信道。</li>
-</ol>
-</li>
-<li><strong>损失函数</strong>：<br>L(x, x̂, λ, M, SNR) &#x3D; R + λ [ D(x, x̂) + D(x, x̂MD) ]<br>其中 x̂ 为压缩器重建图像，x̂MD 为经过端到端 JSCC 模块后的图像。</li>
-</ul>
-<h2 id="阶段三：基于-STE-的精调-STE-based-Finetuning"><a href="#阶段三：基于-STE-的精调-STE-based-Finetuning" class="headerlink" title="阶段三：基于 STE 的精调 (STE-based Finetuning)"></a>阶段三：基于 STE 的精调 (STE-based Finetuning)</h2><ul>
-<li><strong>目标</strong>：解决训练与测试阶段之间的不匹配（真实调制是确定性的，不是加噪声），提升模型在实际信道上的性能。</li>
-<li><strong>初始化</strong>：加载阶段二训练好的参数。</li>
-<li><strong>固定参数</strong>：冻结发射端参数 (θg, θh, θf)。</li>
-<li><strong>训练参数</strong>：ϕg, ϕh, ϕf (接收端)。</li>
-<li><strong>步骤</strong>：<ol>
-<li>重复阶段二的数据采样步骤（x, M, SNR, d）。</li>
-</ol>
-</li>
-<li><strong>损失函数</strong>：<br>与阶段二相同：<br>L(x, x̂, λ, M, SNR) &#x3D; R + λ [ D(x, x̂) + D(x, x̂MD) ]</li>
-</ul>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>其中JSC编码器&#x2F;解码器是一个神经网络模块，以SNR和mcs为输入，学习如何把特征编码成可传输的信号，再从信号中恢复。<br></p>
-</blockquote>
-<hr>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/28/One-Shot-Coding/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/08/28/One-Shot-Coding/" class="post-title-link" itemprop="url">One-Shot Coding</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-08-28 15:07:00 / Modified: 15:14:32" itemprop="dateCreated datePublished" datetime="2025-08-28T15:07:00+08:00">2025-08-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>一次性编码，不需要序列式迭代或多步计算，输出是用向量表示</p>
-<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>将离散信息转为神经网络可处理的连续特征。因此one-shot coding后可以用MLP来处理。<br>类似NLP里的word embedding。<br>One-shot具有可微性（一对一映射），因此可以进行反向传播。</p>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>信号量化具有不可微性（多对一映射）<br></p>
-</blockquote>
-<hr>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/27/Reinforcement-Learning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/08/27/Reinforcement-Learning/" class="post-title-link" itemprop="url">Reinforcement Learning</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-08-27 17:28:49 / Modified: 19:57:27" itemprop="dateCreated datePublished" datetime="2025-08-27T17:28:49+08:00">2025-08-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="强化学习概念"><a href="#强化学习概念" class="headerlink" title="强化学习概念"></a>强化学习概念</h2><ul>
-<li>RL 是一种机器学习方法，通过与环境交互的试错经验学习最优行为（policy），以最大化累计奖励（accumulated reward）</li>
-<li>与监督学习不同：RL不需要“正确答案”做训练，而是通过奖励反馈自主学习</li>
-</ul>
-<p>RL系统组成：</p>
-<ul>
-<li>Agent: 学习者和决策者</li>
-<li>Environment: 智能体作用的外部系统</li>
-<li>State($s_t$)： 智能体感知到的环境信息</li>
-<li>Action($a_t$)：智能体在状态下采取的操作</li>
-<li>Reward($r_{t+1}$)：动作的即时反馈</li>
-<li>Goal: 找到最佳策略𝜋，实现状态 → 动作的最优映射，使累积奖励最大化。</li>
-</ul>
-<h2 id="Q-learning算法"><a href="#Q-learning算法" class="headerlink" title="Q-learning算法"></a>Q-learning算法</h2><p>核心思想：通过不断更新动作价值函数Q(s,a)来学习最佳策略<br>Q值更新公式：<br>$Q(s_t, a_t) &lt;- (1 - \alpha) * Q(s_t, a_t) + \alpha * [ r_{t+1} + \gamma * max_{a_{t+1}​∈A} * Q(s_{t+1}, a_{t+1}) ]$。</p>
-<p>参数说明：</p>
-<table>
-<thead>
-<tr>
-<th>符号</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>$Q(s_t, a_t)$</td>
-<td>状态 $s_t$ 下执行动作 $a_t$ 的当前 Q 值</td>
-</tr>
-<tr>
-<td>$\alpha$</td>
-<td>学习率（0~1），控制新信息更新 Q 值的权重</td>
-</tr>
-<tr>
-<td>$r_{t+1}$</td>
-<td>执行动作 $a_t$ 后在下一个状态获得的即时奖励</td>
-</tr>
-<tr>
-<td>$\gamma$</td>
-<td>折扣因子（0~1），衡量未来奖励的重要性</td>
-</tr>
-<tr>
-<td>$s_{t+1}$</td>
-<td>执行动作后的下一状态</td>
-</tr>
-<tr>
-<td>$a_{t+1}$</td>
-<td>下一步选择的动作</td>
-</tr>
-<tr>
-<td>$A_{\text{max}}$</td>
-<td>在下一状态下可选择的最大 Q 值动作集合</td>
-</tr>
-<tr>
-<td></td>
-<td>指示函数，如果 $a_{t+1}$ 是最大动作之一，则为 1，否则为 0</td>
-</tr>
-</tbody></table>
-<h2 id="QL-AMC"><a href="#QL-AMC" class="headerlink" title="QL-AMC"></a>QL-AMC</h2><p>基于Q-learning的自适应调制编码，用于在无线通信系统中在不同信道条件下动态选择最优MCS</p>
-<h3 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h3><p>传统方法：<br>固定查表（look-up table）：根据SNR对应的BLER曲线预先生成CQI -&gt; MCS的映射</p>
-<h3 id="QL-AMC方案"><a href="#QL-AMC方案" class="headerlink" title="QL-AMC方案"></a>QL-AMC方案</h3><p>Q(s,a): 动作-价值函数，表示在动态<strong>s</strong>下选择动作<strong>a</strong>的价值<br>State: 状态集合，在这里状态是CQI（Channel Quality Indicator），即信道质量指标<br>Action：动作集合，这里是可选的MCS（调制与编码方案）</p>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>Q可以理解为通过RL来推导CQI-&gt;MCS的映射，因此不局限于表格的推荐，而是根据环境反馈动态优化。</p>
-</blockquote>
-<hr>
-<p>Reward function:</p>
-<ul>
-<li><p>R1 基于BLER的非线形奖励。</p>
-<ul>
-<li>μ: 每个符号的比特数 (bits per modulation symbol)</li>
-<li>ν: 编码率 (code rate)</li>
-<li>BLER: 当前传输块误块率</li>
-<li>BLER_T: 系统目标 BLER (例如 10% 对 eMBB).</li>
-</ul>
-  <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">R1 = μ * ν     , if BLER &lt;= BLER_T</span><br><span class="line">R1 = -1        , else</span><br></pre></td></tr></table></figure>
-<p>  如果MCS满足BLER目标，奖励等于理论传输速率μ*ν<br>  否则给惩罚值-1，避免过激MCS</p>
-</li>
-<li><p>R2 基于光谱效率的奖励。</p>
-<ul>
-<li>奖励考虑实际成功传输比特数</li>
-<li>agent 会尝试最大化光谱效率.</li>
-</ul>
-  <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">R2 = (1 - BLER) * μ * ν</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>说明：</p>
-<ul>
-<li>Q(s, a) 更新时结合 当前奖励 r 和 未来潜在收益 max_a Q(s’, a’)</li>
-<li>随着循环进行，Q表会收敛，最终为每个CQI提供最优MCS，示例如下：</li>
-</ul>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">         MCS1   MCS2   MCS3  ...  </span><br><span class="line">CQI0      Q0,0   Q0,1   Q0,2</span><br><span class="line">CQI1      Q1,0   Q1,1   Q1,2</span><br><span class="line">CQI2      Q2,0   Q2,1   Q2,2</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<ul>
-<li>最后的Q表的用途是用于决策.</li>
-</ul>
-<p>$ a* &#x3D; argmax_a Q(s, a)$.<br>也就是对当前CQI s，选择Q值最大的MCS</p>
-<ul>
-<li>学习经验<br>Q表保留了 RL agent对环境的经验，反映了不同信道条件下选择MCS的最优策略</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1498,7 +1200,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -150,6 +150,779 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/05/04/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/05/04/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">算法基础</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-05-04 01:42:52" itemprop="dateCreated datePublished" datetime="2025-05-04T01:42:52+08:00">2025-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-06-16 23:37:42" itemprop="dateModified" datetime="2025-06-16T23:37:42+08:00">2025-06-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h2><h3 id="计算树的节点"><a href="#计算树的节点" class="headerlink" title="计算树的节点"></a>计算树的节点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">// Created by 何晨易 on 2025/5/3.</span><br><span class="line">//</span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">struct TreeNode &#123;</span><br><span class="line">  int data;</span><br><span class="line">  TreeNode *left;</span><br><span class="line">  TreeNode *right;</span><br><span class="line">  TreeNode(): data(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="line">&#125; treeNode;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">TreeNode *<span class="function"><span class="title">createTreeNode</span></span>()&#123;</span><br><span class="line">    TreeNode *root = new TreeNode();</span><br><span class="line">    root-&gt;left = new TreeNode();</span><br><span class="line">    root-&gt;right = new TreeNode();</span><br><span class="line">    root-&gt;left-&gt;right = new TreeNode();</span><br><span class="line">    root-&gt;left-&gt;left = new TreeNode();</span><br><span class="line">    <span class="built_in">return</span> root;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">void countNodes(TreeNode* node, int&amp; internalCount, int&amp; leafCount)&#123;</span><br><span class="line">  <span class="keyword">if</span>(node == nullptr)&#123;</span><br><span class="line">    <span class="built_in">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(node-&gt;left == nullptr &amp;&amp; node-&gt;right == nullptr)&#123;</span><br><span class="line">    leafCount++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span>&#123;</span><br><span class="line">    internalCount++;</span><br><span class="line">  &#125;</span><br><span class="line">  countNodes(node-&gt;left, internalCount, leafCount);</span><br><span class="line">  countNodes(node-&gt;right, internalCount, leafCount);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">    TreeNode *root = createTreeNode();</span><br><span class="line">//      0</span><br><span class="line">//     / \</span><br><span class="line">//    0   0</span><br><span class="line">//   / \</span><br><span class="line">//  0  0</span><br><span class="line">    int internalCount = 0;</span><br><span class="line">    int   leafCount = 0;</span><br><span class="line">    countNodes(root, internalCount, leafCount);</span><br><span class="line">    cout &lt;&lt; <span class="string">internalCount &lt;&lt; endl;</span></span><br><span class="line"><span class="string">    cout &lt;&lt; leafCount &lt;&lt; endl;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<p>C++在构建定义结构体的时候，可以如上述代码使用TreeNode(): data(0), left(nullptr), right(nullptr) {}方式来构造。如果不在定义结构体内使用构造函数，那么可以用{}的方式来构造  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">struct Item&#123;</span><br><span class="line">    string name;</span><br><span class="line">    int w, v, u;</span><br><span class="line">&#125;</span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line"></span><br><span class="line">    vector&lt;Item&gt; items = &#123;</span><br><span class="line">        &#123;<span class="string">&quot;Hocker&quot;</span>, 5, 5, 0&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;Handy&quot;</span>, 1, 20, 1&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><h3 id="mergeSort"><a href="#mergeSort" class="headerlink" title="mergeSort"></a>mergeSort</h3><p>使用了<strong>分治</strong>的思想，将数组进行分块，并且每次分块是用二分法来进行划分，划分次数为log2(n)，n为数组长度<br>然后对每次划分得到的两个数组进行合并排序。由于每次合并排序都是对n个数字进行操作，因此时间复杂度为nlog2(n)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">// Created by 何晨易 on 2025/6/14.</span><br><span class="line">//</span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;vector&gt;</span></span><br><span class="line">std::vector&lt;int&gt; merge(std::vector&lt;int&gt;&amp; nums1, std::vector&lt;int&gt;&amp; nums2) &#123;</span><br><span class="line">  int i = 0, j = 0;</span><br><span class="line">  int size1 = nums1.size(), size2 = nums2.size();</span><br><span class="line"></span><br><span class="line">  nums1.push_back(INT_MAX);</span><br><span class="line">  nums2.push_back(INT_MAX);</span><br><span class="line"></span><br><span class="line">  std::vector&lt;int&gt; temp(size1 + size2);</span><br><span class="line">  <span class="keyword">for</span> (int n = 0; n &lt; size1 + size2; ++n) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nums1[i] &lt; nums2[j]) &#123;</span><br><span class="line">      temp[n] = nums1[i++];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      temp[n] = nums2[j++];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void mergeSort(std::vector&lt;int&gt;&amp; nums, int left, int right) &#123;</span><br><span class="line">  <span class="keyword">if</span>(left &gt;= right)&#123;</span><br><span class="line">    <span class="built_in">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  int mid = left + (right - left) / 2 ;</span><br><span class="line">  mergeSort(nums, left, mid);</span><br><span class="line">  mergeSort(nums, mid + 1, right);</span><br><span class="line"></span><br><span class="line">  std::vector&lt;int&gt; leftarray(nums.begin() + left, nums.begin() + mid + 1);</span><br><span class="line">  std::vector&lt;int&gt; rightarray(nums.begin() + mid + 1, nums.begin() + right + 1);</span><br><span class="line"></span><br><span class="line">  std::vector&lt;int&gt; merged = merge(leftarray, rightarray);</span><br><span class="line">  // 拷贝回原数组</span><br><span class="line">  <span class="keyword">for</span> (int i = 0; i &lt; merged.size(); ++i) &#123;</span><br><span class="line">    nums[left + i] = merged[i];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">  std::vector&lt;int&gt; nums1 = &#123;1,2,3,4,5,6,7,8,9&#125;;</span><br><span class="line">  std::vector&lt;int&gt; nums2 = &#123;9,10,11,100,200&#125;;</span><br><span class="line">//  std::vector&lt;int&gt; merged = merge(nums1, nums2);</span><br><span class="line">  std::vector&lt;int&gt; nums3 = &#123;3,2,5,1,6&#125;;</span><br><span class="line">  mergeSort(nums3, 0, nums3.size() - 1);</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;合并后数组：&quot;</span>;</span><br><span class="line">  <span class="keyword">for</span> (int num : nums3) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">num &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  std::cout &lt;&lt; std::endl;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  return 0;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="heapSort"><a href="#heapSort" class="headerlink" title="heapSort"></a>heapSort</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">// Created by 何晨易 on 2025/6/16.</span><br><span class="line">//</span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;vector&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">// 向下堆化（heapify）</span><br><span class="line">void heapify(vector&lt;int&gt;&amp; arr, int n, int i) &#123;</span><br><span class="line">    int largest = i;       // 当前节点索引</span><br><span class="line">    int left = 2 * i + 1;  // 左子节点</span><br><span class="line">    int right = 2 * i + 2; // 右子节点</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (left &lt; n &amp;&amp; arr[left] &gt; arr[largest])</span><br><span class="line">        largest = left;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (right &lt; n &amp;&amp; arr[right] &gt; arr[largest])</span><br><span class="line">        largest = right;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (largest != i) &#123;</span><br><span class="line">        swap(arr[i], arr[largest]);</span><br><span class="line">        heapify(arr, n, largest);  // 递归下沉</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 堆排序</span><br><span class="line">void heapSort(vector&lt;int&gt;&amp; arr) &#123;</span><br><span class="line">    int n = arr.size();</span><br><span class="line"></span><br><span class="line">    // 构建最大堆</span><br><span class="line">    <span class="keyword">for</span> (int i = n / 2 - 1; i &gt;= 0; i--) &#123;</span><br><span class="line">        heapify(arr, n, i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 逐个取出最大元素，并重新堆化</span><br><span class="line">    <span class="keyword">for</span> (int i = n - 1; i &gt; 0; i--) &#123;</span><br><span class="line">        swap(arr[0], arr[i]);       // 将当前最大值（堆顶）放到末尾</span><br><span class="line">        heapify(arr, i, 0);         // 对剩余部分进行堆化</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 打印数组</span><br><span class="line">void printArray(const vector&lt;int&gt;&amp; arr) &#123;</span><br><span class="line">    <span class="keyword">for</span> (int val : arr)</span><br><span class="line">        cout &lt;&lt; <span class="string">val &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    cout &lt;&lt; endl;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 测试</span></span><br><span class="line"><span class="string">int main() &#123;</span></span><br><span class="line"><span class="string">    vector&lt;int&gt; arr = &#123;40, 30, 25, 50, 20, 10&#125;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;原始数组: &quot;;</span></span><br><span class="line"><span class="string">    printArray(arr);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    heapSort(arr);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;排序后数组: &quot;;</span></span><br><span class="line"><span class="string">    printArray(arr);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h2><h3 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h3><p>可以先计算每一个物品的性价比，也就是价值&#x2F;质量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/05/01/%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/05/01/%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">随机过程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-05-01 00:51:52" itemprop="dateCreated datePublished" datetime="2025-05-01T00:51:52+08:00">2025-05-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-07-19 14:23:59" itemprop="dateModified" datetime="2025-07-19T14:23:59+08:00">2025-07-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="Basic-concept"><a href="#Basic-concept" class="headerlink" title="Basic concept"></a>Basic concept</h2><p>随机过程是随机试验的衍生，具体来说它是Xi(t)的集合，其中Xi是n个变量，理论上n是无强大，Xi的分布函数和t有关，也就是说它的统计学特性受时间影响。</p>
+<h3 id="样本函数与概率密度函数（PDF）"><a href="#样本函数与概率密度函数（PDF）" class="headerlink" title="样本函数与概率密度函数（PDF）"></a>样本函数与概率密度函数（PDF）</h3><p>样本函数：随机过程X(t)的一次实现或某个样本路径，记为x(t)，也就是样本函数<br>概率密度函数：在某个时刻t，随机变量X(t)的概率分布密度函数，记为$f(x)$<br>可以这么理解：<br>样本函数：一个人的身高随年龄的变化曲线<br>概率密度：某个年龄段所有人身高的统计分布  </p>
+<h3 id="随机过程的均值和自相关函数计算"><a href="#随机过程的均值和自相关函数计算" class="headerlink" title="随机过程的均值和自相关函数计算"></a>随机过程的均值和自相关函数计算</h3><p>$\epsilon(t) &#x3D; Acos(w_ct + \phi)$<br>其中$\phi$在0到2pi上均匀分布<br>$E[\epsilon(t)]&#x3D;\int_{0}^{2\pi}Acos(w_ct+\phi)\frac{1}{2\pi}d_\phi$<br>然后对cos函数进行拆解，把$cos\phi$的部分拆解出来，然后求积分</p>
+<h3 id="一维分布函数"><a href="#一维分布函数" class="headerlink" title="一维分布函数"></a>一维分布函数</h3><p>也就是说只考虑某个固定的时间t，随机变量X(t)的分布函数一般与t有关：<br>Fx(x,t) &#x3D; P{X(t)&lt;&#x3D;x}<br>当t取遍T中的所有元素时，我们可以得到一系列的分布函数，将这些分布函数的全体所构成的集合称为一维分布函数族，记为<br>{Fx(x;t)}<br>这个也就是一维分布函数族,它用来刻画随机过程在各个单独时刻的统计特性。</p>
+<h3 id="一维随机过程的n维分布函数族"><a href="#一维随机过程的n维分布函数族" class="headerlink" title="一维随机过程的n维分布函数族"></a>一维随机过程的n维分布函数族</h3><p>一维分布函数族刻画了随机过程在各个时刻的统计特征，为了描述随机过程在<strong>不同时刻状态之间的统计联系</strong>，一般可对任意<br> 个不同的时刻，也就是可以用二维分布函数来表示，如下分布函数所示：   </p>
+<img src="/images/一维随机过程.png"> 
+
+<p>这个分布函数是关于t1 t2 x1 x2四个变量的函数。<br>例如当t1&#x3D;1，x1&#x3D;1；t2&#x3D;1，x2&#x3D;1的时候P( x(t&#x3D;1)&lt;1 , x(t&#x3D;2)&lt;1 ) 的取值，<br>对比前面的1维分布函数，后者例如t1&#x3D;1，x1&#x3D;1时候，P（ x（t&#x3D;1）&lt;1）的取值<br><strong>n维</strong>分布函数：为了描述随机过程在不同时刻状态之间的关系，对任意n个不同时刻t1，t2，…,tn引入n维随机变量<br>（X（t1）， X（t2）， X（t3），…, X（tn））的分布函数</p>
+<h3 id="平稳随机过程"><a href="#平稳随机过程" class="headerlink" title="平稳随机过程"></a>平稳随机过程</h3><p>平稳随机过程的统计特性不随时间的推移而变化，其一维分布与时间t无关，二维分布只与时间间隔$\tau$有关，如下</p>
+<ul>
+<li>一维分布与时间$\tau$无关<br>f(x,t) &#x3D; f(x)</li>
+<li>二维分布只与时间间隔$\tau$有关<br>f(x1,x2;t1,t2) &#x3D; f(x1,x2;τ)</li>
+</ul>
+<h4 id="平稳随机过程的数字特征"><a href="#平稳随机过程的数字特征" class="headerlink" title="平稳随机过程的数字特征"></a>平稳随机过程的数字特征</h4><ul>
+<li>自相关只与时间间隔$\tau$有关，而与时间起点无关<br>R(0) &#x3D; E[ $\epsilon^2(t)$ ] &#x3D; S （也称为均方值）<br>同时平均功率E根据定义如下式所示：<br>S &#x3D; $\int_{-\infty}^{\infty}P_n(f)d_f$  &#x3D;  $\frac{1}{2\pi}\int_{-\infty}^{\infty}P_n(w)d_w$<br>因此平均功率S有以上两种求法</li>
+</ul>
+<p>物理意义： 随机过程的平均功率    </p>
+<ul>
+<li><p>均值<br>均值与t无关，样本函数围绕一水平线起伏<br>也就是$E[\epsilon(t)] &#x3D; \mu$.<br>因此$P &#x3D; \lim_{T \to \infty} \frac{1}{2T}\int_{-T}^{T}E[\epsilon(t)^2]dt &#x3D; E[\epsilon(t)^2]$</p>
+</li>
+<li><p>方差。</p>
+</li>
+</ul>
+<p>方差与t无关，为常数</p>
+<p>R($\infty$) &#x3D; E[$\epsilon$(t)]²<br>因为时间间隔无限大时，$\epsilon(t)$ 与 $\epsilon(t+\tau)$趋于独立</p>
+<p>物理意义： 随机过程的直流功率</p>
+<h4 id="平稳随机过程的功率谱密度"><a href="#平稳随机过程的功率谱密度" class="headerlink" title="平稳随机过程的功率谱密度"></a>平稳随机过程的功率谱密度</h4><p>假定f(t)为随机过程$\epsilon(t)$的任意实现，对其进行T长度的截断，并在对其进行傅立叶变换。<br>$\lim_{T \to \infty} \frac{|F_T(w)|^2}{T}$</p>
+<p><strong>维纳-辛钦定律</strong><br>平稳随机过程$\epsilon(t)$的功率谱密度函数$P_\epsilon(w)$和自相关函数R($\tau$)为一对傅立叶变换对<br><img src="/images/功率谱密度.png"></p>
+<p><strong>平均功率计算方法</strong>:<br>S &#x3D; R(0) &#x3D; E[$\epsilon(t)^2$]<br>S &#x3D; $\frac{1}{2\pi}\int_{-\infty}^{\infty}P_\epsilon(w),dw$</p>
+<h4 id="平稳随机过程的各态历经性"><a href="#平稳随机过程的各态历经性" class="headerlink" title="平稳随机过程的各态历经性"></a>平稳随机过程的各态历经性</h4><p>时间均值公式：<br>$\overline{x} &#x3D; \lim_{T \to \infty} \frac{1}{2T} \int_{-T}^{T} x(t) , dt$<br>若平稳随机过程的时间均值$\overline{x}$ &#x3D; E(x)，那么其具有各态历经性  </p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>在求随机过程的功率时，使用其平方的数学期望来进行计算，而非其时间均值，除非是在满足各态历经性的前提下</p>
+</blockquote>
+<hr>
+<h3 id="高斯随机过程"><a href="#高斯随机过程" class="headerlink" title="高斯随机过程"></a>高斯随机过程</h3><p>若随机过程的任意<strong>n</strong>维分布都是正态分布，则称它为高斯随机过程或正态过程。其n维概率密度函数为：<br>$f_a(x_1,x_2,…;t_1,…,t_n)$<br>一维高斯过程的概率密度函数：<br>X ~ N(a,$\sigma^2$)<br>$f_1(x)$ &#x3D; $\frac{1}{\sqrt{(2\pi)}\sigma}exp[-\frac{(x-a)^2}{2\sigma^2}]$<br>高斯过程在不同时刻取值不相关，则它们也统计独立。<br>高斯过程经过线性变化（或线性系统）后仍为高斯过程。</p>
+<h4 id="正态分布函数"><a href="#正态分布函数" class="headerlink" title="正态分布函数"></a>正态分布函数</h4><p>先来看正态概率密度函数<br>X ～ N(a,$\sigma^2$),<br>$f_1(x)$ &#x3D; $\frac{1}{\sqrt{(2\pi)}\sigma}exp[-\frac{(x-a)^2}{2\sigma^2}]$<br>那么正态分布函数就是将上述函数从负无穷到x上积分<br>标准&#x2F;归一化的正态分布是另a&#x3D;0，$\sigma$&#x3D;1<br>$f_1(x) &#x3D; \frac{1}{\sqrt{(2\pi)}}exp[-\frac{x^2}{2}]$  </p>
+<h4 id="Q函数"><a href="#Q函数" class="headerlink" title="Q函数"></a>Q函数</h4><p>和正态分布的密度分布函数是互补的关系<br>也就是从x到正无穷积分（正态分布函数是从负无穷到x积分）</p>
+<h4 id="误差函数"><a href="#误差函数" class="headerlink" title="误差函数"></a>误差函数</h4><p>$\text{erf}(x) &#x3D; \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^2} , dt$<br>互补误差函数和它互补，也就是说是从x到正无穷上积分<br>误差函数、互补误差函数与正态分布函数存在一个关系<br><img src="/images/误差函数.png"></p>
+<h3 id="随机过程通过线性系统"><a href="#随机过程通过线性系统" class="headerlink" title="随机过程通过线性系统"></a>随机过程通过线性系统</h3><img src="/images/随机过程通过线性系统.png">  
+
+<p>有以下几个特性  </p>
+<ul>
+<li><p>数学期望<br>E[$\epsilon_o(t)$] &#x3D; aH(0)</p>
+</li>
+<li><p>自相关函数<br>输入平稳随机过程，则输出过程自相关函数只与时间间隔有关</p>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>平稳随机过程通过线性系统，输出也是平稳随机过程</p>
+</blockquote>
+<hr>
+<ul>
+<li>功率谱密度<br>$P_o(w)$&#x3D;$P_i(w)$|$H(w)^2$|<br>其中|$H(w)^2$|为功率增益</li>
+</ul>
+<h3 id="窄带随机过程"><a href="#窄带随机过程" class="headerlink" title="窄带随机过程"></a>窄带随机过程</h3><p>窄带系统要求通带宽度$\Delta f \ll f_c$<br>窄带过程是指随机过程通过以$f_c$为中心频率的窄带系统的输出过程<br>$$<br>\xi(t) &#x3D; A(t) \cos\big(2\pi f_c t + \phi(t)\big)<br>$$</p>
+<ul>
+<li>$\xi(t)$：窄带随机过程的样本函数</li>
+<li>A(t)：随机包络（幅度调制过程）  </li>
+<li>$f_c$：载波频率（中心频率）  </li>
+<li>$\phi(t)$：随机相位</li>
+</ul>
+<p>可以将其写成同相分量加上正交分量的形式<br>$\xi(t) &#x3D; \xi_c(t)cosw_ct - \xi_s(t)sinw_ct$<br>其中同相分量$\xi_c(t)$和正交分量$\xi_s(t)$以及$\xi(t)$的统计特性都一样，也就是数学期望和方差都一样，因此其均方值也一样，也就是平均功率都一样</p>
+<img src="/images/窄带过程.png">  
+通常分析平稳高斯窄带过程$\xi(t)$  
+所以均值为0，方差为$\sigma^2$,由于可以写成同向分量$\sigma_c(t)$与正交分量$\sigma_s(t)$线性组合的关系，因此这两个分量的数学期望也均为0，并且二者都平稳（相关函数均只与时间间隔有关），并且二者的自相关函数相同，方差相同，同时也互不相关、统计独立的高斯变量。
+简单来讲， 这两个分量为零均值、等方差、不相关、独立的平稳高斯过程。 
+
+<h3 id="正弦波加窄带高斯过程"><a href="#正弦波加窄带高斯过程" class="headerlink" title="正弦波加窄带高斯过程"></a>正弦波加窄带高斯过程</h3><p>$r(t) &#x3D; Acos(\omega_c t + \phi) + n(t)$<br>其中n(t)是均值为0，方差为$\sigma^2$的窄带高斯噪声<br>然后通过三角函数转换可得r(t)最终也可以分解为同相分量和正交向量，也就是$z_c(t) &#x3D; Acos{\phi} + n_c(t)$和$z_s(t) &#x3D; Acos{\phi} + n_s(t)$<br><img src="随机包络随机相位.png"><br>随机包络遵循广义瑞利分布，随机相位的概率密度与信噪比环境有关。<br>对于小信噪比环境，它们分布退化为瑞利分布和均匀分布。<br>同时它们的整体，也就是正弦波+窄带高斯过程会退化为窄带高斯过程。</p>
+<h3 id="白噪声"><a href="#白噪声" class="headerlink" title="白噪声"></a>白噪声</h3><p>功率谱密度均匀分布在整个频率范围内的随机过程称为白噪声<br>由自相关和功率谱密度的傅立叶变换关系可知，白噪声的自相关函数是在$\tau$&#x3D;0上面有个冲激信号的函数</p>
+<h3 id="高斯白噪声"><a href="#高斯白噪声" class="headerlink" title="高斯白噪声"></a>高斯白噪声</h3><p>服从高斯分布的白噪声，在任意两个不同时刻上随机变量互不相关，且统计独立。</p>
+<h3 id="低通白噪声"><a href="#低通白噪声" class="headerlink" title="低通白噪声"></a>低通白噪声</h3><p>功率谱是门函数，对应的自相关函数是sinc函数</p>
+<h3 id="带通白噪声"><a href="#带通白噪声" class="headerlink" title="带通白噪声"></a>带通白噪声</h3><p>功率是门函数与两个冲激函数的卷积，对应的傅立叶变换是sinc函数与cos函数的乘积</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/29/LMMSE-base-channel-estimation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/04/29/LMMSE-base-channel-estimation/" class="post-title-link" itemprop="url">LMMSE base channel estimation</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-04-29 00:45:01" itemprop="dateCreated datePublished" datetime="2025-04-29T00:45:01+08:00">2025-04-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-08-04 21:37:05" itemprop="dateModified" datetime="2025-08-04T21:37:05+08:00">2025-08-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>先了解MMSE，MMSE（Minimum Mean Square Error），也就是最小均方误差，是一种常用的统计估计方法，它的目标就是最小化估计值与实际值之间的均方误差（MSE）。在通信系统中，MMSE被广泛用于信道估计，因为它能够在噪声和干扰的影响下，给出一个最优估计。<br>另外，在信道估计中，交叉相关矩阵通常用于计算数据子载波和导频子载波之间的相关性，这对于估计信道的状态至关重要。</p>
+<h2 id="数学公式推导"><a href="#数学公式推导" class="headerlink" title="数学公式推导"></a>数学公式推导</h2><h1 id="OFDM-System-Simulation-with-LMMSE-Channel-Estimation"><a href="#OFDM-System-Simulation-with-LMMSE-Channel-Estimation" class="headerlink" title="OFDM System Simulation with LMMSE Channel Estimation"></a>OFDM System Simulation with LMMSE Channel Estimation</h1><p>This MATLAB project simulates an OFDM system using <strong>LMMSE (Linear Minimum Mean Square Error)</strong> channel estimation over a <strong>frequency-selective Rayleigh fading channel</strong>. The system uses QPSK modulation and pilot symbols to perform accurate channel estimation in the frequency domain.</p>
+<hr>
+<h2 id="📌-Features"><a href="#📌-Features" class="headerlink" title="📌 Features"></a>📌 Features</h2><ul>
+<li>QPSK modulation  </li>
+<li>Rayleigh fading multipath channel  </li>
+<li>AWGN noise  </li>
+<li>LMMSE-based pilot-aided channel estimation (PACE)  </li>
+<li>Bit Error Rate (BER) analysis</li>
+</ul>
+<hr>
+<h2 id="🧠-Theoretical-Background"><a href="#🧠-Theoretical-Background" class="headerlink" title="🧠 Theoretical Background"></a>🧠 Theoretical Background</h2><h3 id="1-OFDM-Signal-Model"><a href="#1-OFDM-Signal-Model" class="headerlink" title="1. OFDM Signal Model"></a>1. OFDM Signal Model</h3><p>The received signal on subcarrier ( k ) is:</p>
+<p>$$<br>Y[k] &#x3D; H[k] \cdot X[k] + W[k]<br>$$</p>
+<p>Where:</p>
+<p>$$<br>X[k]: \text{ Transmitted signal on subcarrier } k \<br>H[k]: \text{ Channel frequency response at subcarrier } k \<br>W[k]: \text{ Additive white Gaussian noise (AWGN)} \<br>Y[k]: \text{ Received signal at subcarrier } k<br>$$</p>
+<hr>
+<h3 id="2-LMMSE-Channel-Estimation"><a href="#2-LMMSE-Channel-Estimation" class="headerlink" title="2. LMMSE Channel Estimation"></a>2. LMMSE Channel Estimation</h3><p>The LMMSE estimate of the channel at data subcarriers is:</p>
+<p>$$<br>\hat{H}<em>{\text{data}} &#x3D; R</em>{hd,hp} \left( R_{hp,hp} + \sigma^2 (X X^H)^{-1} \right)^{-1} \hat{H}_{\text{pilot}}<br>$$</p>
+<p>Where:</p>
+<p>$$<br>R_{hd,hp}: \text{ Cross-correlation matrix between data and pilot subcarriers} \<br>R_{hp,hp}: \text{ Autocorrelation matrix of pilot subcarriers} \<br>\hat{H}_{\text{pilot}}: \text{ LS-estimated channel at pilot positions} \<br>\sigma^2: \text{ Noise variance} \<br>X: \text{ Diagonal matrix of known pilot symbols}<br>$$</p>
+<hr>
+<h3 id="3-Channel-Frequency-Response-DFT"><a href="#3-Channel-Frequency-Response-DFT" class="headerlink" title="3. Channel Frequency Response (DFT)"></a>3. Channel Frequency Response (DFT)</h3><p>The time-domain convolution is，这也是一个离散时间的线性卷积公式，它描述了<strong>多径信道</strong>(多径效应)对时域基带信号的影响，其中每一个h[l]表示不同时间延迟下的路径增益:</p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>引入OFDM可以抗多径，因为在循环前缀CP足够长的条件下，把时域的多径线性卷积变换为<strong>循环卷积</strong>,也就是Y[k] &#x3D; H[k]X[k] + W[k]<br></p>
+</blockquote>
+<hr>
+<p>$$<br>y[n] &#x3D; \sum_{m&#x3D;0}^{L-1} h[m] \cdot x[n - m]<br>$$</p>
+<p>The corresponding channel frequency response is obtained via DFT:</p>
+<p>$$<br>H[k] &#x3D; \sum_{l&#x3D;0}^{L-1} h[l] \cdot e^{-j \frac{2\pi k l}{N}}<br>$$</p>
+<p>Where:</p>
+<p>$$<br>h[l]: \text{ Channel tap in time domain} \<br>N: \text{ FFT length (number of subcarriers)} \<br>k: \text{ Subcarrier index}<br>$$</p>
+<hr>
+<h3 id="4-Calculation-of-R-hp-hp"><a href="#4-Calculation-of-R-hp-hp" class="headerlink" title="4. Calculation of $R_{hp,hp}$"></a>4. Calculation of $R_{hp,hp}$</h3><p>在统计通信理论中，如果H[i]是频率索引为i的频域信道系数（例如OFDM中第i个子载波的信道响应）<br>$R_H(i,j)&#x3D;E[H[i]H[j]]$<br>To calculate the autocorrelation matrix between pilot subcarriers $R_{hp,hp}$, we start from the frequency-domain channel representation. The channel frequency response at subcarrier ( n ) is given by the discrete Fourier transform (DFT) of the time-domain channel taps:</p>
+<p>$$<br>H[n] &#x3D; \sum_{l&#x3D;0}^{L-1} h[l] e^{-j \frac{2\pi}{N} n l}<br>$$</p>
+<p>where:</p>
+<ul>
+<li>( L ) is the number of channel taps,</li>
+<li>( h[l] ) is the complex channel coefficient of the ( l )-th tap,</li>
+<li>( N ) is the FFT length,</li>
+<li>( n ) is the subcarrier index.</li>
+</ul>
+<p>The autocorrelation between frequency responses at pilot subcarrier indices ( n_i ) and ( n_j ) is:</p>
+<p>$$<br>\begin{aligned}<br>R_{hp,hp}(i,j) &amp;&#x3D; E \left[ H[n_i] H^<em>[n_j] \right] \<br>&amp;&#x3D; E \left[ \left( \sum_{l&#x3D;0}^{L-1} h[l] e^{-j \frac{2\pi}{N} n_i l} \right) \left( \sum_{m&#x3D;0}^{L-1} h[m] e^{-j \frac{2\pi}{N} n_j m} \right)^</em> \right] \<br>&amp;&#x3D; \sum_{l&#x3D;0}^{L-1} \sum_{m&#x3D;0}^{L-1} e^{-j \frac{2\pi}{N} n_i l} e^{j \frac{2\pi}{N} n_j m} E \left[ h[l] h^*[m] \right]<br>\end{aligned}<br>$$</p>
+<p>Assuming that the channel taps are uncorrelated with power delay profile $\sigma_l^2 &#x3D; E[|h[l]|^2]$, we have:</p>
+<p>$$<br>E \left[ h[l] h^*[m] \right] &#x3D;<br>\begin{cases}<br>\sigma_l^2, &amp; l &#x3D; m \<br>0, &amp; l \neq m<br>\end{cases}<br>$$</p>
+<p>Thus, the autocorrelation matrix element simplifies to:</p>
+<p>$$<br>R_{hp,hp}(i,j) &#x3D; \sum_{l&#x3D;0}^{L-1} \sigma_l^2 e^{-j \frac{2\pi}{N} (n_i - n_j) l}<br>$$</p>
+<p>This formula describes the correlation between frequency-domain channel coefficients at pilot positions ( n_i ) and ( n_j ), derived from the time-domain power delay profile.</p>
+<hr>
+<h3 id="5-Calculation-of-R-hd-hp"><a href="#5-Calculation-of-R-hd-hp" class="headerlink" title="5. Calculation of $R_{hd,hp}$"></a>5. Calculation of $R_{hd,hp}$</h3><p>计算过程和计算导频之间的互相关函数一样，只是需要注意data部分的索引。</p>
+<h2 id="📁-File-Structure"><a href="#📁-File-Structure" class="headerlink" title="📁 File Structure"></a>📁 File Structure</h2><ul>
+<li><code>ofdm_lmmse_sim.m</code> – Main simulation script  </li>
+<li><code>Gen_autocorr.m</code> – Generates channel autocorrelation values  </li>
+<li><code>README.md</code> – Project documentation</li>
+</ul>
+<hr>
+<h2 id="⚙️-Key-Parameters"><a href="#⚙️-Key-Parameters" class="headerlink" title="⚙️ Key Parameters"></a>⚙️ Key Parameters</h2><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FFT Length</td>
+<td>256</td>
+</tr>
+<tr>
+<td>Pilot Count</td>
+<td>32</td>
+</tr>
+<tr>
+<td>Channel Taps</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Cyclic Prefix</td>
+<td>9</td>
+</tr>
+<tr>
+<td>SNR</td>
+<td>40 dB</td>
+</tr>
+<tr>
+<td>Modulation</td>
+<td>QPSK</td>
+</tr>
+<tr>
+<td>Simulation Frames</td>
+<td>1000</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="CSI-Acquisition-and-Precoding-Impact-on-BER"><a href="#CSI-Acquisition-and-Precoding-Impact-on-BER" class="headerlink" title="CSI Acquisition and Precoding Impact on BER"></a>CSI Acquisition and Precoding Impact on BER</h2><p>In MIMO-OFDM systems, accurate Channel State Information (CSI) is essential for leveraging spatial multiplexing gains and optimizing transmission through precoding:</p>
+<ul>
+<li><strong>Channel Sounding:</strong> Known pilot or preamble sequences are transmitted to probe the channel. The receiver estimates the CSI (\hat{H}) using LMMSE or similar methods.  </li>
+<li><strong>CSI Feedback &amp; Precoding:</strong> The estimated CSI is fed back to the transmitter, which computes a precoding matrix ( \mathbf{V} ) (e.g., based on SVD or LMMSE estimation) to pre-multiply data symbols. This precoding enhances signal quality and mitigates interference.  </li>
+<li><strong>Data Transmission &amp; BER:</strong> The precoded data is transmitted through the MIMO channel. The receiver decodes the signals based on the estimated CSI. The accuracy of CSI directly affects Bit Error Rate (BER) performance — better CSI leads to lower BER.</li>
+</ul>
+<p>Example MATLAB snippet for per-subcarrier precoding:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> carrIdx = <span class="number">1</span>:prm.numCarriers</span><br><span class="line">    Q = <span class="built_in">squeeze</span>(v(carrIdx,:,:));</span><br><span class="line">    normQ = Q * <span class="built_in">sqrt</span>(numTx)/norm(Q,<span class="string">&#x27;fro&#x27;</span>);</span><br><span class="line">    preData(carrIdx,symIdx,:) = <span class="built_in">squeeze</span>(gridData(carrIdx,symIdx,:)).&#x27; * normQ;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Deep-Learning-for-CSI-Prediction"><a href="#Deep-Learning-for-CSI-Prediction" class="headerlink" title="Deep Learning for CSI Prediction"></a>Deep Learning for CSI Prediction</h3><h4 id="Objective"><a href="#Objective" class="headerlink" title="Objective"></a>Objective</h4><p>Use a neural network to predict CSI vectors from the received LTF sequences instead of using LMMSE.</p>
+<h4 id="Model-Architecture-Keras"><a href="#Model-Architecture-Keras" class="headerlink" title="Model Architecture (Keras)"></a>Model Architecture (Keras)</h4><ul>
+<li>Fully Connected Neural Network (FC或MLP)</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> args.model == <span class="string">&#x27;FC&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;now the model is Full Dense Model&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> args.datasource == <span class="string">&#x27;matlab_maMimo&#x27;</span>:</span><br><span class="line">        <span class="keyword">if</span> args.decimate_max:</span><br><span class="line">            decimate = Flatten()(MaxPooling1D()(next_layer_in))</span><br><span class="line">            next_layer_in = Concatenate(axis=1)([decimate, seq_p])</span><br><span class="line">        <span class="keyword">elif</span> args.decimate_avg:</span><br><span class="line">            decimate = Flatten()(AveragePooling1D()(next_layer_in))</span><br><span class="line">            next_layer_in = Concatenate(axis=1)([decimate, seq_p])</span><br><span class="line">        <span class="comment"># TODO aggiungere decimazione pura (senza max o avg pooling, solo scarto)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            flatten = Flatten()(next_layer_in)</span><br><span class="line">            next_layer_in = Concatenate(axis=1)([flatten, seq_p])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i, n <span class="keyword">in</span> enumerate(nn):</span><br><span class="line">        layers[<span class="string">&#x27;dense&#x27;</span>].append(</span><br><span class="line">            Dense(nn[i], activation=<span class="string">&#x27;relu&#x27;</span>, kernel_initializer=<span class="string">&#x27;glorot_uniform&#x27;</span>, name=<span class="string">&#x27;fc_dense&#x27;</span>+str(i))(next_layer_in)</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">if</span> args.useBN:</span><br><span class="line">            layers[<span class="string">&#x27;batchnorm&#x27;</span>].append(</span><br><span class="line">                BatchNormalization()(layers[<span class="string">&#x27;dense&#x27;</span>][-1])</span><br><span class="line">            )</span><br><span class="line">            next_layer_in = layers[<span class="string">&#x27;batchnorm&#x27;</span>][-1]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            next_layer_in = layers[<span class="string">&#x27;dense&#x27;</span>][-1]</span><br><span class="line">        <span class="keyword">if</span> (i &lt; (numDense - 1)) and (args.dropout != 0.0):  <span class="comment"># if not the last layer, add dropout</span></span><br><span class="line">            layers[<span class="string">&#x27;dropout&#x27;</span>].append(</span><br><span class="line">                Dropout(args.dropout, name=<span class="string">&#x27;drop&#x27;</span>+str(i))(next_layer_in)</span><br><span class="line">            )</span><br><span class="line">            next_layer_in = layers[<span class="string">&#x27;dropout&#x27;</span>][-1]</span><br><span class="line">    encoder = Dense(simParams[<span class="string">&#x27;nSubCarr&#x27;</span>], activation=<span class="string">&#x27;linear&#x27;</span>, kernel_initializer=<span class="string">&#x27;glorot_uniform&#x27;</span>, name=<span class="string">&#x27;fc_regressor&#x27;</span>)(next_layer_in)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> args.datasource == <span class="string">&#x27;matlab_maMimo&#x27;</span>:</span><br><span class="line">        CSI_predictor = Model([seq_in,seq_p], encoder)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        CSI_predictor = Model(seq_in, encoder)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>其中隐藏层nn数列为[1024,1024],因此最后的模型summary为：</p>
+<table>
+<thead>
+<tr>
+<th>Layer Name</th>
+<th>Type</th>
+<th>Output Shape</th>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>seq_in</code></td>
+<td>Input</td>
+<td><code>(None, T, F)</code></td>
+<td>0</td>
+<td>CSI time-series input</td>
+</tr>
+<tr>
+<td><code>seq_p</code></td>
+<td>Input</td>
+<td><code>(None, P)</code></td>
+<td>0</td>
+<td>Position input</td>
+</tr>
+<tr>
+<td><code>flatten</code></td>
+<td>Flatten</td>
+<td><code>(None, T×F)</code></td>
+<td>0</td>
+<td>Flattens CSI sequence</td>
+</tr>
+<tr>
+<td><code>concatenate</code></td>
+<td>Concatenate</td>
+<td><code>(None, T×F + P)</code></td>
+<td>0</td>
+<td>Merges CSI and position inputs</td>
+</tr>
+<tr>
+<td><code>fc_dense0</code></td>
+<td>Dense</td>
+<td><code>(None, 1024)</code></td>
+<td><code>(T×F + P + 1) × 1024</code></td>
+<td>Fully connected layer with ReLU</td>
+</tr>
+<tr>
+<td><code>batch_norm_0</code></td>
+<td>BatchNorm</td>
+<td><code>(None, 1024)</code></td>
+<td>4096</td>
+<td>Batch normalization</td>
+</tr>
+<tr>
+<td><code>drop0</code></td>
+<td>Dropout</td>
+<td><code>(None, 1024)</code></td>
+<td>0</td>
+<td>Dropout layer (optional)</td>
+</tr>
+<tr>
+<td><code>fc_dense1</code></td>
+<td>Dense</td>
+<td><code>(None, 1024)</code></td>
+<td><code>1024 × 1024 + 1024 = 1,049,600</code></td>
+<td>Hidden dense layer</td>
+</tr>
+<tr>
+<td><code>batch_norm_1</code></td>
+<td>BatchNorm</td>
+<td><code>(None, 1024)</code></td>
+<td>4096</td>
+<td>Batch normalization</td>
+</tr>
+<tr>
+<td><code>fc_regressor</code></td>
+<td>Dense</td>
+<td><code>(None, nSubCarr)</code></td>
+<td><code>1024 × nSubCarr + nSubCarr</code></td>
+<td>Output prediction (e.g., CSI subcarriers)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>CNN</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">elif</span> args.model ==<span class="string">&#x27;CONV1D&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;now the model is Convolution 1D Model&quot;</span>)</span><br><span class="line"></span><br><span class="line">    conv1 = BatchNormalization()(Conv1D(128, 7, padding=<span class="string">&#x27;same&#x27;</span>, name=<span class="string">&#x27;cnn1d_1&#x27;</span>, activation=<span class="string">&#x27;relu&#x27;</span>)(next_layer_in))</span><br><span class="line">    maxpool1 = AveragePooling1D()(conv1)</span><br><span class="line">    <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">    conv2 = BatchNormalization()(Conv1D(64, 7, padding=&#x27;same&#x27;, name=&#x27;cnn1d_2&#x27;, activation=&#x27;relu&#x27;)(maxpool1))</span></span><br><span class="line"><span class="string">    maxpool2 = AveragePooling1D()(conv2)</span></span><br><span class="line"><span class="string">   </span></span><br><span class="line"><span class="string">    conv3 = BatchNormalization()(Conv1D(64, 5, padding=&#x27;same&#x27;, name=&#x27;cnn1d_3&#x27;, activation=&#x27;relu&#x27;)(maxpool2))</span></span><br><span class="line"><span class="string">    maxpool3 = MaxPooling1D()(conv3)</span></span><br><span class="line"><span class="string">    &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">    flatten = Flatten()(maxpool1)</span><br><span class="line">    <span class="comment"># TODO INSERT CONVOLUTIONAL AUTOENCODER HERE</span></span><br><span class="line"></span><br><span class="line">    next_layer_in = Concatenate(axis=1)([flatten, seq_p])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i, n <span class="keyword">in</span> enumerate(nn):</span><br><span class="line">        layers[<span class="string">&#x27;dense&#x27;</span>].append(</span><br><span class="line">            Dense(nn[i], activation=<span class="string">&#x27;relu&#x27;</span>, kernel_initializer=<span class="string">&#x27;glorot_uniform&#x27;</span>, name=<span class="string">&#x27;fc_dense&#x27;</span>+str(i))(next_layer_in)</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">if</span> args.useBN:</span><br><span class="line">            layers[<span class="string">&#x27;batchnorm&#x27;</span>].append(</span><br><span class="line">                BatchNormalization()(layers[<span class="string">&#x27;dense&#x27;</span>][-1])</span><br><span class="line">            )</span><br><span class="line">            next_layer_in = layers[<span class="string">&#x27;batchnorm&#x27;</span>][-1]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            next_layer_in = layers[<span class="string">&#x27;dense&#x27;</span>][-1]</span><br><span class="line">        <span class="keyword">if</span> i &lt; (numDense - 1):  <span class="comment"># if not the last layer, add dropout</span></span><br><span class="line">            layers[<span class="string">&#x27;dropout&#x27;</span>].append(</span><br><span class="line">                Dropout(args.dropout, name=<span class="string">&#x27;drop&#x27;</span>+str(i))(next_layer_in)</span><br><span class="line">            )</span><br><span class="line">            next_layer_in = layers[<span class="string">&#x27;dropout&#x27;</span>][-1]</span><br><span class="line">    encoder = Dense(n_out, activation=<span class="string">&#x27;linear&#x27;</span>, kernel_initializer=<span class="string">&#x27;glorot_uniform&#x27;</span>, name=<span class="string">&#x27;fc_regressor&#x27;</span>)(next_layer_in)</span><br><span class="line"></span><br><span class="line">    CSI_predictor = Model([seq_in,seq_p], encoder)</span><br></pre></td></tr></table></figure>
+<p>模型的summary如下：</p>
+<table>
+<thead>
+<tr>
+<th>Layer Name</th>
+<th>Layer Type</th>
+<th>Output Shape</th>
+<th>Number of Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>seq_in</td>
+<td>InputLayer</td>
+<td>(None, T, F)</td>
+<td>0</td>
+<td>Input CSI sequence</td>
+</tr>
+<tr>
+<td>cnn1d_1</td>
+<td>Conv1D</td>
+<td>(None, T, 128)</td>
+<td>(F * 7 * 128) + 128</td>
+<td>1D convolution, kernel size 7, 128 filters</td>
+</tr>
+<tr>
+<td>batch_normalization</td>
+<td>BatchNormalization</td>
+<td>(None, T, 128)</td>
+<td>512</td>
+<td>Normalization after conv1d</td>
+</tr>
+<tr>
+<td>average_pooling1d</td>
+<td>AveragePooling1D</td>
+<td>(None, T&#x2F;&#x2F;2, 128)</td>
+<td>0</td>
+<td>Downsampling by average pooling</td>
+</tr>
+<tr>
+<td>flatten</td>
+<td>Flatten</td>
+<td>(None, (T&#x2F;&#x2F;2) * 128)</td>
+<td>0</td>
+<td>Flatten pooled feature maps</td>
+</tr>
+<tr>
+<td>seq_p</td>
+<td>InputLayer</td>
+<td>(None, P)</td>
+<td>0</td>
+<td>Additional parameter input (e.g., position)</td>
+</tr>
+<tr>
+<td>concatenate</td>
+<td>Concatenate</td>
+<td>(None, (T&#x2F;&#x2F;2)*128 + P)</td>
+<td>0</td>
+<td>Concatenate flattened features and params</td>
+</tr>
+<tr>
+<td>fc_dense0</td>
+<td>Dense</td>
+<td>(None, 1024)</td>
+<td>((T&#x2F;&#x2F;2)*128 + P + 1) * 1024</td>
+<td>Fully connected layer with 1024 units</td>
+</tr>
+<tr>
+<td>batch_normalization_1</td>
+<td>BatchNormalization</td>
+<td>(None, 1024)</td>
+<td>4096</td>
+<td>Normalization after fc_dense0</td>
+</tr>
+<tr>
+<td>drop0</td>
+<td>Dropout</td>
+<td>(None, 1024)</td>
+<td>0</td>
+<td>Dropout for regularization</td>
+</tr>
+<tr>
+<td>fc_dense1</td>
+<td>Dense</td>
+<td>(None, 1024)</td>
+<td>1,049,600 (1024*1024 + 1024)</td>
+<td>Fully connected layer with 1024 units</td>
+</tr>
+<tr>
+<td>batch_normalization_2</td>
+<td>BatchNormalization</td>
+<td>(None, 1024)</td>
+<td>4096</td>
+<td>Normalization after fc_dense1</td>
+</tr>
+<tr>
+<td>drop1</td>
+<td>Dropout</td>
+<td>(None, 1024)</td>
+<td>0</td>
+<td>Dropout for regularization</td>
+</tr>
+<tr>
+<td>fc_re</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>需要注意这里的T就是inPreamble，因此在取卷积后output shape为(T,128)，其中128为通道数<br></p>
+</blockquote>
+<hr>
+<p>Output:</p>
+<ul>
+<li>Predicted CSI of shape $n_{Rx} \times n_{Tx} \times n_{SubCarriers}$</li>
+</ul>
+<h4 id="Loss"><a href="#Loss" class="headerlink" title="Loss"></a>Loss</h4><p>The model minimizes <strong>MSE</strong> between predicted CSI and ground truth:</p>
+<p>$$<br>\text{MSE} &#x3D; \frac{1}{N} \sum_{i&#x3D;1}^{N} \left| H_i - \hat{H}_i \right|^2<br>$$</p>
+<p>Also supports NMSE:</p>
+<p>$$<br>\text{NMSE} &#x3D; \frac{| H - \hat{H} |^2}{| H |^2}<br>$$<br>这里的$\hat{H}$是通过LMMSE计算得到的，因此是将传统信道估计方法得到的CSI作为ground truth，也就是target</p>
+<h4 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h4><h5 id="数据生成"><a href="#数据生成" class="headerlink" title="数据生成"></a>数据生成</h5><ul>
+<li>generate_maMIMO_LTF.m</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> [mean_ber] = generate_maMIMO_LTF(exp_ID, numPackets, numBSTx, numUERx, snr_dB_CS, isOnlyCSI, saveFlag, isPlotting, prm, isMMSE)</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">usr_data = cell(prm.numUsers, 3);</span><br><span class="line"><span class="keyword">for</span> p = 1 : numPackets:</span><br><span class="line">    <span class="keyword">for</span> nUser = 1:prm.numUsers:</span><br><span class="line">        /// preambleSig的维度 = (FFTLength + CyclicPrefixLength) * numSTS</span><br><span class="line">        /// numSTS = numTx</span><br><span class="line">        preambleSig = helperGenPreamble(prm);</span><br><span class="line">        /// rxPreSig的维度 = numRx x numPreambleSig</span><br><span class="line">        [rxPreSig,chanDelay,h_tau,h_response] = helperApplyMUChannel(preambleSig,prm,spLoss,N_chan_taps,p);</span><br><span class="line">        ...</span><br><span class="line">        usr_data&#123;nUser, 1&#125; = [];</span><br><span class="line">        usr_data&#123;nUser, 2&#125; = [];</span><br><span class="line">        usr_data&#123;nUser, 3&#125; = [];</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>nRxAts x nTxAts x nPackets表示n个样本，按照batch_size从中取样，放到X和y中，用于后续train</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">data_X = f[ref_X][:]</span><br><span class="line">data_y = f[ref_y][:]</span><br><span class="line">nUsers = f[<span class="string">&#x27;usr_data&#x27;</span>].shape[1]</span><br><span class="line"><span class="comment"># (4, 10240, 30),</span></span><br><span class="line">nRxAts, inPreambLen, nPackets = data_X.shape</span><br><span class="line"><span class="comment"># (4, 32, 234, 30)，其中nRxAts表示接受端天线数量，nTxAts表示发送端天线数量</span></span><br><span class="line">nRxAts, nTxAts, nSubCarr, nPackets = data_y.shape</span><br><span class="line">P = f[<span class="string">&#x27;P&#x27;</span>][:]  <span class="comment"># retrieve pilot sequences matrix</span></span><br><span class="line"></span><br><span class="line">trainX_temp = np.zeros((nPackets*nTxAts*nRxAts, <span class="number">2</span>), dtype=int) # for every datapoint, this will contain every unique LTF relative [hash, iTx]</span><br><span class="line">trainy_real_temp = np.zeros((nPackets*nRxAts*nTxAts,nSubCarr))</span><br><span class="line">trainy_imag_temp = np.zeros((nPackets*nRxAts*nTxAts,nSubCarr))</span><br><span class="line"></span><br><span class="line"><span class="comment"># d是real和imag</span></span><br><span class="line"><span class="keyword">for</span> i, sampleIx <span class="keyword">in</span> enumerate(list_IDs_temp):</span><br><span class="line">    <span class="comment"># Store sample</span></span><br><span class="line">    Xsig[i] = self.dataset[<span class="string">&#x27;LTF&#x27;</span>][self.dataset[<span class="string">&#x27;X&#x27;</span>][sampleIx, 0]][self.d][</span><br><span class="line">                              0:int(self.prm[<span class="string">&#x27;lenLTF&#x27;</span>] / self.fraction)][:, np.newaxis]</span><br><span class="line">    Xp[i] = self.dataset[<span class="string">&#x27;P&#x27;</span>][:, self.dataset[<span class="string">&#x27;X&#x27;</span>][sampleIx, 1]]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Store class</span></span><br><span class="line">    y[i] = self.dataset[<span class="string">&#x27;y&#x27;</span>][self.d][sampleIx, :]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">earlystop = EarlyStopping(patience=10, restore_best_weights=True)</span><br><span class="line">reduce_lr = ReduceLROnPlateau(<span class="built_in">factor</span>=0.1, patience=20)</span><br><span class="line">callbacks = [earlystop, reduce_lr]</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> args.method == <span class="string">&#x27;default_SNR&#x27;</span>:</span><br><span class="line">    applyGaussNoise = changeNoisePower(avg_sigPow, ...)</span><br><span class="line">    callbacks.append(applyGaussNoise)</span><br><span class="line"></span><br><span class="line">CSI_predictor.fit(</span><br><span class="line">    x=train_generator,</span><br><span class="line">    validation_data=valid_generator,</span><br><span class="line">    epochs=args.epochs,</span><br><span class="line">    callbacks=callbacks</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Evaluation-Metrics"><a href="#Evaluation-Metrics" class="headerlink" title="Evaluation Metrics"></a>Evaluation Metrics</h4><h5 id="信道估计来源（estSource）"><a href="#信道估计来源（estSource）" class="headerlink" title="信道估计来源（estSource）"></a>信道估计来源（estSource）</h5><ul>
+<li><code>estSource = 3</code>：使用 DNN 进行信道估计. </li>
+<li><code>estSource = 4</code>：使用完美 CSI（理想信道）<br>来自低噪声情况下的信道估计</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">rxPreAmp_lowNoise = phased.ReceiverPreamp( ...</span><br><span class="line">            <span class="string">&#x27;Gain&#x27;</span>,gain_dB, ...    % account <span class="keyword">for</span> path loss</span><br><span class="line">            <span class="string">&#x27;NoiseMethod&#x27;</span>, <span class="string">&#x27;Noise power&#x27;</span>, ...</span><br><span class="line">            <span class="string">&#x27;NoisePower&#x27;</span>, db2pow(-100));        </span><br><span class="line">        </span><br><span class="line">rxPreSigAmp_real = rxPreAmp_lowNoise(rxPreSig&#123;uIdx&#125;); </span><br><span class="line">%   scale power <span class="keyword">for</span> used sub-carriers</span><br><span class="line">rxPreSigAmp_real = rxPreSigAmp_real * (sqrt(prm.FFTLength - ...</span><br><span class="line">    length(prm.NullCarrierIndices))/prm.FFTLength);</span><br><span class="line">        </span><br><span class="line">inputRXSig_real = rxPreSigAmp_real(chanDelay(uIdx)+1: ...</span><br><span class="line">                 end-(prm.numPadZeros-chanDelay(uIdx)),:);</span><br><span class="line">% OFDM demodulation</span><br><span class="line">rxOFDM_real = ofdmdemod(inputRXSig_real,prm.FFTLength, ...</span><br><span class="line">            prm.CyclicPrefixLength,prm.CyclicPrefixLength, ...</span><br><span class="line">            prm.NullCarrierIndices,prm.PilotCarrierIndices);</span><br><span class="line"></span><br><span class="line">% Channel estimation from preamble</span><br><span class="line">%       numCarr, numTx, numRx</span><br><span class="line">% Using classic (LS) method</span><br><span class="line">[hDp_real&#123;uIdx&#125;,~,~,~] = helperMIMOChannelEstimate(rxOFDM_real(:,1:numTx,:),prm,1,h,snr_dB_CS,<span class="literal">false</span>);     </span><br></pre></td></tr></table></figure>
+
+<h5 id="NMSE计算"><a href="#NMSE计算" class="headerlink" title="NMSE计算"></a>NMSE计算</h5><p>使用 <code>NMSE_subk</code> 函数计算每个子载波、每对天线的归一化均方误差，并取平均：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> [out] = NMSE_subk(real, pred)</span><br><span class="line">    diff = real - pred;</span><br><span class="line">    tx = size(real,2);</span><br><span class="line">    rx = size(real,3);</span><br><span class="line">    subK_nmse = zeros(tx,rx);</span><br><span class="line">    <span class="keyword">for</span> t=1:tx</span><br><span class="line">        <span class="keyword">for</span> r=1:rx</span><br><span class="line">            subK_nmse(t,r) = norm(squeeze(diff(:,t,r)))^2 / norm(squeeze(real(:,t,r)))^2;</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">    out = mean(subK_nmse, <span class="string">&#x27;all&#x27;</span>);</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="BER-Bit-Error-Rate"><a href="#BER-Bit-Error-Rate" class="headerlink" title="BER(Bit Error Rate)"></a>BER(Bit Error Rate)</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> estSource=1:4   % 1 = LS est.; 2 = MMSE est.; 3 = DNN est.; 4 = perfect est.</span><br><span class="line">        <span class="keyword">if</span> estSource == 3</span><br><span class="line">            hDp&#123;1&#125; = hDpDNN&#123;1&#125;; % only substitute <span class="keyword">for</span> user ID=1</span><br><span class="line">        elseif estSource == 2</span><br><span class="line">            hDp = hDp_mmse;</span><br><span class="line">        elseif estSource == 4</span><br><span class="line">            hDp = hDp_real;</span><br><span class="line">        end</span><br><span class="line">        [Fbb,Frf] = omphybweights(hDp&#123;1&#125;, numSTS, numSTS, AtExp);</span><br><span class="line">        mFrf = permute(mean(Frf,1), [2 3 1]);</span><br><span class="line">        preData(carrIdx,symIdx,:) = squeeze(gridData(carrIdx,symIdx,:)).<span class="string">&#x27; * normQ;</span></span><br><span class="line"><span class="string">        txSig = txSigSTS * mFrf;</span></span><br><span class="line"><span class="string">        ...</span></span><br><span class="line"><span class="string">        % Compute and display bit error rate</span></span><br><span class="line"><span class="string">        ber = comm.ErrorRate;</span></span><br><span class="line"><span class="string">        measures = ber(txDataBits&#123;uIdx&#125;,rxBits);        </span></span><br></pre></td></tr></table></figure>
+<h5 id="EVM-Error-Vector-Magnitude"><a href="#EVM-Error-Vector-Magnitude" class="headerlink" title="EVM(Error Vector Magnitude)"></a>EVM(Error Vector Magnitude)</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">evm = comm.EVM(<span class="string">&#x27;Normalization&#x27;</span>,<span class="string">&#x27;Average constellation power&#x27;</span>, ...</span><br><span class="line">                <span class="string">&#x27;ReferenceSignalSource&#x27;</span>,<span class="string">&#x27;Estimated from reference constellation&#x27;</span>, ...</span><br><span class="line">                <span class="string">&#x27;ReferenceConstellation&#x27;</span>, ...</span><br><span class="line">                qammod((<span class="number">0</span>:prm.modMode-<span class="number">1</span>)&#x27;,prm.modMode,&#x27;UnitAveragePower&#x27;,<span class="number">1</span>));</span><br><span class="line">rmsEVM = evm(rxSymbs);</span><br><span class="line">            </span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/28/C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/04/28/C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="post-title-link" itemprop="url">C语言实现线程池</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-04-28 17:34:56" itemprop="dateCreated datePublished" datetime="2025-04-28T17:34:56+08:00">2025-04-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-05-27 06:21:25" itemprop="dateModified" datetime="2025-05-27T06:21:25+08:00">2025-05-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h2><p>在高并发程序中，频繁创建和销毁线程会造成较大的资源消耗和系统开销。线程池（Thread Pool）是一种常用的并发编程技术，通过维护一个线程集合来处理任务，避免频繁创建和销毁线程，提高系统性能<br>线程池通常具备以下功能：</p>
+<ul>
+<li>支持动态添加任务</li>
+<li>线程复用，减少线程创建销毁的开销</li>
+<li>任务队列支持FIFO机制</li>
+<li>线程池的销毁与资源回收</li>
+</ul>
+<h2 id="Producer-Consumer-Model"><a href="#Producer-Consumer-Model" class="headerlink" title="Producer-Consumer Model"></a>Producer-Consumer Model</h2><p>以下元素和结构几乎出现在所有经典线程池实现中:</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>功能说明</th>
+<th>是否为标准做法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>线程数组</strong></td>
+<td>预先创建固定数量的线程，用于处理任务</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><strong>任务队列</strong></td>
+<td>存放尚未处理的任务，按顺序排队</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><strong>互斥锁（mutex）</strong></td>
+<td>用于保护任务队列的访问，防止多个线程竞争资源</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><strong>条件变量（cond）</strong></td>
+<td>当任务队列为空时阻塞线程，有新任务时唤醒工作线程</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><strong>无限循环的 <code>worker_thread</code></strong></td>
+<td>每个线程不断尝试从任务队列中取任务并执行</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><strong>stop 标志</strong></td>
+<td>控制线程池的销毁流程，优雅地通知线程退出</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><strong>任务结构包含 function + arg</strong></td>
+<td>支持传入任意函数和参数，使线程池任务更通用</td>
+<td>✅ 是</td>
+</tr>
+</tbody></table>
+<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><p>这涉及同步的概念，需要满足同步与互斥，因此需要使用互斥锁（pthread_mutex_t）来保证任务队列操作的线程安全，以及需要条件变量（pthread_cond_t）用于通知线程处理任务<br>下面代码展示了 初始化线程池 -&gt; 添加任务到线程池 -&gt; 把任务从线程池中取出来，执行task里的function，并以此构建工作线程。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include&lt;stdlib.h&gt;</span></span><br><span class="line"><span class="comment">#include&lt;pthread.h&gt;</span></span><br><span class="line"><span class="comment">#include&lt;unistd.h&gt;</span></span><br><span class="line">typedef struct task&#123;</span><br><span class="line">    void (*<span class="keyword">function</span>) (void *);</span><br><span class="line">    void *arg;</span><br><span class="line">    struct task *next;</span><br><span class="line">&#125; task_t;</span><br><span class="line">typedef struct&#123;</span><br><span class="line">    /// 互斥锁</span><br><span class="line">    pthread_mutex_t lock;</span><br><span class="line">    /// 条件变量</span><br><span class="line">    pthread_cond_t cond;</span><br><span class="line">    /// 线程数组</span><br><span class="line">    pthread_t *threads;</span><br><span class="line">    /// 任务队列</span><br><span class="line">    task_t *task_queue;</span><br><span class="line">    int thread_count;</span><br><span class="line">    int stop;</span><br><span class="line">&#125; thread_pool_t;</span><br><span class="line"></span><br><span class="line">// 线程池实例</span><br><span class="line">thread_pool_t pool;</span><br><span class="line"></span><br><span class="line">// 线程执行的任务函数,这里具体来说是从pool里的任务队列中把任务一个一个的取出来，然后再执行任务里的<span class="keyword">function</span>，把然后放到当前work_thread执行。</span><br><span class="line">void *worker_thread(void *arg)&#123;</span><br><span class="line">    <span class="keyword">while</span>(1)&#123;</span><br><span class="line">        pthread_mutex_lock(&amp;pool.lock);</span><br><span class="line">        // 等待任务</span><br><span class="line">        <span class="keyword">while</span>(pool.task_queue == NULL &amp;&amp; !pool.stop)&#123;</span><br><span class="line">            pthread_cond_wait(&amp;pool.cond, &amp;pool.lock);</span><br><span class="line">        &#125;</span><br><span class="line">        // 检查是否需要终止线程</span><br><span class="line">        <span class="keyword">if</span>(pool.stop)&#123;</span><br><span class="line">            pthread_mutex_unlock(&amp;pool.lock);</span><br><span class="line">            pthread_exit(NULL);</span><br><span class="line">        &#125;</span><br><span class="line">        // 取出任务</span><br><span class="line">        task_t *task = pool.task_queue;</span><br><span class="line">        <span class="keyword">if</span>(task)&#123;</span><br><span class="line">            pool.task_queue = task-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        pthread_mutex_unlock(&amp;pool.lock);</span><br><span class="line">        <span class="keyword">if</span>(task)&#123;</span><br><span class="line">            task-&gt;<span class="keyword">function</span>(task-&gt;arg);</span><br><span class="line">            free(task);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">void thread_pool_init(int thread_count)&#123;</span><br><span class="line">    pool.thread_count = thread_count;</span><br><span class="line">    pool.stop = 0;</span><br><span class="line">    pool.task_queue = NULL;</span><br><span class="line">    pthread_mutex_init(&amp;pool.lock, NULL);</span><br><span class="line">    pthread_cond_init(&amp;pool.cond, NULL);</span><br><span class="line">    pool.threads = (pthread_t *) malloc(sizeof(pthread_t)*thread_count );</span><br><span class="line">    // 创建工作线程</span><br><span class="line">    <span class="keyword">for</span>(int i = 0; i &lt; thread_count; i++)&#123;</span><br><span class="line">        pthread_create(&amp;pool.threads[i], NULL, worker_thread, NULL);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 添加任务到线程池</span><br><span class="line">void thread_pool_add_task(void (*<span class="keyword">function</span>)(void *), void *arg)&#123;</span><br><span class="line">    task_t *new_task = (task_t *) malloc(sizeof(task_t));</span><br><span class="line">    new_task-&gt;<span class="keyword">function</span> = <span class="keyword">function</span>;</span><br><span class="line">    new_task-&gt;arg = arg;</span><br><span class="line">    new_task-&gt;next = NULL;</span><br><span class="line">    pthread_mutex_lock(&amp;pool.lock);</span><br><span class="line">    //添加到任务队列尾部</span><br><span class="line">    <span class="keyword">if</span>(pool.task_queue == NULL)&#123;</span><br><span class="line">        pool.task_queue = new_task;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        task_t *temp = pool.task_queue;</span><br><span class="line">        <span class="keyword">while</span>(temp-&gt;next)&#123;</span><br><span class="line">            temp = temp-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        temp-&gt;next = new_task;</span><br><span class="line">    &#125;</span><br><span class="line">    pthread_cond_signal(&amp;pool.cond);</span><br><span class="line">    pthread_mutex_unlock(&amp;pool.lock);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">// 关闭线程池</span><br><span class="line">void <span class="function"><span class="title">thread_pool_destroy</span></span>()&#123;</span><br><span class="line">    pthread_mutex_lock(&amp;pool.lock);</span><br><span class="line">    pool.stop = 1;</span><br><span class="line">    pthread_cond_broadcast(&amp;pool.cond);</span><br><span class="line">    pthread_mutex_unlock(&amp;pool.lock);</span><br><span class="line">    // 等待所有线程结束</span><br><span class="line">    <span class="keyword">for</span>(int i = 0; i &lt; pool.thread_count; i++)&#123;</span><br><span class="line">        pthread_join(pool.threads[i], NULL);</span><br><span class="line">    &#125;</span><br><span class="line">    free(pool.threads);</span><br><span class="line">    task_t *task;</span><br><span class="line">    <span class="keyword">while</span>(pool.task_queue)&#123;</span><br><span class="line">        task = pool.task_queue;</span><br><span class="line">        pool.task_queue = task-&gt;next;</span><br><span class="line">        free(task);</span><br><span class="line">    &#125;</span><br><span class="line">    pthread_mutex_destroy(&amp;pool.lock);</span><br><span class="line">    pthread_cond_destroy(&amp;pool.cond);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 测试任务</span><br><span class="line">void test_task(void *arg)&#123;</span><br><span class="line">    int num = *(int *) arg;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;线程 %ld 正在执行任务 %d\n&quot;</span>, pthread_self(),num);</span><br><span class="line">    <span class="built_in">sleep</span>(1);</span><br><span class="line">&#125;</span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">    //  创建四个线程</span><br><span class="line">    thread_pool_init(4);</span><br><span class="line">    <span class="keyword">for</span>(int i = 0; i &lt; 10; i++)&#123;</span><br><span class="line">        int *task_num = malloc(sizeof(int));</span><br><span class="line">        *task_num = i;</span><br><span class="line">        thread_pool_add_task(test_task, task_num);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">sleep</span>(5);</span><br><span class="line">    thread_pool_destroy;</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/27/FDD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1008,569 +1781,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/22/MATLAB%E6%B3%A2%E5%BD%A2%E7%94%9F%E6%88%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/22/MATLAB%E6%B3%A2%E5%BD%A2%E7%94%9F%E6%88%90/" class="post-title-link" itemprop="url">MATLAB波形生成</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-04-22 03:14:52" itemprop="dateCreated datePublished" datetime="2025-04-22T03:14:52+08:00">2025-04-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-04-24 18:56:12" itemprop="dateModified" datetime="2025-04-24T18:56:12+08:00">2025-04-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MATLAB/" itemprop="url" rel="index"><span itemprop="name">MATLAB</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="Wireless-Waveform-Generator"><a href="#Wireless-Waveform-Generator" class="headerlink" title="Wireless Waveform Generator"></a>Wireless Waveform Generator</h2><h3 id="OFDM-Waveform-Configuration"><a href="#OFDM-Waveform-Configuration" class="headerlink" title="OFDM Waveform Configuration"></a>OFDM Waveform Configuration</h3><p>需要配置FFT Length，Guard band subcarrier，Cyclic prefix lengths，OFDM symbols，Transmit antennas，子载波间距等参数，另外可以配置Pilot，并可以选定Pilot在子载波中的位置已经它的输入矩阵。另外OFDM都是和QAM配合使用，对于QAM的配置，可以调整它的Modulation order，Symbol mapping，bit source等参数</p>
-<img src="/images/OFDMGenerator.png">
-下面是导出的matlab代码
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">% Generated by MATLAB(R) 24.2 (R2024b) and Communications Toolbox 24.2 (R2024b).</span><br><span class="line">% Generated on: 21-Apr-2025 20:59:07</span><br><span class="line"></span><br><span class="line">%% Generating OFDM waveform</span><br><span class="line">% OFDM configuration</span><br><span class="line">ofdmMod = comm.OFDMModulator(<span class="string">&#x27;FFTLength&#x27;</span>, 128, ...</span><br><span class="line">    <span class="string">&#x27;NumGuardBandCarriers&#x27;</span>, [6;5], ...</span><br><span class="line">    <span class="string">&#x27;InsertDCNull&#x27;</span>, <span class="literal">false</span>, ...</span><br><span class="line">    <span class="string">&#x27;CyclicPrefixLength&#x27;</span>, 16, ...</span><br><span class="line">    <span class="string">&#x27;Windowing&#x27;</span>, <span class="literal">false</span>, ...</span><br><span class="line">    <span class="string">&#x27;OversamplingFactor&#x27;</span>, 1, ...</span><br><span class="line">    <span class="string">&#x27;NumSymbols&#x27;</span>, 19, ...</span><br><span class="line">    <span class="string">&#x27;NumTransmitAntennas&#x27;</span>, 1, ...</span><br><span class="line">    <span class="string">&#x27;PilotInputPort&#x27;</span>, <span class="literal">true</span>, ...</span><br><span class="line">    <span class="string">&#x27;PilotCarrierIndices&#x27;</span>, [12;26;40;54]);</span><br><span class="line"></span><br><span class="line">scs = 1000000;</span><br><span class="line">M = 16; 	 % Modulation order</span><br><span class="line">% input bit <span class="built_in">source</span>:</span><br><span class="line">pn = comm.PNSequence(<span class="string">&#x27;Polynomial&#x27;</span>, <span class="string">&#x27;x9+x5+1&#x27;</span>, <span class="string">&#x27;InitialConditions&#x27;</span>, [zeros(1, 8) 1]);</span><br><span class="line">pn.SamplesPerFrame = 8588;</span><br><span class="line"><span class="keyword">in</span> = [pn()];</span><br><span class="line"></span><br><span class="line">dataInput = qammod(<span class="keyword">in</span>, M, <span class="string">&#x27;bin&#x27;</span>, <span class="string">&#x27;InputType&#x27;</span>, <span class="string">&#x27;bit&#x27;</span>, <span class="string">&#x27;UnitAveragePower&#x27;</span>, <span class="literal">true</span>);</span><br><span class="line">ofdmInfo = info(ofdmMod);</span><br><span class="line">ofdmSize = ofdmInfo.DataInputSize;</span><br><span class="line">dataInput = reshape(dataInput, ofdmSize);</span><br><span class="line"></span><br><span class="line">% Generation</span><br><span class="line">pilotInput = ones(4, 19, 1);</span><br><span class="line">waveform = ofdmMod(dataInput, pilotInput);</span><br><span class="line"></span><br><span class="line">Fs = ofdmMod.FFTLength * scs * ofdmMod.OversamplingFactor; 								 % Specify the sample rate of the waveform <span class="keyword">in</span> Hz</span><br><span class="line"></span><br><span class="line">%% Visualize</span><br><span class="line">% Spectrum Analyzer</span><br><span class="line">spectrum = spectrumAnalyzer(<span class="string">&#x27;SampleRate&#x27;</span>, Fs);</span><br><span class="line">spectrum(waveform);</span><br><span class="line">release(spectrum);</span><br><span class="line"></span><br><span class="line">% Constellation Diagram</span><br><span class="line">constel = comm.ConstellationDiagram(<span class="string">&#x27;ColorFading&#x27;</span>, <span class="literal">true</span>, ...</span><br><span class="line">    <span class="string">&#x27;ShowTrajectory&#x27;</span>, 0, ...</span><br><span class="line">    <span class="string">&#x27;ShowReferenceConstellation&#x27;</span>, <span class="literal">false</span>);</span><br><span class="line">constel(dataInput(:));</span><br><span class="line">release(constel);</span><br><span class="line"></span><br><span class="line">% OFDM Subcarrier Mapping</span><br><span class="line">showResourceMapping(ofdmMod);</span><br></pre></td></tr></table></figure>
-
-<h3 id="5gNRUplink"><a href="#5gNRUplink" class="headerlink" title="5gNRUplink"></a>5gNRUplink</h3><p>需要配置Main（SCS Carriers， Bandwdith Parts， Channel Bandwidth，SubFrames等等），PUSCH，PUCCH和SRS<br><img src="/images/5gNRUplinkGenerator.png"></p>
-<p>这里不需要像OFDM Generator一样配置FFT，因为子载波数目可以推算出来。<br>PUSCH在配置时需要注意symbol length，用来表示在一个slot占据的大小，如果symbol length是7，那么只有一个slot的一半，因此Resource Grid如下<br><img src="/images/ResourceGrid_1.png"><br>还可以改变SlotAllocation和Period，用来改变占据的slot在所有slot中的位置<br><img src="/images/ResourceGrid_2.png"><br>对于PUCCH，其可以和PUSCH在时域（也就是slot）有重合，但是不能在RB上有重合，这里也可以体现OFDM的概念，也就是说频率是复用的</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br></pre></td><td class="code"><pre><span class="line">% Generated by MATLAB(R) 24.2 (R2024b) and 5G Toolbox 24.2 (R2024b).</span><br><span class="line">% Generated on: 21-Apr-2025 22:26:35</span><br><span class="line"></span><br><span class="line">%% Generating Uplink waveform</span><br><span class="line">% Uplink configuration</span><br><span class="line">cfgUL = nrULCarrierConfig;</span><br><span class="line">cfgUL.Label = <span class="string">&#x27;Carrier1&#x27;</span>;</span><br><span class="line">cfgUL.FrequencyRange = <span class="string">&#x27;FR1&#x27;</span>;</span><br><span class="line">cfgUL.ChannelBandwidth = 60;</span><br><span class="line">cfgUL.NCellID = 1;</span><br><span class="line">cfgUL.NumSubframes = 1;</span><br><span class="line">cfgUL.InitialNSubframe = 0;</span><br><span class="line">cfgUL.WindowingPercent = 0;</span><br><span class="line">cfgUL.SampleRate = [];</span><br><span class="line">cfgUL.CarrierFrequency = 0;</span><br><span class="line"></span><br><span class="line">%% SCS specific carriers</span><br><span class="line">scscarrier = nrSCSCarrierConfig;</span><br><span class="line">scscarrier.SubcarrierSpacing = 15;</span><br><span class="line">scscarrier.NSizeGrid = 270;</span><br><span class="line">scscarrier.NStartGrid = 3;</span><br><span class="line"></span><br><span class="line">cfgUL.SCSCarriers = &#123;scscarrier&#125;;</span><br><span class="line"></span><br><span class="line">%% Bandwidth Parts</span><br><span class="line">bwp = nrWavegenBWPConfig;</span><br><span class="line">bwp.BandwidthPartID = 1;</span><br><span class="line">bwp.Label = <span class="string">&#x27;BWP1&#x27;</span>;</span><br><span class="line">bwp.SubcarrierSpacing = 15;</span><br><span class="line">bwp.CyclicPrefix = <span class="string">&#x27;normal&#x27;</span>;</span><br><span class="line">bwp.NSizeBWP = 270;</span><br><span class="line">bwp.NStartBWP = 3;</span><br><span class="line"></span><br><span class="line">cfgUL.BandwidthParts = &#123;bwp&#125;;</span><br><span class="line"></span><br><span class="line">%% Intracell Guard Bands Configuration</span><br><span class="line">gb = nrIntraCellGuardBandsConfig;</span><br><span class="line">gb.GuardBandSize = zeros(0,2);</span><br><span class="line">gb.SubcarrierSpacing = 15;</span><br><span class="line"></span><br><span class="line">cfgUL.IntraCellGuardBands = &#123;gb&#125;;</span><br><span class="line"></span><br><span class="line">%% PUSCH Instances Configuration</span><br><span class="line">pusch = nrWavegenPUSCHConfig;</span><br><span class="line">pusch.Enable = <span class="literal">true</span>;</span><br><span class="line">pusch.Label = <span class="string">&#x27;PUSCH1&#x27;</span>;</span><br><span class="line">pusch.Power = 0;</span><br><span class="line">pusch.BandwidthPartID = 1;</span><br><span class="line">pusch.Modulation = <span class="string">&#x27;64QAM&#x27;</span>;</span><br><span class="line">pusch.NumLayers = 1;</span><br><span class="line">pusch.MappingType = <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">pusch.SymbolAllocation = [0 4];</span><br><span class="line">pusch.SlotAllocation = 0:8;</span><br><span class="line">pusch.Period = 10;</span><br><span class="line">pusch.PRBSet = 0:269;</span><br><span class="line">pusch.TransformPrecoding = <span class="literal">false</span>;</span><br><span class="line">pusch.TransmissionScheme = <span class="string">&#x27;nonCodebook&#x27;</span>;</span><br><span class="line">pusch.NumAntennaPorts = 1;</span><br><span class="line">pusch.TPMI = 0;</span><br><span class="line">pusch.CodebookType = <span class="string">&#x27;codebook1_ng1n4n1&#x27;</span>;</span><br><span class="line">pusch.FrequencyHopping = <span class="string">&#x27;neither&#x27;</span>;</span><br><span class="line">pusch.SecondHopStartPRB = 1;</span><br><span class="line">pusch.Interlacing = <span class="literal">false</span>;</span><br><span class="line">pusch.RBSetIndex = 0;</span><br><span class="line">pusch.InterlaceIndex = 0;</span><br><span class="line">pusch.NID = [];</span><br><span class="line">pusch.RNTI = 1;</span><br><span class="line">pusch.NRAPID = [];</span><br><span class="line">pusch.Coding = <span class="literal">true</span>;</span><br><span class="line">pusch.TargetCodeRate = 0.513671875;</span><br><span class="line">pusch.XOverhead = 0;</span><br><span class="line">pusch.LimitedBufferRateMatching = <span class="literal">false</span>;</span><br><span class="line">pusch.MaxNumLayers = 8;</span><br><span class="line">pusch.MCSTable = <span class="string">&#x27;qam256&#x27;</span>;</span><br><span class="line">pusch.RVSequence = [0 2 3 1];</span><br><span class="line">pusch.DataSource = <span class="string">&#x27;PN9-ITU&#x27;</span>;</span><br><span class="line">pusch.EnableACK = <span class="literal">false</span>;</span><br><span class="line">pusch.NumACKBits = 10;</span><br><span class="line">pusch.BetaOffsetACK = 20;</span><br><span class="line">pusch.DataSourceACK = <span class="string">&#x27;PN9-ITU&#x27;</span>;</span><br><span class="line">pusch.EnableCSI1 = <span class="literal">false</span>;</span><br><span class="line">pusch.NumCSI1Bits = 10;</span><br><span class="line">pusch.BetaOffsetCSI1 = 6.25;</span><br><span class="line">pusch.DataSourceCSI1 = <span class="string">&#x27;PN9-ITU&#x27;</span>;</span><br><span class="line">pusch.EnableCSI2 = <span class="literal">false</span>;</span><br><span class="line">pusch.NumCSI2Bits = 10;</span><br><span class="line">pusch.BetaOffsetCSI2 = 6.25;</span><br><span class="line">pusch.DataSourceCSI2 = <span class="string">&#x27;PN9-ITU&#x27;</span>;</span><br><span class="line">pusch.EnableCGUCI = <span class="literal">false</span>;</span><br><span class="line">pusch.NumCGUCIBits = 7;</span><br><span class="line">pusch.BetaOffsetCGUCI = 20;</span><br><span class="line">pusch.DataSourceCGUCI = <span class="string">&#x27;PN9-ITU&#x27;</span>;</span><br><span class="line">pusch.EnableULSCH = <span class="literal">true</span>;</span><br><span class="line">pusch.UCIScaling = 1;</span><br><span class="line">pusch.DMRSPower = 0;</span><br><span class="line">pusch.EnablePTRS = <span class="literal">false</span>;</span><br><span class="line">pusch.PTRSPower = 0;</span><br><span class="line"></span><br><span class="line">% PUSCH DM-RS</span><br><span class="line">puschDMRS = nrPUSCHDMRSConfig;</span><br><span class="line">puschDMRS.DMRSConfigurationType = 1;</span><br><span class="line">puschDMRS.DMRSTypeAPosition = 2;</span><br><span class="line">puschDMRS.DMRSAdditionalPosition = 0;</span><br><span class="line">puschDMRS.DMRSLength = 1;</span><br><span class="line">puschDMRS.CustomSymbolSet = [];</span><br><span class="line">puschDMRS.DMRSPortSet = [];</span><br><span class="line">puschDMRS.NIDNSCID = [];</span><br><span class="line">puschDMRS.NSCID = 0;</span><br><span class="line">puschDMRS.GroupHopping = <span class="literal">false</span>;</span><br><span class="line">puschDMRS.SequenceHopping = <span class="literal">false</span>;</span><br><span class="line">puschDMRS.NRSID = [];</span><br><span class="line">puschDMRS.NumCDMGroupsWithoutData = 2;</span><br><span class="line">puschDMRS.DMRSUplinkR16 = <span class="literal">false</span>;</span><br><span class="line">puschDMRS.DMRSUplinkTransformPrecodingR16 = <span class="literal">false</span>;</span><br><span class="line">puschDMRS.DMRSEnhancedR18 = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">pusch.DMRS = puschDMRS;</span><br><span class="line"></span><br><span class="line">% PUSCH PT-RS</span><br><span class="line">puschPTRS = nrPUSCHPTRSConfig;</span><br><span class="line">puschPTRS.TimeDensity = 1;</span><br><span class="line">puschPTRS.FrequencyDensity = 2;</span><br><span class="line">puschPTRS.NumPTRSSamples = 2;</span><br><span class="line">puschPTRS.NumPTRSGroups = 2;</span><br><span class="line">puschPTRS.REOffset = <span class="string">&#x27;00&#x27;</span>;</span><br><span class="line">puschPTRS.PTRSPortSet = [];</span><br><span class="line">puschPTRS.NID = [];</span><br><span class="line"></span><br><span class="line">pusch.PTRS = puschPTRS;</span><br><span class="line"></span><br><span class="line">cfgUL.PUSCH = &#123;pusch&#125;;</span><br><span class="line"></span><br><span class="line">%% PUCCH Instances Configuration</span><br><span class="line">pucch = nrWavegenPUCCH0Config;</span><br><span class="line">pucch.Enable = <span class="literal">false</span>;</span><br><span class="line">pucch.Label = <span class="string">&#x27;PUCCH1&#x27;</span>;</span><br><span class="line">pucch.Power = 0;</span><br><span class="line">pucch.BandwidthPartID = 1;</span><br><span class="line">pucch.SymbolAllocation = [0 2];</span><br><span class="line">pucch.SlotAllocation = 0:7;</span><br><span class="line">pucch.Period = 10;</span><br><span class="line">pucch.PRBSet = 12:30;</span><br><span class="line">pucch.FrequencyHopping = <span class="string">&#x27;neither&#x27;</span>;</span><br><span class="line">pucch.SecondHopStartPRB = 1;</span><br><span class="line">pucch.Interlacing = <span class="literal">false</span>;</span><br><span class="line">pucch.RBSetIndex = 0;</span><br><span class="line">pucch.InterlaceIndex = 0;</span><br><span class="line">pucch.GroupHopping = <span class="string">&#x27;neither&#x27;</span>;</span><br><span class="line">pucch.HoppingID = [];</span><br><span class="line">pucch.InitialCyclicShift = 0;</span><br><span class="line">pucch.NumUCIBits = 1;</span><br><span class="line">pucch.DataSourceUCI = <span class="string">&#x27;PN9-ITU&#x27;</span>;</span><br><span class="line">pucch.DataSourceSR = 0;</span><br><span class="line"></span><br><span class="line">cfgUL.PUCCH = &#123;pucch&#125;;</span><br><span class="line"></span><br><span class="line">%% SRS Instances Configuration</span><br><span class="line">srs = nrWavegenSRSConfig;</span><br><span class="line">srs.Enable = <span class="literal">false</span>;</span><br><span class="line">srs.Label = <span class="string">&#x27;SRS1&#x27;</span>;</span><br><span class="line">srs.Power = 0;</span><br><span class="line">srs.BandwidthPartID = 1;</span><br><span class="line">srs.NumSRSPorts = 1;</span><br><span class="line">srs.SymbolStart = 13;</span><br><span class="line">srs.NumSRSSymbols = 1;</span><br><span class="line">srs.SlotAllocation = 0:9;</span><br><span class="line">srs.Period = 10;</span><br><span class="line">srs.FrequencyStart = 0;</span><br><span class="line">srs.NRRC = 0;</span><br><span class="line">srs.CSRS = 0;</span><br><span class="line">srs.BSRS = 0;</span><br><span class="line">srs.BHop = 0;</span><br><span class="line">srs.Repetition = 1;</span><br><span class="line">srs.KTC = 2;</span><br><span class="line">srs.KBarTC = 0;</span><br><span class="line">srs.FrequencyScalingFactor = 1;</span><br><span class="line">srs.StartRBIndex = 0;</span><br><span class="line">srs.EnableStartRBHopping = <span class="literal">false</span>;</span><br><span class="line">srs.CyclicShift = 0;</span><br><span class="line">srs.GroupSeqHopping = <span class="string">&#x27;neither&#x27;</span>;</span><br><span class="line">srs.NSRSID = 0;</span><br><span class="line">srs.SRSPositioning = <span class="literal">false</span>;</span><br><span class="line">srs.EnableEightPortTDM = <span class="literal">false</span>;</span><br><span class="line">srs.CyclicShiftHopping = <span class="literal">false</span>;</span><br><span class="line">srs.CyclicShiftHoppingID = 0;</span><br><span class="line">srs.CyclicShiftHoppingSubset = [];</span><br><span class="line">srs.HoppingFinerGranularity = <span class="literal">false</span>;</span><br><span class="line">srs.CombOffsetHopping = <span class="literal">false</span>;</span><br><span class="line">srs.CombOffsetHoppingID = 0;</span><br><span class="line">srs.CombOffsetHoppingSubset = [];</span><br><span class="line">srs.HoppingWithRepetition = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">cfgUL.SRS = &#123;srs&#125;;</span><br><span class="line"></span><br><span class="line">% Generation</span><br><span class="line">[waveform,info] = nrWaveformGenerator(cfgUL);</span><br><span class="line"></span><br><span class="line">Fs = info.ResourceGrids(1).Info.SampleRate; 								 % Specify the sample rate of the waveform <span class="keyword">in</span> Hz</span><br><span class="line"></span><br><span class="line">%% Visualize</span><br><span class="line">% Spectrum Analyzer</span><br><span class="line">spectrum = spectrumAnalyzer(<span class="string">&#x27;SampleRate&#x27;</span>, Fs);</span><br><span class="line">spectrum(waveform);</span><br><span class="line">release(spectrum);</span><br></pre></td></tr></table></figure>
-
-<p>想你了，老蔡</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/21/5gNRUplink/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/21/5gNRUplink/" class="post-title-link" itemprop="url">5gNRUplink</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-04-21 20:50:40" itemprop="dateCreated datePublished" datetime="2025-04-21T20:50:40+08:00">2025-04-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-04-24 18:57:30" itemprop="dateModified" datetime="2025-04-24T18:57:30+08:00">2025-04-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="Basic-discription"><a href="#Basic-discription" class="headerlink" title="Basic discription"></a>Basic discription</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openExample(<span class="string">&#x27;5g/NRUplinkWaveformGenerationExample&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>This example shows how to configure and generate a 5G NR uplink vector waveform with physical uplink shared channel (PUSCH) and <strong>sounding reference signal</strong>(SRS).</p>
-<ul>
-<li>PUSCH and its assoicated demodulation reference signal (DM-RS) and phase-tracking reference signal (PT-RS)  </li>
-<li>SRS</li>
-</ul>
-<h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><ul>
-<li>初始化nrULCarrierConfig并配置基本参数</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">waveconfig = nrULCarrierConfig;</span><br><span class="line">waveconfig.NumSubframes = 10;</span><br><span class="line">waveconfig.FrequencyRange = <span class="string">&#x27;FR1&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>配置scs</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scscarriers = &#123;nrSCSCarrierConfig, nrSCSCarrierConfig&#125;;</span><br><span class="line">scscarriers&#123;1&#125;.SubcarrierSpacing = 15;</span><br><span class="line">scscarriers&#123;1&#125;.NSizeGrid = 216;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>配置BWP</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bwp&#123;1&#125;.SubcarrierSpacing = 15;</span><br><span class="line">bwp&#123;1&#125;.CyclicPrefix = <span class="string">&#x27;Normal&#x27;</span>;</span><br><span class="line">bwp&#123;1&#125;.NSizeBWP = 25;   % Size of BWP <span class="keyword">in</span> PRBs</span><br><span class="line">bwp&#123;1&#125;.NStartBWP = 10;  % Position of BWP, relateive to point A.</span><br></pre></td></tr></table></figure>
-<ul>
-<li>配置PUSCH</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">pusch = &#123;nrWavegenPUSCHConfig&#125;;</span><br><span class="line">pusch&#123;1&#125;.Coding = 1;    % 启用UL-SCH的信道编码(LDPC编码)</span><br><span class="line">pusch&#123;1&#125;.NID    = 1;    % Scrambling（扰码）所用的NID，确保不同用户的上行数据在解码时不会混淆</span><br><span class="line">pusch&#123;1&#125;.TransformPrecoding = <span class="literal">false</span>;    % 使用CP-OFDM（DFT只适用于某些低频场景）</span><br><span class="line">pusch&#123;1&#125;.Modulation = <span class="string">&#x27;QPSK&#x27;</span>;</span><br><span class="line">pusch&#123;1&#125;.NumLayers  = 2;</span><br><span class="line">pusch&#123;1&#125;.NumAntennaPorts    = 4;</span><br><span class="line">pusch&#123;1&#125;.DataSource = <span class="string">&#x27;PN9&#x27;</span> % Channel data <span class="built_in">source</span></span><br><span class="line">pusch&#123;1&#125;.SymbolAllocation   = [0 14];   % 说明一个slot有14个OFDM symbols</span><br><span class="line">pusch&#123;1&#125;.SlotAllocation = [0 1];        % 说明一个pusch占两个Slot</span><br><span class="line">pusch&#123;1&#125;.period         = 5;            % 说明每5个slot会重复一次PUSCH分配，第0周期：slot 0 和 slot 1，第1周期： slot 5 和 slot 6</span><br><span class="line">pusch&#123;1&#125;.PRBSet         = 0:10          % 说明占用PRB数目，从而说明带宽大小</span><br><span class="line">% DM-RS configuration</span><br><span class="line">pusch&#123;1&#125;.DMRSPower      = 0;</span><br><span class="line">pusch&#123;1&#125;.DMRS.DMRSLength    = 1;</span><br><span class="line">...</span><br><span class="line">pusch&#123;1&#125;.DMRS.NSCID         = 0;</span><br><span class="line">% PT-RS configuration</span><br><span class="line">pusch&#123;1&#125;.EnablePTRS =   0;</span><br><span class="line">pusch&#123;1&#125;.PTRSPower  =   0;</span><br><span class="line">pusch&#123;1&#125;.PTRS.TimeDensity   =   1;</span><br><span class="line">pusch&#123;1&#125;.PTRS.FrequencyDensity   =   2;</span><br><span class="line">pusch&#123;1&#125;.PTRS.NumPTRSSamples =   2;</span><br><span class="line">pusch&#123;1&#125;.PTRS.PTRSPortSet   =   0;</span><br><span class="line">pusch&#123;1&#125;.PTRS.NID   =   0;</span><br><span class="line">% UCI(Uplink Control Information)</span><br><span class="line">pusch&#123;1&#125;.EnableACK  =   <span class="literal">true</span>;   % Enable or <span class="built_in">disable</span> HARQ-ACK</span><br><span class="line">pusch&#123;1&#125;.NumACKBits =   5</span><br><span class="line">pusch&#123;1&#125;.BetaOffsetCSI1 = 2     % Power <span class="built_in">factor</span> of CSI part 1</span><br><span class="line">pusch&#123;1&#125;.DataSourceCSI1 = <span class="string">&#x27;PN9&#x27;</span> % CSI part 1 data <span class="built_in">source</span></span><br><span class="line">pusch&#123;1&#125;.DataSourceACK  = <span class="string">&#x27;PN9&#x27;</span> % HARQ-ACK data <span class="built_in">source</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>配置SRS<br>Specify SRS(sounding reference signal)</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">srs&#123;1&#125;.NumSRSPorts  =   1;  % Number of SRS ports</span><br><span class="line">srs&#123;1&#125;.NumSRSSymbols =  4;  % Number of SRS slor</span><br><span class="line">srs&#123;1&#125;.SymbolStart  =   10; % Time-domain positin of the SRS <span class="keyword">in</span> the slot</span><br><span class="line">srs&#123;1&#125;.FrequencyStart=  0;  % Frequency position of the SRS <span class="keyword">in</span> BWP <span class="keyword">in</span> RBs</span><br><span class="line">srs&#123;1&#125;.Period   =   5       % Allocation period <span class="keyword">in</span> slots</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>Waveform Generation<br>Assign all the channel and signal parameters to the main carrier configuration object(nrULCarrierConfig), then generate and plot the waveform.</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">waveconfig.SCSCarrier   =   scscarriers;</span><br><span class="line">waveconfig.BandwidthParts   =   bwp;</span><br><span class="line">waveconfig.PUSCH            =   pusch;</span><br><span class="line">waveconfig.SRS              =   srs;</span><br></pre></td></tr></table></figure>
-
-<h2 id="概念学习"><a href="#概念学习" class="headerlink" title="概念学习"></a>概念学习</h2><h3 id="CSI"><a href="#CSI" class="headerlink" title="CSI"></a>CSI</h3><p>CSI信道状态矩阵是由UE通过Uplink发射给Basestation，CSI包含CSI1和CSI2</p>
-<h4 id="CSI1"><a href="#CSI1" class="headerlink" title="CSI1"></a>CSI1</h4><p>主要传输的是预定义的、结构化的CSI信息，用于反馈诸如：</p>
-<ul>
-<li>PMI（Precoding Matrix Indicator）</li>
-<li>RI（Rank Indicator）</li>
-<li>LI（Layer Indicator）</li>
-<li>Wideband CQI（Channel Quality Indicator）</li>
-</ul>
-<h4 id="CSI2"><a href="#CSI2" class="headerlink" title="CSI2"></a>CSI2</h4><p>传输的是更精细或更灵活的CSI信息，比如</p>
-<ul>
-<li>Subband CQI</li>
-<li>CRIs（Codebook Reference Indices）</li>
-<li>更复杂的PMI表达</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/21/5gNRDownlink/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/21/5gNRDownlink/" class="post-title-link" itemprop="url">5gNRDownLink</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-04-21 20:49:12" itemprop="dateCreated datePublished" datetime="2025-04-21T20:49:12+08:00">2025-04-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-04-28 02:50:33" itemprop="dateModified" datetime="2025-04-28T02:50:33+08:00">2025-04-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="Basic-description"><a href="#Basic-description" class="headerlink" title="Basic description"></a>Basic description</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openExample(<span class="string">&#x27;5g/NRDownlinkWaveformGenerationExample&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>This example shows how to configure and generate a <strong>5G NR downlink</strong> vector.<br>The generated waveform contains these channels and signals</p>
-<ul>
-<li>PDSCH and its associated DM-RS and PT-RS</li>
-<li>PDCCH and its associated DM-RS</li>
-<li>PBCH and its associated DM-RS</li>
-<li>PSS and SSS</li>
-<li>CSI-RS</li>
-</ul>
-<h3 id="SCS-specific-carriers"><a href="#SCS-specific-carriers" class="headerlink" title="SCS specific carriers"></a>SCS specific carriers</h3><ul>
-<li>SubcarrierSpacing</li>
-<li>NsizeGrid</li>
-<li>StartGrid<br>NsizeGrid默认是52，说明整个带宽中有52个resource blocks，每个resource block有12个子载波</li>
-</ul>
-<h3 id="SS-burst"><a href="#SS-burst" class="headerlink" title="SS burst"></a>SS burst</h3><h4 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h4><p>SSB(SS&#x2F;PBCH Block)是一个包含PSS+SSS+PBCH的小结构，占用240个子载波（20PRBs）、4个OFDM符号<br>SS Burst是一个时间窗口（最多5ms），里面可以发多个SSB（最多64个，取决于配置）</p>
-<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><ul>
-<li>Enable</li>
-<li>Power<br>用来设置SSB的相对功率，也就是和整个波形中其他部分的功率一样，不做放大或衰减。</li>
-<li>BlockPattern<br>例如Case B（30KHz）表示subcarrier spacing</li>
-<li>TransmittedBlocks<br>说明这5ms内发射的SSB个数</li>
-<li>Period<br>发射SS Burst的周期</li>
-<li>NCRBSSB</li>
-</ul>
-<h2 id="BWPs"><a href="#BWPs" class="headerlink" title="BWPs"></a>BWPs</h2><p>A BWP is formed by a set of contiguous resources sharing a numerology on a given SCS carrier.<br>例如如果在前面已经定义好了SCS carrier，例如RB数量，间距，那么在构建BWP的时候可以用到之前构建好的SCS，因此是share numerology</p>
-<ul>
-<li>BandwidthPartID</li>
-<li>Label</li>
-<li>SubcarrierSpacing</li>
-<li>CyclicPrefix</li>
-<li>NSizeBWP<br>表示这个BWP占据多少个RB</li>
-<li>NStartBWP</li>
-</ul>
-<h2 id="PDCCH"><a href="#PDCCH" class="headerlink" title="PDCCH"></a>PDCCH</h2><p>Speicify the set of PDSCH transmission instances in the waveform by using a cell array. </p>
-<ul>
-<li><p>Enable</p>
-</li>
-<li><p>Label</p>
-</li>
-<li><p>BandwidthPartID<br>这个会和前面定义的BWP进行匹配</p>
-</li>
-<li><p>Power</p>
-</li>
-<li><p>Coding<br>Enable the DL-SCH transport channel coding</p>
-</li>
-<li><p>DataSource</p>
-</li>
-<li><p>Modulation</p>
-</li>
-<li><p>NumLayers  </p>
-<ul>
-<li>NumLayers &#x3D; 1,就相当于一个数据流（单层MIMO），也叫SISO</li>
-<li>NumLayers &#x3D; 2，基站可以同时发两条独立的数据流到UE，UE徐亚至少有四个天线来接收，这属于2x2 MIMO</li>
-<li>NumLayers &#x3D; 4，例如4x4到MIMO</li>
-</ul>
-</li>
-<li><p>VRBToPRBInterleaving</p>
-<ul>
-<li>disable interleaver</li>
-<li>enable intrleaver<br>  交错映射的作用是在频域上分散数据，提高对频率选择性衰落的抵抗力。<br>  VRB index:  0 1 2 3 4 5<br>  Mapped PRB: 0 1 4 5 2 3</li>
-</ul>
-</li>
-<li><p>DM-RS(解调参考信号)</p>
-<ul>
-<li>DMRSConfigurationType</li>
-<li>NumCDMGroupsWithoutData</li>
-<li>DMRSPortSet</li>
-<li>DMRSTypeAPosition</li>
-<li>DMRSLength</li>
-<li>DMRSAdditionalPosition（用来做scrambling，也就是说将发射给不同UE的信号区分开）</li>
-<li>DMRS.NSCID</li>
-</ul>
-</li>
-<li><p>CSI-RS</p>
-<ul>
-<li>Enable</li>
-<li>Label</li>
-<li>BandwidthPartID</li>
-<li>Power</li>
-<li>CSIRSType</li>
-<li>RowNumber</li>
-<li>CSIRSType</li>
-<li>SubcarrierLocation</li>
-<li>NumRB</li>
-<li>RBOffset</li>
-<li>SymbolLocations</li>
-<li>CSIPeriod</li>
-<li>NID</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/21/5gNRSidelink/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/21/5gNRSidelink/" class="post-title-link" itemprop="url">5gNRSidelink</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-04-21 20:33:19" itemprop="dateCreated datePublished" datetime="2025-04-21T20:33:19+08:00">2025-04-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-05-19 06:33:54" itemprop="dateModified" datetime="2025-05-19T06:33:54+08:00">2025-05-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="Basic-discription-–-from-MATLAB"><a href="#Basic-discription-–-from-MATLAB" class="headerlink" title="Basic discription – from MATLAB"></a>Basic discription – from MATLAB</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openExample(<span class="string">&#x27;5g/NRSidelinkVectorWaveformGenerationExample&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>This example shows how to configure and generate a 5G NR sidelink baseband waveform containing a sequence of physical sidelink control channel (PSCCH) and physical sidelink shared channel (PSSCH) transmission, including sidelink control information (SCI) and SL-SCH transport channel coding.<br>NR sidelink uses the concept of resource pools to configure specific resources for transmission and reception on a sidelink carrier. Each data transmission comprises a PSCCH transmission and an associated PSSCH transmission. </p>
-<h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><ul>
-<li>set the parameters for the waveform and resource pool configuration<br>The waveform is based on the PSSCH reference measurement channels (RMCs) defined. 也就是它是根据一个参考channel进行构造的，但实际上你可以自定义参数。</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rmc = R.PSSCH.2-1.2</span><br><span class="line">bwscs = 20MHx @ 30kHz</span><br><span class="line">% Get PSCCH and PSSCH channel and sidelink pool parameters</span><br><span class="line">bw = bwscs(1); </span><br><span class="line">scs = bwscs(2);</span><br><span class="line">[waveconfig.SLTransmission,waveconfig.Pool] = NRSidelinkResourcePool.rmcTestConfiguration(rmc,bw,scs);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Waveform Generation (create a baseband IQ waveform that contains a sequence of the previously configured PSCCH and PSSCH transmissions)<ul>
-<li>Use a SL-SCH HARQ entity object to control the HARQ process and RV scheduling of the SL-SCH transport encoding, across the series of PSSCH transmissions in the waveform.</li>
-<li>Create a set of PN23 data sources to stream the SL-SCH, SCI1, and SCI2 payloads across the sequence of transmisins.</li>
-</ul>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sci1datasource = createPN23DataSource();</span><br><span class="line">sci2datasource = createPN23DataSource();</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Create a pair of PSSCH DM-RS position configurations.</li>
-<li>Create variable for the basestation waveform and related outputs</li>
-<li>配置好了之后（Slot-wise loop to build the complete waveform from the sequence of individual PSSCH and PSCCH transmission）<br>  需要注意的是每个slot里面都有PSSCH和PSCCH</li>
-</ul>
-</li>
-</ul>
-<h2 id="基于openairinterface的sidelink"><a href="#基于openairinterface的sidelink" class="headerlink" title="基于openairinterface的sidelink"></a>基于openairinterface的sidelink</h2><h3 id="S-SSB"><a href="#S-SSB" class="headerlink" title="S-SSB"></a>S-SSB</h3><img src="/images/S-SSB.png">
-一个完整的S-SSB包含S-PSS、S-SSS和PSBCH这几个部分
-
-<ul>
-<li>S-PSS: symbols 1, 2</li>
-<li>S-SSS: symbols 3, 4</li>
-<li>PSBCH: symbols 5 - 12<br>S-SSB uses 11 RBs, or 132 subcarriers.<br>The PSBCH provides the system wide configuration and synchronization information required to establish the connection between multiple UEs. Its payload size consists of 56 bits.<br><strong>DMRS</strong> are transmitted in every PSBCH, on every fourth subcarrier, the are used by the receiver to properly decode the PSBCH.</li>
-</ul>
-<h4 id="procedure"><a href="#procedure" class="headerlink" title="procedure"></a>procedure</h4><p>Create SL PSS<br>  |<br>Create SL SSS<br>  |<br>Fill in DMRS<br>  |<br>Generate PSBCH Payload<br>  |<br>Generate SSB Frame<br>  |<br>Conduct Symbol Rotation<br>  |<br>Encode PSBCH<br>  |<br>Detect SSS         &#x2F;&#x2F;&#x2F;接收端<br>  ｜<br>Correlated DMRS<br>  |<br>Extract PSBCH</p>
-<h3 id="S-SSB-SPSS-and-SSSS-and-PSBCH"><a href="#S-SSB-SPSS-and-SSSS-and-PSBCH" class="headerlink" title="S-SSB (SPSS and SSSS) and PSBCH"></a>S-SSB (SPSS and SSSS) and PSBCH</h3><p><strong>nr_sl_initial_sync</strong>函数处理Sidelink S-SSB&#x2F;PSBCH block<br>In 5G sidelink, the first SSB symbol is the PSBCH, so the first thing is to adjust the SSB offset accordingly. The next symbols are PSS and SSS. So we need then to adjust the SSB offset accodingly (subtracting first PSS prefix). </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">uint32_t psbch_plus_prefix_size = fp-&gt;ofdm_symbol_size + fp-&gt;nb_prefix_samples;</span><br><span class="line">uint32_t num_pss_prefix_samples_size = (ue-&gt;common_vars.N2_id + 1) * fp-&gt;nb_prefix_samples;</span><br><span class="line">/// get and extract the corresponding SSB</span><br><span class="line"><span class="keyword">for</span> (int j = 0; j &lt; fp-&gt;slots_per_frame - 1; j++) &#123;</span><br><span class="line">  <span class="keyword">for</span> (int i = 0; i &lt; N_SYMB_SLOT_SL; i++)</span><br><span class="line">nr_slot_fep_init_sync(ue, proc, i ,j ,is * fp-&gt;samples_per_frame + ue-&gt;ssb_offset);</span><br><span class="line">&#125;</span><br><span class="line">/// nr_slot_fep_init_sync 用来接收数据并做dft处理</span><br><span class="line"></span><br><span class="line">int nr_slot_fep_init_sync(PHY_VARS_NR_UE *ue,</span><br><span class="line">                          UE_nr_rxtx_proc_t *proc,</span><br><span class="line">                          unsigned char symbol,</span><br><span class="line">                          unsigned char Ns,</span><br><span class="line">                          int sample_offset)</span><br><span class="line">&#123; ///计算偏移值从而定位到对应的slot以及对应的symbol</span><br><span class="line">  unsigned int slot_offset = frame_parms-&gt;get_samples_slot_timestamp(Ns,frame_parms,0);</span><br><span class="line">  unsigned int rx_offset   = sample_offset + slot_offset;</span><br><span class="line">  unsigned int abs_symbol  = Ns * frame_parms-&gt;symbols_per_slot + symbol;</span><br><span class="line">  <span class="keyword">for</span> (int idx_symb = Ns*frame_parms-&gt;symbols_per_slot; idx_symb &lt;= abs_symbol; idx_symb++)</span><br><span class="line">    rx_offset += (abs_symbol%(0x7&lt;&lt;<span class="string">frame_parms-&gt;numerology_index)) ? nb_prefix_samples : nb_prefix_samples0;</span></span><br><span class="line"><span class="string">  rx_offset += frame_parms</span>-&gt;ofdm_symbol_size * symbol;</span><br><span class="line">  /// dft (<span class="keyword">time</span> domain symbols -&gt; frequency domain symbols)</span><br><span class="line">   dft(dftsize,</span><br><span class="line">        rxdata_ptr,</span><br><span class="line">        (int16_t *)&amp;common_vars-&gt;common_vars_rx_data_per_thread[proc-&gt;thread_id].rxdataF[aa][frame_parms-&gt;ofdm_symbol_size*symbol],</span><br><span class="line">        1);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">/// 之后对dft后的频域信号进行frequency offset的计算 （根据SSS来计算）</span><br><span class="line">/// DFT -&gt; rxdataF</span><br><span class="line"><span class="keyword">for</span> (Nid1 = 0; Nid1 &lt; N_ID_1_NUMBER; Nid1++) &#123;</span><br><span class="line">  <span class="keyword">for</span> (uint8_t phase = 0; phase &lt; PHASE_HYPOTHESIS_NUMBER; phase++) &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; LENGTH_SSS_NR; i++) &#123;</span><br><span class="line">      metric_re += d[i] * (((phase_re_nr[phase] * sss0[<span class="number">2</span> *i ]) &gt;&gt; SCALING_METRIC_SSS_NR) - ((phase_im_nr[phase] * sss0[<span class="number">2</span> * i + <span class="number">1</span>]) &gt;&gt; SCALING_METRIC_SSS_NR))</span><br><span class="line">                 + d[i] * (((phase_re_nr[phase] * sss1[<span class="number">2</span> *i ]) &gt;&gt; SCALING_METRIC_SSS_NR) - ((phase_im_nr[phase] * sss1[<span class="number">2</span> * i + <span class="number">1</span>]) &gt;&gt; SCALING_METRIC_SSS_NR));</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">int re = 0, im = 0;</span><br><span class="line"><span class="keyword">for</span>(int i = 0; i &lt; LENGTH_SSS_NR; i++) &#123;</span><br><span class="line">  re += d[i] * sss0[2 * i];</span><br><span class="line">  im += d[i] * sss0[2 * i + 1];</span><br><span class="line">  re += d[i] * sss1[2 * i];</span><br><span class="line">  im += d[i] * sss1[2 * i + 1];</span><br><span class="line">&#125;</span><br><span class="line">double ffo_sss = atan2(im, re) / M_PI / 4.3;</span><br><span class="line">*freq_offset_sss = (int)(ffo_sss * frame_parms-&gt;subcarrier_spacing);</span><br><span class="line"></span><br><span class="line">/// compensation</span><br><span class="line"><span class="keyword">for</span> (int n = start; n &lt; end; n++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (int ar = 0; ar &lt; fp-&gt;nb_antennas_rx; ar++) &#123;</span><br><span class="line">              double re = ((double)(((short *)ue-&gt;common_vars.rxdata[ar]))[2 * n]);</span><br><span class="line">              double im = ((double)(((short *)ue-&gt;common_vars.rxdata[ar]))[2 * n + 1]);</span><br><span class="line">              ((short *)ue-&gt;common_vars.rxdata[ar])[<span class="number">2</span> * n] = (short)(round(re * cos(n * off_angle) - im * sin(n * off_angle)));</span><br><span class="line">              ((short *)ue-&gt;common_vars.rxdata[ar])[<span class="number">2</span> * n + <span class="number">1</span>] = (short)(round(re * sin(n * off_angle) + im *cos(n * off_angle)));</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">/// 处理psbch</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="PSSCH-and-PSCCH"><a href="#PSSCH-and-PSCCH" class="headerlink" title="PSSCH and PSCCH"></a>PSSCH and PSCCH</h3><p>PSSCH contains SCI2 and DM-RS while PSCCH only contains SCI1.<br><img src="/images/PSSCH.png"></p>
-<p>The SCI2 payload is <strong>polar</strong> encoded and contains the number of data bits transmitted as well as the multiplexing scheme. So the SCI2 is used by the decoder to properly decode the PSSCH payload, which uses a Low-Density Parity Check(LDPC) encoding mechanism. Besides, the SCI2 is used for the decoding of PSSCH for the HARQ operation.</p>
-<h4 id="Procedures"><a href="#Procedures" class="headerlink" title="Procedures"></a>Procedures</h4><p>Generate SCI2           &#x2F;&#x2F;&#x2F;发射端<br> |<br>Polar Coding and Rate Matching<br> |<br>LDPC coding and Rate Matching<br> |<br>Data and Control Multiplexing<br> |<br>Scrambling<br> |<br>Constellation Modulation<br> |<br>Layer Mapping<br> |<br>Virtual resource and resource grid mapping<br> |<br>OFDM modulation<br> |<br>Tx&#x2F;Rx<br> |<br>OFDM Demodulation   &#x2F;&#x2F;&#x2F;接收端<br> |<br>Resource grid demapping<br> |<br>Channel Estimatin and Equalization<br> |<br>Layer demapping<br> |<br>Constellation demodulation<br> |<br>Descrambling<br> |<br>Data and control demultiplexing<br> |<br>LDPC decoding and polar decoding</p>
-<h3 id="HARQ"><a href="#HARQ" class="headerlink" title="HARQ"></a>HARQ</h3><p>HARQ (Hybrid ARQ (Automatic Repeat Request)). It is a feedback transmission and reception 5G uses. It has such functionalities as blow:</p>
-<ul>
-<li><p>重传控制<br>用于管理是否需要重传(通过round， ndi， tx_status等字段)</p>
-</li>
-<li><p>数据存储<br>存储当前HARQ过程的数据，比如<strong>a_sci2</strong>, <strong>b_sci2</strong><br>其中a_sci2用于pointer to sci2 after crc + polar encoding and rate matching stored in bytes.<br>其中b_sci2用于pointer to output of data-control multiplexer in bits.<br>其他<strong>A_sci2</strong>和<strong>B_sci2</strong>用于表示数据大小in bits<br>B_sci2：用来表示数据的大小，使用 uint32_t 类型来存储大小（单位：比特），它是一个静态的数字，而不是实际的数据内容。<br>b_sci2：指向实际数据的指针，用来表示数据的内存地址，实际的数据内容存储在该地址指向的内存区域。使用指针是因为数据的长度不固定或可能变化，因此需要动态地分配和管理内存。</p>
-</li>
-<li><p>编码缓存<br>存储LDPC&#x2F;Polar编码输出及中间步骤</p>
-</li>
-<li><p>slot定位<br>指明此HARQ对应的slot and frame(frame, slot) </p>
-</li>
-<li><p>调度协助<br>辅助scheduler判断资源使用情况，是否有未完成HARQ</p>
-</li>
-</ul>
-<h4 id="NR-UL-UE-HARQ-t"><a href="#NR-UL-UE-HARQ-t" class="headerlink" title="NR_UL_UE_HARQ_t"></a>NR_UL_UE_HARQ_t</h4><p>关键字段</p>
-<ul>
-<li>a_sci2<br>pointer to SCI2 payload from MAC interface</li>
-<li>b_sci2<br>pointer to sci2 after crc+polar encoding and rate matching stored in bytes</li>
-<li>*a<br>pointer to pdu from MAC interface(也就是payload)</li>
-<li>*b<br>pointers to the payload + CRC</li>
-</ul>
-<h4 id="NR-DL-UE-HARQ-t"><a href="#NR-DL-UE-HARQ-t" class="headerlink" title="NR_DL_UE_HARQ_t"></a>NR_DL_UE_HARQ_t</h4><p>关键字段</p>
-<ul>
-<li>*b<br>pointer to the payload</li>
-<li>B<br>the payload + crc size in bits</li>
-<li>b_sci2<br>pointer to the sci2 payload</li>
-<li>B_sci2<br>the sci2’s payload + CRC + channel coder + rate matching size in bits</li>
-</ul>
-<h3 id="TDD"><a href="#TDD" class="headerlink" title="TDD"></a>TDD</h3><p>The flexible slot feature of 5G SL utilizes each symbol to schedule uplink, downlink, or flexible packets. According to the 3GPP standard, the S-SBB should be periodicity of 160 ms(10ms per system frame number, 0.5 ms per slot). There are other modifiable parameters like interval parameter, offset parameter, number S-SSB per period.<br><img src="/images/SSSB_TDD.png"></p>
-<p>So in this test use case, we arbitrarily chose to broadcast 2 S-SSBs per period. The first S-SSB is sent in slot 2 because we set the offset parameter to 2. The interal parameter was set to 20.<br>20+2-10ms&#x2F;0.5ms &#x3D; 2<br>so the next S-SSb will be transmitted twice in a period, and occurs in frame 1 slot 2.</p>
-<h4 id="S-SSB后SCH-PSSCH-PSCCH-之间的时隔划分"><a href="#S-SSB后SCH-PSSCH-PSCCH-之间的时隔划分" class="headerlink" title="S-SSB后SCH(PSSCH &amp; PSCCH)之间的时隔划分"></a>S-SSB后SCH(PSSCH &amp; PSCCH)之间的时隔划分</h4><p>在SL Mode 2中，时隔划分是由UE自身配置的S-SSB周期&#x2F;偏移&#x2F;间隔决定（例如在某个slot发射S-SSB在另外的slot内发射SCH），这是由UE本地RRC Layer来配置的。在本次实验中，查看代码可知S-SSB是每个160ms发射一次S-SSB，代码可见&#x2F;openair1&#x2F;SCHED_NR_UE&#x2F;phy_procedures_nr_ur.c<br>先从RRC层获取S-SSB的各种参数配置，例如一个周期(160ms)内有多少个S-SSB，第一个S-SSB的偏移量还有两个S-SSB之间的间隔</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">bool phy_ssb_slot_allocation_sl(PHY_VARS_NR_UE *ue, int frame, int slot)</span><br><span class="line">&#123;</span><br><span class="line">  NR_DL_FRAME_PARMS *fp = &amp;ue-&gt;frame_parms;</span><br><span class="line">  static int sl_numssb_withinperiod_r16, sl_timeoffsetssb_r16, sl_timeoffsetssb_r16_copy;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (sl_numssb_withinperiod_r16 == 0) &#123;</span><br><span class="line">    sl_numssb_withinperiod_r16 = ue-&gt;slss-&gt;sl_numssb_withinperiod_r16;</span><br><span class="line">    sl_timeoffsetssb_r16 = ue-&gt;slss-&gt;sl_timeoffsetssb_r16;</span><br><span class="line">    sl_timeoffsetssb_r16_copy = sl_timeoffsetssb_r16;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ((frame * fp-&gt;slots_per_frame + slot) % (<span class="number">16</span> * fp-&gt;slots_per_frame) == <span class="number">0</span>) &#123;</span><br><span class="line">    ue-&gt;slss-&gt;sl_numssb_withinperiod_r16 = ue-&gt;slss-&gt;sl_numssb_withinperiod_r16_copy;</span><br><span class="line">    sl_timeoffsetssb_r16 = frame * fp-&gt;slots_per_frame + sl_timeoffsetssb_r16_copy;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  if (ue-&gt;slss-&gt;sl_numssb_withinperiod_r16 &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    if (frame * fp-&gt;slots_per_frame + slot == sl_timeoffsetssb_r16) &#123;</span><br><span class="line">      sl_timeoffsetssb_r16 = sl_timeoffsetssb_r16 + ue-&gt;slss-&gt;sl_timeinterval_r16;</span><br><span class="line">      ue-&gt;slss-&gt;sl_numssb_withinperiod_r16 = ue-&gt;slss-&gt;sl_numssb_withinperiod_r16 - <span class="number">1</span>;</span><br><span class="line">      LOG_I(PHY,&quot;*** SL-SSB slot allocation  %d.%d ***\n&quot;, frame, slot); </span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      return false;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    return false;</span><br><span class="line">  &#125;</span><br><span class="line">  return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>对于syncref ue，以0-15 frames 为例，frame 0 ， frame 1中的slot 1会发射SSB，然后在其他的frame中的slot1或者slot0会发射PSSCH，代码如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">uint32_t sl_bitmap_tx = 0x00000;</span><br><span class="line"><span class="keyword">if</span>(ue-&gt;sync_ref) &#123;</span><br><span class="line">  sl_bitmap_tx = (ue-&gt;is_synchronized_sl == 0) ? 0x00001 : 0x00002;  // SyncRef UE tx slot 0, Relay UE B tx slot 1.</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> ((sl_bitmap_tx &gt;&gt; slot_tx) &amp; <span class="number">1</span>) &#123;</span><br><span class="line">  for (uint8_t harq_pid = <span class="number">0</span>; harq_pid &lt; <span class="number">1</span>; harq_pid++) &#123;</span><br><span class="line">    nr_ue_set_slsch(&amp;ue-&gt;frame_parms, harq_pid, ue-&gt;slsch[proc-&gt;thread_id][gNB_id], frame_tx, slot_tx);</span><br><span class="line">    if (ue-&gt;slsch[proc-&gt;thread_id][gNB_id]-&gt;harq_processes[harq_pid]-&gt;status == ACTIVE) &#123;</span><br><span class="line">      nr_ue_slsch_tx_procedures(ue, harq_pid, frame_tx, slot_tx);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>对于nearby ue，也是从每个frame中的特定slot去获取pssch</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">int phy_procedures_nrUE_SL_RX(PHY_VARS_NR_UE *ue,</span><br><span class="line">                           UE_nr_rxtx_proc_t *proc,</span><br><span class="line">                           uint8_t synchRefUE_id,</span><br><span class="line">                           notifiedFIFO_t *txFifo) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (ue-&gt;is_synchronized_sl == 0)</span><br><span class="line">    <span class="built_in">return</span> (0);</span><br><span class="line"></span><br><span class="line">  // TODO: Need to add rx SSB slot 2 (to Relay UE) and rx SSB slot 4 (Nearby UE) <span class="keyword">for</span> resync</span><br><span class="line">  uint32_t sl_bitmap_rx = ue-&gt;sync_ref ? 0x00001 : 0x00002; // Relay UE B rx slot 0, Nearby UE rx slot 1.</span><br><span class="line">  <span class="keyword">if</span> (((sl_bitmap_rx &gt;&gt; proc-&gt;nr_slot_rx) &amp; <span class="number">1</span>) == <span class="number">0</span>) </span><br><span class="line">    return (<span class="number">0</span>);</span><br><span class="line">  int frame_rx = proc-&gt;frame_rx;</span><br><span class="line">  int slot_rx = proc-&gt;nr_slot_rx;</span><br><span class="line">  uint32_t ret = nr_ue_slsch_rx_procedures(ue, harq_pid, frame_rx, slot_rx, rxdataF, B_mul, Nidx, proc);</span><br><span class="line"></span><br><span class="line">  bool payload_type_string = true;</span><br><span class="line">  bool polar_decoded = (ret &lt; LDPC_MAX_LIMIT) ? true : false;</span><br><span class="line">  uint16_t dest = (*harq-&gt;b_sci2 &gt;&gt; <span class="number">32</span>) &amp; <span class="number">0</span>xFFFF;</span><br><span class="line">  bool dest_matched = (dest == node_id);</span><br><span class="line">  if (polar_decoded)</span><br><span class="line">    LOG_D(PHY, &quot;dest %u vs %u node_id for hex %lx\n&quot;, dest, node_id, *harq-&gt;b_sci2);</span><br><span class="line">  if ((ret != -<span class="number">1</span>) &amp;&amp; dest_matched) &#123;</span><br><span class="line">    if (payload_type_string)</span><br><span class="line">        validate_rx_payload_str(harq, slot_rx, polar_decoded);</span><br><span class="line">        else</span><br><span class="line">        validate_rx_payload(harq, frame_rx, slot_rx, polar_decoded);</span><br><span class="line">              &#125;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>sl-numSSB-WithinPeriod-r16, sl-timeInterval-r16, sl-SSB-PeriodicityAndOffset-r16这些和S-SSB的时序相关的配置根据<strong>3GPP</strong>规范明确出现在<strong>RRC</strong>层定义的Sidelink配置结构中。</p>
-</blockquote>
-<hr>
-<h3 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h3><h4 id="Sidelink-Sequence-Diagram"><a href="#Sidelink-Sequence-Diagram" class="headerlink" title="Sidelink Sequence Diagram"></a>Sidelink Sequence Diagram</h4><p>…<br>自己画(Synchronization ue和nearby ue之间的通信)</p>
-<h4 id="Sidelink-Block-Diagram"><a href="#Sidelink-Block-Diagram" class="headerlink" title="Sidelink Block Diagram"></a>Sidelink Block Diagram</h4><img src="/images/SidelinkBlockDiagram.png">
-
-<h4 id="RSRP-Reference-signal-received-power"><a href="#RSRP-Reference-signal-received-power" class="headerlink" title="RSRP (Reference signal received power)"></a>RSRP (Reference signal received power)</h4><p>分别计算了SSB-RSRP和PSSCH-RSRP<br>以下是PSSCH-RSRP的计算公式</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">\mathrm&#123;RSRP&#125;_&#123;\mathrm&#123;dBm&#125;&#125;</span><br><span class="line">= 10 \log_&#123;10&#125;\Bigl(P_&#123;\mathrm&#123;lin&#125;&#125;\Bigr)</span><br><span class="line">  + 30</span><br><span class="line">  - 10 \log_&#123;10&#125;\bigl(2^&#123;30&#125;\bigr)</span><br><span class="line">  - \bigl(G_&#123;\mathrm&#123;rx&#125;&#125; - G_&#123;\mathrm&#123;off&#125;&#125;\bigr)</span><br><span class="line">  - \mathrm&#123;dB\_fixed&#125;(N_&#123;\mathrm&#123;fft&#125;&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>其中$P_{lin}$是对所有测量到的资源元素（RE）功率取平均后的线性功率，其中$10\log_{10}(2^{30})$是因为系统用30位定点数表示FFT输出，数值实际上被乘了$2^{30}$,因此需要减去这个缩放因子。除此之外还需要减去补偿放大器带来的功率增益。同时还要减去不同FFT大小（即OFDM子载波总数）下的单位子载波的功率密度变化。</p>
-<p>从哪些信号计算rsrp？：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (int k = 0; k &lt; nb_rb * NR_NB_SC_PER_RB; k += 4) &#123;</span><br><span class="line">  <span class="comment">#ifdef DEBUG_MEAS_UE</span></span><br><span class="line">  LOG_I(N_pssch %d %d\n<span class="string">&quot;, __FUNCTION__, rxF_pssch[k * 2], rxF_pssch[k * 2 + 1]);</span></span><br><span class="line"><span class="string">  #endif</span></span><br><span class="line"><span class="string">  rsrp += (((int32_t)rxF_pssch[k * 2] * rxF_pssch[k * 2]) + ((int32_t)rxF_pssch[k * 2 + 1] * rxF_pssch[k * 2 + 1]));</span></span><br><span class="line"><span class="string">  nb_re++;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>每4个子载波取一次DMRS信号来进行测量received power，对每一个抽样点先取实数平方加虚部平方，得到这个RE到线性功率，累加到rsrp。</p>
-<h4 id="Sync-time"><a href="#Sync-time" class="headerlink" title="Sync time"></a>Sync time</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#796821.854505 [NR_PHY] SyncRef UE found with Nid1 10 and Nid2 1 SS-RSRP -100 dBm/RE</span></span><br><span class="line">  <span class="keyword">if</span> not line.startswith(<span class="string">&#x27;[&#x27;</span>) and <span class="string">&#x27;SyncRef UE found&#x27;</span> <span class="keyword">in</span> line and <span class="string">&#x27;Nid1&#x27;</span> <span class="keyword">in</span> line and <span class="string">&#x27;Nid2&#x27;</span> <span class="keyword">in</span> line:</span><br><span class="line">      num_split = 13 <span class="keyword">if</span> <span class="string">&#x27;RSRP&#x27;</span> <span class="keyword">in</span> line <span class="keyword">else</span> 10</span><br><span class="line">      fields = line.split(maxsplit=num_split)</span><br><span class="line">      est_nid1 = int(fields[7])</span><br><span class="line">      est_nid2 = int(fields[10])</span><br><span class="line">      <span class="keyword">if</span> <span class="string">&#x27;RSRP&#x27;</span> <span class="keyword">in</span> line:</span><br><span class="line">            ssb_rsrp = int(fields[12])</span><br><span class="line">      found.add(<span class="string">&#x27;syncref&#x27;</span>)</span><br><span class="line">      time_end_s = <span class="built_in">float</span>(fields[0])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>同步时间平均是7-8秒，对应的SSB数目是除0.16秒再乘2<br>因为周期是160ms，并且一个周期内有2个SSB</p>
-<h4 id="Packet-Loss-Rate"><a href="#Packet-Loss-Rate" class="headerlink" title="Packet Loss Rate"></a>Packet Loss Rate</h4><p>Successfully decoded packets</p>
-<h4 id="Data-rates"><a href="#Data-rates" class="headerlink" title="Data rates"></a>Data rates</h4><ul>
-<li>所有数据</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">uint32_t B_mul = get_B_multiplexed_value(&amp;ue-&gt;frame_parms, slsch-&gt;harq_processes[0]);</span><br><span class="line">uint32_t get_B_multiplexed_value(NR_DL_FRAME_PARMS* fp, NR_DL_UE_HARQ_t *harq) &#123;</span><br><span class="line"></span><br><span class="line">  uint8_t Nl                = harq-&gt;Nl;</span><br><span class="line">  unsigned int G_slsch_bits = harq-&gt;G;</span><br><span class="line">  uint32_t B_mul = G_slsch_bits + harq-&gt;B_sci2 * Nl;</span><br><span class="line">  <span class="built_in">return</span> B_mul;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其中harq-&gt;nl是Number of MIMO layers (streams), harq-&gt;G是Number of soft channel bits，<br>最终<strong>B_mul</strong>是整个Sidelink PDU中所有实际通过空口传输的比特数(数据+控制)，可以用来估算实际的PHY吞吐量。</p>
-<p>其中harq-G具体计算如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">uint32_t nr_get_G_sl(uint16_t nb_rb, uint16_t nb_re_sci1, uint16_t nb_re_sci2, uint16_t nb_symb_sch, uint8_t nb_re_dmrs, uint16_t length_dmrs, uint8_t Qm, uint8_t Nl) &#123;</span><br><span class="line">    uint32_t G;</span><br><span class="line">    G = (((NR_NB_SC_PER_RB * nb_symb_sch)-(nb_re_dmrs * length_dmrs)) * nb_rb - nb_re_sci1 - nb_re_sci2) * Qm * Nl;</span><br><span class="line">    <span class="built_in">return</span>(G);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其中NR_NB_SC_PER_RB是每个资源块包含的子载波数，一个RB包含12个子载波<br>nb_symb_sch 是该slot内的符号数量。其中<strong>nb_rb</strong>是资源块数量，在oai中通常标准化为50的倍数，例如我们在脚本中把rbsl设为了52，但在oai中会变为50。其中<strong>Qm</strong>表示每个RE的的调制比特数，例如QPSK &#x3D; 2，16QAM &#x3D; 4<br>最终nr_get_G_sl的返回值是12480，说明整个pssch的bits是12480，这表示一个slot中传输的数据总比特数，包括： PSSCH数据部分 + SCI2控制信息部分的比特总数。harq-&gt;G是11904bits，这表示整个PSSCH传输中当前slot可承载的数据比特数（理论最大），也就是不包含SCI2控制信息<br>吞吐量 &#x3D; 12480&#x2F;0.0005 &#x3D; 24960000 bits&#x2F;s &#x3D; 24.96 Mbps &#x3D; 3.12 MB&#x2F;s<br>而这时理论上一个slot上的吞吐量，如果放到整一个frame中，那么吞吐量 &#x3D; 24960000 bits&#x2F;s &#x2F; 20 &#x3D; <strong>1248000</strong> bits&#x2F;s<br>（因为一个frame只有一个slot用于pssch传输）<br>在实际测试中，data rate大约为<strong>1188000</strong> bis&#x2F;s,略小于理论速率，因此合理。（可能是由于丢包导致的）<br>overview of parameters:</p>
-<ul>
-<li>MCS<br>0, so it is QPSK</li>
-<li>RB<br>52个RB然后被oai归一化为50，每个RB中有12个子载波  </li>
-<li>SCS<br>子载波间隔为30kHz，这样算下来带宽为18MHx（50x12x30），但是还有一些guard band（保护带），因此实际带宽会更大，大约为标准化带宽20MHz</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">void nr_ue_set_slsch_rx(PHY_VARS_NR_UE *ue, unsigned char harq_pid)</span><br><span class="line">&#123;</span><br><span class="line">  int nb_rb = get_PRB(ue-&gt;frame_parms.N_RB_SL);</span><br><span class="line">  uint16_t nb_symb_sch = 12;</span><br><span class="line">  uint16_t nb_symb_cch = 3; // Assumption there are three SLCCH symbols</span><br><span class="line">  uint8_t dmrsConfigType = 0;</span><br><span class="line">  uint8_t Nl = 1; // number of layer</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h4 id="Latency-self-defined"><a href="#Latency-self-defined" class="headerlink" title="Latency(self-defined)"></a>Latency(self-defined)</h4><p>histogram latency<br>对于发射端<br>在nr_ue_slsch_tx_procedures函数中某一位置加上时间戳，例如在modulation + layer mapping + resource mapping之后，但是在nr_ue_pssch_common_procedures()函数之前，因为nr_ue_pssch_common_procedures()涉及具体的把信号加到RF端。<br>对于接收端<br>在nr_ue_slsch_rx_procedures函数内，在nr_slsch_decoding之后</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">uint32_t ret = nr_slsch_decoding(rxUE, proc, ulsch_llr[0],</span><br><span class="line">                          &amp;rxUE-&gt;frame_parms, slsch_ue_rx,</span><br><span class="line">                          slsch_ue_rx-&gt;harq_processes[0], frame,</span><br><span class="line">                          nb_symb_sch, slot, harq_pid);</span><br><span class="line">///////////////////////////////////////////////////////</span><br><span class="line">LOG_I(NR_PHY,<span class="string">&quot;Frame: %d, Slot: %d&quot;</span>, frame, slot);</span><br><span class="line"><span class="built_in">return</span> ret;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h4 id="Resources-blocks"><a href="#Resources-blocks" class="headerlink" title="Resources blocks"></a>Resources blocks</h4><p>具体可见paper（只需要考虑PSSCH和PSCCH）<br>因为只需要关心real data<br>Resource blocks可以推导出theoretical data rates</p>
-<h3 id="How-would-improve"><a href="#How-would-improve" class="headerlink" title="How would improve"></a>How would improve</h3><p>例如如何改良resource blocks</p>
-<h4 id="改动地方"><a href="#改动地方" class="headerlink" title="改动地方"></a>改动地方</h4><ul>
-<li>ue-&gt;sync_ref &#x3D; 0</li>
-<li>polar_decoder_int16 failed</li>
-<li>validate_rx_str<br>问题：<br>sync过几秒就不再接收了</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1640,7 +1850,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

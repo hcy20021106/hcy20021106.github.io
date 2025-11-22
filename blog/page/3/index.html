@@ -150,6 +150,416 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/05/Python%E8%AF%BB%E5%8F%96mat%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/05/Python%E8%AF%BB%E5%8F%96mat%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">Python读取mat文件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-08-05 00:09:44" itemprop="dateCreated datePublished" datetime="2025-08-05T00:09:44+08:00">2025-08-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-08-09 10:27:48" itemprop="dateModified" datetime="2025-08-09T10:27:48+08:00">2025-08-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="读取-MATLAB-mat-文件（带有结构体字段）"><a href="#读取-MATLAB-mat-文件（带有结构体字段）" class="headerlink" title="读取 MATLAB .mat 文件（带有结构体字段）"></a>读取 MATLAB <code>.mat</code> 文件（带有结构体字段）</h2><p>我们经常遇到 MATLAB 中保存的结构体 <code>.mat</code> 文件，例如包含 <code>real</code> 和 <code>imag</code> 字段的 CSI 或 preamble 数据。在 Python 中可以用 <code>h5py</code> + <code>numpy</code> 来处理：</p>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install h5py numpy torch</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> h5py</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">mat_path = <span class="string">&#x27;your_file_path.mat&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> h5py.File(mat_path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># 访问结构体数组引用（例如 usr_data）</span></span><br><span class="line">    hDp_ref = f[<span class="string">&#x27;usr_data&#x27;</span>]</span><br><span class="line">    hDp_real_refs = hDp_ref[:]  <span class="comment"># 是一组 object reference</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 读取 preamble</span></span><br><span class="line">    preamble_ref = hDp_real_refs[<span class="number">0</span>].item()         <span class="comment"># 解引用</span></span><br><span class="line">    preamble_dataset = f[preamble_ref]             <span class="comment"># 获取对应的数据集</span></span><br><span class="line">    preamble_struct = np.array(preamble_dataset)   <span class="comment"># 转成 numpy 数组</span></span><br><span class="line">    preamble = preamble_struct[<span class="string">&#x27;real&#x27;</span>] + <span class="number">1j</span> * preamble_struct[<span class="string">&#x27;imag&#x27;</span>]  <span class="comment"># 合成为复数</span></span><br><span class="line">    preamble_tensor = torch.tensor(preamble, dtype=torch.complex64)    <span class="comment"># 转为 PyTorch 复数张量</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 读取 CSI（假设是第二个）</span></span><br><span class="line">    csi_ref = hDp_real_refs[<span class="number">1</span>].item()</span><br><span class="line">    csi_dataset = f[csi_ref]</span><br><span class="line">    csi_struct = np.array(csi_dataset)</span><br><span class="line">    csi = csi_struct[<span class="string">&#x27;real&#x27;</span>] + <span class="number">1j</span> * csi_struct[<span class="string">&#x27;imag&#x27;</span>]</span><br><span class="line">    csi_tensor = torch.tensor(csi, dtype=torch.complex64)</span><br></pre></td></tr></table></figure>
+
+<h3 id="常见说明"><a href="#常见说明" class="headerlink" title="常见说明"></a>常见说明</h3><ul>
+<li><code>h5py.File(..., &#39;r&#39;)</code>：读取 <code>.mat</code> 文件（v7.3 格式，基于 HDF5）。</li>
+<li><code>hDp_ref[:]</code>：获取结构体中嵌套的 object reference。</li>
+<li><code>.item()</code>：从 NumPy 的 <code>object</code> 中提取真实的引用。</li>
+<li><code>[&#39;real&#39;] + 1j * [&#39;imag&#39;]</code>：组合为复数。</li>
+<li>使用 <code>torch.tensor(..., dtype=torch.complex64)</code> 转为复数张量，方便用于神经网络输入。</li>
+</ul>
+<p>在 preamble_struct &#x3D; np.array(preamble_dataset) numpy数组中，它的每一个元素仍然是一个类字典对象，拥有字段，比如 ‘real’ 和 ‘imag’，这两个字段就是你要提取的实部和虚部数据。  </p>
+<p>在 PyTorch 中，复数张量（dtype&#x3D;torch.complex64 或 complex128）不是单独的 real&#x2F;imag 张量，而是一个 内建的复数类型，其中每个元素都包含实部和虚部。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([1 + 2j, 3 + 4j], dtype=torch.complex64)，</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>结构上：</p>
+<p>x[0] 是 (1+2j)，即：</p>
+<p>x[0].real &#x3D;&#x3D; 1.0</p>
+<p>x[0].imag &#x3D;&#x3D; 2.0</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/02/CI-CD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/02/CI-CD/" class="post-title-link" itemprop="url">CI/CD</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-02 13:32:29 / Modified: 14:35:07" itemprop="dateCreated datePublished" datetime="2025-08-02T13:32:29+08:00">2025-08-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h1 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h1><h2 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h2><p>GitLab -&gt; Jenkins -&gt; Docker 构建 -&gt; 推送到JFrog Artifactory -&gt; K8s 滚动部署</p>
+<h2 id="详细流程"><a href="#详细流程" class="headerlink" title="详细流程"></a>详细流程</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[开发者] git push</span><br><span class="line">        ↓</span><br><span class="line">[GitLab Webhook] 通知 Jenkins</span><br><span class="line">        ↓</span><br><span class="line">[Jenkins Pipeline]</span><br><span class="line">   1. 拉取 GitLab 源码</span><br><span class="line">   2. 构建 Docker 镜像（基于 Dockerfile）</span><br><span class="line">   3. 登录 JFrog Artifactory 仓库</span><br><span class="line">   4. 推送镜像到 Artifactory Docker 仓库</span><br><span class="line">   5. 使用 kubeconfig/kubectl 更新 Kubernetes Deployment 中的镜像</span><br><span class="line">        ↓</span><br><span class="line">[Kubernetes]</span><br><span class="line">   6. 自动滚动更新容器，部署新版应用</span><br></pre></td></tr></table></figure>
+<h2 id="使用组件及角色"><a href="#使用组件及角色" class="headerlink" title="使用组件及角色"></a>使用组件及角色</h2><table>
+<thead>
+<tr>
+<th>组件</th>
+<th>角色说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GitLab</td>
+<td>源码托管、触发构建 Webhook</td>
+</tr>
+<tr>
+<td>Jenkins</td>
+<td>核心 CI&#x2F;CD 执行器，运行流水线</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td>构建容器镜像</td>
+</tr>
+<tr>
+<td>JFrog Artifactory</td>
+<td>存储容器镜像（Docker Registry）</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>运行你的后端服务，部署并自动滚动更新</td>
+</tr>
+</tbody></table>
+<h2 id="示例Jenkinsfile"><a href="#示例Jenkinsfile" class="headerlink" title="示例Jenkinsfile"></a>示例Jenkinsfile</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line"></span><br><span class="line">    environment &#123;</span><br><span class="line">        ARTIFACTORY_DOCKER_CREDENTIALS = <span class="string">&#x27;artifactory-docker-creds&#x27;</span> // Jenkins中配置</span><br><span class="line">        ARTIFACTORY_DOCKER_REGISTRY = <span class="string">&#x27;jfrog.mycompany.com&#x27;</span></span><br><span class="line">        ARTIFACTORY_REPO = <span class="string">&#x27;docker-local&#x27;</span>  // 你在 Artifactory 中的 Docker 仓库名</span><br><span class="line">        IMAGE_NAME = <span class="string">&#x27;myapp&#x27;</span></span><br><span class="line">        IMAGE_TAG = <span class="string">&quot;<span class="variable">$&#123;BUILD_NUMBER&#125;</span>&quot;</span>      // 每次构建使用不同 tag</span><br><span class="line"></span><br><span class="line">        DEPLOYMENT_NAME = <span class="string">&quot;myapp-deployment&quot;</span></span><br><span class="line">        CONTAINER_NAME = <span class="string">&quot;myapp-container&quot;</span></span><br><span class="line">        NAMESPACE = <span class="string">&quot;test&quot;</span></span><br><span class="line">        KUBECONFIG_CRED = <span class="string">&#x27;kubeconfig-file&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;Clone Code&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                checkout scm</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">&#x27;Build Docker Image&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                script &#123;</span><br><span class="line">                    docker.withRegistry(<span class="string">&quot;https://<span class="variable">$&#123;ARTIFACTORY_DOCKER_REGISTRY&#125;</span>&quot;</span>, ARTIFACTORY_DOCKER_CREDENTIALS) &#123;</span><br><span class="line">                        def image = docker.build(<span class="string">&quot;<span class="variable">$&#123;ARTIFACTORY_DOCKER_REGISTRY&#125;</span>/<span class="variable">$&#123;ARTIFACTORY_REPO&#125;</span>/<span class="variable">$&#123;IMAGE_NAME&#125;</span>:<span class="variable">$&#123;IMAGE_TAG&#125;</span>&quot;</span>)</span><br><span class="line">                        image.push()</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">&#x27;Update K8s Deployment&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                withCredentials([file(credentialsId: KUBECONFIG_CRED, variable: <span class="string">&#x27;KUBECONFIG&#x27;</span>)]) &#123;</span><br><span class="line">                    sh <span class="string">&#x27;&#x27;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">                    kubectl --kubeconfig=$KUBECONFIG -n $&#123;NAMESPACE&#125; set image deployment/$&#123;DEPLOYMENT_NAME&#125; $&#123;CONTAINER_NAME&#125;=$&#123;ARTIFACTORY_DOCKER_REGISTRY&#125;/$&#123;ARTIFACTORY_REPO&#125;/$&#123;IMAGE_NAME&#125;:$&#123;IMAGE_TAG&#125;</span></span><br><span class="line"><span class="string">                    kubectl --kubeconfig=$KUBECONFIG -n $&#123;NAMESPACE&#125; rollout status deployment/$&#123;DEPLOYMENT_NAME&#125;</span></span><br><span class="line"><span class="string">                    &#x27;</span><span class="string">&#x27;&#x27;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="准备工作（一次性配置）"><a href="#准备工作（一次性配置）" class="headerlink" title="准备工作（一次性配置）"></a>准备工作（一次性配置）</h2><ul>
+<li>GitLab 配置好Webhook：指向Jenkins Job URL</li>
+<li>Artifactory 建好Docker仓库（如docker-local）</li>
+<li>Jenkins凭据配置<ul>
+<li>artifactory-docker-creds （用户名&#x2F;密码或API Token）</li>
+<li>kubeconfig-file（K8s访问配置文件）</li>
+</ul>
+</li>
+<li>Jenkins安装插件<ul>
+<li>Docker plugin</li>
+<li>Git plugin</li>
+<li>Pipeline plugin</li>
+<li>Credentials plugin</li>
+</ul>
+</li>
+</ul>
+<h2 id="部署效果"><a href="#部署效果" class="headerlink" title="部署效果"></a>部署效果</h2><p>只需一条git push:</p>
+<ul>
+<li>Jenkins 自动构建镜像</li>
+<li>推送Artifactory</li>
+<li>更新K8s应用，自动滚动升级</li>
+</ul>
+<h1 id="Ansible"><a href="#Ansible" class="headerlink" title="Ansible"></a>Ansible</h1><p>Ansible 角色 （Role）是对自动化任务的模块化封装，方便复用和管理。一个完整的role通常包含以下目录和文件，每个目录复制不同的职责：</p>
+<h2 id="defaults"><a href="#defaults" class="headerlink" title="defaults"></a>defaults</h2><ul>
+<li>作用：存放角色的默认变量</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">core_executable: <span class="string">&quot;&#123;&#123; free5gc_src.dest_dir &#125;&#125;/run.sh&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">core_apn: <span class="string">&quot;internet&quot;</span></span><br><span class="line">core_sst: <span class="string">&quot;1&quot;</span></span><br><span class="line">core_sd: <span class="string">&quot;000000&quot;</span></span><br><span class="line"></span><br><span class="line">core_mcc: <span class="string">&quot;999&quot;</span></span><br><span class="line">core_mnc: <span class="string">&quot;70&quot;</span></span><br><span class="line"></span><br><span class="line">core_plmn: <span class="string">&quot;&#123;&#123;core_mcc&#125;&#125;&#123;&#123;core_mcn&#125;&#125;&quot;</span></span><br><span class="line"></span><br><span class="line">core_tac: <span class="string">&quot;000001&quot;</span></span><br><span class="line"></span><br><span class="line">core_simcard_inventory_file: deploy-config-simcards.yml</span><br><span class="line">amf_ipv4_net: <span class="string">&quot;10.0.2.10&quot;</span></span><br><span class="line">upf_ipv4_net: <span class="string">&quot;10.0.2.12&quot;</span></span><br><span class="line"></span><br><span class="line">sim_cards:</span><br><span class="line">- name: <span class="string">&quot;Sim26&quot;</span></span><br><span class="line">  imsi: <span class="string">&quot;imsi-999700000128110&quot;</span></span><br><span class="line">  key: <span class="string">&quot;E501DCD94E0912B04AE041619DA43421&quot;</span></span><br><span class="line">  opc: <span class="string">&quot;13082466301232D8B8BB299F1867A861&quot;</span></span><br><span class="line">  apn: <span class="string">&quot;internet&quot;</span></span><br><span class="line">  sst: <span class="string">&quot;1&quot;</span></span><br><span class="line">  sd: <span class="string">&quot;000000&quot;</span></span><br><span class="line">  gpsis: <span class="string">&quot;msisdn-0900000005&quot;</span></span><br><span class="line"></span><br><span class="line">- name: <span class="string">&quot;Sim28&quot;</span></span><br><span class="line">  imsi: <span class="string">&quot;imsi-001010000105331&quot;</span></span><br><span class="line">  key: <span class="string">&quot;22231214410527097343456132856119&quot;</span></span><br><span class="line">  opc: <span class="string">&quot;35400111987345158373161168419158&quot;</span></span><br><span class="line">  apn: <span class="string">&quot;internet&quot;</span></span><br><span class="line">  sst: <span class="string">&quot;1&quot;</span></span><br><span class="line">  sd: <span class="string">&quot;000000&quot;</span></span><br><span class="line">  gpsis: <span class="string">&quot;msisdn-0900000006&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="vars"><a href="#vars" class="headerlink" title="vars"></a>vars</h2><ul>
+<li>作用： 存放角色的变量（优先级高于defaults）</li>
+<li>用于定义角色强制需要的变量，通常不建议轻易覆盖</li>
+</ul>
+<h2 id="tasks"><a href="#tasks" class="headerlink" title="tasks"></a>tasks</h2><ul>
+<li>作用： 角色的核心任务清单，定义执行的操作步骤</li>
+<li>文件一般为main.yml</li>
+<li>例如安装软件、复制文件、配置服务等</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- name: Install Corepack</span><br><span class="line">  become: <span class="built_in">yes</span></span><br><span class="line">  npm:</span><br><span class="line">    name: corepack</span><br><span class="line">    global: <span class="built_in">yes</span></span><br><span class="line"></span><br><span class="line">- name: Enable corepark</span><br><span class="line">  <span class="built_in">command</span>: corepack <span class="built_in">enable</span></span><br><span class="line">  <span class="comment"># when: yarn_version.rc != 0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- name: <span class="string">&quot;INSTALL-TASKS-gtp5g-SOURCE - Run gtp5g build&quot;</span></span><br><span class="line">  tags: gtp5g build</span><br><span class="line">  <span class="comment"># become_user: &quot;&#123;&#123; normal_user_id &#125;&#125;&quot;</span></span><br><span class="line">  become: <span class="built_in">yes</span></span><br><span class="line">  <span class="built_in">command</span>: <span class="built_in">sudo</span> make</span><br><span class="line">  args:</span><br><span class="line">    <span class="built_in">chdir</span>: <span class="string">&quot;&#123;&#123; gtp5g_src.dest_dir &#125;&#125;&quot;</span></span><br><span class="line">  when: gtp5g_module.rc != 0</span><br><span class="line"></span><br><span class="line">- name: <span class="string">&quot;INSTALL-TASKS-gtp5g-SOURCE - Run gtp5g install&quot;</span></span><br><span class="line">  tags: gtp5g install</span><br><span class="line">  become: <span class="built_in">yes</span></span><br><span class="line">  <span class="built_in">command</span>:   make install</span><br><span class="line">  args:</span><br><span class="line">    <span class="built_in">chdir</span>: <span class="string">&quot;&#123;&#123; gtp5g_src.dest_dir &#125;&#125;&quot;</span></span><br><span class="line">  when: gtp5g_module.rc != 0</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="templates"><a href="#templates" class="headerlink" title="templates"></a>templates</h2><ul>
+<li>作用： 存放jinja2模板文件，用于生成动态配置文件</li>
+<li>在模版文件中可以使用变量、 条件语句等</li>
+<li>在tasks中通过template模板调用</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line">info:</span><br><span class="line">  version: 1.0.9</span><br><span class="line">  description: AMF initial <span class="built_in">local</span> configuration</span><br><span class="line"></span><br><span class="line">configuration:</span><br><span class="line">  amfName: AMF <span class="comment"># the name of this AMF</span></span><br><span class="line">  ngapIpList:  <span class="comment"># the IP list of N2 interfaces on this AMF</span></span><br><span class="line">    - &#123;&#123; amf_ipv4_net &#125;&#125;</span><br><span class="line">  ngapPort: 38412 <span class="comment"># the SCTP port listened by NGAP</span></span><br><span class="line">  sbi: <span class="comment"># Service-based interface information</span></span><br><span class="line">    scheme: http <span class="comment"># the protocol for sbi (http or https)</span></span><br><span class="line">    registerIPv4: 127.0.0.18 <span class="comment"># IP used to register to NRF</span></span><br><span class="line">    bindingIPv4: 127.0.0.18  <span class="comment"># IP used to bind the service</span></span><br><span class="line">    port: 8000 <span class="comment"># port used to bind the service</span></span><br><span class="line">    tls: <span class="comment"># the local path of TLS key</span></span><br><span class="line">      pem: cert/amf.pem <span class="comment"># AMF TLS Certificate</span></span><br><span class="line">      key: cert/amf.key <span class="comment"># AMF TLS Private key</span></span><br><span class="line">  serviceNameList: <span class="comment"># the SBI services provided by this AMF, refer to TS 29.518</span></span><br><span class="line">    - namf-comm <span class="comment"># Namf_Communication service</span></span><br><span class="line">    - namf-evts <span class="comment"># Namf_EventExposure service</span></span><br><span class="line">    - namf-mt   <span class="comment"># Namf_MT service</span></span><br><span class="line">    - namf-loc  <span class="comment"># Namf_Location service</span></span><br><span class="line">    - namf-oam  <span class="comment"># OAM service</span></span><br><span class="line">  servedGuamiList: <span class="comment"># Guami (Globally Unique AMF ID) list supported by this AMF</span></span><br><span class="line">    <span class="comment"># &lt;GUAMI&gt; = &lt;MCC&gt;&lt;MNC&gt;&lt;AMF ID&gt;</span></span><br><span class="line">    - plmnId: <span class="comment"># Public Land Mobile Network ID, &lt;PLMN ID&gt; = &lt;MCC&gt;&lt;MNC&gt;</span></span><br><span class="line">        mcc: &#123;&#123; core_mcc &#125;&#125; <span class="comment"># Mobile Country Code (3 digits string, digit: 0~9)</span></span><br><span class="line">        mnc: &#123;&#123; core_mnc &#125;&#125; <span class="comment"># Mobile Network Code (2 or 3 digits string, digit: 0~9)</span></span><br><span class="line">      amfId: cafe00 <span class="comment"># AMF identifier (3 bytes hex string, range: 000000~FFFFFF)</span></span><br><span class="line">  supportTaiList:  <span class="comment"># the TAI (Tracking Area Identifier) list supported by this AMF</span></span><br><span class="line">    - plmnId: <span class="comment"># Public Land Mobile Network ID, &lt;PLMN ID&gt; = &lt;MCC&gt;&lt;MNC&gt;</span></span><br><span class="line">        mcc: &#123;&#123; core_mcc &#125;&#125; <span class="comment"># Mobile Country Code (3 digits string, digit: 0~9)</span></span><br><span class="line">        mnc: &#123;&#123; core_mnc &#125;&#125; <span class="comment"># Mobile Network Code (2 or 3 digits string, digit: 0~9)</span></span><br><span class="line">      <span class="built_in">tac</span>: &#123;&#123; core_tac &#125;&#125; <span class="comment"># Tracking Area Code (3 bytes hex string, range: 000000~FFFFFF)</span></span><br><span class="line">  plmnSupportList: <span class="comment"># the PLMNs (Public land mobile network) list supported by this AMF</span></span><br><span class="line">    - plmnId: <span class="comment"># Public Land Mobile Network ID, &lt;PLMN ID&gt; = &lt;MCC&gt;&lt;MNC&gt;</span></span><br><span class="line">        mcc: &#123;&#123; core_mcc &#125;&#125; <span class="comment"># Mobile Country Code (3 digits string, digit: 0~9)</span></span><br><span class="line">        mnc: &#123;&#123; core_mnc &#125;&#125; <span class="comment"># Mobile Network Code (2 or 3 digits string, digit: 0~9)</span></span><br><span class="line">      snssaiList: <span class="comment"># the S-NSSAI (Single Network Slice Selection Assistance Information) list supported by this AMF</span></span><br><span class="line">        - sst: &#123;&#123; core_sst &#125;&#125; <span class="comment"># Slice/Service Type (uinteger, range: 0~255)</span></span><br><span class="line">          sd: &#123;&#123; core_sd &#125;&#125; <span class="comment"># Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)</span></span><br><span class="line">        - sst: 1 <span class="comment"># Slice/Service Type (uinteger, range: 0~255)</span></span><br><span class="line">          sd: 112233 <span class="comment"># Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)</span></span><br><span class="line">  supportDnnList:  <span class="comment"># the DNN (Data Network Name) list supported by this AMF</span></span><br><span class="line">    - internet</span><br><span class="line">  nrfUri: http://127.0.0.10:8000 <span class="comment"># a valid URI of NRF</span></span><br><span class="line">  nrfCertPem: cert/nrf.pem <span class="comment"># NRF Certificate</span></span><br><span class="line">  security:  <span class="comment"># NAS security parameters</span></span><br><span class="line">    integrityOrder: <span class="comment"># the priority of integrity algorithms</span></span><br><span class="line">      - NIA2</span><br><span class="line">      <span class="comment"># - NIA0</span></span><br><span class="line">    cipheringOrder: <span class="comment"># the priority of ciphering algorithms</span></span><br><span class="line">      - NEA0</span><br><span class="line">      - NEA2</span><br><span class="line">  networkName:  <span class="comment"># the name of this core network</span></span><br><span class="line">    full: free5GC</span><br><span class="line">    short: free</span><br><span class="line">  ngapIE: <span class="comment"># Optional NGAP IEs</span></span><br><span class="line">    mobilityRestrictionList: <span class="comment"># Mobility Restriction List IE, refer to TS 38.413</span></span><br><span class="line">      <span class="built_in">enable</span>: <span class="literal">true</span> <span class="comment"># append this IE in related message or not</span></span><br><span class="line">    maskedIMEISV: <span class="comment"># Masked IMEISV IE, refer to TS 38.413</span></span><br><span class="line">      <span class="built_in">enable</span>: <span class="literal">true</span> <span class="comment"># append this IE in related message or not</span></span><br><span class="line">    redirectionVoiceFallback: <span class="comment"># Redirection Voice Fallback IE, refer to TS 38.413</span></span><br><span class="line">      <span class="built_in">enable</span>: <span class="literal">false</span> <span class="comment"># append this IE in related message or not</span></span><br><span class="line">  nasIE: <span class="comment"># Optional NAS IEs</span></span><br><span class="line">    networkFeatureSupport5GS: <span class="comment"># 5gs Network Feature Support IE, refer to TS 24.501</span></span><br><span class="line">      <span class="built_in">enable</span>: <span class="literal">true</span> <span class="comment"># append this IE in Registration accept or not</span></span><br><span class="line">      length: 1 <span class="comment"># IE content length (uinteger, range: 1~3)</span></span><br><span class="line">      imsVoPS: 0 <span class="comment"># IMS voice over PS session indicator (uinteger, range: 0~1)</span></span><br><span class="line">      emc: 0 <span class="comment"># Emergency service support indicator for 3GPP access (uinteger, range: 0~3)</span></span><br><span class="line">      emf: 0 <span class="comment"># Emergency service fallback indicator for 3GPP access (uinteger, range: 0~3)</span></span><br><span class="line">      iwkN26: 0 <span class="comment"># Interworking without N26 interface indicator (uinteger, range: 0~1)</span></span><br><span class="line">      mpsi: 0 <span class="comment"># MPS indicator (uinteger, range: 0~1)</span></span><br><span class="line">      emcN3: 0 <span class="comment"># Emergency service support indicator for Non-3GPP access (uinteger, range: 0~1)</span></span><br><span class="line">      mcsi: 0 <span class="comment"># MCS indicator (uinteger, range: 0~1)</span></span><br><span class="line">  t3502Value: 720  <span class="comment"># timer value (seconds) at UE side</span></span><br><span class="line">  t3512Value: 3600 <span class="comment"># timer value (seconds) at UE side</span></span><br><span class="line">  non3gppDeregTimerValue: 3240 <span class="comment"># timer value (seconds) at UE side</span></span><br><span class="line">  <span class="comment"># retransmission timer for paging message</span></span><br><span class="line">  t3513:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  <span class="comment"># retransmission timer for NAS Deregistration Request message</span></span><br><span class="line">  t3522:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  <span class="comment"># retransmission timer for NAS Registration Accept message</span></span><br><span class="line">  t3550:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  <span class="comment"># retransmission timer for NAS Configuration Update Command message</span></span><br><span class="line">  t3555:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  <span class="comment"># retransmission timer for NAS Authentication Request/Security Mode Command message</span></span><br><span class="line">  t3560:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  <span class="comment"># retransmission timer for NAS Notification message</span></span><br><span class="line">  t3565:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  <span class="comment"># retransmission timer for NAS Identity Request message</span></span><br><span class="line">  t3570:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span>     <span class="comment"># true or false</span></span><br><span class="line">    expireTime: 6s   <span class="comment"># default is 6 seconds</span></span><br><span class="line">    maxRetryTimes: 4 <span class="comment"># the max number of retransmission</span></span><br><span class="line">  locality: area1 <span class="comment"># Name of the location where a set of AMF, SMF, PCF and UPFs are located</span></span><br><span class="line">  sctp: <span class="comment"># set the sctp server setting &lt;optinal&gt;, once this field is set, please also add maxInputStream, maxOsStream, maxAttempts, maxInitTimeOut</span></span><br><span class="line">    numOstreams: 3 <span class="comment"># the maximum out streams of each sctp connection</span></span><br><span class="line">    maxInstreams: 5 <span class="comment"># the maximum in streams of each sctp connection</span></span><br><span class="line">    maxAttempts: 2 <span class="comment"># the maximum attempts of each sctp connection</span></span><br><span class="line">    maxInitTimeout: 2 <span class="comment"># the maximum init timeout of each sctp connection</span></span><br><span class="line">  defaultUECtxReq: <span class="literal">false</span> <span class="comment"># the default value of UE Context Request to decide when triggering Initial Context Setup procedure</span></span><br><span class="line"></span><br><span class="line">logger: <span class="comment"># log output setting</span></span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span> <span class="comment"># true or false</span></span><br><span class="line">  level: info <span class="comment"># how detailed to output, value: trace, debug, info, warn, error, fatal, panic</span></span><br><span class="line">  reportCaller: <span class="literal">false</span> <span class="comment"># enable the caller report or not, value: true or false</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/01/MIMOBeamforming/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/01/MIMOBeamforming/" class="post-title-link" itemprop="url">MIMOBeamforming</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-01 00:58:24 / Modified: 01:21:46" itemprop="dateCreated datePublished" datetime="2025-08-01T00:58:24+08:00">2025-08-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h1 id="MIMO-OFDM-波束成形系统理论介绍"><a href="#MIMO-OFDM-波束成形系统理论介绍" class="headerlink" title="MIMO-OFDM 波束成形系统理论介绍"></a>MIMO-OFDM 波束成形系统理论介绍</h1><h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><p>现代无线通信系统（如 5G NR、LTE、WLAN）普遍采用 <strong>MIMO-OFDM</strong> 技术，因其对频率选择性衰落信道的鲁棒性及高数据速率的支持。随着应用需求的增加，系统配置日益复杂，天线阵列规模和子载波数量大幅提升，多天线、多流传输成为主流。</p>
+<h2 id="2-天线阵列与波束成形"><a href="#2-天线阵列与波束成形" class="headerlink" title="2. 天线阵列与波束成形"></a>2. 天线阵列与波束成形</h2><p>通过多个天线元素组成的阵列，系统可实现<strong>空间复用</strong>和<strong>波束成形</strong>。波束成形（Beamforming）是利用空间信号处理技术调整发射信号的相位和幅度，使信号在目标方向上增强，同时抑制干扰，提高信噪比（SNR）和系统性能（如降低误码率 BER）。<br>在多天线系统中，除了数字基带层面的预编码外，通常还会应用 射频波束成形矩阵 (Frf)，这是在模拟射频前端对信号进行加权处理，实现对天线阵列的物理波束成形。</p>
+<p>射频波束成形通过对数字基带信号乘以 Frf 矩阵，将信号映射到各个天线单元。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">% RF beamforming: Apply Frf to the digital signal            </span><br><span class="line">% Each antenna element is connected to each data stream</span><br><span class="line">txSig = txSigSTS*mFrf;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-波束成形的关键流程"><a href="#3-波束成形的关键流程" class="headerlink" title="3. 波束成形的关键流程"></a>3. 波束成形的关键流程</h2><h3 id="接收端-Channel-Sounding"><a href="#接收端-Channel-Sounding" class="headerlink" title="接收端(Channel Sounding)"></a>接收端(Channel Sounding)</h3><p>Preamble Tx -&gt; MIMO Channel -&gt; OFDM Rx -&gt; MIMO Channel Estimate -&gt; SVD -&gt; nfrf</p>
+<h3 id="发射端-Precoding-from-channel-sounding"><a href="#发射端-Precoding-from-channel-sounding" class="headerlink" title="发射端 (Precoding from channel sounding)"></a>发射端 (Precoding from channel sounding)</h3><p>系统建模时，将天线阵列位置、天线方向图和空间信道特性纳入设计，采用如下流程：</p>
+<p>数据编码 → 预编码（基于信道测量）→ OFDM调制 → 发射波束成形 → MIMO信道 → 接收波束成形 → OFDM解调 → 数据恢复</p>
+<h3 id="具体步骤说明："><a href="#具体步骤说明：" class="headerlink" title="具体步骤说明："></a>具体步骤说明：</h3><ol>
+<li><p><strong>编码与调制</strong><br>发送数据先经过信源编码和信道编码提升可靠性，再映射成数字调制符号。</p>
+</li>
+<li><p><strong>信道测量与预编码</strong><br>通过信道探测（Channel Sounding）获取信道状态信息（CSI），基于 CSI 设计预编码矩阵，实现多流的空间分离和干扰抑制。</p>
+</li>
+<li><p><strong>OFDM 调制</strong><br>将频域符号映射到多个正交子载波，经过 IFFT 生成时域 OFDM 符号，并添加循环前缀以抵抗符号间干扰。</p>
+</li>
+<li><p><strong>发射波束成形</strong><br>通过射频预编码矩阵对数字基带信号进行加权组合，形成定向的传输波束，提高发射信号的方向增益。</p>
+</li>
+<li><p><strong>MIMO 空间信道</strong><br>模拟多径衰落、散射及路径损耗，采用 WINNER II 等复杂空间信道模型，真实反映无线环境。</p>
+</li>
+<li><p><strong>接收波束成形</strong><br>接收端根据信道特性调整接收波束，最大化信号质量。</p>
+</li>
+<li><p><strong>OFDM 解调与数据恢复</strong><br>移除循环前缀，FFT 变换回频域，进行符号检测和译码，恢复原始数据。</p>
+</li>
+</ol>
+<h2 id="4-系统优势"><a href="#4-系统优势" class="headerlink" title="4. 系统优势"></a>4. 系统优势</h2><ul>
+<li><strong>抗频率选择性衰落</strong>：OFDM 将宽带信道分解为多个平坦子信道。</li>
+<li><strong>空间复用</strong>：多天线支持多数据流并行传输，提升频谱效率。</li>
+<li><strong>波束成形提升 SNR</strong>：信号能量聚焦于接收端，提高可靠性。</li>
+<li><strong>灵活信道模型</strong>：支持多种空间信道模型，便于性能评估和系统设计。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/21/pandas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/07/21/pandas/" class="post-title-link" itemprop="url">pandas</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-07-21 20:17:58 / Modified: 22:26:15" itemprop="dateCreated datePublished" datetime="2025-07-21T20:17:58+08:00">2025-07-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h1 id="pandas-基础语法速查"><a href="#pandas-基础语法速查" class="headerlink" title="pandas 基础语法速查"></a>pandas 基础语法速查</h1><p>以下内容基于对 pandas 基础用法的常见问题整理，方便快速入门和复习。</p>
+<hr>
+<h2 id="1-查看数据"><a href="#1-查看数据" class="headerlink" title="1. 查看数据"></a>1. 查看数据</h2><ul>
+<li><p><code>df.head()</code><br>返回数据框前 5 行（默认），可以用 <code>df.head(n)</code> 查看前 n 行。<br>用于快速预览数据。</p>
+</li>
+<li><p><code>df.iloc[:, :-1].values</code><br>用 <code>.iloc</code> 按位置索引，<code>:,:-1</code> 表示所有行，除最后一列以外的所有列。<br><code>.values</code> 返回对应的 NumPy 数组。</p>
+</li>
+<li><p><code>df.values</code><br>将整个 DataFrame 转换为 NumPy 数组，包含所有数据（数值和非数值都可能存在）。</p>
+</li>
+</ul>
+<hr>
+<h2 id="2-处理缺失值"><a href="#2-处理缺失值" class="headerlink" title="2. 处理缺失值"></a>2. 处理缺失值</h2><ul>
+<li><code>df.fillna(0, inplace=True)</code><br>将所有缺失值（NaN）替换为 0，<code>inplace=True</code> 代表直接修改原 DataFrame。</li>
+</ul>
+<hr>
+<h2 id="3-唯一值和类别编码"><a href="#3-唯一值和类别编码" class="headerlink" title="3. 唯一值和类别编码"></a>3. 唯一值和类别编码</h2><ul>
+<li><p><code>df.Summary.unique()</code><br>返回列 <code>Summary</code> 中所有唯一的值（去重后的列表）。</p>
+</li>
+<li><p><code>df.LoudCover.unique()</code><br>类似，返回 <code>LoudCover</code> 列所有唯一值。</p>
+</li>
+<li><p>Label Encoding  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line">  labelencoder = LabelEncoder()</span><br><span class="line">  df[<span class="string">&#x27;Summary&#x27;</span>] = labelencoder.fit_transform(df[<span class="string">&#x27;Summary&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">## 4. 相关性分析</span></span><br><span class="line">- df.corr()</span><br><span class="line">计算数值列之间的相关系数矩阵（默认是 Pearson 相关系数）。</span><br><span class="line"></span><br><span class="line">注意：执行 df.corr() 前，确保 DataFrame 中只包含数值列，否则可能报错。</span><br><span class="line">- 热力图可视化</span><br><span class="line">```bash</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sn</span><br><span class="line">sn.heatmap(df.select_dtypes(include=[<span class="string">&#x27;number&#x27;</span>]).corr())</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="5-数据拼接与转换"><a href="#5-数据拼接与转换" class="headerlink" title="5. 数据拼接与转换"></a>5. 数据拼接与转换</h2><ul>
+<li>pd.concat(cols, axis &#x3D; 1)<br>将列表 cols 中的多个 DataFrame 按列合并成一个大 DataFrame。</li>
+<li>.shift(n)<br>对时间序列数据进行平移（滞后或提前）。<br>例如：df.shift(1) 会将所有数据下移一行，原第一行变为 NaN。</li>
+</ul>
+<h2 id="6-Numpy与Pandas转换"><a href="#6-Numpy与Pandas转换" class="headerlink" title="6. Numpy与Pandas转换"></a>6. Numpy与Pandas转换</h2><ul>
+<li>DataFrame转为NumPy数组</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = df.values</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>只保留数值列转为数组</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = df.select_dtypes(include=[<span class="string">&#x27;number&#x27;</span>]).values</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/21/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2213,577 +2623,6 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/15/C++/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/15/C++/" class="post-title-link" itemprop="url">C++</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-06-15 13:13:04" itemprop="dateCreated datePublished" datetime="2025-06-15T13:13:04+08:00">2025-06-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-04 13:16:00" itemprop="dateModified" datetime="2025-08-04T13:16:00+08:00">2025-08-04</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h1 id="C-STL容器"><a href="#C-STL容器" class="headerlink" title="C++ STL容器"></a>C++ STL容器</h1><h2 id="unordered-set与unordered-map"><a href="#unordered-set与unordered-map" class="headerlink" title="unordered_set与unordered_map"></a>unordered_set与unordered_map</h2><table>
-<thead>
-<tr>
-<th>特性</th>
-<th><code>std::unordered_set</code></th>
-<th><code>std::unordered_map</code></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>存储内容</strong></td>
-<td>只存储 <strong>键</strong>（key）</td>
-<td>存储 <strong>键值对</strong>（key-value）</td>
-</tr>
-<tr>
-<td><strong>访问方式</strong></td>
-<td>只能通过键判断元素是否存在</td>
-<td>通过键访问对应的值，例如：<code>map[key]</code></td>
-</tr>
-<tr>
-<td><strong>典型用途</strong></td>
-<td>用于判断元素是否存在、集合操作</td>
-<td>用于映射关系，如字符串到整数的字典映射</td>
-</tr>
-<tr>
-<td><strong>示例声明</strong></td>
-<td><code>std::unordered_set&lt;int&gt; s;</code></td>
-<td><code>std::unordered_map&lt;std::string, int&gt; m;</code></td>
-</tr>
-<tr>
-<td><strong>内部实现</strong></td>
-<td>哈希表（只哈希 key）</td>
-<td>哈希表（key 哈希 + value 存储）</td>
-</tr>
-</tbody></table>
-<p>unordered_set常用来代替vector来判断元素是否存在，因为它的find操作的时间复杂度是O(1)</p>
-<h2 id="vector基本用法"><a href="#vector基本用法" class="headerlink" title="vector基本用法"></a>vector基本用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;int&gt; v1;                  // 空 vector</span><br><span class="line">std::vector&lt;int&gt; v2(5);               // 5 个默认值元素（0）</span><br><span class="line">std::vector&lt;int&gt; v3(5, 42);           // 5 个元素，值为 42</span><br><span class="line">std::vector&lt;int&gt; v4 = &#123;1, 2, 3&#125;;      // 使用列表初始化</span><br><span class="line">v.push_back(x);     // 添加元素</span><br><span class="line">v.pop_back();       // 删除最后一个元素</span><br><span class="line">v.size();           // 返回元素个数</span><br><span class="line">v.empty();          // 是否为空</span><br><span class="line">v.clear();          // 清空所有元素</span><br><span class="line">v.front();          // 返回第一个元素</span><br><span class="line">v.back();           // 返回最后一个元素</span><br><span class="line">v[i];               // 访问第 i 个元素</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="vector遍历方式"><a href="#vector遍历方式" class="headerlink" title="vector遍历方式"></a>vector遍历方式</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;int&gt; v = &#123;1, 2, 3&#125;;</span><br><span class="line"></span><br><span class="line">// 方法 1：范围 <span class="keyword">for</span> 循环</span><br><span class="line"><span class="keyword">for</span> (int x : v) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">x &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 方法 2：索引访问</span></span><br><span class="line"><span class="string">for (int i = 0; i &lt; v.size(); ++i) &#123;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; v[i] &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 方法 3：普通迭代器</span></span><br><span class="line"><span class="string">for (auto it = v.begin(); it != v.end(); ++it) &#123;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; *it &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 方法 4：反向迭代器</span></span><br><span class="line"><span class="string">for (auto rit = v.rbegin(); rit != v.rend(); ++rit) &#123;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; *rit &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="迭代器基本用法"><a href="#迭代器基本用法" class="headerlink" title="迭代器基本用法"></a>迭代器基本用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">begin()	指向第一个元素的迭代器</span><br><span class="line">end()	指向最后一个元素之后的位置</span><br><span class="line">rbegin()	反向迭代器，指向最后一个元素</span><br><span class="line">rend()	反向迭代器，指向第一个元素之前</span><br><span class="line">cbegin()	常量迭代器，不能修改元素</span><br><span class="line">cend()	常量迭代器，指向末尾</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用迭代器拷贝容器"><a href="#使用迭代器拷贝容器" class="headerlink" title="使用迭代器拷贝容器"></a>使用迭代器拷贝容器</h2><p>std::vector<T> subvec(start_iter, end_iter);</p>
-<p>需注意这是左闭右开</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;vector&gt;</span></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    std::vector&lt;int&gt; original = &#123;1, 2, 3, 4, 5&#125;;</span><br><span class="line"></span><br><span class="line">    // 拷贝整个 original 到 copy（完整复制）</span><br><span class="line">    std::vector&lt;int&gt; copy(original.begin(), original.end());</span><br><span class="line"></span><br><span class="line">    // 拷贝 original 的前 3 个元素 [0,3) -&gt; 元素 1, 2, 3</span><br><span class="line">    std::vector&lt;int&gt; firstHalf(original.begin(), original.begin() + 3);</span><br><span class="line"></span><br><span class="line">    // 拷贝 original 的后两个元素 [3,5) -&gt; 元素 4, 5</span><br><span class="line">    std::vector&lt;int&gt; lastPart(original.begin() + 3, original.end());</span><br><span class="line"></span><br><span class="line">    // 输出结果</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;copy: &quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (int num : copy) std::cout &lt;&lt; <span class="string">num &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; &quot;\nfirstHalf: &quot;;</span></span><br><span class="line"><span class="string">    for (int num</span> : firstHalf) std::cout &lt;&lt; <span class="string">num &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; &quot;\nlastPart: &quot;;</span></span><br><span class="line"><span class="string">    for (int num</span> : lastPart) std::cout &lt;&lt; <span class="string">num &lt;&lt; &quot; &quot;;</span></span><br><span class="line"><span class="string">    std::cout &lt;&lt; std::endl;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>输出结构：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">copy: 1 2 3 4 5</span><br><span class="line">firstHalf: 1 2 3</span><br><span class="line">lastPart: 4 5</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h1 id="引用"><a href="#引用" class="headerlink" title="&amp;引用"></a>&amp;引用</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">string res;</span><br><span class="line"><span class="keyword">for</span> (const string &amp;row : rows)</span><br><span class="line">    res += row;</span><br><span class="line"><span class="built_in">return</span> res;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th>写法</th>
-<th>拷贝？</th>
-<th>推荐？</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>const string &amp;row</code></td>
-<td>❌ 否</td>
-<td>✅ 是</td>
-</tr>
-<tr>
-<td><code>const string row</code></td>
-<td>✅ 是</td>
-<td>⚠️ 否</td>
-</tr>
-</tbody></table>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>凡是遍历容器但不需要修改元素时，都用 const T&amp;，可以大大减少不必要的拷贝。<br></p>
-</blockquote>
-<hr>
-<h2 id="右键引用"><a href="#右键引用" class="headerlink" title="右键引用"></a>右键引用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 右值引用（C++11）</span><br><span class="line">int &amp;&amp;rref = 10; // rref 是 10 的别名（只能绑定临时对象）</span><br></pre></td></tr></table></figure>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><ul>
-<li>函数接收临时对象进行移动构造或资源转移</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">void setValue(std::string&amp;&amp; s) &#123;</span><br><span class="line">    value = std::move(s); // 转移 s 的内容</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其中std::string&amp;&amp; s接受一个右值引用（临时对象），如：setValue(“hello”).<br>需要注意的是虽然s是右值引用，但它在函数体中是一个左值变量，会调用拷贝赋值，浪费性能。因此我们需要使用<strong>move</strong>来将s明确标记为右值。</p>
-<h1 id="C-Lambda-表达式（匿名函数）使用"><a href="#C-Lambda-表达式（匿名函数）使用" class="headerlink" title="C++ Lambda 表达式（匿名函数）使用"></a>C++ Lambda 表达式（匿名函数）使用</h1><p>Lambda表达式是C++11引入的一种简洁方式，用于定义匿名函数。适用于临时定义函数逻辑，可以在函数内定义</p>
-<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><ul>
-<li><strong>capture</strong> 捕捉外部变量</li>
-<li><strong>parameter_list</strong> 参数列表</li>
-<li><strong>return_type</strong>(可选) 返回类型</li>
-<li><strong>function_body</strong> 函数体</li>
-</ul>
-<h2 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 最基本的Lambda</span><br><span class="line">auto add = [](int a, int b)&#123;</span><br><span class="line">    <span class="built_in">return</span> a + b;</span><br><span class="line">&#125;;</span><br><span class="line">int result = add(3,4);</span><br><span class="line">// 捕捉外部变量</span><br><span class="line">int x = 10;</span><br><span class="line">auto printX = [=]()&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">x &lt;&lt; std::endl;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">// 捕捉外部变量(按引用)</span></span><br><span class="line"><span class="string">int y = 5;</span></span><br><span class="line"><span class="string">auto increaseY = [&amp;]()&#123;</span></span><br><span class="line"><span class="string">    y += 1;</span></span><br><span class="line"><span class="string">&#125;;</span></span><br><span class="line"><span class="string">increaseY();</span></span><br></pre></td></tr></table></figure>
-<h2 id="捕捉列表说明"><a href="#捕捉列表说明" class="headerlink" title="捕捉列表说明"></a>捕捉列表说明</h2><table>
-<thead>
-<tr>
-<th>写法</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>[=]</code></td>
-<td>按值捕获所有外部变量（不可修改）</td>
-</tr>
-<tr>
-<td><code>[&amp;]</code></td>
-<td>按引用捕获所有外部变量（可修改）</td>
-</tr>
-<tr>
-<td><code>[=, &amp;x]</code></td>
-<td>除 <code>x</code> 外按值捕获，<code>x</code> 按引用捕获</td>
-</tr>
-<tr>
-<td><code>[x, &amp;y]</code></td>
-<td><code>x</code> 按值捕获，<code>y</code> 按引用捕获</td>
-</tr>
-<tr>
-<td><code>[this]</code></td>
-<td>捕获当前类对象指针</td>
-</tr>
-</tbody></table>
-<h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><h3 id="string-substr"><a href="#string-substr" class="headerlink" title="string.substr"></a>string.substr</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string x=<span class="string">&quot;abc&quot;</span>;</span><br><span class="line">string y = x.substr(0,1);</span><br></pre></td></tr></table></figure>
-
-<h2 id="Heap"><a href="#Heap" class="headerlink" title="Heap"></a>Heap</h2><p>std::priority_queue构建max heap或min heap, 用于：  </p>
-<ul>
-<li>插入元素 push</li>
-<li>获取最大值 top</li>
-<li>删除最大值 pop</li>
-</ul>
-<p>最大堆不是平衡数或哈希表，因此只允许删除堆顶元素</p>
-<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;queue&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    std::priority_queue&lt;int&gt; maxHeap;</span><br><span class="line"></span><br><span class="line">    // 插入元素</span><br><span class="line">    maxHeap.push(10);</span><br><span class="line">    maxHeap.push(50);</span><br><span class="line">    maxHeap.push(30);</span><br><span class="line"></span><br><span class="line">    // 获取最大值</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;最大值: &quot;</span> &lt;&lt; <span class="string">maxHeap.top() &lt;&lt; std::endl;  // 50</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    // 删除最大值</span></span><br><span class="line"><span class="string">    maxHeap</span>.pop();</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;新的最大值: &quot;</span> &lt;&lt; <span class="string">maxHeap.top() &lt;&lt; std::endl;  // 30</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="红黑树-multiset"><a href="#红黑树-multiset" class="headerlink" title="红黑树(multiset)"></a>红黑树(multiset)</h2><p>红黑树的本质是一个<strong>自平衡的二叉搜索树</strong>,它通过着色和旋转操作，在插入和删除节点时保证树的高度近似平衡，从而让基本操作（查找，插入，删除）都能在O(logn)时间内完成<br>如果要频繁删除任意值，改用std::multiset，而不是heap. </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;set&gt;</span></span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    std::multiset&lt;int&gt; s;</span><br><span class="line"></span><br><span class="line">    s.insert(30);</span><br><span class="line">    s.insert(10);</span><br><span class="line">    s.insert(50);</span><br><span class="line"></span><br><span class="line">    // 获取最大值：反向迭代器 rbegin()</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;最大值: &quot;</span> &lt;&lt; *s.rbegin() &lt;&lt; <span class="string">std::endl;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    // 删除某个值（只删除一个）</span></span><br><span class="line"><span class="string">    s.erase(s.find(30));</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    std</span>::cout &lt;&lt; <span class="string">&quot;删除30后最大值: &quot;</span> &lt;&lt; *s.rbegin() &lt;&lt; <span class="string">std::endl;</span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
-<h2 id="红黑树-和-最大-最小堆-的对比"><a href="#红黑树-和-最大-最小堆-的对比" class="headerlink" title="红黑树 和 最大&#x2F;最小堆 的对比"></a>红黑树 和 最大&#x2F;最小堆 的对比</h2><table>
-<thead>
-<tr>
-<th>功能</th>
-<th><code>priority_queue</code></th>
-<th><code>multiset</code></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>获取最大值（O(1)）</td>
-<td>✅ 是</td>
-<td>❌ O(log n)</td>
-</tr>
-<tr>
-<td>删除堆顶</td>
-<td>✅ 是</td>
-<td>✅ 是（尾部删除）</td>
-</tr>
-<tr>
-<td>删除任意元素</td>
-<td>❌ 否</td>
-<td>✅ 支持（O(log n)）</td>
-</tr>
-<tr>
-<td>插入元素</td>
-<td>✅ O(log n)</td>
-<td>✅ O(log n)</td>
-</tr>
-<tr>
-<td>保持排序</td>
-<td>❌ 否</td>
-<td>✅ 自动排序</td>
-</tr>
-</tbody></table>
-<h2 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include&lt;queue&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">    queue&lt;int&gt; q;</span><br><span class="line">    q.push(5);</span><br><span class="line">    q.push(10);</span><br><span class="line">    q.push(15);</span><br><span class="line">    q.pop();</span><br><span class="line">    // 输出队首与队尾</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Front: &quot;</span> &lt;&lt; <span class="string">q.front() &lt;&lt; endl; // 5</span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;Back: &quot; &lt;&lt; q</span>.back() &lt;&lt; <span class="string">endl;   // 15</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
-<h1 id="拷贝"><a href="#拷贝" class="headerlink" title="拷贝"></a>拷贝</h1><h3 id="值拷贝"><a href="#值拷贝" class="headerlink" title="值拷贝"></a>值拷贝</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">void rotate(vector&lt;vector&lt;int&gt;&gt;&amp; matrix)&#123;</span><br><span class="line">    auto matrix_new = matrix;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>C++ 这里的 &#x3D; 拷贝是值拷贝，会得到一个新的数组</p>
-<h3 id="指针赋值"><a href="#指针赋值" class="headerlink" title="指针赋值"></a>指针赋值</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ListNode* smallHead = small;</span><br></pre></td></tr></table></figure>
-<p><strong>smallHead</strong>是另一个指针，它指向与small相同的节点（即两者指向的是同一个内存地址）<br>类似浅拷贝操作，都只是简单的指针赋值</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/12/MVC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/12/MVC/" class="post-title-link" itemprop="url">MVC</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-06-12 21:42:50 / Modified: 21:51:23" itemprop="dateCreated datePublished" datetime="2025-06-12T21:42:50+08:00">2025-06-12</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <hr>
-<h2 id="🧠-MVC-Architecture"><a href="#🧠-MVC-Architecture" class="headerlink" title="🧠 MVC Architecture"></a>🧠 MVC Architecture</h2><h3 id="🟢-Model-PizzaModel-java"><a href="#🟢-Model-PizzaModel-java" class="headerlink" title="🟢 Model (PizzaModel.java)"></a>🟢 Model (<code>PizzaModel.java</code>)</h3><ul>
-<li>Manages pizza size and toppings</li>
-<li>Maintains pricing data for sizes and toppings</li>
-<li>Calculates total price dynamically</li>
-</ul>
-<h4 id="Size-Prices"><a href="#Size-Prices" class="headerlink" title="Size Prices"></a>Size Prices</h4><table>
-<thead>
-<tr>
-<th>Size</th>
-<th>Base Price</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Small</td>
-<td>€4.00</td>
-</tr>
-<tr>
-<td>Medium</td>
-<td>€5.50</td>
-</tr>
-<tr>
-<td>Large</td>
-<td>€7.00</td>
-</tr>
-</tbody></table>
-<h4 id="Topping-Price-based-on-selected-size"><a href="#Topping-Price-based-on-selected-size" class="headerlink" title="Topping Price (based on selected size)"></a>Topping Price (based on selected size)</h4><table>
-<thead>
-<tr>
-<th>Size</th>
-<th>Topping Price</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Small</td>
-<td>€0.75</td>
-</tr>
-<tr>
-<td>Medium</td>
-<td>€1.00</td>
-</tr>
-<tr>
-<td>Large</td>
-<td>€1.45</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="🟡-View-PizzaView-java"><a href="#🟡-View-PizzaView-java" class="headerlink" title="🟡 View (PizzaView.java)"></a>🟡 View (<code>PizzaView.java</code>)</h3><ul>
-<li>Built with Java Swing</li>
-<li>Contains:<ul>
-<li>Size selection (radio buttons)</li>
-<li>Toppings selection (radio buttons)</li>
-<li>Total price display (<code>JTextField</code>)</li>
-<li>Pizza image (<code>Pizza.jpeg</code>)</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>Layout uses <code>BorderLayout</code> with components divided into size panel, topping panel, total price panel, and center image.</p>
-</blockquote>
-<hr>
-<h3 id="🔵-Controller-PizzaController-java"><a href="#🔵-Controller-PizzaController-java" class="headerlink" title="🔵 Controller (PizzaController.java)"></a>🔵 Controller (<code>PizzaController.java</code>)</h3><p>绑定View与Model</p>
-<ul>
-<li>Binds user interaction to logic</li>
-<li>Registers <code>ActionListener</code> to size and topping buttons<br>使用SizeRadioButtonListener类实现了ActionListener接口，用来监听用户点击按钮的行为。<br>然后给button通过addActionListener这个类从而实现监听功能</li>
-<li>On user interaction:<ul>
-<li>Updates model with size&#x2F;toppings</li>
-<li>Recalculates and updates price in the view</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="💡-How-It-Works"><a href="#💡-How-It-Works" class="headerlink" title="💡 How It Works"></a>💡 How It Works</h2><ol>
-<li>User selects a pizza size.</li>
-<li>Topping prices are adjusted based on size.</li>
-<li>User selects&#x2F;deselects toppings.</li>
-<li>Total price updates live on the GUI.</li>
-</ol>
-<hr>
-<h2 id="🖼️-GUI-Screenshot-Placeholder"><a href="#🖼️-GUI-Screenshot-Placeholder" class="headerlink" title="🖼️ GUI Screenshot Placeholder"></a>🖼️ GUI Screenshot Placeholder</h2><blockquote>
-<p>Make sure to include <code>Pizza.jpeg</code> in the <code>pizzacalculationtool</code> package folder.</p>
-</blockquote>
-<pre><code class="language-java">new ImageIcon(getClass().getResource(&quot;Pizza.jpeg&quot;))
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/11/MyBatis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/11/MyBatis/" class="post-title-link" itemprop="url">MyBatis</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-06-11 22:51:28" itemprop="dateCreated datePublished" datetime="2025-06-11T22:51:28+08:00">2025-06-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-12 21:24:36" itemprop="dateModified" datetime="2025-06-12T21:24:36+08:00">2025-06-12</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>Maven项目的配置文件包括<strong>pom.xml</strong>和<strong>mybatis-config.xml</strong>（核心配置文件）</p>
-<h3 id="mybatis-config-xml组成部分"><a href="#mybatis-config-xml组成部分" class="headerlink" title="mybatis-config.xml组成部分"></a>mybatis-config.xml组成部分</h3><ul>
-<li>properties<br>读取数据库连接参数（外部配置）</li>
-<li>typeAliases<br>简化JavaBean类型写法</li>
-<li>environments</li>
-<li><strong>mappers</strong><br>扫描Mapper接口所在包，自动注册为映射器</li>
-</ul>
-<h3 id="pom-xml组成部分"><a href="#pom-xml组成部分" class="headerlink" title="pom.xml组成部分"></a>pom.xml组成部分</h3><ul>
-<li>project标签</li>
-<li>公司，项目名，项目版本标签</li>
-<li>properties标签<br>  定义项目中的一些变量，方便统一管理<ul>
-<li>Java版本</li>
-<li>编码</li>
-<li>JavaFX版本</li>
-</ul>
-</li>
-<li>dependencies<br>  定义项目依赖的第三方库<ul>
-<li>MyBatis（Java ORM框架）</li>
-<li>MySQL JDBC驱动（mysql-connector-j）</li>
-<li>JUnit和Mockito（测试框架）</li>
-<li>JavaFX相关库</li>
-</ul>
-</li>
-</ul>
-<h2 id="映射器接口Mapper"><a href="#映射器接口Mapper" class="headerlink" title="映射器接口Mapper"></a>映射器接口Mapper</h2><p>DAO层（Data Access Object），也就是数据访问对象，和Mapper接口一致。</p>
-<h3 id="PreparationStep（实体类）"><a href="#PreparationStep（实体类）" class="headerlink" title="PreparationStep（实体类）"></a>PreparationStep（实体类）</h3><p>表示数据库中<strong>preparationstep</strong>表中的一条记录<br>用于封装数据表中的一行数据<br>同时可以作为PreparationStepMapper接口中方法的传递参数</p>
-<h3 id="PreparationStepMapper"><a href="#PreparationStepMapper" class="headerlink" title="PreparationStepMapper"></a>PreparationStepMapper</h3><p>用于定义数据库操作的方法，MyBatis会将其自动生成实现类<br>@Param(“xxx”)给参数命名，供XML中引用</p>
-<p>mapper接口的实例化</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">recipeIngredientMapper = sqlSession.getMapper(RecipeIngredientMapper.class);</span><br></pre></td></tr></table></figure>
-<p>目的是让MyBatis自动生成RecipeIngredientMapper接口的实现类，并返回其实例，然后可以调用这个类里通过调用其方法，并通过xml来进行sql映射。</p>
-<h3 id="PreparationStepMapper-xml（映射SQL文件）"><a href="#PreparationStepMapper-xml（映射SQL文件）" class="headerlink" title="PreparationStepMapper.xml（映射SQL文件）"></a>PreparationStepMapper.xml（映射SQL文件）</h3><p>负责将Mapper接口中定义的方法与具体SQL语句绑定</p>
-<h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><h3 id="View类"><a href="#View类" class="headerlink" title="View类"></a>View类</h3><ul>
-<li>MainPageView</li>
-<li>RecipeCreateView</li>
-<li>RecipeDisplayView</li>
-<li>RecipeSelectView</li>
-<li>SignView</li>
-</ul>
-<p>使用javafx来设计GUI</p>
-<h3 id="Model类"><a href="#Model类" class="headerlink" title="Model类"></a>Model类</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);  </span><br><span class="line">sqlSession = sqlSessionFactory.openSession();</span><br><span class="line">recipeIngredientMapper = sqlSession.getMapper(RecipeIngredientMapper.class);</span><br></pre></td></tr></table></figure>
-<p>先构建sqlSession，用于和sql会话交互，然后再分别getMapper获取每个Mapper</p>
-<h3 id="Controller类"><a href="#Controller类" class="headerlink" title="Controller类"></a>Controller类</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public class RecipeDisplayController implements EventHandler&lt;ActionEvent&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<p>其中EventHandler为接口，里面有handle方法，需要在RecipeDisplayControlle类里写这个方法，从而实现鼠标点击响应的功能</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">this.model = new Model();</span><br><span class="line">selectedRecipe = model.getRecipeByID(selectedRecipeNumber);</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>调用model里定义的方法</p>
-<h2 id="EC-BVA"><a href="#EC-BVA" class="headerlink" title="EC&#x2F;BVA"></a>EC&#x2F;BVA</h2><h3 id="EC"><a href="#EC" class="headerlink" title="EC"></a>EC</h3><p>有效等价类&#x2F;无效等价类<br>以username为例<br>username:<br>Value: String<br>ECs:<br>Valid:<br>EC V1 &#x3D; {userName | userName is a unique string, not purely numeric, and less<br>than 18 digits}<br>Invalid:<br>EC V2 &#x3D; {userName | userName duplicates an exsiting userName in the<br>database e.g. userName &#x3D; “HeChenyi”}<br>EC V3 &#x3D; {userName | userName is a purely numeric string}<br>EC V4 &#x3D; {userName | userName is more than 18 digits}<br>EC V5 &#x3D; {userName | userName is more than 18 digits}<br>EC V6 &#x3D; {userName | userName &#x3D; null}</p>
-<h3 id="Junit测试"><a href="#Junit测试" class="headerlink" title="Junit测试"></a>Junit测试</h3><p>也就是单元测试（Unit Test）类，用的是Junit5（org.junit.jupiter）编写的。<br>以下为Model.sign()方法设计的功能性单元测试，并且按照EC方法设计的测试用例，其包含以下方法名:</p>
-<ul>
-<li>testSignUserAlreadyExists</li>
-<li>testSignUserNameIsPureInteger</li>
-<li>testSignPasswordIsPureInteger</li>
-<li>testSignSuccess</li>
-</ul>
-<h3 id="BVA测试"><a href="#BVA测试" class="headerlink" title="BVA测试"></a>BVA测试</h3><p>可以测试密码最小长度，密码最大长度</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/11/%E6%95%B0%E5%AD%97%E5%9F%BA%E5%B8%A6%E4%BF%A1%E5%8F%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/11/%E6%95%B0%E5%AD%97%E5%9F%BA%E5%B8%A6%E4%BF%A1%E5%8F%B7/" class="post-title-link" itemprop="url">数字基带信号</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-06-11 00:03:04" itemprop="dateCreated datePublished" datetime="2025-06-11T00:03:04+08:00">2025-06-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-08 00:31:43" itemprop="dateModified" datetime="2025-07-08T00:31:43+08:00">2025-07-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="基带信号波形"><a href="#基带信号波形" class="headerlink" title="基带信号波形"></a>基带信号波形</h2><h3 id="单极性不归零信号（单极性NRZ）"><a href="#单极性不归零信号（单极性NRZ）" class="headerlink" title="单极性不归零信号（单极性NRZ）"></a>单极性不归零信号（单极性NRZ）</h3><h3 id="双极性不归零信号（双极性NRZ）"><a href="#双极性不归零信号（双极性NRZ）" class="headerlink" title="双极性不归零信号（双极性NRZ）"></a>双极性不归零信号（双极性NRZ）</h3><h3 id="单极性归零信号（单极性RZ）"><a href="#单极性归零信号（单极性RZ）" class="headerlink" title="单极性归零信号（单极性RZ）"></a>单极性归零信号（单极性RZ）</h3><h3 id="双极性归零信号（双极性RZ）"><a href="#双极性归零信号（双极性RZ）" class="headerlink" title="双极性归零信号（双极性RZ）"></a>双极性归零信号（双极性RZ）</h3><h2 id="功率谱密度"><a href="#功率谱密度" class="headerlink" title="功率谱密度"></a>功率谱密度</h2><h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="基带传输的常用码型"><a href="#基带传输的常用码型" class="headerlink" title="基带传输的常用码型"></a>基带传输的常用码型</h2><h2 id="码间干扰ISI"><a href="#码间干扰ISI" class="headerlink" title="码间干扰ISI"></a>码间干扰ISI</h2><h2 id="抗噪声性能（分析无码间干扰条件）"><a href="#抗噪声性能（分析无码间干扰条件）" class="headerlink" title="抗噪声性能（分析无码间干扰条件）"></a>抗噪声性能（分析无码间干扰条件）</h2><p>由于无ISI，并且根据抽样判决$x(kT_B+t_0) &#x3D; a_kh(t_0)+n_R(kT_B+t_0)$<br>其中$a_k$为数字基带信号，如1和-1。<br>若考虑ISI，那么$x(kT_B+t_0) &#x3D; a_kh(t_0)+ \sum_{n !&#x3D; k}a_nh[(k-n)T_B + t_0] + n_R(kT_B+t_0)$</p>
-<h2 id="均衡技术"><a href="#均衡技术" class="headerlink" title="均衡技术"></a>均衡技术</h2><h2 id="部分响应技术"><a href="#部分响应技术" class="headerlink" title="部分响应技术"></a>部分响应技术</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2853,7 +2692,7 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
