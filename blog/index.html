@@ -150,6 +150,222 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/24/11-24/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/24/11-24/" class="post-title-link" itemprop="url">11-24</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-11-24 22:57:33" itemprop="dateCreated datePublished" datetime="2025-11-24T22:57:33+08:00">2025-11-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-11-25 13:31:26" itemprop="dateModified" datetime="2025-11-25T13:31:26+08:00">2025-11-25</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="科研"><a href="#科研" class="headerlink" title="科研"></a>科研</h2><p>确定了System model<br>全局考虑第 i 个GoP， 第 s 个slot，第 k 个token map，第 j 个packet。<br>block fading是指对单个slot内packet的信道状态是保持不变的。  </p>
+<p>$P_{i,s,k,j}$.<br>以这个为误块率的输入，得到的误块率乘权重$W_{i,k,j}$（也就是第 i 个GoP， 第 k 个token map， 第 j 个packet）,然后得到最终的优化目标。</p>
+<h2 id="落地"><a href="#落地" class="headerlink" title="落地"></a>落地</h2><h3 id="网络切片"><a href="#网络切片" class="headerlink" title="网络切片"></a>网络切片</h3><p>End-to-End Network Slice由3层共同完成<br>5G 的网络切片是 E2E（端到端）切片，跨越：</p>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>谁负责</th>
+<th>切片内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>核心网（5GC）</strong></td>
+<td>AMF&#x2F;SMF&#x2F;UPF</td>
+<td>会话管理、QoS、UPF路径、带宽策略</td>
+</tr>
+<tr>
+<td><strong>无线接入网（RAN &#x2F; gNB）</strong></td>
+<td>MAC&#x2F;RLC&#x2F;PHY</td>
+<td>PRB 分配、功率、MCS、调度、资源隔离</td>
+</tr>
+<tr>
+<td><strong>传输网（TN）</strong></td>
+<td>IP&#x2F;MPLS、SDN</td>
+<td>承载路径、优先级</td>
+</tr>
+</tbody></table>
+<p>E2E切片的入口（标识）是在 5GC 网络层（L3）产生的：</p>
+<ul>
+<li>NSSAI&#x2F;S-NSSAI</li>
+<li>Slice ID选择</li>
+<li>PDU Session 建立时，选择切片</li>
+<li>QoS Flow</li>
+<li>SMF&#x2F;AMF分配该切片的路径与策略<br>这五个共同决定UE属于哪个slice。</li>
+</ul>
+<p>真正的资源隔离是在RAN和TN做的：<br>RAN做的切片内容：  </p>
+<ul>
+<li>PRB分配</li>
+<li>时隙资源隔离</li>
+<li>MCS&#x2F;功率分配</li>
+<li>调度优先级</li>
+<li>HARQ分配</li>
+<li>控制信道资源</li>
+</ul>
+<p>这些都是L1&#x2F;L2完成的，不属于网络层</p>
+<p>🔵 切片是一个跨层概念：</p>
+<p>网络层（5GC）负责：逻辑切片、QoS 类别、路径管理</p>
+<p>无线层（RAN）负责：物理资源切割、调度隔离</p>
+<p>传输网（TN）负责：承载路径</p>
+<h4 id="切片应用"><a href="#切片应用" class="headerlink" title="切片应用"></a>切片应用</h4><p>Slice A：要求latency小<br>Solution：</p>
+<ul>
+<li>增大PRB<br>影响排队时间，从而影响时延</li>
+<li>减小slot<br>slot 越小 → 一个时隙占用的时间越短 → packet 可以更快开始传输 → 时延更低</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">|----slot1----|----slot2----|----slot3----| ...</span><br><span class="line">DCI           next DCI</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>如果数据来了要发，但你在 slot1 的中间才到达：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">时间线:</span><br><span class="line">0ms    0.5ms    1ms</span><br><span class="line">|-------|--------|</span><br><span class="line">      数据到达</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>调度器不能立即调度你<br>因为 PDCCH 时间已经过去。</p>
+<p>❗你必须等待下一个 slot 开头（1ms）。</p>
+<p>所以等待时间（调度延迟）最大 &#x3D; 一个 slot 的长度。</p>
+<p>注：PDCCH和DCI的区别</p>
+<table>
+<thead>
+<tr>
+<th>类比</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PDCCH</strong></td>
+<td>郵件信封（物理载体）</td>
+</tr>
+<tr>
+<td><strong>DCI</strong></td>
+<td>信封里的信件内容（调度命令）</td>
+</tr>
+</tbody></table>
+<p>Slice B: 要求吞吐量大<br>Solution：</p>
+<ul>
+<li>分配更多PRB</li>
+<li>分配更高的MCS</li>
+<li>更高调度优先级</li>
+<li>拥有更高的HARQ资源</li>
+</ul>
+<p>注意：<br>UE的发射功率决定可用上行MCS的上限：<br>手机功率太小 → 上行 SNR 很差 → 不可能用高 MCS。因此RAN 控制器会把 UL MCS 设得更保守</p>
+<h3 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h3><h4 id="MCS"><a href="#MCS" class="headerlink" title="MCS"></a>MCS</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MCS = lookup(CQI)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (recent BLER &gt; target BLER):</span><br><span class="line">    MCS = MCS - 1</span><br><span class="line"><span class="keyword">elif</span> (recent BLER &lt; target BLER):</span><br><span class="line">    MCS = MCS + 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="PRB"><a href="#PRB" class="headerlink" title="PRB"></a>PRB</h4>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/24/%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/24/%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/" class="post-title-link" itemprop="url">模型微调</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-11-24 13:47:42 / Modified: 22:57:58" itemprop="dateCreated datePublished" datetime="2025-11-24T13:47:42+08:00">2025-11-24</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="剪枝-推理-仅测试"><a href="#剪枝-推理-仅测试" class="headerlink" title="剪枝+推理(仅测试)"></a>剪枝+推理(仅测试)</h2><p>prune_new.py:<br>load模型后剪枝</p>
+<h2 id="剪枝-微调"><a href="#剪枝-微调" class="headerlink" title="剪枝+微调"></a>剪枝+微调</h2><p>ptuning_test_1028.py:<br>剪枝后load模型（在配置文件中checkpointer.py）.<br>剪枝是在ptuning_test_1028.py中剪枝模型结构</p>
+<h2 id="使用剪枝后的权重"><a href="#使用剪枝后的权重" class="headerlink" title="使用剪枝后的权重"></a>使用剪枝后的权重</h2><p>剪枝后load模型，等同于<strong>剪枝+微调</strong>中的步骤</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">torchrun --nproc_per_node=8 -m ptuning_xxx \</span><br><span class="line">  --config=cosmos_predict1/tokenizer/training/configs/config.py -- </span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/23/11-22/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -895,242 +1111,6 @@ CUDA_VISIBLE_DEVICES=5 python .py
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/29/Hyperprior/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/08/29/Hyperprior/" class="post-title-link" itemprop="url">Hyperprior</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-08-29 11:37:52" itemprop="dateCreated datePublished" datetime="2025-08-29T11:37:52+08:00">2025-08-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/29/%E7%86%B5%E7%BC%96%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/08/29/%E7%86%B5%E7%BC%96%E7%A0%81/" class="post-title-link" itemprop="url">熵编码</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-08-29 11:11:52 / Modified: 11:15:31" itemprop="dateCreated datePublished" datetime="2025-08-29T11:11:52+08:00">2025-08-29</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h2><ul>
-<li><strong>熵编码</strong>（Entropy Coding）是一种<strong>无损压缩方法</strong>，目的是将符号序列用尽可能少的比特表示。</li>
-<li>核心思想来自信息论：<br>$H(X) &#x3D; -\sum_x P(x) \log_2 P(x)$<ul>
-<li>$H(X)$：理论最少平均比特数（香农熵）  </li>
-<li>$P(x)$：符号 $x$ 出现概率</li>
-</ul>
-</li>
-<li>核心原则：<ul>
-<li>高频符号 → 用较少比特表示  </li>
-<li>低频符号 → 用较多比特表示</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="2-常见熵编码方法"><a href="#2-常见熵编码方法" class="headerlink" title="2. 常见熵编码方法"></a>2. 常见熵编码方法</h2><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>特点</th>
-<th>适用场景</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>霍夫曼编码 (Huffman)</td>
-<td>构建前缀码二叉树</td>
-<td>符号少，离散概率</td>
-</tr>
-<tr>
-<td>算术编码 (Arithmetic)</td>
-<td>将整个序列映射到 [0,1) → 二进制</td>
-<td>高维连续概率，精细概率分布</td>
-</tr>
-<tr>
-<td>范围编码 (Range)</td>
-<td>算术编码优化实现</td>
-<td>类似算术编码，效率高</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>Deep Source Encoder 中使用 <strong>算术编码</strong>。</p>
-</blockquote>
-<hr>
-<h2 id="3-熵编码在深度源编码中的流程"><a href="#3-熵编码在深度源编码中的流程" class="headerlink" title="3. 熵编码在深度源编码中的流程"></a>3. 熵编码在深度源编码中的流程</h2><ol>
-<li><strong>DNN 特征提取</strong>：<ul>
-<li>输入图像 $x \in X^M$ → DNN → 连续特征向量 $y \in \mathbb{R}^K$</li>
-</ul>
-</li>
-<li><strong>量化</strong>：<ul>
-<li>连续特征 $y$ → 离散符号 $\tilde{y} \in \mathbb{Z}^K$</li>
-</ul>
-</li>
-<li><strong>概率建模</strong>：<ul>
-<li>使用侧信息 $\tilde{z}$ 建模条件概率：<br>$P_{\tilde{y}|\tilde{z}}(\tilde{y}|\tilde{z})$</li>
-<li>使得特征在条件下近似独立，便于编码</li>
-</ul>
-</li>
-<li><strong>熵编码生成比特流</strong>：<ul>
-<li>对每个量化符号根据概率分配比特长度</li>
-<li>高频符号少比特，低频符号多比特</li>
-</ul>
-</li>
-<li><strong>输出比特流</strong>：<br>$b &#x3D; [b_y, b_z]$<ul>
-<li>$b_y$：特征比特  </li>
-<li>$b_z$：侧信息比特</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h2 id="4-示例"><a href="#4-示例" class="headerlink" title="4. 示例"></a>4. 示例</h2><ul>
-<li>量化后的符号序列：<br>$\tilde{y} &#x3D; [0, 0, 1, 0, 2, 0, 1, 0]$</li>
-<li>概率：<ul>
-<li>0 → 0.625  </li>
-<li>1 → 0.25  </li>
-<li>2 → 0.125</li>
-</ul>
-</li>
-<li>熵编码生成比特数：<ul>
-<li>0 → $\sim 0.678$ bit  </li>
-<li>1 → 2 bit  </li>
-<li>2 → 3 bit</li>
-</ul>
-</li>
-<li>平均比特数：<br>$B_\text{avg} \approx 10.39$ bit</li>
-<li>对比固定长度编码 (3 bit × 8 &#x3D; 24 bit) → 节省比特</li>
-</ul>
-<hr>
-<h2 id="5-不使用熵编码的情况"><a href="#5-不使用熵编码的情况" class="headerlink" title="5. 不使用熵编码的情况"></a>5. 不使用熵编码的情况</h2><ul>
-<li><strong>固定比特编码</strong>：<ul>
-<li>每个量化符号用相同长度的比特表示</li>
-<li>示例：特征范围 0–255 → 每个符号 8 bit</li>
-<li>序列 $[3,128,255] \to 00000011\ 10000000\ 11111111$</li>
-</ul>
-</li>
-<li><strong>缺点</strong>：<ul>
-<li>不能利用符号概率 → 压缩效率低  </li>
-<li>总比特数大于熵编码</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h2><ul>
-<li>熵编码是无损压缩的核心方法，用概率分配比特，理论上最接近熵极限  </li>
-<li>在 Deep Source Encoder 中：<ol>
-<li>DNN 提取特征  </li>
-<li>量化离散化  </li>
-<li>条件概率建模 + 熵编码生成比特流</li>
-</ol>
-</li>
-<li>相比固定比特编码，熵编码显著减少比特数，提高压缩效率</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1200,7 +1180,7 @@ CUDA_VISIBLE_DEVICES=5 python .py
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-count">58</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
