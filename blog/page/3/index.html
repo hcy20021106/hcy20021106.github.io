@@ -150,6 +150,98 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/20/CSI%E5%8E%8B%E7%BC%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/20/CSI%E5%8E%8B%E7%BC%A9/" class="post-title-link" itemprop="url">CSI压缩</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-20 18:43:08 / Modified: 22:12:16" itemprop="dateCreated datePublished" datetime="2025-08-20T18:43:08+08:00">2025-08-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="CSI基本表示"><a href="#CSI基本表示" class="headerlink" title="CSI基本表示"></a>CSI基本表示</h2><p>CSI用来描述无线信道的频率响应。<br>在OFDM系统中，CSI常用矩阵表示：</p>
+<ul>
+<li>行方向：天线</li>
+<li>列方向：子载波</li>
+<li>例如：$H ∈ C^{Nc × Nt}$，其中<ul>
+<li>Nc &#x3D; 天线数</li>
+<li>Nt &#x3D; 子载波数.</li>
+</ul>
+</li>
+</ul>
+<h2 id="时域和频域的关系"><a href="#时域和频域的关系" class="headerlink" title="时域和频域的关系"></a>时域和频域的关系</h2><p>H[t] -&gt; DFT -&gt; 频域CSI。<br>DFT表达式:  </p>
+<p>$H[k] &#x3D; \sum_{l&#x3D;0}^{L-1} h[l] \cdot e^{-j \frac{2\pi k l}{N}}$.<br>也可以将其写成矩阵形式：<br>H &#x3D; W h<br>其中 W 是 DFT 矩阵，$W ∈ C^{N_c × L}$, $h ∈ C^{L × N_t}$, $H ∈ C^{N_c × N_t}$. </p>
+<h2 id="CSI的角度-延迟域变换"><a href="#CSI的角度-延迟域变换" class="headerlink" title="CSI的角度-延迟域变换"></a>CSI的角度-延迟域变换</h2><p>$\hat{H}_~ &#x3D; F_c * H * F_t^H$. </p>
+<ul>
+<li>Fc: Nc x Nc 的 DFT 矩阵，作用在行方向（天线 -&gt; 角度域）</li>
+<li>Ft: Nt x Nt 的 DFT 矩阵，作用在列方向（子载波 -&gt; 延迟域）</li>
+</ul>
+<p>第一步是计算H与$F_t^H$进行右乘，相当于对每一行（固定天线）都会把“跨子载波的频域响应”做IDFT（因为是对Ft求共轭处理），得到“跨延迟抽头的时延响应”，然后第二步是将计算得到的与Fc进行左乘，相当于对每一列（固定延迟抽头）做DFT，把天线域的信号转换到角度域。  </p>
+<h2 id="最终结果"><a href="#最终结果" class="headerlink" title="最终结果"></a>最终结果</h2><p>$\hat{H}_~$在角度-延迟域往往呈现出稀疏性：</p>
+<ul>
+<li>多径信道只在延迟bins和角度bins上有能量</li>
+<li>其他位置接近0</li>
+</ul>
+<p>正是这种稀疏性，使得CSI可以高效压缩和反馈</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/12/%E6%B3%A2%E6%9D%9F%E8%B5%8B%E5%BD%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1355,176 +1447,6 @@ print(f&quot;Difference (CP removed vs. circular): &#123;error:.3e&#125;&quot;)
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/25/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/25/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="post-title-link" itemprop="url">线性代数</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-06-25 22:52:26" itemprop="dateCreated datePublished" datetime="2025-06-25T22:52:26+08:00">2025-06-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-20 13:53:04" itemprop="dateModified" datetime="2025-08-20T13:53:04+08:00">2025-08-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h1 id="线性方程组与矩阵运算总结"><a href="#线性方程组与矩阵运算总结" class="headerlink" title="线性方程组与矩阵运算总结"></a>线性方程组与矩阵运算总结</h1><p>本笔记总结了关于线性方程组求解及矩阵运算的几个关键知识点，涵盖：</p>
-<ul>
-<li>MATLAB 中 <code>\</code> 与 <code>/</code> 操作符的含义</li>
-<li>对角矩阵的求逆方法</li>
-<li>噪声环境下线性模型的最小二乘估计</li>
-</ul>
-<hr>
-<h2 id="1-线性方程组求解：-AX-B"><a href="#1-线性方程组求解：-AX-B" class="headerlink" title="1. 线性方程组求解：$AX &#x3D; B$"></a>1. 线性方程组求解：$AX &#x3D; B$</h2><p>我们常见的线性模型为：</p>
-<p>$$<br>AX &#x3D; B<br>$$</p>
-<p>目标是求出未知矩阵或向量 $X$。</p>
-<hr>
-<h3 id="1-1-MATLAB-中的-与-含义"><a href="#1-1-MATLAB-中的-与-含义" class="headerlink" title="1.1 MATLAB 中的 \ 与 / 含义"></a>1.1 MATLAB 中的 <code>\</code> 与 <code>/</code> 含义</h3><table>
-<thead>
-<tr>
-<th>表达式</th>
-<th>数学意义</th>
-<th>求解方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>X = A \ B</code></td>
-<td>解 $AX &#x3D; B$</td>
-<td>左除（推荐使用）</td>
-</tr>
-<tr>
-<td><code>X = B / A</code></td>
-<td>解 $XA &#x3D; B$</td>
-<td>右除（适用于对偶情形）</td>
-</tr>
-</tbody></table>
-<h4 id="情况说明："><a href="#情况说明：" class="headerlink" title="情况说明："></a>情况说明：</h4><ul>
-<li>如果 $A$ 是<strong>方阵且可逆</strong>：<ul>
-<li><code>A \ B</code> 等价于 $A^{-1} B$</li>
-<li><code>B / A</code> 等价于 $B A^{-1}$</li>
-</ul>
-</li>
-<li>如果 $A$ 是<strong>非方阵或奇异</strong>：<ul>
-<li>MATLAB 会自动采用<strong>最小二乘解</strong>：<br>$$<br>\hat{X} &#x3D; \arg\min_X |AX - B|_2<br>$$</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="2-对角矩阵的求逆"><a href="#2-对角矩阵的求逆" class="headerlink" title="2. 对角矩阵的求逆"></a>2. 对角矩阵的求逆</h2><p>给定一个 $n \times n$ 的对角矩阵 $D$：</p>
-<p>$$<br>D &#x3D; \begin{bmatrix}<br>d_1 &amp; 0 &amp; \cdots &amp; 0 \<br>0 &amp; d_2 &amp; \cdots &amp; 0 \<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots \<br>0 &amp; 0 &amp; \cdots &amp; d_n<br>\end{bmatrix}<br>$$</p>
-<h3 id="2-1-可逆条件"><a href="#2-1-可逆条件" class="headerlink" title="2.1 可逆条件"></a>2.1 可逆条件</h3><ul>
-<li>如果所有 $d_i \ne 0$，则 $D$ 可逆。</li>
-<li>若任一 $d_i &#x3D; 0$，则 $D$ 不可逆。</li>
-</ul>
-<h3 id="2-2-逆矩阵表达式"><a href="#2-2-逆矩阵表达式" class="headerlink" title="2.2 逆矩阵表达式"></a>2.2 逆矩阵表达式</h3><p>$$<br>D^{-1} &#x3D; \begin{bmatrix}<br>\frac{1}{d_1} &amp; 0 &amp; \cdots &amp; 0 \<br>0 &amp; \frac{1}{d_2} &amp; \cdots &amp; 0 \<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots \<br>0 &amp; 0 &amp; \cdots &amp; \frac{1}{d_n}<br>\end{bmatrix}<br>$$</p>
-<p>即：<strong>对角矩阵的逆，仍是对角矩阵，每个对角元素取倒数即可</strong>。</p>
-<hr>
-<h2 id="3-线性模型与最小二乘法"><a href="#3-线性模型与最小二乘法" class="headerlink" title="3. 线性模型与最小二乘法"></a>3. 线性模型与最小二乘法</h2><p>在现实中常见的线性模型为：</p>
-<p>$$<br>Y &#x3D; H \cdot X + N<br>$$</p>
-<p>其中：</p>
-<ul>
-<li>$Y$：观测值（已知）</li>
-<li>$H$：待估计矩阵</li>
-<li>$X$：输入矩阵或导频（已知）</li>
-<li>$N$：噪声项</li>
-</ul>
-<h3 id="3-1-无噪声时（理想情况）"><a href="#3-1-无噪声时（理想情况）" class="headerlink" title="3.1 无噪声时（理想情况）"></a>3.1 无噪声时（理想情况）</h3><p>$$<br>Y &#x3D; H \cdot X<br>$$</p>
-<p>若 $X$ 可逆，则可直接求解：</p>
-<p>$$<br>H &#x3D; Y X^{-1}<br>$$</p>
-<h3 id="3-2-含噪声时（实际情况）"><a href="#3-2-含噪声时（实际情况）" class="headerlink" title="3.2 含噪声时（实际情况）"></a>3.2 含噪声时（实际情况）</h3><p>$$<br>Y &#x3D; H \cdot X + N<br>$$</p>
-<p>此时无法直接求逆，只能求<strong>最小二乘解</strong>：</p>
-<p>$$<br>\hat{H} &#x3D; \arg\min_H | Y - H X |_F^2<br>$$</p>
-<p>求解方式如下：</p>
-<ul>
-<li><p>若 $X$ 为满秩方阵：</p>
-<p>$$<br>\hat{H} &#x3D; Y X^{-1}<br>$$</p>
-</li>
-<li><p>若 $X$ 非方阵或秩不足，使用伪逆（Moore-Penrose）：</p>
-<p>$$<br>\hat{H} &#x3D; Y X^\dagger &#x3D; Y (X^H X)^{-1} X^H<br>$$</p>
-</li>
-</ul>
-<hr>
-<h2 id="4-MATLAB-示例代码片段"><a href="#4-MATLAB-示例代码片段" class="headerlink" title="4. MATLAB 示例代码片段"></a>4. MATLAB 示例代码片段</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 1. 解 AX = B 的最小二乘解</span></span><br><span class="line">X = A \ B;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 2. 解 XA = B 的最小二乘解</span></span><br><span class="line">X = B / A;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 3. 对角矩阵求逆</span></span><br><span class="line">D = <span class="built_in">diag</span>([d1, d2, d3]);</span><br><span class="line">D_inv = <span class="built_in">diag</span>(<span class="number">1</span> ./ <span class="built_in">diag</span>(D));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h1 id="矩阵特征值的推导过程"><a href="#矩阵特征值的推导过程" class="headerlink" title="矩阵特征值的推导过程"></a>矩阵特征值的推导过程</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>设 A 是一个 n×n 的方阵，如果存在非零向量 v 和标量 λ，使得：</p>
-<pre><code>A v = λ v
-</code></pre>
-<p>则 λ 称为矩阵 A 的一个特征值，v 称为对应的特征向量。</p>
-<h2 id="推导过程"><a href="#推导过程" class="headerlink" title="推导过程"></a>推导过程</h2><p>从特征值定义出发：</p>
-<pre><code>A v = λ v
-</code></pre>
-<p>可以写成：</p>
-<pre><code>A v = λ I v
-</code></pre>
-<p>将等式两边移项，得到：</p>
-<pre><code>A v - λ I v = 0
-</code></pre>
-<p>提取 v：</p>
-<pre><code>(A - λ I) v = 0
-</code></pre>
-<p>这是一个齐次线性方程组。</p>
-<h2 id="非零解条件"><a href="#非零解条件" class="headerlink" title="非零解条件"></a>非零解条件</h2><p>为了使该方程有非零解 v ≠ 0，矩阵 (A - λ I) 必须是奇异矩阵，即其行列式为零：</p>
-<pre><code>det(A - λ I) = 0
-</code></pre>
-<p>这称为特征方程，解这个方程可以得到矩阵 A 的所有特征值 λ。</p>
-<hr>
-<p>总结：</p>
-<pre><code>A v = λ v  ⇒  (A - λ I) v = 0  
-有非零解 ⇔ det(A - λ I) = 0
-</code></pre>
-<h1 id="共轭矩阵"><a href="#共轭矩阵" class="headerlink" title="共轭矩阵"></a>共轭矩阵</h1><p>A的共轭矩阵记为$A^H$.<br>求法：<br>也称为Hermite阵。Hermite阵中每一个第i 行第j 列的元素都与第j 行第i 列的元素的共轭相等（然而矩阵A的共轭矩阵并非Hermite阵）。自共轭矩阵是矩阵本身先转置再把矩阵中每个元素取共轭得到的矩阵。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1594,7 +1516,7 @@ print(f&quot;Difference (CP removed vs. circular): &#123;error:.3e&#125;&quot;)
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

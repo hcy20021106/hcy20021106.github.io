@@ -150,6 +150,132 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/29/D%C2%B2-JSCC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/29/D%C2%B2-JSCC/" class="post-title-link" itemprop="url">D²-JSCC</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-29 21:44:15 / Modified: 21:46:40" itemprop="dateCreated datePublished" datetime="2025-08-29T21:44:15+08:00">2025-08-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h2><ul>
+<li><strong>JSCC (Joint Source Channel Coding)</strong> &#x3D; 联合信源信道编码。</li>
+<li>传统方案：<ul>
+<li><strong>纯数字传输 (JPEG + LDPC&#x2F;Polar)</strong><br>高 SNR 时接近容量，但低 SNR 时一旦出错会“花屏”。</li>
+<li><strong>纯模拟 JSCC</strong><br>没有信道编码，失真随 SNR 平滑退化，但高 SNR 浪费容量。</li>
+<li><strong>深度 JSCC</strong><br>用神经网络直接端到端映射图像→信道符号。鲁棒，但高 SNR 不如数字系统。</li>
+</ul>
+</li>
+<li><strong>D²-JSCC</strong>（本文提出）：<br>结合 <strong>深度信源编码 (Deep Source Coding)</strong> + <strong>数字信道编码 (Digital Channel Coding)</strong>，兼顾鲁棒性与容量利用率。</li>
+</ul>
+<hr>
+<h2 id="2-深度-JSCC-vs-D²-JSCC"><a href="#2-深度-JSCC-vs-D²-JSCC" class="headerlink" title="2. 深度 JSCC vs D²-JSCC"></a>2. 深度 JSCC vs D²-JSCC</h2><h3 id="深度-JSCC"><a href="#深度-JSCC" class="headerlink" title="深度 JSCC"></a>深度 JSCC</h3><ul>
+<li><strong>没有传统意义上的信道编码</strong>。</li>
+<li>图像 → CNN 编码 → 信道符号 → 解码器 CNN → 图像恢复。</li>
+<li>鲁棒性来自神经网络自动学到的冗余映射。</li>
+<li><strong>优点</strong>：低 SNR 下平滑退化，不会突然花屏。  </li>
+<li><strong>缺点</strong>：高 SNR 下码率固定，不能榨干信道容量。</li>
+</ul>
+<h3 id="D²-JSCC"><a href="#D²-JSCC" class="headerlink" title="D²-JSCC"></a>D²-JSCC</h3><ul>
+<li><strong>有传统意义上的信道编码</strong>（如 LDPC、Polar）。  </li>
+<li>流程：<br>图像 → 深度信源编码 (DNN) → 比特流<br>→ 信道编码 (LDPC&#x2F;Polar) → 符号<br>→ 无线信道 → 解调&#x2F;译码<br>→ 深度信源解码 (DNN) → 重建图像</li>
+<li><strong>优点</strong>：  </li>
+<li>低 SNR 下鲁棒（深度信源编码不会像 JPEG 那样产生花屏）；  </li>
+<li>高 SNR 下接近信道容量（因为仍有传统信道编码）。</li>
+</ul>
+<h2 id="3-为什么-D²-JSCC-更鲁棒"><a href="#3-为什么-D²-JSCC-更鲁棒" class="headerlink" title="3. 为什么 D²-JSCC 更鲁棒"></a>3. 为什么 D²-JSCC 更鲁棒</h2><h3 id="JPEG-LDPC-的问题"><a href="#JPEG-LDPC-的问题" class="headerlink" title="JPEG+LDPC 的问题"></a>JPEG+LDPC 的问题</h3><ul>
+<li>熵编码比特流对错误极度敏感。</li>
+<li>一旦信道码解码失败 → 整帧报废 → 花屏。</li>
+</ul>
+<h3 id="深度信源编码的优势"><a href="#深度信源编码的优势" class="headerlink" title="深度信源编码的优势"></a>深度信源编码的优势</h3><ul>
+<li>DNN 学到的特征是 <strong>分布式冗余</strong>，不依赖严格语法。</li>
+<li>即使部分比特错误，解码器 CNN 仍能通过上下文恢复合理图像。</li>
+<li>结果：低 SNR 下 <strong>平滑退化</strong>，而不是突然崩溃。</li>
+</ul>
+<h2 id="4-为什么深度-JSCC-高-SNR-下浪费容量"><a href="#4-为什么深度-JSCC-高-SNR-下浪费容量" class="headerlink" title="4. 为什么深度 JSCC 高 SNR 下浪费容量"></a>4. 为什么深度 JSCC 高 SNR 下浪费容量</h2><h3 id="信道容量"><a href="#信道容量" class="headerlink" title="信道容量"></a>信道容量</h3><ul>
+<li>高斯信道容量：<br>[<br>C &#x3D; \log_2(1+\text{SNR})<br>]</li>
+<li>数字系统（LDPC&#x2F;Polar）：高 SNR 时码率随 SNR 提升，逼近容量。</li>
+</ul>
+<h3 id="深度-JSCC-的限制"><a href="#深度-JSCC-的限制" class="headerlink" title="深度 JSCC 的限制"></a>深度 JSCC 的限制</h3><ul>
+<li>符号映射是固定的，不会随 SNR 动态提升码率。</li>
+<li>优化目标是失真最小化，而不是“码率 &#x3D; 容量”。</li>
+<li>即使噪声趋近于 0，仍存在一定的重建误差。</li>
+</ul>
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><ul>
+<li>高 SNR 下，深度 JSCC 的失真有下限，无法无限逼近零失真。</li>
+<li>数字系统能充分利用信道容量，而深度 JSCC 会浪费容量。</li>
+</ul>
+<h2 id="5-本文创新点"><a href="#5-本文创新点" class="headerlink" title="5. 本文创新点"></a>5. 本文创新点</h2><ol>
+<li><p><strong>架构创新</strong><br> 提出 D²-JSCC，把深度信源编码和传统数字信道编码结合。</p>
+</li>
+<li><p><strong>信源端优化</strong><br> 使用自适应概率模型（辅助潜变量 z + 条件高斯分布）提升压缩效率。</p>
+</li>
+<li><p><strong>理论贡献</strong><br> 推导了 <strong>端到端失真上界 (Theorem 3.1)</strong>，把信道误块率和系统参数引入到失真公式中。</p>
+</li>
+<li><p><strong>性能优势</strong></p>
+</li>
+</ol>
+<ul>
+<li>低 SNR：比 JPEG+LDPC 鲁棒。  </li>
+<li>高 SNR：比深度 JSCC 更接近信道容量。  </li>
+<li>实现了“既鲁棒又高效”的传输。</li>
+</ul>
+<h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h2><ul>
+<li><strong>深度 JSCC</strong>：没有信道编码，低 SNR 鲁棒但高 SNR 浪费容量。  </li>
+<li><strong>D²-JSCC</strong>：有信道编码，兼顾低 SNR 鲁棒性和高 SNR 容量利用率。  </li>
+<li>本文的价值在于把深度学习的信源编码与传统通信理论结合，提出了一个 <strong>既有实践性能，又有理论保证</strong> 的新型通信框架。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/29/Hyperprior/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1360,98 +1486,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/20/CSI%E5%8E%8B%E7%BC%A9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/08/20/CSI%E5%8E%8B%E7%BC%A9/" class="post-title-link" itemprop="url">CSI压缩</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-08-20 18:43:08 / Modified: 22:12:16" itemprop="dateCreated datePublished" datetime="2025-08-20T18:43:08+08:00">2025-08-20</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="CSI基本表示"><a href="#CSI基本表示" class="headerlink" title="CSI基本表示"></a>CSI基本表示</h2><p>CSI用来描述无线信道的频率响应。<br>在OFDM系统中，CSI常用矩阵表示：</p>
-<ul>
-<li>行方向：天线</li>
-<li>列方向：子载波</li>
-<li>例如：$H ∈ C^{Nc × Nt}$，其中<ul>
-<li>Nc &#x3D; 天线数</li>
-<li>Nt &#x3D; 子载波数.</li>
-</ul>
-</li>
-</ul>
-<h2 id="时域和频域的关系"><a href="#时域和频域的关系" class="headerlink" title="时域和频域的关系"></a>时域和频域的关系</h2><p>H[t] -&gt; DFT -&gt; 频域CSI。<br>DFT表达式:  </p>
-<p>$H[k] &#x3D; \sum_{l&#x3D;0}^{L-1} h[l] \cdot e^{-j \frac{2\pi k l}{N}}$.<br>也可以将其写成矩阵形式：<br>H &#x3D; W h<br>其中 W 是 DFT 矩阵，$W ∈ C^{N_c × L}$, $h ∈ C^{L × N_t}$, $H ∈ C^{N_c × N_t}$. </p>
-<h2 id="CSI的角度-延迟域变换"><a href="#CSI的角度-延迟域变换" class="headerlink" title="CSI的角度-延迟域变换"></a>CSI的角度-延迟域变换</h2><p>$\hat{H}_~ &#x3D; F_c * H * F_t^H$. </p>
-<ul>
-<li>Fc: Nc x Nc 的 DFT 矩阵，作用在行方向（天线 -&gt; 角度域）</li>
-<li>Ft: Nt x Nt 的 DFT 矩阵，作用在列方向（子载波 -&gt; 延迟域）</li>
-</ul>
-<p>第一步是计算H与$F_t^H$进行右乘，相当于对每一行（固定天线）都会把“跨子载波的频域响应”做IDFT（因为是对Ft求共轭处理），得到“跨延迟抽头的时延响应”，然后第二步是将计算得到的与Fc进行左乘，相当于对每一列（固定延迟抽头）做DFT，把天线域的信号转换到角度域。  </p>
-<h2 id="最终结果"><a href="#最终结果" class="headerlink" title="最终结果"></a>最终结果</h2><p>$\hat{H}_~$在角度-延迟域往往呈现出稀疏性：</p>
-<ul>
-<li>多径信道只在延迟bins和角度bins上有能量</li>
-<li>其他位置接近0</li>
-</ul>
-<p>正是这种稀疏性，使得CSI可以高效压缩和反馈</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1521,7 +1555,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="基本概念一次性编码，不需要序列式迭代或多步计算，输出是用向量表示 作用将离散信息转为神经网络可处理的连续特征。因此one-shot coding后可以用MLP来处理。类似NLP里的word embedding。One-shot具有可微性（一对一映射），因此可以进行反向传播。   Notice信号量化具有不可微性（多对一映射）">
+  <meta name="description" content="数据打包struct.pack与struct.unpack作用：struct.pack将多个小字段(int, short, byte, float …)按指定顺序&#x2F;大小端打包成二进制结构struct.unpack用于从二进制字节流中按指定格式提取多个字短 tobytesnumpy.tobytes() TBSize计算MCS → I_TBS →（PRB × 符号数）→ N_info → 查">
 <meta property="og:type" content="article">
-<meta property="og:title" content="One-Shot Coding">
-<meta property="og:url" content="https://hechenyi.github.io/2025/08/28/One-Shot-Coding/index.html">
+<meta property="og:title" content="11-25">
+<meta property="og:url" content="https://hechenyi.github.io/2025/11/25/11-25/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="基本概念一次性编码，不需要序列式迭代或多步计算，输出是用向量表示 作用将离散信息转为神经网络可处理的连续特征。因此one-shot coding后可以用MLP来处理。类似NLP里的word embedding。One-shot具有可微性（一对一映射），因此可以进行反向传播。   Notice信号量化具有不可微性（多对一映射）">
+<meta property="og:description" content="数据打包struct.pack与struct.unpack作用：struct.pack将多个小字段(int, short, byte, float …)按指定顺序&#x2F;大小端打包成二进制结构struct.unpack用于从二进制字节流中按指定格式提取多个字短 tobytesnumpy.tobytes() TBSize计算MCS → I_TBS →（PRB × 符号数）→ N_info → 查">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-08-28T07:07:00.000Z">
-<meta property="article:modified_time" content="2025-08-28T07:14:32.743Z">
+<meta property="article:published_time" content="2025-11-25T05:34:13.000Z">
+<meta property="article:modified_time" content="2025-11-25T07:47:09.025Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hechenyi.github.io/2025/08/28/One-Shot-Coding/">
+<link rel="canonical" href="https://hechenyi.github.io/2025/11/25/11-25/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>One-Shot Coding | Hexo</title>
+  <title>11-25 | Hexo</title>
   
 
 
@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/28/One-Shot-Coding/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/25/11-25/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -168,7 +168,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          One-Shot Coding
+          11-25
         </h1>
 
         <div class="post-meta">
@@ -179,16 +179,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-08-28 15:07:00 / Modified: 15:14:32" itemprop="dateCreated datePublished" datetime="2025-08-28T15:07:00+08:00">2025-08-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
-                </span>
+              <time title="Created: 2025-11-25 13:34:13 / Modified: 15:47:09" itemprop="dateCreated datePublished" datetime="2025-11-25T13:34:13+08:00">2025-11-25</time>
             </span>
 
           
@@ -202,13 +193,57 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>一次性编码，不需要序列式迭代或多步计算，输出是用向量表示</p>
-<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>将离散信息转为神经网络可处理的连续特征。因此one-shot coding后可以用MLP来处理。<br>类似NLP里的word embedding。<br>One-shot具有可微性（一对一映射），因此可以进行反向传播。</p>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>信号量化具有不可微性（多对一映射）<br></p>
-</blockquote>
-<hr>
+        <h2 id="数据打包"><a href="#数据打包" class="headerlink" title="数据打包"></a>数据打包</h2><h3 id="struct-pack与struct-unpack"><a href="#struct-pack与struct-unpack" class="headerlink" title="struct.pack与struct.unpack"></a>struct.pack与struct.unpack</h3><p>作用：<br>struct.pack将多个小字段(int, short, byte, float …)按指定顺序&#x2F;大小端打包成二进制结构<br>struct.unpack用于从二进制字节流中按指定格式提取多个字短</p>
+<h3 id="tobytes"><a href="#tobytes" class="headerlink" title="tobytes"></a>tobytes</h3><p>numpy.tobytes()</p>
+<h2 id="TBSize计算"><a href="#TBSize计算" class="headerlink" title="TBSize计算"></a>TBSize计算</h2><p>MCS → I_TBS →（PRB × 符号数）→ N_info → 查 TBS 表 → 得到 TBSize（字节）</p>
+<h2 id="Codeword"><a href="#Codeword" class="headerlink" title="Codeword"></a>Codeword</h2><p>codeword是TB信道编码后的码本，要注意的是TB不会直接整体进入LDPC编码器，必须先<strong>分段Segmentation</strong>再编码<br>TB →（可能）分段 → 每段加 CRC → 每段进入 LDPC 编码 → 输出多个 Codeword fragment → 拼成最终 Codeword<br>LDPC编码器的单个码块最大只能处理：</p>
+<ul>
+<li>8448bits</li>
+<li>3840bits</li>
+</ul>
+<h2 id="系统框架"><a href="#系统框架" class="headerlink" title="系统框架"></a>系统框架</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">基站 (gNB/DU)</span><br><span class="line">  ↕ (UDP)</span><br><span class="line">RIC Agent</span><br><span class="line">  ↕ (UDP)</span><br><span class="line">xApp</span><br></pre></td></tr></table></figure>
+
+<p>RIC Agent必须在DU或基站侧，它们能做：</p>
+<ul>
+<li>监听基站内部的PHY&#x2F;MAC数据</li>
+<li>把RSRP&#x2F;上报信息封装成UDP&#x2F;TCP上行报文</li>
+<li>发送给RIC&#x2F;XApp(192.168.100.50)</li>
+<li>接收RIC&#x2F;XApp控制命令（PRB分配）</li>
+<li>将控制结果写回到DU&#x2F;gNB调度器</li>
+</ul>
+<h2 id="网管接口"><a href="#网管接口" class="headerlink" title="网管接口"></a>网管接口</h2><ul>
+<li>DLSCHConfigStruct<ul>
+<li>nBWPSize</li>
+<li>nBWPStart</li>
+<li>nSubcSpacing</li>
+<li>nMcsTable</li>
+<li>nMCS</li>
+<li>nTBSize</li>
+<li>nRBStart</li>
+<li>nlatency</li>
+<li>nssai</li>
+<li>nNrOfSymbols</li>
+<li>nStartSymbolIndex</li>
+</ul>
+</li>
+<li>ULSCHConfigStruct</li>
+</ul>
+<h2 id="可以设置（set）的"><a href="#可以设置（set）的" class="headerlink" title="可以设置（set）的"></a>可以设置（set）的</h2><ul>
+<li>fstRecmdRBstart</li>
+<li>fstRecmdRBend</li>
+<li>scdRecmdRBend</li>
+<li>scdRecmdRBstart</li>
+</ul>
+<h2 id="BBU"><a href="#BBU" class="headerlink" title="BBU"></a>BBU</h2><p>BBU &#x3D; BaseBand Units（基带处理单元）<br>O-RU（射频单元）<br>O-DU（分布式单元）<br>O-CU（集中单元）<br>而很多商业基站仍然把 O-DU + O-CU 功能统称 BBU<br>因此xApp 控制基站的 调度&#x2F;资源管理&#x2F;参数配置</p>
+<p>通过 RRM &#x2F; MAC 层接口，发送给 BBU 实施。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xApp → RIC → BBU</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>xApp 通过 UDP 把指令发送给 RIC<br>RIC 再通过接口把控制动作下发到 BBU<br>由 BBU 修改调度策略，比如：</p>
+<p>RBstart &#x2F; RBend</p>
+<p>UE cluster 设置</p>
+<p>PRB 分配</p>
+<p>上行&#x2F;下行功率控制</p>
+<p>MCS 范围 set-mcs-range</p>
+<p>最终影响实际的无线链路。</p>
 
     </div>
 
@@ -224,13 +259,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/08/27/Reinforcement-Learning/" rel="prev" title="Reinforcement Learning">
-      <i class="fa fa-chevron-left"></i> Reinforcement Learning
+    <a href="/2025/11/24/11-24/" rel="prev" title="11-24">
+      <i class="fa fa-chevron-left"></i> 11-24
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/08/28/JSCC/" rel="next" title="JSCC">
-      JSCC <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -289,7 +321,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">作用</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%89%93%E5%8C%85"><span class="nav-number">1.</span> <span class="nav-text">数据打包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#struct-pack%E4%B8%8Estruct-unpack"><span class="nav-number">1.1.</span> <span class="nav-text">struct.pack与struct.unpack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tobytes"><span class="nav-number">1.2.</span> <span class="nav-text">tobytes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TBSize%E8%AE%A1%E7%AE%97"><span class="nav-number">2.</span> <span class="nav-text">TBSize计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Codeword"><span class="nav-number">3.</span> <span class="nav-text">Codeword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%A1%86%E6%9E%B6"><span class="nav-number">4.</span> <span class="nav-text">系统框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%AE%A1%E6%8E%A5%E5%8F%A3"><span class="nav-number">5.</span> <span class="nav-text">网管接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E8%AE%BE%E7%BD%AE%EF%BC%88set%EF%BC%89%E7%9A%84"><span class="nav-number">6.</span> <span class="nav-text">可以设置（set）的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BBU"><span class="nav-number">7.</span> <span class="nav-text">BBU</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

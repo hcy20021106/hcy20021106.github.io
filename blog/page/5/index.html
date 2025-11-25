@@ -150,6 +150,244 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/05/%E6%A8%A1%E6%8B%9F%E8%B0%83%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/05/%E6%A8%A1%E6%8B%9F%E8%B0%83%E5%88%B6/" class="post-title-link" itemprop="url">模拟调制</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-06-05 03:19:42" itemprop="dateCreated datePublished" datetime="2025-06-05T03:19:42+08:00">2025-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-06-24 22:14:20" itemprop="dateModified" datetime="2025-06-24T22:14:20+08:00">2025-06-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="AM（Amplitude-Modulation）调幅"><a href="#AM（Amplitude-Modulation）调幅" class="headerlink" title="AM（Amplitude Modulation）调幅"></a>AM（Amplitude Modulation）调幅</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li>通过改变载波信号的<strong>幅度</strong>来携带信息信号。</li>
+<li>调制信号形式：</li>
+</ul>
+<p>$$<br>s(t) &#x3D; [A_0 + m(t)] \cos(2\pi f_c t)<br>$$</p>
+<p>其中$A_0\cos(2\pi f_c t)$为载波，$m(t)$为调制信号，$s(t)$为已调信号</p>
+<ul>
+<li>简单易实现。</li>
+<li>带宽为 (2B)，其中 (B) 为信号带宽。</li>
+<li>存在包络检波方式，易于接收。</li>
+<li>效率低，载波本身不包含信息但占用功率。</li>
+</ul>
+<p>包络检波器包括全波整流器和低通滤波器两部分组成，其中全波整流器用于将负半轴的波形翻到正半轴</p>
+<h4 id="功率计算"><a href="#功率计算" class="headerlink" title="功率计算"></a>功率计算</h4><p>$S_{AM}(t) &#x3D; [A_0 + m(t)]cosw_ct &#x3D; A_0cosw_ct + m(t)cosw_ct$<br>其中$A_0cosw_ct$和$m(t)cosw_ct$分别是载波相和边带相，其功率分别是$\frac{A_0^2}{2}$和$\frac{\overline{m(t)}^2}{2}$</p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>$\overline{m(t)}^2$表示m(t)的均方值<br>对随机过程或者给定信号都能求均方值，并且其都用来求平均功率</p>
+</blockquote>
+<hr>
+<h3 id="DSB（Double-Side-Band）双边带调制"><a href="#DSB（Double-Side-Band）双边带调制" class="headerlink" title="DSB（Double Side Band）双边带调制"></a>DSB（Double Side Band）双边带调制</h3><p>由于包络与m(t)不成正比，不能使用包络检波法，此时解调需要使用相干解调法</p>
+<ul>
+<li>又称 DSB-SC（Suppressed Carrier）。</li>
+<li>将基带信号与载波相乘，抑制直流项。</li>
+<li>形式：</li>
+</ul>
+<p>$s(t) &#x3D; m(t) \cos(2\pi f_c t)$</p>
+<p>特点:</p>
+<ul>
+<li>没有载波，传输效率高于 AM。</li>
+<li>但接收时需要载波同步，复杂度增加。</li>
+<li>频谱包含上下两个边带，带宽为 (2B)。</li>
+</ul>
+<h3 id="SSB（Single-Side-Band）单边带调制"><a href="#SSB（Single-Side-Band）单边带调制" class="headerlink" title="SSB（Single Side Band）单边带调制"></a>SSB（Single Side Band）单边带调制</h3><p>以调制信号为单频正弦波$m(t)&#x3D;A_mcosw_mt$为例<br>$s_{DSB}(t) &#x3D; A_m  cosw_mtcosw_ct &#x3D; \frac{1}{2}A_mcos(w_c+w_m)t + \frac{1}{2}A_mcos(w_c-w_m)t$  </p>
+<p>其中上边带$s_{USB}(t) &#x3D; \frac{1}{2}A_mcos(w_c+w_m)t$<br>下边带$s_{LSB}(t) &#x3D; \frac{1}{2}A_mcos(w_c-w_m)t$  </p>
+<p>基本概念</p>
+<ul>
+<li>在 <strong>DSB</strong>的基础上，仅保留一个边带（上边带或下边带）。</li>
+<li>去除冗余频谱部分，提高频谱效率。</li>
+</ul>
+<p>生成方法:</p>
+<ul>
+<li>滤波法：滤除一个边带。</li>
+<li>平衡调制 + 相移法（Hilbert 变换）：生成正交信号组合消除一个边带。</li>
+</ul>
+<p>特点:</p>
+<ul>
+<li>带宽减半，仅为 (B)。</li>
+<li>频谱效率高，适合长距离传输（如语音通信）。</li>
+<li>实现复杂，载波恢复要求高。</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>Hilbert滤波器使得信号在时域上偏移$\pi&#x2F;2$<br>$A_mcosw_mt$经过Hibert变换后得到$A_mcos(w_mt-\pi&#x2F;2)$，也就是$A_msinw_mt$<br>因此Hilbert滤波器的冲击响应$h_h(t) &#x3D; \frac{1}{\pi t}$,其传递函数$H_h(w)&#x3D;-jsgn(w)$，<br>其中$\operatorname{sgn}(\omega) &#x3D;\begin{cases}<br>+1, &amp; \omega &gt; 0 \<br>0, &amp; \omega &#x3D; 0 \<br>-1, &amp; \omega &lt; 0<br>\end{cases}$</p>
+</blockquote>
+<hr>
+<h3 id="VSB（Vestigial-Side-Band）残留边带调制"><a href="#VSB（Vestigial-Side-Band）残留边带调制" class="headerlink" title="VSB（Vestigial Side Band）残留边带调制"></a>VSB（Vestigial Side Band）残留边带调制</h3><ul>
+<li>在 SSB 基础上，保留一个完整边带 + 另一个边带的一小部分（残留边带）。</li>
+<li>实际用于电视视频信号等高带宽场景。</li>
+</ul>
+<p>特点:</p>
+<ul>
+<li>兼顾频谱利用与实现难度。</li>
+<li>能较好保留低频成分，解决 SSB 滤波困难问题。</li>
+<li>广泛用于模拟电视广播（如 NTSC、PAL）。</li>
+</ul>
+<h2 id="FM-PM（角度调制）"><a href="#FM-PM（角度调制）" class="headerlink" title="FM&#x2F;PM（角度调制）"></a>FM&#x2F;PM（角度调制）</h2><p>$S_m(t) &#x3D; Acos[w_ct+\phi(t)]$<br>其中：<br>顺时位移&#x3D;$w_ct+\phi(t)$<br>瞬时角频率&#x3D;$w_c+\frac{d\phi(t)}{dt}$<br>PM调相是让其中的$\phi(t)$与调制信号成正比，也就是$\phi(t)&#x3D;k_pm(t)$<br>FM调频是让其中的$\frac{d\phi(t)}{dt}$与调制信号成正比，也就是$\frac{d\phi(t)}{dt}&#x3D;k_fm(t)$<br>实际应用中通常使用FM调频  </p>
+<h3 id="FM"><a href="#FM" class="headerlink" title="FM"></a>FM</h3><p>令$m(t)&#x3D;A_mcos(w_mt)$<br>这个调制信号也是单因信号<br>根据$\frac{d\phi(t)}{dt}&#x3D;k_fm(t)$可知<br>$\phi(t) &#x3D; K_fA_m\int cos(w_m\tau)d\tau$ &#x3D; $\frac{K_fA_m}{w_m}sin(w_mt)$<br>其中$m_f$为调频指数</p>
+<h3 id="NBFM"><a href="#NBFM" class="headerlink" title="NBFM"></a>NBFM</h3><p>FM信号的最大瞬时相位偏移满足远小于pi&#x2F;6(0.5)<br>通过化简可得<br>$S_{NBFM}(t) &#x3D; Acos(w_ct)-[AK_f\int m(\tau)d\tau]sin(w_ct)$  </p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>对于直流分量为0的信号，也就是其傅立叶变换后的w&#x3D;0处为0的信号，有<br>$\mathcal{F}\left(\int m(t),dt \right) &#x3D; \frac{M(\omega)}{j\omega}$</p>
+</blockquote>
+<hr>
+<p>hint：<br>不定积分可以写成原信号和单位阶跃函数卷积的形式，然后单位阶跃信号的傅立叶变换为 $\frac{1}{jw} + \pi\delta(w)$<br>由于原信号的傅立叶变换后的w&#x3D;0处为0，因此与冲击信号乘积的部分可除去。</p>
+<h3 id="FM信号的解调"><a href="#FM信号的解调" class="headerlink" title="FM信号的解调"></a>FM信号的解调</h3><p>$s_{FM}(t)$经过在接收端经过带通滤波器及限幅后再经过<strong>微分电路</strong>然后再经过包络检波以及低通滤波器<br>$s_{FM}(t)$在经过微分后生成的$s_d(t) &#x3D; -A[w_c+K_fm(t)]sin[w_ct+K_f\int m(\tau)d\tau]$  </p>
+<p>然后经过包络检波后可以得到$-A[w_c + K_fm(t)]$，最后经过低通滤波器滤去wc从而得到m(t)</p>
+<h2 id="模拟调制系统的抗噪声性能"><a href="#模拟调制系统的抗噪声性能" class="headerlink" title="模拟调制系统的抗噪声性能"></a>模拟调制系统的抗噪声性能</h2><h3 id="相干解调法"><a href="#相干解调法" class="headerlink" title="相干解调法"></a>相干解调法</h3><p>研究抗噪声性能也就是在研究SNR，为了研究模拟调制对系统的抗噪声能力，我们重点关注已调信号$s_m(t)$与n(t)在经过带通滤波器（输入端的接收滤波器）后生成的$s_m(t)$与$n_i(t)$的$\frac{S_0}{N_0}$与经过解调器后形成的$\frac{S_i}{N_i}$之间的比值。<br>结论：<br>以DSB为例，最后的信噪比经过相干解调后会改善一倍，也就是$G_{DSB} &#x3D; \frac{S_0&#x2F;N_0}{S_i&#x2F;N_i}&#x3D;2$<br>这是因为在相干解调的过程中噪声的正交分量被低通滤波器滤除了</p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>实质上已调信号$s_m(t)$会经过发送滤波器和信道，但我们在这里将其忽略，因此只需考虑$s_m(t)$<br>另外，我们假设$s_m(t)$经过带通滤波器后的保持不变，仍为$s_m(t)$<br>而对于噪声n(t) (我们通常假设其为高斯白噪声)，在经过带通滤波器的传信滤噪后，会生成窄带噪声，因此我们用窄带噪声的特性来分析</p>
+</blockquote>
+<hr>
+<table>
+<thead>
+<tr>
+<th>调制方式</th>
+<th>解调前信噪比 $\frac{S_0}{N_0}$</th>
+<th>解调后信噪比 $\frac{S_i}{N_i}$</th>
+<th>抗噪声能力 $G &#x3D; \frac{S_i&#x2F;N_i}{S_0&#x2F;N_0}$</th>
+<th>特点说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AM（含载波）</td>
+<td>$\frac{\frac{A_0^2}{2}+\frac{\overline{m^2(t)}}{2}}{n_0B(N_i)}$</td>
+<td>$\frac{1}{4}\overline{m^2(t)}&#x2F; \frac{1}{4}N_i(N_0)$</td>
+<td>$\frac{2\overline{m^2(t)}}{A_0^2+\overline{m^2(t)}}$</td>
+<td>信噪比依赖调幅指数，抗噪性能最弱</td>
+</tr>
+<tr>
+<td>DSB（无载波）</td>
+<td>$\frac{1}{2} \overline{m^2(t)} &#x2F; n_0B(N_i)$</td>
+<td>$\frac{1}{4}\overline{m^2(t)} &#x2F; \frac{1}{4}N_i(N_0)$</td>
+<td><strong>2</strong></td>
+<td>相干解调提升一倍信噪比</td>
+</tr>
+<tr>
+<td>SSB</td>
+<td>$\frac{1}{4}\overline{m^2(t)} &#x2F; n_0B(N_i)$</td>
+<td>$\frac{1}{16}overline{m^2(t)} &#x2F; \frac{1}{4}N_i(N_0)$</td>
+<td><strong>1</strong></td>
+<td>最佳带宽效率，抗噪不变</td>
+</tr>
+</tbody></table>
+<h3 id="包络检测法"><a href="#包络检测法" class="headerlink" title="包络检测法"></a>包络检测法</h3><h4 id="AM系统"><a href="#AM系统" class="headerlink" title="AM系统"></a>AM系统</h4><p>非线性解调，不能分别处理信号和噪声<br>输入信号$S_{AM}(t) &#x3D; [A_0 + m(t)]cosw_ct$<br>由于输入会经过带通滤波器，因此输入噪声会成为窄带高斯白噪声，根据窄带高斯白噪声的性质可将其分为正交部分和同相部分两部分，如下输入噪声所示：<br>输入噪声$n_i(t) &#x3D; n_c(t)cosw_ct - n_s(t)sinw_ct$</p>
+<p>将二者信号相加并通过包络检测可得到<br>所含包络$E(t) &#x3D; \sqrt{ \left[ A_0 + m(t) + n_c(t) \right]^2 + n_s^2(t) }$<br>后面需要分析大信噪比和小信噪比两种情况 </p>
+<h5 id="大信噪比"><a href="#大信噪比" class="headerlink" title="大信噪比"></a>大信噪比</h5><p>信号包络远超过噪声包络<br>也就是$A_0+m(t)&gt;&gt;\sqrt{n_c(t)^2 + n_s(t)^2}$<br>因此$E(t) \approx \sqrt{[A_0+m(t)]^2 + 2[A_0 + m(t)]n_c(t)} \approx A_0 + m(t) + n_c(t) $  </p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>$(1+x)^{1&#x2F;2} \approx 1 + \frac{x}{2}$</p>
+</blockquote>
+<hr>
+<p>因此输出信号中信号(m(t))的平均功率为$\overline{m(t)^2}$, 噪声的平均功率为$\overline{n_c(t)^2}$<br>其中$n_c(t)$为窄带高斯噪声，功率为其均方值，也就是$E[n_c(t)^2]$,根据窄带信号的统计特性可知，其本身的数学期望和方差都和其正交部分和同相部分相等（E&#x3D;0，D&#x3D;$\sigma^2$），因此均方值也相同<br>因此此时输出信噪比$S_0&#x2F;N_0$与相干检波时一样，又因为输入信噪比也一样（易知），因此抗噪声性一样（大信噪比情况下）  </p>
+<h4 id="小信噪比"><a href="#小信噪比" class="headerlink" title="小信噪比"></a>小信噪比</h4><p>也就是信号包络远小于噪声包络<br>通过分析合成的信号的包络E(t)，可知信号会被检测器扰乱为噪声。因此此时输出信噪比急剧恶化<br>这也就是门限效应，是由于包络检测器的非线性解调作用而产生的。（相干解调是线性解调，不存在门限效应）<br>在大信噪比环境下抗噪声能力与相干解调在任意信噪比时几乎相同，而在小信噪比时会很弱，因此会有一个拐点，也就是会出现门限效应。</p>
+<p><strong>小结</strong></p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>带宽</th>
+<th>是否包含载波</th>
+<th>频谱效率</th>
+<th>接收复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AM</td>
+<td>2B</td>
+<td>✅ 是</td>
+<td>低</td>
+<td>低（可包络检波）</td>
+</tr>
+<tr>
+<td>DSB</td>
+<td>2B</td>
+<td>❌ 否</td>
+<td>中</td>
+<td>中（需同步）</td>
+</tr>
+<tr>
+<td>SSB</td>
+<td>B</td>
+<td>❌ 否</td>
+<td>高</td>
+<td>高（需精确滤波&#x2F;相移）</td>
+</tr>
+<tr>
+<td>VSB</td>
+<td>≈B~1.5B</td>
+<td>❌&#x2F;部分载波</td>
+<td>较高</td>
+<td>中高（电视常用）</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/04/%E4%BF%A1%E9%81%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1572,76 +1810,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/04/24/NRTDDPerformanceEvaluation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/24/NRTDDPerformanceEvaluation/" class="post-title-link" itemprop="url">NRTDDPerformanceEvaluation</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-04-24 05:47:47 / Modified: 18:56:11" itemprop="dateCreated datePublished" datetime="2025-04-24T05:47:47+08:00">2025-04-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="1-Basic-Concept"><a href="#1-Basic-Concept" class="headerlink" title="1. Basic Concept"></a>1. Basic Concept</h2><p>In TDD (Time division duplexing) mode, physical uplink shared channel (PUSCH) and physical downlink shared channel (PDSCH) transmissions are scheduled in the same frequency band with separation in time domain. The scheduling strategy can be customized and network performance can be evaluated accordingly. </p>
-<h3 id="1-1-举例说明"><a href="#1-1-举例说明" class="headerlink" title="1.1 举例说明"></a>1.1 举例说明</h3><p>matlab里面参数设置如下<br>reference_scs &#x3D; 15kHz(i.e. 1 ms slot), DLULPeriodicity &#x3D; 5 ms, numDLSlots &#x3D; 3, numDLSyms &#x3D; 7, numULSlots &#x3D; 1, numULSyms &#x3D; 5<br>所以Number of slots in DL-UL periodicity with respect to reference SCS of 15 kHz对应的NumSlotsDLULPeriodicity &#x3D; 5<br>最后Slot分布图如下<br>Slot Index:     0   1   2    3    4<br>            +—–+—+—-+—-+—–+<br>Slot Type:  DL     Dl   Dl    Up   UL<br>Symbol Use: full   full  7sym  full 5sym</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1711,7 +1879,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
