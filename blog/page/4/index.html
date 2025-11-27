@@ -150,6 +150,426 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/07/%E5%85%B6%E4%BB%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/07/07/%E5%85%B6%E4%BB%96/" class="post-title-link" itemprop="url">其他</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-07-07 17:20:33" itemprop="dateCreated datePublished" datetime="2025-07-07T17:20:33+08:00">2025-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-07-19 14:44:22" itemprop="dateModified" datetime="2025-07-19T14:44:22+08:00">2025-07-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="周期冲激序列的傅立叶变换"><a href="#周期冲激序列的傅立叶变换" class="headerlink" title="周期冲激序列的傅立叶变换"></a>周期冲激序列的傅立叶变换</h2><p>求冲激串 $ \sum_{k&#x3D;-\infty}^{\infty}\delta(t-kT) $ 的傅立叶变换。</p>
+<hr>
+<h3 id="🚩-思路一：傅立叶级数展开"><a href="#🚩-思路一：傅立叶级数展开" class="headerlink" title="🚩 思路一：傅立叶级数展开"></a>🚩 思路一：傅立叶级数展开</h3><ul>
+<li>时间域是周期信号，周期 $T$，所以可以写成傅立叶级数：</li>
+</ul>
+<p>$$<br>x(t) &#x3D; \sum_{n&#x3D;-\infty}^{\infty} c_n e^{j n \Omega_s t}, \quad \Omega_s &#x3D; \frac{2\pi}{T}.<br>$$</p>
+<ul>
+<li>求傅立叶系数，对于冲激串：</li>
+</ul>
+<p>$$<br>c_n &#x3D; \frac{1}{T} \int_{-T&#x2F;2}^{T&#x2F;2} \sum_{k&#x3D;-\infty}^{\infty} \delta(t - kT) e^{-j n \Omega_s t} dt.<br>$$</p>
+<p>只会取到 $k &#x3D; 0$：</p>
+<p>$$<br>c_n &#x3D; \frac{1}{T}.<br>$$</p>
+<ul>
+<li>所以：</li>
+</ul>
+<p>$$<br>x(t) &#x3D; \frac{1}{T} \sum_{n&#x3D;-\infty}^{\infty} e^{j n \Omega_s t}.<br>$$</p>
+<ul>
+<li>利用傅立叶变换性质，复指数 $e^{j n \Omega_s t}$ 的傅立叶变换：</li>
+</ul>
+<p>$$<br>\mathcal{F}[e^{j n \Omega_s t}] &#x3D; 2\pi \delta(\omega - n\Omega_s).<br>$$</p>
+<ul>
+<li>所以：</li>
+</ul>
+<p>$$<br>X(j\omega) &#x3D; \frac{1}{T} \sum_{n&#x3D;-\infty}^{\infty} 2\pi \delta(\omega - n\Omega_s)<br>&#x3D; \frac{2\pi}{T} \sum_{n&#x3D;-\infty}^{\infty} \delta(\omega - n\Omega_s).<br>$$</p>
+<hr>
+<h3 id="🚩-思路二：直接利用时移性质"><a href="#🚩-思路二：直接利用时移性质" class="headerlink" title="🚩 思路二：直接利用时移性质"></a>🚩 思路二：直接利用时移性质</h3><hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>时移性质是指信号在时域中的时间延迟会导致其傅立叶变换在相位上发生线性变化。<br><br>f(t)沿时间右轴t0得到f(t-t0),则傅立叶变换F(w)将在所有频率点上乘上一个相位因子$e^{-jwt_0}$<br></p>
+</blockquote>
+<hr>
+<ul>
+<li>单个冲激的傅立叶变换：</li>
+</ul>
+<p>$$<br>\mathcal{F}[\delta(t)] &#x3D; 1, \quad \mathcal{F}[\delta(t - kT)] &#x3D; e^{-j \omega kT}.<br>$$</p>
+<ul>
+<li>求和：</li>
+</ul>
+<p>$$<br>X(j\omega) &#x3D; \sum_{k&#x3D;-\infty}^{\infty} e^{-j \omega kT}<br>&#x3D; \sum_{k&#x3D;-\infty}^{\infty} e^{-j k \omega T}.<br>$$</p>
+<ul>
+<li>这本质上是一个无限等比数列在单位圆上的和，用冲激串采样定理：</li>
+</ul>
+<p>$$<br>\sum_{k&#x3D;-\infty}^{\infty} e^{-j k \omega T}<br>&#x3D; 2\pi \sum_{n&#x3D;-\infty}^{\infty} \delta(\omega - n\Omega_s) \cdot \frac{1}{T}.<br>$$</p>
+<ul>
+<li>所以同样得到：</li>
+</ul>
+<p>$$<br>X(j\omega) &#x3D; \frac{2\pi}{T} \sum_{n&#x3D;-\infty}^{\infty} \delta(\omega - n\Omega_s).<br>$$</p>
+<hr>
+<h2 id="✅-总结"><a href="#✅-总结" class="headerlink" title="✅ 总结"></a>✅ 总结</h2><ul>
+<li><p>时间域：周期冲激串，周期 $T$</p>
+</li>
+<li><p>频域：等间隔频域冲激串，间隔 $\Omega_s &#x3D; \frac{2\pi}{T}$，幅度系数 $\frac{2\pi}{T}$</p>
+</li>
+</ul>
+<h2 id="拉丁字母"><a href="#拉丁字母" class="headerlink" title="拉丁字母"></a>拉丁字母</h2><table>
+<thead>
+<tr>
+<th>LaTeX代码</th>
+<th>渲染效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\alpha$</td>
+<td>α</td>
+</tr>
+<tr>
+<td>$\beta$</td>
+<td>β</td>
+</tr>
+<tr>
+<td>$\gamma$</td>
+<td>γ</td>
+</tr>
+<tr>
+<td>$\delta$</td>
+<td>δ</td>
+</tr>
+<tr>
+<td>$\epsilon$</td>
+<td>ε</td>
+</tr>
+<tr>
+<td>$\zeta$</td>
+<td>ζ</td>
+</tr>
+<tr>
+<td>$\eta$</td>
+<td>η</td>
+</tr>
+<tr>
+<td>$\theta$</td>
+<td>θ</td>
+</tr>
+<tr>
+<td>$\iota$</td>
+<td>ι</td>
+</tr>
+<tr>
+<td>$\kappa$</td>
+<td>κ</td>
+</tr>
+<tr>
+<td>$\lambda$</td>
+<td>λ</td>
+</tr>
+<tr>
+<td>$\mu$</td>
+<td>μ</td>
+</tr>
+<tr>
+<td>$\nu$</td>
+<td>ν</td>
+</tr>
+<tr>
+<td>$\xi$</td>
+<td>ξ</td>
+</tr>
+<tr>
+<td>$\pi$</td>
+<td>π</td>
+</tr>
+<tr>
+<td>$\rho$</td>
+<td>ρ</td>
+</tr>
+<tr>
+<td>$\sigma$</td>
+<td>σ</td>
+</tr>
+<tr>
+<td>$\varsigma$</td>
+<td>ς</td>
+</tr>
+<tr>
+<td>$\tau$</td>
+<td>τ</td>
+</tr>
+<tr>
+<td>$\upsilon$</td>
+<td>υ</td>
+</tr>
+<tr>
+<td>$\phi$</td>
+<td>φ</td>
+</tr>
+<tr>
+<td>$\varphi$</td>
+<td>ϕ</td>
+</tr>
+<tr>
+<td>$\chi$</td>
+<td>χ</td>
+</tr>
+<tr>
+<td>$\psi$</td>
+<td>ψ</td>
+</tr>
+<tr>
+<td>$\omega$</td>
+<td>ω</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/02/%E5%BE%AA%E7%8E%AF%E5%8D%B7%E7%A7%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/07/02/%E5%BE%AA%E7%8E%AF%E5%8D%B7%E7%A7%AF/" class="post-title-link" itemprop="url">循环卷积</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-07-02 06:39:15 / Modified: 06:56:43" itemprop="dateCreated datePublished" datetime="2025-07-02T06:39:15+08:00">2025-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="循环卷积定义"><a href="#循环卷积定义" class="headerlink" title="循环卷积定义"></a>循环卷积定义</h2><p>给定两个长度为 ( N ) 的序列 ( x[n] ) 和 ( h[n] )，它们的循环卷积定义为：</p>
+<p>$$<br>y_{\text{circ}}[n] &#x3D; \sum_{m&#x3D;0}^{N-1} x[m] \cdot h[(n - m) \bmod N], \quad n&#x3D;0,1,\ldots,N-1<br>$$</p>
+<p>其中，( \bmod ) 表示取模运算，序列被视为周期为 ( N )。</p>
+<h2 id="循环卷积与-DFT-的关系"><a href="#循环卷积与-DFT-的关系" class="headerlink" title="循环卷积与 DFT 的关系"></a>循环卷积与 DFT 的关系</h2><p>离散傅里叶变换（DFT）定义为：</p>
+<p>$$<br>X[k] &#x3D; \sum_{n&#x3D;0}^{N-1} x[n] \cdot e^{-j \frac{2\pi}{N} kn}, \quad k&#x3D;0,1,\ldots,N-1<br>$$</p>
+<p>逆变换为：</p>
+<p>$$<br>x[n] &#x3D; \frac{1}{N} \sum_{k&#x3D;0}^{N-1} X[k] \cdot e^{j \frac{2\pi}{N} kn}<br>$$</p>
+<p>关键结论：</p>
+<p>两个长度为 ( N ) 的序列 ( x[n] ) 和 ( h[n] ) 的循环卷积 ( y_{\text{circ}}[n] ) 的 DFT 等于它们的 DFT 乘积：</p>
+<p>$$<br>Y[k] &#x3D; X[k] \cdot H[k]<br>$$</p>
+<p>反过来，循环卷积可通过 IDFT 计算：</p>
+<p>$$<br>y_{\text{circ}}[n] &#x3D; \text{IDFT}{ X[k] \cdot H[k] }<br>$$</p>
+<h2 id="傅立叶变换等于-DFT-的说明"><a href="#傅立叶变换等于-DFT-的说明" class="headerlink" title="傅立叶变换等于 DFT 的说明"></a>傅立叶变换等于 DFT 的说明</h2><ul>
+<li>离散时间傅立叶变换（DTFT）是连续频率的变换。</li>
+<li>DFT 是对长度为 ( N ) 的序列 DTFT 在均匀采样点 ( \omega &#x3D; \frac{2\pi k}{N} ) 上的采样。</li>
+<li>因此，DFT 是 DTFT 的离散版本。</li>
+</ul>
+<h2 id="线性卷积与循环卷积的区别与联系"><a href="#线性卷积与循环卷积的区别与联系" class="headerlink" title="线性卷积与循环卷积的区别与联系"></a>线性卷积与循环卷积的区别与联系</h2><ul>
+<li>线性卷积长度为 ( N_x + N_h - 1 )，无周期性。</li>
+<li>循环卷积长度固定为 ( N )，信号视为周期为 ( N )。</li>
+<li>对 ( x[n], h[n] ) 零填充至长度 ( N \geq N_x + N_h -1 )，线性卷积结果等于循环卷积的前 ( N_x + N_h -1 ) 项。</li>
+</ul>
+<h2 id="在-OFDM-中的应用"><a href="#在-OFDM-中的应用" class="headerlink" title="在 OFDM 中的应用"></a>在 OFDM 中的应用</h2><ul>
+<li>OFDM 信号长度为 ( N )，添加长度大于等于 ( L-1 ) 的循环前缀（CP），其中 ( L ) 是信道长度。</li>
+<li>CP 使得线性卷积等价于循环卷积。</li>
+<li>接收端去除 CP 后，信号通过循环卷积传输，可用 FFT 频域乘法实现均衡。</li>
+</ul>
+<h2 id="关键公式汇总"><a href="#关键公式汇总" class="headerlink" title="关键公式汇总"></a>关键公式汇总</h2><p>循环卷积：</p>
+<p>$$<br>y_{\text{circ}}[n] &#x3D; \sum_{m&#x3D;0}^{N-1} x[m] \cdot h[(n - m) \bmod N]<br>$$</p>
+<p>DFT 计算循环卷积：</p>
+<p>$$<br>Y[k] &#x3D; X[k] \cdot H[k]<br>$$</p>
+<p>$$<br>y_{\text{circ}}[n] &#x3D; \text{IDFT}{ Y[k] }<br>$$</p>
+<h2 id="代码示范"><a href="#代码示范" class="headerlink" title="代码示范"></a>代码示范</h2><p>下面是一个最小可运行的示例，演示 <strong>OFDM 信号添加循环前缀后经过线性卷积，与去除 CP 后与循环卷积一致</strong> 的原理。</p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# ----------------------------
+# 参数设置
+N = 8          # IFFT/FFT 大小（子载波数）
+L = 3          # 信道脉冲响应长度
+CP = L - 1     # 循环前缀长度，必须 &gt;= L - 1
+
+# ----------------------------
+# 生成随机 OFDM 符号（频域）
+# np.random.seed(0)  # 不设置种子，每次随机
+X = np.random.randn(N) + 1j*np.random.randn(N)
+
+# IFFT 变换到时域
+x = np.fft.ifft(X)
+
+# 添加循环前缀：复制末尾 CP 位到前面
+x_cp = np.concatenate([x[-CP:], x])
+
+# ----------------------------
+# 信道冲激响应
+h = np.array([0.5, 0.3, 0.2])
+
+# 线性卷积：通过信道传输
+y = np.convolve(x_cp, h)
+
+# 接收端去除 CP：保留长度 N 的有效符号
+y_cp_removed = y[CP : CP + N]
+
+# ----------------------------
+# 循环卷积（频域等效）
+# 零填充信道到长度 N
+h_padded = np.pad(h, (0, N - L))
+H = np.fft.fft(h_padded)
+
+# 频域点乘
+Y_freq = np.fft.fft(x) * H
+
+# IFFT 得到循环卷积结果
+y_circular = np.fft.ifft(Y_freq)
+
+# ----------------------------
+# 可视化结果对比
+fig, axs = plt.subplots(4, 1, figsize=(10, 10))
+
+# IFFT 后的时域符号
+axs[0].stem(np.arange(N), np.real(x), basefmt=&quot; &quot;, use_line_collection=True)
+axs[0].set_title(&#39;1. IFFT 时域信号 (未加 CP)&#39;)
+axs[0].grid()
+
+# 加 CP 后的时域符号
+axs[1].stem(np.arange(len(x_cp)), np.real(x_cp), basefmt=&quot; &quot;, use_line_collection=True)
+axs[1].set_title(f&#39;2. 加 CP 后时域信号 (CP length = &#123;CP&#125;)&#39;)
+axs[1].axvspan(0, CP-1, color=&#39;orange&#39;, alpha=0.3, label=&#39;Cyclic Prefix&#39;)
+axs[1].legend()
+axs[1].grid()
+
+# 通过信道后的线性卷积
+axs[2].stem(np.arange(len(y)), np.real(y), basefmt=&quot; &quot;, use_line_collection=True)
+axs[2].set_title(&#39;3. 经过信道: 线性卷积&#39;)
+axs[2].axvspan(0, CP-1, color=&#39;orange&#39;, alpha=0.3, label=&#39;CP to discard&#39;)
+axs[2].legend()
+axs[2].grid()
+
+# 去除 CP 后 vs 循环卷积结果
+axs[3].stem(np.arange(N), np.real(y_cp_removed), markerfmt=&#39;bo&#39;,
+            label=&#39;Linear conv. + CP removed&#39;,
+            basefmt=&quot; &quot;, use_line_collection=True)
+axs[3].stem(np.arange(N), np.real(y_circular), markerfmt=&#39;rx&#39;,
+            label=&#39;Circular conv.&#39;,
+            basefmt=&quot; &quot;, use_line_collection=True)
+axs[3].set_title(&#39;4. 对比: 线性卷积去 CP vs. 循环卷积&#39;)
+axs[3].legend()
+axs[3].grid()
+
+plt.tight_layout()
+plt.show()
+
+# ----------------------------
+# 计算误差（验证一致性）
+error = np.linalg.norm(y_cp_removed - y_circular)
+print(f&quot;Difference (CP removed vs. circular): &#123;error:.3e&#125;&quot;)
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/25/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2346,308 +2766,10 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/07/%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/07/%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81/" class="post-title-link" itemprop="url">信源编码</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-06-07 21:37:43" itemprop="dateCreated datePublished" datetime="2025-06-07T21:37:43+08:00">2025-06-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-08-29 11:29:30" itemprop="dateModified" datetime="2025-08-29T11:29:30+08:00">2025-08-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="1-信源编码基本概念"><a href="#1-信源编码基本概念" class="headerlink" title="1. 信源编码基本概念"></a>1. 信源编码基本概念</h2><ul>
-<li><p>信源编码 (Source Coding &#x2F; Data Compression)</p>
-<ul>
-<li>目标：将原始数据压缩成比特流，同时尽量保持低失真</li>
-<li>函数表示：<br>$$<br>F: X^M \to {0,1}^B, \quad F^{-1}: {0,1}^B \to X^M<br>$$<ul>
-<li>$X^M$：原始数据集合（维度 $M$）</li>
-<li>$B$：编码后的比特长度</li>
-</ul>
-</li>
-<li>失真度量（均方误差 MSE）：<br>$$<br>D_s &#x3D; \mathbb{E}\Big[\frac{1}{M}|x - F^{-1}(F(x))|^2\Big]<br>$$</li>
-</ul>
-</li>
-<li><p>基本流程：</p>
-<ol>
-<li>特征提取</li>
-<li>量化（连续 $\to$ 离散符号）</li>
-<li>熵编码（生成比特流）</li>
-</ol>
-</li>
-</ul>
-<hr>
-<h2 id="2-熵编码"><a href="#2-熵编码" class="headerlink" title="2. 熵编码"></a>2. 熵编码</h2><ul>
-<li>核心思想：利用符号概率分布，将高频符号用较少比特表示，低频符号用较多比特表示</li>
-<li>信息论公式：<br>$$<br>H(X) &#x3D; - \sum_x P(x) \log_2 P(x)<br>$$</li>
-<li>常用方法：<ul>
-<li>霍夫曼编码 (Huffman)：构建前缀码二叉树</li>
-<li>算术编码 (Arithmetic)：整个序列映射到 $[0,1)$，适合连续概率</li>
-<li>范围编码 (Range)：算术编码优化实现</li>
-</ul>
-</li>
-<li>在深度源编码中的应用：<ol>
-<li>对量化后的特征 $\tilde{y}$ 进行条件概率建模：<br>$$<br>P_{\tilde{y}|\tilde{z}}(\tilde{y}|\tilde{z})<br>$$</li>
-<li>对侧信息 $\tilde{z}$ 进行熵编码：<br>$$<br>P_{\tilde{z}}(\tilde{z})<br>$$</li>
-<li>生成比特流：<br>$$<br>b &#x3D; [b_y, b_z]<br>$$</li>
-</ol>
-</li>
-</ul>
-<hr>
-<h2 id="3-深度信源编码-Deep-Source-Coding"><a href="#3-深度信源编码-Deep-Source-Coding" class="headerlink" title="3. 深度信源编码 (Deep Source Coding)"></a>3. 深度信源编码 (Deep Source Coding)</h2><ul>
-<li><p>核心思想：利用深度神经网络自动学习接近最优的编码和解码函数</p>
-</li>
-<li><p>流程：</p>
-<ol>
-<li>特征提取：<br>$$<br>y &#x3D; F_\phi(x) \in \mathbb{R}^K \quad (K \ll M)<br>$$</li>
-<li>量化：<br>$$<br>\tilde{y} &#x3D; \lceil y \rfloor<br>$$<br>（连续 $\to$ 离散符号）</li>
-<li>条件概率建模：使用侧信息 $z$<br>$$<br>P_{\tilde{y}|\tilde{z}}(\tilde{y}|\tilde{z})<br>$$</li>
-<li>熵编码：根据符号概率生成比特流 $b_y, b_z$</li>
-<li>解码：<br>$$<br>\hat{x} &#x3D; G_\psi(\tilde{y})<br>$$</li>
-</ol>
-</li>
-<li><p>优势：</p>
-<ul>
-<li>自动学习特征表示</li>
-<li>可接近理论最优压缩性能</li>
-<li>支持图像、视频等高维数据</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="4-传统视频编码（H-26x）特征提取"><a href="#4-传统视频编码（H-26x）特征提取" class="headerlink" title="4. 传统视频编码（H.26x）特征提取"></a>4. 传统视频编码（H.26x）特征提取</h2><ul>
-<li>特征提取依赖经典信号处理，不依赖 DNN</li>
-<li>核心目标：<ul>
-<li>空间冗余：帧内相邻像素高度相关</li>
-<li>时间冗余：视频帧间存在运动相关性</li>
-<li>频域冗余：像素在变换域存在非均匀分布</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-块划分与运动补偿"><a href="#1-块划分与运动补偿" class="headerlink" title="(1) 块划分与运动补偿"></a>(1) 块划分与运动补偿</h3><ul>
-<li>图像&#x2F;视频帧划分为 Macroblock (MB)</li>
-<li>运动估计：<ul>
-<li>提取运动矢量 (MV)</li>
-<li>提取残差块 (Residual)</li>
-</ul>
-</li>
-<li>特征意义：<ul>
-<li>MV 捕捉帧间变化</li>
-<li>残差捕捉帧内细节</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-变换编码"><a href="#2-变换编码" class="headerlink" title="(2) 变换编码"></a>(2) 变换编码</h3><ul>
-<li>对残差块做离散余弦变换 (DCT)：<br>$$<br>R(u,v) &#x3D; \sum_{x&#x3D;0}^{N-1}\sum_{y&#x3D;0}^{N-1} r(x,y) \cos\left[\frac{(2x+1)u\pi}{2N}\right]\cos\left[\frac{(2y+1)v\pi}{2N}\right]<br>$$<ul>
-<li>$r(x,y)$：残差块像素</li>
-<li>$R(u,v)$：变换系数</li>
-</ul>
-</li>
-</ul>
-<h3 id="3-量化"><a href="#3-量化" class="headerlink" title="(3) 量化"></a>(3) 量化</h3><ul>
-<li>对变换系数量化：<br>$$<br>\tilde{R}(u,v) &#x3D; \text{round}\Big(\frac{R(u,v)}{Q(u,v)}\Big)<br>$$<ul>
-<li>$Q(u,v)$：量化步长</li>
-</ul>
-</li>
-</ul>
-<h3 id="4-熵编码"><a href="#4-熵编码" class="headerlink" title="(4) 熵编码"></a>(4) 熵编码</h3><ul>
-<li>H.264&#x2F;H.265 使用 CABAC 或 CAVLC</li>
-<li>对量化系数进行无损压缩</li>
-</ul>
-<h3 id="5-对比深度信源编码"><a href="#5-对比深度信源编码" class="headerlink" title="(5) 对比深度信源编码"></a>(5) 对比深度信源编码</h3><table>
-<thead>
-<tr>
-<th>方面</th>
-<th>传统信源编码 (H.26x)</th>
-<th>深度信源编码</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>特征提取</td>
-<td>块划分 + 运动估计 + 残差 + 变换</td>
-<td>DNN 自动学习语义特征</td>
-</tr>
-<tr>
-<td>量化</td>
-<td>对 DCT&#x2F;变换系数量化</td>
-<td>对 DNN 输出连续特征量化</td>
-</tr>
-<tr>
-<td>熵编码</td>
-<td>CABAC &#x2F; CAVLC</td>
-<td>算术编码 &#x2F; 其他熵编码</td>
-</tr>
-<tr>
-<td>数据依赖</td>
-<td>无需训练</td>
-<td>需要训练数据集</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="5-小结"><a href="#5-小结" class="headerlink" title="5. 小结"></a>5. 小结</h2><ul>
-<li>信源编码目标：压缩数据，降低冗余</li>
-<li>熵编码核心方法：通过概率分配比特，实现接近熵极限的压缩</li>
-<li>深度信源编码：<ul>
-<li>利用 DNN 自动学习编码、量化、条件概率建模和解码</li>
-</ul>
-</li>
-<li>传统信源编码：<ul>
-<li>H.26x 系列通过块划分、运动估计、DCT 变换和量化提取特征</li>
-<li>熵编码 (CABAC &#x2F; CAVLC) 压缩量化系数</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/06/05/%E6%95%B0%E5%AD%97%E8%B0%83%E5%88%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/05/%E6%95%B0%E5%AD%97%E8%B0%83%E5%88%B6/" class="post-title-link" itemprop="url">数字调制</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-06-05 05:18:05" itemprop="dateCreated datePublished" datetime="2025-06-05T05:18:05+08:00">2025-06-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-15 22:49:42" itemprop="dateModified" datetime="2025-06-15T22:49:42+08:00">2025-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="二进制调制"><a href="#二进制调制" class="headerlink" title="二进制调制"></a>二进制调制</h2><h3 id="解调"><a href="#解调" class="headerlink" title="解调"></a>解调</h3><p>2ASK可以用包络检测法，而2PSK不行，只能用相干解调法</p>
-<h2 id="多进制调制"><a href="#多进制调制" class="headerlink" title="多进制调制"></a>多进制调制</h2><h3 id="正交调制"><a href="#正交调制" class="headerlink" title="正交调制"></a>正交调制</h3><p>已调信号表示为正交调制信号的组合<br>$u(t)&#x3D;A(t)cos[w_ct+\phi(t)] &#x3D; I(t)cosw_ct-Q(t)sinw_ct$  </p>
-<p>其中$I(t)&#x3D;A(t)cos\phi(t)$为同相分量<br>$Q(t)&#x3D;A(t)sin\phi(t)$为正交分量<br>易见I(t)和Q(t)都是成形滤波，因此在生成I(t)和Q(t)我们先引入In和Qn，可以在信号矢量图&#x2F;星座图上面显示In，Qn<br>$u_n(t-nT_B) &#x3D; A_ng(t-nT_B)cos[w_ct+\phi_n] &#x3D; I_ng(t-nT_B)cosw_ct-Q_ng(t-nT_B)sinw_ct$<br>注意u(t)和$u_n(t)$的区别在于是否对单个码元进行分析，$I_n$和$I_t$的区别也是如此。<br>其中对$I_ng(t-nT_B)$和$Q_ng(t-nT_B)$求累加可以分别表示I(t)和Q(t)，因此In和Qn可以表征It和Qt</p>
-<h3 id="正交调制的相干解调法"><a href="#正交调制的相干解调法" class="headerlink" title="正交调制的相干解调法"></a>正交调制的相干解调法</h3><p>由于$u(t) &#x3D; I(t)cosw_ct-Q(t)sinw_ct$  </p>
-<ul>
-<li>获取In<br>与本地载波$cosw_ct$相乘后经过低通滤波器后生成$\frac{1}{2}I(t)$,然后经过抽样判决后生成In</li>
-<li>获取Qn<br>与本地载波$-sinw_ct$相乘同理获取Qn</li>
-</ul>
-<p>然后In与Qn经过并&#x2F;串变换后得到输出01序列</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/blog/page/5/">5</a><a class="page-number" href="/blog/page/6/">6</a><a class="extend next" rel="next" href="/blog/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/blog/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/blog/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/7/">7</a><a class="extend next" rel="next" href="/blog/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2713,7 +2835,7 @@ $θ_&#123;t+1&#125; = θ_t + v_&#123;t+1&#125;$
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

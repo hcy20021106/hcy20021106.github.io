@@ -150,6 +150,181 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/27/11-27/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/27/11-27/" class="post-title-link" itemprop="url">11-27</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-11-27 16:10:28" itemprop="dateCreated datePublished" datetime="2025-11-27T16:10:28+08:00">2025-11-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-11-28 01:31:05" itemprop="dateModified" datetime="2025-11-28T01:31:05+08:00">2025-11-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><h3 id="mobicomm"><a href="#mobicomm" class="headerlink" title="mobicomm"></a>mobicomm</h3><p>Tutti: Coupling 5G RAN and Mobile Edge Computing for Latency-critical Video Analytics</p>
+<p>区别于RIC框架<br>有一个边缘服务器，从而能实现快速调度</p>
+<h3 id="VAED模型"><a href="#VAED模型" class="headerlink" title="VAED模型"></a>VAED模型</h3><ol>
+<li>Used 3D depthwise separable convolutions to reduce the number of parameters. </li>
+<li>Distill the decoder to Turbo-VAED instead of re-training the full VAE, enabling fast mobile adaption with minimal performance loss.</li>
+</ol>
+<h3 id="DC-AE"><a href="#DC-AE" class="headerlink" title="DC-AE"></a>DC-AE</h3><p>Open-Sora 2.0: Training a Commercial-Level Video Generation Model in $200k</p>
+<p>完整流程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Video → [DC-AE Encoder] → Latent Tokens → [Diffusion Transformer (DiT)] → Latent → [DC-AE Decoder] → Video</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>DiT可以生成&#x2F;预测&#x2F;补全 视频<br>没有 DiT，模型无法：</p>
+<p>学习“分布”</p>
+<p>采样新的内容</p>
+<p>控制时间一致性</p>
+<p>保持场景稳定性</p>
+<p>生成运动逻辑</p>
+<h4 id="Pixel-Unshuffle"><a href="#Pixel-Unshuffle" class="headerlink" title="Pixel Unshuffle"></a>Pixel Unshuffle</h4><p>输入<br>形状： (C, H, W)<br>输出<br>输出： (4C, H&#x2F;2, W&#x2F;2)</p>
+<h4 id="Pixel-Shuffle"><a href="#Pixel-Shuffle" class="headerlink" title="Pixel Shuffle"></a>Pixel Shuffle</h4><p>把通道信息重新展开为空间像素 → 提高分辨率</p>
+<p>因此它们是完全可逆的变换，用来实现高效下采样 &#x2F; 上采样。</p>
+<h3 id="LLaVa-Video和CLIP模型"><a href="#LLaVa-Video和CLIP模型" class="headerlink" title="LLaVa-Video和CLIP模型"></a>LLaVa-Video和CLIP模型</h3><p>LLaVA-Video &#x3D; 多模态大语言模型（LLM）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Video Encoder  →  Projection Layer  →  LLM (如 Vicuna, Llama)</span><br></pre></td></tr></table></figure>
+
+<p>常用Video Encoder：</p>
+<ul>
+<li><p>CLIP ViT-L&#x2F;14 或 ViT-G&#x2F;14（用于图像或帧）</p>
+</li>
+<li><p>或视频专用的模型（如 X-CLIP、InternVideo）<br>训练方式：</p>
+</li>
+<li><p>Instructions-tuning</p>
+</li>
+<li><p>对齐LLM与视觉表示</p>
+</li>
+<li><p>大规模视频+文本训练集</p>
+</li>
+</ul>
+<h3 id="DINO"><a href="#DINO" class="headerlink" title="DINO"></a>DINO</h3><p>meta研发的<br>DINO 是一种用“自监督方式”训练 Vision Transformer（ViT）的模型，让模型在没有标签的情况下学会理解图像内容<br>因为它用一种叫 self-distillation（自蒸馏） 的方式，让一个模型教另一个模型学习。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">学生模型（student）</span><br><span class="line">教师模型（teacher）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>架构一样（通常是 ViT）</p>
+<p>教师 &#x3D; 学生的 EMA（指数滑动平均）</p>
+<h3 id="EfficientViT-Block"><a href="#EfficientViT-Block" class="headerlink" title="EfficientViT Block"></a>EfficientViT Block</h3><p>是一个高效版的Transformer Block，把传统Transformer的重计算注意力MHSA替换为轻量级卷积混合+局部注意力，计算量更小，但保持全局特征能力<br>它不是普通的 ViT block，也不是 ResNet block，而是介于两者之间：</p>
+<p>比 CNN 更擅长建模长范围依赖</p>
+<p>比标准 Transformer 便宜几倍</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Input</span><br><span class="line">  ↓</span><br><span class="line">Normalization</span><br><span class="line">  ↓</span><br><span class="line">Local Attention (局部注意力 或 GLU + DW Conv)</span><br><span class="line">  ↓</span><br><span class="line">Feed-forward Network (pointwise conv + expansion)</span><br><span class="line">  ↓</span><br><span class="line">Residual Connection</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="创新点"><a href="#创新点" class="headerlink" title="创新点"></a>创新点</h3><p>DINO attention → Semantic importance map → Dynamic bit allocation</p>
+<h3 id="to-do"><a href="#to-do" class="headerlink" title="to do"></a>to do</h3><p>跑一下dino<br>hunyuan vae</p>
+<h2 id="Mobicomm"><a href="#Mobicomm" class="headerlink" title="Mobicomm"></a>Mobicomm</h2><p>encoder -》 token -〉 decoder -》 RGB numpy -〉 VLC播放器（API接口）<br>无需再用WebRTC推流（内部有ffmpeg）</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/26/11-26/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/26/11-26/" class="post-title-link" itemprop="url">11-26</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-11-26 16:36:54 / Modified: 16:48:56" itemprop="dateCreated datePublished" datetime="2025-11-26T16:36:54+08:00">2025-11-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="视频推流"><a href="#视频推流" class="headerlink" title="视频推流"></a>视频推流</h2><h3 id="RTMP-HLS"><a href="#RTMP-HLS" class="headerlink" title="RTMP -&gt; HLS"></a>RTMP -&gt; HLS</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RTMP(H.264) → nginx-rtmp → 分片 → .ts + .m3u8</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="WebRTC-HLS"><a href="#WebRTC-HLS" class="headerlink" title="WebRTC -&gt; HLS"></a>WebRTC -&gt; HLS</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">WebRTC(H.264) → server → 切片 → HLS</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/25/11-25/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -173,10 +348,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-11-25 13:34:13 / Modified: 15:47:09" itemprop="dateCreated datePublished" datetime="2025-11-25T13:34:13+08:00">2025-11-25</time>
+              <time title="Created: 2025-11-25 13:34:13" itemprop="dateCreated datePublished" datetime="2025-11-25T13:34:13+08:00">2025-11-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-11-26 09:35:11" itemprop="dateModified" datetime="2025-11-26T09:35:11+08:00">2025-11-26</time>
+              </span>
 
           
 
@@ -225,7 +406,8 @@
 </li>
 <li>ULSCHConfigStruct</li>
 </ul>
-<h2 id="可以设置（set）的"><a href="#可以设置（set）的" class="headerlink" title="可以设置（set）的"></a>可以设置（set）的</h2><ul>
+<h3 id="NSSAI-切片信息"><a href="#NSSAI-切片信息" class="headerlink" title="NSSAI 切片信息"></a>NSSAI 切片信息</h3><p>S-NSSAI &#x3D; SST + SD<br>SST是切片类型，SD是切片区分符</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="可以设置（set）的"><a href="#可以设置（set）的" class="headerlink" title="可以设置（set）的"></a>可以设置（set）的</h2><ul>
 <li>fstRecmdRBstart</li>
 <li>fstRecmdRBend</li>
 <li>scdRecmdRBend</li>
@@ -890,215 +1072,10 @@ CUDA_VISIBLE_DEVICES=5 python .py
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/09/01/Log-Likelihood-Ratio/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/09/01/Log-Likelihood-Ratio/" class="post-title-link" itemprop="url">Log-Likelihood Ratio</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-09-01 16:30:48" itemprop="dateCreated datePublished" datetime="2025-09-01T16:30:48+08:00">2025-09-01</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/30/AWGN%E4%BF%A1%E9%81%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/08/30/AWGN%E4%BF%A1%E9%81%93/" class="post-title-link" itemprop="url">AWGN信道</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-08-30 11:02:27 / Modified: 12:14:06" itemprop="dateCreated datePublished" datetime="2025-08-30T11:02:27+08:00">2025-08-30</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="1-AWGN-信道简介"><a href="#1-AWGN-信道简介" class="headerlink" title="1. AWGN 信道简介"></a>1. AWGN 信道简介</h2><p><strong>AWGN</strong> &#x3D; Additive White Gaussian Noise Channel<br>全称：加性白高斯噪声信道，是最经典的信道模型。</p>
-<h3 id="1-1-名称拆解"><a href="#1-1-名称拆解" class="headerlink" title="1.1 名称拆解"></a>1.1 名称拆解</h3><ul>
-<li><strong>Additive（加性）</strong>：噪声是叠加在信号上的<br>$$<br>y &#x3D; x + n<br>$$</li>
-<li><strong>White（白噪声）</strong>：噪声功率谱密度在所有频率均匀分布  </li>
-<li><strong>Gaussian（高斯）</strong>：噪声服从正态分布<br>$$<br>n \sim \mathcal{N}(0, \sigma^2)<br>$$</li>
-</ul>
-<h3 id="1-2-数学模型"><a href="#1-2-数学模型" class="headerlink" title="1.2 数学模型"></a>1.2 数学模型</h3><p>$$<br>y &#x3D; x + n, \quad n \sim \mathcal{N}(0, \sigma^2)<br>$$</p>
-<ul>
-<li>$x$：发射符号（BPSK&#x2F;QAM 等调制）  </li>
-<li>$n$：高斯白噪声  </li>
-<li>$y$：接收符号</li>
-</ul>
-<p>常用指标：  </p>
-<ul>
-<li><strong>信噪比 (SNR)</strong><br>$$<br>\text{SNR} &#x3D; \frac{\mathbb{E}[x^2]}{\sigma^2}<br>$$</li>
-<li><strong>容量 (Shannon Capacity)</strong><br>$$<br>C &#x3D; \log_2(1+\text{SNR}) \quad [\text{bits per channel use}]<br>$$</li>
-</ul>
-<hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>这里采用带宽归一化的假设：<br><br>把每秒能传输的符号数当作带宽B <br><br>每个符号对应一次channel use <br><br>如果不归一化的话，带宽B Hz -&gt; 每秒大约可以传B个符号，那么持续时间T秒内，就可以传B x T个符号。因此也就是B x T次信道使用<br><br>带宽约束d~ &#x3D; 信道使用次数 &#x2F; 源符号数<br><br>d~越大说明信道资源宽裕，说明可以加冗余来提升鲁棒性<br></p>
-</blockquote>
-<hr>
-<h2 id="2-瑞利衰落信道等效为-AWGN"><a href="#2-瑞利衰落信道等效为-AWGN" class="headerlink" title="2. 瑞利衰落信道等效为 AWGN"></a>2. 瑞利衰落信道等效为 AWGN</h2><p>论文中真实信道是 <strong>块衰落瑞利信道</strong>：<br>$$<br>r_i &#x3D; h \cdot s_i + n_i, \quad n_i \sim \mathcal{CN}(0,\delta^2)<br>$$</p>
-<p>其中：</p>
-<ul>
-<li>$h$：瑞利衰落系数（随时间块变化）</li>
-<li>$s_i$：发送符号</li>
-<li>$n_i$：高斯噪声</li>
-</ul>
-<h3 id="2-1-信道反演功率控制"><a href="#2-1-信道反演功率控制" class="headerlink" title="2.1 信道反演功率控制"></a>2.1 信道反演功率控制</h3><p>在发射端做信道反演：<br>$$<br>s’_i &#x3D; \frac{s_i}{h}<br>$$</p>
-<p>接收端变为：<br>$$<br>r_i &#x3D; h \cdot s’_i + n_i &#x3D; s_i + n_i<br>$$</p>
-<h3 id="2-2-等效后的模型"><a href="#2-2-等效后的模型" class="headerlink" title="2.2 等效后的模型"></a>2.2 等效后的模型</h3><p>这样接收端信道就简化为：<br>$$<br>r_i &#x3D; s_i + n_i, \quad n_i \sim \mathcal{CN}(0,\delta^2)<br>$$</p>
-<p>即 <strong>AWGN 信道模型</strong>。  </p>
-<ul>
-<li>等效后的信噪比：$\gamma &#x3D; 1&#x2F;\delta^2$  </li>
-<li>便于后续推导容量与误块率。</li>
-</ul>
-<hr>
-<h2 id="3-有限码长信息论-Finite-Blocklength-Theory"><a href="#3-有限码长信息论-Finite-Blocklength-Theory" class="headerlink" title="3. 有限码长信息论 (Finite Blocklength Theory)"></a>3. 有限码长信息论 (Finite Blocklength Theory)</h2><p>传统 Shannon 容量理论假设码长 $L \to \infty$，实际通信系统码长有限，需要修正。</p>
-<h3 id="3-1-Polyanskiy–Verdu-结果"><a href="#3-1-Polyanskiy–Verdu-结果" class="headerlink" title="3.1 Polyanskiy–Verdú 结果"></a>3.1 Polyanskiy–Verdú 结果</h3><p>有限码长下，速率 $R_c$、误块率 $\rho$ 和容量 $C$ 的近似关系：<br>$$<br>R_c ;\approx; C - \sqrt{\tfrac{V}{L}} Q^{-1}(\rho) + \mathcal{O}!\left(\tfrac{\log L}{L}\right)<br>$$</p>
-<ul>
-<li>$C$：信道容量 $\log_2(1+\gamma)$  </li>
-<li>$V$：信道弥散度 (dispersion)  </li>
-<li>$Q^{-1}$：高斯 Q 函数的反函数</li>
-</ul>
-<h3 id="3-2-AWGN-信道的容量与弥散度"><a href="#3-2-AWGN-信道的容量与弥散度" class="headerlink" title="3.2 AWGN 信道的容量与弥散度"></a>3.2 AWGN 信道的容量与弥散度</h3><ul>
-<li>容量：<br>$$<br>C &#x3D; \log_2(1+\gamma)<br>$$</li>
-<li>弥散度：<br>$$<br>V &#x3D; \left(1-\frac{1}{(1+\gamma)^2}\right)(\log_2 e)^2<br>$$</li>
-</ul>
-<h3 id="3-3-反推得到误块率"><a href="#3-3-反推得到误块率" class="headerlink" title="3.3 反推得到误块率"></a>3.3 反推得到误块率</h3><p>把公式反写为误块率：<br>$$<br>\rho ;\approx; Q!\left(\frac{\sqrt{L},(C-R_c)}{\sqrt{V}}\right)<br>$$</p>
-<ul>
-<li>分子 $\sqrt{L}(C-R_c)$：离容量的“裕量”  </li>
-<li>分母 $\sqrt{V}$：有限码长下的波动项</li>
-</ul>
-<h3 id="3-4-直觉"><a href="#3-4-直觉" class="headerlink" title="3.4 直觉"></a>3.4 直觉</h3><ul>
-<li>如果 $R_c &lt; C$：裕量为正，码长 $L$ 越大，误码率迅速下降  </li>
-<li>如果 $R_c &#x3D; C$：误码率收敛到 0.5，不会下降  </li>
-<li>如果 $R_c &gt; C$：码率超过容量，误码率始终接近 1</li>
-</ul>
-<h3 id="3-5-工程经验式"><a href="#3-5-工程经验式" class="headerlink" title="3.5 工程经验式"></a>3.5 工程经验式</h3><p>对具体码型（如极化码），可用指数函数拟合BLER：<br>$$<br>\rho ;\approx; \exp(\beta_1 R_c + \beta_2) \tag{5}<br>$$<br>其中 $\beta_1, \beta_2$ 由仿真拟合，依赖于 $\gamma, L, \text{码型}$。</p>
-<h2 id="4-端到端失真上界"><a href="#4-端到端失真上界" class="headerlink" title="4. 端到端失真上界"></a>4. 端到端失真上界</h2><h3 id="4-1-分析思路"><a href="#4-1-分析思路" class="headerlink" title="4.1 分析思路"></a>4.1 分析思路</h3><ul>
-<li>一幅图像压缩后得到 $B$ 比特  </li>
-<li>源编码速率 $R_s &#x3D; B &#x2F; (\text{源符号数})$  </li>
-<li>分为 $T$ 个包，每个包长度 $N$，比特经 $(N,L)$ 信道码 → 码率 $R_c &#x3D; N&#x2F;L$  </li>
-<li>每个包传输成功概率 &#x3D; $1-\rho$  </li>
-<li>所有 $T$ 个包成功概率 &#x3D; $(1-\rho)^T$  </li>
-<li>至少一个失败概率 &#x3D; $1-(1-\rho)^T$</li>
-</ul>
-<h3 id="4-3-期望失真公式"><a href="#4-3-期望失真公式" class="headerlink" title="4.3 期望失真公式"></a>4.3 期望失真公式</h3><p>$$<br>\mathbb{E}[D] &#x3D; (1-\rho)^T , D_s + \big(1-(1-\rho)^T\big) , O(1)<br>$$</p>
-<h3 id="4-4-Theorem-3-1-最终形式"><a href="#4-4-Theorem-3-1-最终形式" class="headerlink" title="4.4 Theorem 3.1 最终形式"></a>4.4 Theorem 3.1 最终形式</h3><p>$$<br>\mathbb{E}[D] ;\leq; (1-\rho)^T D_s + \big(1-(1-\rho)^T\big) O(1) \tag{Theorem 3.1}<br>$$</p>
-<hr>
-<h2 id="5-小结"><a href="#5-小结" class="headerlink" title="5. 小结"></a>5. 小结</h2><ul>
-<li><p><strong>AWGN 信道</strong>：$y&#x3D;x+n$，最基本的信道模型  </p>
-</li>
-<li><p><strong>瑞利衰落信道 → AWGN</strong>：通过信道反演功率控制，把衰落抵消掉，只剩高斯噪声  </p>
-</li>
-<li><p><strong>有限码长信息论</strong>：在有限块长 $L$ 下，误块率不再是“0&#x2F;1”现象，而是通过 Q 函数平滑过渡<br>$$<br>\rho \approx Q!\left(\frac{\sqrt{L}(C-R_c)}{\sqrt{V}}\right)<br>$$</p>
-</li>
-<li><p>多包传输 + 成功&#x2F;失败概率 -&gt; Theorem 3.1 端到端失真上界</p>
-</li>
-</ul>
-<p><strong>关键依赖变量</strong></p>
-<ul>
-<li>源编码速率 $R_s \to D_s$  </li>
-<li>信道编码速率 $R_c \to \rho$  </li>
-<li>包数 $T \to (1-\rho)^T$  </li>
-<li>信噪比 $\gamma \to C,V$</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/6/">6</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/7/">7</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1164,7 +1141,7 @@ CUDA_VISIBLE_DEVICES=5 python .py
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

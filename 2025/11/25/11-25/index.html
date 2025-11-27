@@ -28,7 +28,7 @@
 <meta property="og:description" content="数据打包struct.pack与struct.unpack作用：struct.pack将多个小字段(int, short, byte, float …)按指定顺序&#x2F;大小端打包成二进制结构struct.unpack用于从二进制字节流中按指定格式提取多个字短 tobytesnumpy.tobytes() TBSize计算MCS → I_TBS →（PRB × 符号数）→ N_info → 查">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-11-25T05:34:13.000Z">
-<meta property="article:modified_time" content="2025-11-25T07:47:09.025Z">
+<meta property="article:modified_time" content="2025-11-26T01:35:11.175Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -177,10 +177,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-11-25 13:34:13 / Modified: 15:47:09" itemprop="dateCreated datePublished" datetime="2025-11-25T13:34:13+08:00">2025-11-25</time>
+              <time title="Created: 2025-11-25 13:34:13" itemprop="dateCreated datePublished" datetime="2025-11-25T13:34:13+08:00">2025-11-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-11-26 09:35:11" itemprop="dateModified" datetime="2025-11-26T09:35:11+08:00">2025-11-26</time>
+              </span>
 
           
 
@@ -228,7 +234,8 @@
 </li>
 <li>ULSCHConfigStruct</li>
 </ul>
-<h2 id="可以设置（set）的"><a href="#可以设置（set）的" class="headerlink" title="可以设置（set）的"></a>可以设置（set）的</h2><ul>
+<h3 id="NSSAI-切片信息"><a href="#NSSAI-切片信息" class="headerlink" title="NSSAI 切片信息"></a>NSSAI 切片信息</h3><p>S-NSSAI &#x3D; SST + SD<br>SST是切片类型，SD是切片区分符</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="可以设置（set）的"><a href="#可以设置（set）的" class="headerlink" title="可以设置（set）的"></a>可以设置（set）的</h2><ul>
 <li>fstRecmdRBstart</li>
 <li>fstRecmdRBend</li>
 <li>scdRecmdRBend</li>
@@ -262,7 +269,10 @@
     <a href="/2025/11/24/11-24/" rel="prev" title="11-24">
       <i class="fa fa-chevron-left"></i> 11-24
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2025/11/26/11-26/" rel="next" title="11-26">
+      11-26 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -321,7 +331,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%89%93%E5%8C%85"><span class="nav-number">1.</span> <span class="nav-text">数据打包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#struct-pack%E4%B8%8Estruct-unpack"><span class="nav-number">1.1.</span> <span class="nav-text">struct.pack与struct.unpack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tobytes"><span class="nav-number">1.2.</span> <span class="nav-text">tobytes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TBSize%E8%AE%A1%E7%AE%97"><span class="nav-number">2.</span> <span class="nav-text">TBSize计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Codeword"><span class="nav-number">3.</span> <span class="nav-text">Codeword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%A1%86%E6%9E%B6"><span class="nav-number">4.</span> <span class="nav-text">系统框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%AE%A1%E6%8E%A5%E5%8F%A3"><span class="nav-number">5.</span> <span class="nav-text">网管接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E8%AE%BE%E7%BD%AE%EF%BC%88set%EF%BC%89%E7%9A%84"><span class="nav-number">6.</span> <span class="nav-text">可以设置（set）的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BBU"><span class="nav-number">7.</span> <span class="nav-text">BBU</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%89%93%E5%8C%85"><span class="nav-number">1.</span> <span class="nav-text">数据打包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#struct-pack%E4%B8%8Estruct-unpack"><span class="nav-number">1.1.</span> <span class="nav-text">struct.pack与struct.unpack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tobytes"><span class="nav-number">1.2.</span> <span class="nav-text">tobytes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TBSize%E8%AE%A1%E7%AE%97"><span class="nav-number">2.</span> <span class="nav-text">TBSize计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Codeword"><span class="nav-number">3.</span> <span class="nav-text">Codeword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%A1%86%E6%9E%B6"><span class="nav-number">4.</span> <span class="nav-text">系统框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%AE%A1%E6%8E%A5%E5%8F%A3"><span class="nav-number">5.</span> <span class="nav-text">网管接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NSSAI-%E5%88%87%E7%89%87%E4%BF%A1%E6%81%AF"><span class="nav-number">5.1.</span> <span class="nav-text">NSSAI 切片信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E8%AE%BE%E7%BD%AE%EF%BC%88set%EF%BC%89%E7%9A%84"><span class="nav-number">6.</span> <span class="nav-text">可以设置（set）的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BBU"><span class="nav-number">7.</span> <span class="nav-text">BBU</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -335,7 +345,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

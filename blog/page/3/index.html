@@ -150,6 +150,170 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/26/Semantic-Communication/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/26/Semantic-Communication/" class="post-title-link" itemprop="url">Semantic Communication</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-26 19:06:04 / Modified: 19:13:43" itemprop="dateCreated datePublished" datetime="2025-08-26T19:06:04+08:00">2025-08-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input video</span><br><span class="line">1080p         -&gt;              360p        -&gt;            token   -&gt; decoder  </span><br><span class="line">8x1920x1080   downsampling     640x360    encoder(8x16x16)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/20/DeepAutoencoder/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/20/DeepAutoencoder/" class="post-title-link" itemprop="url">DeepAutoencoder</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-20 23:05:37 / Modified: 23:36:09" itemprop="dateCreated datePublished" datetime="2025-08-20T23:05:37+08:00">2025-08-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>使用网络结构来降维，降维的网络被称为Encoder，这个Encoder就是很多个隐藏层网络的网络结构，它也有一个对应的Decoder，也是网络结构。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input Image (28 x 28 = 784) -&gt; Encoder -&gt; codeword (&lt; 784)</span><br><span class="line"></span><br><span class="line">codeword -&gt; Decoder -&gt; Output Image</span><br></pre></td></tr></table></figure>
+<p>Encoder和Decoder需要learn together</p>
+<h2 id="以CSI压缩为例"><a href="#以CSI压缩为例" class="headerlink" title="以CSI压缩为例"></a>以CSI压缩为例</h2><p>在无线通信中，为了进一步压缩CSI矩阵，可以使用基于深度自动编码器的策略</p>
+<ul>
+<li><ol>
+<li>编码压缩：</li>
+</ol>
+<ul>
+<li>输入： 稀疏化后的CSI矩阵Ha</li>
+<li>编码器$E(\theta_1, ⋅ )$将$H_a$压缩成低维码字向量v：<br>  $v &#x3D; E(\theta_1, H_a)$</li>
+<li>$\theta_1$是编码器网络的参数，需要通过训练学习</li>
+</ul>
+</li>
+<li><ol start="2">
+<li>反馈传输</li>
+</ol>
+<ul>
+<li>压缩后的码字v通过uplink反馈给BS</li>
+<li>这种低维表示大幅减少uplink反馈开销</li>
+</ul>
+</li>
+<li><ol start="3">
+<li>解码恢复</li>
+</ol>
+<ul>
+<li>基站接收到v后，通过解码器$D(\theta_2, ⋅)$恢复CSI矩阵：<br>  $\hat{H}_a &#x3D; D(\theta_2,v)$</li>
+</ul>
+</li>
+<li><ol start="4">
+<li>训练目标</li>
+</ol>
+<ul>
+<li>编码器和解码器共同训练，目标是最小化重建误差：<br>  $min_{\theta_1, \theta_2} E || H_a - \hat{H}_a ||^2$。<br>  这个也是均方差，因此也是loss function，其中E表示对训练样本取平均，</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/20/CSI%E5%8E%8B%E7%BC%A9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1027,430 +1191,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/07/%E5%85%B6%E4%BB%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/07/07/%E5%85%B6%E4%BB%96/" class="post-title-link" itemprop="url">其他</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-07-07 17:20:33" itemprop="dateCreated datePublished" datetime="2025-07-07T17:20:33+08:00">2025-07-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-07-19 14:44:22" itemprop="dateModified" datetime="2025-07-19T14:44:22+08:00">2025-07-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="周期冲激序列的傅立叶变换"><a href="#周期冲激序列的傅立叶变换" class="headerlink" title="周期冲激序列的傅立叶变换"></a>周期冲激序列的傅立叶变换</h2><p>求冲激串 $ \sum_{k&#x3D;-\infty}^{\infty}\delta(t-kT) $ 的傅立叶变换。</p>
-<hr>
-<h3 id="🚩-思路一：傅立叶级数展开"><a href="#🚩-思路一：傅立叶级数展开" class="headerlink" title="🚩 思路一：傅立叶级数展开"></a>🚩 思路一：傅立叶级数展开</h3><ul>
-<li>时间域是周期信号，周期 $T$，所以可以写成傅立叶级数：</li>
-</ul>
-<p>$$<br>x(t) &#x3D; \sum_{n&#x3D;-\infty}^{\infty} c_n e^{j n \Omega_s t}, \quad \Omega_s &#x3D; \frac{2\pi}{T}.<br>$$</p>
-<ul>
-<li>求傅立叶系数，对于冲激串：</li>
-</ul>
-<p>$$<br>c_n &#x3D; \frac{1}{T} \int_{-T&#x2F;2}^{T&#x2F;2} \sum_{k&#x3D;-\infty}^{\infty} \delta(t - kT) e^{-j n \Omega_s t} dt.<br>$$</p>
-<p>只会取到 $k &#x3D; 0$：</p>
-<p>$$<br>c_n &#x3D; \frac{1}{T}.<br>$$</p>
-<ul>
-<li>所以：</li>
-</ul>
-<p>$$<br>x(t) &#x3D; \frac{1}{T} \sum_{n&#x3D;-\infty}^{\infty} e^{j n \Omega_s t}.<br>$$</p>
-<ul>
-<li>利用傅立叶变换性质，复指数 $e^{j n \Omega_s t}$ 的傅立叶变换：</li>
-</ul>
-<p>$$<br>\mathcal{F}[e^{j n \Omega_s t}] &#x3D; 2\pi \delta(\omega - n\Omega_s).<br>$$</p>
-<ul>
-<li>所以：</li>
-</ul>
-<p>$$<br>X(j\omega) &#x3D; \frac{1}{T} \sum_{n&#x3D;-\infty}^{\infty} 2\pi \delta(\omega - n\Omega_s)<br>&#x3D; \frac{2\pi}{T} \sum_{n&#x3D;-\infty}^{\infty} \delta(\omega - n\Omega_s).<br>$$</p>
-<hr>
-<h3 id="🚩-思路二：直接利用时移性质"><a href="#🚩-思路二：直接利用时移性质" class="headerlink" title="🚩 思路二：直接利用时移性质"></a>🚩 思路二：直接利用时移性质</h3><hr>
-<blockquote>
-<p><strong>Notice</strong><br><br>时移性质是指信号在时域中的时间延迟会导致其傅立叶变换在相位上发生线性变化。<br><br>f(t)沿时间右轴t0得到f(t-t0),则傅立叶变换F(w)将在所有频率点上乘上一个相位因子$e^{-jwt_0}$<br></p>
-</blockquote>
-<hr>
-<ul>
-<li>单个冲激的傅立叶变换：</li>
-</ul>
-<p>$$<br>\mathcal{F}[\delta(t)] &#x3D; 1, \quad \mathcal{F}[\delta(t - kT)] &#x3D; e^{-j \omega kT}.<br>$$</p>
-<ul>
-<li>求和：</li>
-</ul>
-<p>$$<br>X(j\omega) &#x3D; \sum_{k&#x3D;-\infty}^{\infty} e^{-j \omega kT}<br>&#x3D; \sum_{k&#x3D;-\infty}^{\infty} e^{-j k \omega T}.<br>$$</p>
-<ul>
-<li>这本质上是一个无限等比数列在单位圆上的和，用冲激串采样定理：</li>
-</ul>
-<p>$$<br>\sum_{k&#x3D;-\infty}^{\infty} e^{-j k \omega T}<br>&#x3D; 2\pi \sum_{n&#x3D;-\infty}^{\infty} \delta(\omega - n\Omega_s) \cdot \frac{1}{T}.<br>$$</p>
-<ul>
-<li>所以同样得到：</li>
-</ul>
-<p>$$<br>X(j\omega) &#x3D; \frac{2\pi}{T} \sum_{n&#x3D;-\infty}^{\infty} \delta(\omega - n\Omega_s).<br>$$</p>
-<hr>
-<h2 id="✅-总结"><a href="#✅-总结" class="headerlink" title="✅ 总结"></a>✅ 总结</h2><ul>
-<li><p>时间域：周期冲激串，周期 $T$</p>
-</li>
-<li><p>频域：等间隔频域冲激串，间隔 $\Omega_s &#x3D; \frac{2\pi}{T}$，幅度系数 $\frac{2\pi}{T}$</p>
-</li>
-</ul>
-<h2 id="拉丁字母"><a href="#拉丁字母" class="headerlink" title="拉丁字母"></a>拉丁字母</h2><table>
-<thead>
-<tr>
-<th>LaTeX代码</th>
-<th>渲染效果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>$\alpha$</td>
-<td>α</td>
-</tr>
-<tr>
-<td>$\beta$</td>
-<td>β</td>
-</tr>
-<tr>
-<td>$\gamma$</td>
-<td>γ</td>
-</tr>
-<tr>
-<td>$\delta$</td>
-<td>δ</td>
-</tr>
-<tr>
-<td>$\epsilon$</td>
-<td>ε</td>
-</tr>
-<tr>
-<td>$\zeta$</td>
-<td>ζ</td>
-</tr>
-<tr>
-<td>$\eta$</td>
-<td>η</td>
-</tr>
-<tr>
-<td>$\theta$</td>
-<td>θ</td>
-</tr>
-<tr>
-<td>$\iota$</td>
-<td>ι</td>
-</tr>
-<tr>
-<td>$\kappa$</td>
-<td>κ</td>
-</tr>
-<tr>
-<td>$\lambda$</td>
-<td>λ</td>
-</tr>
-<tr>
-<td>$\mu$</td>
-<td>μ</td>
-</tr>
-<tr>
-<td>$\nu$</td>
-<td>ν</td>
-</tr>
-<tr>
-<td>$\xi$</td>
-<td>ξ</td>
-</tr>
-<tr>
-<td>$\pi$</td>
-<td>π</td>
-</tr>
-<tr>
-<td>$\rho$</td>
-<td>ρ</td>
-</tr>
-<tr>
-<td>$\sigma$</td>
-<td>σ</td>
-</tr>
-<tr>
-<td>$\varsigma$</td>
-<td>ς</td>
-</tr>
-<tr>
-<td>$\tau$</td>
-<td>τ</td>
-</tr>
-<tr>
-<td>$\upsilon$</td>
-<td>υ</td>
-</tr>
-<tr>
-<td>$\phi$</td>
-<td>φ</td>
-</tr>
-<tr>
-<td>$\varphi$</td>
-<td>ϕ</td>
-</tr>
-<tr>
-<td>$\chi$</td>
-<td>χ</td>
-</tr>
-<tr>
-<td>$\psi$</td>
-<td>ψ</td>
-</tr>
-<tr>
-<td>$\omega$</td>
-<td>ω</td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/02/%E5%BE%AA%E7%8E%AF%E5%8D%B7%E7%A7%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/07/02/%E5%BE%AA%E7%8E%AF%E5%8D%B7%E7%A7%AF/" class="post-title-link" itemprop="url">循环卷积</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-07-02 06:39:15 / Modified: 06:56:43" itemprop="dateCreated datePublished" datetime="2025-07-02T06:39:15+08:00">2025-07-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">通信原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="循环卷积定义"><a href="#循环卷积定义" class="headerlink" title="循环卷积定义"></a>循环卷积定义</h2><p>给定两个长度为 ( N ) 的序列 ( x[n] ) 和 ( h[n] )，它们的循环卷积定义为：</p>
-<p>$$<br>y_{\text{circ}}[n] &#x3D; \sum_{m&#x3D;0}^{N-1} x[m] \cdot h[(n - m) \bmod N], \quad n&#x3D;0,1,\ldots,N-1<br>$$</p>
-<p>其中，( \bmod ) 表示取模运算，序列被视为周期为 ( N )。</p>
-<h2 id="循环卷积与-DFT-的关系"><a href="#循环卷积与-DFT-的关系" class="headerlink" title="循环卷积与 DFT 的关系"></a>循环卷积与 DFT 的关系</h2><p>离散傅里叶变换（DFT）定义为：</p>
-<p>$$<br>X[k] &#x3D; \sum_{n&#x3D;0}^{N-1} x[n] \cdot e^{-j \frac{2\pi}{N} kn}, \quad k&#x3D;0,1,\ldots,N-1<br>$$</p>
-<p>逆变换为：</p>
-<p>$$<br>x[n] &#x3D; \frac{1}{N} \sum_{k&#x3D;0}^{N-1} X[k] \cdot e^{j \frac{2\pi}{N} kn}<br>$$</p>
-<p>关键结论：</p>
-<p>两个长度为 ( N ) 的序列 ( x[n] ) 和 ( h[n] ) 的循环卷积 ( y_{\text{circ}}[n] ) 的 DFT 等于它们的 DFT 乘积：</p>
-<p>$$<br>Y[k] &#x3D; X[k] \cdot H[k]<br>$$</p>
-<p>反过来，循环卷积可通过 IDFT 计算：</p>
-<p>$$<br>y_{\text{circ}}[n] &#x3D; \text{IDFT}{ X[k] \cdot H[k] }<br>$$</p>
-<h2 id="傅立叶变换等于-DFT-的说明"><a href="#傅立叶变换等于-DFT-的说明" class="headerlink" title="傅立叶变换等于 DFT 的说明"></a>傅立叶变换等于 DFT 的说明</h2><ul>
-<li>离散时间傅立叶变换（DTFT）是连续频率的变换。</li>
-<li>DFT 是对长度为 ( N ) 的序列 DTFT 在均匀采样点 ( \omega &#x3D; \frac{2\pi k}{N} ) 上的采样。</li>
-<li>因此，DFT 是 DTFT 的离散版本。</li>
-</ul>
-<h2 id="线性卷积与循环卷积的区别与联系"><a href="#线性卷积与循环卷积的区别与联系" class="headerlink" title="线性卷积与循环卷积的区别与联系"></a>线性卷积与循环卷积的区别与联系</h2><ul>
-<li>线性卷积长度为 ( N_x + N_h - 1 )，无周期性。</li>
-<li>循环卷积长度固定为 ( N )，信号视为周期为 ( N )。</li>
-<li>对 ( x[n], h[n] ) 零填充至长度 ( N \geq N_x + N_h -1 )，线性卷积结果等于循环卷积的前 ( N_x + N_h -1 ) 项。</li>
-</ul>
-<h2 id="在-OFDM-中的应用"><a href="#在-OFDM-中的应用" class="headerlink" title="在 OFDM 中的应用"></a>在 OFDM 中的应用</h2><ul>
-<li>OFDM 信号长度为 ( N )，添加长度大于等于 ( L-1 ) 的循环前缀（CP），其中 ( L ) 是信道长度。</li>
-<li>CP 使得线性卷积等价于循环卷积。</li>
-<li>接收端去除 CP 后，信号通过循环卷积传输，可用 FFT 频域乘法实现均衡。</li>
-</ul>
-<h2 id="关键公式汇总"><a href="#关键公式汇总" class="headerlink" title="关键公式汇总"></a>关键公式汇总</h2><p>循环卷积：</p>
-<p>$$<br>y_{\text{circ}}[n] &#x3D; \sum_{m&#x3D;0}^{N-1} x[m] \cdot h[(n - m) \bmod N]<br>$$</p>
-<p>DFT 计算循环卷积：</p>
-<p>$$<br>Y[k] &#x3D; X[k] \cdot H[k]<br>$$</p>
-<p>$$<br>y_{\text{circ}}[n] &#x3D; \text{IDFT}{ Y[k] }<br>$$</p>
-<h2 id="代码示范"><a href="#代码示范" class="headerlink" title="代码示范"></a>代码示范</h2><p>下面是一个最小可运行的示例，演示 <strong>OFDM 信号添加循环前缀后经过线性卷积，与去除 CP 后与循环卷积一致</strong> 的原理。</p>
-<pre><code class="language-python">import numpy as np
-import matplotlib.pyplot as plt
-
-# ----------------------------
-# 参数设置
-N = 8          # IFFT/FFT 大小（子载波数）
-L = 3          # 信道脉冲响应长度
-CP = L - 1     # 循环前缀长度，必须 &gt;= L - 1
-
-# ----------------------------
-# 生成随机 OFDM 符号（频域）
-# np.random.seed(0)  # 不设置种子，每次随机
-X = np.random.randn(N) + 1j*np.random.randn(N)
-
-# IFFT 变换到时域
-x = np.fft.ifft(X)
-
-# 添加循环前缀：复制末尾 CP 位到前面
-x_cp = np.concatenate([x[-CP:], x])
-
-# ----------------------------
-# 信道冲激响应
-h = np.array([0.5, 0.3, 0.2])
-
-# 线性卷积：通过信道传输
-y = np.convolve(x_cp, h)
-
-# 接收端去除 CP：保留长度 N 的有效符号
-y_cp_removed = y[CP : CP + N]
-
-# ----------------------------
-# 循环卷积（频域等效）
-# 零填充信道到长度 N
-h_padded = np.pad(h, (0, N - L))
-H = np.fft.fft(h_padded)
-
-# 频域点乘
-Y_freq = np.fft.fft(x) * H
-
-# IFFT 得到循环卷积结果
-y_circular = np.fft.ifft(Y_freq)
-
-# ----------------------------
-# 可视化结果对比
-fig, axs = plt.subplots(4, 1, figsize=(10, 10))
-
-# IFFT 后的时域符号
-axs[0].stem(np.arange(N), np.real(x), basefmt=&quot; &quot;, use_line_collection=True)
-axs[0].set_title(&#39;1. IFFT 时域信号 (未加 CP)&#39;)
-axs[0].grid()
-
-# 加 CP 后的时域符号
-axs[1].stem(np.arange(len(x_cp)), np.real(x_cp), basefmt=&quot; &quot;, use_line_collection=True)
-axs[1].set_title(f&#39;2. 加 CP 后时域信号 (CP length = &#123;CP&#125;)&#39;)
-axs[1].axvspan(0, CP-1, color=&#39;orange&#39;, alpha=0.3, label=&#39;Cyclic Prefix&#39;)
-axs[1].legend()
-axs[1].grid()
-
-# 通过信道后的线性卷积
-axs[2].stem(np.arange(len(y)), np.real(y), basefmt=&quot; &quot;, use_line_collection=True)
-axs[2].set_title(&#39;3. 经过信道: 线性卷积&#39;)
-axs[2].axvspan(0, CP-1, color=&#39;orange&#39;, alpha=0.3, label=&#39;CP to discard&#39;)
-axs[2].legend()
-axs[2].grid()
-
-# 去除 CP 后 vs 循环卷积结果
-axs[3].stem(np.arange(N), np.real(y_cp_removed), markerfmt=&#39;bo&#39;,
-            label=&#39;Linear conv. + CP removed&#39;,
-            basefmt=&quot; &quot;, use_line_collection=True)
-axs[3].stem(np.arange(N), np.real(y_circular), markerfmt=&#39;rx&#39;,
-            label=&#39;Circular conv.&#39;,
-            basefmt=&quot; &quot;, use_line_collection=True)
-axs[3].set_title(&#39;4. 对比: 线性卷积去 CP vs. 循环卷积&#39;)
-axs[3].legend()
-axs[3].grid()
-
-plt.tight_layout()
-plt.show()
-
-# ----------------------------
-# 计算误差（验证一致性）
-error = np.linalg.norm(y_cp_removed - y_circular)
-print(f&quot;Difference (CP removed vs. circular): &#123;error:.3e&#125;&quot;)
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/6/">6</a><a class="extend next" rel="next" href="/blog/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/blog/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/7/">7</a><a class="extend next" rel="next" href="/blog/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1516,7 +1260,7 @@ print(f&quot;Difference (CP removed vs. circular): &#123;error:.3e&#125;&quot;)
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -150,6 +150,211 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/09/01/Log-Likelihood-Ratio/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/09/01/Log-Likelihood-Ratio/" class="post-title-link" itemprop="url">Log-Likelihood Ratio</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-09-01 16:30:48" itemprop="dateCreated datePublished" datetime="2025-09-01T16:30:48+08:00">2025-09-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/30/AWGN%E4%BF%A1%E9%81%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/30/AWGN%E4%BF%A1%E9%81%93/" class="post-title-link" itemprop="url">AWGN信道</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-30 11:02:27 / Modified: 12:14:06" itemprop="dateCreated datePublished" datetime="2025-08-30T11:02:27+08:00">2025-08-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="1-AWGN-信道简介"><a href="#1-AWGN-信道简介" class="headerlink" title="1. AWGN 信道简介"></a>1. AWGN 信道简介</h2><p><strong>AWGN</strong> &#x3D; Additive White Gaussian Noise Channel<br>全称：加性白高斯噪声信道，是最经典的信道模型。</p>
+<h3 id="1-1-名称拆解"><a href="#1-1-名称拆解" class="headerlink" title="1.1 名称拆解"></a>1.1 名称拆解</h3><ul>
+<li><strong>Additive（加性）</strong>：噪声是叠加在信号上的<br>$$<br>y &#x3D; x + n<br>$$</li>
+<li><strong>White（白噪声）</strong>：噪声功率谱密度在所有频率均匀分布  </li>
+<li><strong>Gaussian（高斯）</strong>：噪声服从正态分布<br>$$<br>n \sim \mathcal{N}(0, \sigma^2)<br>$$</li>
+</ul>
+<h3 id="1-2-数学模型"><a href="#1-2-数学模型" class="headerlink" title="1.2 数学模型"></a>1.2 数学模型</h3><p>$$<br>y &#x3D; x + n, \quad n \sim \mathcal{N}(0, \sigma^2)<br>$$</p>
+<ul>
+<li>$x$：发射符号（BPSK&#x2F;QAM 等调制）  </li>
+<li>$n$：高斯白噪声  </li>
+<li>$y$：接收符号</li>
+</ul>
+<p>常用指标：  </p>
+<ul>
+<li><strong>信噪比 (SNR)</strong><br>$$<br>\text{SNR} &#x3D; \frac{\mathbb{E}[x^2]}{\sigma^2}<br>$$</li>
+<li><strong>容量 (Shannon Capacity)</strong><br>$$<br>C &#x3D; \log_2(1+\text{SNR}) \quad [\text{bits per channel use}]<br>$$</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>这里采用带宽归一化的假设：<br><br>把每秒能传输的符号数当作带宽B <br><br>每个符号对应一次channel use <br><br>如果不归一化的话，带宽B Hz -&gt; 每秒大约可以传B个符号，那么持续时间T秒内，就可以传B x T个符号。因此也就是B x T次信道使用<br><br>带宽约束d~ &#x3D; 信道使用次数 &#x2F; 源符号数<br><br>d~越大说明信道资源宽裕，说明可以加冗余来提升鲁棒性<br></p>
+</blockquote>
+<hr>
+<h2 id="2-瑞利衰落信道等效为-AWGN"><a href="#2-瑞利衰落信道等效为-AWGN" class="headerlink" title="2. 瑞利衰落信道等效为 AWGN"></a>2. 瑞利衰落信道等效为 AWGN</h2><p>论文中真实信道是 <strong>块衰落瑞利信道</strong>：<br>$$<br>r_i &#x3D; h \cdot s_i + n_i, \quad n_i \sim \mathcal{CN}(0,\delta^2)<br>$$</p>
+<p>其中：</p>
+<ul>
+<li>$h$：瑞利衰落系数（随时间块变化）</li>
+<li>$s_i$：发送符号</li>
+<li>$n_i$：高斯噪声</li>
+</ul>
+<h3 id="2-1-信道反演功率控制"><a href="#2-1-信道反演功率控制" class="headerlink" title="2.1 信道反演功率控制"></a>2.1 信道反演功率控制</h3><p>在发射端做信道反演：<br>$$<br>s’_i &#x3D; \frac{s_i}{h}<br>$$</p>
+<p>接收端变为：<br>$$<br>r_i &#x3D; h \cdot s’_i + n_i &#x3D; s_i + n_i<br>$$</p>
+<h3 id="2-2-等效后的模型"><a href="#2-2-等效后的模型" class="headerlink" title="2.2 等效后的模型"></a>2.2 等效后的模型</h3><p>这样接收端信道就简化为：<br>$$<br>r_i &#x3D; s_i + n_i, \quad n_i \sim \mathcal{CN}(0,\delta^2)<br>$$</p>
+<p>即 <strong>AWGN 信道模型</strong>。  </p>
+<ul>
+<li>等效后的信噪比：$\gamma &#x3D; 1&#x2F;\delta^2$  </li>
+<li>便于后续推导容量与误块率。</li>
+</ul>
+<hr>
+<h2 id="3-有限码长信息论-Finite-Blocklength-Theory"><a href="#3-有限码长信息论-Finite-Blocklength-Theory" class="headerlink" title="3. 有限码长信息论 (Finite Blocklength Theory)"></a>3. 有限码长信息论 (Finite Blocklength Theory)</h2><p>传统 Shannon 容量理论假设码长 $L \to \infty$，实际通信系统码长有限，需要修正。</p>
+<h3 id="3-1-Polyanskiy–Verdu-结果"><a href="#3-1-Polyanskiy–Verdu-结果" class="headerlink" title="3.1 Polyanskiy–Verdú 结果"></a>3.1 Polyanskiy–Verdú 结果</h3><p>有限码长下，速率 $R_c$、误块率 $\rho$ 和容量 $C$ 的近似关系：<br>$$<br>R_c ;\approx; C - \sqrt{\tfrac{V}{L}} Q^{-1}(\rho) + \mathcal{O}!\left(\tfrac{\log L}{L}\right)<br>$$</p>
+<ul>
+<li>$C$：信道容量 $\log_2(1+\gamma)$  </li>
+<li>$V$：信道弥散度 (dispersion)  </li>
+<li>$Q^{-1}$：高斯 Q 函数的反函数</li>
+</ul>
+<h3 id="3-2-AWGN-信道的容量与弥散度"><a href="#3-2-AWGN-信道的容量与弥散度" class="headerlink" title="3.2 AWGN 信道的容量与弥散度"></a>3.2 AWGN 信道的容量与弥散度</h3><ul>
+<li>容量：<br>$$<br>C &#x3D; \log_2(1+\gamma)<br>$$</li>
+<li>弥散度：<br>$$<br>V &#x3D; \left(1-\frac{1}{(1+\gamma)^2}\right)(\log_2 e)^2<br>$$</li>
+</ul>
+<h3 id="3-3-反推得到误块率"><a href="#3-3-反推得到误块率" class="headerlink" title="3.3 反推得到误块率"></a>3.3 反推得到误块率</h3><p>把公式反写为误块率：<br>$$<br>\rho ;\approx; Q!\left(\frac{\sqrt{L},(C-R_c)}{\sqrt{V}}\right)<br>$$</p>
+<ul>
+<li>分子 $\sqrt{L}(C-R_c)$：离容量的“裕量”  </li>
+<li>分母 $\sqrt{V}$：有限码长下的波动项</li>
+</ul>
+<h3 id="3-4-直觉"><a href="#3-4-直觉" class="headerlink" title="3.4 直觉"></a>3.4 直觉</h3><ul>
+<li>如果 $R_c &lt; C$：裕量为正，码长 $L$ 越大，误码率迅速下降  </li>
+<li>如果 $R_c &#x3D; C$：误码率收敛到 0.5，不会下降  </li>
+<li>如果 $R_c &gt; C$：码率超过容量，误码率始终接近 1</li>
+</ul>
+<h3 id="3-5-工程经验式"><a href="#3-5-工程经验式" class="headerlink" title="3.5 工程经验式"></a>3.5 工程经验式</h3><p>对具体码型（如极化码），可用指数函数拟合BLER：<br>$$<br>\rho ;\approx; \exp(\beta_1 R_c + \beta_2) \tag{5}<br>$$<br>其中 $\beta_1, \beta_2$ 由仿真拟合，依赖于 $\gamma, L, \text{码型}$。</p>
+<h2 id="4-端到端失真上界"><a href="#4-端到端失真上界" class="headerlink" title="4. 端到端失真上界"></a>4. 端到端失真上界</h2><h3 id="4-1-分析思路"><a href="#4-1-分析思路" class="headerlink" title="4.1 分析思路"></a>4.1 分析思路</h3><ul>
+<li>一幅图像压缩后得到 $B$ 比特  </li>
+<li>源编码速率 $R_s &#x3D; B &#x2F; (\text{源符号数})$  </li>
+<li>分为 $T$ 个包，每个包长度 $N$，比特经 $(N,L)$ 信道码 → 码率 $R_c &#x3D; N&#x2F;L$  </li>
+<li>每个包传输成功概率 &#x3D; $1-\rho$  </li>
+<li>所有 $T$ 个包成功概率 &#x3D; $(1-\rho)^T$  </li>
+<li>至少一个失败概率 &#x3D; $1-(1-\rho)^T$</li>
+</ul>
+<h3 id="4-3-期望失真公式"><a href="#4-3-期望失真公式" class="headerlink" title="4.3 期望失真公式"></a>4.3 期望失真公式</h3><p>$$<br>\mathbb{E}[D] &#x3D; (1-\rho)^T , D_s + \big(1-(1-\rho)^T\big) , O(1)<br>$$</p>
+<h3 id="4-4-Theorem-3-1-最终形式"><a href="#4-4-Theorem-3-1-最终形式" class="headerlink" title="4.4 Theorem 3.1 最终形式"></a>4.4 Theorem 3.1 最终形式</h3><p>$$<br>\mathbb{E}[D] ;\leq; (1-\rho)^T D_s + \big(1-(1-\rho)^T\big) O(1) \tag{Theorem 3.1}<br>$$</p>
+<hr>
+<h2 id="5-小结"><a href="#5-小结" class="headerlink" title="5. 小结"></a>5. 小结</h2><ul>
+<li><p><strong>AWGN 信道</strong>：$y&#x3D;x+n$，最基本的信道模型  </p>
+</li>
+<li><p><strong>瑞利衰落信道 → AWGN</strong>：通过信道反演功率控制，把衰落抵消掉，只剩高斯噪声  </p>
+</li>
+<li><p><strong>有限码长信息论</strong>：在有限块长 $L$ 下，误块率不再是“0&#x2F;1”现象，而是通过 Q 函数平滑过渡<br>$$<br>\rho \approx Q!\left(\frac{\sqrt{L}(C-R_c)}{\sqrt{V}}\right)<br>$$</p>
+</li>
+<li><p>多包传输 + 成功&#x2F;失败概率 -&gt; Theorem 3.1 端到端失真上界</p>
+</li>
+</ul>
+<p><strong>关键依赖变量</strong></p>
+<ul>
+<li>源编码速率 $R_s \to D_s$  </li>
+<li>信道编码速率 $R_c \to \rho$  </li>
+<li>包数 $T \to (1-\rho)^T$  </li>
+<li>信噪比 $\gamma \to C,V$</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/29/D%C2%B2-JSCC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1322,174 +1527,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/26/Semantic-Communication/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/08/26/Semantic-Communication/" class="post-title-link" itemprop="url">Semantic Communication</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-08-26 19:06:04 / Modified: 19:13:43" itemprop="dateCreated datePublished" datetime="2025-08-26T19:06:04+08:00">2025-08-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input video</span><br><span class="line">1080p         -&gt;              360p        -&gt;            token   -&gt; decoder  </span><br><span class="line">8x1920x1080   downsampling     640x360    encoder(8x16x16)</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/20/DeepAutoencoder/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/08/20/DeepAutoencoder/" class="post-title-link" itemprop="url">DeepAutoencoder</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-08-20 23:05:37 / Modified: 23:36:09" itemprop="dateCreated datePublished" datetime="2025-08-20T23:05:37+08:00">2025-08-20</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>使用网络结构来降维，降维的网络被称为Encoder，这个Encoder就是很多个隐藏层网络的网络结构，它也有一个对应的Decoder，也是网络结构。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input Image (28 x 28 = 784) -&gt; Encoder -&gt; codeword (&lt; 784)</span><br><span class="line"></span><br><span class="line">codeword -&gt; Decoder -&gt; Output Image</span><br></pre></td></tr></table></figure>
-<p>Encoder和Decoder需要learn together</p>
-<h2 id="以CSI压缩为例"><a href="#以CSI压缩为例" class="headerlink" title="以CSI压缩为例"></a>以CSI压缩为例</h2><p>在无线通信中，为了进一步压缩CSI矩阵，可以使用基于深度自动编码器的策略</p>
-<ul>
-<li><ol>
-<li>编码压缩：</li>
-</ol>
-<ul>
-<li>输入： 稀疏化后的CSI矩阵Ha</li>
-<li>编码器$E(\theta_1, ⋅ )$将$H_a$压缩成低维码字向量v：<br>  $v &#x3D; E(\theta_1, H_a)$</li>
-<li>$\theta_1$是编码器网络的参数，需要通过训练学习</li>
-</ul>
-</li>
-<li><ol start="2">
-<li>反馈传输</li>
-</ol>
-<ul>
-<li>压缩后的码字v通过uplink反馈给BS</li>
-<li>这种低维表示大幅减少uplink反馈开销</li>
-</ul>
-</li>
-<li><ol start="3">
-<li>解码恢复</li>
-</ol>
-<ul>
-<li>基站接收到v后，通过解码器$D(\theta_2, ⋅)$恢复CSI矩阵：<br>  $\hat{H}_a &#x3D; D(\theta_2,v)$</li>
-</ul>
-</li>
-<li><ol start="4">
-<li>训练目标</li>
-</ol>
-<ul>
-<li>编码器和解码器共同训练，目标是最小化重建误差：<br>  $min_{\theta_1, \theta_2} E || H_a - \hat{H}_a ||^2$。<br>  这个也是均方差，因此也是loss function，其中E表示对训练样本取平均，</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/blog/">1</a><span class="page-number current">2</span><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/6/">6</a><a class="extend next" rel="next" href="/blog/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/blog/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/blog/">1</a><span class="page-number current">2</span><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/7/">7</a><a class="extend next" rel="next" href="/blog/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1555,7 +1596,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

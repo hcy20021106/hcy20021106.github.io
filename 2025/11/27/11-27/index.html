@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="readingmobicommTutti: Coupling 5G RAN and Mobile Edge Computing for Latency-critical Video Analytics 区别于RIC框架有一个边缘服务器，从而能实现快速调度 VAED模型 Used 3D depthwise separable convolutions to reduce the number of">
+<meta property="og:type" content="article">
+<meta property="og:title" content="11-27">
+<meta property="og:url" content="https://hechenyi.github.io/2025/11/27/11-27/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="readingmobicommTutti: Coupling 5G RAN and Mobile Edge Computing for Latency-critical Video Analytics 区别于RIC框架有一个边缘服务器，从而能实现快速调度 VAED模型 Used 3D depthwise separable convolutions to reduce the number of">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-11-27T08:10:28.000Z">
+<meta property="article:modified_time" content="2025-11-27T17:31:05.275Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hechenyi.github.io/2025/11/27/11-27/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>11-27 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/27/11-27/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          11-27
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-11-27 16:10:28" itemprop="dateCreated datePublished" datetime="2025-11-27T16:10:28+08:00">2025-11-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-11-28 01:31:05" itemprop="dateModified" datetime="2025-11-28T01:31:05+08:00">2025-11-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><h3 id="mobicomm"><a href="#mobicomm" class="headerlink" title="mobicomm"></a>mobicomm</h3><p>Tutti: Coupling 5G RAN and Mobile Edge Computing for Latency-critical Video Analytics</p>
+<p>区别于RIC框架<br>有一个边缘服务器，从而能实现快速调度</p>
+<h3 id="VAED模型"><a href="#VAED模型" class="headerlink" title="VAED模型"></a>VAED模型</h3><ol>
+<li>Used 3D depthwise separable convolutions to reduce the number of parameters. </li>
+<li>Distill the decoder to Turbo-VAED instead of re-training the full VAE, enabling fast mobile adaption with minimal performance loss.</li>
+</ol>
+<h3 id="DC-AE"><a href="#DC-AE" class="headerlink" title="DC-AE"></a>DC-AE</h3><p>Open-Sora 2.0: Training a Commercial-Level Video Generation Model in $200k</p>
+<p>完整流程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Video → [DC-AE Encoder] → Latent Tokens → [Diffusion Transformer (DiT)] → Latent → [DC-AE Decoder] → Video</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>DiT可以生成&#x2F;预测&#x2F;补全 视频<br>没有 DiT，模型无法：</p>
+<p>学习“分布”</p>
+<p>采样新的内容</p>
+<p>控制时间一致性</p>
+<p>保持场景稳定性</p>
+<p>生成运动逻辑</p>
+<h4 id="Pixel-Unshuffle"><a href="#Pixel-Unshuffle" class="headerlink" title="Pixel Unshuffle"></a>Pixel Unshuffle</h4><p>输入<br>形状： (C, H, W)<br>输出<br>输出： (4C, H&#x2F;2, W&#x2F;2)</p>
+<h4 id="Pixel-Shuffle"><a href="#Pixel-Shuffle" class="headerlink" title="Pixel Shuffle"></a>Pixel Shuffle</h4><p>把通道信息重新展开为空间像素 → 提高分辨率</p>
+<p>因此它们是完全可逆的变换，用来实现高效下采样 &#x2F; 上采样。</p>
+<h3 id="LLaVa-Video和CLIP模型"><a href="#LLaVa-Video和CLIP模型" class="headerlink" title="LLaVa-Video和CLIP模型"></a>LLaVa-Video和CLIP模型</h3><p>LLaVA-Video &#x3D; 多模态大语言模型（LLM）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Video Encoder  →  Projection Layer  →  LLM (如 Vicuna, Llama)</span><br></pre></td></tr></table></figure>
+
+<p>常用Video Encoder：</p>
+<ul>
+<li><p>CLIP ViT-L&#x2F;14 或 ViT-G&#x2F;14（用于图像或帧）</p>
+</li>
+<li><p>或视频专用的模型（如 X-CLIP、InternVideo）<br>训练方式：</p>
+</li>
+<li><p>Instructions-tuning</p>
+</li>
+<li><p>对齐LLM与视觉表示</p>
+</li>
+<li><p>大规模视频+文本训练集</p>
+</li>
+</ul>
+<h3 id="DINO"><a href="#DINO" class="headerlink" title="DINO"></a>DINO</h3><p>meta研发的<br>DINO 是一种用“自监督方式”训练 Vision Transformer（ViT）的模型，让模型在没有标签的情况下学会理解图像内容<br>因为它用一种叫 self-distillation（自蒸馏） 的方式，让一个模型教另一个模型学习。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">学生模型（student）</span><br><span class="line">教师模型（teacher）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>架构一样（通常是 ViT）</p>
+<p>教师 &#x3D; 学生的 EMA（指数滑动平均）</p>
+<h3 id="EfficientViT-Block"><a href="#EfficientViT-Block" class="headerlink" title="EfficientViT Block"></a>EfficientViT Block</h3><p>是一个高效版的Transformer Block，把传统Transformer的重计算注意力MHSA替换为轻量级卷积混合+局部注意力，计算量更小，但保持全局特征能力<br>它不是普通的 ViT block，也不是 ResNet block，而是介于两者之间：</p>
+<p>比 CNN 更擅长建模长范围依赖</p>
+<p>比标准 Transformer 便宜几倍</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Input</span><br><span class="line">  ↓</span><br><span class="line">Normalization</span><br><span class="line">  ↓</span><br><span class="line">Local Attention (局部注意力 或 GLU + DW Conv)</span><br><span class="line">  ↓</span><br><span class="line">Feed-forward Network (pointwise conv + expansion)</span><br><span class="line">  ↓</span><br><span class="line">Residual Connection</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="创新点"><a href="#创新点" class="headerlink" title="创新点"></a>创新点</h3><p>DINO attention → Semantic importance map → Dynamic bit allocation</p>
+<h3 id="to-do"><a href="#to-do" class="headerlink" title="to do"></a>to do</h3><p>跑一下dino<br>hunyuan vae</p>
+<h2 id="Mobicomm"><a href="#Mobicomm" class="headerlink" title="Mobicomm"></a>Mobicomm</h2><p>encoder -》 token -〉 decoder -》 RGB numpy -〉 VLC播放器（API接口）<br>无需再用WebRTC推流（内部有ffmpeg）</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/11/26/11-26/" rel="prev" title="11-26">
+      <i class="fa fa-chevron-left"></i> 11-26
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#reading"><span class="nav-number">1.</span> <span class="nav-text">reading</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mobicomm"><span class="nav-number">1.1.</span> <span class="nav-text">mobicomm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VAED%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">VAED模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DC-AE"><span class="nav-number">1.3.</span> <span class="nav-text">DC-AE</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pixel-Unshuffle"><span class="nav-number">1.3.1.</span> <span class="nav-text">Pixel Unshuffle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pixel-Shuffle"><span class="nav-number">1.3.2.</span> <span class="nav-text">Pixel Shuffle</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LLaVa-Video%E5%92%8CCLIP%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.4.</span> <span class="nav-text">LLaVa-Video和CLIP模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DINO"><span class="nav-number">1.5.</span> <span class="nav-text">DINO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EfficientViT-Block"><span class="nav-number">1.6.</span> <span class="nav-text">EfficientViT Block</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E6%96%B0%E7%82%B9"><span class="nav-number">1.7.</span> <span class="nav-text">创新点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#to-do"><span class="nav-number">1.8.</span> <span class="nav-text">to do</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mobicomm"><span class="nav-number">2.</span> <span class="nav-text">Mobicomm</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
