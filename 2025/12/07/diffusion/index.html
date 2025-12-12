@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Diffusion-based Denoising &amp; Feature Imputing (Semantic Communication)本 README 用于理解 diffusion 在语义通信&#x2F;抗噪中的 denoising 原理，包括 forward &#x2F; reverse、训练 &#x2F; 推理、UNet 输入、mask、噪声差异等内容。  1. Core Idea">
+<meta property="og:type" content="article">
+<meta property="og:title" content="diffusion">
+<meta property="og:url" content="https://hechenyi.github.io/2025/12/07/diffusion/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Diffusion-based Denoising &amp; Feature Imputing (Semantic Communication)本 README 用于理解 diffusion 在语义通信&#x2F;抗噪中的 denoising 原理，包括 forward &#x2F; reverse、训练 &#x2F; 推理、UNet 输入、mask、噪声差异等内容。  1. Core Idea">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-12-06T16:50:48.000Z">
+<meta property="article:modified_time" content="2025-12-06T17:00:37.923Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hechenyi.github.io/2025/12/07/diffusion/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>diffusion | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/07/diffusion/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          diffusion
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-12-07 00:50:48 / Modified: 01:00:37" itemprop="dateCreated datePublished" datetime="2025-12-07T00:50:48+08:00">2025-12-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Diffusion-based-Denoising-Feature-Imputing-Semantic-Communication"><a href="#Diffusion-based-Denoising-Feature-Imputing-Semantic-Communication" class="headerlink" title="Diffusion-based Denoising &amp; Feature Imputing (Semantic Communication)"></a>Diffusion-based Denoising &amp; Feature Imputing (Semantic Communication)</h1><p>本 README 用于理解 diffusion 在语义通信&#x2F;抗噪中的 denoising 原理，包括 forward &#x2F; reverse、训练 &#x2F; 推理、UNet 输入、mask、噪声差异等内容。</p>
+<hr>
+<h2 id="1-Core-Idea"><a href="#1-Core-Idea" class="headerlink" title="1. Core Idea"></a>1. Core Idea</h2><p>训练：学习从噪声恢复语义 latent<br>推理：对 corrupted latent 执行 conditional reverse denoising</p>
+<p>一句话：<br>Train with synthetic noise; infer on corrupted latent.</p>
+<hr>
+<h2 id="2-Forward-diffusion-training"><a href="#2-Forward-diffusion-training" class="headerlink" title="2. Forward diffusion (training)"></a>2. Forward diffusion (training)</h2><p>对完整 latent y0 加噪，得到 y_t：</p>
+<p>$y_t &#x3D; sqrt(alpha_t) * y0 + sqrt(1 - alpha_t) * eps_t$</p>
+<p>其中 eps_t ~ N(0, I)</p>
+<p>随着 t 增大，噪声增加，最终：</p>
+<p>y_T ~ N(0, I)</p>
+<p>目的：</p>
+<ul>
+<li>构造 noisy latent</li>
+<li>训练噪声预测器（UNet）</li>
+</ul>
+<p>特点：</p>
+<ul>
+<li>forward 只在训练执行</li>
+<li>不使用 mask</li>
+<li>不使用 corrupted latent y_hat</li>
+</ul>
+<hr>
+<h2 id="3-Reverse-diffusion-inference"><a href="#3-Reverse-diffusion-inference" class="headerlink" title="3. Reverse diffusion (inference)"></a>3. Reverse diffusion (inference)</h2><p>推理阶段执行逐步去噪：</p>
+<p>eps_hat &#x3D; UNet(y_tilde_t, t, y_hat, M)</p>
+<p>更新：<br>y_tilde_{t-1} &#x3D; reverse_update(y_tilde_t, eps_hat)</p>
+<p>最终输出恢复后的 y_tilde_0</p>
+<p>特点：</p>
+<ul>
+<li>reverse 只在推理执行</li>
+<li>包含 conditional 信息（y_hat 和 mask M）</li>
+</ul>
+<hr>
+<h2 id="4-UNet-inputs"><a href="#4-UNet-inputs" class="headerlink" title="4. UNet inputs"></a>4. UNet inputs</h2><p>Training:<br>UNet(y_t, t)</p>
+<p>Inference:<br>UNet(y_tilde_t, t, y_hat, M)</p>
+<p>说明：<br>y_tilde_t &#x3D; 当前 noisy latent (推理)<br>y_hat     &#x3D; 破损 latent（信道输出）<br>M         &#x3D; mask，表示哪些位置缺失<br>t         &#x3D; diffusion timestep</p>
+<hr>
+<h2 id="5-Mask-M"><a href="#5-Mask-M" class="headerlink" title="5. Mask M"></a>5. Mask M</h2><p>M 用于指示哪些 latent 位置丢失需要补全：</p>
+<p>M &#x3D; 1 表示该位置需要生成<br>M &#x3D; 0 表示该位置保持接收端值</p>
+<p>通常做 dilation 得到 perceptive mask，使恢复区域更平滑。</p>
+<hr>
+<h2 id="6-Forward-noise-Channel-noise"><a href="#6-Forward-noise-Channel-noise" class="headerlink" title="6. Forward noise !&#x3D; Channel noise"></a>6. Forward noise !&#x3D; Channel noise</h2><p>forward噪声（人为添加）与信道噪声（真实丢包&#x2F;衰落）无关。</p>
+<p>Diffusion 学习的是语义恢复能力，而不是匹配具体噪声分布。</p>
+<hr>
+<h2 id="7-Initialization-during-inference"><a href="#7-Initialization-during-inference" class="headerlink" title="7. Initialization during inference"></a>7. Initialization during inference</h2><p>推理起点不是随机噪声，而是 corrupted latent：</p>
+<p>y_tilde_T &#x3D; y_hat</p>
+<hr>
+<h2 id="8-Loss-per-timestep"><a href="#8-Loss-per-timestep" class="headerlink" title="8. Loss per timestep?"></a>8. Loss per timestep?</h2><p>训练时不需要对所有 t 计算 loss，只随机采样一个 t：</p>
+<p>loss &#x3D; || eps - eps_theta ||^2</p>
+<p>这是 DDPM &#x2F; DDIM 的标准训练方式。</p>
+<hr>
+<h2 id="9-Training-pseudocode"><a href="#9-Training-pseudocode" class="headerlink" title="9. Training pseudocode"></a>9. Training pseudocode</h2><p>for each sample:<br>    y0 &#x3D; encoder(x)<br>    sample t<br>    y_t &#x3D; sqrt(alpha_t)*y0 + sqrt(1-alpha_t)*eps<br>    eps_hat &#x3D; UNet(y_t, t)<br>    loss &#x3D; ||eps - eps_hat||^2<br>    optimizer.step()</p>
+<hr>
+<h2 id="10-Inference-pseudocode"><a href="#10-Inference-pseudocode" class="headerlink" title="10. Inference pseudocode"></a>10. Inference pseudocode</h2><p>y_tilde_T &#x3D; y_hat<br>for t &#x3D; T … 1:<br>    eps_hat &#x3D; UNet(y_tilde_t, t, y_hat, M)<br>    y_tilde_{t-1} &#x3D; reverse_update(y_tilde_t, eps_hat)</p>
+<p>output &#x3D; y_tilde_0</p>
+<hr>
+<h2 id="11-Key-understanding"><a href="#11-Key-understanding" class="headerlink" title="11. Key understanding"></a>11. Key understanding</h2><ul>
+<li>forward &#x3D; synthetic corruption (training only)</li>
+<li>reverse &#x3D; actual recovery (inference only)</li>
+<li>UNet learns denoising</li>
+<li>mask guides inpainting</li>
+<li>inference uses corrupted latent as start</li>
+</ul>
+<hr>
+<h2 id="12-One-sentence-summary"><a href="#12-One-sentence-summary" class="headerlink" title="12. One-sentence summary"></a>12. One-sentence summary</h2><p>Diffusion learns semantic restoration from noisy latent during training and performs conditional reverse denoising on corrupted latent with masks during inference.</p>
+<hr>
+<h2 id="13-Misconceptions"><a href="#13-Misconceptions" class="headerlink" title="13. Misconceptions"></a>13. Misconceptions</h2><p>误区：训练噪声等于信道噪声 → 错<br>误区：推理从高斯开始      → 错<br>误区：reverse 在训练执行  → 错<br>误区：每个 t 都计算 loss  → 错  </p>
+<p>真相：</p>
+<ul>
+<li>forward only for training</li>
+<li>reverse only for inference</li>
+<li>sample one timestep per update</li>
+</ul>
+<hr>
+<h2 id="keywords"><a href="#keywords" class="headerlink" title="keywords"></a>keywords</h2><p>diffusion denoising, semantic communication, conditional diffusion,<br>feature imputing, inpainting, corrupted latent, mask, UNet, forward, reverse</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/12/02/12-2/" rel="prev" title="12-2">
+      <i class="fa fa-chevron-left"></i> 12-2
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/12/08/day12-8/" rel="next" title="day12-8">
+      day12-8 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Diffusion-based-Denoising-Feature-Imputing-Semantic-Communication"><span class="nav-number">1.</span> <span class="nav-text">Diffusion-based Denoising &amp; Feature Imputing (Semantic Communication)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Core-Idea"><span class="nav-number">1.1.</span> <span class="nav-text">1. Core Idea</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Forward-diffusion-training"><span class="nav-number">1.2.</span> <span class="nav-text">2. Forward diffusion (training)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Reverse-diffusion-inference"><span class="nav-number">1.3.</span> <span class="nav-text">3. Reverse diffusion (inference)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-UNet-inputs"><span class="nav-number">1.4.</span> <span class="nav-text">4. UNet inputs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Mask-M"><span class="nav-number">1.5.</span> <span class="nav-text">5. Mask M</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Forward-noise-Channel-noise"><span class="nav-number">1.6.</span> <span class="nav-text">6. Forward noise !&#x3D; Channel noise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Initialization-during-inference"><span class="nav-number">1.7.</span> <span class="nav-text">7. Initialization during inference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-Loss-per-timestep"><span class="nav-number">1.8.</span> <span class="nav-text">8. Loss per timestep?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-Training-pseudocode"><span class="nav-number">1.9.</span> <span class="nav-text">9. Training pseudocode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Inference-pseudocode"><span class="nav-number">1.10.</span> <span class="nav-text">10. Inference pseudocode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-Key-understanding"><span class="nav-number">1.11.</span> <span class="nav-text">11. Key understanding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-One-sentence-summary"><span class="nav-number">1.12.</span> <span class="nav-text">12. One-sentence summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-Misconceptions"><span class="nav-number">1.13.</span> <span class="nav-text">13. Misconceptions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keywords"><span class="nav-number">1.14.</span> <span class="nav-text">keywords</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

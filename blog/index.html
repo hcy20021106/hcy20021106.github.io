@@ -150,7 +150,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/27/11-27/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/13/12-12/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -164,122 +164,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/11/27/11-27/" class="post-title-link" itemprop="url">11-27</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-11-27 16:10:28" itemprop="dateCreated datePublished" datetime="2025-11-27T16:10:28+08:00">2025-11-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-11-28 01:31:05" itemprop="dateModified" datetime="2025-11-28T01:31:05+08:00">2025-11-28</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><h3 id="mobicomm"><a href="#mobicomm" class="headerlink" title="mobicomm"></a>mobicomm</h3><p>Tutti: Coupling 5G RAN and Mobile Edge Computing for Latency-critical Video Analytics</p>
-<p>区别于RIC框架<br>有一个边缘服务器，从而能实现快速调度</p>
-<h3 id="VAED模型"><a href="#VAED模型" class="headerlink" title="VAED模型"></a>VAED模型</h3><ol>
-<li>Used 3D depthwise separable convolutions to reduce the number of parameters. </li>
-<li>Distill the decoder to Turbo-VAED instead of re-training the full VAE, enabling fast mobile adaption with minimal performance loss.</li>
-</ol>
-<h3 id="DC-AE"><a href="#DC-AE" class="headerlink" title="DC-AE"></a>DC-AE</h3><p>Open-Sora 2.0: Training a Commercial-Level Video Generation Model in $200k</p>
-<p>完整流程：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Video → [DC-AE Encoder] → Latent Tokens → [Diffusion Transformer (DiT)] → Latent → [DC-AE Decoder] → Video</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>DiT可以生成&#x2F;预测&#x2F;补全 视频<br>没有 DiT，模型无法：</p>
-<p>学习“分布”</p>
-<p>采样新的内容</p>
-<p>控制时间一致性</p>
-<p>保持场景稳定性</p>
-<p>生成运动逻辑</p>
-<h4 id="Pixel-Unshuffle"><a href="#Pixel-Unshuffle" class="headerlink" title="Pixel Unshuffle"></a>Pixel Unshuffle</h4><p>输入<br>形状： (C, H, W)<br>输出<br>输出： (4C, H&#x2F;2, W&#x2F;2)</p>
-<h4 id="Pixel-Shuffle"><a href="#Pixel-Shuffle" class="headerlink" title="Pixel Shuffle"></a>Pixel Shuffle</h4><p>把通道信息重新展开为空间像素 → 提高分辨率</p>
-<p>因此它们是完全可逆的变换，用来实现高效下采样 &#x2F; 上采样。</p>
-<h3 id="LLaVa-Video和CLIP模型"><a href="#LLaVa-Video和CLIP模型" class="headerlink" title="LLaVa-Video和CLIP模型"></a>LLaVa-Video和CLIP模型</h3><p>LLaVA-Video &#x3D; 多模态大语言模型（LLM）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Video Encoder  →  Projection Layer  →  LLM (如 Vicuna, Llama)</span><br></pre></td></tr></table></figure>
-
-<p>常用Video Encoder：</p>
-<ul>
-<li><p>CLIP ViT-L&#x2F;14 或 ViT-G&#x2F;14（用于图像或帧）</p>
-</li>
-<li><p>或视频专用的模型（如 X-CLIP、InternVideo）<br>训练方式：</p>
-</li>
-<li><p>Instructions-tuning</p>
-</li>
-<li><p>对齐LLM与视觉表示</p>
-</li>
-<li><p>大规模视频+文本训练集</p>
-</li>
-</ul>
-<h3 id="DINO"><a href="#DINO" class="headerlink" title="DINO"></a>DINO</h3><p>meta研发的<br>DINO 是一种用“自监督方式”训练 Vision Transformer（ViT）的模型，让模型在没有标签的情况下学会理解图像内容<br>因为它用一种叫 self-distillation（自蒸馏） 的方式，让一个模型教另一个模型学习。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">学生模型（student）</span><br><span class="line">教师模型（teacher）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>架构一样（通常是 ViT）</p>
-<p>教师 &#x3D; 学生的 EMA（指数滑动平均）</p>
-<h3 id="EfficientViT-Block"><a href="#EfficientViT-Block" class="headerlink" title="EfficientViT Block"></a>EfficientViT Block</h3><p>是一个高效版的Transformer Block，把传统Transformer的重计算注意力MHSA替换为轻量级卷积混合+局部注意力，计算量更小，但保持全局特征能力<br>它不是普通的 ViT block，也不是 ResNet block，而是介于两者之间：</p>
-<p>比 CNN 更擅长建模长范围依赖</p>
-<p>比标准 Transformer 便宜几倍</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Input</span><br><span class="line">  ↓</span><br><span class="line">Normalization</span><br><span class="line">  ↓</span><br><span class="line">Local Attention (局部注意力 或 GLU + DW Conv)</span><br><span class="line">  ↓</span><br><span class="line">Feed-forward Network (pointwise conv + expansion)</span><br><span class="line">  ↓</span><br><span class="line">Residual Connection</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-<h3 id="创新点"><a href="#创新点" class="headerlink" title="创新点"></a>创新点</h3><p>DINO attention → Semantic importance map → Dynamic bit allocation</p>
-<h3 id="to-do"><a href="#to-do" class="headerlink" title="to do"></a>to do</h3><p>跑一下dino<br>hunyuan vae</p>
-<h2 id="Mobicomm"><a href="#Mobicomm" class="headerlink" title="Mobicomm"></a>Mobicomm</h2><p>encoder -》 token -〉 decoder -》 RGB numpy -〉 VLC播放器（API接口）<br>无需再用WebRTC推流（内部有ffmpeg）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/26/11-26/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/11/26/11-26/" class="post-title-link" itemprop="url">11-26</a>
+            <a href="/2025/12/13/12-12/" class="post-title-link" itemprop="url">12-12</a>
         </h2>
 
         <div class="post-meta">
@@ -290,7 +175,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-11-26 16:36:54 / Modified: 16:48:56" itemprop="dateCreated datePublished" datetime="2025-11-26T16:36:54+08:00">2025-11-26</time>
+              <time title="Created: 2025-12-13 01:17:13 / Modified: 01:29:27" itemprop="dateCreated datePublished" datetime="2025-12-13T01:17:13+08:00">2025-12-13</time>
             </span>
 
           
@@ -305,645 +190,18 @@
 
       
       
-          <h2 id="视频推流"><a href="#视频推流" class="headerlink" title="视频推流"></a>视频推流</h2><h3 id="RTMP-HLS"><a href="#RTMP-HLS" class="headerlink" title="RTMP -&gt; HLS"></a>RTMP -&gt; HLS</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RTMP(H.264) → nginx-rtmp → 分片 → .ts + .m3u8</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="WebRTC-HLS"><a href="#WebRTC-HLS" class="headerlink" title="WebRTC -&gt; HLS"></a>WebRTC -&gt; HLS</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">WebRTC(H.264) → server → 切片 → HLS</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/25/11-25/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/11/25/11-25/" class="post-title-link" itemprop="url">11-25</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-11-25 13:34:13" itemprop="dateCreated datePublished" datetime="2025-11-25T13:34:13+08:00">2025-11-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-11-26 09:35:11" itemprop="dateModified" datetime="2025-11-26T09:35:11+08:00">2025-11-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="数据打包"><a href="#数据打包" class="headerlink" title="数据打包"></a>数据打包</h2><h3 id="struct-pack与struct-unpack"><a href="#struct-pack与struct-unpack" class="headerlink" title="struct.pack与struct.unpack"></a>struct.pack与struct.unpack</h3><p>作用：<br>struct.pack将多个小字段(int, short, byte, float …)按指定顺序&#x2F;大小端打包成二进制结构<br>struct.unpack用于从二进制字节流中按指定格式提取多个字短</p>
-<h3 id="tobytes"><a href="#tobytes" class="headerlink" title="tobytes"></a>tobytes</h3><p>numpy.tobytes()</p>
-<h2 id="TBSize计算"><a href="#TBSize计算" class="headerlink" title="TBSize计算"></a>TBSize计算</h2><p>MCS → I_TBS →（PRB × 符号数）→ N_info → 查 TBS 表 → 得到 TBSize（字节）</p>
-<h2 id="Codeword"><a href="#Codeword" class="headerlink" title="Codeword"></a>Codeword</h2><p>codeword是TB信道编码后的码本，要注意的是TB不会直接整体进入LDPC编码器，必须先<strong>分段Segmentation</strong>再编码<br>TB →（可能）分段 → 每段加 CRC → 每段进入 LDPC 编码 → 输出多个 Codeword fragment → 拼成最终 Codeword<br>LDPC编码器的单个码块最大只能处理：</p>
-<ul>
-<li>8448bits</li>
-<li>3840bits</li>
-</ul>
-<h2 id="系统框架"><a href="#系统框架" class="headerlink" title="系统框架"></a>系统框架</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">基站 (gNB/DU)</span><br><span class="line">  ↕ (UDP)</span><br><span class="line">RIC Agent</span><br><span class="line">  ↕ (UDP)</span><br><span class="line">xApp</span><br></pre></td></tr></table></figure>
-
-<p>RIC Agent必须在DU或基站侧，它们能做：</p>
-<ul>
-<li>监听基站内部的PHY&#x2F;MAC数据</li>
-<li>把RSRP&#x2F;上报信息封装成UDP&#x2F;TCP上行报文</li>
-<li>发送给RIC&#x2F;XApp(192.168.100.50)</li>
-<li>接收RIC&#x2F;XApp控制命令（PRB分配）</li>
-<li>将控制结果写回到DU&#x2F;gNB调度器</li>
-</ul>
-<h2 id="网管接口"><a href="#网管接口" class="headerlink" title="网管接口"></a>网管接口</h2><ul>
-<li>DLSCHConfigStruct<ul>
-<li>nBWPSize</li>
-<li>nBWPStart</li>
-<li>nSubcSpacing</li>
-<li>nMcsTable</li>
-<li>nMCS</li>
-<li>nTBSize</li>
-<li>nRBStart</li>
-<li>nlatency</li>
-<li>nssai</li>
-<li>nNrOfSymbols</li>
-<li>nStartSymbolIndex</li>
-</ul>
-</li>
-<li>ULSCHConfigStruct</li>
-</ul>
-<h3 id="NSSAI-切片信息"><a href="#NSSAI-切片信息" class="headerlink" title="NSSAI 切片信息"></a>NSSAI 切片信息</h3><p>S-NSSAI &#x3D; SST + SD<br>SST是切片类型，SD是切片区分符</p>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="可以设置（set）的"><a href="#可以设置（set）的" class="headerlink" title="可以设置（set）的"></a>可以设置（set）的</h2><ul>
-<li>fstRecmdRBstart</li>
-<li>fstRecmdRBend</li>
-<li>scdRecmdRBend</li>
-<li>scdRecmdRBstart</li>
-</ul>
-<h2 id="BBU"><a href="#BBU" class="headerlink" title="BBU"></a>BBU</h2><p>BBU &#x3D; BaseBand Units（基带处理单元）<br>O-RU（射频单元）<br>O-DU（分布式单元）<br>O-CU（集中单元）<br>而很多商业基站仍然把 O-DU + O-CU 功能统称 BBU<br>因此xApp 控制基站的 调度&#x2F;资源管理&#x2F;参数配置</p>
-<p>通过 RRM &#x2F; MAC 层接口，发送给 BBU 实施。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xApp → RIC → BBU</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>xApp 通过 UDP 把指令发送给 RIC<br>RIC 再通过接口把控制动作下发到 BBU<br>由 BBU 修改调度策略，比如：</p>
-<p>RBstart &#x2F; RBend</p>
-<p>UE cluster 设置</p>
-<p>PRB 分配</p>
-<p>上行&#x2F;下行功率控制</p>
-<p>MCS 范围 set-mcs-range</p>
-<p>最终影响实际的无线链路。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/24/11-24/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/11/24/11-24/" class="post-title-link" itemprop="url">11-24</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-11-24 22:57:33" itemprop="dateCreated datePublished" datetime="2025-11-24T22:57:33+08:00">2025-11-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-11-25 13:31:26" itemprop="dateModified" datetime="2025-11-25T13:31:26+08:00">2025-11-25</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="科研"><a href="#科研" class="headerlink" title="科研"></a>科研</h2><p>确定了System model<br>全局考虑第 i 个GoP， 第 s 个slot，第 k 个token map，第 j 个packet。<br>block fading是指对单个slot内packet的信道状态是保持不变的。  </p>
-<p>$P_{i,s,k,j}$.<br>以这个为误块率的输入，得到的误块率乘权重$W_{i,k,j}$（也就是第 i 个GoP， 第 k 个token map， 第 j 个packet）,然后得到最终的优化目标。</p>
-<h2 id="落地"><a href="#落地" class="headerlink" title="落地"></a>落地</h2><h3 id="网络切片"><a href="#网络切片" class="headerlink" title="网络切片"></a>网络切片</h3><p>End-to-End Network Slice由3层共同完成<br>5G 的网络切片是 E2E（端到端）切片，跨越：</p>
-<table>
-<thead>
-<tr>
-<th>层</th>
-<th>谁负责</th>
-<th>切片内容</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>核心网（5GC）</strong></td>
-<td>AMF&#x2F;SMF&#x2F;UPF</td>
-<td>会话管理、QoS、UPF路径、带宽策略</td>
-</tr>
-<tr>
-<td><strong>无线接入网（RAN &#x2F; gNB）</strong></td>
-<td>MAC&#x2F;RLC&#x2F;PHY</td>
-<td>PRB 分配、功率、MCS、调度、资源隔离</td>
-</tr>
-<tr>
-<td><strong>传输网（TN）</strong></td>
-<td>IP&#x2F;MPLS、SDN</td>
-<td>承载路径、优先级</td>
-</tr>
-</tbody></table>
-<p>E2E切片的入口（标识）是在 5GC 网络层（L3）产生的：</p>
-<ul>
-<li>NSSAI&#x2F;S-NSSAI</li>
-<li>Slice ID选择</li>
-<li>PDU Session 建立时，选择切片</li>
-<li>QoS Flow</li>
-<li>SMF&#x2F;AMF分配该切片的路径与策略<br>这五个共同决定UE属于哪个slice。</li>
-</ul>
-<p>真正的资源隔离是在RAN和TN做的：<br>RAN做的切片内容：  </p>
-<ul>
-<li>PRB分配</li>
-<li>时隙资源隔离</li>
-<li>MCS&#x2F;功率分配</li>
-<li>调度优先级</li>
-<li>HARQ分配</li>
-<li>控制信道资源</li>
-</ul>
-<p>这些都是L1&#x2F;L2完成的，不属于网络层</p>
-<p>🔵 切片是一个跨层概念：</p>
-<p>网络层（5GC）负责：逻辑切片、QoS 类别、路径管理</p>
-<p>无线层（RAN）负责：物理资源切割、调度隔离</p>
-<p>传输网（TN）负责：承载路径</p>
-<h4 id="切片应用"><a href="#切片应用" class="headerlink" title="切片应用"></a>切片应用</h4><p>Slice A：要求latency小<br>Solution：</p>
-<ul>
-<li>增大PRB<br>影响排队时间，从而影响时延</li>
-<li>减小slot<br>slot 越小 → 一个时隙占用的时间越短 → packet 可以更快开始传输 → 时延更低</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">|----slot1----|----slot2----|----slot3----| ...</span><br><span class="line">DCI           next DCI</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>如果数据来了要发，但你在 slot1 的中间才到达：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">时间线:</span><br><span class="line">0ms    0.5ms    1ms</span><br><span class="line">|-------|--------|</span><br><span class="line">      数据到达</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>调度器不能立即调度你<br>因为 PDCCH 时间已经过去。</p>
-<p>❗你必须等待下一个 slot 开头（1ms）。</p>
-<p>所以等待时间（调度延迟）最大 &#x3D; 一个 slot 的长度。</p>
-<p>注：PDCCH和DCI的区别</p>
-<table>
-<thead>
-<tr>
-<th>类比</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>PDCCH</strong></td>
-<td>郵件信封（物理载体）</td>
-</tr>
-<tr>
-<td><strong>DCI</strong></td>
-<td>信封里的信件内容（调度命令）</td>
-</tr>
-</tbody></table>
-<p>Slice B: 要求吞吐量大<br>Solution：</p>
-<ul>
-<li>分配更多PRB</li>
-<li>分配更高的MCS</li>
-<li>更高调度优先级</li>
-<li>拥有更高的HARQ资源</li>
-</ul>
-<p>注意：<br>UE的发射功率决定可用上行MCS的上限：<br>手机功率太小 → 上行 SNR 很差 → 不可能用高 MCS。因此RAN 控制器会把 UL MCS 设得更保守</p>
-<h3 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h3><h4 id="MCS"><a href="#MCS" class="headerlink" title="MCS"></a>MCS</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MCS = lookup(CQI)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (recent BLER &gt; target BLER):</span><br><span class="line">    MCS = MCS - 1</span><br><span class="line"><span class="keyword">elif</span> (recent BLER &lt; target BLER):</span><br><span class="line">    MCS = MCS + 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="PRB"><a href="#PRB" class="headerlink" title="PRB"></a>PRB</h4>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/24/%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/11/24/%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/" class="post-title-link" itemprop="url">模型微调</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-11-24 13:47:42 / Modified: 22:57:58" itemprop="dateCreated datePublished" datetime="2025-11-24T13:47:42+08:00">2025-11-24</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="剪枝-推理-仅测试"><a href="#剪枝-推理-仅测试" class="headerlink" title="剪枝+推理(仅测试)"></a>剪枝+推理(仅测试)</h2><p>prune_new.py:<br>load模型后剪枝</p>
-<h2 id="剪枝-微调"><a href="#剪枝-微调" class="headerlink" title="剪枝+微调"></a>剪枝+微调</h2><p>ptuning_test_1028.py:<br>剪枝后load模型（在配置文件中checkpointer.py）.<br>剪枝是在ptuning_test_1028.py中剪枝模型结构</p>
-<h2 id="使用剪枝后的权重"><a href="#使用剪枝后的权重" class="headerlink" title="使用剪枝后的权重"></a>使用剪枝后的权重</h2><p>剪枝后load模型，等同于<strong>剪枝+微调</strong>中的步骤</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">torchrun --nproc_per_node=8 -m ptuning_xxx \</span><br><span class="line">  --config=cosmos_predict1/tokenizer/training/configs/config.py -- </span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/23/11-22/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/11/23/11-22/" class="post-title-link" itemprop="url">11-22</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-11-23 00:43:02 / Modified: 02:25:57" itemprop="dateCreated datePublished" datetime="2025-11-23T00:43:02+08:00">2025-11-23</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="online视频传输"><a href="#online视频传输" class="headerlink" title="online视频传输"></a>online视频传输</h2><p>transmitter + receiver 进行收发</p>
-<p>数据格式转化方式：<br>tensor(int32) -&gt; socket payload (比特流(比特数由max K 决定) -&gt; byte)<br>打包成字节的函数：<br><strong>packed &#x3D; np.packbits(bits_1d, bitorder&#x3D;BITORDER)</strong></p>
-<p>tranmitter.py中为了简化，没有按这个方式转为比特流，而是:<br>**latent_np.tobytes()**将int32直接转为4bytes</p>
-<h3 id="推流方式"><a href="#推流方式" class="headerlink" title="推流方式"></a>推流方式</h3><ul>
-<li>HLS + FFmpeg<br>FFmpeg 负责生成 HLS 分片与 playlist<br>Web 服务器（Nginx&#x2F;Apache&#x2F;S3&#x2F;OSS&#x2F;本地 HTTP）负责提供访问<br>播放端使用浏览器或播放器拉取 m3u8 文件即可</li>
-<li>RTMP</li>
-<li>SRT</li>
-<li>WebRTC<br>不需要FFmpeg编码，<br>浏览器会自动处理：<br>封装 RTP packet<br>发送<br>重传<br>丢包修复<br>抖动控制<br>SRTP 加密</li>
-<li>RTSP</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/19/Image/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/11/19/Image/" class="post-title-link" itemprop="url">Image</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-11-19 15:45:03 / Modified: 16:50:03" itemprop="dateCreated datePublished" datetime="2025-11-19T15:45:03+08:00">2025-11-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <p>图像中，<strong>频率</strong>是指像素变化的快慢，不是出现次数：</p>
-<ul>
-<li>纹理</li>
-<li>边缘</li>
-<li>细小颗粒</li>
-<li>噪声</li>
-</ul>
-<p>低频是指像素变化慢的部分：</p>
-<ul>
-<li>天空的渐变</li>
-<li>大区域的平滑颜色</li>
-<li>物体的整体轮廓</li>
-<li>大形状<br>这些都是颜色&#x2F;亮度变化慢的</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/19/AutoEncoder/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/11/19/AutoEncoder/" class="post-title-link" itemprop="url">AutoEncoder</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-11-19 01:26:42 / Modified: 16:51:17" itemprop="dateCreated datePublished" datetime="2025-11-19T01:26:42+08:00">2025-11-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="DINOv2"><a href="#DINOv2" class="headerlink" title="DINOv2"></a>DINOv2</h2><p>DINOv2对普通ViT-B&#x2F;14的backbone做了很多改进，如下：</p>
-<ul>
-<li><p>使用Conv2d来实现PatchEmbed，不用原生ViT的线性patch projection（Flatten -&gt; Linear）</p>
-</li>
-<li><p>Memory Efficient Attention<br>  自己的更“搞笑注意力”实现<br>  MemEffAttention(dim &#x3D; 768, num_heads &#x3D; 12)</p>
-</li>
-<li><p>LayerScale<br>  对稳定大规模训练非常重要<br>  抑制梯度爆炸</p>
-</li>
-<li><p>DropPath</p>
-</li>
-<li><p>LayerNorm</p>
-</li>
-<li><p>MLP</p>
-</li>
-<li><p>Token</p>
-</li>
-<li><p>Antialias Positional Interpolation</p>
-</li>
-<li><p>Weighted Global Pooling<br>  对所有patch进行加权相加，优于CLS token(CLS在分类任务有效，对于LLM的视觉前端，用的是所有patch)</p>
-</li>
-</ul>
-<h3 id="Conv2d与Linear的转换"><a href="#Conv2d与Linear的转换" class="headerlink" title="Conv2d与Linear的转换"></a>Conv2d与Linear的转换</h3><p>Linear projection 对每个 patch 的投影公式是一样的<br>以DINOv2的patch embedding为例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">patch_flat: shape=(14*14*3)</span><br><span class="line">↓</span><br><span class="line">Linear(14*14*3 → 768)</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Conv2d(<span class="keyword">in</span>=3, out=768, kernel=14, stride=14)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="Swin-Transformer"><a href="#Swin-Transformer" class="headerlink" title="Swin Transformer"></a>Swin Transformer</h2><p>借用CNN下采样思路，每次downsample用的是parch merging，patch个数减少，patch的通道数增加。</p>
-<h2 id="RAE"><a href="#RAE" class="headerlink" title="RAE"></a>RAE</h2><p>RAE (Representative AutoEncoder) 是使用预训练表征编码器 (如DINOv2) 替代VAE encoder，目的是让扩散模型在更优、语义更丰富的latent空间中工作，从而提高训练效率和最终生成质量。<br>因此使用SOTA表征模型提供更强latent表示：DINO、SigLIP和MAE等<br>论文提出的 RAE（Representation Autoencoder）结合：</p>
-<ul>
-<li><p>预训练 encoder（冻结，不再训练）</p>
-</li>
-<li><p>轻量 ViT decoder（可监督训练）</p>
-</li>
-</ul>
-<h2 id="CLIP"><a href="#CLIP" class="headerlink" title="CLIP"></a>CLIP</h2><h2 id="UNet"><a href="#UNet" class="headerlink" title="UNet"></a>UNet</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">hs = []</span><br><span class="line">t_emb = timestep_embedding(timesteps, self.model_channels, repeat_only=False)</span><br><span class="line">emb = self.time_embed(t_emb)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> self.num_classes is not None:</span><br><span class="line">    assert y.shape == (x.shape[0],)</span><br><span class="line">    emb = emb + self.label_emb(y)</span><br><span class="line"></span><br><span class="line">h = x.type(self.dtype)</span><br><span class="line"><span class="keyword">for</span> module <span class="keyword">in</span> self.input_blocks:</span><br><span class="line">    h = module(h, emb, context)</span><br><span class="line">    hs.append(h)</span><br><span class="line">h = self.middle_block(h, emb, context)</span><br><span class="line"><span class="keyword">for</span> module <span class="keyword">in</span> self.output_blocks:</span><br><span class="line">    h = th.cat([h, hs.pop()], dim=1)</span><br><span class="line">    h = module(h, emb, context)</span><br><span class="line">h = h.type(x.dtype)</span><br><span class="line"><span class="keyword">if</span> self.predict_codebook_ids:</span><br><span class="line">    <span class="built_in">return</span> self.id_predictor(h)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">return</span> self.out(h)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>decode每层的输出和encoder对应的每层直接相加</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/11/gpu/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/11/11/gpu/" class="post-title-link" itemprop="url">gpu</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-11-11 14:27:21" itemprop="dateCreated datePublished" datetime="2025-11-11T14:27:21+08:00">2025-11-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-11-13 10:43:26" itemprop="dateModified" datetime="2025-11-13T10:43:26+08:00">2025-11-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <pre><code class="language-bash">nvidia-smi
-CUDA_VISIBLE_DEVICES=5 python .py
-```+
+          <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><h3 id="Taming-Transformers-for-High-Resolution-Image-Synthesis"><a href="#Taming-Transformers-for-High-Resolution-Image-Synthesis" class="headerlink" title="Taming Transformers for High-Resolution Image Synthesis"></a>Taming Transformers for High-Resolution Image Synthesis</h3><p>VQGAN + Transformer.<br>Transformer 的任务是预测下一个token，给定一个图像，其VQGAN编码得到token序列：<br>s&#x3D;(s1​,s2​,…,sN​),si​∈{0,1,…,∣Z∣−1}<br>Transformer需要学习：<br>$p(s_i | s_{&lt;i})$.<br>整体的目标函数是最大化:  </p>
+<p>$logp(s)&#x3D;∑<em>{i&#x3D;1}^N ​logp(s_i​∣s</em>{&lt;i}​)$</p>
+<h3 id="GAN"><a href="#GAN" class="headerlink" title="GAN"></a>GAN</h3><pre><code>        ┌──────────────┐
 </code></pre>
+<p>Input x ───▶│ Encoder  E    │<br>            └──────────────┘<br>                    │ z_q (quantized)<br>                    ▼<br>            ┌──────────────┐<br>            │ Decoder  G    │───┐<br>            └──────────────┘   │ reconstructed x̂<br>                                ▼<br>                        ┌──────────────┐<br>Real x ────────────────▶│ Discriminator│◀── fake x̂<br>                        └──────────────┘<br>训练步骤：</p>
+<p>编码 → 量化 → 解码</p>
+<p>判别器 D 区分真实与生成</p>
+<p>重建 loss + 感知 loss + GAN loss</p>
+<p>Update E&#x2F;G&#x2F;Z</p>
+<p>Update D</p>
+<p>重复迭代</p>
+<h3 id="StableCodec-Taming-One-Step-Diffusion-for-Extreme-Image-Compression"><a href="#StableCodec-Taming-One-Step-Diffusion-for-Extreme-Image-Compression" class="headerlink" title="StableCodec: Taming One-Step Diffusion for Extreme Image Compression"></a>StableCodec: Taming One-Step Diffusion for Extreme Image Compression</h3><p>SD-Turbo is a distilled version of Stable Diffusion that enables real-time image synthesis in 1 to 4 denoising steps.</p>
 
       
     </div>
@@ -963,7 +221,7 @@ CUDA_VISIBLE_DEVICES=5 python .py
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/09/14/pruning/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/11/diffusion-denoising/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -977,7 +235,7 @@ CUDA_VISIBLE_DEVICES=5 python .py
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/09/14/pruning/" class="post-title-link" itemprop="url">pruning</a>
+            <a href="/2025/12/11/diffusion-denoising/" class="post-title-link" itemprop="url">diffusion denoising</a>
         </h2>
 
         <div class="post-meta">
@@ -988,7 +246,7 @@ CUDA_VISIBLE_DEVICES=5 python .py
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-09-14 17:03:44 / Modified: 21:26:41" itemprop="dateCreated datePublished" datetime="2025-09-14T17:03:44+08:00">2025-09-14</time>
+              <time title="Created: 2025-12-11 14:25:50 / Modified: 14:40:41" itemprop="dateCreated datePublished" datetime="2025-12-11T14:25:50+08:00">2025-12-11</time>
             </span>
 
           
@@ -1003,61 +261,696 @@ CUDA_VISIBLE_DEVICES=5 python .py
 
       
       
-          <h1 id="README-—-PyTorch-模型剪枝总结"><a href="#README-—-PyTorch-模型剪枝总结" class="headerlink" title="README — PyTorch 模型剪枝总结"></a>README — PyTorch 模型剪枝总结</h1><h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h2><ul>
-<li><strong>剪枝 (Pruning)</strong>：通过将部分权重置零，来减少模型的有效参数量，从而降低计算量和显存开销。  </li>
-<li><strong>剪枝方式</strong>：<ul>
-<li><strong>非结构化剪枝 (Unstructured Pruning)</strong>：在权重矩阵中逐元素置零，灵活但实际加速有限。</li>
-<li><strong>结构化剪枝 (Structured Pruning)</strong>：直接删除整个卷积核、通道或层，更适合硬件加速。</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-named-parameters-vs-named-modules"><a href="#2-named-parameters-vs-named-modules" class="headerlink" title="2. named_parameters() vs named_modules()"></a>2. <code>named_parameters()</code> vs <code>named_modules()</code></h2><ul>
-<li><code>named_parameters()</code>  <ul>
-<li>返回 <strong>参数名 + 张量</strong>  </li>
-<li>常用于直接操作 <code>weight</code> &#x2F; <code>bias</code>。  </li>
-<li>例如剪枝时需要传入 <code>(module, &quot;weight&quot;)</code> 就必须从参数开始。</li>
-</ul>
-</li>
-<li><code>named_modules()</code>  <ul>
-<li>返回 <strong>模块名 + 子模块</strong>  </li>
-<li>可以枚举出所有子模块 (Conv、Linear、BN 等)。  </li>
-<li>适合筛选特定层（比如 Conv3d），再去访问其参数。</li>
-</ul>
-</li>
-</ul>
-<p>总结：  </p>
+          <h1 id="Diffusion-模型体系对比：DDPM-·-Inpainting-·-CDDM"><a href="#Diffusion-模型体系对比：DDPM-·-Inpainting-·-CDDM" class="headerlink" title="Diffusion 模型体系对比：DDPM · Inpainting · CDDM"></a>Diffusion 模型体系对比：DDPM · Inpainting · CDDM</h1><p>本 README 对比三类扩散模型：</p>
+<ol>
+<li><strong>DDPM</strong>（标准扩散模型）</li>
+<li><strong>Stable Diffusion Inpainting</strong>（mask concat 条件）</li>
+<li><strong>CDDM</strong>（Channel Denoising Diffusion Model）</li>
+</ol>
+<hr>
+<h2 id="1-DDPM-——-标准扩散模型"><a href="#1-DDPM-——-标准扩散模型" class="headerlink" title="1. DDPM —— 标准扩散模型"></a>1. DDPM —— 标准扩散模型</h2><h3 id="Forward（逐步加噪）"><a href="#Forward（逐步加噪）" class="headerlink" title="Forward（逐步加噪）"></a>Forward（逐步加噪）</h3><p>DDPM 的前向加噪公式为：</p>
+<p>$$x_t &#x3D; \sqrt{\bar{\alpha}_t}, x_0 + \sqrt{1 - \bar{\alpha}_t}, \epsilon,\quad \epsilon \sim \mathcal{N}(0,I)$$</p>
+<p><strong>特点：</strong></p>
 <ul>
-<li><strong>要找到具体层</strong> → 用 <code>named_modules()</code>  </li>
-<li><strong>要操作参数</strong> → 用 <code>named_parameters()</code></li>
+<li>按 $t&#x3D;1\dots T$（$T&#x3D;1000$）逐步加噪</li>
+<li>使干净的 $x_0$ 越来越像纯噪声</li>
 </ul>
-<h2 id="3-TorchScript-下的剪枝"><a href="#3-TorchScript-下的剪枝" class="headerlink" title="3. TorchScript 下的剪枝"></a>3. TorchScript 下的剪枝</h2><ul>
-<li>TorchScript 模型的子模块 (<code>encoder.jit</code>) 会变成 <code>RecursiveScriptModule</code>。  </li>
-<li>可以通过 <code>hasattr(module, &quot;original_name&quot;)</code> 判断模块原始类型，比如 <code>&quot;Conv3d&quot;</code>。  </li>
-<li>TorchScript 下不能直接用 <code>torch.nn.utils.prune</code>，因为它需要注册新的 <code>Parameter</code>，而 <code>jit</code> 的权重不是标准 <code>Parameter</code> 类型。</li>
-</ul>
-<p>解决方案：<strong>手动实现剪枝逻辑</strong>：  </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">prune_jit_global</span>(<span class="params">encoder, amount=<span class="number">0.2</span></span>):</span><br><span class="line">    conv_weights, conv_modules = [], []</span><br><span class="line">    <span class="keyword">for</span> name, module <span class="keyword">in</span> encoder.named_modules():</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">hasattr</span>(module, <span class="string">&quot;original_name&quot;</span>) <span class="keyword">and</span> module.original_name == <span class="string">&quot;Conv3d&quot;</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;quant_conv&quot;</span> <span class="keyword">in</span> name <span class="keyword">or</span> <span class="string">&quot;shortcut&quot;</span> <span class="keyword">in</span> name <span class="keyword">or</span> <span class="string">&quot;conv_out.1.conv3d&quot;</span> <span class="keyword">in</span> name:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            conv_weights.append(module.weight.detach().<span class="built_in">abs</span>().flatten())</span><br><span class="line">            conv_modules.append((name, module))</span><br><span class="line"></span><br><span class="line">    all_weights = torch.cat(conv_weights)</span><br><span class="line">    k = <span class="built_in">int</span>(amount * all_weights.numel())</span><br><span class="line">    threshold = torch.topk(all_weights, k, largest=<span class="literal">False</span>).values.<span class="built_in">max</span>()</span><br><span class="line"></span><br><span class="line">    total_pruned, total_params = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> name, module <span class="keyword">in</span> conv_modules:</span><br><span class="line">        W = module.weight.data</span><br><span class="line">        mask = (W.<span class="built_in">abs</span>() &gt; threshold).to(W.dtype)</span><br><span class="line">        pruned = W.numel() - mask.<span class="built_in">sum</span>().item()</span><br><span class="line">        total_pruned += pruned; total_params += W.numel()</span><br><span class="line">        module.weight.data = W * mask</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;name:&lt;<span class="number">50</span>&#125;</span> 剪掉 <span class="subst">&#123;pruned&#125;</span>/<span class="subst">&#123;W.numel()&#125;</span> (<span class="subst">&#123;pruned/W.numel():<span class="number">.2</span>%&#125;</span>)&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;✅ 全局剪枝完成，总共剪掉 <span class="subst">&#123;total_pruned&#125;</span>/<span class="subst">&#123;total_params&#125;</span> (<span class="subst">&#123;total_pruned/total_params:<span class="number">.2</span>%&#125;</span>)&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> encoder</span><br></pre></td></tr></table></figure>
-<h2 id="4-全局剪枝-Global-Unstructured-Pruning"><a href="#4-全局剪枝-Global-Unstructured-Pruning" class="headerlink" title="4. 全局剪枝(Global Unstructured Pruning)"></a>4. 全局剪枝(Global Unstructured Pruning)</h2><p>思路：收集所有层的权重 → 拼接成一个大向量 → 找到全局阈值 → 应用到所有层。</p>
-<p>优点：稀疏性分布更均匀，能自动选择“最不重要”的参数。</p>
-<p>上述 prune_jit_global 就是全局非结构化剪枝的实现。</p>
-<h2 id="5-使用流程"><a href="#5-使用流程" class="headerlink" title="5. 使用流程"></a>5. 使用流程</h2><ul>
-<li>加载TorchScript模型</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">encoder = torch.jit.load(<span class="string">&quot;encoder.jit&quot;</span>, map_location=<span class="string">&quot;cuda&quot;</span>).to(dtype=torch.bfloat16)</span><br><span class="line">encoder.eval()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="Reverse（逐步去噪）"><a href="#Reverse（逐步去噪）" class="headerlink" title="Reverse（逐步去噪）"></a>Reverse（逐步去噪）</h3><p>模型预测噪声：</p>
+<p>$$\epsilon_\theta(x_t, t)$$</p>
+<p>反向采样：</p>
+<p>$$x_{t-1} &#x3D; f(x_t, \epsilon_\theta, t)$$</p>
+<p><strong>特点：</strong></p>
 <ul>
-<li>筛选出需要剪枝的模块 (Conv3d)</li>
+<li>需要很多步（50–1000）</li>
+<li>可以带文本条件（cross-attention）</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name, module <span class="keyword">in</span> encoder.named_modules():</span><br><span class="line">    <span class="keyword">if</span> hasattr(module, <span class="string">&quot;original_name&quot;</span>) and module.original_name == <span class="string">&quot;Conv3d&quot;</span>:</span><br><span class="line">        <span class="built_in">print</span>(name, module)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>应用全局剪枝</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">encoder = prune_jit_global(encoder, amount=0.3)  <span class="comment"># 剪掉 30%</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="2-CDDM-——-Channel-Denoising-Diffusion-Model"><a href="#2-CDDM-——-Channel-Denoising-Diffusion-Model" class="headerlink" title="2. CDDM —— Channel Denoising Diffusion Model"></a>2. CDDM —— Channel Denoising Diffusion Model</h2><p>CDDM 用于无线信道去噪，目标是回复语义特征x0</p>
+<h3 id="2-1-forward-类比信道噪声"><a href="#2-1-forward-类比信道噪声" class="headerlink" title="2.1 forward(类比信道噪声)"></a>2.1 forward(类比信道噪声)</h3><p>CDDM定义的forward加噪声：</p>
+<p>$x_t &#x3D; \sqrt{\bar{\alpha}_t}, x_0 + \sqrt{1 - \bar{\alpha}_t}, W_n \epsilon$<br>其中：</p>
+<p>$W_n$：由 Rayleigh fading + AWGN 构成<br>$\epsilon \sim \mathcal{N}(0,I)$<br>实际信道模型：<br>$y_r &#x3D; \frac{1}{1+\sigma^2}, W_s x + \frac{\sigma}{1+\sigma^2}, W_n \epsilon$</p>
+<p>关键区别：</p>
+<p>DDPM：数学加噪，多步<br>CDDM：真实信道噪声，一步即可覆盖所有衰落 + 噪声机制</p>
+<h3 id="2-2-Reverse"><a href="#2-2-Reverse" class="headerlink" title="2.2 Reverse"></a>2.2 Reverse</h3><p>初始化：<br>$x_m &#x3D; y_r$<br>每步计算：<br>$z &#x3D; W_n * \epsilon_\theta(x_t, h_r, t)$<br>更新：<br>$x_{t-1} &#x3D; \sqrt{\bar{\alpha}_{t-1}} \left( \frac{x_t - \sqrt{1 - \bar{\alpha}_t}, z}{\sqrt{\bar{\alpha}<em>t}} \right) + \sqrt{1 - \bar{\alpha}</em>{t-1}}, z$<br>特点：</p>
+<p>只需 $m\approx 5$–$20$ 步<br>包含信道增益 $h_r$ 的条件输入</p>
+<h3 id="2-3-Loss"><a href="#2-3-Loss" class="headerlink" title="2.3 Loss"></a>2.3 Loss</h3><p>$L_{\text{CDDM}}(\theta) &#x3D; \mathbb{E}<em>{x_0,\epsilon,h_r,t} \left[ | \epsilon - \epsilon</em>\theta(x_t, h_r, t) |^2 \right]$<br>和 DDPM 类似，但输入多了 $h_r$， forward 噪声来自真实信道。</p>
+<h2 id="3-Stable-Diffusion-Inpainting-——-Mask-作为-concat-条件"><a href="#3-Stable-Diffusion-Inpainting-——-Mask-作为-concat-条件" class="headerlink" title="3. Stable Diffusion Inpainting —— Mask 作为 concat 条件"></a>3. Stable Diffusion Inpainting —— Mask 作为 concat 条件</h2><p>UNet 输入是多个条件张量的拼接：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UNet_input = concat( x_t, mask, masked_image )</span><br></pre></td></tr></table></figure>
 
-<h2 id="6-注意事项"><a href="#6-注意事项" class="headerlink" title="6. 注意事项"></a>6. 注意事项</h2><p>TorchScript 的权重是 Tensor，而不是 nn.Parameter → 无法用 torch.nn.utils.prune 的官方 API。</p>
-<p>必须手动覆盖 module.weight.data。</p>
-<p>剪枝后的权重仍占显存，只是大部分被置零（稀疏矩阵计算需要进一步优化）。</p>
-<p>如果想获得实际加速，需要配合 稀疏矩阵库 或 结构化剪枝。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>x_t</code></td>
+<td>当前带噪 latent</td>
+</tr>
+<tr>
+<td><code>mask</code></td>
+<td>1&#x3D;要修补，0&#x3D;保留</td>
+</tr>
+<tr>
+<td><code>masked_image</code></td>
+<td>提供上下文内容</td>
+</tr>
+</tbody></table>
+<p>模型预测：<br>$\epsilon_\theta(x_t,; mask,; masked_image,; t)$<br>特点：</p>
+<p>仍然是 DDPM 的多步去噪<br>concat 是 Inpainting 的核心机制<br>用于修补图像，不是通信信道</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>DDPM</th>
+<th>Inpainting（concat）</th>
+<th>CDDM</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Forward</strong></td>
+<td>多步高斯噪声</td>
+<td>多步高斯噪声</td>
+<td>Rayleigh + AWGN 信道噪声</td>
+</tr>
+<tr>
+<td><strong>Reverse</strong></td>
+<td>50–1000 步</td>
+<td>50–1000 步</td>
+<td>$m$ 步（5–20）</td>
+</tr>
+<tr>
+<td><strong>条件</strong></td>
+<td>文本</td>
+<td>文本 + mask + context</td>
+<td>信道增益 $h_r$</td>
+</tr>
+<tr>
+<td><strong>输入</strong></td>
+<td>$x_t$</td>
+<td><code>concat([...])</code></td>
+<td>$x_t, h_r$</td>
+</tr>
+<tr>
+<td><strong>输出</strong></td>
+<td>图像</td>
+<td>修补图像</td>
+<td>语义特征（feature）</td>
+</tr>
+<tr>
+<td><strong>任务</strong></td>
+<td>生成</td>
+<td>inpainting</td>
+<td>信道去噪</td>
+</tr>
+</tbody></table>
 
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/08/12-8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/12/08/12-8/" class="post-title-link" itemprop="url">12-8</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-12-08 13:18:26 / Modified: 14:41:04" itemprop="dateCreated datePublished" datetime="2025-12-08T13:18:26+08:00">2025-12-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="Reading"><a href="#Reading" class="headerlink" title="Reading"></a>Reading</h2><p>J. Song, C. Meng, and S. Ermon, “Denoising diffusion implicit models,” 2022. [Online]. Available: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2010.02502">https://arxiv.org/abs/2010.02502</a></p>
+<p>Denoising Vision Transformer Autoencoder with Spectral Self-Regularization</p>
+<h2 id="Conv-based-And-ViT-based-Tokenizer-Autoencoder"><a href="#Conv-based-And-ViT-based-Tokenizer-Autoencoder" class="headerlink" title="Conv-based And ViT-based Tokenizer&#x2F;Autoencoder"></a>Conv-based And ViT-based Tokenizer&#x2F;Autoencoder</h2><h3 id="Conv-based-Auoencoder"><a href="#Conv-based-Auoencoder" class="headerlink" title="Conv-based Auoencoder"></a>Conv-based Auoencoder</h3><p>DC-AE VQVAE MaskGIT MaskBit VAVAE SD-VAE SDXL-VAE GaussToken EQVAE</p>
+<h3 id="ViT-based-Tokenizer"><a href="#ViT-based-Tokenizer" class="headerlink" title="ViT-based Tokenizer"></a>ViT-based Tokenizer</h3><p>SoftVQ TiTok-B64 TiTok-S128 MAETok One-D-Piece FlexTok TexTok HieraTok</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/08/day12-8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/12/08/day12-8/" class="post-title-link" itemprop="url">day12-8</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-12-08 13:18:08" itemprop="dateCreated datePublished" datetime="2025-12-08T13:18:08+08:00">2025-12-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-12-13 01:23:19" itemprop="dateModified" datetime="2025-12-13T01:23:19+08:00">2025-12-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/07/diffusion/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/12/07/diffusion/" class="post-title-link" itemprop="url">diffusion</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-12-07 00:50:48 / Modified: 01:00:37" itemprop="dateCreated datePublished" datetime="2025-12-07T00:50:48+08:00">2025-12-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h1 id="Diffusion-based-Denoising-Feature-Imputing-Semantic-Communication"><a href="#Diffusion-based-Denoising-Feature-Imputing-Semantic-Communication" class="headerlink" title="Diffusion-based Denoising &amp; Feature Imputing (Semantic Communication)"></a>Diffusion-based Denoising &amp; Feature Imputing (Semantic Communication)</h1><p>本 README 用于理解 diffusion 在语义通信&#x2F;抗噪中的 denoising 原理，包括 forward &#x2F; reverse、训练 &#x2F; 推理、UNet 输入、mask、噪声差异等内容。</p>
+<hr>
+<h2 id="1-Core-Idea"><a href="#1-Core-Idea" class="headerlink" title="1. Core Idea"></a>1. Core Idea</h2><p>训练：学习从噪声恢复语义 latent<br>推理：对 corrupted latent 执行 conditional reverse denoising</p>
+<p>一句话：<br>Train with synthetic noise; infer on corrupted latent.</p>
+<hr>
+<h2 id="2-Forward-diffusion-training"><a href="#2-Forward-diffusion-training" class="headerlink" title="2. Forward diffusion (training)"></a>2. Forward diffusion (training)</h2><p>对完整 latent y0 加噪，得到 y_t：</p>
+<p>$y_t &#x3D; sqrt(alpha_t) * y0 + sqrt(1 - alpha_t) * eps_t$</p>
+<p>其中 eps_t ~ N(0, I)</p>
+<p>随着 t 增大，噪声增加，最终：</p>
+<p>y_T ~ N(0, I)</p>
+<p>目的：</p>
+<ul>
+<li>构造 noisy latent</li>
+<li>训练噪声预测器（UNet）</li>
+</ul>
+<p>特点：</p>
+<ul>
+<li>forward 只在训练执行</li>
+<li>不使用 mask</li>
+<li>不使用 corrupted latent y_hat</li>
+</ul>
+<hr>
+<h2 id="3-Reverse-diffusion-inference"><a href="#3-Reverse-diffusion-inference" class="headerlink" title="3. Reverse diffusion (inference)"></a>3. Reverse diffusion (inference)</h2><p>推理阶段执行逐步去噪：</p>
+<p>eps_hat &#x3D; UNet(y_tilde_t, t, y_hat, M)</p>
+<p>更新：<br>y_tilde_{t-1} &#x3D; reverse_update(y_tilde_t, eps_hat)</p>
+<p>最终输出恢复后的 y_tilde_0</p>
+<p>特点：</p>
+<ul>
+<li>reverse 只在推理执行</li>
+<li>包含 conditional 信息（y_hat 和 mask M）</li>
+</ul>
+<hr>
+<h2 id="4-UNet-inputs"><a href="#4-UNet-inputs" class="headerlink" title="4. UNet inputs"></a>4. UNet inputs</h2><p>Training:<br>UNet(y_t, t)</p>
+<p>Inference:<br>UNet(y_tilde_t, t, y_hat, M)</p>
+<p>说明：<br>y_tilde_t &#x3D; 当前 noisy latent (推理)<br>y_hat     &#x3D; 破损 latent（信道输出）<br>M         &#x3D; mask，表示哪些位置缺失<br>t         &#x3D; diffusion timestep</p>
+<hr>
+<h2 id="5-Mask-M"><a href="#5-Mask-M" class="headerlink" title="5. Mask M"></a>5. Mask M</h2><p>M 用于指示哪些 latent 位置丢失需要补全：</p>
+<p>M &#x3D; 1 表示该位置需要生成<br>M &#x3D; 0 表示该位置保持接收端值</p>
+<p>通常做 dilation 得到 perceptive mask，使恢复区域更平滑。</p>
+<hr>
+<h2 id="6-Forward-noise-Channel-noise"><a href="#6-Forward-noise-Channel-noise" class="headerlink" title="6. Forward noise !&#x3D; Channel noise"></a>6. Forward noise !&#x3D; Channel noise</h2><p>forward噪声（人为添加）与信道噪声（真实丢包&#x2F;衰落）无关。</p>
+<p>Diffusion 学习的是语义恢复能力，而不是匹配具体噪声分布。</p>
+<hr>
+<h2 id="7-Initialization-during-inference"><a href="#7-Initialization-during-inference" class="headerlink" title="7. Initialization during inference"></a>7. Initialization during inference</h2><p>推理起点不是随机噪声，而是 corrupted latent：</p>
+<p>y_tilde_T &#x3D; y_hat</p>
+<hr>
+<h2 id="8-Loss-per-timestep"><a href="#8-Loss-per-timestep" class="headerlink" title="8. Loss per timestep?"></a>8. Loss per timestep?</h2><p>训练时不需要对所有 t 计算 loss，只随机采样一个 t：</p>
+<p>loss &#x3D; || eps - eps_theta ||^2</p>
+<p>这是 DDPM &#x2F; DDIM 的标准训练方式。</p>
+<hr>
+<h2 id="9-Training-pseudocode"><a href="#9-Training-pseudocode" class="headerlink" title="9. Training pseudocode"></a>9. Training pseudocode</h2><p>for each sample:<br>    y0 &#x3D; encoder(x)<br>    sample t<br>    y_t &#x3D; sqrt(alpha_t)*y0 + sqrt(1-alpha_t)*eps<br>    eps_hat &#x3D; UNet(y_t, t)<br>    loss &#x3D; ||eps - eps_hat||^2<br>    optimizer.step()</p>
+<hr>
+<h2 id="10-Inference-pseudocode"><a href="#10-Inference-pseudocode" class="headerlink" title="10. Inference pseudocode"></a>10. Inference pseudocode</h2><p>y_tilde_T &#x3D; y_hat<br>for t &#x3D; T … 1:<br>    eps_hat &#x3D; UNet(y_tilde_t, t, y_hat, M)<br>    y_tilde_{t-1} &#x3D; reverse_update(y_tilde_t, eps_hat)</p>
+<p>output &#x3D; y_tilde_0</p>
+<hr>
+<h2 id="11-Key-understanding"><a href="#11-Key-understanding" class="headerlink" title="11. Key understanding"></a>11. Key understanding</h2><ul>
+<li>forward &#x3D; synthetic corruption (training only)</li>
+<li>reverse &#x3D; actual recovery (inference only)</li>
+<li>UNet learns denoising</li>
+<li>mask guides inpainting</li>
+<li>inference uses corrupted latent as start</li>
+</ul>
+<hr>
+<h2 id="12-One-sentence-summary"><a href="#12-One-sentence-summary" class="headerlink" title="12. One-sentence summary"></a>12. One-sentence summary</h2><p>Diffusion learns semantic restoration from noisy latent during training and performs conditional reverse denoising on corrupted latent with masks during inference.</p>
+<hr>
+<h2 id="13-Misconceptions"><a href="#13-Misconceptions" class="headerlink" title="13. Misconceptions"></a>13. Misconceptions</h2><p>误区：训练噪声等于信道噪声 → 错<br>误区：推理从高斯开始      → 错<br>误区：reverse 在训练执行  → 错<br>误区：每个 t 都计算 loss  → 错  </p>
+<p>真相：</p>
+<ul>
+<li>forward only for training</li>
+<li>reverse only for inference</li>
+<li>sample one timestep per update</li>
+</ul>
+<hr>
+<h2 id="keywords"><a href="#keywords" class="headerlink" title="keywords"></a>keywords</h2><p>diffusion denoising, semantic communication, conditional diffusion,<br>feature imputing, inpainting, corrupted latent, mask, UNet, forward, reverse</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/02/12-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/12/02/12-2/" class="post-title-link" itemprop="url">12-2</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-12-02 11:29:30 / Modified: 21:08:18" itemprop="dateCreated datePublished" datetime="2025-12-02T11:29:30+08:00">2025-12-02</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="Reading"><a href="#Reading" class="headerlink" title="Reading"></a>Reading</h2><p>MOC-RVQ: Multilevel Codebook-Assisted Digital Generative<br>Semantic Communication</p>
+<h2 id="双重注意力"><a href="#双重注意力" class="headerlink" title="双重注意力"></a>双重注意力</h2><p>双重注意力（Dual Attention）Block 通常指在深度学习网络中同时使用 通道注意力（Channel Attention） 和 空间注意力（Spatial Attention） 的模块，用来增强特征表示能力。</p>
+<p>最典型的结构来自 CBAM（Convolutional Block Attention Module)，但“Dual Attention”也可能指语义分割的 DANet（Dual Attention Network）。两者含义不同，我会分别解释。</p>
+<h2 id="Sytle-loss"><a href="#Sytle-loss" class="headerlink" title="Sytle loss"></a>Sytle loss</h2><p>给定某层feature map：<br>$F ∈ R^{C×HW}$.<br>Style Loss 使用的是Gram Matrix:<br>$G &#x3D; F F^T $<br>其中Gij &#x3D; 特征通道 i 和 通道 j 的相关性<br>这表示纹理、颜色分布、局部结构等风格信息<br>不包含空间布局（排布）信息 -》 所以适合风格迁移</p>
+<h2 id="stop-gradient-operation"><a href="#stop-gradient-operation" class="headerlink" title="stop-gradient operation"></a>stop-gradient operation</h2><p>保持encoder的梯度不变，only fine-tuning NRB</p>
+<h2 id="多头码本"><a href="#多头码本" class="headerlink" title="多头码本"></a>多头码本</h2><p>Multi-head octonary codebook</p>
+<h2 id="MOC-RVQ"><a href="#MOC-RVQ" class="headerlink" title="MOC-RVQ"></a>MOC-RVQ</h2><p>多头码本+RVQ</p>
+<h2 id="to-do"><a href="#to-do" class="headerlink" title="to-do"></a>to-do</h2><p>研究RVQ<br>到底什么是digital SemComm 和 analog SemComm 的区别</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/01/12-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/12/01/12-1/" class="post-title-link" itemprop="url">12-1</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-12-01 14:09:38 / Modified: 17:06:40" itemprop="dateCreated datePublished" datetime="2025-12-01T14:09:38+08:00">2025-12-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="推流"><a href="#推流" class="headerlink" title="推流"></a>推流</h2><p>Flask MJPEG Stream Server</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/30/11-30/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/30/11-30/" class="post-title-link" itemprop="url">11-30</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-11-30 15:10:43" itemprop="dateCreated datePublished" datetime="2025-11-30T15:10:43+08:00">2025-11-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-12-01 15:22:30" itemprop="dateModified" datetime="2025-12-01T15:22:30+08:00">2025-12-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="VAE"><a href="#VAE" class="headerlink" title="VAE"></a>VAE</h2><p>如果将VQ理解为直接将编码向量聚类为K个不同的类别，那么FSQ就是将编码向量归纳出d个属性，每个属性划分为L个等级，从而直接表达了$L^d$<br> 个不同的整数。</p>
+<p>不管是从参数量、几何直观或者表达能力来看，其实FSQ都不如VQ，但为什么FSQ有机会取得比VQ更好的结果呢？笔者认为有两方面的原因。</p>
+<p>第一个原因，是encoder和decoder太强。虽然FSQ本身弱一些，但是encoder和decoder都足够强了，所以基于神经网络的万能拟合能力假设，FSQ相对于VQ的劣势，完全可以在encoder和decoder中弥补过来。</p>
+<p>第二个原因，是VQ的“队友”（梯度）太弱。VQ的经典问题是编码表坍缩：当编码表增大时，编码表并没有被充分利用起来，反而由于恶性竞争导致编码表聚集到一块了，经典表现就是一个5000的编码表，最终效果还不如500的编码表。归根结底，这是梯度不够合理所致，尽管VQ已经巧妙地设计了梯度，但对于argmin<br>这种硬指派的运算，基于梯度的优化都存在“赢者通吃”问题，这是坍缩的根本原因，而FSQ的Round<br>运算并不涉及到指派，它是直接取的近似值.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/30/11-29/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/30/11-29/" class="post-title-link" itemprop="url">11-29</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-11-30 01:25:23 / Modified: 02:06:44" itemprop="dateCreated datePublished" datetime="2025-11-30T01:25:23+08:00">2025-11-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="Reading"><a href="#Reading" class="headerlink" title="Reading"></a>Reading</h2><p>Generative Feature Imputing — A Technique for<br>Error-resilient Semantic Communication</p>
+<p>对有损区域进行M掩码，然后再过diffusion进行去噪来</p>
+<p>让diffusion从生成变成纠错，需要：</p>
+<ul>
+<li>损坏后的特征 ŷ —— 给模型看“哪里坏了”</li>
+<li>错误掩膜 M —— 明确告诉模型“哪些地方需要修”</li>
+<li>保持未损坏区域不变 —— 扩散只修 M&#x3D;1 的位置<br>扩散模型只在 M&#x3D;1（错误区域）上运行，不在整个 latent 空间上运行，</li>
+</ul>
+<h2 id="膨胀卷积"><a href="#膨胀卷积" class="headerlink" title="膨胀卷积"></a>膨胀卷积</h2><h2 id="RAE"><a href="#RAE" class="headerlink" title="RAE"></a>RAE</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python src/test.py     --config /Huang_group/zyyz/tianyi/cs/RAE/configs/stage2/training/ImageNet256/DiTDH-S_DINOv2-B.yaml     --image 3.png     --output out/new_3.png</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python src/sample.py   --config /Huang_group/zyyz/tianyi/cs/RAE/configs/stage2/training/ImageNet256/DiTDH-S_DINOv2-B.yaml  --seed 42</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python src/stage1_sample.py     --config /Huang_group/zyyz/tianyi/cs/RAE/configs/stage2/training/ImageNet256/DiTDH-S_DINOv2-B.yaml     --image  /Huang_group/zyyz/tianyi/cs/RAE/1.png     --output /Huang_group/zyyz/tianyi/cs/RAE/7.png</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/30/day11-29/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/30/day11-29/" class="post-title-link" itemprop="url">day11-29</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-11-30 01:25:13" itemprop="dateCreated datePublished" datetime="2025-11-30T01:25:13+08:00">2025-11-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          
       
     </div>
 
@@ -1075,7 +968,7 @@ CUDA_VISIBLE_DEVICES=5 python .py
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/7/">7</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/8/">8</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1141,7 +1034,7 @@ CUDA_VISIBLE_DEVICES=5 python .py
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
