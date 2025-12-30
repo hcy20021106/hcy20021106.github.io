@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="readingPromptus: Can Prompts Streaming Replace Video Streaming with Stable Diffusionfine-tune the post-processing nerual networks for each video segmennt and send the fune-tuned nerual networks along">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12-29">
+<meta property="og:url" content="https://hechenyi.github.io/2025/12/29/12-29/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="readingPromptus: Can Prompts Streaming Replace Video Streaming with Stable Diffusionfine-tune the post-processing nerual networks for each video segmennt and send the fune-tuned nerual networks along">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-12-29T03:55:44.000Z">
+<meta property="article:modified_time" content="2025-12-29T17:54:45.245Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hechenyi.github.io/2025/12/29/12-29/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>12-29 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/29/12-29/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          12-29
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-12-29 11:55:44" itemprop="dateCreated datePublished" datetime="2025-12-29T11:55:44+08:00">2025-12-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-12-30 01:54:45" itemprop="dateModified" datetime="2025-12-30T01:54:45+08:00">2025-12-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><h3 id="Promptus-Can-Prompts-Streaming-Replace-Video-Streaming-with-Stable-Diffusion"><a href="#Promptus-Can-Prompts-Streaming-Replace-Video-Streaming-with-Stable-Diffusion" class="headerlink" title="Promptus: Can Prompts Streaming Replace Video Streaming with Stable Diffusion"></a>Promptus: Can Prompts Streaming Replace Video Streaming with Stable Diffusion</h3><p>fine-tune the post-processing nerual networks for each video segmennt and send the fune-tuned nerual networks along with the video.<br>Neural network-based post-processing methods such as super-resolution<br>StreamDiffusion can generate images at a speed of 100FPS<br><strong>Video2seq</strong>模型和“Scaling up vision-language pre-training for image captioning.” 分别是video&#x2F;image captioning。<br>CLIP model converting discrete natural language p into a continuous text embedding c (an m ∗ n matrix)</p>
+<h3 id="StreamDiffusion-A-Pipeline-level-Solution-for-Real-time-Interactive-Generation"><a href="#StreamDiffusion-A-Pipeline-level-Solution-for-Real-time-Interactive-Generation" class="headerlink" title="StreamDiffusion: A Pipeline-level Solution for Real-time Interactive Generation"></a>StreamDiffusion: A Pipeline-level Solution for Real-time Interactive Generation</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Input Image Stream</span><br><span class="line">   ↓</span><br><span class="line">IO Queue  →  VAE Encoder</span><br><span class="line">                ↓</span><br><span class="line">         Stream Batch UNet  +  R-CFG</span><br><span class="line">                ↓</span><br><span class="line">            VAE Decoder</span><br><span class="line">   ↓</span><br><span class="line">Output Queue  →  Renderer</span><br></pre></td></tr></table></figure>
+<p>不等一帧完全denoise完，每来一帧就立刻进入pipeline，不同帧处在不同denoising step，把这些step拼成一个batch一次性送进unet</p>
+<p>SD是在cross-attention条件分布上训练的，而 CLIP 只是一个生成该分布的工具。<br>K, V ∈ R^{77 × 1024}<br>Q &#x3D; Wq · h<br>K &#x3D; Wk · c<br>V &#x3D; Wv · c</p>
+<p>Attention(Q, K, V)<br>计算过程如下：</p>
+<h4 id="1-1-Latent-特征（图像侧）"><a href="#1-1-Latent-特征（图像侧）" class="headerlink" title="1.1 Latent 特征（图像侧）"></a>1.1 Latent 特征（图像侧）</h4><ul>
+<li><p>扩散过程中某一层 UNet 的中间特征：</p>
+<p>h ∈ R^{B × C × H × W}</p>
+</li>
+<li><p>其中：</p>
+<ul>
+<li>B：batch size</li>
+<li>C：通道数（随 UNet 层变化，如 320 &#x2F; 640 &#x2F; 1280）</li>
+<li>H, W：latent 空间分辨率</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-2-条件特征（文本-连续条件）"><a href="#1-2-条件特征（文本-连续条件）" class="headerlink" title="1.2 条件特征（文本 &#x2F; 连续条件）"></a>1.2 条件特征（文本 &#x2F; 连续条件）</h4><ul>
+<li><p>条件 embedding（来自 CLIP 或连续 prompt）：</p>
+<p>c ∈ R^{B × T × C_c}</p>
+</li>
+<li><p>其中：</p>
+<ul>
+<li>T &#x3D; 77（token 数）</li>
+<li>C_c &#x3D; 1024（SD2.x &#x2F; SD-Turbo）</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="2-Latent-展平（Flatten）"><a href="#2-Latent-展平（Flatten）" class="headerlink" title="2. Latent 展平（Flatten）"></a>2. Latent 展平（Flatten）</h4><p>将空间维度展平：</p>
+<ul>
+<li>h ∈ R^{B × C × H × W}</li>
+<li>reshape →</li>
+<li>h ∈ R^{B × (H·W) × C}</li>
+</ul>
+<hr>
+<h4 id="3-线性投影生成-Q-K-V"><a href="#3-线性投影生成-Q-K-V" class="headerlink" title="3. 线性投影生成 Q &#x2F; K &#x2F; V"></a>3. 线性投影生成 Q &#x2F; K &#x2F; V</h4><h4 id="3-1-投影权重"><a href="#3-1-投影权重" class="headerlink" title="3.1 投影权重"></a>3.1 投影权重</h4><ul>
+<li>W_q ∈ R^{C × d}</li>
+<li>W_k ∈ R^{C_c × d}</li>
+<li>W_v ∈ R^{C_c × d}</li>
+</ul>
+<p>其中：</p>
+<ul>
+<li>d &#x3D; head_dim</li>
+<li>多头注意力时：d &#x3D; embed_dim &#x2F; num_heads</li>
+</ul>
+<h4 id="3-2-线性变换"><a href="#3-2-线性变换" class="headerlink" title="3.2 线性变换"></a>3.2 线性变换</h4><ul>
+<li><p>Query（来自 latent）：</p>
+<p>Q &#x3D; h · W_q<br>Q ∈ R^{B × (H·W) × d}</p>
+</li>
+<li><p>Key（来自条件）：</p>
+<p>K &#x3D; c · W_k<br>K ∈ R^{B × T × d}</p>
+</li>
+<li><p>Value（来自条件）：</p>
+<p>V &#x3D; c · W_v<br>V ∈ R^{B × T × d}</p>
+</li>
+</ul>
+<hr>
+<h4 id="4-1-计算相似度矩阵"><a href="#4-1-计算相似度矩阵" class="headerlink" title="4.1 计算相似度矩阵"></a>4.1 计算相似度矩阵</h4><p>对每个 batch：</p>
+<ul>
+<li>Q ∈ R^{(H·W) × d}</li>
+<li>K ∈ R^{T × d}</li>
+</ul>
+<p>计算：</p>
+<ul>
+<li>S &#x3D; Q · Kᵀ &#x2F; √d</li>
+<li>S ∈ R^{(H·W) × T}</li>
+</ul>
+<p>语义含义：</p>
+<ul>
+<li>每一个空间位置（pixel &#x2F; latent token）</li>
+<li>对所有条件 token 的相关性</li>
+</ul>
+<hr>
+<p>在 token 维度上归一化：</p>
+<ul>
+<li>A &#x3D; softmax(S, dim &#x3D; -1)</li>
+<li>A ∈ R^{B × (H·W) × T}</li>
+</ul>
+<p>含义：</p>
+<ul>
+<li>对每个空间位置，所有 token 的权重和为 1</li>
+</ul>
+<hr>
+<h4 id="5-加权求和-Value"><a href="#5-加权求和-Value" class="headerlink" title="5. 加权求和 Value"></a>5. 加权求和 Value</h4><p>计算 attention 输出：</p>
+<ul>
+<li>out &#x3D; A · V</li>
+<li>out ∈ R^{B × (H·W) × d}</li>
+</ul>
+<p>含义：</p>
+<ul>
+<li>对每个空间位置</li>
+<li>按注意力权重，从条件中提取信息</li>
+</ul>
+<hr>
+<ul>
+<li>Q → [B × num_heads × (H·W) × d]</li>
+<li>K → [B × num_heads × T × d]</li>
+<li>V → [B × num_heads × T × d]</li>
+</ul>
+<p>每个 head 独立执行第 4–5 步。</p>
+<hr>
+<h4 id="6-2-合并-heads"><a href="#6-2-合并-heads" class="headerlink" title="6.2 合并 heads"></a>6.2 合并 heads</h4><ul>
+<li>concat(out_heads) → [B × (H·W) × (num_heads · d)]</li>
+<li>线性投影 →</li>
+<li>out ∈ R^{B × (H·W) × C}</li>
+</ul>
+<hr>
+<h4 id="7-1-恢复特征图形状"><a href="#7-1-恢复特征图形状" class="headerlink" title="7.1 恢复特征图形状"></a>7.1 恢复特征图形状</h4><ul>
+<li>out ∈ R^{B × (H·W) × C}</li>
+<li>reshape →</li>
+<li>out ∈ R^{B × C × H × W}</li>
+</ul>
+<h4 id="7-2-残差连接"><a href="#7-2-残差连接" class="headerlink" title="7.2 残差连接"></a>7.2 残差连接</h4><ul>
+<li>h_out &#x3D; h_in + out</li>
+</ul>
+<hr>
+<h4 id="8-关键总结"><a href="#8-关键总结" class="headerlink" title="8. 关键总结"></a>8. 关键总结</h4><ul>
+<li>Query 来自 <strong>图像 latent 特征</strong></li>
+<li>Key &#x2F; Value 来自 <strong>条件 embedding</strong></li>
+<li>UNet 对条件来源（CLIP &#x2F; 连续 prompt）不敏感</li>
+<li>只要 embedding 分布可用，cross-attention 即可正常工作</li>
+</ul>
+<hr>
+<p>这是传统SD的思想，promptus用只在训练低秩文本条件（U、V），模型权重全部冻结<br>c &#x3D; (U @ V &#x2F; sqrt(rank)).unsqueeze(0)<br>c &#x3D; {‘crossattn’: c}</p>
+<table>
+<thead>
+<tr>
+<th>张量</th>
+<th>形状</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>U</td>
+<td>(77, r)</td>
+<td>token 维度</td>
+</tr>
+<tr>
+<td>V</td>
+<td>(r, 1024)</td>
+<td>cross-attention channel</td>
+</tr>
+<tr>
+<td>U @ V</td>
+<td>(77, 1024)</td>
+<td>等价于 CLIP text embedding</td>
+</tr>
+<tr>
+<td>c[‘crossattn’]</td>
+<td>(1, 77, 1024)</td>
+<td>直接喂给 UNet</td>
+</tr>
+</tbody></table>
+<h3 id="Akio-Kodaira-Chenfeng-Xu-Toshiki-Hazama-Takanori-Yoshimoto-Kohei-Ohno-Shogo-Mitsuhori-Soichi-Sug-ano-Hanying-Cho-Zhijian-Liu-and-Kurt-Keutzer-Streamdiffusion-A-pipeline-level-solution-for-real-time-interactive-generation-arXiv-preprint-arXiv-2312-12491-2023"><a href="#Akio-Kodaira-Chenfeng-Xu-Toshiki-Hazama-Takanori-Yoshimoto-Kohei-Ohno-Shogo-Mitsuhori-Soichi-Sug-ano-Hanying-Cho-Zhijian-Liu-and-Kurt-Keutzer-Streamdiffusion-A-pipeline-level-solution-for-real-time-interactive-generation-arXiv-preprint-arXiv-2312-12491-2023" class="headerlink" title="Akio Kodaira, Chenfeng Xu, Toshiki Hazama, Takanori Yoshimoto, Kohei Ohno, Shogo Mitsuhori, Soichi Sug- ano, Hanying Cho, Zhijian Liu, and Kurt Keutzer. Streamdiffusion: A pipeline-level solution for real-time interactive generation. arXiv preprint arXiv:2312.12491, 2023."></a>Akio Kodaira, Chenfeng Xu, Toshiki Hazama, Takanori Yoshimoto, Kohei Ohno, Shogo Mitsuhori, Soichi Sug- ano, Hanying Cho, Zhijian Liu, and Kurt Keutzer. Streamdiffusion: A pipeline-level solution for real-time interactive generation. arXiv preprint arXiv:2312.12491, 2023.</h3><h3 id="ELIC-Efficient-Learned-Image-Compression-with-Unevenly-Grouped-Space-Channel-Contextual-Adaptive-Coding"><a href="#ELIC-Efficient-Learned-Image-Compression-with-Unevenly-Grouped-Space-Channel-Contextual-Adaptive-Coding" class="headerlink" title="ELIC: Efficient Learned Image Compression with Unevenly Grouped Space-Channel Contextual Adaptive Coding"></a>ELIC: Efficient Learned Image Compression with Unevenly Grouped Space-Channel Contextual Adaptive Coding</h3><h3 id="taesd"><a href="#taesd" class="headerlink" title="taesd"></a>taesd</h3><p>TAESD is very tiny autoencoder which uses the same “latent API” as Stable Diffusion’s VAE. TAESD can decode Stable Diffusion’s latents into full-size images at zero cost.<br>SD VAE*	TAESD<br>Parameters in Encoder	34,163,592	1,222,532<br>Parameters in Decoder	49,490,179	1,222,531</p>
+<h3 id="Video-Compression-With-Rate-Distortion-Autoencoders"><a href="#Video-Compression-With-Rate-Distortion-Autoencoders" class="headerlink" title="Video Compression With Rate-Distortion Autoencoders"></a>Video Compression With Rate-Distortion Autoencoders</h3><p>PixelCNN 和 Hyperprior 都可以给出精准的p(z)<br>交叉熵：<br>$H(q,p) &#x3D; -\sum_{x}q(x)log p(x)$.<br>用错误或者近似的模型编码真实数据<br>H(q,p) &#x3D; H(q) + KL(q||p)<br>对于VAE模型</p>
+<ul>
+<li>后验（近似后验）<br>q(z|x) 来自VAE的编码器</li>
+<li>先验<br>p(z)来自code model（PixelCNN&#x2F;hyperprior）</li>
+</ul>
+<h1 id="对于hyperprior里p-z-（先验）通常不是N-0-I-所以闭式KL不再适用，而是直接用Rate交叉熵。-R≈E-−logp-y-​∣z-E-−logp-z-而不是：-mathrm-KL-left-mathcal-N-left-boldsymbol-mu-operatorname-diag-boldsymbol-sigma-2-right-middle-mathcal-N-mathbf-0-mathbf-I-right"><a href="#对于hyperprior里p-z-（先验）通常不是N-0-I-所以闭式KL不再适用，而是直接用Rate交叉熵。-R≈E-−logp-y-​∣z-E-−logp-z-而不是：-mathrm-KL-left-mathcal-N-left-boldsymbol-mu-operatorname-diag-boldsymbol-sigma-2-right-middle-mathcal-N-mathbf-0-mathbf-I-right" class="headerlink" title="对于hyperprior里p(z)（先验）通常不是N(0,I),所以闭式KL不再适用，而是直接用Rate交叉熵。$R≈E[−logp(y^​∣z^)]+E[−logp(z^)]$. 而不是：$$\mathrm{KL}!\left(\mathcal{N}!\left(\boldsymbol{\mu}, \operatorname{diag}(\boldsymbol{\sigma}^2)\right);\middle|;\mathcal{N}(\mathbf{0}, \mathbf{I})\right)"></a>对于hyperprior里p(z)（先验）通常不是N(0,I),所以闭式KL不再适用，而是直接用Rate交叉熵。$R≈E[−logp(y^​∣z^)]+E[−logp(z^)]$. 而不是：<br>$$<br>\mathrm{KL}!\left(<br>\mathcal{N}!\left(\boldsymbol{\mu}, \operatorname{diag}(\boldsymbol{\sigma}^2)\right)<br>;\middle|;<br>\mathcal{N}(\mathbf{0}, \mathbf{I})<br>\right)</h1><h2 id="frac-1-2-sum-j-1-d-left-mu-j-2-sigma-j-2"><a href="#frac-1-2-sum-j-1-d-left-mu-j-2-sigma-j-2" class="headerlink" title="\frac{1}{2}\sum_{j&#x3D;1}^{d}\left(\mu_j^2+\sigma_j^2"></a>\frac{1}{2}<br>\sum_{j&#x3D;1}^{d}<br>\left(<br>\mu_j^2<br>+<br>\sigma_j^2</h2><h2 id="log-sigma-j-2"><a href="#log-sigma-j-2" class="headerlink" title="\log \sigma_j^2"></a>\log \sigma_j^2</h2><p>1<br>\right).<br>$$</p>
+<p>对真实分布取期望：<br>$Eq​[B]​&#x3D;Eq​[−log2​p(y<del>​,z</del>)]&#x3D;H(q)+KL(q(y<del>​,z</del>)∥p(y<del>​,z</del>))​$.<br>训练时直接最小化交叉熵就等价于最小化 KL<br>$min​Eq​[−logp]⟺min​KL(q∥p)$</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/12/28/12-28/" rel="prev" title="12-28">
+      <i class="fa fa-chevron-left"></i> 12-28
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/12/31/12-30/" rel="next" title="12-30">
+      12-30 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#reading"><span class="nav-number">1.</span> <span class="nav-text">reading</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Promptus-Can-Prompts-Streaming-Replace-Video-Streaming-with-Stable-Diffusion"><span class="nav-number">1.1.</span> <span class="nav-text">Promptus: Can Prompts Streaming Replace Video Streaming with Stable Diffusion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StreamDiffusion-A-Pipeline-level-Solution-for-Real-time-Interactive-Generation"><span class="nav-number">1.2.</span> <span class="nav-text">StreamDiffusion: A Pipeline-level Solution for Real-time Interactive Generation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-Latent-%E7%89%B9%E5%BE%81%EF%BC%88%E5%9B%BE%E5%83%8F%E4%BE%A7%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.1 Latent 特征（图像侧）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-%E6%9D%A1%E4%BB%B6%E7%89%B9%E5%BE%81%EF%BC%88%E6%96%87%E6%9C%AC-%E8%BF%9E%E7%BB%AD%E6%9D%A1%E4%BB%B6%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2 条件特征（文本 &#x2F; 连续条件）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Latent-%E5%B1%95%E5%B9%B3%EF%BC%88Flatten%EF%BC%89"><span class="nav-number">1.2.3.</span> <span class="nav-text">2. Latent 展平（Flatten）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E7%BA%BF%E6%80%A7%E6%8A%95%E5%BD%B1%E7%94%9F%E6%88%90-Q-K-V"><span class="nav-number">1.2.4.</span> <span class="nav-text">3. 线性投影生成 Q &#x2F; K &#x2F; V</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E6%8A%95%E5%BD%B1%E6%9D%83%E9%87%8D"><span class="nav-number">1.2.5.</span> <span class="nav-text">3.1 投影权重</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2"><span class="nav-number">1.2.6.</span> <span class="nav-text">3.2 线性变换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-%E8%AE%A1%E7%AE%97%E7%9B%B8%E4%BC%BC%E5%BA%A6%E7%9F%A9%E9%98%B5"><span class="nav-number">1.2.7.</span> <span class="nav-text">4.1 计算相似度矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E5%8A%A0%E6%9D%83%E6%B1%82%E5%92%8C-Value"><span class="nav-number">1.2.8.</span> <span class="nav-text">5. 加权求和 Value</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-%E5%90%88%E5%B9%B6-heads"><span class="nav-number">1.2.9.</span> <span class="nav-text">6.2 合并 heads</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-%E6%81%A2%E5%A4%8D%E7%89%B9%E5%BE%81%E5%9B%BE%E5%BD%A2%E7%8A%B6"><span class="nav-number">1.2.10.</span> <span class="nav-text">7.1 恢复特征图形状</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-%E6%AE%8B%E5%B7%AE%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.2.11.</span> <span class="nav-text">7.2 残差连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%E5%85%B3%E9%94%AE%E6%80%BB%E7%BB%93"><span class="nav-number">1.2.12.</span> <span class="nav-text">8. 关键总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Akio-Kodaira-Chenfeng-Xu-Toshiki-Hazama-Takanori-Yoshimoto-Kohei-Ohno-Shogo-Mitsuhori-Soichi-Sug-ano-Hanying-Cho-Zhijian-Liu-and-Kurt-Keutzer-Streamdiffusion-A-pipeline-level-solution-for-real-time-interactive-generation-arXiv-preprint-arXiv-2312-12491-2023"><span class="nav-number">1.3.</span> <span class="nav-text">Akio Kodaira, Chenfeng Xu, Toshiki Hazama, Takanori Yoshimoto, Kohei Ohno, Shogo Mitsuhori, Soichi Sug- ano, Hanying Cho, Zhijian Liu, and Kurt Keutzer. Streamdiffusion: A pipeline-level solution for real-time interactive generation. arXiv preprint arXiv:2312.12491, 2023.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ELIC-Efficient-Learned-Image-Compression-with-Unevenly-Grouped-Space-Channel-Contextual-Adaptive-Coding"><span class="nav-number">1.4.</span> <span class="nav-text">ELIC: Efficient Learned Image Compression with Unevenly Grouped Space-Channel Contextual Adaptive Coding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#taesd"><span class="nav-number">1.5.</span> <span class="nav-text">taesd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Video-Compression-With-Rate-Distortion-Autoencoders"><span class="nav-number">1.6.</span> <span class="nav-text">Video Compression With Rate-Distortion Autoencoders</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8Ehyperprior%E9%87%8Cp-z-%EF%BC%88%E5%85%88%E9%AA%8C%EF%BC%89%E9%80%9A%E5%B8%B8%E4%B8%8D%E6%98%AFN-0-I-%E6%89%80%E4%BB%A5%E9%97%AD%E5%BC%8FKL%E4%B8%8D%E5%86%8D%E9%80%82%E7%94%A8%EF%BC%8C%E8%80%8C%E6%98%AF%E7%9B%B4%E6%8E%A5%E7%94%A8Rate%E4%BA%A4%E5%8F%89%E7%86%B5%E3%80%82-R%E2%89%88E-%E2%88%92logp-y-%E2%80%8B%E2%88%A3z-E-%E2%88%92logp-z-%E8%80%8C%E4%B8%8D%E6%98%AF%EF%BC%9A-mathrm-KL-left-mathcal-N-left-boldsymbol-mu-operatorname-diag-boldsymbol-sigma-2-right-middle-mathcal-N-mathbf-0-mathbf-I-right"><span class="nav-number"></span> <span class="nav-text">对于hyperprior里p(z)（先验）通常不是N(0,I),所以闭式KL不再适用，而是直接用Rate交叉熵。$R≈E[−logp(y^​∣z^)]+E[−logp(z^)]$. 而不是：$$\mathrm{KL}!\left(\mathcal{N}!\left(\boldsymbol{\mu}, \operatorname{diag}(\boldsymbol{\sigma}^2)\right);\middle|;\mathcal{N}(\mathbf{0}, \mathbf{I})\right)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#frac-1-2-sum-j-1-d-left-mu-j-2-sigma-j-2"><span class="nav-number">1.</span> <span class="nav-text">\frac{1}{2}\sum_{j&#x3D;1}^{d}\left(\mu_j^2+\sigma_j^2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#log-sigma-j-2"><span class="nav-number">2.</span> <span class="nav-text">\log \sigma_j^2</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

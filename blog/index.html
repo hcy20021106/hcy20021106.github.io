@@ -150,7 +150,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/13/12-12/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/31/12-30/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -164,7 +164,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/12/13/12-12/" class="post-title-link" itemprop="url">12-12</a>
+            <a href="/2025/12/31/12-30/" class="post-title-link" itemprop="url">12-30</a>
         </h2>
 
         <div class="post-meta">
@@ -173,9 +173,8 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-12-13 01:17:13 / Modified: 01:29:27" itemprop="dateCreated datePublished" datetime="2025-12-13T01:17:13+08:00">2025-12-13</time>
+              <time title="Created: 2025-12-31 00:05:29" itemprop="dateCreated datePublished" datetime="2025-12-31T00:05:29+08:00">2025-12-31</time>
             </span>
 
           
@@ -190,19 +189,7 @@
 
       
       
-          <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><h3 id="Taming-Transformers-for-High-Resolution-Image-Synthesis"><a href="#Taming-Transformers-for-High-Resolution-Image-Synthesis" class="headerlink" title="Taming Transformers for High-Resolution Image Synthesis"></a>Taming Transformers for High-Resolution Image Synthesis</h3><p>VQGAN + Transformer.<br>Transformer 的任务是预测下一个token，给定一个图像，其VQGAN编码得到token序列：<br>s&#x3D;(s1​,s2​,…,sN​),si​∈{0,1,…,∣Z∣−1}<br>Transformer需要学习：<br>$p(s_i | s_{&lt;i})$.<br>整体的目标函数是最大化:  </p>
-<p>$logp(s)&#x3D;∑<em>{i&#x3D;1}^N ​logp(s_i​∣s</em>{&lt;i}​)$</p>
-<h3 id="GAN"><a href="#GAN" class="headerlink" title="GAN"></a>GAN</h3><pre><code>        ┌──────────────┐
-</code></pre>
-<p>Input x ───▶│ Encoder  E    │<br>            └──────────────┘<br>                    │ z_q (quantized)<br>                    ▼<br>            ┌──────────────┐<br>            │ Decoder  G    │───┐<br>            └──────────────┘   │ reconstructed x̂<br>                                ▼<br>                        ┌──────────────┐<br>Real x ────────────────▶│ Discriminator│◀── fake x̂<br>                        └──────────────┘<br>训练步骤：</p>
-<p>编码 → 量化 → 解码</p>
-<p>判别器 D 区分真实与生成</p>
-<p>重建 loss + 感知 loss + GAN loss</p>
-<p>Update E&#x2F;G&#x2F;Z</p>
-<p>Update D</p>
-<p>重复迭代</p>
-<h3 id="StableCodec-Taming-One-Step-Diffusion-for-Extreme-Image-Compression"><a href="#StableCodec-Taming-One-Step-Diffusion-for-Extreme-Image-Compression" class="headerlink" title="StableCodec: Taming One-Step Diffusion for Extreme Image Compression"></a>StableCodec: Taming One-Step Diffusion for Extreme Image Compression</h3><p>SD-Turbo is a distilled version of Stable Diffusion that enables real-time image synthesis in 1 to 4 denoising steps.</p>
-
+          
       
     </div>
 
@@ -221,7 +208,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/11/diffusion-denoising/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/29/12-29/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -235,7 +222,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/12/11/diffusion-denoising/" class="post-title-link" itemprop="url">diffusion denoising</a>
+            <a href="/2025/12/29/12-29/" class="post-title-link" itemprop="url">12-29</a>
         </h2>
 
         <div class="post-meta">
@@ -244,10 +231,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-12-11 14:25:50 / Modified: 14:40:41" itemprop="dateCreated datePublished" datetime="2025-12-11T14:25:50+08:00">2025-12-11</time>
+              <time title="Created: 2025-12-29 11:55:44" itemprop="dateCreated datePublished" datetime="2025-12-29T11:55:44+08:00">2025-12-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-12-30 01:54:45" itemprop="dateModified" datetime="2025-12-30T01:54:45+08:00">2025-12-30</time>
+              </span>
 
           
 
@@ -261,108 +254,513 @@
 
       
       
-          <h1 id="Diffusion-模型体系对比：DDPM-·-Inpainting-·-CDDM"><a href="#Diffusion-模型体系对比：DDPM-·-Inpainting-·-CDDM" class="headerlink" title="Diffusion 模型体系对比：DDPM · Inpainting · CDDM"></a>Diffusion 模型体系对比：DDPM · Inpainting · CDDM</h1><p>本 README 对比三类扩散模型：</p>
-<ol>
-<li><strong>DDPM</strong>（标准扩散模型）</li>
-<li><strong>Stable Diffusion Inpainting</strong>（mask concat 条件）</li>
-<li><strong>CDDM</strong>（Channel Denoising Diffusion Model）</li>
-</ol>
-<hr>
-<h2 id="1-DDPM-——-标准扩散模型"><a href="#1-DDPM-——-标准扩散模型" class="headerlink" title="1. DDPM —— 标准扩散模型"></a>1. DDPM —— 标准扩散模型</h2><h3 id="Forward（逐步加噪）"><a href="#Forward（逐步加噪）" class="headerlink" title="Forward（逐步加噪）"></a>Forward（逐步加噪）</h3><p>DDPM 的前向加噪公式为：</p>
-<p>$$x_t &#x3D; \sqrt{\bar{\alpha}_t}, x_0 + \sqrt{1 - \bar{\alpha}_t}, \epsilon,\quad \epsilon \sim \mathcal{N}(0,I)$$</p>
-<p><strong>特点：</strong></p>
+          <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><h3 id="Promptus-Can-Prompts-Streaming-Replace-Video-Streaming-with-Stable-Diffusion"><a href="#Promptus-Can-Prompts-Streaming-Replace-Video-Streaming-with-Stable-Diffusion" class="headerlink" title="Promptus: Can Prompts Streaming Replace Video Streaming with Stable Diffusion"></a>Promptus: Can Prompts Streaming Replace Video Streaming with Stable Diffusion</h3><p>fine-tune the post-processing nerual networks for each video segmennt and send the fune-tuned nerual networks along with the video.<br>Neural network-based post-processing methods such as super-resolution<br>StreamDiffusion can generate images at a speed of 100FPS<br><strong>Video2seq</strong>模型和“Scaling up vision-language pre-training for image captioning.” 分别是video&#x2F;image captioning。<br>CLIP model converting discrete natural language p into a continuous text embedding c (an m ∗ n matrix)</p>
+<h3 id="StreamDiffusion-A-Pipeline-level-Solution-for-Real-time-Interactive-Generation"><a href="#StreamDiffusion-A-Pipeline-level-Solution-for-Real-time-Interactive-Generation" class="headerlink" title="StreamDiffusion: A Pipeline-level Solution for Real-time Interactive Generation"></a>StreamDiffusion: A Pipeline-level Solution for Real-time Interactive Generation</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Input Image Stream</span><br><span class="line">   ↓</span><br><span class="line">IO Queue  →  VAE Encoder</span><br><span class="line">                ↓</span><br><span class="line">         Stream Batch UNet  +  R-CFG</span><br><span class="line">                ↓</span><br><span class="line">            VAE Decoder</span><br><span class="line">   ↓</span><br><span class="line">Output Queue  →  Renderer</span><br></pre></td></tr></table></figure>
+<p>不等一帧完全denoise完，每来一帧就立刻进入pipeline，不同帧处在不同denoising step，把这些step拼成一个batch一次性送进unet</p>
+<p>SD是在cross-attention条件分布上训练的，而 CLIP 只是一个生成该分布的工具。<br>K, V ∈ R^{77 × 1024}<br>Q &#x3D; Wq · h<br>K &#x3D; Wk · c<br>V &#x3D; Wv · c</p>
+<p>Attention(Q, K, V)<br>计算过程如下：</p>
+<h4 id="1-1-Latent-特征（图像侧）"><a href="#1-1-Latent-特征（图像侧）" class="headerlink" title="1.1 Latent 特征（图像侧）"></a>1.1 Latent 特征（图像侧）</h4><ul>
+<li><p>扩散过程中某一层 UNet 的中间特征：</p>
+<p>h ∈ R^{B × C × H × W}</p>
+</li>
+<li><p>其中：</p>
 <ul>
-<li>按 $t&#x3D;1\dots T$（$T&#x3D;1000$）逐步加噪</li>
-<li>使干净的 $x_0$ 越来越像纯噪声</li>
+<li>B：batch size</li>
+<li>C：通道数（随 UNet 层变化，如 320 &#x2F; 640 &#x2F; 1280）</li>
+<li>H, W：latent 空间分辨率</li>
 </ul>
-<h3 id="Reverse（逐步去噪）"><a href="#Reverse（逐步去噪）" class="headerlink" title="Reverse（逐步去噪）"></a>Reverse（逐步去噪）</h3><p>模型预测噪声：</p>
-<p>$$\epsilon_\theta(x_t, t)$$</p>
-<p>反向采样：</p>
-<p>$$x_{t-1} &#x3D; f(x_t, \epsilon_\theta, t)$$</p>
-<p><strong>特点：</strong></p>
+</li>
+</ul>
+<h4 id="1-2-条件特征（文本-连续条件）"><a href="#1-2-条件特征（文本-连续条件）" class="headerlink" title="1.2 条件特征（文本 &#x2F; 连续条件）"></a>1.2 条件特征（文本 &#x2F; 连续条件）</h4><ul>
+<li><p>条件 embedding（来自 CLIP 或连续 prompt）：</p>
+<p>c ∈ R^{B × T × C_c}</p>
+</li>
+<li><p>其中：</p>
 <ul>
-<li>需要很多步（50–1000）</li>
-<li>可以带文本条件（cross-attention）</li>
+<li>T &#x3D; 77（token 数）</li>
+<li>C_c &#x3D; 1024（SD2.x &#x2F; SD-Turbo）</li>
+</ul>
+</li>
 </ul>
 <hr>
-<h2 id="2-CDDM-——-Channel-Denoising-Diffusion-Model"><a href="#2-CDDM-——-Channel-Denoising-Diffusion-Model" class="headerlink" title="2. CDDM —— Channel Denoising Diffusion Model"></a>2. CDDM —— Channel Denoising Diffusion Model</h2><p>CDDM 用于无线信道去噪，目标是回复语义特征x0</p>
-<h3 id="2-1-forward-类比信道噪声"><a href="#2-1-forward-类比信道噪声" class="headerlink" title="2.1 forward(类比信道噪声)"></a>2.1 forward(类比信道噪声)</h3><p>CDDM定义的forward加噪声：</p>
-<p>$x_t &#x3D; \sqrt{\bar{\alpha}_t}, x_0 + \sqrt{1 - \bar{\alpha}_t}, W_n \epsilon$<br>其中：</p>
-<p>$W_n$：由 Rayleigh fading + AWGN 构成<br>$\epsilon \sim \mathcal{N}(0,I)$<br>实际信道模型：<br>$y_r &#x3D; \frac{1}{1+\sigma^2}, W_s x + \frac{\sigma}{1+\sigma^2}, W_n \epsilon$</p>
-<p>关键区别：</p>
-<p>DDPM：数学加噪，多步<br>CDDM：真实信道噪声，一步即可覆盖所有衰落 + 噪声机制</p>
-<h3 id="2-2-Reverse"><a href="#2-2-Reverse" class="headerlink" title="2.2 Reverse"></a>2.2 Reverse</h3><p>初始化：<br>$x_m &#x3D; y_r$<br>每步计算：<br>$z &#x3D; W_n * \epsilon_\theta(x_t, h_r, t)$<br>更新：<br>$x_{t-1} &#x3D; \sqrt{\bar{\alpha}_{t-1}} \left( \frac{x_t - \sqrt{1 - \bar{\alpha}_t}, z}{\sqrt{\bar{\alpha}<em>t}} \right) + \sqrt{1 - \bar{\alpha}</em>{t-1}}, z$<br>特点：</p>
-<p>只需 $m\approx 5$–$20$ 步<br>包含信道增益 $h_r$ 的条件输入</p>
-<h3 id="2-3-Loss"><a href="#2-3-Loss" class="headerlink" title="2.3 Loss"></a>2.3 Loss</h3><p>$L_{\text{CDDM}}(\theta) &#x3D; \mathbb{E}<em>{x_0,\epsilon,h_r,t} \left[ | \epsilon - \epsilon</em>\theta(x_t, h_r, t) |^2 \right]$<br>和 DDPM 类似，但输入多了 $h_r$， forward 噪声来自真实信道。</p>
-<h2 id="3-Stable-Diffusion-Inpainting-——-Mask-作为-concat-条件"><a href="#3-Stable-Diffusion-Inpainting-——-Mask-作为-concat-条件" class="headerlink" title="3. Stable Diffusion Inpainting —— Mask 作为 concat 条件"></a>3. Stable Diffusion Inpainting —— Mask 作为 concat 条件</h2><p>UNet 输入是多个条件张量的拼接：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UNet_input = concat( x_t, mask, masked_image )</span><br></pre></td></tr></table></figure>
-
+<h4 id="2-Latent-展平（Flatten）"><a href="#2-Latent-展平（Flatten）" class="headerlink" title="2. Latent 展平（Flatten）"></a>2. Latent 展平（Flatten）</h4><p>将空间维度展平：</p>
+<ul>
+<li>h ∈ R^{B × C × H × W}</li>
+<li>reshape →</li>
+<li>h ∈ R^{B × (H·W) × C}</li>
+</ul>
+<hr>
+<h4 id="3-线性投影生成-Q-K-V"><a href="#3-线性投影生成-Q-K-V" class="headerlink" title="3. 线性投影生成 Q &#x2F; K &#x2F; V"></a>3. 线性投影生成 Q &#x2F; K &#x2F; V</h4><h4 id="3-1-投影权重"><a href="#3-1-投影权重" class="headerlink" title="3.1 投影权重"></a>3.1 投影权重</h4><ul>
+<li>W_q ∈ R^{C × d}</li>
+<li>W_k ∈ R^{C_c × d}</li>
+<li>W_v ∈ R^{C_c × d}</li>
+</ul>
+<p>其中：</p>
+<ul>
+<li>d &#x3D; head_dim</li>
+<li>多头注意力时：d &#x3D; embed_dim &#x2F; num_heads</li>
+</ul>
+<h4 id="3-2-线性变换"><a href="#3-2-线性变换" class="headerlink" title="3.2 线性变换"></a>3.2 线性变换</h4><ul>
+<li><p>Query（来自 latent）：</p>
+<p>Q &#x3D; h · W_q<br>Q ∈ R^{B × (H·W) × d}</p>
+</li>
+<li><p>Key（来自条件）：</p>
+<p>K &#x3D; c · W_k<br>K ∈ R^{B × T × d}</p>
+</li>
+<li><p>Value（来自条件）：</p>
+<p>V &#x3D; c · W_v<br>V ∈ R^{B × T × d}</p>
+</li>
+</ul>
+<hr>
+<h4 id="4-1-计算相似度矩阵"><a href="#4-1-计算相似度矩阵" class="headerlink" title="4.1 计算相似度矩阵"></a>4.1 计算相似度矩阵</h4><p>对每个 batch：</p>
+<ul>
+<li>Q ∈ R^{(H·W) × d}</li>
+<li>K ∈ R^{T × d}</li>
+</ul>
+<p>计算：</p>
+<ul>
+<li>S &#x3D; Q · Kᵀ &#x2F; √d</li>
+<li>S ∈ R^{(H·W) × T}</li>
+</ul>
+<p>语义含义：</p>
+<ul>
+<li>每一个空间位置（pixel &#x2F; latent token）</li>
+<li>对所有条件 token 的相关性</li>
+</ul>
+<hr>
+<p>在 token 维度上归一化：</p>
+<ul>
+<li>A &#x3D; softmax(S, dim &#x3D; -1)</li>
+<li>A ∈ R^{B × (H·W) × T}</li>
+</ul>
+<p>含义：</p>
+<ul>
+<li>对每个空间位置，所有 token 的权重和为 1</li>
+</ul>
+<hr>
+<h4 id="5-加权求和-Value"><a href="#5-加权求和-Value" class="headerlink" title="5. 加权求和 Value"></a>5. 加权求和 Value</h4><p>计算 attention 输出：</p>
+<ul>
+<li>out &#x3D; A · V</li>
+<li>out ∈ R^{B × (H·W) × d}</li>
+</ul>
+<p>含义：</p>
+<ul>
+<li>对每个空间位置</li>
+<li>按注意力权重，从条件中提取信息</li>
+</ul>
+<hr>
+<ul>
+<li>Q → [B × num_heads × (H·W) × d]</li>
+<li>K → [B × num_heads × T × d]</li>
+<li>V → [B × num_heads × T × d]</li>
+</ul>
+<p>每个 head 独立执行第 4–5 步。</p>
+<hr>
+<h4 id="6-2-合并-heads"><a href="#6-2-合并-heads" class="headerlink" title="6.2 合并 heads"></a>6.2 合并 heads</h4><ul>
+<li>concat(out_heads) → [B × (H·W) × (num_heads · d)]</li>
+<li>线性投影 →</li>
+<li>out ∈ R^{B × (H·W) × C}</li>
+</ul>
+<hr>
+<h4 id="7-1-恢复特征图形状"><a href="#7-1-恢复特征图形状" class="headerlink" title="7.1 恢复特征图形状"></a>7.1 恢复特征图形状</h4><ul>
+<li>out ∈ R^{B × (H·W) × C}</li>
+<li>reshape →</li>
+<li>out ∈ R^{B × C × H × W}</li>
+</ul>
+<h4 id="7-2-残差连接"><a href="#7-2-残差连接" class="headerlink" title="7.2 残差连接"></a>7.2 残差连接</h4><ul>
+<li>h_out &#x3D; h_in + out</li>
+</ul>
+<hr>
+<h4 id="8-关键总结"><a href="#8-关键总结" class="headerlink" title="8. 关键总结"></a>8. 关键总结</h4><ul>
+<li>Query 来自 <strong>图像 latent 特征</strong></li>
+<li>Key &#x2F; Value 来自 <strong>条件 embedding</strong></li>
+<li>UNet 对条件来源（CLIP &#x2F; 连续 prompt）不敏感</li>
+<li>只要 embedding 分布可用，cross-attention 即可正常工作</li>
+</ul>
+<hr>
+<p>这是传统SD的思想，promptus用只在训练低秩文本条件（U、V），模型权重全部冻结<br>c &#x3D; (U @ V &#x2F; sqrt(rank)).unsqueeze(0)<br>c &#x3D; {‘crossattn’: c}</p>
 <table>
 <thead>
 <tr>
-<th>名称</th>
+<th>张量</th>
+<th>形状</th>
 <th>含义</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>x_t</code></td>
-<td>当前带噪 latent</td>
+<td>U</td>
+<td>(77, r)</td>
+<td>token 维度</td>
 </tr>
 <tr>
-<td><code>mask</code></td>
-<td>1&#x3D;要修补，0&#x3D;保留</td>
+<td>V</td>
+<td>(r, 1024)</td>
+<td>cross-attention channel</td>
 </tr>
 <tr>
-<td><code>masked_image</code></td>
-<td>提供上下文内容</td>
+<td>U @ V</td>
+<td>(77, 1024)</td>
+<td>等价于 CLIP text embedding</td>
+</tr>
+<tr>
+<td>c[‘crossattn’]</td>
+<td>(1, 77, 1024)</td>
+<td>直接喂给 UNet</td>
 </tr>
 </tbody></table>
-<p>模型预测：<br>$\epsilon_\theta(x_t,; mask,; masked_image,; t)$<br>特点：</p>
-<p>仍然是 DDPM 的多步去噪<br>concat 是 Inpainting 的核心机制<br>用于修补图像，不是通信信道</p>
-<table>
+<h3 id="Akio-Kodaira-Chenfeng-Xu-Toshiki-Hazama-Takanori-Yoshimoto-Kohei-Ohno-Shogo-Mitsuhori-Soichi-Sug-ano-Hanying-Cho-Zhijian-Liu-and-Kurt-Keutzer-Streamdiffusion-A-pipeline-level-solution-for-real-time-interactive-generation-arXiv-preprint-arXiv-2312-12491-2023"><a href="#Akio-Kodaira-Chenfeng-Xu-Toshiki-Hazama-Takanori-Yoshimoto-Kohei-Ohno-Shogo-Mitsuhori-Soichi-Sug-ano-Hanying-Cho-Zhijian-Liu-and-Kurt-Keutzer-Streamdiffusion-A-pipeline-level-solution-for-real-time-interactive-generation-arXiv-preprint-arXiv-2312-12491-2023" class="headerlink" title="Akio Kodaira, Chenfeng Xu, Toshiki Hazama, Takanori Yoshimoto, Kohei Ohno, Shogo Mitsuhori, Soichi Sug- ano, Hanying Cho, Zhijian Liu, and Kurt Keutzer. Streamdiffusion: A pipeline-level solution for real-time interactive generation. arXiv preprint arXiv:2312.12491, 2023."></a>Akio Kodaira, Chenfeng Xu, Toshiki Hazama, Takanori Yoshimoto, Kohei Ohno, Shogo Mitsuhori, Soichi Sug- ano, Hanying Cho, Zhijian Liu, and Kurt Keutzer. Streamdiffusion: A pipeline-level solution for real-time interactive generation. arXiv preprint arXiv:2312.12491, 2023.</h3><h3 id="ELIC-Efficient-Learned-Image-Compression-with-Unevenly-Grouped-Space-Channel-Contextual-Adaptive-Coding"><a href="#ELIC-Efficient-Learned-Image-Compression-with-Unevenly-Grouped-Space-Channel-Contextual-Adaptive-Coding" class="headerlink" title="ELIC: Efficient Learned Image Compression with Unevenly Grouped Space-Channel Contextual Adaptive Coding"></a>ELIC: Efficient Learned Image Compression with Unevenly Grouped Space-Channel Contextual Adaptive Coding</h3><h3 id="taesd"><a href="#taesd" class="headerlink" title="taesd"></a>taesd</h3><p>TAESD is very tiny autoencoder which uses the same “latent API” as Stable Diffusion’s VAE. TAESD can decode Stable Diffusion’s latents into full-size images at zero cost.<br>SD VAE*	TAESD<br>Parameters in Encoder	34,163,592	1,222,532<br>Parameters in Decoder	49,490,179	1,222,531</p>
+<h3 id="Video-Compression-With-Rate-Distortion-Autoencoders"><a href="#Video-Compression-With-Rate-Distortion-Autoencoders" class="headerlink" title="Video Compression With Rate-Distortion Autoencoders"></a>Video Compression With Rate-Distortion Autoencoders</h3><p>PixelCNN 和 Hyperprior 都可以给出精准的p(z)<br>交叉熵：<br>$H(q,p) &#x3D; -\sum_{x}q(x)log p(x)$.<br>用错误或者近似的模型编码真实数据<br>H(q,p) &#x3D; H(q) + KL(q||p)<br>对于VAE模型</p>
+<ul>
+<li>后验（近似后验）<br>q(z|x) 来自VAE的编码器</li>
+<li>先验<br>p(z)来自code model（PixelCNN&#x2F;hyperprior）</li>
+</ul>
+<h1 id="对于hyperprior里p-z-（先验）通常不是N-0-I-所以闭式KL不再适用，而是直接用Rate交叉熵。-R≈E-−logp-y-​∣z-E-−logp-z-而不是：-mathrm-KL-left-mathcal-N-left-boldsymbol-mu-operatorname-diag-boldsymbol-sigma-2-right-middle-mathcal-N-mathbf-0-mathbf-I-right"><a href="#对于hyperprior里p-z-（先验）通常不是N-0-I-所以闭式KL不再适用，而是直接用Rate交叉熵。-R≈E-−logp-y-​∣z-E-−logp-z-而不是：-mathrm-KL-left-mathcal-N-left-boldsymbol-mu-operatorname-diag-boldsymbol-sigma-2-right-middle-mathcal-N-mathbf-0-mathbf-I-right" class="headerlink" title="对于hyperprior里p(z)（先验）通常不是N(0,I),所以闭式KL不再适用，而是直接用Rate交叉熵。$R≈E[−logp(y^​∣z^)]+E[−logp(z^)]$. 而不是：$$\mathrm{KL}!\left(\mathcal{N}!\left(\boldsymbol{\mu}, \operatorname{diag}(\boldsymbol{\sigma}^2)\right);\middle|;\mathcal{N}(\mathbf{0}, \mathbf{I})\right)"></a>对于hyperprior里p(z)（先验）通常不是N(0,I),所以闭式KL不再适用，而是直接用Rate交叉熵。$R≈E[−logp(y^​∣z^)]+E[−logp(z^)]$. 而不是：<br>$$<br>\mathrm{KL}!\left(<br>\mathcal{N}!\left(\boldsymbol{\mu}, \operatorname{diag}(\boldsymbol{\sigma}^2)\right)<br>;\middle|;<br>\mathcal{N}(\mathbf{0}, \mathbf{I})<br>\right)</h1><h2 id="frac-1-2-sum-j-1-d-left-mu-j-2-sigma-j-2"><a href="#frac-1-2-sum-j-1-d-left-mu-j-2-sigma-j-2" class="headerlink" title="\frac{1}{2}\sum_{j&#x3D;1}^{d}\left(\mu_j^2+\sigma_j^2"></a>\frac{1}{2}<br>\sum_{j&#x3D;1}^{d}<br>\left(<br>\mu_j^2<br>+<br>\sigma_j^2</h2><h2 id="log-sigma-j-2"><a href="#log-sigma-j-2" class="headerlink" title="\log \sigma_j^2"></a>\log \sigma_j^2</h2><p>1<br>\right).<br>$$</p>
+<p>对真实分布取期望：<br>$Eq​[B]​&#x3D;Eq​[−log2​p(y<del>​,z</del>)]&#x3D;H(q)+KL(q(y<del>​,z</del>)∥p(y<del>​,z</del>))​$.<br>训练时直接最小化交叉熵就等价于最小化 KL<br>$min​Eq​[−logp]⟺min​KL(q∥p)$</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/28/12-28/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/12/28/12-28/" class="post-title-link" itemprop="url">12-28</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-12-28 01:29:08 / Modified: 01:39:09" itemprop="dateCreated datePublished" datetime="2025-12-28T01:29:08+08:00">2025-12-28</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <p>所有snr的<br>awgn错误生成10个左右</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/21/12-21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/12/21/12-21/" class="post-title-link" itemprop="url">12-21</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-12-21 12:35:56" itemprop="dateCreated datePublished" datetime="2025-12-21T12:35:56+08:00">2025-12-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-12-27 20:24:51" itemprop="dateModified" datetime="2025-12-27T20:24:51+08:00">2025-12-27</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="steps"><a href="#steps" class="headerlink" title="steps"></a>steps</h2><h3 id="step1"><a href="#step1" class="headerlink" title="step1"></a>step1</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python <span class="string">&quot;/Huang_group/zyyz/Projects/Yolo13/yolov13-main/map4_to_jpg.py&quot;</span>  <span class="string">&quot;/Huang_group/zyyz/Projects/Wireless-Channel/simulation/ori_video/ori_2x_2_en_ori/0/eb157ff9-d7b3-45a8-bd57-c2b0871183f9/1920x1056_ori.mp4&quot;</span>  -o <span class="string">&quot;/Huang_group/zyyz/Projects/Wireless-Channel/simulation/test_1221/eb157ff9-d7b3-45a8-bd57-c2b0871183f9/jpg&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="step2"><a href="#step2" class="headerlink" title="step2"></a>step2</h3><p>python &#x2F;Huang_group&#x2F;zyyz&#x2F;Projects&#x2F;Yolo13&#x2F;yolov13-main&#x2F;FrameToGoPs.py</p>
+<h3 id="step3"><a href="#step3" class="headerlink" title="step3"></a>step3</h3><p>.&#x2F;main.sh</p>
+<h3 id="step4"><a href="#step4" class="headerlink" title="step4"></a>step4</h3><p>python &#x2F;Huang_group&#x2F;zyyz&#x2F;tianyi&#x2F;new_cosmos&#x2F;export_token_map.py</p>
+<h3 id="step5"><a href="#step5" class="headerlink" title="step5"></a>step5</h3><p>python &#x2F;Huang_group&#x2F;zyyz&#x2F;tianyi&#x2F;new_cosmos&#x2F;mask_tile_1217_hcy_E.py</p>
+<h3 id="step6"><a href="#step6" class="headerlink" title="step6"></a>step6</h3><p>.&#x2F;Huang_group&#x2F;zyyz&#x2F;Projects&#x2F;Wireless-Channel&#x2F;ZYYZ_power&#x2F;run_all_gops.sh</p>
+<h3 id="step7"><a href="#step7" class="headerlink" title="step7"></a>step7</h3><p> python .&#x2F;mask_tile_1210_hcy_decode.py –config &#x2F;Huang_group&#x2F;zyyz&#x2F;tianyi&#x2F;new_cosmos&#x2F;test_config&#x2F;cosmos_2x_ori_en.yaml</p>
+<h2 id="H264-H265"><a href="#H264-H265" class="headerlink" title="H264 H265"></a>H264 H265</h2><h3 id="视频生成"><a href="#视频生成" class="headerlink" title="视频生成"></a>视频生成</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 475kbps</span></span><br><span class="line">python compress_and_upscale.py     --out /Huang_group/zyyz/Projects/Wireless-Channel/simulation/encoded_videos_kbps_475   --input test_1221  --bitrate 415 --batch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 450kbps</span></span><br><span class="line">python compress_and_upscale.py     --out /Huang_group/zyyz/Projects/Wireless-Channel/simulation/encoded_videos_kbps_450   --input test_1221  --bitrate 390 --batch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 425kbps</span></span><br><span class="line">python compress_and_upscale.py     --out /Huang_group/zyyz/Projects/Wireless-Channel/simulation/encoded_videos_kbps_425   --input test_1221  --bitrate 370  --batch</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 400kbps</span></span><br><span class="line">python compress_and_upscale.py     --out /Huang_group/zyyz/Projects/Wireless-Channel/simulation/encoded_videos_kbps_400   --input test_1221  --bitrate 340  --batch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 375kbps</span></span><br><span class="line">python compress_and_upscale.py     --out /Huang_group/zyyz/Projects/Wireless-Channel/simulation/encoded_videos_kbps_375   --input test_1221  --bitrate 315  --batch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 350kbps</span></span><br><span class="line">python compress_and_upscale.py     --out /Huang_group/zyyz/Projects/Wireless-Channel/simulation/encoded_videos_kbps_350   --input test_1221  --bitrate 290  --batch</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="加噪"><a href="#加噪" class="headerlink" title="加噪"></a>加噪</h3><h4 id="265"><a href="#265" class="headerlink" title="265"></a>265</h4><ul>
+<li><p>单一视频<br>python &#x2F;Huang_group&#x2F;zyyz&#x2F;Projects&#x2F;Wireless-Channel&#x2F;VVC_encoder_202512242304_BER_H265.py <br>–input &#x2F;Huang_group&#x2F;zyyz&#x2F;Projects&#x2F;Wireless-Channel&#x2F;simulation&#x2F;encoded_videos_kbps_425&#x2F;b4988fb8-bcdb-4b80-adee-0cdccfa8470d&#x2F;h265&#x2F;b4988fb8-bcdb-4b80-adee-0cdccfa8470d_1920x1056_h265_bicubic_413k.mp4 <br>–output &#x2F;Huang_group&#x2F;zyyz&#x2F;Projects&#x2F;Wireless-Channel&#x2F;simulation&#x2F;encoded_videos_kbps_425_ber0.05_1224&#x2F;0efe4907-c085-4ea5-9c70-c7bad0bb5493&#x2F;snr0.mp4 <br>–error_rate 0.01</p>
+</li>
+<li><p>batch<br>python &#x2F;Huang_group&#x2F;zyyz&#x2F;Projects&#x2F;Wireless-Channel&#x2F;VVC_encoder_202512242304_BER_H265.py</p>
+</li>
+</ul>
+<h4 id="264"><a href="#264" class="headerlink" title="264"></a>264</h4><ul>
+<li>单一视频</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python /Huang_group/zyyz/Projects/Wireless-Channel/VVC_encoder_202512242243_BER_H264.py \</span><br><span class="line">  --input /Huang_group/zyyz/Projects/Wireless-Channel/simulation/encoded_videos_kbps_425/4b9ad4dd-d069-4e13-928b-3505124e1bba/h264/4b9ad4dd-d069-4e13-928b-3505124e1bba_1920x1056_h264_bicubic_430k.mp4 \</span><br><span class="line">  --output /Huang_group/zyyz/Projects/Wireless-Channel/simulation/encoded_videos_kbps_425_ber0.05_1224/0efe4907-c085-4ea5-9c70-c7bad0bb5493/snr-4.mp4 \</span><br><span class="line">  --error_rate 0.05 \</span><br><span class="line">  --slices 1000</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>batch</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python /Huang_group/zyyz/Projects/Wireless-Channel/VVC_encoder_202512242243_BER_H264.py</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>&#x2F;Users&#x2F;hechenyi&#x2F;Desktop&#x2F;视频&#x2F;test_1225&#x2F;Results</p>
+<h3 id="视频集"><a href="#视频集" class="headerlink" title="视频集"></a>视频集</h3><ul>
+<li>指标 vs snr<br>&#x2F;Users&#x2F;hechenyi&#x2F;Desktop&#x2F;vmaf&#x2F;python&#x2F;vmaf&#x2F;test_1225</li>
+<li>指标 vs bandwidh<br>&#x2F;Users&#x2F;hechenyi&#x2F;Desktop&#x2F;vmaf&#x2F;python&#x2F;vmaf&#x2F;test_1225</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/21/12-20/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/12/21/12-20/" class="post-title-link" itemprop="url">12-20</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-12-21 01:47:42 / Modified: 01:52:03" itemprop="dateCreated datePublished" datetime="2025-12-21T01:47:42+08:00">2025-12-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><h3 id="“Latent-Diffusion-Model-Based-Denoising-Receiver-for-6G-Semantic-Communication-From-Stochastic-Differential-Theory-to-Application”"><a href="#“Latent-Diffusion-Model-Based-Denoising-Receiver-for-6G-Semantic-Communication-From-Stochastic-Differential-Theory-to-Application”" class="headerlink" title="“Latent Diffusion Model Based Denoising Receiver for 6G Semantic Communication: From Stochastic Differential Theory to Application”"></a>“Latent Diffusion Model Based Denoising Receiver for 6G Semantic Communication: From Stochastic Differential Theory to Application”</h3><ul>
+<li>信道输出：<br>y &#x3D; z + n</li>
+<li>经过scaling 与 SNR-t 映射<br>$x_t​ &#x3D; αy$</li>
+<li>然后<br>$ \hat z &#x3D; reverse(x_t​,t)$</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/19/12-19/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/12/19/12-19/" class="post-title-link" itemprop="url">12-19</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-12-19 14:23:12 / Modified: 14:36:46" itemprop="dateCreated datePublished" datetime="2025-12-19T14:23:12+08:00">2025-12-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="data-sheet"><a href="#data-sheet" class="headerlink" title="data sheet"></a>data sheet</h2><table>
 <thead>
 <tr>
-<th>项目</th>
-<th>DDPM</th>
-<th>Inpainting（concat）</th>
-<th>CDDM</th>
+<th>参数</th>
+<th>符号</th>
+<th>取值</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>Forward</strong></td>
-<td>多步高斯噪声</td>
-<td>多步高斯噪声</td>
-<td>Rayleigh + AWGN 信道噪声</td>
+<td>信息比特数</td>
+<td>(K)</td>
+<td><strong>256 bit</strong></td>
+<td>每个 packet &#x2F; codeword 含 4×4 个 token，每个 16 bit</td>
 </tr>
 <tr>
-<td><strong>Reverse</strong></td>
-<td>50–1000 步</td>
-<td>50–1000 步</td>
-<td>$m$ 步（5–20）</td>
+<td>码长</td>
+<td>(D)</td>
+<td><strong>512 bit</strong></td>
+<td>每个 codeword 的编码后比特数</td>
 </tr>
 <tr>
-<td><strong>条件</strong></td>
-<td>文本</td>
-<td>文本 + mask + context</td>
-<td>信道增益 $h_r$</td>
+<td>码率</td>
+<td>($R_c$)</td>
+<td><strong>0.5</strong></td>
+<td>(R_c &#x3D; K&#x2F;D &#x3D; 256&#x2F;512)</td>
 </tr>
 <tr>
-<td><strong>输入</strong></td>
-<td>$x_t$</td>
-<td><code>concat([...])</code></td>
-<td>$x_t, h_r$</td>
+<td>调制阶数</td>
+<td>(M)</td>
+<td><strong>2（BPSK）</strong></td>
+<td>每个符号 2 bit</td>
 </tr>
 <tr>
-<td><strong>输出</strong></td>
-<td>图像</td>
-<td>修补图像</td>
-<td>语义特征（feature）</td>
+<td>每符号比特</td>
+<td>($\log_2 M$)</td>
+<td><strong>1 bit&#x2F;symbol</strong></td>
+<td>QPSK</td>
 </tr>
 <tr>
-<td><strong>任务</strong></td>
-<td>生成</td>
-<td>inpainting</td>
-<td>信道去噪</td>
+<td>资源块带宽</td>
+<td>($f_s$)</td>
+<td><strong>20 khz</strong></td>
+<td>每个子载波每秒 1 万个符号</td>
+</tr>
+<tr>
+<td>资源块数</td>
+<td>(B)</td>
+<td><strong>30</strong></td>
+<td>并行 30 条子载波</td>
+</tr>
+<tr>
+<td>总吞吐率</td>
+<td>($R_{\text{ch}}$)</td>
+<td><strong>300 kbps</strong></td>
+<td>由上面参数共同决定</td>
 </tr>
 </tbody></table>
 
@@ -384,7 +782,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/08/12-8/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/18/12-18/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -398,70 +796,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/12/08/12-8/" class="post-title-link" itemprop="url">12-8</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-12-08 13:18:26 / Modified: 14:41:04" itemprop="dateCreated datePublished" datetime="2025-12-08T13:18:26+08:00">2025-12-08</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="Reading"><a href="#Reading" class="headerlink" title="Reading"></a>Reading</h2><p>J. Song, C. Meng, and S. Ermon, “Denoising diffusion implicit models,” 2022. [Online]. Available: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2010.02502">https://arxiv.org/abs/2010.02502</a></p>
-<p>Denoising Vision Transformer Autoencoder with Spectral Self-Regularization</p>
-<h2 id="Conv-based-And-ViT-based-Tokenizer-Autoencoder"><a href="#Conv-based-And-ViT-based-Tokenizer-Autoencoder" class="headerlink" title="Conv-based And ViT-based Tokenizer&#x2F;Autoencoder"></a>Conv-based And ViT-based Tokenizer&#x2F;Autoencoder</h2><h3 id="Conv-based-Auoencoder"><a href="#Conv-based-Auoencoder" class="headerlink" title="Conv-based Auoencoder"></a>Conv-based Auoencoder</h3><p>DC-AE VQVAE MaskGIT MaskBit VAVAE SD-VAE SDXL-VAE GaussToken EQVAE</p>
-<h3 id="ViT-based-Tokenizer"><a href="#ViT-based-Tokenizer" class="headerlink" title="ViT-based Tokenizer"></a>ViT-based Tokenizer</h3><p>SoftVQ TiTok-B64 TiTok-S128 MAETok One-D-Piece FlexTok TexTok HieraTok</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/08/day12-8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/12/08/day12-8/" class="post-title-link" itemprop="url">day12-8</a>
+            <a href="/2025/12/18/12-18/" class="post-title-link" itemprop="url">12-18</a>
         </h2>
 
         <div class="post-meta">
@@ -471,14 +806,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2025-12-08 13:18:08" itemprop="dateCreated datePublished" datetime="2025-12-08T13:18:08+08:00">2025-12-08</time>
+              <time title="Created: 2025-12-18 17:03:30" itemprop="dateCreated datePublished" datetime="2025-12-18T17:03:30+08:00">2025-12-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-12-13 01:23:19" itemprop="dateModified" datetime="2025-12-13T01:23:19+08:00">2025-12-13</time>
+                <time title="Modified: 2025-12-29 23:21:43" itemprop="dateModified" datetime="2025-12-29T23:21:43+08:00">2025-12-29</time>
               </span>
 
           
@@ -493,7 +828,19 @@
 
       
       
-          
+          <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><h3 id="”DEEP-COMPRESSION-AUTOENCODER-FOR-EFFICIENT-HIGH-RESOLUTION-DIFFUSION-MODELS“"><a href="#”DEEP-COMPRESSION-AUTOENCODER-FOR-EFFICIENT-HIGH-RESOLUTION-DIFFUSION-MODELS“" class="headerlink" title="”DEEP COMPRESSION AUTOENCODER FOR EFFICIENT HIGH-RESOLUTION DIFFUSION MODELS“"></a>”DEEP COMPRESSION AUTOENCODER FOR EFFICIENT HIGH-RESOLUTION DIFFUSION MODELS“</h3><p>首次引入了DC-AE。<br>降低HW来减少token数目</p>
+<h3 id="Adversarial-Diffusion-Distillation"><a href="#Adversarial-Diffusion-Distillation" class="headerlink" title="Adversarial Diffusion Distillation"></a>Adversarial Diffusion Distillation</h3><p>扩散模型（Diffusion Models, DMs）在文本生成图像任务中具有极高的生成质量和语义一致性，但其推理过程需要几十步迭代采样，难以满足实时生成需求；<br>而 GAN 具有单步生成、速度快的优势，却在高分辨率、复杂文本条件下的图像质量与稳定性方面明显落后于扩散模型。<br>ADD 的学生模型本身仍采用 U-Net 扩散模型结构，因此：</p>
+<ul>
+<li><p>可单步生成（类似 GAN）</p>
+</li>
+<li><p>也支持多步迭代精修（扩散模型特性）</p>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://huggingface.co/stabilityai/sd-turbo">https://huggingface.co/stabilityai/sd-turbo</a><br>SD-turbo is a distilled version of stable diffusion 2.1, trained for real-time synthesis. It uses score distillation to leverage large-scale off-the-shelf image diffusion models as a teacher signal and combines this with an adversarial loss to ensure high image fidelity even in the low-step regime of one or two sampling steps.</p>
+<h3 id="Open-Sora-2-0-Training-a-Commercial-Level-Video-Generation-Model-in-200k"><a href="#Open-Sora-2-0-Training-a-Commercial-Level-Video-Generation-Model-in-200k" class="headerlink" title="Open-Sora 2.0: Training a Commercial-Level Video Generation Model in $200k"></a>Open-Sora 2.0: Training a Commercial-Level Video Generation Model in $200k</h3><p>用DC-AE实现了视频编码器</p>
+<h3 id="StableCodec-Taming-One-Step-Diffusion-for-Extreme-Image-Compression"><a href="#StableCodec-Taming-One-Step-Diffusion-for-Extreme-Image-Compression" class="headerlink" title="StableCodec: Taming One-Step Diffusion for Extreme Image Compression"></a>StableCodec: Taming One-Step Diffusion for Extreme Image Compression</h3><p>将SD-Turbo成功引入图像压缩。<br>讲latent进一步下采样到64x &#x2F; 256x<br>结合深层变换网络 + 自回归熵模型<br>引入一个以率失真优化为目标的高码率编码器（来自 ELIC）用来补充SD-VAE中缺失的像素级结构信息</p>
+<h3 id="D-B-Kurka-and-D-G-̈-und-̈-uz-“Deepjscc-f-Deep-joint-source-channel-coding-of-images-with-feedback-”-IEEE-J-Sel-Areas-Inf-Theory-vol-1-no-1-pp-178–193-Apr-2020"><a href="#D-B-Kurka-and-D-G-̈-und-̈-uz-“Deepjscc-f-Deep-joint-source-channel-coding-of-images-with-feedback-”-IEEE-J-Sel-Areas-Inf-Theory-vol-1-no-1-pp-178–193-Apr-2020" class="headerlink" title="D. B. Kurka and D. G ̈ und  ̈ uz, “Deepjscc-f: Deep joint source-channel coding of images with feedback,” IEEE J. Sel. Areas Inf. Theory, vol. 1, no. 1, pp. 178–193, Apr. 2020."></a>D. B. Kurka and D. G ̈ und  ̈ uz, “Deepjscc-f: Deep joint source-channel coding of images with feedback,” IEEE J. Sel. Areas Inf. Theory, vol. 1, no. 1, pp. 178–193, Apr. 2020.</h3><p>可以作为DeepJSCC的baseline</p>
+
       
     </div>
 
@@ -512,7 +859,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/07/diffusion/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/17/12-17/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -526,7 +873,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/12/07/diffusion/" class="post-title-link" itemprop="url">diffusion</a>
+            <a href="/2025/12/17/12-17/" class="post-title-link" itemprop="url">12-17</a>
         </h2>
 
         <div class="post-meta">
@@ -537,7 +884,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-12-07 00:50:48 / Modified: 01:00:37" itemprop="dateCreated datePublished" datetime="2025-12-07T00:50:48+08:00">2025-12-07</time>
+              <time title="Created: 2025-12-17 11:05:58 / Modified: 20:57:01" itemprop="dateCreated datePublished" datetime="2025-12-17T11:05:58+08:00">2025-12-17</time>
             </span>
 
           
@@ -552,81 +899,37 @@
 
       
       
-          <h1 id="Diffusion-based-Denoising-Feature-Imputing-Semantic-Communication"><a href="#Diffusion-based-Denoising-Feature-Imputing-Semantic-Communication" class="headerlink" title="Diffusion-based Denoising &amp; Feature Imputing (Semantic Communication)"></a>Diffusion-based Denoising &amp; Feature Imputing (Semantic Communication)</h1><p>本 README 用于理解 diffusion 在语义通信&#x2F;抗噪中的 denoising 原理，包括 forward &#x2F; reverse、训练 &#x2F; 推理、UNet 输入、mask、噪声差异等内容。</p>
-<hr>
-<h2 id="1-Core-Idea"><a href="#1-Core-Idea" class="headerlink" title="1. Core Idea"></a>1. Core Idea</h2><p>训练：学习从噪声恢复语义 latent<br>推理：对 corrupted latent 执行 conditional reverse denoising</p>
-<p>一句话：<br>Train with synthetic noise; infer on corrupted latent.</p>
-<hr>
-<h2 id="2-Forward-diffusion-training"><a href="#2-Forward-diffusion-training" class="headerlink" title="2. Forward diffusion (training)"></a>2. Forward diffusion (training)</h2><p>对完整 latent y0 加噪，得到 y_t：</p>
-<p>$y_t &#x3D; sqrt(alpha_t) * y0 + sqrt(1 - alpha_t) * eps_t$</p>
-<p>其中 eps_t ~ N(0, I)</p>
-<p>随着 t 增大，噪声增加，最终：</p>
-<p>y_T ~ N(0, I)</p>
-<p>目的：</p>
+          <h2 id="联通-ViVo"><a href="#联通-ViVo" class="headerlink" title="联通 ViVo"></a>联通 ViVo</h2><p>端-边-云 三层智能体协同架构<br>实现用户实时网络需求感知、网络资源动态调度</p>
+<h3 id="终端智能体（User-Intent-Agent）：手机终端"><a href="#终端智能体（User-Intent-Agent）：手机终端" class="headerlink" title="终端智能体（User Intent Agent）：手机终端"></a>终端智能体（User Intent Agent）：手机终端</h3><p>功能： 不仅是识别APP，而是识别“任务上下文”。<br>关键细节：以游戏场景为例，识别当前是高交互游戏场景（如MOBA团战）还是弱交互场景（如挂机）。识别设备物理状态（电池&lt;10%，机身温度&gt;40℃），决定是否发起“计算卸载”请求。<br>模型部署：<br>运行small model（如MobileBert剪枝版）。负责将复杂的屏幕内容和用户操作，瞬间“转译”为网络能听懂的结构化需求（如 QCI&#x2F;5QI 等级请求）。</p>
+<h3 id="网侧边缘智能体-Edge-RAN-Agent-：基站"><a href="#网侧边缘智能体-Edge-RAN-Agent-：基站" class="headerlink" title="网侧边缘智能体 (Edge RAN Agent) ：基站"></a>网侧边缘智能体 (Edge RAN Agent) ：基站</h3><p>功能： 在基站侧实现快速网络资源调配。<br>关键细节： 部署于 BBU&#x2F;DU (基带处理单元)，实时监控 RB (资源块) 利用率和空口干扰，实时判断基站当前的资源紧张程度、是否有弱覆盖、是否出现突发拥塞。当终端发起高优请求时，它能立即执行抢占式调度或双连接 (DC) 激活，无需回传核心网，时延控制在 10ms 以内。<br>模型部署：<br>运行 Small Model 。实时判断基站当前的资源紧张程度、是否有弱覆盖、是否出现突发拥塞、边缘算力是否足够，以实时响应用户需求。</p>
+<h3 id="云端智能体-Global-Policy-Agent-：核心网"><a href="#云端智能体-Global-Policy-Agent-：核心网" class="headerlink" title="云端智能体 (Global Policy Agent)：核心网"></a>云端智能体 (Global Policy Agent)：核心网</h3><p>功能： 跨域网络调度编排与规则仲裁。<br>关键细节： 处理跨小区移动性管理（如预测用户行进路线，提前通知下一个基站预留资源）。处理公平性策略，防止单个高优用户挤占过多公共资源</p>
+<p>运行 Large Model (垂直行业大模型)。负责复杂故障的根因分析 (RCA) 和长期策略优化。</p>
+<h3 id="Agent"><a href="#Agent" class="headerlink" title="Agent"></a>Agent</h3><p>“外挂软件”运行机制 ：感知 -&gt; 决策 -&gt; 执行</p>
 <ul>
-<li>构造 noisy latent</li>
-<li>训练噪声预测器（UNet）</li>
+<li>感知输入: 智能体通过 MR流数据&#x2F;DPI&#x2F;网管PM指标 实时“旁路监听”网络状态。</li>
+<li>智能决策: 部署于联通MEC&#x2F;中台，基于强化学习模型，结合终端意图进行策略计算。</li>
+<li>参数注入 : 不修改基站代码，而是通过 MML指令&#x2F;北向API 动态下发配置参数。</li>
 </ul>
-<p>特点：</p>
+<p>关键参数与控制能力 (核心：把参数作为Agent的“执行动作”)</p>
 <ul>
-<li>forward 只在训练执行</li>
-<li>不使用 mask</li>
-<li>不使用 corrupted latent y_hat</li>
+<li><p>移动性参数 —— 切换<br>核心参数： CIO (小区个体偏移), A3 Offset, TTT (触发时间)。<br>Agent动作： “诱导”切换。<br>作用机制： 当Agent预测到前方拥塞或弱覆盖时，动态调大邻区CIO，欺骗基站算法，强制终端提前或延后切换。<br>解决痛点： 解决高铁&#x2F;高速场景下的“切换不及时”导致的掉话。</p>
+</li>
+<li><p>QoS&#x2F;调度参数—— 优先<br>核心参数： 5QI (QoS等级), ARP (保留优先级), AMBR (最大比特率)。<br>Agent动作： 动态优先级提升。<br>作用机制： 当识别到VIP用户或其他关键任务时，通过核心网PCF接口临时修改专承载参数，让基站调度器优先分配RB资源。<br>解决痛点： 解决重载场景下关键业务卡顿</p>
+</li>
+<li><p>覆盖&#x2F;干扰参数—— 信号形状<br>核心参数： Antenna Tilt (电子下倾角), Beam Pattern ID (波束场景ID)。<br>Agent动作： 场景化波束重构。<br>作用机制： 针对特定时间段（如演唱会），调用预设波束权值模板。<br>解决痛点： 解决低空干扰大或地面覆盖盲区问题。</p>
+</li>
 </ul>
-<hr>
-<h2 id="3-Reverse-diffusion-inference"><a href="#3-Reverse-diffusion-inference" class="headerlink" title="3. Reverse diffusion (inference)"></a>3. Reverse diffusion (inference)</h2><p>推理阶段执行逐步去噪：</p>
-<p>eps_hat &#x3D; UNet(y_tilde_t, t, y_hat, M)</p>
-<p>更新：<br>y_tilde_{t-1} &#x3D; reverse_update(y_tilde_t, eps_hat)</p>
-<p>最终输出恢复后的 y_tilde_0</p>
-<p>特点：</p>
+<h3 id="To-do"><a href="#To-do" class="headerlink" title="To do"></a>To do</h3><h4 id="诊断agent"><a href="#诊断agent" class="headerlink" title="诊断agent"></a>诊断agent</h4><p>在端侧或网络侧执行执行问题识别，即负责发现终端、网络侧问题。</p>
 <ul>
-<li>reverse 只在推理执行</li>
-<li>包含 conditional 信息（y_hat 和 mask M）</li>
+<li>Ph1 “诊断agent”以“场景识别” 为主， 但“场景识别” 不局限在“高速移动场景”，覆盖进入电梯、地库、人口密集场所的识别，为后期场景扩展做好准备。</li>
+<li>Ph2 “诊断agent” 可深入到性能层面问题的识别和发现（需要大模型理解通信和协议的能力） 。</li>
 </ul>
-<hr>
-<h2 id="4-UNet-inputs"><a href="#4-UNet-inputs" class="headerlink" title="4. UNet inputs"></a>4. UNet inputs</h2><p>Training:<br>UNet(y_t, t)</p>
-<p>Inference:<br>UNet(y_tilde_t, t, y_hat, M)</p>
-<p>说明：<br>y_tilde_t &#x3D; 当前 noisy latent (推理)<br>y_hat     &#x3D; 破损 latent（信道输出）<br>M         &#x3D; mask，表示哪些位置缺失<br>t         &#x3D; diffusion timestep</p>
-<hr>
-<h2 id="5-Mask-M"><a href="#5-Mask-M" class="headerlink" title="5. Mask M"></a>5. Mask M</h2><p>M 用于指示哪些 latent 位置丢失需要补全：</p>
-<p>M &#x3D; 1 表示该位置需要生成<br>M &#x3D; 0 表示该位置保持接收端值</p>
-<p>通常做 dilation 得到 perceptive mask，使恢复区域更平滑。</p>
-<hr>
-<h2 id="6-Forward-noise-Channel-noise"><a href="#6-Forward-noise-Channel-noise" class="headerlink" title="6. Forward noise !&#x3D; Channel noise"></a>6. Forward noise !&#x3D; Channel noise</h2><p>forward噪声（人为添加）与信道噪声（真实丢包&#x2F;衰落）无关。</p>
-<p>Diffusion 学习的是语义恢复能力，而不是匹配具体噪声分布。</p>
-<hr>
-<h2 id="7-Initialization-during-inference"><a href="#7-Initialization-during-inference" class="headerlink" title="7. Initialization during inference"></a>7. Initialization during inference</h2><p>推理起点不是随机噪声，而是 corrupted latent：</p>
-<p>y_tilde_T &#x3D; y_hat</p>
-<hr>
-<h2 id="8-Loss-per-timestep"><a href="#8-Loss-per-timestep" class="headerlink" title="8. Loss per timestep?"></a>8. Loss per timestep?</h2><p>训练时不需要对所有 t 计算 loss，只随机采样一个 t：</p>
-<p>loss &#x3D; || eps - eps_theta ||^2</p>
-<p>这是 DDPM &#x2F; DDIM 的标准训练方式。</p>
-<hr>
-<h2 id="9-Training-pseudocode"><a href="#9-Training-pseudocode" class="headerlink" title="9. Training pseudocode"></a>9. Training pseudocode</h2><p>for each sample:<br>    y0 &#x3D; encoder(x)<br>    sample t<br>    y_t &#x3D; sqrt(alpha_t)*y0 + sqrt(1-alpha_t)*eps<br>    eps_hat &#x3D; UNet(y_t, t)<br>    loss &#x3D; ||eps - eps_hat||^2<br>    optimizer.step()</p>
-<hr>
-<h2 id="10-Inference-pseudocode"><a href="#10-Inference-pseudocode" class="headerlink" title="10. Inference pseudocode"></a>10. Inference pseudocode</h2><p>y_tilde_T &#x3D; y_hat<br>for t &#x3D; T … 1:<br>    eps_hat &#x3D; UNet(y_tilde_t, t, y_hat, M)<br>    y_tilde_{t-1} &#x3D; reverse_update(y_tilde_t, eps_hat)</p>
-<p>output &#x3D; y_tilde_0</p>
-<hr>
-<h2 id="11-Key-understanding"><a href="#11-Key-understanding" class="headerlink" title="11. Key understanding"></a>11. Key understanding</h2><ul>
-<li>forward &#x3D; synthetic corruption (training only)</li>
-<li>reverse &#x3D; actual recovery (inference only)</li>
-<li>UNet learns denoising</li>
-<li>mask guides inpainting</li>
-<li>inference uses corrupted latent as start</li>
-</ul>
-<hr>
-<h2 id="12-One-sentence-summary"><a href="#12-One-sentence-summary" class="headerlink" title="12. One-sentence summary"></a>12. One-sentence summary</h2><p>Diffusion learns semantic restoration from noisy latent during training and performs conditional reverse denoising on corrupted latent with masks during inference.</p>
-<hr>
-<h2 id="13-Misconceptions"><a href="#13-Misconceptions" class="headerlink" title="13. Misconceptions"></a>13. Misconceptions</h2><p>误区：训练噪声等于信道噪声 → 错<br>误区：推理从高斯开始      → 错<br>误区：reverse 在训练执行  → 错<br>误区：每个 t 都计算 loss  → 错  </p>
-<p>真相：</p>
+<h4 id="执行agent："><a href="#执行agent：" class="headerlink" title="执行agent："></a>执行agent：</h4><p>基于端侧或网络侧诊断agent输出结果，执行优化动作。</p>
 <ul>
-<li>forward only for training</li>
-<li>reverse only for inference</li>
-<li>sample one timestep per update</li>
+<li>Ph1：简化执行agent难度，执行基于特定问题的特定优化动作。</li>
+<li>Ph2：提升“执行Agent”能力，实现更多样化、自主的优化策略（需要大模型理解通信和协议的能力）。<br>执行agent可分别部署在端侧和网络侧，也可以只部署在网络侧；</li>
 </ul>
-<hr>
-<h2 id="keywords"><a href="#keywords" class="headerlink" title="keywords"></a>keywords</h2><p>diffusion denoising, semantic communication, conditional diffusion,<br>feature imputing, inpainting, corrupted latent, mask, UNet, forward, reverse</p>
-
+<h2 id="simulation"><a href="#simulation" class="headerlink" title="simulation"></a>simulation</h2>
       
     </div>
 
@@ -645,7 +948,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/02/12-2/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/16/12-16/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -659,134 +962,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/12/02/12-2/" class="post-title-link" itemprop="url">12-2</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-12-02 11:29:30 / Modified: 21:08:18" itemprop="dateCreated datePublished" datetime="2025-12-02T11:29:30+08:00">2025-12-02</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="Reading"><a href="#Reading" class="headerlink" title="Reading"></a>Reading</h2><p>MOC-RVQ: Multilevel Codebook-Assisted Digital Generative<br>Semantic Communication</p>
-<h2 id="双重注意力"><a href="#双重注意力" class="headerlink" title="双重注意力"></a>双重注意力</h2><p>双重注意力（Dual Attention）Block 通常指在深度学习网络中同时使用 通道注意力（Channel Attention） 和 空间注意力（Spatial Attention） 的模块，用来增强特征表示能力。</p>
-<p>最典型的结构来自 CBAM（Convolutional Block Attention Module)，但“Dual Attention”也可能指语义分割的 DANet（Dual Attention Network）。两者含义不同，我会分别解释。</p>
-<h2 id="Sytle-loss"><a href="#Sytle-loss" class="headerlink" title="Sytle loss"></a>Sytle loss</h2><p>给定某层feature map：<br>$F ∈ R^{C×HW}$.<br>Style Loss 使用的是Gram Matrix:<br>$G &#x3D; F F^T $<br>其中Gij &#x3D; 特征通道 i 和 通道 j 的相关性<br>这表示纹理、颜色分布、局部结构等风格信息<br>不包含空间布局（排布）信息 -》 所以适合风格迁移</p>
-<h2 id="stop-gradient-operation"><a href="#stop-gradient-operation" class="headerlink" title="stop-gradient operation"></a>stop-gradient operation</h2><p>保持encoder的梯度不变，only fine-tuning NRB</p>
-<h2 id="多头码本"><a href="#多头码本" class="headerlink" title="多头码本"></a>多头码本</h2><p>Multi-head octonary codebook</p>
-<h2 id="MOC-RVQ"><a href="#MOC-RVQ" class="headerlink" title="MOC-RVQ"></a>MOC-RVQ</h2><p>多头码本+RVQ</p>
-<h2 id="to-do"><a href="#to-do" class="headerlink" title="to-do"></a>to-do</h2><p>研究RVQ<br>到底什么是digital SemComm 和 analog SemComm 的区别</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/01/12-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/12/01/12-1/" class="post-title-link" itemprop="url">12-1</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-12-01 14:09:38 / Modified: 17:06:40" itemprop="dateCreated datePublished" datetime="2025-12-01T14:09:38+08:00">2025-12-01</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="推流"><a href="#推流" class="headerlink" title="推流"></a>推流</h2><p>Flask MJPEG Stream Server</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/30/11-30/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/11/30/11-30/" class="post-title-link" itemprop="url">11-30</a>
+            <a href="/2025/12/16/12-16/" class="post-title-link" itemprop="url">12-16</a>
         </h2>
 
         <div class="post-meta">
@@ -796,14 +972,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2025-11-30 15:10:43" itemprop="dateCreated datePublished" datetime="2025-11-30T15:10:43+08:00">2025-11-30</time>
+              <time title="Created: 2025-12-16 15:47:53" itemprop="dateCreated datePublished" datetime="2025-12-16T15:47:53+08:00">2025-12-16</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-12-01 15:22:30" itemprop="dateModified" datetime="2025-12-01T15:22:30+08:00">2025-12-01</time>
+                <time title="Modified: 2025-12-17 11:18:37" itemprop="dateModified" datetime="2025-12-17T11:18:37+08:00">2025-12-17</time>
               </span>
 
           
@@ -818,11 +994,8 @@
 
       
       
-          <h2 id="VAE"><a href="#VAE" class="headerlink" title="VAE"></a>VAE</h2><p>如果将VQ理解为直接将编码向量聚类为K个不同的类别，那么FSQ就是将编码向量归纳出d个属性，每个属性划分为L个等级，从而直接表达了$L^d$<br> 个不同的整数。</p>
-<p>不管是从参数量、几何直观或者表达能力来看，其实FSQ都不如VQ，但为什么FSQ有机会取得比VQ更好的结果呢？笔者认为有两方面的原因。</p>
-<p>第一个原因，是encoder和decoder太强。虽然FSQ本身弱一些，但是encoder和decoder都足够强了，所以基于神经网络的万能拟合能力假设，FSQ相对于VQ的劣势，完全可以在encoder和decoder中弥补过来。</p>
-<p>第二个原因，是VQ的“队友”（梯度）太弱。VQ的经典问题是编码表坍缩：当编码表增大时，编码表并没有被充分利用起来，反而由于恶性竞争导致编码表聚集到一块了，经典表现就是一个5000的编码表，最终效果还不如500的编码表。归根结底，这是梯度不够合理所致，尽管VQ已经巧妙地设计了梯度，但对于argmin<br>这种硬指派的运算，基于梯度的优化都存在“赢者通吃”问题，这是坍缩的根本原因，而FSQ的Round<br>运算并不涉及到指派，它是直接取的近似值.</p>
-
+          <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><p>Robust Semantic Communications with Masked VQ-VAE Enabled Codebook</p>
+<h2 id="MAE模型"><a href="#MAE模型" class="headerlink" title="MAE模型"></a>MAE模型</h2>
       
     </div>
 
@@ -841,7 +1014,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/30/11-29/">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/16/day12-16/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -855,77 +1028,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/11/30/11-29/" class="post-title-link" itemprop="url">11-29</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-11-30 01:25:23 / Modified: 02:06:44" itemprop="dateCreated datePublished" datetime="2025-11-30T01:25:23+08:00">2025-11-30</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="Reading"><a href="#Reading" class="headerlink" title="Reading"></a>Reading</h2><p>Generative Feature Imputing — A Technique for<br>Error-resilient Semantic Communication</p>
-<p>对有损区域进行M掩码，然后再过diffusion进行去噪来</p>
-<p>让diffusion从生成变成纠错，需要：</p>
-<ul>
-<li>损坏后的特征 ŷ —— 给模型看“哪里坏了”</li>
-<li>错误掩膜 M —— 明确告诉模型“哪些地方需要修”</li>
-<li>保持未损坏区域不变 —— 扩散只修 M&#x3D;1 的位置<br>扩散模型只在 M&#x3D;1（错误区域）上运行，不在整个 latent 空间上运行，</li>
-</ul>
-<h2 id="膨胀卷积"><a href="#膨胀卷积" class="headerlink" title="膨胀卷积"></a>膨胀卷积</h2><h2 id="RAE"><a href="#RAE" class="headerlink" title="RAE"></a>RAE</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python src/test.py     --config /Huang_group/zyyz/tianyi/cs/RAE/configs/stage2/training/ImageNet256/DiTDH-S_DINOv2-B.yaml     --image 3.png     --output out/new_3.png</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python src/sample.py   --config /Huang_group/zyyz/tianyi/cs/RAE/configs/stage2/training/ImageNet256/DiTDH-S_DINOv2-B.yaml  --seed 42</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python src/stage1_sample.py     --config /Huang_group/zyyz/tianyi/cs/RAE/configs/stage2/training/ImageNet256/DiTDH-S_DINOv2-B.yaml     --image  /Huang_group/zyyz/tianyi/cs/RAE/1.png     --output /Huang_group/zyyz/tianyi/cs/RAE/7.png</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/30/day11-29/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/11/30/day11-29/" class="post-title-link" itemprop="url">day11-29</a>
+            <a href="/2025/12/16/day12-16/" class="post-title-link" itemprop="url">day12-16</a>
         </h2>
 
         <div class="post-meta">
@@ -935,7 +1038,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2025-11-30 01:25:13" itemprop="dateCreated datePublished" datetime="2025-11-30T01:25:13+08:00">2025-11-30</time>
+              <time title="Created: 2025-12-16 15:47:30" itemprop="dateCreated datePublished" datetime="2025-12-16T15:47:30+08:00">2025-12-16</time>
             </span>
 
           
@@ -968,7 +1071,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/8/">8</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/9/">9</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1034,7 +1137,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">82</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
