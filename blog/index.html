@@ -175,7 +175,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2026-01-04 11:16:15 / Modified: 12:22:54" itemprop="dateCreated datePublished" datetime="2026-01-04T11:16:15+08:00">2026-01-04</time>
+              <time title="Created: 2026-01-04 11:16:15 / Modified: 17:11:21" itemprop="dateCreated datePublished" datetime="2026-01-04T11:16:15+08:00">2026-01-04</time>
             </span>
 
           
@@ -200,6 +200,88 @@
 <li>Video DC-AE<br>TxHxW: 4 x 32 x 32, channel: 128</li>
 </ul>
 <h3 id="EfficientViT-Multi-Scale-Linear-Attention-for-High-Resolution-Dense-Prediction"><a href="#EfficientViT-Multi-Scale-Linear-Attention-for-High-Resolution-Dense-Prediction" class="headerlink" title="EfficientViT: Multi-Scale Linear Attention for High-Resolution Dense Prediction"></a>EfficientViT: Multi-Scale Linear Attention for High-Resolution Dense Prediction</h3><p>High-resolution dense prediction enables many applealing real-world applications, such as computational photography, autonomous driving.Unlike prior high-resolution dense prediction models<br>that rely on heavy softmax attention, hardware-inefficient<br>large-kernel convolution, or complicated topology structure to obtain good performances, the efficientViT uses multi-scale linear<br>attention to achieve the global receptive field and multi-scale learning. </p>
+<h3 id="DCVC"><a href="#DCVC" class="headerlink" title="DCVC"></a>DCVC</h3><h3 id="UniTok-A-Unified-Tokenizer-for-Visual-Generation-and-Understanding"><a href="#UniTok-A-Unified-Tokenizer-for-Visual-Generation-and-Understanding" class="headerlink" title="UniTok: A Unified Tokenizer for Visual Generation and Understanding"></a>UniTok: A Unified Tokenizer for Visual Generation and Understanding</h3><p>Leading VQVAE tokenizers predominantly adopt the CNN architecture, while ViT is preferred in CLIP training for its scalability. To take advantage of both, we choose a hybrid architecture, ViTamin-L&#x2F;16, to instanitate UniTok.<br><strong>ViTamin-L&#x2F;16</strong> is referred as<br>“Jieneng Chen, Qihang Yu, Xiaohui Shen, Alan Yuille, and Liang-Chieh Chen. Vitamin: Designing scalable vision models in the vision-language era. In Proceedings of the IEEE&#x2F;CVF Conference on Computer Vision and Pattern Recognition, pages 12954–12966, 2024.”<br>Generally, ViTamin &#x3D; ViT + CNN inductive bias</p>
+<h4 id="Image-Generation-Models-Comparision"><a href="#Image-Generation-Models-Comparision" class="headerlink" title="Image Generation Models Comparision"></a>Image Generation Models Comparision</h4><ul>
+<li>diffusion model。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>Res</th>
+<th>FID</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SDXL</td>
+<td>1024</td>
+<td>9.55</td>
+</tr>
+<tr>
+<td>PixArt</td>
+<td>1024</td>
+<td>6.14</td>
+</tr>
+<tr>
+<td>Playground</td>
+<td>1024</td>
+<td><strong>4.48</strong></td>
+</tr>
+</tbody></table>
+<ul>
+<li>自回归模型。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>Res</th>
+<th>FID</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Liquid</td>
+<td>512</td>
+<td>5.47</td>
+</tr>
+<tr>
+<td>Janus</td>
+<td>384</td>
+<td>10.10</td>
+</tr>
+<tr>
+<td>LWM</td>
+<td>256</td>
+<td>17.77</td>
+</tr>
+<tr>
+<td>VILA-U</td>
+<td>256</td>
+<td>12.81</td>
+</tr>
+<tr>
+<td><strong>UniTok</strong></td>
+<td>256</td>
+<td><strong>7.46</strong></td>
+</tr>
+</tbody></table>
+<ul>
+<li>Discrete Diffusion.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>Res</th>
+<th>FID</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Show-o</td>
+<td>256</td>
+<td>15.18</td>
+</tr>
+</tbody></table>
 
       
     </div>

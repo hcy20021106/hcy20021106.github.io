@@ -297,10 +297,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2025-12-13 01:17:13 / Modified: 01:29:27" itemprop="dateCreated datePublished" datetime="2025-12-13T01:17:13+08:00">2025-12-13</time>
+              <time title="Created: 2025-12-13 01:17:13" itemprop="dateCreated datePublished" datetime="2025-12-13T01:17:13+08:00">2025-12-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-01-04 16:34:46" itemprop="dateModified" datetime="2026-01-04T16:34:46+08:00">2026-01-04</time>
+              </span>
 
           
 
@@ -314,9 +320,10 @@
 
       
       
-          <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><h3 id="Taming-Transformers-for-High-Resolution-Image-Synthesis"><a href="#Taming-Transformers-for-High-Resolution-Image-Synthesis" class="headerlink" title="Taming Transformers for High-Resolution Image Synthesis"></a>Taming Transformers for High-Resolution Image Synthesis</h3><p>VQGAN + Transformer.<br>Transformer 的任务是预测下一个token，给定一个图像，其VQGAN编码得到token序列：<br>s&#x3D;(s1​,s2​,…,sN​),si​∈{0,1,…,∣Z∣−1}<br>Transformer需要学习：<br>$p(s_i | s_{&lt;i})$.<br>整体的目标函数是最大化:  </p>
+          <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><h3 id="Taming-Transformers-for-High-Resolution-Image-Synthesis"><a href="#Taming-Transformers-for-High-Resolution-Image-Synthesis" class="headerlink" title="Taming Transformers for High-Resolution Image Synthesis"></a>Taming Transformers for High-Resolution Image Synthesis</h3><h4 id="主要思想"><a href="#主要思想" class="headerlink" title="主要思想"></a>主要思想</h4><p>先用VQ-VAE把图像压缩成离散token，再用transformer在token空间里建模</p>
+<p>VQGAN + Transformer.<br>Transformer 的任务是预测下一个token，给定一个图像，其VQGAN编码得到token序列：<br>s&#x3D;(s1​,s2​,…,sN​),si​∈{0,1,…,∣Z∣−1}<br>Transformer需要学习：<br>$p(s_i | s_{&lt;i})$.<br>整体的目标函数是最大化:  </p>
 <p>$logp(s)&#x3D;∑<em>{i&#x3D;1}^N ​logp(s_i​∣s</em>{&lt;i}​)$</p>
-<h3 id="GAN"><a href="#GAN" class="headerlink" title="GAN"></a>GAN</h3><pre><code>        ┌──────────────┐
+<h4 id="GAN"><a href="#GAN" class="headerlink" title="GAN"></a>GAN</h4><pre><code>        ┌──────────────┐
 </code></pre>
 <p>Input x ───▶│ Encoder  E    │<br>            └──────────────┘<br>                    │ z_q (quantized)<br>                    ▼<br>            ┌──────────────┐<br>            │ Decoder  G    │───┐<br>            └──────────────┘   │ reconstructed x̂<br>                                ▼<br>                        ┌──────────────┐<br>Real x ────────────────▶│ Discriminator│◀── fake x̂<br>                        └──────────────┘<br>训练步骤：</p>
 <p>编码 → 量化 → 解码</p>
@@ -325,6 +332,36 @@
 <p>Update E&#x2F;G&#x2F;Z</p>
 <p>Update D</p>
 <p>重复迭代</p>
+<h4 id="Transformer对token进行序列化"><a href="#Transformer对token进行序列化" class="headerlink" title="Transformer对token进行序列化"></a>Transformer对token进行序列化</h4><p>和stble diffusion的区别</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>VQGAN + Transformer</th>
+<th>Stable Diffusion</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>token 排列</td>
+<td>自回归，一步一步</td>
+<td>不排</td>
+</tr>
+<tr>
+<td>顺序重要性</td>
+<td>非常重要</td>
+<td>不重要</td>
+</tr>
+<tr>
+<td>建模对象</td>
+<td>离散 token</td>
+<td>连续 latent</td>
+</tr>
+<tr>
+<td>生成逻辑</td>
+<td>语言模型式</td>
+<td>去噪过程</td>
+</tr>
+</tbody></table>
 <h3 id="StableCodec-Taming-One-Step-Diffusion-for-Extreme-Image-Compression"><a href="#StableCodec-Taming-One-Step-Diffusion-for-Extreme-Image-Compression" class="headerlink" title="StableCodec: Taming One-Step Diffusion for Extreme Image Compression"></a>StableCodec: Taming One-Step Diffusion for Extreme Image Compression</h3><p>SD-Turbo is a distilled version of Stable Diffusion that enables real-time image synthesis in 1 to 4 denoising steps.</p>
 
       
