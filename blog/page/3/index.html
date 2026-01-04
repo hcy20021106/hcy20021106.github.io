@@ -150,6 +150,134 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/30/11-29/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/30/11-29/" class="post-title-link" itemprop="url">11-29</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-11-30 01:25:23 / Modified: 02:06:44" itemprop="dateCreated datePublished" datetime="2025-11-30T01:25:23+08:00">2025-11-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="Reading"><a href="#Reading" class="headerlink" title="Reading"></a>Reading</h2><p>Generative Feature Imputing — A Technique for<br>Error-resilient Semantic Communication</p>
+<p>对有损区域进行M掩码，然后再过diffusion进行去噪来</p>
+<p>让diffusion从生成变成纠错，需要：</p>
+<ul>
+<li>损坏后的特征 ŷ —— 给模型看“哪里坏了”</li>
+<li>错误掩膜 M —— 明确告诉模型“哪些地方需要修”</li>
+<li>保持未损坏区域不变 —— 扩散只修 M&#x3D;1 的位置<br>扩散模型只在 M&#x3D;1（错误区域）上运行，不在整个 latent 空间上运行，</li>
+</ul>
+<h2 id="膨胀卷积"><a href="#膨胀卷积" class="headerlink" title="膨胀卷积"></a>膨胀卷积</h2><h2 id="RAE"><a href="#RAE" class="headerlink" title="RAE"></a>RAE</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python src/test.py     --config /Huang_group/zyyz/tianyi/cs/RAE/configs/stage2/training/ImageNet256/DiTDH-S_DINOv2-B.yaml     --image 3.png     --output out/new_3.png</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python src/sample.py   --config /Huang_group/zyyz/tianyi/cs/RAE/configs/stage2/training/ImageNet256/DiTDH-S_DINOv2-B.yaml  --seed 42</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python src/stage1_sample.py     --config /Huang_group/zyyz/tianyi/cs/RAE/configs/stage2/training/ImageNet256/DiTDH-S_DINOv2-B.yaml     --image  /Huang_group/zyyz/tianyi/cs/RAE/1.png     --output /Huang_group/zyyz/tianyi/cs/RAE/7.png</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/30/day11-29/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/30/day11-29/" class="post-title-link" itemprop="url">day11-29</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-11-30 01:25:13" itemprop="dateCreated datePublished" datetime="2025-11-30T01:25:13+08:00">2025-11-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/28/11-28/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -903,169 +1031,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/19/AutoEncoder/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/11/19/AutoEncoder/" class="post-title-link" itemprop="url">AutoEncoder</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-11-19 01:26:42 / Modified: 16:51:17" itemprop="dateCreated datePublished" datetime="2025-11-19T01:26:42+08:00">2025-11-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="DINOv2"><a href="#DINOv2" class="headerlink" title="DINOv2"></a>DINOv2</h2><p>DINOv2对普通ViT-B&#x2F;14的backbone做了很多改进，如下：</p>
-<ul>
-<li><p>使用Conv2d来实现PatchEmbed，不用原生ViT的线性patch projection（Flatten -&gt; Linear）</p>
-</li>
-<li><p>Memory Efficient Attention<br>  自己的更“搞笑注意力”实现<br>  MemEffAttention(dim &#x3D; 768, num_heads &#x3D; 12)</p>
-</li>
-<li><p>LayerScale<br>  对稳定大规模训练非常重要<br>  抑制梯度爆炸</p>
-</li>
-<li><p>DropPath</p>
-</li>
-<li><p>LayerNorm</p>
-</li>
-<li><p>MLP</p>
-</li>
-<li><p>Token</p>
-</li>
-<li><p>Antialias Positional Interpolation</p>
-</li>
-<li><p>Weighted Global Pooling<br>  对所有patch进行加权相加，优于CLS token(CLS在分类任务有效，对于LLM的视觉前端，用的是所有patch)</p>
-</li>
-</ul>
-<h3 id="Conv2d与Linear的转换"><a href="#Conv2d与Linear的转换" class="headerlink" title="Conv2d与Linear的转换"></a>Conv2d与Linear的转换</h3><p>Linear projection 对每个 patch 的投影公式是一样的<br>以DINOv2的patch embedding为例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">patch_flat: shape=(14*14*3)</span><br><span class="line">↓</span><br><span class="line">Linear(14*14*3 → 768)</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Conv2d(<span class="keyword">in</span>=3, out=768, kernel=14, stride=14)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="Swin-Transformer"><a href="#Swin-Transformer" class="headerlink" title="Swin Transformer"></a>Swin Transformer</h2><p>借用CNN下采样思路，每次downsample用的是parch merging，patch个数减少，patch的通道数增加。</p>
-<h2 id="RAE"><a href="#RAE" class="headerlink" title="RAE"></a>RAE</h2><p>RAE (Representative AutoEncoder) 是使用预训练表征编码器 (如DINOv2) 替代VAE encoder，目的是让扩散模型在更优、语义更丰富的latent空间中工作，从而提高训练效率和最终生成质量。<br>因此使用SOTA表征模型提供更强latent表示：DINO、SigLIP和MAE等<br>论文提出的 RAE（Representation Autoencoder）结合：</p>
-<ul>
-<li><p>预训练 encoder（冻结，不再训练）</p>
-</li>
-<li><p>轻量 ViT decoder（可监督训练）</p>
-</li>
-</ul>
-<h2 id="CLIP"><a href="#CLIP" class="headerlink" title="CLIP"></a>CLIP</h2><h2 id="UNet"><a href="#UNet" class="headerlink" title="UNet"></a>UNet</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">hs = []</span><br><span class="line">t_emb = timestep_embedding(timesteps, self.model_channels, repeat_only=False)</span><br><span class="line">emb = self.time_embed(t_emb)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> self.num_classes is not None:</span><br><span class="line">    assert y.shape == (x.shape[0],)</span><br><span class="line">    emb = emb + self.label_emb(y)</span><br><span class="line"></span><br><span class="line">h = x.type(self.dtype)</span><br><span class="line"><span class="keyword">for</span> module <span class="keyword">in</span> self.input_blocks:</span><br><span class="line">    h = module(h, emb, context)</span><br><span class="line">    hs.append(h)</span><br><span class="line">h = self.middle_block(h, emb, context)</span><br><span class="line"><span class="keyword">for</span> module <span class="keyword">in</span> self.output_blocks:</span><br><span class="line">    h = th.cat([h, hs.pop()], dim=1)</span><br><span class="line">    h = module(h, emb, context)</span><br><span class="line">h = h.type(x.dtype)</span><br><span class="line"><span class="keyword">if</span> self.predict_codebook_ids:</span><br><span class="line">    <span class="built_in">return</span> self.id_predictor(h)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">return</span> self.out(h)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>decode每层的输出和encoder对应的每层直接相加</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/11/11/gpu/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/11/11/gpu/" class="post-title-link" itemprop="url">gpu</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-11-11 14:27:21" itemprop="dateCreated datePublished" datetime="2025-11-11T14:27:21+08:00">2025-11-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-11-13 10:43:26" itemprop="dateModified" datetime="2025-11-13T10:43:26+08:00">2025-11-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <pre><code class="language-bash">nvidia-smi
-CUDA_VISIBLE_DEVICES=5 python .py
-```+
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1135,7 +1100,7 @@ CUDA_VISIBLE_DEVICES=5 python .py
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-count">84</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1167,7 +1132,7 @@ CUDA_VISIBLE_DEVICES=5 python .py
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2025</span>
+  <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

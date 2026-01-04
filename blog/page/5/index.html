@@ -150,6 +150,244 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/28/One-Shot-Coding/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/28/One-Shot-Coding/" class="post-title-link" itemprop="url">One-Shot Coding</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-28 15:07:00 / Modified: 15:14:32" itemprop="dateCreated datePublished" datetime="2025-08-28T15:07:00+08:00">2025-08-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/5G/" itemprop="url" rel="index"><span itemprop="name">5G</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>一次性编码，不需要序列式迭代或多步计算，输出是用向量表示</p>
+<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>将离散信息转为神经网络可处理的连续特征。因此one-shot coding后可以用MLP来处理。<br>类似NLP里的word embedding。<br>One-shot具有可微性（一对一映射），因此可以进行反向传播。</p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>信号量化具有不可微性（多对一映射）<br></p>
+</blockquote>
+<hr>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/27/Reinforcement-Learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/27/Reinforcement-Learning/" class="post-title-link" itemprop="url">Reinforcement Learning</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-27 17:28:49 / Modified: 19:57:27" itemprop="dateCreated datePublished" datetime="2025-08-27T17:28:49+08:00">2025-08-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="强化学习概念"><a href="#强化学习概念" class="headerlink" title="强化学习概念"></a>强化学习概念</h2><ul>
+<li>RL 是一种机器学习方法，通过与环境交互的试错经验学习最优行为（policy），以最大化累计奖励（accumulated reward）</li>
+<li>与监督学习不同：RL不需要“正确答案”做训练，而是通过奖励反馈自主学习</li>
+</ul>
+<p>RL系统组成：</p>
+<ul>
+<li>Agent: 学习者和决策者</li>
+<li>Environment: 智能体作用的外部系统</li>
+<li>State($s_t$)： 智能体感知到的环境信息</li>
+<li>Action($a_t$)：智能体在状态下采取的操作</li>
+<li>Reward($r_{t+1}$)：动作的即时反馈</li>
+<li>Goal: 找到最佳策略𝜋，实现状态 → 动作的最优映射，使累积奖励最大化。</li>
+</ul>
+<h2 id="Q-learning算法"><a href="#Q-learning算法" class="headerlink" title="Q-learning算法"></a>Q-learning算法</h2><p>核心思想：通过不断更新动作价值函数Q(s,a)来学习最佳策略<br>Q值更新公式：<br>$Q(s_t, a_t) &lt;- (1 - \alpha) * Q(s_t, a_t) + \alpha * [ r_{t+1} + \gamma * max_{a_{t+1}​∈A} * Q(s_{t+1}, a_{t+1}) ]$。</p>
+<p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$Q(s_t, a_t)$</td>
+<td>状态 $s_t$ 下执行动作 $a_t$ 的当前 Q 值</td>
+</tr>
+<tr>
+<td>$\alpha$</td>
+<td>学习率（0~1），控制新信息更新 Q 值的权重</td>
+</tr>
+<tr>
+<td>$r_{t+1}$</td>
+<td>执行动作 $a_t$ 后在下一个状态获得的即时奖励</td>
+</tr>
+<tr>
+<td>$\gamma$</td>
+<td>折扣因子（0~1），衡量未来奖励的重要性</td>
+</tr>
+<tr>
+<td>$s_{t+1}$</td>
+<td>执行动作后的下一状态</td>
+</tr>
+<tr>
+<td>$a_{t+1}$</td>
+<td>下一步选择的动作</td>
+</tr>
+<tr>
+<td>$A_{\text{max}}$</td>
+<td>在下一状态下可选择的最大 Q 值动作集合</td>
+</tr>
+<tr>
+<td></td>
+<td>指示函数，如果 $a_{t+1}$ 是最大动作之一，则为 1，否则为 0</td>
+</tr>
+</tbody></table>
+<h2 id="QL-AMC"><a href="#QL-AMC" class="headerlink" title="QL-AMC"></a>QL-AMC</h2><p>基于Q-learning的自适应调制编码，用于在无线通信系统中在不同信道条件下动态选择最优MCS</p>
+<h3 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h3><p>传统方法：<br>固定查表（look-up table）：根据SNR对应的BLER曲线预先生成CQI -&gt; MCS的映射</p>
+<h3 id="QL-AMC方案"><a href="#QL-AMC方案" class="headerlink" title="QL-AMC方案"></a>QL-AMC方案</h3><p>Q(s,a): 动作-价值函数，表示在动态<strong>s</strong>下选择动作<strong>a</strong>的价值<br>State: 状态集合，在这里状态是CQI（Channel Quality Indicator），即信道质量指标<br>Action：动作集合，这里是可选的MCS（调制与编码方案）</p>
+<hr>
+<blockquote>
+<p><strong>Notice</strong><br><br>Q可以理解为通过RL来推导CQI-&gt;MCS的映射，因此不局限于表格的推荐，而是根据环境反馈动态优化。</p>
+</blockquote>
+<hr>
+<p>Reward function:</p>
+<ul>
+<li><p>R1 基于BLER的非线形奖励。</p>
+<ul>
+<li>μ: 每个符号的比特数 (bits per modulation symbol)</li>
+<li>ν: 编码率 (code rate)</li>
+<li>BLER: 当前传输块误块率</li>
+<li>BLER_T: 系统目标 BLER (例如 10% 对 eMBB).</li>
+</ul>
+  <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">R1 = μ * ν     , if BLER &lt;= BLER_T</span><br><span class="line">R1 = -1        , else</span><br></pre></td></tr></table></figure>
+<p>  如果MCS满足BLER目标，奖励等于理论传输速率μ*ν<br>  否则给惩罚值-1，避免过激MCS</p>
+</li>
+<li><p>R2 基于光谱效率的奖励。</p>
+<ul>
+<li>奖励考虑实际成功传输比特数</li>
+<li>agent 会尝试最大化光谱效率.</li>
+</ul>
+  <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">R2 = (1 - BLER) * μ * ν</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>说明：</p>
+<ul>
+<li>Q(s, a) 更新时结合 当前奖励 r 和 未来潜在收益 max_a Q(s’, a’)</li>
+<li>随着循环进行，Q表会收敛，最终为每个CQI提供最优MCS，示例如下：</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">         MCS1   MCS2   MCS3  ...  </span><br><span class="line">CQI0      Q0,0   Q0,1   Q0,2</span><br><span class="line">CQI1      Q1,0   Q1,1   Q1,2</span><br><span class="line">CQI2      Q2,0   Q2,1   Q2,2</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<ul>
+<li>最后的Q表的用途是用于决策.</li>
+</ul>
+<p>$ a* &#x3D; argmax_a Q(s, a)$.<br>也就是对当前CQI s，选择Q值最大的MCS</p>
+<ul>
+<li>学习经验<br>Q表保留了 RL agent对环境的经验，反映了不同信道条件下选择MCS的最优策略</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/27/EVM-based-SNR-Calculation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1119,188 +1357,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/08/01/MIMOBeamforming/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/08/01/MIMOBeamforming/" class="post-title-link" itemprop="url">MIMOBeamforming</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-08-01 00:58:24 / Modified: 01:21:46" itemprop="dateCreated datePublished" datetime="2025-08-01T00:58:24+08:00">2025-08-01</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h1 id="MIMO-OFDM-波束成形系统理论介绍"><a href="#MIMO-OFDM-波束成形系统理论介绍" class="headerlink" title="MIMO-OFDM 波束成形系统理论介绍"></a>MIMO-OFDM 波束成形系统理论介绍</h1><h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><p>现代无线通信系统（如 5G NR、LTE、WLAN）普遍采用 <strong>MIMO-OFDM</strong> 技术，因其对频率选择性衰落信道的鲁棒性及高数据速率的支持。随着应用需求的增加，系统配置日益复杂，天线阵列规模和子载波数量大幅提升，多天线、多流传输成为主流。</p>
-<h2 id="2-天线阵列与波束成形"><a href="#2-天线阵列与波束成形" class="headerlink" title="2. 天线阵列与波束成形"></a>2. 天线阵列与波束成形</h2><p>通过多个天线元素组成的阵列，系统可实现<strong>空间复用</strong>和<strong>波束成形</strong>。波束成形（Beamforming）是利用空间信号处理技术调整发射信号的相位和幅度，使信号在目标方向上增强，同时抑制干扰，提高信噪比（SNR）和系统性能（如降低误码率 BER）。<br>在多天线系统中，除了数字基带层面的预编码外，通常还会应用 射频波束成形矩阵 (Frf)，这是在模拟射频前端对信号进行加权处理，实现对天线阵列的物理波束成形。</p>
-<p>射频波束成形通过对数字基带信号乘以 Frf 矩阵，将信号映射到各个天线单元。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">% RF beamforming: Apply Frf to the digital signal            </span><br><span class="line">% Each antenna element is connected to each data stream</span><br><span class="line">txSig = txSigSTS*mFrf;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-波束成形的关键流程"><a href="#3-波束成形的关键流程" class="headerlink" title="3. 波束成形的关键流程"></a>3. 波束成形的关键流程</h2><h3 id="接收端-Channel-Sounding"><a href="#接收端-Channel-Sounding" class="headerlink" title="接收端(Channel Sounding)"></a>接收端(Channel Sounding)</h3><p>Preamble Tx -&gt; MIMO Channel -&gt; OFDM Rx -&gt; MIMO Channel Estimate -&gt; SVD -&gt; nfrf</p>
-<h3 id="发射端-Precoding-from-channel-sounding"><a href="#发射端-Precoding-from-channel-sounding" class="headerlink" title="发射端 (Precoding from channel sounding)"></a>发射端 (Precoding from channel sounding)</h3><p>系统建模时，将天线阵列位置、天线方向图和空间信道特性纳入设计，采用如下流程：</p>
-<p>数据编码 → 预编码（基于信道测量）→ OFDM调制 → 发射波束成形 → MIMO信道 → 接收波束成形 → OFDM解调 → 数据恢复</p>
-<h3 id="具体步骤说明："><a href="#具体步骤说明：" class="headerlink" title="具体步骤说明："></a>具体步骤说明：</h3><ol>
-<li><p><strong>编码与调制</strong><br>发送数据先经过信源编码和信道编码提升可靠性，再映射成数字调制符号。</p>
-</li>
-<li><p><strong>信道测量与预编码</strong><br>通过信道探测（Channel Sounding）获取信道状态信息（CSI），基于 CSI 设计预编码矩阵，实现多流的空间分离和干扰抑制。</p>
-</li>
-<li><p><strong>OFDM 调制</strong><br>将频域符号映射到多个正交子载波，经过 IFFT 生成时域 OFDM 符号，并添加循环前缀以抵抗符号间干扰。</p>
-</li>
-<li><p><strong>发射波束成形</strong><br>通过射频预编码矩阵对数字基带信号进行加权组合，形成定向的传输波束，提高发射信号的方向增益。</p>
-</li>
-<li><p><strong>MIMO 空间信道</strong><br>模拟多径衰落、散射及路径损耗，采用 WINNER II 等复杂空间信道模型，真实反映无线环境。</p>
-</li>
-<li><p><strong>接收波束成形</strong><br>接收端根据信道特性调整接收波束，最大化信号质量。</p>
-</li>
-<li><p><strong>OFDM 解调与数据恢复</strong><br>移除循环前缀，FFT 变换回频域，进行符号检测和译码，恢复原始数据。</p>
-</li>
-</ol>
-<h2 id="4-系统优势"><a href="#4-系统优势" class="headerlink" title="4. 系统优势"></a>4. 系统优势</h2><ul>
-<li><strong>抗频率选择性衰落</strong>：OFDM 将宽带信道分解为多个平坦子信道。</li>
-<li><strong>空间复用</strong>：多天线支持多数据流并行传输，提升频谱效率。</li>
-<li><strong>波束成形提升 SNR</strong>：信号能量聚焦于接收端，提高可靠性。</li>
-<li><strong>灵活信道模型</strong>：支持多种空间信道模型，便于性能评估和系统设计。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/07/21/pandas/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/07/21/pandas/" class="post-title-link" itemprop="url">pandas</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-07-21 20:17:58 / Modified: 22:26:15" itemprop="dateCreated datePublished" datetime="2025-07-21T20:17:58+08:00">2025-07-21</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h1 id="pandas-基础语法速查"><a href="#pandas-基础语法速查" class="headerlink" title="pandas 基础语法速查"></a>pandas 基础语法速查</h1><p>以下内容基于对 pandas 基础用法的常见问题整理，方便快速入门和复习。</p>
-<hr>
-<h2 id="1-查看数据"><a href="#1-查看数据" class="headerlink" title="1. 查看数据"></a>1. 查看数据</h2><ul>
-<li><p><code>df.head()</code><br>返回数据框前 5 行（默认），可以用 <code>df.head(n)</code> 查看前 n 行。<br>用于快速预览数据。</p>
-</li>
-<li><p><code>df.iloc[:, :-1].values</code><br>用 <code>.iloc</code> 按位置索引，<code>:,:-1</code> 表示所有行，除最后一列以外的所有列。<br><code>.values</code> 返回对应的 NumPy 数组。</p>
-</li>
-<li><p><code>df.values</code><br>将整个 DataFrame 转换为 NumPy 数组，包含所有数据（数值和非数值都可能存在）。</p>
-</li>
-</ul>
-<hr>
-<h2 id="2-处理缺失值"><a href="#2-处理缺失值" class="headerlink" title="2. 处理缺失值"></a>2. 处理缺失值</h2><ul>
-<li><code>df.fillna(0, inplace=True)</code><br>将所有缺失值（NaN）替换为 0，<code>inplace=True</code> 代表直接修改原 DataFrame。</li>
-</ul>
-<hr>
-<h2 id="3-唯一值和类别编码"><a href="#3-唯一值和类别编码" class="headerlink" title="3. 唯一值和类别编码"></a>3. 唯一值和类别编码</h2><ul>
-<li><p><code>df.Summary.unique()</code><br>返回列 <code>Summary</code> 中所有唯一的值（去重后的列表）。</p>
-</li>
-<li><p><code>df.LoudCover.unique()</code><br>类似，返回 <code>LoudCover</code> 列所有唯一值。</p>
-</li>
-<li><p>Label Encoding  </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line">  labelencoder = LabelEncoder()</span><br><span class="line">  df[<span class="string">&#x27;Summary&#x27;</span>] = labelencoder.fit_transform(df[<span class="string">&#x27;Summary&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">## 4. 相关性分析</span></span><br><span class="line">- df.corr()</span><br><span class="line">计算数值列之间的相关系数矩阵（默认是 Pearson 相关系数）。</span><br><span class="line"></span><br><span class="line">注意：执行 df.corr() 前，确保 DataFrame 中只包含数值列，否则可能报错。</span><br><span class="line">- 热力图可视化</span><br><span class="line">```bash</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sn</span><br><span class="line">sn.heatmap(df.select_dtypes(include=[<span class="string">&#x27;number&#x27;</span>]).corr())</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="5-数据拼接与转换"><a href="#5-数据拼接与转换" class="headerlink" title="5. 数据拼接与转换"></a>5. 数据拼接与转换</h2><ul>
-<li>pd.concat(cols, axis &#x3D; 1)<br>将列表 cols 中的多个 DataFrame 按列合并成一个大 DataFrame。</li>
-<li>.shift(n)<br>对时间序列数据进行平移（滞后或提前）。<br>例如：df.shift(1) 会将所有数据下移一行，原第一行变为 NaN。</li>
-</ul>
-<h2 id="6-Numpy与Pandas转换"><a href="#6-Numpy与Pandas转换" class="headerlink" title="6. Numpy与Pandas转换"></a>6. Numpy与Pandas转换</h2><ul>
-<li>DataFrame转为NumPy数组</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = df.values</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>只保留数值列转为数组</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = df.select_dtypes(include=[<span class="string">&#x27;number&#x27;</span>]).values</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1370,7 +1426,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-count">84</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1402,7 +1458,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2025</span>
+  <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

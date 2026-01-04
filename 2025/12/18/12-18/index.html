@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="reading”DEEP COMPRESSION AUTOENCODER FOR EFFICIENT HIGH-RESOLUTION DIFFUSION MODELS“首次引入了DC-AE。降低HW来减少token数目 Adversarial Diffusion Distillation扩散模型（Diffusion Models, DMs）在文本生成图像任务中具有极高的生成质量和语义一致性，但其推">
+  <meta name="description" content="reading”DEEP COMPRESSION AUTOENCODER FOR EFFICIENT HIGH-RESOLUTION DIFFUSION MODELS“首次引入了DC-AE。降低HW来减少token数目 reconstruction(用于semantic communication)Reconstructed images by DC-AE demonstrate a better">
 <meta property="og:type" content="article">
 <meta property="og:title" content="12-18">
 <meta property="og:url" content="https://hechenyi.github.io/2025/12/18/12-18/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="reading”DEEP COMPRESSION AUTOENCODER FOR EFFICIENT HIGH-RESOLUTION DIFFUSION MODELS“首次引入了DC-AE。降低HW来减少token数目 Adversarial Diffusion Distillation扩散模型（Diffusion Models, DMs）在文本生成图像任务中具有极高的生成质量和语义一致性，但其推">
+<meta property="og:description" content="reading”DEEP COMPRESSION AUTOENCODER FOR EFFICIENT HIGH-RESOLUTION DIFFUSION MODELS“首次引入了DC-AE。降低HW来减少token数目 reconstruction(用于semantic communication)Reconstructed images by DC-AE demonstrate a better">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-12-18T09:03:30.000Z">
-<meta property="article:modified_time" content="2025-12-29T15:21:43.140Z">
+<meta property="article:modified_time" content="2026-01-03T08:22:03.488Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -185,7 +185,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-12-29 23:21:43" itemprop="dateModified" datetime="2025-12-29T23:21:43+08:00">2025-12-29</time>
+                <time title="Modified: 2026-01-03 16:22:03" itemprop="dateModified" datetime="2026-01-03T16:22:03+08:00">2026-01-03</time>
               </span>
 
           
@@ -200,6 +200,7 @@
 
       
         <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><h3 id="”DEEP-COMPRESSION-AUTOENCODER-FOR-EFFICIENT-HIGH-RESOLUTION-DIFFUSION-MODELS“"><a href="#”DEEP-COMPRESSION-AUTOENCODER-FOR-EFFICIENT-HIGH-RESOLUTION-DIFFUSION-MODELS“" class="headerlink" title="”DEEP COMPRESSION AUTOENCODER FOR EFFICIENT HIGH-RESOLUTION DIFFUSION MODELS“"></a>”DEEP COMPRESSION AUTOENCODER FOR EFFICIENT HIGH-RESOLUTION DIFFUSION MODELS“</h3><p>首次引入了DC-AE。<br>降低HW来减少token数目</p>
+<h4 id="reconstruction-用于semantic-communication"><a href="#reconstruction-用于semantic-communication" class="headerlink" title="reconstruction(用于semantic communication)"></a>reconstruction(用于semantic communication)</h4><p>Reconstructed images by DC-AE demonstrate a better visual quality than SD-VAE’s reconstructed images. In particular, for the f64 and f128 autoencoders, DC-AE still maintains a good visual quality for small text and the human face.<br>也就是说dc-ae的编解码器的重建效果会更好</p>
 <h3 id="Adversarial-Diffusion-Distillation"><a href="#Adversarial-Diffusion-Distillation" class="headerlink" title="Adversarial Diffusion Distillation"></a>Adversarial Diffusion Distillation</h3><p>扩散模型（Diffusion Models, DMs）在文本生成图像任务中具有极高的生成质量和语义一致性，但其推理过程需要几十步迭代采样，难以满足实时生成需求；<br>而 GAN 具有单步生成、速度快的优势，却在高分辨率、复杂文本条件下的图像质量与稳定性方面明显落后于扩散模型。<br>ADD 的学生模型本身仍采用 U-Net 扩散模型结构，因此：</p>
 <ul>
 <li><p>可单步生成（类似 GAN）</p>
@@ -291,7 +292,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#reading"><span class="nav-number">1.</span> <span class="nav-text">reading</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%80%9DDEEP-COMPRESSION-AUTOENCODER-FOR-EFFICIENT-HIGH-RESOLUTION-DIFFUSION-MODELS%E2%80%9C"><span class="nav-number">1.1.</span> <span class="nav-text">”DEEP COMPRESSION AUTOENCODER FOR EFFICIENT HIGH-RESOLUTION DIFFUSION MODELS“</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adversarial-Diffusion-Distillation"><span class="nav-number">1.2.</span> <span class="nav-text">Adversarial Diffusion Distillation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Open-Sora-2-0-Training-a-Commercial-Level-Video-Generation-Model-in-200k"><span class="nav-number">1.3.</span> <span class="nav-text">Open-Sora 2.0: Training a Commercial-Level Video Generation Model in $200k</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StableCodec-Taming-One-Step-Diffusion-for-Extreme-Image-Compression"><span class="nav-number">1.4.</span> <span class="nav-text">StableCodec: Taming One-Step Diffusion for Extreme Image Compression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-B-Kurka-and-D-G-%CC%88-und-%CC%88-uz-%E2%80%9CDeepjscc-f-Deep-joint-source-channel-coding-of-images-with-feedback-%E2%80%9D-IEEE-J-Sel-Areas-Inf-Theory-vol-1-no-1-pp-178%E2%80%93193-Apr-2020"><span class="nav-number">1.5.</span> <span class="nav-text">D. B. Kurka and D. G ̈ und  ̈ uz, “Deepjscc-f: Deep joint source-channel coding of images with feedback,” IEEE J. Sel. Areas Inf. Theory, vol. 1, no. 1, pp. 178–193, Apr. 2020.</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#reading"><span class="nav-number">1.</span> <span class="nav-text">reading</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%80%9DDEEP-COMPRESSION-AUTOENCODER-FOR-EFFICIENT-HIGH-RESOLUTION-DIFFUSION-MODELS%E2%80%9C"><span class="nav-number">1.1.</span> <span class="nav-text">”DEEP COMPRESSION AUTOENCODER FOR EFFICIENT HIGH-RESOLUTION DIFFUSION MODELS“</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#reconstruction-%E7%94%A8%E4%BA%8Esemantic-communication"><span class="nav-number">1.1.1.</span> <span class="nav-text">reconstruction(用于semantic communication)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adversarial-Diffusion-Distillation"><span class="nav-number">1.2.</span> <span class="nav-text">Adversarial Diffusion Distillation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Open-Sora-2-0-Training-a-Commercial-Level-Video-Generation-Model-in-200k"><span class="nav-number">1.3.</span> <span class="nav-text">Open-Sora 2.0: Training a Commercial-Level Video Generation Model in $200k</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StableCodec-Taming-One-Step-Diffusion-for-Extreme-Image-Compression"><span class="nav-number">1.4.</span> <span class="nav-text">StableCodec: Taming One-Step Diffusion for Extreme Image Compression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-B-Kurka-and-D-G-%CC%88-und-%CC%88-uz-%E2%80%9CDeepjscc-f-Deep-joint-source-channel-coding-of-images-with-feedback-%E2%80%9D-IEEE-J-Sel-Areas-Inf-Theory-vol-1-no-1-pp-178%E2%80%93193-Apr-2020"><span class="nav-number">1.5.</span> <span class="nav-text">D. B. Kurka and D. G ̈ und  ̈ uz, “Deepjscc-f: Deep joint source-channel coding of images with feedback,” IEEE J. Sel. Areas Inf. Theory, vol. 1, no. 1, pp. 178–193, Apr. 2020.</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -305,7 +306,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-count">84</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -337,7 +338,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2025</span>
+  <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

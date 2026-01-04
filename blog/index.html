@@ -150,6 +150,163 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2026/01/04/1-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/01/04/1-3/" class="post-title-link" itemprop="url">1-3</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2026-01-04 11:16:15 / Modified: 12:22:54" itemprop="dateCreated datePublished" datetime="2026-01-04T11:16:15+08:00">2026-01-04</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><h3 id="Open-Sora"><a href="#Open-Sora" class="headerlink" title="Open-Sora"></a>Open-Sora</h3><p>We begin by leveraging the open-source HunyuanVideo VAE as the initial autoencoder for our model. To further reduce both training and interference costs, <strong>Video DC-AE</strong> is used as a video autoencoder to improve efficiency while maintaining high reconstruction fidelity.</p>
+<h3 id="High-Compression-Autoencoder-Adaptation"><a href="#High-Compression-Autoencoder-Adaptation" class="headerlink" title="High Compression Autoencoder Adaptation"></a>High Compression Autoencoder Adaptation</h3><p>$D_{token} &#x3D; D_T × D_H × D_W × P_T × P_H × P_W$.  </p>
+<p>$D_{info} &#x3D;  (D_T × D_H × D_W × C_{in}) &#x2F; C_{out}$<br>Additionally, we find that maintaining similar reconstruction performance requires a 4×increase in channels when doubling the height and width compression ratio, whereas adding a 4×temporal compression on top of the original image DC-AE (no temporal compression) incurs no additional channels possibly due to redundancy in temporal information. Based on these insights, we train a Video DC-AE with a 2x Dinfo and 16 x Dtoken as compared to the Hunyuan Video VAE while maintaining comparable performances.</p>
+<h3 id="Auto-encoder-reconstruction-performance-comparison"><a href="#Auto-encoder-reconstruction-performance-comparison" class="headerlink" title="Auto-encoder reconstruction performance comparison"></a>Auto-encoder reconstruction performance comparison</h3><ul>
+<li>Hunyuan video vae<br>TxHxW: 4 x 8 x 8,   channel: 16</li>
+<li>Open Sora 1.2<br>TxHxW: 4 x 8 x 8,   channel: 16</li>
+<li>StepVideo VAE<br>TxHxW: 8 x 16 x 16, channel: 64</li>
+<li>Video DC-AE<br>TxHxW: 4 x 32 x 32, channel: 128</li>
+</ul>
+<h3 id="EfficientViT-Multi-Scale-Linear-Attention-for-High-Resolution-Dense-Prediction"><a href="#EfficientViT-Multi-Scale-Linear-Attention-for-High-Resolution-Dense-Prediction" class="headerlink" title="EfficientViT: Multi-Scale Linear Attention for High-Resolution Dense Prediction"></a>EfficientViT: Multi-Scale Linear Attention for High-Resolution Dense Prediction</h3><p>High-resolution dense prediction enables many applealing real-world applications, such as computational photography, autonomous driving.Unlike prior high-resolution dense prediction models<br>that rely on heavy softmax attention, hardware-inefficient<br>large-kernel convolution, or complicated topology structure to obtain good performances, the efficientViT uses multi-scale linear<br>attention to achieve the global receptive field and multi-scale learning. </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2026/01/03/1-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/01/03/1-2/" class="post-title-link" itemprop="url">1-2</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2026-01-03 15:12:02 / Modified: 16:25:53" itemprop="dateCreated datePublished" datetime="2026-01-03T15:12:02+08:00">2026-01-03</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+          <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><h3 id="Wireless-Deep-Video-Semantic-Transmission"><a href="#Wireless-Deep-Video-Semantic-Transmission" class="headerlink" title="Wireless Deep Video Semantic Transmission"></a>Wireless Deep Video Semantic Transmission</h3><h4 id="DVST-框架：非线性变换-深度-JSCC-时序上下文的统一视频-JSCC"><a href="#DVST-框架：非线性变换-深度-JSCC-时序上下文的统一视频-JSCC" class="headerlink" title="DVST 框架：非线性变换 + 深度 JSCC + 时序上下文的统一视频 JSCC"></a>DVST 框架：非线性变换 + 深度 JSCC + 时序上下文的统一视频 JSCC</h4><p>提出一个专为无线视频设计的 Deep Video Semantic Transmission (DVST) 框架：</p>
+<p>上游用 NVTC 类非线性变换 做语义特征提取与概率建模；<br>下游是 可变长的 deep JSCC 编码器&#x2F;解码器 直接面对信道；<br>整体端到端训练，直接优化 rate–distortion。</p>
+<p>相比只在图像、小分辨率上做的 deep JSCC，他们解决了 高维视频源上编码增益早饱和 的问题。</p>
+<h4 id="上下文驱动的语义特征建模（Context-Driven-Semantic-Feature-Modeling）"><a href="#上下文驱动的语义特征建模（Context-Driven-Semantic-Feature-Modeling）" class="headerlink" title="上下文驱动的语义特征建模（Context-Driven Semantic Feature Modeling）"></a>上下文驱动的语义特征建模（Context-Driven Semantic Feature Modeling）</h4><p>在 语义特征域（latent y） 和 码字域（s） 两个层面都引入“上下文”：</p>
+<p>通过光流在特征&#x2F;码字空间 warp 参考帧，生成 Tx&#x2F;Rx context $\check{c}_t, \hat{c}_t, \check{d}_t, \hat{d}_t$。<br>分别条件化分析变换 $g_a$、合成变换 $g_s$、编码器 $f_e$、解码器 $f_d$。</p>
+<p>其中$\check{c}<em>t &#x3D; φa(\check{x}</em>{t−1})&#x3D;φ_{ref} (warp(φ_{fe}(\check{x}_{t−1}), \check{m}_t)),$.<br>其中运动向量$m_t$是通过flow estimation network 得来的，然后$\check{m}_t is attained by the whole pipeline including each function except for the channel transfer function W.</p>
+<p>这样一来，模型可以：</p>
+<p>对“老内容”更多依赖参考帧（少发）；<br>对“新内容”多发信息；<br>本质上是端到端学出来的、非显式残差编码。</p>
+<h4 id="熵驱动的速率自适应传输机制（Rate-Adaptive-Semantic-Feature-Transmission）"><a href="#熵驱动的速率自适应传输机制（Rate-Adaptive-Semantic-Feature-Transmission）" class="headerlink" title="熵驱动的速率自适应传输机制（Rate-Adaptive Semantic Feature Transmission）"></a>熵驱动的速率自适应传输机制（Rate-Adaptive Semantic Feature Transmission）</h4><p>利用 BA（自回归）+ hyperprior + temporal context 构建 带时间先验的熵模型，估计每个 embedding 的“重要性”（熵）。<br>引入一个 可学习的比例因子 $\eta_t$，把熵值映射到实际信道维度 $k_{t,i}$，再量化到离散集合。<br>在网络实现上：</p>
+<p>用 Swin Transformer + rate tokens + 动态 FC 做 variable-length deep JSCC，而不是为每个码率单独训练一个网络。</p>
+<p>这部分就是他们实现“同一模型支持不同 CBR、在空间和时间上动态分配码率”的关键创新。</p>
+<p>运动链路 + 语义特征 MEMC：在特征&#x2F;码字域做运动补偿</p>
+<p>不是在像素域做传统 MEMC，而是在：</p>
+<p>语义特征域上，<br>和 JSCC 码字域上，<br>结合光流 + warp + refine，构造上下文。</p>
+<p>再加上 MV 自己也是经 NTC + JSCC 压缩传输的 motion link。<br>这使得 DVST 可以：</p>
+<p>更好地利用时域冗余；<br>在有限带宽下把更多资源给“真正变动的语义”。</p>
+<p>GOP 级联合训练 + 带宽分配学习</p>
+<p>不是单帧训练，而是 在一个 GOP 内联合优化：</p>
+<p>让模型学会 在帧与帧之间分配带宽：哪些帧&#x2F;哪些位置应该多给、哪些可以少给。</p>
+<p>训练上使用渐进式策略（先单链路预训练，再整个系统 joint finetune）来防止不稳定。</p>
+<p>性能结果上的“亮点”：可当作卖点写</p>
+<p>在 AWGN &#x2F; Rayleigh 渠道上，相比：</p>
+<p>H.264&#x2F;H.265 + LDPC（现实配置）<br>H.264&#x2F;H.265 + capacity-achieving code（理论上界）</p>
+<p>DVST 在很多序列上：</p>
+<p>PSNR&#x2F;MS-SSIM 更高，尤其高分辨率、高码率区域；<br>达到同样画质时，可节省约 20–60% 的平均信道带宽（最高约 50%）。</p>
+<p>同时：</p>
+<p>对信道 SNR mismatch 不会出现 cliff effect，性能曲线比较平滑；<br>在联合 segmentation 训练下，对机器视觉任务（mIoU）和重建 PSNR 都有优势。</p>
+<h3 id="Nonlinear-Transforms-for-Lossy-Image-Compression"><a href="#Nonlinear-Transforms-for-Lossy-Image-Compression" class="headerlink" title="Nonlinear Transforms for Lossy Image Compression"></a>Nonlinear Transforms for Lossy Image Compression</h3><h4 id="GDN"><a href="#GDN" class="headerlink" title="GDN"></a>GDN</h4><p>GDN（Generalized Divisive Normalization，广义除法归一化）是一种用于神经网络中 非线性变换 的操作，特别是在图像和信号处理任务中，常用于神经网络的激活层。它的主要作用是通过对输入进行除法归一化（divisive normalization），来实现非线性变换，从而有助于网络的学习和特征提取。<br>GDN 的基本原理<br>GDN 是通过对输入信号应用 归一化 和 非线性 操作来增强模型的表达能力。具体来说，它是对输入信号进行除法归一化，并通过一个参数化的方式使得输出具有非线性性质。这一过程的核心是：<br>$$y_i &#x3D; \frac{x_i}{\sqrt{c_i + \sum_{j} W_{ij} x_j^2}}$$</p>
+<p>$x_i$ 是输入信号的第 $i$ 个元素。<br>$y_i$ 是输出信号的第 $i$ 个元素。<br>$c_i$ 是一个常数，用于控制归一化的尺度。<br>$W_{ij}$ 是一个权重矩阵，控制了输入元素之间的相互影响。<br>归一化操作会根据输入信号的局部上下文信息进行计算。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/31/12-30/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -176,6 +333,13 @@
 
               <time title="Created: 2025-12-31 00:05:29" itemprop="dateCreated datePublished" datetime="2025-12-31T00:05:29+08:00">2025-12-31</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-01-02 17:15:36" itemprop="dateModified" datetime="2026-01-02T17:15:36+08:00">2026-01-02</time>
+              </span>
 
           
 
@@ -189,7 +353,31 @@
 
       
       
-          
+          <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><h3 id="Promptus-Can-Prompts-Streaming-Replace-Video-Streaming-with-Stable-Diffusion"><a href="#Promptus-Can-Prompts-Streaming-Replace-Video-Streaming-with-Stable-Diffusion" class="headerlink" title="Promptus: Can Prompts Streaming Replace Video Streaming with Stable Diffusion"></a>Promptus: Can Prompts Streaming Replace Video Streaming with Stable Diffusion</h3><p>Since we adopt a single-step denoising Stable Diffusion, if the input noise is far from the target image in the latent space, this movement cannot be completed in a singel step, making it impossible to fit the inverse prompt. Using random noise as input, after the loss value converges, the generated frame still has noticeable differences from the tar- get frame, including blurring, noise artifacts, and inconsistent details. Therefore, we need to reduce the distance between the input noise and the target frame in the latent space.</p>
+<p><strong>Prompt regularization</strong>: We found that even with real video as supervision, fitting occasionally fails. This is because as gradient descent progresses, the distribution of prompts gradually shifts away from the distribution of CLIP embeddings, resulting in an inability to generate meaningful images.</p>
+<p><strong>插值公式</strong><br>prompt(1) &#x3D; 0.9 * prompt(0) + 0.1 * prompt(10)<br>prompt(2) &#x3D; 0.8 * prompt(0) + 0.2 * prompt(10)<br>…<br>prompt(9) &#x3D; 0.1 * prompt(0) + 0.9 * prompt(10)</p>
+<p>第 1–10 帧这一段里，真正“训练 &#x2F; 保存”的 prompt 只对应第 0 帧和第 10 帧；<br>第 1–9 帧的 prompt 是在这两个 prompt 之间“插值出来的”，并没有单独训练。</p>
+<p><strong>steamingdiffusion</strong><br>tensorRT</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">self.denoise_engine = Engine(engine_path)</span><br><span class="line">self.decoder_engine = Engine(engine_path)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.batch = batch  <span class="comment"># the number of frames generated at once</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="diffusion-model"><a href="#diffusion-model" class="headerlink" title="diffusion model"></a>diffusion model</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">taesd = AutoencoderTiny.from_pretrained(<span class="string">&quot;madebyollin/taesd&quot;</span>, torch_dtype=torch.float32).cuda()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                   <span class="comment"># generating a frame</span></span><br><span class="line">                   samples_z = sampler(denoiser, randn, cond=c, uc=uc)</span><br><span class="line">                   samples_x = decoder(samples_z)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><ul>
+<li>inversion</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=7 python inversion.py -frame_path <span class="string">&quot;/Huang_group/zyyz/tianyi/promptus/data/test_hcy/a03001a8-a50f-4d28-8513-637c3ec627bb&quot;</span> -max_id 140 -rank 15 -interval 10</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>generation</li>
+</ul>
+<pre><code class="language-bash">python generation.py -frame_path &quot;/Huang_group/zyyz/tianyi/promptus/data/test_hcy/00fe7c5e-130c-42eb-8e1c-7576e6a647b8&quot; -rank 16 -interval 10
+
+```1
+</code></pre>
+
       
     </div>
 
@@ -813,7 +1001,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-12-29 23:21:43" itemprop="dateModified" datetime="2025-12-29T23:21:43+08:00">2025-12-29</time>
+                <time title="Modified: 2026-01-03 16:22:03" itemprop="dateModified" datetime="2026-01-03T16:22:03+08:00">2026-01-03</time>
               </span>
 
           
@@ -829,6 +1017,7 @@
       
       
           <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><h3 id="”DEEP-COMPRESSION-AUTOENCODER-FOR-EFFICIENT-HIGH-RESOLUTION-DIFFUSION-MODELS“"><a href="#”DEEP-COMPRESSION-AUTOENCODER-FOR-EFFICIENT-HIGH-RESOLUTION-DIFFUSION-MODELS“" class="headerlink" title="”DEEP COMPRESSION AUTOENCODER FOR EFFICIENT HIGH-RESOLUTION DIFFUSION MODELS“"></a>”DEEP COMPRESSION AUTOENCODER FOR EFFICIENT HIGH-RESOLUTION DIFFUSION MODELS“</h3><p>首次引入了DC-AE。<br>降低HW来减少token数目</p>
+<h4 id="reconstruction-用于semantic-communication"><a href="#reconstruction-用于semantic-communication" class="headerlink" title="reconstruction(用于semantic communication)"></a>reconstruction(用于semantic communication)</h4><p>Reconstructed images by DC-AE demonstrate a better visual quality than SD-VAE’s reconstructed images. In particular, for the f64 and f128 autoencoders, DC-AE still maintains a good visual quality for small text and the human face.<br>也就是说dc-ae的编解码器的重建效果会更好</p>
 <h3 id="Adversarial-Diffusion-Distillation"><a href="#Adversarial-Diffusion-Distillation" class="headerlink" title="Adversarial Diffusion Distillation"></a>Adversarial Diffusion Distillation</h3><p>扩散模型（Diffusion Models, DMs）在文本生成图像任务中具有极高的生成质量和语义一致性，但其推理过程需要几十步迭代采样，难以满足实时生成需求；<br>而 GAN 具有单步生成、速度快的优势，却在高分辨率、复杂文本条件下的图像质量与稳定性方面明显落后于扩散模型。<br>ADD 的学生模型本身仍采用 U-Net 扩散模型结构，因此：</p>
 <ul>
 <li><p>可单步生成（类似 GAN）</p>
@@ -944,130 +1133,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/16/12-16/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/12/16/12-16/" class="post-title-link" itemprop="url">12-16</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-12-16 15:47:53" itemprop="dateCreated datePublished" datetime="2025-12-16T15:47:53+08:00">2025-12-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-12-17 11:18:37" itemprop="dateModified" datetime="2025-12-17T11:18:37+08:00">2025-12-17</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><p>Robust Semantic Communications with Masked VQ-VAE Enabled Codebook</p>
-<h2 id="MAE模型"><a href="#MAE模型" class="headerlink" title="MAE模型"></a>MAE模型</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2025/12/16/day12-16/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/12/16/day12-16/" class="post-title-link" itemprop="url">day12-16</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-12-16 15:47:30" itemprop="dateCreated datePublished" datetime="2025-12-16T15:47:30+08:00">2025-12-16</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1137,7 +1202,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-count">84</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1169,7 +1234,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2025</span>
+  <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

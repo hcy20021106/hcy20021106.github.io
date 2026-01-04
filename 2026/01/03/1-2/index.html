@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hechenyi.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="readingWireless Deep Video Semantic TransmissionDVST 框架：非线性变换 + 深度 JSCC + 时序上下文的统一视频 JSCC提出一个专为无线视频设计的 Deep Video Semantic Transmission (DVST) 框架： 上游用 NVTC 类非线性变换 做语义特征提取与概率建模；下游是 可变长的 deep JSCC 编码器&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1-2">
+<meta property="og:url" content="https://hechenyi.github.io/2026/01/03/1-2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="readingWireless Deep Video Semantic TransmissionDVST 框架：非线性变换 + 深度 JSCC + 时序上下文的统一视频 JSCC提出一个专为无线视频设计的 Deep Video Semantic Transmission (DVST) 框架： 上游用 NVTC 类非线性变换 做语义特征提取与概率建模；下游是 可变长的 deep JSCC 编码器&amp;#">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-01-03T07:12:02.000Z">
+<meta property="article:modified_time" content="2026-01-03T08:25:53.001Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hechenyi.github.io/2026/01/03/1-2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>1-2 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://hechenyi.github.io/2026/01/03/1-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          1-2
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2026-01-03 15:12:02 / Modified: 16:25:53" itemprop="dateCreated datePublished" datetime="2026-01-03T15:12:02+08:00">2026-01-03</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="reading"><a href="#reading" class="headerlink" title="reading"></a>reading</h2><h3 id="Wireless-Deep-Video-Semantic-Transmission"><a href="#Wireless-Deep-Video-Semantic-Transmission" class="headerlink" title="Wireless Deep Video Semantic Transmission"></a>Wireless Deep Video Semantic Transmission</h3><h4 id="DVST-框架：非线性变换-深度-JSCC-时序上下文的统一视频-JSCC"><a href="#DVST-框架：非线性变换-深度-JSCC-时序上下文的统一视频-JSCC" class="headerlink" title="DVST 框架：非线性变换 + 深度 JSCC + 时序上下文的统一视频 JSCC"></a>DVST 框架：非线性变换 + 深度 JSCC + 时序上下文的统一视频 JSCC</h4><p>提出一个专为无线视频设计的 Deep Video Semantic Transmission (DVST) 框架：</p>
+<p>上游用 NVTC 类非线性变换 做语义特征提取与概率建模；<br>下游是 可变长的 deep JSCC 编码器&#x2F;解码器 直接面对信道；<br>整体端到端训练，直接优化 rate–distortion。</p>
+<p>相比只在图像、小分辨率上做的 deep JSCC，他们解决了 高维视频源上编码增益早饱和 的问题。</p>
+<h4 id="上下文驱动的语义特征建模（Context-Driven-Semantic-Feature-Modeling）"><a href="#上下文驱动的语义特征建模（Context-Driven-Semantic-Feature-Modeling）" class="headerlink" title="上下文驱动的语义特征建模（Context-Driven Semantic Feature Modeling）"></a>上下文驱动的语义特征建模（Context-Driven Semantic Feature Modeling）</h4><p>在 语义特征域（latent y） 和 码字域（s） 两个层面都引入“上下文”：</p>
+<p>通过光流在特征&#x2F;码字空间 warp 参考帧，生成 Tx&#x2F;Rx context $\check{c}_t, \hat{c}_t, \check{d}_t, \hat{d}_t$。<br>分别条件化分析变换 $g_a$、合成变换 $g_s$、编码器 $f_e$、解码器 $f_d$。</p>
+<p>其中$\check{c}<em>t &#x3D; φa(\check{x}</em>{t−1})&#x3D;φ_{ref} (warp(φ_{fe}(\check{x}_{t−1}), \check{m}_t)),$.<br>其中运动向量$m_t$是通过flow estimation network 得来的，然后$\check{m}_t is attained by the whole pipeline including each function except for the channel transfer function W.</p>
+<p>这样一来，模型可以：</p>
+<p>对“老内容”更多依赖参考帧（少发）；<br>对“新内容”多发信息；<br>本质上是端到端学出来的、非显式残差编码。</p>
+<h4 id="熵驱动的速率自适应传输机制（Rate-Adaptive-Semantic-Feature-Transmission）"><a href="#熵驱动的速率自适应传输机制（Rate-Adaptive-Semantic-Feature-Transmission）" class="headerlink" title="熵驱动的速率自适应传输机制（Rate-Adaptive Semantic Feature Transmission）"></a>熵驱动的速率自适应传输机制（Rate-Adaptive Semantic Feature Transmission）</h4><p>利用 BA（自回归）+ hyperprior + temporal context 构建 带时间先验的熵模型，估计每个 embedding 的“重要性”（熵）。<br>引入一个 可学习的比例因子 $\eta_t$，把熵值映射到实际信道维度 $k_{t,i}$，再量化到离散集合。<br>在网络实现上：</p>
+<p>用 Swin Transformer + rate tokens + 动态 FC 做 variable-length deep JSCC，而不是为每个码率单独训练一个网络。</p>
+<p>这部分就是他们实现“同一模型支持不同 CBR、在空间和时间上动态分配码率”的关键创新。</p>
+<p>运动链路 + 语义特征 MEMC：在特征&#x2F;码字域做运动补偿</p>
+<p>不是在像素域做传统 MEMC，而是在：</p>
+<p>语义特征域上，<br>和 JSCC 码字域上，<br>结合光流 + warp + refine，构造上下文。</p>
+<p>再加上 MV 自己也是经 NTC + JSCC 压缩传输的 motion link。<br>这使得 DVST 可以：</p>
+<p>更好地利用时域冗余；<br>在有限带宽下把更多资源给“真正变动的语义”。</p>
+<p>GOP 级联合训练 + 带宽分配学习</p>
+<p>不是单帧训练，而是 在一个 GOP 内联合优化：</p>
+<p>让模型学会 在帧与帧之间分配带宽：哪些帧&#x2F;哪些位置应该多给、哪些可以少给。</p>
+<p>训练上使用渐进式策略（先单链路预训练，再整个系统 joint finetune）来防止不稳定。</p>
+<p>性能结果上的“亮点”：可当作卖点写</p>
+<p>在 AWGN &#x2F; Rayleigh 渠道上，相比：</p>
+<p>H.264&#x2F;H.265 + LDPC（现实配置）<br>H.264&#x2F;H.265 + capacity-achieving code（理论上界）</p>
+<p>DVST 在很多序列上：</p>
+<p>PSNR&#x2F;MS-SSIM 更高，尤其高分辨率、高码率区域；<br>达到同样画质时，可节省约 20–60% 的平均信道带宽（最高约 50%）。</p>
+<p>同时：</p>
+<p>对信道 SNR mismatch 不会出现 cliff effect，性能曲线比较平滑；<br>在联合 segmentation 训练下，对机器视觉任务（mIoU）和重建 PSNR 都有优势。</p>
+<h3 id="Nonlinear-Transforms-for-Lossy-Image-Compression"><a href="#Nonlinear-Transforms-for-Lossy-Image-Compression" class="headerlink" title="Nonlinear Transforms for Lossy Image Compression"></a>Nonlinear Transforms for Lossy Image Compression</h3><h4 id="GDN"><a href="#GDN" class="headerlink" title="GDN"></a>GDN</h4><p>GDN（Generalized Divisive Normalization，广义除法归一化）是一种用于神经网络中 非线性变换 的操作，特别是在图像和信号处理任务中，常用于神经网络的激活层。它的主要作用是通过对输入进行除法归一化（divisive normalization），来实现非线性变换，从而有助于网络的学习和特征提取。<br>GDN 的基本原理<br>GDN 是通过对输入信号应用 归一化 和 非线性 操作来增强模型的表达能力。具体来说，它是对输入信号进行除法归一化，并通过一个参数化的方式使得输出具有非线性性质。这一过程的核心是：<br>$$y_i &#x3D; \frac{x_i}{\sqrt{c_i + \sum_{j} W_{ij} x_j^2}}$$</p>
+<p>$x_i$ 是输入信号的第 $i$ 个元素。<br>$y_i$ 是输出信号的第 $i$ 个元素。<br>$c_i$ 是一个常数，用于控制归一化的尺度。<br>$W_{ij}$ 是一个权重矩阵，控制了输入元素之间的相互影响。<br>归一化操作会根据输入信号的局部上下文信息进行计算。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/12/31/12-30/" rel="prev" title="12-30">
+      <i class="fa fa-chevron-left"></i> 12-30
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/01/04/1-3/" rel="next" title="1-3">
+      1-3 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#reading"><span class="nav-number">1.</span> <span class="nav-text">reading</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Wireless-Deep-Video-Semantic-Transmission"><span class="nav-number">1.1.</span> <span class="nav-text">Wireless Deep Video Semantic Transmission</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DVST-%E6%A1%86%E6%9E%B6%EF%BC%9A%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2-%E6%B7%B1%E5%BA%A6-JSCC-%E6%97%B6%E5%BA%8F%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E7%BB%9F%E4%B8%80%E8%A7%86%E9%A2%91-JSCC"><span class="nav-number">1.1.1.</span> <span class="nav-text">DVST 框架：非线性变换 + 深度 JSCC + 时序上下文的统一视频 JSCC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E9%A9%B1%E5%8A%A8%E7%9A%84%E8%AF%AD%E4%B9%89%E7%89%B9%E5%BE%81%E5%BB%BA%E6%A8%A1%EF%BC%88Context-Driven-Semantic-Feature-Modeling%EF%BC%89"><span class="nav-number">1.1.2.</span> <span class="nav-text">上下文驱动的语义特征建模（Context-Driven Semantic Feature Modeling）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%86%B5%E9%A9%B1%E5%8A%A8%E7%9A%84%E9%80%9F%E7%8E%87%E8%87%AA%E9%80%82%E5%BA%94%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6%EF%BC%88Rate-Adaptive-Semantic-Feature-Transmission%EF%BC%89"><span class="nav-number">1.1.3.</span> <span class="nav-text">熵驱动的速率自适应传输机制（Rate-Adaptive Semantic Feature Transmission）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nonlinear-Transforms-for-Lossy-Image-Compression"><span class="nav-number">1.2.</span> <span class="nav-text">Nonlinear Transforms for Lossy Image Compression</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GDN"><span class="nav-number">1.2.1.</span> <span class="nav-text">GDN</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
